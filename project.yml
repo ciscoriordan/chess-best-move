@@ -1,0 +1,148 @@
+# xcodegen spec for Chess Best Move. Generate the project with `xcodegen generate`;
+# never edit ChessBestMove.xcodeproj by hand (it is git-ignored and rebuilt from this file).
+#
+# App sources and resources are Xcode synchronized folders (`type: syncedFolder`):
+# adding, removing or renaming a file inside them needs no regeneration. Regenerate only
+# after changing this file.
+name: ChessBestMove
+
+options:
+  bundleIdPrefix: com.motomatic.chessbestmove
+  deploymentTarget:
+    iOS: "18.0"
+  developmentLanguage: en
+  createIntermediateGroups: true
+  groupSortPosition: top
+  xcodeVersion: "26.6"
+
+attributes:
+  LastUpgradeCheck: 2660
+  LastSwiftUpdateCheck: 2660
+
+packages:
+  ChessCore:
+    path: Packages/ChessCore
+  ChessEngine:
+    path: Packages/ChessEngine
+  ChessVision:
+    path: Packages/ChessVision
+
+settings:
+  base:
+    # The Apple Developer team the App Store build is signed with. To build with your own
+    # account, replace it with your team identifier, or build without signing:
+    # `xcodebuild build ... CODE_SIGNING_ALLOWED=NO`.
+    DEVELOPMENT_TEAM: RJB472R448
+    CODE_SIGN_STYLE: Automatic
+    IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    # Declarations are nonisolated unless annotated; the app's contracts spell out
+    # @MainActor explicitly.
+    SWIFT_DEFAULT_ACTOR_ISOLATION: nonisolated
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+    SUPPORTS_MACCATALYST: NO
+    SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+    SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+  configs:
+    Release:
+      # Stockfish itself is compiled with -O3 and full LTO in Release by
+      # Packages/ChessEngine/Package.swift (`.when(configuration: .release)`), which
+      # SwiftPM applies because this configuration is named "Release".
+      SWIFT_COMPILATION_MODE: wholemodule
+      SWIFT_OPTIMIZATION_LEVEL: "-O"
+      GCC_OPTIMIZATION_LEVEL: s
+      DEAD_CODE_STRIPPING: YES
+      VALIDATE_PRODUCT: YES
+
+targets:
+  ChessBestMove:
+    type: application
+    platform: iOS
+    sources:
+      - path: App/Sources
+        type: syncedFolder
+      - path: App/Resources
+        type: syncedFolder
+    dependencies:
+      - package: ChessCore
+      - package: ChessEngine
+      - package: ChessVision
+        product: ChessVision
+    preBuildScripts:
+      # Release gate: an archive (ACTION=install) fails while App/Sources or App/Info.plist
+      # still holds a URL that must not reach a release, such as one pointing at a page that
+      # does not exist yet. The script's own comment lists the patterns it looks for. Ordinary
+      # Debug and Release builds skip the check. It walks the whole App/Sources folder, which is
+      # why this target turns the user script sandbox off (see ENABLE_USER_SCRIPT_SANDBOXING
+      # below).
+      - name: Block archives with placeholder URLs
+        basedOnDependencyAnalysis: false
+        showEnvVarsInLog: false
+        script: |
+          "${SRCROOT}/scripts/check-release-placeholders.sh"
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Chess Best Move
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSRequiresIPhoneOS: true
+        ITSAppUsesNonExemptEncryption: false
+        SKIncludeConsumableInAppPurchaseHistory: true
+        NSPhotoLibraryUsageDescription: "Chess Best Move reads your most recent screenshot to find the chessboard in it. Your photos stay on your device."
+        UIAppFonts:
+          - BricolageGrotesque-Variable.ttf
+          - IBMPlexMono-Regular.ttf
+          - IBMPlexMono-Medium.ttf
+          - IBMPlexMono-SemiBold.ttf
+          - NotoSansSymbols2-Regular.ttf
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+    settings:
+      base:
+        PRODUCT_NAME: Chess Best Move
+        PRODUCT_MODULE_NAME: ChessBestMove
+        PRODUCT_BUNDLE_IDENTIFIER: com.motomatic.chessbestmove
+        GENERATE_INFOPLIST_FILE: NO
+        # The release gate pre-build script reads every Swift file under App/Sources. The user
+        # script sandbox grants a script only the paths it declares, and declaring the folder
+        # does not grant the files inside it: with the sandbox on, the script's grep is denied
+        # and finds nothing, so an archive with placeholder URLs would pass. The script counts
+        # the files it read and fails when it cannot read them, and the sandbox stays off so the
+        # gate can do its work. This is the target's only script phase.
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: YES
+        LD_RUNPATH_SEARCH_PATHS:
+          - "$(inherited)"
+          - "@executable_path/Frameworks"
+
+schemes:
+  ChessBestMove:
+    build:
+      targets:
+        ChessBestMove: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

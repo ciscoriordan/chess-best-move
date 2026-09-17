@@ -1,0 +1,65 @@
+import SwiftUI
+
+/// The native close control for modal sheets and full-screen covers. There is never a
+/// "Done" text button to dismiss a modal in this app.
+///
+/// - iOS 26 and later: `Button(role: .close)`, which the system draws as its standard
+///   close control.
+/// - iOS 18 to 25: an `xmark` icon button with the accessibility label "Close".
+struct CloseButton: View {
+    let action: () -> Void
+
+    init(action: @escaping () -> Void) {
+        self.action = action
+    }
+
+    var body: some View {
+        if #available(iOS 26.0, *) {
+            Button(role: .close, action: action)
+        } else {
+            Button(action: action) {
+                Image(systemName: "xmark")
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(Palette.ink)
+                    .frame(minWidth: Layout.minimumHitTarget, minHeight: Layout.minimumHitTarget)
+                    .contentShape(Rectangle())
+            }
+            .accessibilityLabel("Close")
+        }
+    }
+}
+
+/// A toolbar item holding `CloseButton`.
+struct CloseToolbarItem: ToolbarContent {
+    var placement: ToolbarItemPlacement = .cancellationAction
+    let action: () -> Void
+
+    var body: some ToolbarContent {
+        ToolbarItem(placement: placement) {
+            CloseButton(action: action)
+        }
+    }
+}
+
+extension View {
+    /// Adds the native close control to the navigation bar. Place the view inside a
+    /// `NavigationStack` in the modal. `placement` defaults to the leading
+    /// cancellation position; the paywall uses `.topBarTrailing`.
+    func modalCloseButton(placement: ToolbarItemPlacement = .cancellationAction, action: @escaping () -> Void) -> some View {
+        toolbar { CloseToolbarItem(placement: placement, action: action) }
+    }
+}
+
+#Preview("Close button") {
+    Color.clear
+        .sheet(isPresented: .constant(true)) {
+            NavigationStack {
+                Text("Settings")
+                    .typography(.title)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .padding(Spacing.s4)
+                    .background(Palette.canvas)
+                    .modalCloseButton {}
+            }
+        }
+}

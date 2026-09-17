@@ -1,0 +1,83 @@
+[
+  {
+    "shortDescription" : "Chess square classifier. Input: 64 board cells, each resized to 64x64, RGB 0...1. logits: 13 classes empty,wP,wN,wB,wR,wQ,wK,bP,bN,bB,bR,bQ,bK. highlight: square tint logit.",
+    "metadataOutputVersion" : "3.0",
+    "outputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32 64 × 13)",
+        "shortDescription" : "",
+        "shape" : "[64, 13]",
+        "name" : "logits",
+        "type" : "MultiArray"
+      },
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32 64 × 1)",
+        "shortDescription" : "",
+        "shape" : "[64, 1]",
+        "name" : "highlight",
+        "type" : "MultiArray"
+      }
+    ],
+    "version" : "1.1.0",
+    "modelParameters" : [
+
+    ],
+    "author" : "Chess Best Move",
+    "specificationVersion" : 8,
+    "storagePrecision" : "Float16",
+    "mlProgramOperationTypeHistogram" : {
+      "Ios17.cast" : 3,
+      "Ios17.conv" : 17,
+      "Ios17.mul" : 1,
+      "Ios16.relu" : 14,
+      "Ios17.add" : 6,
+      "Ios16.reduceMean" : 1,
+      "Ios17.sub" : 1,
+      "Ios17.linear" : 2
+    },
+    "computePrecision" : "Mixed (Float16, Float32, Int32)",
+    "stateSchema" : [
+
+    ],
+    "isUpdatable" : "0",
+    "availability" : {
+      "macOS" : "14.0",
+      "tvOS" : "17.0",
+      "visionOS" : "1.0",
+      "watchOS" : "10.0",
+      "iOS" : "17.0",
+      "macCatalyst" : "17.0"
+    },
+    "modelType" : {
+      "name" : "MLModelType_mlProgram"
+    },
+    "inputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32 64 × 3 × 64 × 64)",
+        "shortDescription" : "",
+        "shape" : "[64, 3, 64, 64]",
+        "name" : "squares",
+        "type" : "MultiArray"
+      }
+    ],
+    "userDefinedMetadata" : {
+      "com.github.apple.coremltools.source_dialect" : "TorchScript",
+      "com.github.apple.coremltools.conversion_date" : "2026-09-17",
+      "class_names" : "empty,wP,wN,wB,wR,wQ,wK,bP,bN,bB,bR,bQ,bK",
+      "input" : "squares float32 [64,3,64,64] RGB 0...1",
+      "com.github.apple.coremltools.version" : "9.0",
+      "com.github.apple.coremltools.source" : "torch==2.14.0"
+    },
+    "generatedClassName" : "PieceClassifier",
+    "method" : "predict"
+  }
+]

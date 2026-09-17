@@ -1,0 +1,19 @@
+--- a/src/shm.h
++++ b/src/shm.h
+@@ -36,8 +36,14 @@
+ #include <utility>
+ #include <variant>
+ 
+-#if (defined(__linux__) && !defined(__ANDROID__)) || defined(__APPLE__) || defined(__FreeBSD__) \
+-  || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__DragonFly__)
++// ChessEngine (Best Move iOS app) modification, 2026-09-13: allow an embedding
++// application to opt out of the cross-process shared-memory network store. It
++// creates /tmp/stockfish-<uid>, a Unix socket server thread and an atexit
++// handler, none of which belong inside a sandboxed app process. With the opt-out
++// the network lives in ordinary process memory (the existing fallback path).
++#if ((defined(__linux__) && !defined(__ANDROID__)) || defined(__APPLE__) || defined(__FreeBSD__) \
++     || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__DragonFly__)) \
++  && !defined(STOCKFISH_NO_SYSTEM_WIDE_SHM)
+     #define USE_UNIX_SHM
+     #include "shm_unix.h"
+ #endif
