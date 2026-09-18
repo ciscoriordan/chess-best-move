@@ -143,16 +143,19 @@ public final class BoardRecognizer: Sendable {
         evidence.piecePlacement = OrientationEstimator.pieceLogOdds(displayPieces: displayPieces)
         evidence.startPosition = OrientationEstimator.startPositionLogOdds(displayPieces: displayPieces)
         evidence.lastMove = OrientationEstimator.lastMoveLogOdds(tintedCells: tintedCells, tintDistances: tintAnalysis.tintDistances,
-                                                                 displayPieces: displayPieces, premove: tintAnalysis.premove)
+                                                                 displayPieces: displayPieces, estimates: tintAnalysis.tintEstimates)
             + OrientationEstimator.pawnHintLogOdds(tintedCells: tintedCells, dotCells: dotCells, displayPieces: displayPieces)
         let (whiteAtBottom, orientationConfidence) = OrientationEstimator.decide(evidence)
 
         let pieces = DisplayGrid.toSquares(displayPieces, whiteAtBottom: whiteAtBottom)
         let confidences = DisplayGrid.toSquares(displayConfidences, whiteAtBottom: whiteAtBottom)
-        let tintedSquares = tintedCells.map { DisplayGrid.square(row: $0 / 8, column: $0 % 8, whiteAtBottom: whiteAtBottom) }
         let dotSquares = dotCells.map { DisplayGrid.square(row: $0 / 8, column: $0 % 8, whiteAtBottom: whiteAtBottom) }
-        let resolution = LastMoveResolver.resolve(tinted: tintedSquares, tintDistances: tintAnalysis.tintDistances, board: pieces,
-                                                  dots: dotSquares, premove: tintAnalysis.premove,
+        // The last move is read from the tinted cells and the faint candidates behind them; the
+        // orientation evidence above uses the tinted cells alone.
+        let candidateSquares = tintAnalysis.candidates.map { DisplayGrid.square(row: $0 / 8, column: $0 % 8, whiteAtBottom: whiteAtBottom) }
+        let resolution = LastMoveResolver.resolve(tinted: candidateSquares, tintDistances: tintAnalysis.candidateDistances,
+                                                  board: pieces, dots: dotSquares, estimates: tintAnalysis.candidateEstimates,
+                                                  faint: tintAnalysis.candidateFaint,
                                                   bottomColor: whiteAtBottom ? .white : .black)
         // The running clock is read only when the highlight does not settle the side to move.
         let runningClock = resolution?.isPlausible == true ? nil : RunningClockReader.read(rgba, detection: detection)

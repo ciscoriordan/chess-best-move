@@ -36,13 +36,28 @@ public struct TintAnalysis: Sendable {
     /// color, relative to the board's light/dark contrast (see `HighlightDetector.tintDistance`).
     /// Last move and selection share one color; a premove or a square mark usually has another.
     public var tintDistances: [[Double]]
-    /// Per entry of `tinted`: the cell carries the saturated red of a premove (see
-    /// `HighlightDetector.isPremoveRed`).
-    public var premove: [Bool] = []
+    /// Per entry of `tinted`: the tint color estimated as if blended at 50% over the base, which
+    /// is what tells a premove's red from the last move's own color (see
+    /// `HighlightDetector.isRedTint` and `LastMoveResolver.premoveGroup`).
+    public var tintEstimates: [RGB] = []
     /// Per display cell: false when less than 40% of the cell's border ring lies inside the image
     /// (a board cut off by the image edge). Such cells have no color of their own; they are left
     /// out of the tint statistics and are never reported as tinted.
     public var measured: [Bool] = [Bool](repeating: true, count: 64)
+
+    /// Display cells the last move may be read from: `tinted`, then the faint candidates, cells
+    /// whose color changed too little to count as tinted but did so over the whole cell (see
+    /// `HighlightDetector.uniformCells`). A faint candidate is never reported as tinted and never
+    /// counts as a selected piece; `LastMoveResolver` reads a move from one only when the tint
+    /// agreement and the position both support it.
+    public var candidates: [Int] = []
+    /// Relative tint distances between entries of `candidates` (as `tintDistances`).
+    public var candidateDistances: [[Double]] = []
+    /// Per entry of `candidates`: the tint estimate (as `tintEstimates`).
+    public var candidateEstimates: [RGB] = []
+    /// Per entry of `candidates`: the confident rule did not accept this cell on its own. True for
+    /// the faint candidates and for a partner the search below the threshold added.
+    public var candidateFaint: [Bool] = []
 
     /// Group label per entry of `tinted`, linking entries closer than
     /// `HighlightDetector.sameTintRadius`, for diagnostics.
@@ -70,6 +85,8 @@ public struct TintAnalysis: Sendable {
 public enum HighlightDetector {
     /// Most tinted cells reported (last move, selection, premove pair, a square mark).
     public static let maximumTinted = 6
+    /// Most cells the last move is read from: the tinted ones plus the faint candidates.
+    public static let maximumCandidates = maximumTinted + maximumFaint
 
     /// Measures every cell and returns the cells judged tinted, strongest first, with their
     /// tint groups.
@@ -103,6 +120,7 @@ public enum HighlightDetector {
         var deviations = [Double](repeating: 0, count: 64)
         var chromas = [Double](repeating: 0, count: 64)
         var scales = [Double](repeating: 1, count: 64)
+        var uniform = [Bool](repeating: true, count: 64)
         for i in 0..<64 {
             let row = i / 8, column = i % 8
             let global = (row + column) % 2 == 0 ? light : dark
@@ -123,8 +141,9 @@ public enum HighlightDetector {
                 bases[i] = base
                 continue
             }
+            var sides: [RGB] = []
             if let image {
-                let sides = CellSampler.ringSides(
+                sides = CellSampler.ringSides(
                     image, x: detection.originX + Double(column) * detection.cellSize,
                     y: detection.originY + Double(row) * detection.cellSize, size: detection.cellSize
                 ).compactMap { $0 }
@@ -137,6 +156,7 @@ public enum HighlightDetector {
             deviations[i] = observed.distance(to: base)
             scales[i] = observed.dot(base) / max(base.dot(base), 1)
             chromas[i] = observed.distance(to: base * scales[i])
+            uniform[i] = isUniform(sides, observed: observed, deviation: deviations[i])
         }
         let rank = backgroundRank
         let threshold = max(minimumDeviation, 1.4 * deviations.sorted(by: >)[rank] + 4, 0.06 * contrast)
@@ -181,6 +201,7 @@ public enum HighlightDetector {
         // other square's tint can be too faint to pass the threshold on its own (a blue tint on
         // the icy sea board, a tan tint on wood): take the strongest weaker square of the same
         // tint color.
+        let confident = kept.count
         for anchor in kept where anchor.strength >= partnerAnchorStrength && !anchor.isShade {
             guard kept.count < maximumTinted,
                   !kept.contains(where: { $0.cell != anchor.cell && tintDistance(anchor, $0) / scale < sameTintRadius })
@@ -193,21 +214,74 @@ public enum HighlightDetector {
             if let partner { kept.append(partner) }
         }
         let distances = kept.map { a in kept.map { b in tintDistance(a, b) / scale } }
+        // Faint candidates. A tint that falls short of the threshold still covers the whole cell,
+        // so the cells that changed uniformly are offered to the resolver, which reads a move from
+        // one only when a second cell carries the same tint and the position supports the move.
+        // The partner the search above added is one of them: it is below the threshold too.
+        let faint = cells.filter { cell in
+            measured[cell.cell] && uniform[cell.cell] && !cell.isShade
+                && cell.strength >= faintMinimumStrength && cell.strength < 1
+                && !kept.contains(where: { $0.cell == cell.cell })
+        }.sorted { $0.strength > $1.strength }.prefix(maximumFaint)
+        let candidates = kept + faint
+        let candidateDistances = candidates.map { a in candidates.map { b in tintDistance(a, b) / scale } }
         return TintAnalysis(cells: cells, tinted: kept.map(\.cell), tintDistances: distances,
-                            premove: kept.map { isPremoveRed($0.tintEstimate) }, measured: measured)
+                            tintEstimates: kept.map(\.tintEstimate), measured: measured,
+                            candidates: candidates.map(\.cell), candidateDistances: candidateDistances,
+                            candidateEstimates: candidates.map(\.tintEstimate),
+                            candidateFaint: candidates.indices.map { $0 >= confident })
     }
 
-    /// Whether a tint estimate (as if blended at 50%) is the saturated pure red drawn under a
-    /// premove: measured (255, 0, 0) within about 30 on real screenshots (real_090, real_092,
-    /// real_113). The red that marks a blunder in a reviewed game is less saturated, about
-    /// (225, 75, 53) to (282, 96, 56), and is not matched.
-    static func isPremoveRed(_ estimate: RGB) -> Bool {
-        estimate.r >= 200 && estimate.r - max(estimate.g, estimate.b) >= premoveRedMargin
+    /// Whether every side of the cell's border ring shows the color the cell was measured at: a
+    /// tint covers the whole cell, while board texture (wood grain, marble, a graffiti stroke) and
+    /// a piece or a glyph reaching into the ring change one part of it. A side counts as agreeing
+    /// when it is within half the cell's deviation of the measured color, with a floor for boards
+    /// whose deviation is a few levels; at most one side of four may disagree, because a tall
+    /// piece, an arrow or a badge covers one.
+    ///
+    /// Measured over the 21 boards whose faint tint was missed: of the cells not already tinted
+    /// and at least `faintMinimumStrength` strong, 26 of the 32 that carry a real tint pass, and
+    /// 105 of 309 that do not, which is about five candidates per board for the pair rules to
+    /// weigh instead of eighteen.
+    static func isUniform(_ sides: [RGB], observed: RGB, deviation: Double) -> Bool {
+        guard !sides.isEmpty else { return true }
+        let tolerance = max(uniformSideTolerance * deviation, uniformSideFloor)
+        let agreeing = sides.filter { $0.distance(to: observed) <= tolerance }.count
+        return sides.count >= 3 ? agreeing >= sides.count - 1 : agreeing == sides.count
     }
 
-    /// Red minus the larger of green and blue that a premove tint estimate reaches (premoves:
-    /// 231 to 267; Game Review red: 150 to 186).
-    static let premoveRedMargin = 210.0
+    /// How far a ring side may be from the cell's measured color and still count as showing the
+    /// same tint: half the deviation, never less than `uniformSideFloor` L1 units (JPEG noise and
+    /// rounding on a faint tint).
+    static let uniformSideTolerance = 0.5
+    static let uniformSideFloor = 6.0
+
+    /// Weakest strength a cell needs to be offered as a faint candidate, and how many are offered.
+    static let faintMinimumStrength = 0.35
+    static let maximumFaint = 6
+
+    /// Whether a tint estimate (as if blended at 50%) belongs to the red family a premove is drawn
+    /// in: red clearly above both green and blue.
+    ///
+    /// The bound is the whole family, not the pure red alone. Over the 192-image premove set the
+    /// 335 squares a premove tints measure 172 and above in red minus the larger of green and
+    /// blue, five in twenty of them below 223, while the 335 squares the last move tints stay at
+    /// 167 and below, three quarters of them below 8. Game Review's reds (a blunder, a mistake's
+    /// salmon; measured 112 to 186 on real_089, real_146 and the rendered classification colors)
+    /// reach into the family and are not premoves: `LastMoveResolver.premoveGroup` separates them,
+    /// because a premove is the most saturated red on a board that carries another tint too.
+    static func isRedTint(_ estimate: RGB) -> Bool {
+        estimate.r >= redTintMinimum && redness(estimate) >= redTintMargin
+    }
+
+    /// How far a tint estimate's red stands above both its green and its blue.
+    static func redness(_ estimate: RGB) -> Double { estimate.r - max(estimate.g, estimate.b) }
+
+    /// Red, and red minus the larger of green and blue, that a tint estimate needs to count as the
+    /// red family. The premove squares of the stress set start at 172 and its last-move squares
+    /// stop at 167; an orange last-move tint on a metal board measures 125 (synth_00248).
+    static let redTintMinimum = 185.0
+    static let redTintMargin = 150.0
 
     /// Per display cell, whether at least 40% of its border ring lies inside the image, the
     /// condition under which `CellSampler.ringMedian` measures a color.
@@ -233,6 +307,15 @@ public enum HighlightDetector {
             }
             return total > 0 && Double(inside) >= 0.4 * Double(total)
         }
+    }
+
+    /// Interquartile-mean colors of the four sides of a cell's border ring (top, bottom, left,
+    /// right), nil for a side that is mostly outside the image. Exposed for the tint measurements
+    /// the tests and the diagnostics check.
+    @_spi(Testing)
+    public static func ringSides(_ detection: BoardDetection, image: RGBAImage, cell: Int) -> [RGB?] {
+        CellSampler.ringSides(image, x: detection.originX + Double(cell % 8) * detection.cellSize,
+                              y: detection.originY + Double(cell / 8) * detection.cellSize, size: detection.cellSize)
     }
 
     /// Mean color of the two ring sides that agree best with each other, preferring sides near
@@ -316,15 +399,59 @@ public enum LastMoveResolver {
         public var isPlausible: Bool = true
     }
 
+    /// Largest relative tint distance between two squares of a pair that includes a faint
+    /// candidate, and the radius within which no third square may carry the same tint.
+    ///
+    /// Measured on the 21 boards whose faint tint was missed: where the faint square carries the
+    /// move's own tint it lies 0.000 to 0.020 from its partner, while the strongest texture cells
+    /// of the same boards lie 0.034 and further from it. The same radius rejects a board whose
+    /// faint cells all drift together, which is what texture and an uneven backlight do: on the
+    /// five boards of the clock set that a faint pair was read from by mistake, every one of the
+    /// six candidates had two to four others within this radius, while a real tint sits on exactly
+    /// two squares.
+    static let faintPairRadius = 0.025
+    /// How much better the best faint pair's tint agreement must be than the next pair's that
+    /// reads as another move, for the faint reading to be used at all.
+    static let faintAmbiguityFactor = 0.5
+    /// Score below which a reading of tinted squares is weak enough to lose to a faint pair: any
+    /// reading that pays a penalty. A pair of one tint that the piece could have played scores at
+    /// least 1.55, whatever its place in the strength order.
+    static let faintOverrideScore = 1.4
+    /// How many times more exactly a faint pair's two squares must carry one tint than a tinted
+    /// pair's, for the faint reading to replace an unpenalized one, and how far apart that tinted
+    /// pair's own tints must be for the comparison to mean anything. Two squares of one tint are
+    /// measured 0.000 to 0.020 apart even on a textured board (synth_00248, a metal board: 0.006),
+    /// so only a tinted pair beyond that is doubtful enough to lose this way.
+    static let faintOverrideAgreement = 5.0
+    static let faintOverrideMinimumDistance = 0.02
+
     /// Score penalty for reading a move from two squares of clearly different tint colors
     /// (relative tint distance 0.5 or more; none up to `HighlightDetector.sameTintRadius`).
     static let crossTintPenalty = 1.2
     /// Relative tint distance up to which a third tinted square counts as the selection.
     static let selectionTintRadius = 0.4
-    /// Score penalty for reading the last move from two premove-red squares while squares of
+    /// Relative tint distance up to which that third square is reported as the selected piece
+    /// (unless the legal-move dots point at it). A selected piece is drawn in the move's own
+    /// color: over the evaluated sets the 298 selections read correctly lie a median of 0.004 from
+    /// the move's squares, while the 15 squares reported as a selection by mistake lie 0.141 and
+    /// further away.
+    static let selectionReportRadius = 0.12
+    /// Score penalty for reading the last move from one red-family square and one square of
+    /// another tint while a complete pair of that other tint is on the board: the red belongs to
+    /// the premove, so pairing it with a move square is a coincidence. Measured on premove_00116
+    /// and premove_00126, where such a pair sat exactly on the cross-tint penalty's threshold and
+    /// paid nothing.
+    static let mixedRedPenalty = 0.6
+    /// Score penalty for reading the last move from two red-family squares while squares of
     /// another tint are present: the premove pair holds the premoving piece on its start square,
-    /// so read as a move it runs backward and names the wrong mover.
-    static let premovePenalty = 1.5
+    /// so read as a move it runs backward and names the wrong mover. It is subtracted after the
+    /// `minimumScore` gate, so a red pair that is the only reading on the board still reads as the
+    /// last move (Game Review draws a blunder in the same red family), and it is small on purpose:
+    /// what settles a premove is the rule below, that a pair of one tint the piece could have
+    /// played always wins. A penalty large enough to decide on its own also let a pair of two
+    /// unrelated tints win over a red last move (measured on tints_00083, a red-pink board with a
+    /// marked square: the marked square paired with a move square scored 0.70 against 0.35).
+    static let premovePenalty = 0.3
     /// Readings by different movers whose scores differ by at most this are a tie that only the
     /// order of tint strengths would break (a selected piece that could have come from the
     /// vacated square scores exactly like the real move).
@@ -332,45 +459,82 @@ public enum LastMoveResolver {
 
     /// `tinted` in strength order; `tintDistances` relative tint distances between entries (nil:
     /// all one tint); `board` indexed by `Square.index`; `dots` the squares showing a legal-move
-    /// dot; `premove` per entry of `tinted`, whether it carries the premove red; `bottomColor`
-    /// the color at the bottom of the screen, which breaks ties between readings by different
-    /// movers when three or more squares are tinted: a piece is selected by the player at the
-    /// bottom, who is to move, so the move was the top player's.
+    /// dot; `estimates` the tint color of each entry, which finds the premove; `faint` per entry,
+    /// whether the threshold accepted the square on its own; `bottomColor` the color at the bottom
+    /// of the screen, which breaks ties between readings by different movers when three or more
+    /// squares are tinted: a piece is selected by the player at the bottom, who is to move, so the
+    /// move was the top player's.
     public static func resolve(tinted: [Square], tintDistances: [[Double]]? = nil, board: [Piece?],
-                               dots: [Square] = [], premove: [Bool]? = nil, bottomColor: PieceColor? = nil) -> Resolution? {
-        let candidates = Array(tinted.prefix(HighlightDetector.maximumTinted))
+                               dots: [Square] = [], estimates: [RGB]? = nil, faint: [Bool]? = nil,
+                               bottomColor: PieceColor? = nil) -> Resolution? {
+        let candidates = Array(tinted.prefix(HighlightDetector.maximumCandidates))
         // No move has been played in the start position.
         guard candidates.count >= 2, board != Position.start.board else { return nil }
         let distance = { (i: Int, j: Int) -> Double in
             guard let tintDistances, tintDistances.indices.contains(i), tintDistances.indices.contains(j) else { return 0 }
             return tintDistances[i][j]
         }
-        let isRed = { (i: Int) -> Bool in premove.map { $0.indices.contains(i) && $0[i] } ?? false }
-        // Premove squares next to squares of another tint: the red pair is the premove.
-        let redCount = candidates.indices.filter(isRed).count
-        let premoveShown = redCount >= 2 && redCount < candidates.count
+        let isFaint = { (i: Int) -> Bool in faint.map { $0.indices.contains(i) && $0[i] } ?? false }
+        let tintedIndices = candidates.indices.filter { !isFaint($0) }
+        // The premove pair. Only the squares the threshold accepted count here, so a faint
+        // candidate neither makes a premove nor hides one.
+        let premove = premoveGroup(tintedIndices, estimates: estimates, distance: distance)
+        let isPremoveSquare = { (i: Int) -> Bool in premove.contains(i) }
+        let premoveShown = !premove.isEmpty
+        let markers = resultMarkers(tintedIndices.map { candidates[$0] }, board: board, distance: distance)
         let same = { (i: Int, j: Int) -> Bool in distance(i, j) < selectionTintRadius }
         var readings: [Reading] = []
+        var faintReadings: [Reading] = []
         for i in 0..<candidates.count {
             for j in (i + 1)..<candidates.count {
                 let a = candidates[i], b = candidates[j]
-                guard var (resolution, score) = interpret(a, b, board: board) else { continue }
+                guard let (interpretation, raw) = interpret(a, b, board: board) else { continue }
+                var resolution = interpretation
+                var score = raw
                 // Stronger tints first.
                 score -= Double(i + j) * 0.05
                 let d = distance(i, j)
-                // The premove's start square holds the premoving piece, which may be the piece
-                // that just moved: its red then covers the last move's tint, and only one square
-                // of the last move's color is left.
-                let redStartSquare = (isRed(i) && board[a.index] != nil) || (isRed(j) && board[b.index] != nil)
-                let coveredMove = premoveShown && redCount == candidates.count - 1 && isRed(i) != isRed(j) && redStartSquare
-                if premoveShown && isRed(i) && isRed(j) {
-                    score -= premovePenalty
-                } else if !coveredMove {
+                // A cell the threshold did not accept is read as part of a move only on evidence
+                // that leaves little else: the two squares carry one tint, that tint is on no
+                // other square of the board, the piece could have made the move with a clear path
+                // and without leaving its own king in check (`raw >= 2`), and the position can
+                // have been arrived at by it (below).
+                let faintPair = isFaint(i) || isFaint(j)
+                if faintPair {
+                    // With no tinted square to anchor it, the pair must agree twice as closely:
+                    // nothing on the board was measured as a tint, so the two faint squares carry
+                    // the whole reading.
+                    let radius = isFaint(i) && isFaint(j) ? faintPairRadius * 0.5 : faintPairRadius
+                    guard d < radius, raw >= 2,
+                          !candidates.indices.contains(where: {
+                              $0 != i && $0 != j && (distance($0, i) < faintPairRadius || distance($0, j) < faintPairRadius)
+                          })
+                    else { continue }
+                }
+                // The premove is drawn over a board the last move already tinted, so it can cover
+                // one of the move's two squares: its start square holds the premoving piece, which
+                // may be the piece that just moved (real_090), and its destination can be the
+                // square the move came from (premove_00028). Either way only one square of the
+                // move's own color is left, which is what "every tinted square but one belongs to
+                // the premove" says: the move then has to be read across the two colors, without
+                // the cross-tint penalty. With two squares of another tint on the board the move pair is complete
+                // and a mixed pair is a coincidence instead.
+                let mixedRed = premoveShown && isPremoveSquare(i) != isPremoveSquare(j)
+                let coveredMove = mixedRed && premove.count == tintedIndices.count - 1
+                let isPremovePair = premoveShown && isPremoveSquare(i) && isPremoveSquare(j)
+                // A game-over marker covers the square it is drawn on, so a move that ends under
+                // one carries two unrelated colors for a reason: it pays the marker penalty
+                // instead of the cross-tint one.
+                let coveredByMarker = markers.contains(i) != markers.contains(j)
+                if !isPremovePair && !coveredMove && !coveredByMarker {
                     score -= crossTintPenalty * max(0, min(1, (d - HighlightDetector.sameTintRadius) / 0.2))
                 }
+                if coveredByMarker { score -= resultMarkerPenalty }
+                if mixedRed && !coveredMove { score -= mixedRedPenalty }
+
                 // A third tinted square of the same color is normally the selected piece of the
-                // side to move.
-                let others = candidates.indices.filter { $0 != i && $0 != j && same($0, i) && same($0, j) }
+                // side to move. A game-over marker and a faint candidate are never one.
+                let others = tintedIndices.filter { $0 != i && $0 != j && !markers.contains($0) && same($0, i) && same($0, j) }
                 var selection = false
                 if let other = others.first {
                     let square = candidates[other]
@@ -387,7 +551,7 @@ public enum LastMoveResolver {
                             }
                             // Report the selection when its tint clearly matches the move's, or
                             // when the dots belong to its piece.
-                            let tintMatches = max(distance(other, i), distance(other, j)) < HighlightDetector.sameTintRadius
+                            let tintMatches = max(distance(other, i), distance(other, j)) < selectionReportRadius
                             if tintMatches || (reach ?? 0) >= 0.5 {
                                 resolution.selected = square
                             }
@@ -399,10 +563,46 @@ public enum LastMoveResolver {
                     }
                 }
                 resolution.highlighted = [a, b]
+                // The gate is the reading's own score. The premove penalty is subtracted after it,
+                // so a red pair with nothing to lose to still reads as the last move.
                 guard score >= minimumScore else { continue }
+                if isPremovePair { score -= premovePenalty }
                 let reachable = predecessorIsPossible(resolution, board: board)
-                readings.append(Reading(resolution: resolution, score: score, selection: selection,
-                                        reachable: reachable))
+                if faintPair && !reachable { continue }
+                let reading = Reading(resolution: resolution, score: score, selection: selection,
+                                      reachable: reachable, isPremovePair: isPremovePair,
+                                      beatsAPremove: (d < HighlightDetector.sameTintRadius || coveredMove)
+                                          && resolution.isPlausible, tintDistance: d,
+                                      faintSquares: (isFaint(i) ? 1 : 0) + (isFaint(j) ? 1 : 0))
+                if faintPair { faintReadings.append(reading) } else { readings.append(reading) }
+            }
+        }
+        // The faint candidates. A pair that carries the tint of a square the threshold did accept
+        // is the stronger reading, because only one of its two squares rests on the faint
+        // measurement; between pairs of one kind the closer tint agreement decides, and a rival of
+        // the same kind that agrees nearly as well leaves the board without a last move rather
+        // than with a guess.
+        let ordered = faintReadings.sorted {
+            ($0.faintSquares, $0.tintDistance) < ($1.faintSquares, $1.tintDistance)
+        }
+        if let faintBest = ordered.first {
+            let rival = ordered.first {
+                $0.faintSquares == faintBest.faintSquares
+                    && ($0.resolution.from != faintBest.resolution.from || $0.resolution.to != faintBest.resolution.to)
+            }
+            // A faint pair is used when the tinted squares read as no move at all, when the move
+            // they read pays a penalty (their two tints differ, the piece could not have made the
+            // move, or its path is blocked), or when the faint pair's two squares carry one tint
+            // several times more exactly than the tinted pair's do, which is what a false tint
+            // beside a real one looks like (tints_00166: 0.003 against 0.045).
+            let tinted = readings.max(by: { $0.score < $1.score })
+            let weak = tinted == nil || tinted!.score < faintOverrideScore
+                || (tinted!.tintDistance >= faintOverrideMinimumDistance
+                    && faintBest.tintDistance * faintOverrideAgreement <= tinted!.tintDistance)
+            if weak, rival == nil || faintBest.tintDistance <= faintAmbiguityFactor * rival!.tintDistance {
+                readings = faintReadings.filter {
+                    $0.resolution.from == faintBest.resolution.from && $0.resolution.to == faintBest.resolution.to
+                }
             }
         }
         // A pair the position cannot have arrived at loses to any pair it can have: that is what
@@ -412,6 +612,15 @@ public enum LastMoveResolver {
         let reachable = readings.filter(\.reachable)
         if !reachable.isEmpty { readings = reachable }
         guard var best = readings.max(by: { $0.score < $1.score }) else { return nil }
+        // A premove pair never wins over a reading of the last move's own tint. The premove is
+        // drawn in red over the board the last move already tinted, so whenever a pair of one tint
+        // reads as a move the player could have played, that pair is the move and the red pair is
+        // the queued one. Measured on the premove stress set: 16 of its 192 boards were read as
+        // the premove, every one of them with such a pair on the board.
+        if best.isPremovePair,
+           let rival = readings.filter({ !$0.isPremovePair && $0.beatsAPremove }).max(by: { $0.score < $1.score }) {
+            best = rival
+        }
         // Two readings of three same-tint squares, each with the third square as a selected
         // piece of the other side, that differ only in tint order.
         let rivals: [Reading] = readings.filter { reading in
@@ -434,7 +643,102 @@ public enum LastMoveResolver {
         var selection: Bool
         /// The position before this move could have been legal (see `predecessorIsPossible`).
         var reachable: Bool
+        /// Both squares carry the red family while squares of another tint are on the board.
+        var isPremovePair = false
+        /// The two squares carry one tint (or the red covers one of them) and the move is one the
+        /// piece could have made: a reading a premove pair must not win over.
+        var beatsAPremove = false
+        /// Relative tint distance between the two squares.
+        var tintDistance = 0.0
+        /// How many of the two squares are faint candidates (0 for a reading of tinted squares).
+        var faintSquares = 0
     }
+
+    /// The candidates that carry a premove, or none.
+    ///
+    /// A premove is drawn in red over a board that already shows the last move, so the red squares
+    /// are a premove only when something else on the board can be the move. Two cases:
+    /// the red squares sit beside squares of another tint, which is the common one; or every
+    /// tinted square is red because the last move is drawn in one of Game Review's reds as well,
+    /// and then the premove is the more saturated group (measured on premove_00112: the premove's
+    /// red stands 245 above green and blue, the mistake's salmon 167).
+    ///
+    /// `indices` are the tinted candidates; `estimates` and `distance` are indexed as they are in
+    /// `resolve`.
+    static func premoveGroup(_ indices: [Int], estimates: [RGB]?, distance: (Int, Int) -> Double) -> Set<Int> {
+        guard let estimates else { return [] }
+        let red = indices.filter { estimates.indices.contains($0) && HighlightDetector.isRedTint(estimates[$0]) }
+        guard red.count >= 2 else { return [] }
+        if red.count < indices.count { return Set(red) }
+        // Everything tinted is red: look for a more saturated red inside it.
+        var groups: [[Int]] = []
+        for index in red {
+            if let existing = groups.firstIndex(where: { $0.contains { distance($0, index) < premoveGroupRadius } }) {
+                groups[existing].append(index)
+            } else {
+                groups.append([index])
+            }
+        }
+        let redness = { (group: [Int]) -> Double in
+            group.reduce(0.0) { $0 + HighlightDetector.redness(estimates[$1]) } / Double(group.count)
+        }
+        let ranked = groups.sorted { redness($0) > redness($1) }
+        guard ranked.count >= 2, ranked[0].count >= 2, ranked[0].count < indices.count,
+              redness(ranked[0]) - redness(ranked[1]) >= premoveRedSeparation else { return [] }
+        return Set(ranked[0])
+    }
+
+    /// Relative tint distance within which two red squares are one group. Tighter than
+    /// `sameTintRadius`, because the two reds this has to tell apart are both red: on
+    /// premove_00112 the premove's two squares lie 0.003 apart and the last move's 0.000, while
+    /// the two pairs lie 0.169 to 0.245 apart.
+    static let premoveGroupRadius = 0.1
+
+    /// How much more saturated the premove's red must be than the red the last move is drawn in,
+    /// when both are on the board. Measured: 245 against 167 on premove_00112.
+    static let premoveRedSeparation = 60.0
+
+    /// Indices of `candidates` that mark how the game ended rather than a move.
+    ///
+    /// A finished game is shown with a tint on both kings' squares: a green "Winner" pill on one, a
+    /// red "Abandon", "Resigned", "Timeout" or "Checkmate" pill on the other, gray on both for a
+    /// draw. No move can tint both kings, because one of a move's two squares is always empty, and
+    /// the result color is its own, drawn over whatever the square already carried. So a candidate
+    /// counts as a marker when it holds a king, a king of the other color is tinted too, and its
+    /// tint matches no square that holds no king: a king that just moved, a king in check drawn in
+    /// red and a selected king all share the tint of the move or selection they belong to and are
+    /// left alone. Measured: 7 of the 192 badge boards read a marker as part of the move or as the
+    /// selected piece, and 11 of the 192 selection boards tint both kings in the move's own color.
+    ///
+    /// `distance(i, j)`: relative tint distance between two candidates.
+    static func resultMarkers(_ candidates: [Square], board: [Piece?],
+                              distance: (Int, Int) -> Double) -> Set<Int> {
+        var kings: [PieceColor: [Int]] = [:]
+        for (index, square) in candidates.enumerated() {
+            guard let piece = board[square.index], piece.kind == .king else { continue }
+            kings[piece.color, default: []].append(index)
+        }
+        guard kings[.white] != nil, kings[.black] != nil else { return [] }
+        let others = candidates.indices.filter { index in
+            board[candidates[index].index].map { $0.kind != .king } ?? true
+        }
+        return Set(kings.values.flatMap { $0 }.filter { king in
+            others.allSatisfy { distance(king, $0) >= resultMarkerTintDistance }
+        })
+    }
+
+    /// Relative tint distance from every tinted square that holds no king that a king's tint needs
+    /// to count as a game-over marker. Measured: a marker's distance from the last move's own
+    /// squares is 0.18 to 0.73 over the badge set (the result color is drawn over the square,
+    /// whatever it held), while a king tinted as part of the move or because the player selected
+    /// it carries the move's own tint, 0.00 to 0.05 away, on the 11 selection boards that tint
+    /// both kings.
+    static let resultMarkerTintDistance = 0.15
+
+    /// Score penalty for reading the last move from a pair that includes a game-over marker. It is
+    /// a penalty and not a refusal because the mating or winning move often ends on the king's own
+    /// square, where the result tint covers the move's destination.
+    static let resultMarkerPenalty = 0.5
 
     /// Score added for a selected piece that can reach all legal-move dots (subtracted when it
     /// reaches none).

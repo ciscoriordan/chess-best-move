@@ -133,13 +133,13 @@ public enum OrientationEstimator {
     /// Log-odds from a highlighted move in display cells: a pawn moves toward the opponent,
     /// and castling starts on the e-file.
     public static func lastMoveLogOdds(tintedCells: [Int], tintDistances: [[Double]]? = nil, displayPieces: [Piece?],
-                                       premove: [Bool]? = nil) -> Double {
+                                       estimates: [RGB]? = nil) -> Double {
         let white = LastMoveResolver.resolve(
             tinted: tintedCells.map { DisplayGrid.square(row: $0 / 8, column: $0 % 8, whiteAtBottom: true) },
-            tintDistances: tintDistances, board: DisplayGrid.toSquares(displayPieces, whiteAtBottom: true), premove: premove)
+            tintDistances: tintDistances, board: DisplayGrid.toSquares(displayPieces, whiteAtBottom: true), estimates: estimates)
         let black = LastMoveResolver.resolve(
             tinted: tintedCells.map { DisplayGrid.square(row: $0 / 8, column: $0 % 8, whiteAtBottom: false) },
-            tintDistances: tintDistances, board: DisplayGrid.toSquares(displayPieces, whiteAtBottom: false), premove: premove)
+            tintDistances: tintDistances, board: DisplayGrid.toSquares(displayPieces, whiteAtBottom: false), estimates: estimates)
         func plausible(_ r: LastMoveResolver.Resolution?, whiteAtBottom: Bool) -> Bool? {
             guard let r else { return nil }
             let board = DisplayGrid.toSquares(displayPieces, whiteAtBottom: whiteAtBottom)
