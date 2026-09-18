@@ -243,6 +243,7 @@ private struct AnalysisScreen: View {
         case .lastMoveHighlight: "from last-move highlight"
         case .runningClock: "from the clock"
         case .checkRule: "from check"
+        case .startPosition: "the game has not started"
         case .assumedBottomPlayer: "assumed: you are at the bottom"
         case .user: nil
         }
@@ -254,7 +255,7 @@ private struct AnalysisScreen: View {
                 HStack(alignment: .top, spacing: Spacing.s2) { chipItems }
                 VStack(alignment: .leading, spacing: Spacing.s2) { chipItems }
             }
-            if [.lastMoveHighlight, .runningClock, .checkRule].contains(snapshot.sideToMoveOrigin),
+            if [.lastMoveHighlight, .runningClock, .checkRule, .startPosition].contains(snapshot.sideToMoveOrigin),
                let source = sideToMoveSourceText {
                 Text(source)
                     .typography(.caption)

@@ -316,7 +316,8 @@ final class AppModel {
     }
 
     private func authorize(_ session: AnalysisSession, presentingPaywall: Bool) {
-        let authorization = credits.authorize(board: session.snapshot.position.board, origin: session.origin)
+        let authorization = credits.authorize(board: session.snapshot.position.board, origin: session.origin,
+                                              recognition: MonetizationRecognitionEvidence(session.snapshot))
         if authorization.decision.allowsAnalysis {
             session.creditState = .authorized(authorization)
             if pendingAnalysis === session { pendingAnalysis = nil }
@@ -399,7 +400,10 @@ final class AppModel {
             return
         }
         guard path.isEmpty, sheet == nil, presentedSheet == nil, editor == nil else { return }
-        let authorization = credits.authorize(board: snapshot.position.board, origin: saved.origin)
+        // A board restored for an Ask to Buy approval keeps no reading, so it gets no free
+        // squares (monetization.md section 5).
+        let authorization = credits.authorize(board: snapshot.position.board, origin: saved.origin,
+                                              recognition: MonetizationRecognitionEvidence(snapshot))
         guard authorization.decision.allowsAnalysis else { return }
         settings.pendingApprovalBoard = nil
         path = [.analysis(AnalysisSession(snapshot: snapshot, origin: saved.origin, creditState: .authorized(authorization)))]

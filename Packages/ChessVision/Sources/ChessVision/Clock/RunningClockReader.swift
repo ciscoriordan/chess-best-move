@@ -21,10 +21,10 @@ public struct RunningClock: Sendable, Hashable {
 /// Ink is luminance that differs by more than 40 from the mean over a window about a third of a
 /// square wide, dark on light boxes and light on dark ones. An ink component counts as the icon
 /// only when it looks like a clock in a clock box:
-/// - a round ring (width and height within 20% of each other, 14% to 60% of a square across)
-///   closed in at least 21 of 24 directions, with ink at its center (the hands) and little ink
-///   between hands and ring, which rules out the digit 0, the letter O and the pause icon of a
-///   daily game on vacation;
+/// - a round ring (width and height within 20% of each other, at least 8 samples and at most 60%
+///   of a square across; see `minimumRingSamples`) closed in at least 21 of 24 directions, with
+///   ink at its center (the hands) and little ink between hands and ring, which rules out the
+///   digit 0, the letter O and the pause icon of a daily game on vacation;
 /// - a uniform box color around the ring, contrasting with the ring by at least 70, whose edge
 ///   is within 3.5 ring radii to the left, above and below with nothing drawn in between, which
 ///   rules out the puzzle timer drawn straight on the background and letters in running text;
@@ -33,14 +33,22 @@ public struct RunningClock: Sendable, Hashable {
 /// tablets, the website), then a column right of the board (landscape tablets). An icon at both
 /// the top and the bottom is contradictory and reports nothing.
 ///
-/// Measured on 2026-09-17: all 223 icons in the synthetic test set found with none invented; in
-/// the real screenshot set, 41 icons found, none invented; the 2 that disagree with the labeled side to move
-/// are stepped-back game viewers whose highlight decides instead (real_057, real_064). Missed:
+/// Measured on 2026-09-18 over the synthetic set and the stress sets, which record which bar
+/// draws the icon: 1,397 of the 1,512 rendered icons found, none invented on the 517 images
+/// without one, and never the wrong bar. Leaving out the sets that hide the clock on purpose
+/// (covered, cutoff, tiny), it is 1,239 of 1,243; the 4 left are one layout, a 4K desktop browser
+/// window whose 16 px icon falls between the samples of a 155 px square. In the real screenshot
+/// set 41 icons are found, none invented; the 2 that disagree with the labeled side to move are
+/// stepped-back game viewers whose highlight decides instead (real_057, real_064). Missed there:
 /// a centered clock in a wide landscape-tablet box (real_040) and a clock cut off by the image
-/// edge (real_152).
+/// edge (real_152). Resampling those screenshots smaller, as a messaging app does, the icons
+/// survive down to 64 px squares (57 of 57, against 50 of 57 before the size window was stated in
+/// the sampling density actually reached).
 @_spi(Testing)
 public enum RunningClockReader {
-    /// Samples per square edge.
+    /// Samples per square edge aimed for. The sampling step is never finer than one pixel, so on
+    /// squares under this size the real density is one sample per pixel and every size test uses
+    /// `Plane.samplesPerCell` (the density actually reached) instead of this target.
     static let samplesPerCell = 90.0
     /// Height of each searched bar, in squares.
     static let barDepth = 1.8
@@ -76,6 +84,10 @@ public enum RunningClockReader {
         var originX: Double
         var originY: Double
         var step: Double
+        /// Samples per square edge actually reached, `cellSize / step`. Equal to the target
+        /// `samplesPerCell` while squares are at least that many pixels, and equal to the square's
+        /// size in pixels below that, where `step` is clamped to one pixel.
+        var samplesPerCell: Double
         var luminance: [Float]
         /// False where the sample lies outside the image.
         var inside: [Bool]
@@ -104,11 +116,14 @@ public enum RunningClockReader {
                        top: Bool) -> RunningClock? {
         let cell = detection.cellSize
         let step = max(1, cell / samplesPerCell)
+        // The density the step actually reaches, which the size tests are expressed in.
+        let density = cell / step
         let x0 = max(0, x0), x1 = min(Double(image.width), x1)
         let y0 = max(0, y0), y1 = min(Double(image.height), y1)
         let width = Int((x1 - x0) / step), height = Int((y1 - y0) / step)
         guard width >= 40, height >= 20 else { return nil }
         var plane = Plane(width: width, height: height, originX: x0, originY: y0, step: step,
+                          samplesPerCell: density,
                           luminance: [Float](repeating: 0, count: width * height),
                           inside: [Bool](repeating: false, count: width * height), image: image)
         image.data.withUnsafeBufferPointer { d in
@@ -124,7 +139,7 @@ public enum RunningClockReader {
                 }
             }
         }
-        let local = localMean(plane, radius: Int(0.18 * samplesPerCell))
+        let local = localMean(plane, radius: max(1, Int(0.18 * density)))
         var best: (clock: RunningClock, score: Double)?
         for bright in [true, false] {
             var mask = [Bool](repeating: false, count: width * height)
@@ -142,6 +157,23 @@ public enum RunningClockReader {
         }
         return best?.clock
     }
+
+    /// Ring size window, as a share of the square, and an absolute floor in samples.
+    ///
+    /// The clock icon is interface chrome: it is sized by the layout, not by the board, so where
+    /// the board is large next to the clock box (a desktop browser window, a landscape tablet) the
+    /// icon is a small share of a square. Measured over the rendered sets the running icon runs
+    /// from 0.098 to 0.46 of a square and on real screenshots from 0.156 to 0.456, so a window
+    /// stated only as a share of the square cannot hold both ends. The floor that decides is
+    /// therefore `minimumRingSamples`, below which the ring tests (24 directions at four radii)
+    /// have too few samples to mean anything; `minimumRingFraction` only keeps the floor from
+    /// falling far below the sampling grid if the target density is ever raised.
+    static let minimumRingFraction = 0.07
+    static let maximumRingFraction = 0.60
+    /// Smallest ring accepted, in samples (one sample per pixel on squares under
+    /// `samplesPerCell` pixels). At the current target density this is what the lower bound is:
+    /// 8 samples is 0.089 of a square on a large board and 8 pixels on a small one.
+    static let minimumRingSamples = 8.0
 
     /// Farthest a box edge may be from the icon's center, in ring radii (measured: about 1.9 to 2.6).
     static let boxPadding = 3.5
@@ -191,7 +223,8 @@ public enum RunningClockReader {
     /// radius in samples.
     static func ringScore(_ c: Component, components: [Component], mask: [Bool], plane: Plane) -> (Double, Double, Double, Double)? {
         let diameter = Double(max(c.width, c.height))
-        guard diameter >= 0.14 * samplesPerCell, diameter <= 0.60 * samplesPerCell,
+        let smallest = max(minimumRingSamples, minimumRingFraction * plane.samplesPerCell)
+        guard diameter >= smallest, diameter <= maximumRingFraction * plane.samplesPerCell,
               Double(min(c.width, c.height)) >= 0.8 * diameter else { return nil }
         let cx = Double(c.minX + c.maxX) / 2, cy = Double(c.minY + c.maxY) / 2
         let r = diameter / 2

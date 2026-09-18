@@ -93,6 +93,9 @@ enum SideToMoveOrigin: String, Sendable, Hashable, Codable {
     case runningClock
     /// The other side would be in check ("from check").
     case checkRule
+    /// The board is the start position, so White moves first ("the game has not started"). It
+    /// is the rules of chess rather than a guess, so the chip stays in the normal state.
+    case startPosition
     /// No evidence: the player at the bottom ("assumed: you are at the bottom"). The chip is
     /// shown in the attention state.
     case assumedBottomPlayer
@@ -126,6 +129,34 @@ enum BoardDoubt: Sendable, Hashable {
     case orientationUnconfirmed
     /// The side to move rests on evidence that may mislead.
     case sideToMoveUncertain
+    /// Nothing in the screenshot says whose turn it is: no last-move highlight and no clock.
+    /// The side to move was not established, so the user confirms it before anything is spent
+    /// (owner decision of 2026-09-17).
+    case sideToMoveNotEstablished
+    /// The board's colors or its pieces are unlike the board styles recognition was trained on,
+    /// so the pieces may be read wrong (owner decision of 2026-09-17).
+    case unfamiliarTheme
+    /// A doubt this version of the app has no sentence for. It is still a doubt, so the board
+    /// goes to Check position; the screen says nothing specific about it.
+    case other
+
+    /// The same doubt on a board turned around: the squares it names are renamed to the
+    /// square rotated by 180 degrees (`index 63 - i`), as `BoardSnapshot.flipped()` renames
+    /// every other square set. Doubts about the board as a whole are unchanged.
+    func flipped() -> BoardDoubt {
+        func rotate(_ squares: Set<Square>) -> Set<Square> {
+            Set(squares.compactMap { Square(index: 63 - $0.index) })
+        }
+        switch self {
+        case .squaresOutsideImage(let squares): return .squaresOutsideImage(rotate(squares))
+        case .squaresCovered(let squares): return .squaresCovered(rotate(squares))
+        case .uncertainSquares(let squares): return .uncertainSquares(rotate(squares))
+        case .squaresTooSmall, .severalBoards, .invertedSquareColors, .weakBoardMatch,
+             .impossiblePosition, .orientationUnconfirmed, .sideToMoveUncertain,
+             .sideToMoveNotEstablished, .unfamiliarTheme, .other:
+            return self
+        }
+    }
 }
 
 /// One board on its way from import to analysis: the position plus what the screens need
@@ -245,7 +276,7 @@ struct BoardSnapshot: Sendable, Identifiable, Hashable {
 
     /// The board with its orientation flipped (design.md 9.4 "Flip"): the crop is not
     /// rotated; every piece is re-mapped to the square rotated by 180 degrees
-    /// (index `63 - i`), and so is the last move.
+    /// (index `63 - i`), and so are the last move and the squares the doubts name.
     ///
     /// Flipping back to the board as it was before the last flip restores its castling rights
     /// and en passant square exactly, so a right the user turned off stays off. Otherwise the
@@ -258,6 +289,9 @@ struct BoardSnapshot: Sendable, Identifiable, Hashable {
         copy.recognizedBoard = recognizedBoard.map { Array($0.reversed()) }
         copy.squareConfidences = squareConfidences.map { Array($0.reversed()) }
         copy.lowConfidenceSquares = Set(lowConfidenceSquares.compactMap { Square(index: 63 - $0.index) })
+        // The doubts name squares in the orientation they were read in, like every other square
+        // set here; Check position intersects them with the flagged squares to pick its sentence.
+        copy.doubts = doubts.map { $0.flipped() }
         copy.lastMove = lastMove.flatMap { move in
             guard let from = Square(index: 63 - move.from.index), let to = Square(index: 63 - move.to.index) else { return nil }
             return Move(from: from, to: to, promotion: move.promotion)
@@ -294,10 +328,18 @@ struct BoardSnapshot: Sendable, Identifiable, Hashable {
     ///   orientation is what was wrong.
     /// - A board set up by hand (no crop) has no picture to keep: the position the user built
     ///   stays as it is, and only the displayed orientation turns around.
-    /// - When the side to move was only assumed from the bottom player, it follows the new
-    ///   bottom player, with recognition's exceptions (ARCHITECTURE.md, side to move): White in
-    ///   the start position, and the other side when the assumed side's opponent is in check
-    ///   (origin `.checkRule`).
+    /// - A side to move that was read from the screen's top and bottom follows the flip, with
+    ///   recognition's exceptions (ARCHITECTURE.md, side to move): White in the start position,
+    ///   and the other side when the chosen side's opponent is in check (origin `.checkRule`).
+    ///   Two origins are read that way:
+    ///   - `.assumedBottomPlayer`: the side to move becomes the new bottom player.
+    ///   - `.runningClock`: the clock bar belongs to the screenshot, not to the board, so the
+    ///     running clock that stood next to one player now stands next to the other and the side
+    ///     to move swaps. The reading itself still holds, so the origin (and its caption "from
+    ///     the clock") stays.
+    ///   A side read from the last-move highlight is the color of the piece that moved; a side
+    ///   the user chose or the check rule settled, and White to move in the start position
+    ///   (`.startPosition`), do not depend on which way the board faces: those are kept.
     func flippedByUser() -> BoardSnapshot {
         var result: BoardSnapshot
         if boardImage == nil {
@@ -306,11 +348,23 @@ struct BoardSnapshot: Sendable, Identifiable, Hashable {
         } else {
             result = flipped()
         }
-        guard sideToMoveOrigin == .assumedBottomPlayer else { return result }
-
-        var side: PieceColor = result.whiteAtBottom ? .white : .black
-        if result.position.board == Position.start.board { side = .white }
-        var origin = SideToMoveOrigin.assumedBottomPlayer
+        var origin = sideToMoveOrigin
+        var side: PieceColor
+        switch sideToMoveOrigin {
+        case .assumedBottomPlayer:
+            side = result.whiteAtBottom ? .white : .black
+        case .runningClock:
+            side = position.sideToMove.opposite
+        case .lastMoveHighlight, .checkRule, .startPosition, .user:
+            return result
+        }
+        if result.position.board == Position.start.board {
+            // No move has been made, so White is to move whoever is at the bottom and whatever
+            // the clock shows; a clock that is not White's no longer explains the side to move,
+            // and the rules of chess do (`SideToMoveSource.startPosition`).
+            if origin == .runningClock, side != .white { origin = .startPosition }
+            side = .white
+        }
         let probe = Position(board: result.position.board, sideToMove: side)
         if probe.isInCheck(side.opposite), !probe.isInCheck(side) {
             side = side.opposite
@@ -393,7 +447,9 @@ enum AnalysisOrigin: String, Sendable, Hashable, Codable {
 enum CreditDecision: String, Sendable, Hashable, Codable {
     /// Pro is active: unlimited.
     case allowedPro
-    /// No credit needed: within 3 squares of one of the last 20 paid boards.
+    /// No credit needed: the same placement as one of the last 20 paid boards, or a fix within
+    /// 3 squares of one, limited to the squares that board allows to be changed
+    /// (monetization.md section 5).
     case allowedFreeReanalysis
     /// Spends one of the 3 free analyses on commit.
     case spendFree
@@ -435,7 +491,15 @@ protocol CreditsService: AnyObject, Observable, Sendable {
     /// Decides whether analyzing `board` costs a credit, without spending anything. Order of
     /// use: Pro, then free, then purchased. Compare against paid boards treating a board
     /// rotated by 180 degrees (a flip) as the same board.
-    func authorize(board: [Piece?], origin: AnalysisOrigin) -> CreditAuthorization
+    ///
+    /// `recognition` is what recognition contributed to this board, which decides the squares a
+    /// later edit of the paid board may change for free (monetization.md section 5, owner
+    /// decision 1 of 2026-09-17). Build it from the snapshot being analyzed,
+    /// `MonetizationRecognitionEvidence(snapshot)`, also for a board set up by hand: such a
+    /// snapshot carries no reading and therefore no free squares. Pass nil only where there is
+    /// no snapshot.
+    func authorize(board: [Piece?], origin: AnalysisOrigin,
+                   recognition: MonetizationRecognitionEvidence?) -> CreditAuthorization
 
     /// Spends the credit (if any) and records the paid board. Call once, after the engine has
     /// actually started. Must be idempotent for the same authorization id, and must re-check

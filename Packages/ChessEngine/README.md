@@ -1,8 +1,10 @@
 # ChessEngine
 
-Stockfish compiled into the app process, with the Swift API defined in
-`docs/ARCHITECTURE.md` (`StockfishEngine`, `SearchLimit`, `EngineScore`, `EngineInfo`,
-`EngineResult`, `EngineEvent`).
+Stockfish compiled into the app process, behind the Swift API declared in
+`Sources/ChessEngine/`: `StockfishEngine`, `SearchLimit`, `EngineScore`, `EngineInfo`,
+`EngineResult` and `EngineEvent`. (The module contract that specifies them is
+`docs/ARCHITECTURE.md`, a development document that is not part of the published source, so
+this file is written to stand on its own.)
 
 ```swift
 let engine = StockfishEngine.shared
@@ -176,8 +178,8 @@ into every Stockfish file, because SwiftPM cannot vary flags per architecture an
 | `NNUE_EMBEDDING_OFF`, `STOCKFISH_NO_SYSTEM_WIDE_SHM` | defined | Network from the bundle; no `/tmp` shared memory. |
 
 **Why no dot product.** Stockfish's `apple-silicon` and `armv8-dotprod` targets add
-`-march=armv8.2-a+dotprod -DUSE_NEON_DOTPROD`. The app's deployment target is iOS 17, which
-runs on the Apple A12 (iPhone XS, XS Max, XR). LLVM's CPU definitions give `apple-a13` and
+`-march=armv8.2-a+dotprod -DUSE_NEON_DOTPROD`. The app's deployment target is iOS 18, which
+still runs on the Apple A12 (iPhone XS, XS Max, XR). LLVM's CPU definitions give `apple-a13` and
 later the dot-product extension but not `apple-a12` (checked with
 `clang -mcpu=apple-a12 -dM -E`: no `__ARM_FEATURE_DOTPROD`), and an App Store app cannot
 ship a separate slice per CPU. A dot-product build would crash with an illegal instruction

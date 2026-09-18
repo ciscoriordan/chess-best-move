@@ -12,6 +12,7 @@ enum CaptureAccessibilityID {
     static let checkPositionTitle = "checkPosition.title"
     static let checkPositionAnalyze = "checkPosition.analyze"
     static let checkPositionReason = "checkPosition.reason"
+    static let checkPositionChipNote = "checkPosition.chipNote"
     static let boardNotFoundTitle = "boardNotFound.title"
     static let editorBoard = "editor.board"
     static let editorAnalyze = "editor.analyze"
@@ -43,6 +44,7 @@ struct CheckPositionView: View {
 
     var body: some View {
         let issues = issues
+        let summary = CaptureCheckPositionSummary(snapshot: snapshot, issues: issues)
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 board(issues: issues)
@@ -53,11 +55,11 @@ struct CheckPositionView: View {
                         .padding(.top, Spacing.s2)
                         .accessibilityHidden(true)
                 }
-                chips
+                chips(summary)
                     .padding(.top, Spacing.s4)
                 Hairline()
                     .padding(.top, Spacing.s4)
-                summary(issues: issues)
+                self.summary(summary, issues: issues)
                     .padding(.top, Spacing.s4)
                 castling
             }
@@ -130,16 +132,20 @@ struct CheckPositionView: View {
 
     // MARK: Chips
 
-    private var chips: some View {
+    /// The side-to-move and Flip chips, with the caption naming where the side to move came
+    /// from and, when recognition doubted the orientation or the side to move, what to check
+    /// here (design.md 9.5). The doubt is said next to the controls that settle it, not in the
+    /// summary below.
+    private func chips(_ summary: CaptureCheckPositionSummary) -> some View {
         let side = snapshot.position.sideToMove
         let caption = CapturePositionIssues.sideToMoveCaption(snapshot.sideToMoveOrigin)
-        let assumed = snapshot.sideToMoveOrigin == .assumedBottomPlayer
+        let emphasized = summary.emphasizesSideToMove
         return VStack(alignment: .leading, spacing: Spacing.s1) {
             CaptureFlowLayout {
                 Chip(
                     "\(CapturePositionIssues.name(side)) to move",
                     glyph: .piece(Piece(color: side, kind: .king)),
-                    state: assumed ? .attention : .normal
+                    state: emphasized ? .attention : .normal
                 ) {
                     snapshot = snapshot.withSideToMove(side.opposite)
                     selectionFeedback += 1
@@ -157,7 +163,15 @@ struct CheckPositionView: View {
             if let caption {
                 Text(caption)
                     .typography(.caption)
-                    .foregroundStyle(assumed ? Palette.caution : Palette.ink2)
+                    .foregroundStyle(emphasized ? Palette.caution : Palette.ink2)
+            }
+            if let note = summary.chipNote {
+                Text(note)
+                    .typography(.body)
+                    .foregroundStyle(Palette.caution)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, Spacing.s1)
+                    .accessibilityIdentifier(CaptureAccessibilityID.checkPositionChipNote)
             }
         }
     }
@@ -189,9 +203,8 @@ struct CheckPositionView: View {
 
     // MARK: Summary
 
-    private func summary(issues: [PositionIssue]) -> some View {
-        let summary = CaptureCheckPositionSummary(snapshot: snapshot, issues: issues)
-        return VStack(alignment: .leading, spacing: Spacing.s3) {
+    private func summary(_ summary: CaptureCheckPositionSummary, issues: [PositionIssue]) -> some View {
+        VStack(alignment: .leading, spacing: Spacing.s3) {
             Text(summary.title)
                 .typography(.title)
                 .foregroundStyle(Palette.ink)
@@ -256,22 +269,35 @@ struct CheckPositionView: View {
 /// and, when the screenshot itself explains the doubt, why.
 ///
 /// The reason comes from what recognition reported (`BoardSnapshot.doubts`) and, for the
-/// screenshot's edge, from the geometry the app checks itself (`CaptureBoardCoverage`):
+/// screenshot's edge, from the geometry the app checks itself (`CaptureBoardCoverage`). What is
+/// said about the marked squares and what is said about the board as a whole are two different
+/// things, so they are two sentences of the same reason line rather than alternatives:
 ///
 /// - Marked squares outside the screenshot: the recognizer never saw them, so pieces there may
 ///   be missing.
 /// - Marked squares under a cover: something is drawn over them (a banner, a card, a menu).
 /// - Other marked squares: hard to read, for whatever reason.
-/// - Nothing marked and nothing to fix, so the doubt is about the board as a whole: several
-///   boards in the screenshot, squares too small to read, inverted square colors, an orientation
-///   no coordinates confirm, or a side to move read from weak evidence. A doubt with nothing to
-///   say about the screenshot (a weak board match) leaves the reason out, because the body
+/// - Then the board as a whole: several boards in the screenshot, squares too small to read,
+///   inverted square colors, or a board style recognition has not been trained on. A doubt with
+///   nothing to say about the screenshot (a weak board match) adds nothing, because the body
 ///   already asks the user to compare the board with the screenshot.
+///
+/// The two doubts the user settles with the chips above the summary - the orientation (Flip) and
+/// the side to move - are not part of that line. They are `chipNote`, shown under those chips,
+/// and a doubted side to move also draws its chip in the attention state
+/// (`emphasizesSideToMove`), so the sentence and the control that answers it are together.
 struct CaptureCheckPositionSummary: Equatable, Sendable {
     let title: String
     let body: String
     /// Why the board needs a look, shown in `caution`; nil when there is nothing specific to say.
     let reason: String?
+    /// What to check about the orientation and the side to move, shown in `caution` under the
+    /// chips that change them; nil when neither is in doubt.
+    let chipNote: String?
+    /// Draw the side-to-move chip in the attention state: it was assumed, or recognition doubted
+    /// it (owner decision of 2026-09-17: a side to move that nothing in the screenshot
+    /// establishes is checked by the user before anything is spent).
+    let emphasizesSideToMove: Bool
 
     init(snapshot: BoardSnapshot, issues: [PositionIssue]) {
         let flagged = snapshot.lowConfidenceSquares
@@ -305,27 +331,34 @@ struct CaptureCheckPositionSummary: Equatable, Sendable {
             body = "Check the pieces, then analyze."
         }
 
+        var squareReason: String?
         if !readFromScreenshot {
-            reason = nil
+            squareReason = nil
         } else if !outside.isEmpty {
             let rest = outside.count == flagged.count ? ""
                 : covered.isEmpty ? " Other marked squares were hard to read."
                 : " Something in your screenshot covers the other marked squares."
-            reason = "Part of the board is outside your screenshot, so pieces on the marked edge squares may be missing." + rest
+            squareReason = "Part of the board is outside your screenshot, so pieces on the marked edge squares may be missing." + rest
         } else if !covered.isEmpty {
-            reason = "Something in your screenshot covers the marked squares, such as a banner, a card or a menu."
+            squareReason = "Something in your screenshot covers the marked squares, such as a banner, a card or a menu."
                 + (covered.count == flagged.count ? "" : " The other marked squares were hard to read.")
         } else if !flagged.isEmpty {
-            reason = "Marked squares were hard to read. Something may cover them in your screenshot, such as a banner, an arrow or a menu."
-        } else if blocking.isEmpty {
-            reason = Self.boardReason(snapshot.doubts)
-        } else {
-            reason = nil
+            squareReason = "Marked squares were hard to read. Something may cover them in your screenshot, such as a banner, an arrow or a menu."
         }
+        // What is wrong with the whole board is said whether or not single squares are marked:
+        // a banner over two squares does not explain a board that is also too small to read.
+        let boardReason = readFromScreenshot && blocking.isEmpty ? Self.boardReason(snapshot.doubts) : nil
+        let sentences = [squareReason, boardReason].compactMap { $0 }
+        reason = sentences.isEmpty ? nil : sentences.joined(separator: " ")
+
+        // The orientation and the side to move belong to the chips, not to the summary.
+        chipNote = blocking.isEmpty ? Self.chipNote(snapshot) : nil
+        emphasizesSideToMove = snapshot.sideToMoveOrigin == .assumedBottomPlayer
+            || (snapshot.sideToMoveOrigin != .user && snapshot.doubts.contains { $0.isAboutTheSideToMove })
     }
 
-    /// What to say when no single square is marked and the doubt is about the board as a whole.
-    /// The first doubt that has something to say about the screenshot wins.
+    /// What to say when the doubt is about the board as a whole. The first doubt that has
+    /// something to say about the screenshot wins.
     static func boardReason(_ doubts: [BoardDoubt]) -> String? {
         for doubt in doubts {
             switch doubt {
@@ -335,15 +368,49 @@ struct CaptureCheckPositionSummary: Equatable, Sendable {
                 return "The board is small in your screenshot, about \(Int(pixelsPerSquare.rounded())) pixels a square, which makes the pieces hard to read. A screenshot with the board larger reads better."
             case .invertedSquareColors:
                 return "The light and dark squares are the other way round on this board. Some board themes look like that; so does a mirrored screenshot, and then the pieces sit on mirrored squares."
-            case .orientationUnconfirmed:
-                return "Recognition is not sure which way the board faces. Check that the right color is at the bottom, and flip it if it is not."
-            case .sideToMoveUncertain:
-                return "Recognition is not sure who is to move. Check the side to move below."
-            case .weakBoardMatch, .squaresOutsideImage, .squaresCovered, .uncertainSquares, .impossiblePosition:
+            case .unfamiliarTheme:
+                return "This board style is unfamiliar, so pieces on it are easier to misread. Check the pieces against your screenshot."
+            case .weakBoardMatch, .squaresOutsideImage, .squaresCovered, .uncertainSquares,
+                 .impossiblePosition, .orientationUnconfirmed, .sideToMoveUncertain,
+                 .sideToMoveNotEstablished, .other:
                 continue
             }
         }
         return nil
+    }
+
+    /// What to say under the side-to-move and Flip chips: the orientation first, because it also
+    /// decides which player is at the bottom, then the side to move. A side the user has already
+    /// chosen is settled and says nothing.
+    static func chipNote(_ snapshot: BoardSnapshot) -> String? {
+        var sentences: [String] = []
+        if snapshot.doubts.contains(.orientationUnconfirmed) {
+            sentences.append("Recognition is not sure which way the board faces. Check that the right color is at the bottom, and flip it if it is not.")
+        }
+        if snapshot.sideToMoveOrigin != .user {
+            for doubt in snapshot.doubts {
+                switch doubt {
+                case .sideToMoveNotEstablished:
+                    sentences.append("Nothing in your screenshot says who is to move: no highlighted last move and no clock. Check the side to move.")
+                case .sideToMoveUncertain:
+                    sentences.append("Recognition is not sure who is to move. Check the side to move.")
+                default:
+                    continue
+                }
+                break
+            }
+        }
+        return sentences.isEmpty ? nil : sentences.joined(separator: " ")
+    }
+}
+
+extension BoardDoubt {
+    /// Whether this doubt is about who is to move.
+    var isAboutTheSideToMove: Bool {
+        switch self {
+        case .sideToMoveUncertain, .sideToMoveNotEstablished: true
+        default: false
+        }
     }
 }
 

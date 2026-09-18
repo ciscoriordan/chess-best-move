@@ -76,7 +76,8 @@ extension SquareClassifier {
 public final class CoreMLSquareClassifier: SquareClassifier, @unchecked Sendable {
     // MLModel predictions are thread-safe; the class is immutable after init.
     private let model: MLModel
-    private let hasHighlight: Bool
+    /// Whether the model has the `highlight` output (`CellPrediction.highlightProbability`).
+    public let hasHighlight: Bool
     public let inputSize: Int
     /// Batch sizes the model accepts, ascending.
     public let batchSizes: [Int]
@@ -98,8 +99,18 @@ public final class CoreMLSquareClassifier: SquareClassifier, @unchecked Sendable
     /// gives 0.559 (`val_id`) and 0.537 (`val_holdout`), and running the whole evaluation at 0.56
     /// flags 8 more correctly read boards of 3,364 while catching no misread the pair (0.39,
     /// `confidentSquareProbability` 0.97) misses, so the pair stays as it was tuned
-    /// (`build/round3/calibration-1.1.0.json`, `build/round3/after.json`). A model exported from
-    /// now on carries its own temperature, and the threshold should be re-checked against it.
+    /// (`build/round3/calibration-1.1.0.json`, `build/round3/after.json`).
+    ///
+    /// That last measurement holds only for art the model trained on. On the 150 sealed-art
+    /// screenshots of round 4 the same model leaves 2 boards silently wrong at 0.39 and none at
+    /// the 0.6075 fitted in distribution, at a cost of 10 more flagged-but-correct boards of 150,
+    /// and none at the 0.7139 fitted on art it never saw, for 29 more (`training/README.md`,
+    /// "Confidence calibration"). So a softer temperature does catch misreads this pair lets
+    /// through, on unfamiliar art. A model exported from 2026-09-18 on carries its own
+    /// `calibration_temperature` and a second key `calibration_temperature_unseen_art` next to
+    /// it; `confidentSquareProbability` has to be re-checked against whichever a future model
+    /// ships, and pairing the unseen-art temperature with the training-distribution check is the
+    /// shape that measurement points at.
     public static let defaultTemperature = 0.39
 
     /// The compiled model in the package bundle, or nil when it has not been added yet.

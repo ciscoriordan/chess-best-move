@@ -2,6 +2,7 @@ import ChessCore
 import ChessVision
 import CoreGraphics
 import Foundation
+import UIKit
 import os
 
 /// The part of ChessVision's `BoardRecognizer` that Capture uses. Tests substitute a fake.
@@ -38,7 +39,13 @@ enum CaptureRecognitionFailure: Sendable, Hashable {
 ///   priority and runs one classification of a blank board (`BoardRecognizer.warmUp()`), so the
 ///   first real import finds the model loaded and its compute units set up. A recognition started
 ///   meanwhile is queued behind the warm-up (its higher priority raises the queue's) and reuses
-///   the recognizer instead of loading it twice.
+///   the recognizer instead of loading it twice. An import that beat the warm-up to it and read a
+///   board has already paid both costs, so the warm-up then does nothing: it classifies a blank
+///   board only when no recognition has run the classifier yet (an import that found no board
+///   loaded the model without ever classifying, and the warm-up still has work to do).
+/// - A memory warning releases the recognizer (`releaseRecognizerUnderMemoryPressure()`), which
+///   releases the Core ML model with it. The next import loads it again on the queue, and a later
+///   warm-up may run again.
 /// - If creating it throws (the model is missing), recognition reports `.invalidImage` and
 ///   remembers `CaptureRecognitionFailure.recognizerUnavailable`, which the Board not found
 ///   screen explains. The next recognition tries to create the recognizer again.
@@ -66,14 +73,56 @@ final class CaptureRecognitionService: RecognitionService {
         var isWarm = false
         var failures: [UUID: CaptureRecognitionFailure] = [:]
         var failureOrder: [UUID] = []
+        var memoryWarningReleases = 0
     }
 
     private let makeRecognizer: RecognizerFactory
     private let queue = DispatchQueue(label: "com.motomatic.chessbestmove.capture.recognition", qos: .userInitiated)
     private let state = OSAllocatedUnfairLock(initialState: State())
+    private let log = Logger(subsystem: "com.motomatic.chessbestmove", category: "recognition")
+    /// The memory-warning observer: written once in `init`, read once in `deinit`.
+    private nonisolated(unsafe) var memoryWarningObserver: (any NSObjectProtocol)?
 
-    init(makeRecognizer: @escaping RecognizerFactory = { try BoardRecognizer() }) {
+    init(
+        makeRecognizer: @escaping RecognizerFactory = { try BoardRecognizer() },
+        observesMemoryWarnings: Bool = true
+    ) {
         self.makeRecognizer = makeRecognizer
+        guard observesMemoryWarnings else { return }
+        let observer = NotificationCenter.default.addObserver(
+            forName: UIApplication.didReceiveMemoryWarningNotification,
+            object: nil,
+            queue: nil
+        ) { [weak self] _ in
+            self?.releaseRecognizerUnderMemoryPressure()
+        }
+        memoryWarningObserver = observer
+    }
+
+    deinit {
+        if let memoryWarningObserver {
+            NotificationCenter.default.removeObserver(memoryWarningObserver)
+        }
+    }
+
+    /// Drops the recognizer and the Core ML model it holds, on a memory warning. Safe at any
+    /// time: a recognition already running holds its own reference and finishes, and the next
+    /// one loads the model again (`loadRecognizer`). The service is cold afterwards, so a later
+    /// warm-up pays the first classification again.
+    func releaseRecognizerUnderMemoryPressure() {
+        let released: Bool = state.withLock { state in
+            let had = state.recognizer != nil
+            state.recognizer = nil
+            state.isWarm = false
+            if had { state.memoryWarningReleases += 1 }
+            return had
+        }
+        if released { log.notice("memory warning: released the recognition model") }
+    }
+
+    /// How many times a memory warning released a loaded recognizer.
+    var memoryWarningReleases: Int {
+        state.withLock { $0.memoryWarningReleases }
     }
 
     func recognize(_ image: ImportedImage) async -> RecognitionOutcome {
@@ -131,16 +180,43 @@ final class CaptureRecognitionService: RecognitionService {
         }
         let (outcome, failure) = Self.outcome(for: image, recognizer: recognizer)
         if let failure { record(failure, for: image.id) }
+        switch outcome {
+        case .confident, .needsCheck:
+            // This image went through the classifier, which is what the warm-up pays for: a
+            // warm-up that has not run yet has nothing left to do.
+            state.withLock { $0.isWarm = true }
+        case .boardNotFound, .invalidImage:
+            // No board, so nothing was classified (`BoardRecognizer.analyze` gives up first):
+            // the warm-up still has its first prediction to make.
+            break
+        }
         return outcome
     }
 
     private func warmUpOnQueue() {
         guard !state.withLock({ $0.isWarm }) else { return }
+        let loadStart = ContinuousClock.now
         guard case .success(let recognizer) = loadRecognizer() else { return }
+        let loaded = ContinuousClock.now
         // Loading the model is most of the cost, but the first prediction also pays for the
         // compute-unit setup and the buffers, so the warm-up runs one classification.
-        try? recognizer.warmUp()
+        do {
+            try recognizer.warmUp()
+        } catch {
+            // A classification that threw warmed nothing up: stay cold so a later warm-up, or
+            // the first import, tries again.
+            log.error("warm-up classification failed: \(String(describing: error), privacy: .public)")
+            return
+        }
+        let classified = ContinuousClock.now
         state.withLock { $0.isWarm = true }
+        // What the launch warm-up costs, on every build, so the figure in App/APP_CONTRACT.md can
+        // be measured again on any device: the model load and the first classification.
+        func milliseconds(_ duration: Duration) -> Int { Int((duration / .milliseconds(1)).rounded()) }
+        log.notice("""
+            warm-up: model load \(milliseconds(loaded - loadStart), privacy: .public) ms, \
+            first classification \(milliseconds(classified - loaded), privacy: .public) ms
+            """)
     }
 
     private enum LoadResult {
@@ -195,7 +271,11 @@ final class CaptureRecognitionService: RecognitionService {
                 whiteAtBottom: result.whiteAtBottom,
                 below: CaptureBoardCoverage.forcedCheckVisibleFraction
             )
-            if CapturePositionIssues.blocking(in: snapshot.position).isEmpty, cutOff.isEmpty {
+            // A recognizer that reported a doubt without throwing is still doubtful: the user
+            // checks the board, and nothing is spent until they do (owner decision of
+            // 2026-09-17 on the side to move and on unfamiliar board styles).
+            if CapturePositionIssues.blocking(in: snapshot.position).isEmpty, cutOff.isEmpty,
+               snapshot.doubts.isEmpty {
                 return (.confident(snapshot), nil)
             }
             return (.needsCheck(snapshot), nil)
@@ -210,7 +290,8 @@ final class CaptureRecognitionService: RecognitionService {
 
     /// ChessVision's reason for doubting a result, in the app's own terms (the contract keeps
     /// ChessVision types out of `BoardSnapshot`). Every case is mapped, so a snapshot's `doubts`
-    /// are the whole list the recognizer gave.
+    /// are the whole list the recognizer gave. A doubt this version of the app does not know
+    /// becomes `.other`: the board still goes to Check position, without a sentence of its own.
     static func boardDoubt(_ doubt: RecognitionDoubt) -> BoardDoubt {
         switch doubt {
         case .squaresOutsideImage(let squares): .squaresOutsideImage(Set(squares))
@@ -223,7 +304,20 @@ final class CaptureRecognitionService: RecognitionService {
         case .impossiblePosition, .relabeledSquares: .impossiblePosition
         case .orientation: .orientationUnconfirmed
         case .sideToMove: .sideToMoveUncertain
+        case .unfamiliarBoardArt: .unfamiliarTheme
+        @unknown default: .other
         }
+    }
+
+    /// A doubt read together with where the side to move came from. ChessVision has one case for
+    /// every doubt about the side to move, but the two the user is told apart differ in what is
+    /// missing rather than in the doubt itself: with the side taken from the player at the bottom
+    /// (`bottomPlayerDefault`) there was neither a last-move highlight nor a clock to read, while
+    /// the other origins doubt evidence that exists. Check position says which
+    /// (`CaptureCheckPositionSummary.chipNote`, owner decision of 2026-09-17).
+    static func doubt(_ doubt: BoardDoubt, sideToMoveOrigin: SideToMoveOrigin) -> BoardDoubt {
+        guard doubt == .sideToMoveUncertain, sideToMoveOrigin == .assumedBottomPlayer else { return doubt }
+        return .sideToMoveNotEstablished
     }
 
     /// The snapshot for a recognition result: the position with consistent castling rights
@@ -240,6 +334,7 @@ final class CaptureRecognitionService: RecognitionService {
         case .lastMoveHighlight: .lastMoveHighlight
         case .runningClock: .runningClock
         case .checkRule: .checkRule
+        case .startPosition: .startPosition
         case .bottomPlayerDefault: .assumedBottomPlayer
         }
         let confidences = result.squareConfidences
@@ -265,7 +360,7 @@ final class CaptureRecognitionService: RecognitionService {
             lowConfidenceSquares: uncertain,
             lastMove: result.lastMove.map { Move(from: $0.from, to: $0.to) },
             importSource: image.source,
-            doubts: result.doubts.map(boardDoubt),
+            doubts: result.doubts.map { doubt(boardDoubt($0), sideToMoveOrigin: origin) },
             assumedCastlingRights: position.castlingRights
         )
     }
@@ -285,8 +380,13 @@ enum CaptureBoardCoverage {
     static let forcedCheckVisibleFraction = 0.55
 
     /// Check position explains a marked square as cut off when less than this fraction of it
-    /// is inside the image.
-    static let partlyOutsideVisibleFraction = 0.9
+    /// is inside the image. It rests on the same measurement as `forcedCheckVisibleFraction`,
+    /// one step more cautious: boards cut by up to 0.4 of a square (0.6 visible) were still read
+    /// correctly, so a cut smaller than that does not explain a doubtful square and the marks
+    /// have another cause. At 0.9 the screen blamed the edge for squares that are 88% visible,
+    /// which happens on real screenshots (one of the 152 in the real test set cuts its h-file by
+    /// 0.12 of a square), and the sentence that named the real cause was dropped.
+    static let partlyOutsideVisibleFraction = 0.6
 
     /// The fraction (0...1) of each square inside the image, by `Square.index`.
     static func visibleFractions(boardRect: CGRect, imageWidth: Int, imageHeight: Int, whiteAtBottom: Bool) -> [Double] {

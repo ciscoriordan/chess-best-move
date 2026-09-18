@@ -71,9 +71,11 @@ enum MonetizationLegalLinks {
 enum MonetizationRules {
     /// Free analyses per Apple Account on a device. Never refilled.
     static let freeAllowance = 3
-    /// A board that differs from a paid board by at most this many squares is free, unless legal
-    /// play from the paid board explains the change (`MonetizationPlayRule`). Taking exactly one
-    /// piece off is free whether or not play explains it (`MonetizationCreditPolicy`).
+    /// A board that differs from a paid board by at most this many squares is free, and then only
+    /// when every differing square is one that paid board allows to change (`MonetizationFreeEdit`)
+    /// and legal play from it does not explain the change (`MonetizationPlayRule`). Taking exactly
+    /// one piece off, and moving one piece to a square that was empty, are fixes whether or not
+    /// play explains them (`MonetizationCreditPolicy`).
     static let maximumFreeSquareDifference = 3
     /// How many paid boards are remembered.
     static let rememberedPaidBoards = 20

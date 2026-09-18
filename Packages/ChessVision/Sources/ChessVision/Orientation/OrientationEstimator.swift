@@ -25,6 +25,14 @@ public enum OrientationEstimator {
     /// pieces 98.7%, and 12 or more over 99.9%, and the reported confidence matches those rates.
     /// The log-odds are w . (features read with White at the bottom - features read with Black
     /// at the bottom), so flipping the display negates them.
+    ///
+    /// Those rates are measured on the public puzzle-position database the weights were fitted
+    /// on, over boards read correctly, and they do not transfer to the rendered stress sets: the
+    /// renderer draws about 22% of its positions
+    /// from random_endgame_position, which scatters pieces over shuffled squares and is symmetric
+    /// under a 180-degree flip, so those boards carry no placement signal at all. Nor do they hold
+    /// for a board whose pieces were misread. The orientation accuracy of a stress set is therefore
+    /// not a calibration check for this model; build/orientation-prior/report.json is.
     public static func pieceLogOdds(displayPieces: [Piece?]) -> Double {
         var whiteBottom: [(rank: Int, file: Int, piece: Piece)] = []
         var blackBottom: [(rank: Int, file: Int, piece: Piece)] = []
@@ -181,10 +189,20 @@ public enum OrientationEstimator {
     /// lets through about 2% of the wrong orientations among them.
     static let unsupportedOrientationConfidence: Float = 0.97
 
-    /// The log-odds `decide` uses: the evidence total with decisive coordinate evidence weighted up.
+    /// The log-odds `decide` uses: the evidence total with coordinate evidence weighted up.
+    ///
+    /// The weight rises from 1 at `confirmingCoordinateEvidence` to `decisiveCoordinateWeight` at
+    /// `decisiveCoordinateEvidence` rather than stepping at the latter. The same number is reported
+    /// as `RecognitionResult.orientationConfidence`, and a step turned a 0.001 change in the
+    /// evidence into a jump in the reported confidence from 0.982 to 0.99995 — there is real mass
+    /// on both sides of the boundary (over the evaluated sets, 149 boards read coordinate evidence
+    /// between 3 and 4 and 157 between 4 and 5). Over 3,276 boards the ramp changes one decision,
+    /// which it gets right.
     public static func combinedLogOdds(_ evidence: OrientationEvidence) -> Double {
         let coordinates = evidence.textRecognition + evidence.glyphShapes
-        let weight = abs(coordinates) >= decisiveCoordinateEvidence ? decisiveCoordinateWeight : 1
+        let span = decisiveCoordinateEvidence - confirmingCoordinateEvidence
+        let share = max(0, min(1, (abs(coordinates) - confirmingCoordinateEvidence) / span))
+        let weight = 1 + (decisiveCoordinateWeight - 1) * share
         return evidence.total + (weight - 1) * coordinates
     }
 

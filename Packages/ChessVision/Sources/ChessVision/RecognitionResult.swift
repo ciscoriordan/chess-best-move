@@ -11,6 +11,9 @@ public enum SideToMoveSource: Sendable, Hashable {
     case runningClock
     /// The side that would otherwise be to move gives check, so the other side must be to move.
     case checkRule
+    /// The board is the start position, where White moves first by the rules of chess. It is not
+    /// an assumption, so nothing is doubted and the app does not offer it as a guess.
+    case startPosition
     /// No other evidence: the player at the bottom of the screen (who took the screenshot).
     case bottomPlayerDefault
 }
@@ -55,6 +58,10 @@ public enum RecognitionDoubt: Sendable, Hashable {
     /// The side to move rests on evidence that may mislead, such as a highlighted move the piece
     /// standing there cannot have made. `reason` is the whole line, naming that evidence.
     case sideToMove(reason: String)
+    /// The board's art (its square colors, or how colored its piece ink is) falls outside the
+    /// range the classifier was trained on (`ThemeFamiliarity`), so its probabilities are not
+    /// calibrated. `reason` names the statistics that are out of range.
+    case unfamiliarBoardArt(reason: String)
 
     /// One line naming the doubt, as the logs and the evaluation print it.
     public var description: String {
@@ -82,6 +89,8 @@ public enum RecognitionDoubt: Sendable, Hashable {
             return "relabeled to make the position possible: " + detail
         case .orientation(let reason), .sideToMove(let reason):
             return reason
+        case .unfamiliarBoardArt(let reason):
+            return "board art outside the trained range: " + reason
         }
     }
 }
@@ -94,7 +103,28 @@ public struct RecognitionResult: Sendable {
     /// The board cropped from the source image as displayed (not rotated).
     public var boardImage: CGImage
     public var whiteAtBottom: Bool
-    /// 0...1: probability that `whiteAtBottom` is right.
+    /// 0.5...1: how strongly the evidence in `orientationEvidence` favors `whiteAtBottom`, as the
+    /// logistic of `OrientationEstimator.combinedLogOdds`.
+    ///
+    /// It is a probability for the population its parts were fitted and measured on — real game
+    /// positions whose board was read correctly — and not for everything a screenshot can hold.
+    /// Measured over the 3,468 evaluated boards (2026-09-18, classifier 1.1.0): below 0.7 it is
+    /// right 56% of the time (35 of 62), 0.7 to 0.9 55% (29 of 53), 0.9 to 0.99 71% (25 of 35),
+    /// 0.99 to 0.999 88% (43 of 49), and from 0.999 up 99.5% (3,253 of 3,269).
+    ///
+    /// The optimism between 0.7 and 0.99 is 88 boards and comes from the input, not from the
+    /// arithmetic: a slope fitted to remove it is 0.27 over all the sets and 0.53 over the four
+    /// realistic ones, so no one factor fits both. Two populations produce it. All 34 wrong
+    /// readings in those bands are boards whose pieces were misread, and the placement model is
+    /// calibrated only for a board read correctly; and 22% of the rendered positions scatter
+    /// pieces at random, which carries no orientation signal at all. The decisive-coordinate
+    /// weight is not the cause: no board in those bands read coordinate evidence of 4 or more,
+    /// and 77 of the 88 had nothing but the placement to go on.
+    ///
+    /// Do not use it as a threshold for accepting an orientation. `doubts` is the contract for
+    /// that: `recognize` refuses any result that carries one, and every wrong orientation in the
+    /// 0.7-to-0.99 bands carries one. Of the 2,420 results returned without a doubt, 2,419 have
+    /// the right orientation.
     public var orientationConfidence: Float
     /// 64 entries indexed by `Square.index`, already corrected for orientation.
     public var pieces: [Piece?]

@@ -67,6 +67,11 @@ final class MonetizationCreditsService: CreditsService, MonetizationPackLedger {
     @ObservationIgnored private let now: () -> Date
     @ObservationIgnored private var synced: SyncedItem = .unread
     @ObservationIgnored private var committedAuthorizationIDs: Set<UUID> = []
+    /// The free-edit scope of each outstanding authorization, oldest first.
+    @ObservationIgnored private var freeEditByAuthorization: [(id: UUID, freeEdit: MonetizationFreeEdit)] = []
+    /// How many outstanding authorizations keep their scope. One board is authorized at a time,
+    /// so this is never reached in the app.
+    private static let rememberedAuthorizations = 32
     @ObservationIgnored private var activationObserver: (any NSObjectProtocol)?
 
     /// What the last read of the synchronizable item found.
@@ -122,7 +127,28 @@ final class MonetizationCreditsService: CreditsService, MonetizationPackLedger {
 
     // MARK: CreditsService
 
+    /// The call the app shell makes. `recognition` is what recognition contributed to this
+    /// board, which decides the squares a later edit may change for free (monetization.md
+    /// section 5); nil for a board no recognizer read (set up by hand, or restored from disk
+    /// for an Ask to Buy approval).
+    func authorize(
+        board: [Piece?],
+        origin: AnalysisOrigin,
+        recognition: MonetizationRecognitionEvidence?
+    ) -> CreditAuthorization {
+        authorize(board: board, origin: origin, freeEdit: recognition?.freeEdit(for: board) ?? .squares([]))
+    }
+
+    /// The same decision with the evidence unknown, which is not the `CreditsService` call: the
+    /// app shell always passes evidence. Nothing is known about what recognition contributed, so
+    /// the board is remembered as one paid under the rule before the doubt-scoped one
+    /// (`MonetizationFreeEdit.anySquare`) rather than as one the app read correctly everywhere.
+    /// Kept for the tests that exercise the credit arithmetic on hand-built boards.
     func authorize(board: [Piece?], origin: AnalysisOrigin) -> CreditAuthorization {
+        authorize(board: board, origin: origin, freeEdit: .anySquare)
+    }
+
+    private func authorize(board: [Piece?], origin: AnalysisOrigin, freeEdit: MonetizationFreeEdit) -> CreditAuthorization {
         loadLocalIfNeeded()
         reloadPurchased()
         guard localLoaded else {
@@ -135,7 +161,9 @@ final class MonetizationCreditsService: CreditsService, MonetizationPackLedger {
                 purchasedRemaining: 0,
                 paidBoards: []
             )
-            return CreditAuthorization(board: board, origin: origin, decision: decision)
+            let authorization = CreditAuthorization(board: board, origin: origin, decision: decision)
+            keepFreeEdit(freeEdit, for: authorization)
+            return authorization
         }
         let decision = MonetizationCreditPolicy.decide(
             board: MonetizationBoardKey(board),
@@ -145,7 +173,21 @@ final class MonetizationCreditsService: CreditsService, MonetizationPackLedger {
             purchasedRemaining: purchasedRemaining,
             paidBoards: local.paidBoards
         )
-        return CreditAuthorization(board: board, origin: origin, decision: decision)
+        let authorization = CreditAuthorization(board: board, origin: origin, decision: decision)
+        keepFreeEdit(freeEdit, for: authorization)
+        return authorization
+    }
+
+    /// Keeps the free-edit scope until `commit` stores the paid board. `CreditAuthorization` is
+    /// a contract type the app shell passes around, so the scope is held here, by authorization
+    /// id. An authorization that never reaches `commit` is dropped once
+    /// `rememberedAuthorizations` newer ones have arrived; a board committed after that is
+    /// stored with no free squares, which charges for later edits rather than giving them away.
+    private func keepFreeEdit(_ freeEdit: MonetizationFreeEdit, for authorization: CreditAuthorization) {
+        freeEditByAuthorization.append((authorization.id, freeEdit))
+        if freeEditByAuthorization.count > Self.rememberedAuthorizations {
+            freeEditByAuthorization.removeFirst(freeEditByAuthorization.count - Self.rememberedAuthorizations)
+        }
     }
 
     func commit(_ authorization: CreditAuthorization) {
@@ -162,12 +204,15 @@ final class MonetizationCreditsService: CreditsService, MonetizationPackLedger {
             return
         }
         let key = MonetizationBoardKey(authorization.board)
+        let index = freeEditByAuthorization.lastIndex { $0.id == authorization.id }
+        let paid = MonetizationPaidBoard(key: key, freeEdit: index.map { freeEditByAuthorization[$0].freeEdit } ?? .squares([]))
+        if let index { freeEditByAuthorization.remove(at: index) }
         // A board analyzed while Pro was active is remembered like a paid board, so changing
         // only its side to move or castling rights in the editor stays free after Pro lapses
         // (monetization.md section 5). Re-check at commit time: Pro may have started since
         // `authorize`.
         if authorization.decision == .allowedPro || store.isPro {
-            local.rememberPaidBoard(key)
+            local.rememberPaidBoard(paid)
             saveLocal()
             return
         }
@@ -188,7 +233,7 @@ final class MonetizationCreditsService: CreditsService, MonetizationPackLedger {
             // written; the next successful write merges it.
             saveSynced(purchased)
         }
-        local.rememberPaidBoard(key)
+        local.rememberPaidBoard(paid)
         saveLocal()
     }
 

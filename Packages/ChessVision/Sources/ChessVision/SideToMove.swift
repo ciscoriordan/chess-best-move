@@ -49,12 +49,19 @@ public enum SideToMoveRule {
     /// 2. A highlight whose move the piece could not make (spurious tints) still decides when no
     ///    clock disagrees, with a doubt; a running clock that disagrees decides instead, also with
     ///    a doubt.
-    /// 3. Without a highlight, the start position is White to move (source `runningClock` when
-    ///    White's clock is the running one).
+    /// 3. Without a highlight, the start position is White to move (source `startPosition`, or
+    ///    `runningClock` when White's clock is the running one).
     /// 4. Otherwise the running clock (`runningClockAtTop`: whether the clock marked as running is
-    ///    the top player's) decides, and without one the player at the bottom is to move.
+    ///    the top player's) decides. With neither a highlight nor a clock nothing on the board says
+    ///    whose turn it is, so the player at the bottom is offered as the side to move together
+    ///    with a doubt, which sends the user to the check-position screen instead of analyzing at
+    ///    once. Screenshots taken to ask for a move usually do show the taker's own turn, but not
+    ///    always: over the evaluated sets this branch is right on 109 of the 208 boards that reach
+    ///    it, and until now it was the one unsupported reading that raised no doubt of its own.
     /// Then the check rule: if the side not chosen is in check and the chosen side is not, the
-    /// other side must be to move (source `checkRule`, which settles any doubt above).
+    /// other side must be to move (source `checkRule`, which settles any doubt above). Read the
+    /// other way round, a bare assumption whose chosen side is itself the one in check is
+    /// confirmed by the same rule and reported as `checkRule` too, without a doubt.
     public static func decide(board: [Piece?], lastMove: LastMove?, runningClockAtTop: Bool?, whiteAtBottom: Bool) -> Decision {
         let bottom: PieceColor = whiteAtBottom ? .white : .black
         let clockSide = runningClockAtTop.map { $0 ? bottom.opposite : bottom }
@@ -69,11 +76,12 @@ public enum SideToMoveRule {
             }
         } else if board == Position.start.board {
             // No move has been made: White moves first, whatever a clock of the live game shows
-            // (a game viewer stepped back to the start). The contract's sources have no case for
-            // the start position, so it is reported as the running clock when White's clock runs
-            // and otherwise as the default.
+            // (a game viewer stepped back to the start). This is the rules of chess rather than
+            // an assumption, so it has its own source: reporting it as `bottomPlayerDefault` told
+            // a player with the black pieces "assumed: you are at the bottom" while Black was
+            // plainly at the bottom of the crop.
             side = .white
-            source = clockSide == .white ? .runningClock : .bottomPlayerDefault
+            source = clockSide == .white ? .runningClock : .startPosition
         } else if let clockSide {
             side = clockSide
             source = .runningClock
@@ -83,10 +91,17 @@ public enum SideToMoveRule {
         } else {
             side = bottom
             source = .bottomPlayerDefault
+            doubts.append("no last-move highlight and no running clock: side to move assumed to be the player at the bottom")
         }
         let position = Position(board: board, sideToMove: side)
         if position.isInCheck(side.opposite) && !position.isInCheck(side) {
             side = side.opposite
+            source = .checkRule
+            doubts = []
+        } else if source == .bottomPlayerDefault, position.isInCheck(side), !position.isInCheck(side.opposite) {
+            // The same rule read the other way: a king standing in check means that player is to
+            // move, because the opponent's move cannot have left its own king attacked. This makes
+            // the assumption certain instead of overriding it, so it settles the doubt.
             source = .checkRule
             doubts = []
         }

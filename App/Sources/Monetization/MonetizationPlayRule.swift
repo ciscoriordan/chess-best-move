@@ -4,9 +4,9 @@
 
 /// Decides whether a new piece placement follows from a paid placement by legal play.
 ///
-/// A board within 3 squares of a paid board stays free only when the change cannot be
-/// explained by 1 to `maximumPlies` legal plies from that paid board, with either side moving
-/// first. The paid board is only a placement, so castling and en passant rights are unknown:
+/// A board within 3 squares of a paid board stays free only when every square it changes is one
+/// that paid board allows to change (`MonetizationFreeEdit`) and the change cannot be explained
+/// by 1 to `maximumPlies` legal plies from that paid board, with either side moving first. The paid board is only a placement, so castling and en passant rights are unknown:
 /// the search grants every castling right whose king and rook stand on their home squares, and
 /// allows a first-ply en passant capture wherever the enemy pawn could just have made a double
 /// step (it stands beside the capturing pawn, and both squares it passed are empty). After the
@@ -17,9 +17,10 @@
 /// attacked cannot be the side to move. A side without a king has no check to respect.
 ///
 /// This type answers only whether play reaches the board. Whether that costs a credit is
-/// `MonetizationCreditPolicy.paidBoard(_:covers:)`, which keeps one edit free even when play
-/// reaches it: a board that takes exactly one piece off the paid board and changes nothing
-/// else (owner decision, 2026-09-17).
+/// `MonetizationCreditPolicy.paidBoard(_:covers:)`, which keeps two edits free even where play
+/// reaches them (owner decisions, 2026-09-17): a board that takes exactly one piece off the paid
+/// board, and one that moves a single piece to a square that was empty on it, both changing
+/// nothing else.
 enum MonetizationPlayRule {
     /// The longest sequence of plies that makes an edit cost a credit.
     static let maximumPlies = 3

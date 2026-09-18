@@ -96,6 +96,11 @@ that package that ships) and the Core ML model package it was compiled from
 See `Packages/ChessVision/ModelSource/README.md` for the model's inputs and outputs and for
 how to compile the package again.
 
+The model was trained on rendered screenshots, not on photographs, and some of the board and
+piece art used to render them is published under licenses that ask for credit. `NOTICE.md` at
+the root of this repository names those sets, their authors and their licenses. None of that art
+is in this repository or in the app: only the trained weights ship.
+
 Stockfish's neural network is the file
 `Packages/ChessEngine/Sources/ChessEngine/NNUE/nn-1a298aa575a0.nnue` (98,511,183 bytes,
 SHA-256 `1a298aa575a085434d29027978dc36867fe9c5bcea9376654b7a8eba1e52dfc2`). It is committed as
@@ -160,13 +165,22 @@ Notes on the build:
 
 ### Build phases
 
-The app target has one script phase, `scripts/check-release-placeholders.sh`. It reports any
-URL in `App/Sources` or `App/Info.plist` that must not reach a release, such as one still
-pointing at a page that does not exist yet. The script's own comment lists the exact patterns
-it looks for. It runs only when Xcode archives or installs (`ACTION=install`), so ordinary
-Debug and Release builds are never blocked by it. The target turns Xcode's user script sandbox
-off for that phase, because a sandboxed phase is not allowed to read the source files it has to
-check.
+The app target has one script phase, `scripts/check-release-placeholders.sh`. It searches
+`App/Sources` and `App/Info.plist` for URLs that must not reach a release: the reserved example
+domains, a URL whose text contains `TODO`, and a link to Apple's standard End User License
+Agreement, whose usage rules conflict with GPLv3 section 10. The script's own comment lists the
+exact patterns. It then runs `scripts/check-release-source-tag.sh`, which builds the two source
+links the app shows from the version being built and asks whether they answer, because those
+links are assembled at run time and no pattern can see whether the tag behind them exists; with
+no network it cannot ask, and it then lets the archive through. Both run only when Xcode
+archives or installs (`ACTION=install`), so ordinary Debug and Release builds are never blocked
+by them, and `CHESS_BEST_MOVE_SOURCE_TAG_CHECK=0` turns the second one off. The target turns
+Xcode's user script sandbox off for that phase, because a sandboxed phase is not allowed to
+read the source files it has to check.
+
+If you build a changed version of this app for distribution, point
+`SettingsLinks.appSourceRepository` in `App/Sources/Settings/SettingsLegal.swift` at your own
+published source; that check then asks about your repository and your tag, not this one.
 
 ## Stockfish
 
@@ -229,6 +243,12 @@ license text is in `App/Resources/Fonts/`.
 | Noto Sans Symbols 2 | Copyright 2022 The Noto Project Authors | `NotoSansSymbols2-OFL.txt` |
 
 Noto Sans Symbols 2 supplies the chess piece glyphs the app draws on its board diagrams.
+
+## Attribution
+
+`NOTICE.md` lists the board and piece art whose licenses ask for credit, with authors and
+licenses, and says how it was used. It is generated from this project's asset record rather than
+written by hand, so it cannot drift from the art the weights were actually fitted on.
 
 ## Support
 

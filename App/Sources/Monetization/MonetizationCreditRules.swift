@@ -41,6 +41,18 @@ struct MonetizationBoardKey: Codable, Sendable, Hashable {
         min(squareDifference(to: paid), squareDifference(to: paid.rotated))
     }
 
+    /// The indices (`Square.index`) whose content differs. Squares past the end of either
+    /// board (never produced by the app) count as differing.
+    func differingSquares(to other: MonetizationBoardKey) -> [Int] {
+        let lhs = Array(squares.utf8)
+        let rhs = Array(other.squares.utf8)
+        var indices: [Int] = []
+        for index in 0..<max(lhs.count, rhs.count) where index >= min(lhs.count, rhs.count) || lhs[index] != rhs[index] {
+            indices.append(index)
+        }
+        return indices
+    }
+
     /// True when this board is `other` with exactly one piece taken off and nothing else
     /// changed: one square holds a piece in `other` and is empty here, and every other square
     /// is identical (monetization.md section 5, the always-free fix).
@@ -56,13 +68,144 @@ struct MonetizationBoardKey: Codable, Sendable, Hashable {
         }
         return removed
     }
+
+    /// True when this board is `other` with exactly one piece moved to a square that was empty
+    /// on `other`, the piece keeping its kind and color, and nothing else changed
+    /// (monetization.md section 5, the misread-placement fix; owner decision, 2026-09-17).
+    ///
+    /// A capture is never this shape: its destination held a piece on `other`, so that square
+    /// changes from one piece to another and the check fails.
+    func movesExactlyOnePieceToAnEmptySquare(from other: MonetizationBoardKey) -> Bool {
+        let mine = Array(squares.utf8)
+        let theirs = Array(other.squares.utf8)
+        guard mine.count == theirs.count else { return false }
+        let empty = UInt8(ascii: ".")
+        var from: Int?
+        var to: Int?
+        for index in 0..<mine.count where mine[index] != theirs[index] {
+            if mine[index] == empty, theirs[index] != empty {
+                guard from == nil else { return false }
+                from = index
+            } else if mine[index] != empty, theirs[index] == empty {
+                guard to == nil else { return false }
+                to = index
+            } else {
+                // One piece replaced another: a capture, or two misread squares at once.
+                return false
+            }
+        }
+        guard let from, let to else { return false }
+        return theirs[from] == mine[to]
+    }
+}
+
+// MARK: - Paid boards
+
+/// Which squares of a paid board a later edit may change without paying again (monetization.md
+/// section 5, owner decision 2026-09-17).
+enum MonetizationFreeEdit: Sendable, Hashable {
+    /// Recognition read this board, and these squares (`Square.index`) are the ones it doubted
+    /// when the credit was spent, plus the ones that already differed from what it read (the
+    /// user had corrected them). Empty when recognition was sure of every square, and for a
+    /// board no recognizer read at all: then only the same placement is free.
+    case squares(Set<Int>)
+    /// Nothing is known about what recognition contributed: a paid board stored before this
+    /// rule, or an authorization made without that evidence. Every square counts as free to
+    /// change, which is the rule as it stood before 2026-09-17.
+    case anySquare
+
+    /// The same squares on a board rotated by 180 degrees (square `i` becomes `63 - i`).
+    var rotated: MonetizationFreeEdit {
+        switch self {
+        case .anySquare: .anySquare
+        case .squares(let squares): .squares(Set(squares.map { 63 - $0 }))
+        }
+    }
+
+    /// True when every one of `changed` may be changed for free.
+    func allows(_ changed: [Int]) -> Bool {
+        switch self {
+        case .anySquare: true
+        case .squares(let squares): changed.allSatisfy(squares.contains)
+        }
+    }
+}
+
+/// One remembered paid board: the placement a credit was spent on, and the squares later edits
+/// may change for free.
+///
+/// Stored as `{"squares": "...", "freeEdit": [12, 13]}`. A record written before the doubt-scoped
+/// rule has no `freeEdit` key and decodes as `.anySquare`, so boards paid for by an earlier
+/// version keep the rule they were paid under. An older app version reading a newer record
+/// ignores the extra key and still finds the placement.
+struct MonetizationPaidBoard: Codable, Sendable, Hashable {
+    let key: MonetizationBoardKey
+    let freeEdit: MonetizationFreeEdit
+
+    init(key: MonetizationBoardKey, freeEdit: MonetizationFreeEdit) {
+        self.key = key
+        self.freeEdit = freeEdit
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case squares, freeEdit
+    }
+
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        key = MonetizationBoardKey(squares: try container.decode(String.self, forKey: .squares))
+        let stored = (try? container.decodeIfPresent([Int].self, forKey: .freeEdit)) ?? nil
+        freeEdit = stored.map { MonetizationFreeEdit.squares(Set($0)) } ?? .anySquare
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(key.squares, forKey: .squares)
+        if case .squares(let squares) = freeEdit {
+            try container.encode(squares.sorted(), forKey: .freeEdit)
+        }
+    }
+}
+
+/// What recognition contributed to the board an analysis is authorized for, which decides the
+/// squares later edits may change for free (`MonetizationFreeEdit`). Nil at the call site for a
+/// board no recognizer read: one set up by hand, or one restored from disk for an Ask to Buy
+/// approval, which keeps no reading.
+struct MonetizationRecognitionEvidence: Sendable, Hashable {
+    /// `BoardSnapshot.recognizedBoard`: the pieces as recognized, before any edit.
+    let recognizedBoard: [Piece?]?
+    /// `BoardSnapshot.lowConfidenceSquares`: the squares recognition still doubts. The editor
+    /// takes a square out of this set once the user has changed or confirmed it, and a changed
+    /// square is then covered by `recognizedBoard` instead.
+    let doubtedSquares: Set<Square>
+
+    init(recognizedBoard: [Piece?]?, doubtedSquares: Set<Square>) {
+        self.recognizedBoard = recognizedBoard
+        self.doubtedSquares = doubtedSquares
+    }
+
+    init(_ snapshot: BoardSnapshot) {
+        self.init(recognizedBoard: snapshot.recognizedBoard, doubtedSquares: snapshot.lowConfidenceSquares)
+    }
+
+    /// The squares of `board` (the placement being paid for) that later edits may change for
+    /// free: the ones recognition doubts, and the ones that already differ from what it read.
+    func freeEdit(for board: [Piece?]) -> MonetizationFreeEdit {
+        var squares = Set(doubtedSquares.map(\.index))
+        if let recognizedBoard, recognizedBoard.count == board.count {
+            for index in 0..<board.count where recognizedBoard[index] != board[index] {
+                squares.insert(index)
+            }
+        }
+        return .squares(squares)
+    }
 }
 
 // MARK: - Decisions
 
 enum MonetizationCreditPolicy {
     /// True when one of `paidBoards` covers `board` (`paidBoard(_:covers:)`).
-    static func isCoveredByPaidBoard(_ board: MonetizationBoardKey, paidBoards: [MonetizationBoardKey]) -> Bool {
+    static func isCoveredByPaidBoard(_ board: MonetizationBoardKey, paidBoards: [MonetizationPaidBoard]) -> Bool {
         paidBoards.contains { paidBoard($0, covers: board) }
     }
 
@@ -70,36 +213,52 @@ enum MonetizationCreditPolicy {
     /// always from the paid board, never from the last edit.
     ///
     /// - The same placement, as shown or flipped (square `i` as `63 - i`), is covered.
-    /// - A placement that takes exactly one piece off a paid board and changes nothing else is
-    ///   covered, whatever play could also produce it (owner decision, 2026-09-17): a single
-    ///   vanished piece is a misread square, and the three plies that end with that piece
-    ///   captured on the square it just entered are not what the user did.
     /// - A placement within `MonetizationRules.maximumFreeSquareDifference` squares, as shown or
-    ///   flipped, is a fix of misread squares and covered, unless 1 to 3 legal plies from the
-    ///   paid board explain it (`MonetizationPlayRule`). Then it costs like a new board, so
-    ///   following a game by editing costs a credit per move even when a capture and its
-    ///   recapture change only 2 or 3 squares.
+    ///   flipped, is covered only when it is a fix of squares the user may still change for free
+    ///   (owner decision, 2026-09-17): every square that differs from the paid board must be one
+    ///   recognition doubted when the credit was spent, or one the user had already corrected on
+    ///   that board (`MonetizationFreeEdit`). Editing a square the app read and the user left
+    ///   alone is never free, which is what stops one credit buying a whole game: pay for the real
+    ///   position with one piece deleted, and putting that piece back is free, but the squares the
+    ///   next move changes are squares the app read.
+    /// - Within that scope, a change counts as a fix unless 1 to 3 legal plies from the paid board
+    ///   explain it (`MonetizationPlayRule`), with two exceptions that are fixes whatever play
+    ///   could also produce them (owner decisions, 2026-09-17):
+    ///   - exactly one piece taken off and nothing else changed (the vanished-piece fix), and
+    ///   - exactly one piece moved to a square that was empty on the paid board, keeping its kind
+    ///     and color (the misread-placement fix), which needs both squares to be free to change,
+    ///     so it never turns following a game into a free re-analysis. A capture is not this
+    ///     shape and still costs.
     /// - Either board may have been read upside down, so each explanation is tried in both
     ///   orientations of the pair: as shown (paid to board, both rotated) and flipped (paid to the
-    ///   rotated board, the rotated paid board to board).
-    static func paidBoard(_ paid: MonetizationBoardKey, covers board: MonetizationBoardKey) -> Bool {
-        let asShown = board.squareDifference(to: paid)
-        let flipped = board.squareDifference(to: paid.rotated)
+    ///   rotated board, the rotated paid board to board). The free squares turn with the board.
+    /// - A paid board stored before this rule carries no record of what recognition contributed
+    ///   (`MonetizationFreeEdit.anySquare`) and keeps exactly the rule it was paid under: the
+    ///   window, the play rule and the vanished-piece fix, with no scope on which squares may
+    ///   change and without the misread-placement fix.
+    static func paidBoard(_ paid: MonetizationPaidBoard, covers board: MonetizationBoardKey) -> Bool {
+        let key = paid.key
+        let asShown = board.squareDifference(to: key)
+        let flipped = board.squareDifference(to: key.rotated)
         if asShown == 0 || flipped == 0 { return true }
-        if board.removesExactlyOnePiece(from: paid) || board.removesExactlyOnePiece(from: paid.rotated) { return true }
         let limit = MonetizationRules.maximumFreeSquareDifference
-        guard asShown <= limit || flipped <= limit else { return false }
-        if asShown <= limit,
-           MonetizationPlayRule.isReachableByPlay(from: paid, to: board)
-            || MonetizationPlayRule.isReachableByPlay(from: paid.rotated, to: board.rotated) {
-            return false
-        }
-        if flipped <= limit,
-           MonetizationPlayRule.isReachableByPlay(from: paid, to: board.rotated)
-            || MonetizationPlayRule.isReachableByPlay(from: paid.rotated, to: board) {
-            return false
-        }
-        return true
+        if asShown <= limit, isFix(of: key, freeEdit: paid.freeEdit, to: board) { return true }
+        if flipped <= limit, isFix(of: key.rotated, freeEdit: paid.freeEdit.rotated, to: board) { return true }
+        return false
+    }
+
+    /// Whether `board` is a free fix of `paid`, for one orientation of the pair. `freeEdit` is
+    /// in `paid`'s own frame (`paidBoard(_:covers:)` turns it with the board).
+    private static func isFix(of paid: MonetizationBoardKey, freeEdit: MonetizationFreeEdit, to board: MonetizationBoardKey) -> Bool {
+        guard freeEdit.allows(board.differingSquares(to: paid)) else { return false }
+        if board.removesExactlyOnePiece(from: paid) { return true }
+        // The misread-placement fix needs the squares it changes to be ones this board is
+        // allowed to change. Where nothing is known about them (a board paid for before the
+        // rule), a piece moved to an empty square is an ordinary move and costs.
+        if case .squares = freeEdit, board.movesExactlyOnePieceToAnEmptySquare(from: paid) { return true }
+        // This pairing may itself have been read upside down, so play is tried both ways up.
+        return !(MonetizationPlayRule.isReachableByPlay(from: paid, to: board)
+            || MonetizationPlayRule.isReachableByPlay(from: paid.rotated, to: board.rotated))
     }
 
     /// The decision for one analysis. Order of use: Pro, then no credit needed (a board covered
@@ -118,7 +277,7 @@ enum MonetizationCreditPolicy {
         isPro: Bool,
         freeRemaining: Int,
         purchasedRemaining: Int,
-        paidBoards: [MonetizationBoardKey]
+        paidBoards: [MonetizationPaidBoard]
     ) -> CreditDecision {
         if isPro { return .allowedPro }
         if isCoveredByPaidBoard(board, paidBoards: paidBoards) { return .allowedFreeReanalysis }
@@ -139,7 +298,7 @@ enum MonetizationCreditPolicy {
 struct MonetizationLocalRecord: Codable, Sendable, Equatable {
     var freeRemaining: Int
     /// Oldest first, at most `MonetizationRules.rememberedPaidBoards`.
-    var paidBoards: [MonetizationBoardKey]
+    var paidBoards: [MonetizationPaidBoard]
     var lastDownsellDeclinedAt: Date?
     /// A random id for this device's spend counter in `MonetizationPurchasedRecord`. Empty when
     /// the stored record predates it; the credits service then assigns one and saves it.
@@ -151,7 +310,7 @@ struct MonetizationLocalRecord: Codable, Sendable, Equatable {
 
     init(
         freeRemaining: Int,
-        paidBoards: [MonetizationBoardKey],
+        paidBoards: [MonetizationPaidBoard],
         lastDownsellDeclinedAt: Date?,
         deviceID: String = UUID().uuidString,
         purchased: MonetizationPurchasedRecord = MonetizationPurchasedRecord()
@@ -175,17 +334,18 @@ struct MonetizationLocalRecord: Codable, Sendable, Equatable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         freeRemaining = (try? container.decodeIfPresent(Int.self, forKey: .freeRemaining)) ?? 0
-        paidBoards = (try? container.decodeIfPresent([MonetizationBoardKey].self, forKey: .paidBoards)) ?? []
+        paidBoards = (try? container.decodeIfPresent([MonetizationPaidBoard].self, forKey: .paidBoards)) ?? []
         lastDownsellDeclinedAt = try? container.decodeIfPresent(Date.self, forKey: .lastDownsellDeclinedAt)
         deviceID = (try? container.decodeIfPresent(String.self, forKey: .deviceID)) ?? ""
         purchased = (try? container.decodeIfPresent(MonetizationPurchasedRecord.self, forKey: .purchased)) ?? MonetizationPurchasedRecord()
     }
 
     /// Remembers a board a credit was spent on (or that was analyzed while Pro was active).
-    /// Re-paying a remembered board moves it to the newest position; the oldest board is
-    /// forgotten beyond the limit.
-    mutating func rememberPaidBoard(_ board: MonetizationBoardKey) {
-        paidBoards.removeAll { $0 == board }
+    /// Re-paying a remembered placement moves it to the newest position and keeps the squares
+    /// of the newest payment as the ones free to change; the oldest board is forgotten beyond
+    /// the limit.
+    mutating func rememberPaidBoard(_ board: MonetizationPaidBoard) {
+        paidBoards.removeAll { $0.key == board.key }
         paidBoards.append(board)
         if paidBoards.count > MonetizationRules.rememberedPaidBoards {
             paidBoards.removeFirst(paidBoards.count - MonetizationRules.rememberedPaidBoards)

@@ -239,7 +239,8 @@ struct RecognizingView: View {
     /// `AppModel.handleRecognition`.
     private func analysisRunsWithoutPaywall(_ snapshot: BoardSnapshot) -> Bool {
         let origin: AnalysisOrigin = image.source == .shortcut ? .shortcut : .recognition
-        return app.credits.authorize(board: snapshot.position.board, origin: origin).decision.allowsAnalysis
+        return app.credits.authorize(board: snapshot.position.board, origin: origin,
+                                     recognition: MonetizationRecognitionEvidence(snapshot)).decision.allowsAnalysis
     }
 
     /// DEBUG `-debugRecognitionDelay`: keeps Recognizing on screen for screenshots.

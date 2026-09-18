@@ -75,11 +75,19 @@ targets:
         product: ChessVision
     preBuildScripts:
       # Release gate: an archive (ACTION=install) fails while App/Sources or App/Info.plist
-      # still holds a URL that must not reach a release, such as one pointing at a page that
-      # does not exist yet. The script's own comment lists the patterns it looks for. Ordinary
-      # Debug and Release builds skip the check. It walks the whole App/Sources folder, which is
-      # why this target turns the user script sandbox off (see ENABLE_USER_SCRIPT_SANDBOXING
-      # below).
+      # still holds a URL that must not reach a release: a reserved example domain, a URL whose
+      # text contains TODO, or a link to Apple's standard End User License Agreement, whose
+      # usage rules conflict with GPLv3 section 10. The script's own comment lists the patterns
+      # it looks for. Ordinary Debug and Release builds skip the check. It walks the whole
+      # App/Sources folder, which is why this target turns the user script sandbox off (see
+      # ENABLE_USER_SCRIPT_SANDBOXING below).
+      #
+      # That script then runs scripts/check-release-source-tag.sh, which builds the two source
+      # links the app shows from the version being built and asks whether they answer, because
+      # those links are assembled at run time and no pattern can see whether the tag behind them
+      # exists. With no network it cannot ask and lets the archive through, and
+      # CHESS_BEST_MOVE_SOURCE_TAG_CHECK=0 turns it off. If you distribute a changed version of
+      # this app, point SettingsLinks.appSourceRepository at your own published source first.
       - name: Block archives with placeholder URLs
         basedOnDependencyAnalysis: false
         showEnvVarsInLog: false

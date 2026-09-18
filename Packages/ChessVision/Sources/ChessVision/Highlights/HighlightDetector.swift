@@ -350,7 +350,7 @@ public enum LastMoveResolver {
         let redCount = candidates.indices.filter(isRed).count
         let premoveShown = redCount >= 2 && redCount < candidates.count
         let same = { (i: Int, j: Int) -> Bool in distance(i, j) < selectionTintRadius }
-        var readings: [(resolution: Resolution, score: Double, selection: Bool)] = []
+        var readings: [Reading] = []
         for i in 0..<candidates.count {
             for j in (i + 1)..<candidates.count {
                 let a = candidates[i], b = candidates[j]
@@ -400,21 +400,40 @@ public enum LastMoveResolver {
                 }
                 resolution.highlighted = [a, b]
                 guard score >= minimumScore else { continue }
-                readings.append((resolution, score, selection))
+                let reachable = predecessorIsPossible(resolution, board: board)
+                readings.append(Reading(resolution: resolution, score: score, selection: selection,
+                                        reachable: reachable))
             }
         }
+        // A pair the position cannot have arrived at loses to any pair it can have: that is what
+        // separates squares the user marked by hand from the move actually played, when both read
+        // as legal-looking moves on the board shown. When no reading survives the test the board
+        // itself is likely misread, so the readings are kept as they are rather than thrown away.
+        let reachable = readings.filter(\.reachable)
+        if !reachable.isEmpty { readings = reachable }
         guard var best = readings.max(by: { $0.score < $1.score }) else { return nil }
         // Two readings of three same-tint squares, each with the third square as a selected
         // piece of the other side, that differ only in tint order.
+        let rivals: [Reading] = readings.filter { reading in
+            reading.selection && reading.resolution.mover != best.resolution.mover
+                && reading.resolution.isPlausible == best.resolution.isPlausible
+        }
         if let bottomColor, best.selection, best.resolution.mover == bottomColor,
-           let rival = readings.filter({
-               $0.selection && $0.resolution.mover != best.resolution.mover
-                   && $0.resolution.isPlausible == best.resolution.isPlausible
-           }).max(by: { $0.score < $1.score }),
+           let rival = rivals.max(by: { $0.score < $1.score }),
            best.score - rival.score <= tieMargin {
             best = rival
         }
         return best.resolution
+    }
+
+    /// One way to read two of the tinted squares as the last move.
+    struct Reading {
+        var resolution: Resolution
+        var score: Double
+        /// A third tinted square holds a piece of the side to move (a selected piece).
+        var selection: Bool
+        /// The position before this move could have been legal (see `predecessorIsPossible`).
+        var reachable: Bool
     }
 
     /// Score added for a selected piece that can reach all legal-move dots (subtracted when it
@@ -480,6 +499,106 @@ public enum LastMoveResolver {
             score -= 1.5
         }
         return (resolution, score)
+    }
+
+    /// Whether the position before this reading could have been legal.
+    ///
+    /// Undoing the move puts the moved piece back on its start square and empties its destination.
+    /// It was then the mover's turn, so the mover's opponent cannot already have been in check: a
+    /// reading whose undone position checks the opponent did not happen, and the tinted squares
+    /// are squares the user marked, a premove or a review color instead. Measured on a screenshot
+    /// with a yellow-green pair on b2/b4 and a red-orange marked pair on c4/d5: reading d5-c4
+    /// leaves the black king on a5 in check from the pawn already standing on b4, while b2-b4
+    /// undoes cleanly, and only this test tells the two pairs apart.
+    ///
+    /// The piece the move captured is unknown, so a check along a line that runs through the
+    /// emptied destination is ignored: whatever stood there would have blocked it. A promotion is
+    /// ambiguous from the board alone (a queen on the last rank may have been a pawn or a queen),
+    /// so both readings are tried and either one being possible is enough.
+    static func predecessorIsPossible(_ resolution: Resolution, board: [Piece?]) -> Bool {
+        let boards = predecessors(resolution, board: board)
+        guard !boards.isEmpty else { return true }
+        return boards.contains { previous, captured in
+            guard let kingIndex = previous.firstIndex(of: Piece(color: resolution.mover.opposite, kind: .king)),
+                  let king = Square(index: kingIndex) else { return true }
+            let checkers = attackers(of: king, by: resolution.mover, board: previous)
+            guard !checkers.isEmpty else { return true }
+            guard let captured else { return false }
+            return checkers.allSatisfy { isBetween(captured, $0, king) }
+        }
+    }
+
+    /// The board before the move, with the square a capture could have emptied. Empty when the
+    /// reading cannot be undone (nothing on the destination, or a castling whose rook is not where
+    /// it would be).
+    static func predecessors(_ resolution: Resolution, board: [Piece?]) -> [(board: [Piece?], captured: Square?)] {
+        guard let moved = board[resolution.to.index] else { return [] }
+        var previous = board
+        previous[resolution.to.index] = nil
+        let from = resolution.from, to = resolution.to
+        // Castling, reported as the king's two-square move: the rook goes back too, and castling
+        // never captures.
+        if moved.kind == .king, from.file == 4, abs(to.file - from.file) == 2, from.rank == to.rank {
+            let kingside = to.file > from.file
+            guard let rookStart = Square(file: kingside ? 7 : 0, rank: from.rank),
+                  let rookDestination = Square(file: kingside ? 5 : 3, rank: from.rank),
+                  previous[rookDestination.index] == Piece(color: moved.color, kind: .rook) else { return [] }
+            previous[rookDestination.index] = nil
+            previous[rookStart.index] = Piece(color: moved.color, kind: .rook)
+            previous[from.index] = moved
+            return [(previous, nil)]
+        }
+        var result: [(board: [Piece?], captured: Square?)] = []
+        previous[from.index] = moved
+        result.append((previous, to))
+        let lastRank = moved.color == .white ? 7 : 0
+        let pawnRank = moved.color == .white ? 6 : 1
+        if moved.kind != .pawn, moved.kind != .king, to.rank == lastRank, from.rank == pawnRank {
+            var promoted = previous
+            promoted[from.index] = Piece(color: moved.color, kind: .pawn)
+            result.append((promoted, to))
+        }
+        return result
+    }
+
+    /// Squares from which `color` attacks `square`. A pawn attacks diagonally only, and the
+    /// contents of `square` itself do not matter.
+    static func attackers(of square: Square, by color: PieceColor, board: [Piece?]) -> [Square] {
+        (0..<64).compactMap { index in
+            guard let piece = board[index], piece.color == color, let from = Square(index: index),
+                  from != square, attacks(piece, from: from, to: square, board: board) else { return nil }
+            return from
+        }
+    }
+
+    static func attacks(_ piece: Piece, from: Square, to: Square, board: [Piece?]) -> Bool {
+        let df = to.file - from.file, dr = to.rank - from.rank
+        let adf = abs(df), adr = abs(dr)
+        switch piece.kind {
+        case .pawn:
+            return adf == 1 && dr == (piece.color == .white ? 1 : -1)
+        case .knight:
+            return (adf == 1 && adr == 2) || (adf == 2 && adr == 1)
+        case .king:
+            return max(adf, adr) == 1
+        case .bishop:
+            return adf == adr && adf > 0 && pathIsClear(piece, from: from, to: to, board: board)
+        case .rook:
+            return (df == 0) != (dr == 0) && pathIsClear(piece, from: from, to: to, board: board)
+        case .queen:
+            return ((adf == adr && adf > 0) || ((df == 0) != (dr == 0)))
+                && pathIsClear(piece, from: from, to: to, board: board)
+        }
+    }
+
+    /// Whether `square` lies strictly between `a` and `b` along a rank, file or diagonal.
+    static func isBetween(_ square: Square, _ a: Square, _ b: Square) -> Bool {
+        let df = b.file - a.file, dr = b.rank - a.rank
+        guard df == 0 || dr == 0 || abs(df) == abs(dr) else { return false }
+        let steps = max(abs(df), abs(dr))
+        guard steps > 1 else { return false }
+        let sf = df.signum(), sr = dr.signum()
+        return (1..<steps).contains { Square(file: a.file + $0 * sf, rank: a.rank + $0 * sr) == square }
     }
 
     static func moveScore(_ piece: Piece, from: Square, to: Square, board: [Piece?]) -> Double {
