@@ -1,7 +1,7 @@
 #!/usr/bin/env swift
 // Renders the Chess Best Move app icon (docs/design.md section 13, "The knight's L") into
 // App/Resources/Assets.xcassets/AppIcon.appiconset: the default 1024 x 1024 icon plus the
-// dark and tinted variants for iOS 18 and later, and the set's Contents.json.
+// dark and tinted appearance variants, and the set's Contents.json.
 //
 // Usage (from the repository root):
 //   swift App/Scripts/render-app-icon.swift [output directory] [--preview <directory>]

@@ -178,12 +178,15 @@ into every Stockfish file, because SwiftPM cannot vary flags per architecture an
 | `NNUE_EMBEDDING_OFF`, `STOCKFISH_NO_SYSTEM_WIDE_SHM` | defined | Network from the bundle; no `/tmp` shared memory. |
 
 **Why no dot product.** Stockfish's `apple-silicon` and `armv8-dotprod` targets add
-`-march=armv8.2-a+dotprod -DUSE_NEON_DOTPROD`. The app's deployment target is iOS 18, which
-still runs on the Apple A12 (iPhone XS, XS Max, XR). LLVM's CPU definitions give `apple-a13` and
-later the dot-product extension but not `apple-a12` (checked with
+`-march=armv8.2-a+dotprod -DUSE_NEON_DOTPROD`. The app's deployment target is iOS 26, and
+raising it there from iOS 18 did not make dot product safe: iOS 26 does drop the Apple A12
+iPhones (iPhone XS, XS Max, XR), but the app is universal and iPadOS 26 still runs on A12
+and A12X iPads (iPad 8th generation, iPad mini 5th generation, iPad Air 3rd generation, iPad
+Pro 11-inch 1st generation, iPad Pro 12.9-inch 3rd generation). LLVM's CPU definitions give
+`apple-a13` and later the dot-product extension but not `apple-a12` (checked with
 `clang -mcpu=apple-a12 -dM -E`: no `__ARM_FEATURE_DOTPROD`), and an App Store app cannot
 ship a separate slice per CPU. A dot-product build would crash with an illegal instruction
-on those phones. The cost is small: Stockfish's `bench` on this Mac measured the
+on those iPads. The cost is small: Stockfish's `bench` on this Mac measured the
 dot-product build about 5 % faster in CPU time per node, within the noise of a heavily
 loaded machine. Runtime dispatch (compiling the engine twice and picking a copy by
 `hw.optional.arm.FEAT_DotProd`) would recover that if it ever matters.

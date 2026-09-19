@@ -1,11 +1,8 @@
 import SwiftUI
 
-/// The native close control for modal sheets and full-screen covers. There is never a
-/// "Done" text button to dismiss a modal in this app.
-///
-/// - iOS 26 and later: `Button(role: .close)`, which the system draws as its standard
-///   close control.
-/// - iOS 18 to 25: an `xmark` icon button with the accessibility label "Close".
+/// The native close control for modal sheets and full-screen covers: `Button(role: .close)`,
+/// which the system draws as its standard close control and labels for VoiceOver itself.
+/// There is never a "Done" text button to dismiss a modal in this app.
 struct CloseButton: View {
     let action: () -> Void
 
@@ -14,18 +11,7 @@ struct CloseButton: View {
     }
 
     var body: some View {
-        if #available(iOS 26.0, *) {
-            Button(role: .close, action: action)
-        } else {
-            Button(action: action) {
-                Image(systemName: "xmark")
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(Palette.ink)
-                    .frame(minWidth: Layout.minimumHitTarget, minHeight: Layout.minimumHitTarget)
-                    .contentShape(Rectangle())
-            }
-            .accessibilityLabel("Close")
-        }
+        Button(role: .close, action: action)
     }
 }
 

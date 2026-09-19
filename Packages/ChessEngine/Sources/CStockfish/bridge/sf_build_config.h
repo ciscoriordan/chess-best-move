@@ -11,11 +11,14 @@
 // Stockfish's `ARCH=armv8`: 64-bit, hardware popcount, NEON (ARMv8 level).
 //
 // NEON dot product (`ARCH=armv8-dotprod` / `apple-silicon`, USE_NEON_DOTPROD) is
-// deliberately NOT enabled. The app's deployment target is iOS 18, which still
-// runs on the Apple A12 (iPhone XS / XR). LLVM's CPU tables list dot product
-// (ARMv8.4 DotProd) for apple-a13 and later but not for apple-a11/apple-a12, and
-// iOS gives no way to install a per-CPU slice. Enabling it would make those
-// devices crash with an illegal-instruction signal on the first evaluation.
+// deliberately NOT enabled. The app's deployment target is iOS 26, which no
+// longer runs on the Apple A12 iPhones, but the app is universal and iPadOS 26
+// still runs on A12 and A12X iPads (iPad 8th generation, iPad mini 5th
+// generation, iPad Air 3rd generation, iPad Pro 11-inch 1st generation, iPad Pro
+// 12.9-inch 3rd generation). LLVM's CPU tables list dot product (ARMv8.4
+// DotProd) for apple-a13 and later but not for apple-a12, and iOS gives no way
+// to install a per-CPU slice. Enabling it would make those iPads crash with an
+// illegal-instruction signal on the first evaluation.
 //
 // x86_64 (iOS Simulator on Intel Macs only): portable 64-bit build, no SIMD
 // intrinsics. It only has to be correct, not fast.

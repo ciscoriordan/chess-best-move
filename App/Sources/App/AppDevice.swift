@@ -27,16 +27,15 @@ enum AppDevice: Sendable, Hashable {
         return .iPhone(hasHomeButton: homeButtonIPhones.contains(modelIdentifier))
     }
 
-    /// The iPhones with a Home button that run iOS 18 or later: iPhone SE (2nd and 3rd
-    /// generation). Every later iPhone has Face ID, so the list is complete.
+    /// The iPhones with a Home button that run iOS 26: iPhone SE (2nd and 3rd generation).
+    /// Every later iPhone has Face ID, so the list is complete.
     static let homeButtonIPhones: Set<String> = ["iPhone12,8", "iPhone14,6"]
 
-    /// The iPads with a Home button that run iPadOS 18 or later: iPad7 (iPad 7th generation,
-    /// iPad7,11 and iPad7,12; the older iPad7 models stop at iPadOS 17 and never run the app),
-    /// iPad11 (iPad mini 5th generation, iPad Air 3rd generation, iPad 8th generation) and
-    /// iPad12 (iPad 9th generation). Every later iPad has no Home button, so the list is
-    /// complete.
-    static let homeButtonIPadPrefixes = ["iPad7,", "iPad11,", "iPad12,"]
+    /// The iPads with a Home button that run iPadOS 26: iPad11 (iPad mini 5th generation,
+    /// iPad Air 3rd generation, iPad 8th generation) and iPad12 (iPad 9th generation). The
+    /// iPad 7th generation (iPad7,11 and iPad7,12) had one too, but iPadOS 26 does not run on
+    /// it. Every later iPad has no Home button, so the list is complete.
+    static let homeButtonIPadPrefixes = ["iPad11,", "iPad12,"]
 
     /// "iPhone", "iPad" or "Mac".
     var name: String {

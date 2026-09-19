@@ -9,7 +9,7 @@ name: ChessBestMove
 options:
   bundleIdPrefix: com.motomatic.chessbestmove
   deploymentTarget:
-    iOS: "18.0"
+    iOS: "26.0"
   developmentLanguage: en
   createIntermediateGroups: true
   groupSortPosition: top
@@ -34,15 +34,15 @@ settings:
     # `xcodebuild build ... CODE_SIGNING_ALLOWED=NO`.
     DEVELOPMENT_TEAM: RJB472R448
     CODE_SIGN_STYLE: Automatic
-    IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "26.0"
     TARGETED_DEVICE_FAMILY: "1,2"
     SWIFT_VERSION: "6.0"
     SWIFT_STRICT_CONCURRENCY: complete
     # Declarations are nonisolated unless annotated; the app's contracts spell out
     # @MainActor explicitly.
     SWIFT_DEFAULT_ACTOR_ISOLATION: nonisolated
-    MARKETING_VERSION: "1.0"
-    CURRENT_PROJECT_VERSION: "1"
+    MARKETING_VERSION: "1.0.1"
+    CURRENT_PROJECT_VERSION: "2"
     ENABLE_USER_SCRIPT_SANDBOXING: YES
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
     SUPPORTS_MACCATALYST: NO

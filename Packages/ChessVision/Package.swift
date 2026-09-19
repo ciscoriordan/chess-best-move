@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 import PackageDescription
 
 // The image-processing loops (board detection, cell statistics, board resampling) are
@@ -10,7 +10,7 @@ let optimizeAlways: [SwiftSetting] = [
 
 let package = Package(
     name: "ChessVision",
-    platforms: [.iOS(.v18), .macOS(.v14)],
+    platforms: [.iOS(.v26), .macOS(.v14)],
     products: [
         .library(name: "ChessVision", targets: ["ChessVision"]),
     ],

@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 import PackageDescription
 
 // Compiler flags for the vendored Stockfish sources (see README.md, "Build flags").
@@ -31,7 +31,7 @@ let stockfishReleaseFlags: [String] = [
 let package = Package(
     name: "ChessEngine",
     platforms: [
-        .iOS(.v18),
+        .iOS(.v26),
         .macOS(.v14),
     ],
     products: [

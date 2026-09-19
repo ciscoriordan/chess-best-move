@@ -369,7 +369,7 @@ struct MonetizationLocalRecord: Codable, Sendable, Equatable {
 ///     remaining = 15 x |(credited packs ∪ history packs) - revoked packs| - (spent - forgiven), floored at 0
 ///
 /// History packs are the verified pack transactions in `Transaction.all`, which keeps finished
-/// consumables on iOS 18 and later with `SKIncludeConsumableInAppPurchaseHistory`. The credited
+/// consumables because the app sets `SKIncludeConsumableInAppPurchaseHistory`. The credited
 /// set counts a pack before the history has been read and carries it to devices that have not
 /// read theirs yet.
 struct MonetizationPurchasedRecord: Codable, Sendable, Equatable {
@@ -409,11 +409,11 @@ struct MonetizationPurchasedRecord: Codable, Sendable, Equatable {
         creditedPackTransactionIDs = (try? container.decodeIfPresent(Set<UInt64>.self, forKey: .creditedPackTransactionIDs)) ?? []
         revokedPackTransactionIDs = (try? container.decodeIfPresent(Set<UInt64>.self, forKey: .revokedPackTransactionIDs)) ?? []
         forgivenByRevokedPack = (try? container.decodeIfPresent([String: Int].self, forKey: .forgivenByRevokedPack)) ?? [:]
-        // Version 1 also wrote `storedBalance`, the balance its iOS 17 accounting kept. It is not
-        // read: version 1 itself ignored it on iOS 18 and later (the minimum now) and derived the
-        // balance from `spent` and the packs, as this version does, and reading it could only
-        // grant credits nobody bought. Its `spent` counter becomes `legacyDeviceID`'s counter,
-        // and the next write stores the record as version 2 without either old key.
+        // Version 1 also wrote `storedBalance`, a balance from an earlier accounting scheme. It
+        // is not read: version 1 itself ignored it and derived the balance from `spent` and the
+        // packs, as this version does, and reading it could only grant credits nobody bought. Its
+        // `spent` counter becomes `legacyDeviceID`'s counter, and the next write stores the record
+        // as version 2 without either old key.
     }
 
     func encode(to encoder: any Encoder) throws {

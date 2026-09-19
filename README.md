@@ -157,7 +157,7 @@ Notes on the build:
 - Stockfish is compiled with `-O3` in every configuration, including Debug. An unoptimized
   engine searches about ten times fewer nodes, which would make Debug builds misleading.
   `Packages/ChessVision` is optimized in every configuration for the same reason.
-- The app's deployment target is iOS 18.0, for iPhone and iPad.
+- The app's deployment target is iOS 26.0, for iPhone and iPad.
 - `Packages/ChessEngine/README.md` documents every engine build flag and why it has the value
   it has, how the Swift API calls Stockfish, and what the engine needs in memory. Its "Tests"
   section describes that package's test suite, which is development material and is not part of

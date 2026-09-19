@@ -4,10 +4,10 @@ import StoreKit
 
 /// DEBUG builds only: a StoreKit stand-in that behaves like the App Store for the store
 /// logic (transactions, entitlements, Ask to Buy, refunds, expiry, billing grace periods,
-/// crossgrades). Finished consumables stay in the history, as with
-/// `SKIncludeConsumableInAppPurchaseHistory` on iOS 18 and later. Unit tests script it; the
-/// `-monetizationDemo` launch argument uses it so the paywall can be seen with products in a
-/// simulator that has no StoreKit configuration (`xcrun simctl launch`).
+/// crossgrades). Finished consumables stay in the history, as they do in the App Store with
+/// `SKIncludeConsumableInAppPurchaseHistory`. Unit tests script it; the `-monetizationDemo`
+/// launch argument uses it so the paywall can be seen with products in a simulator that has
+/// no StoreKit configuration (`xcrun simctl launch`).
 @MainActor
 final class MonetizationScriptedStoreKitClient: MonetizationStoreKitClient {
     enum PurchaseBehavior: Equatable {
