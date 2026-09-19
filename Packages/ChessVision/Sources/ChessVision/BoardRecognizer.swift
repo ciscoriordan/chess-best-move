@@ -217,6 +217,28 @@ public final class BoardRecognizer: Sendable {
             doubts.append(.orientation(reason: orientationDoubt))
         }
         doubts += sideDecision.doubts.map { .sideToMove(reason: $0) }
+        // Tinted squares in more than one color that read as no move at all. Something is drawn
+        // on the board, the recognizer cannot say what, and it reports no last move: if one of
+        // those tints is the move, the position goes to the engine with the wrong side to move
+        // and without the en passant square. One tint color is a different matter and is left
+        // alone: a lone selection, a pair of marks or two squares the user colored by hand are
+        // drawn in one color, they are what most boards with unread tints carry, and they say
+        // nothing about a move. Measured over the 3,776 evaluated images (2026-09-18), 18 boards
+        // carry two or more tinted squares and report no move without a doubt; the 6 whose
+        // reading is wrong are the ones this is for, and taking only the boards whose tints fall
+        // in several colors catches 4 of those 6 while flagging 1 correct board (real_047).
+        //
+        // That one board would be free to keep quiet about: its second tint is a plain darkening,
+        // and counting only cells the shade test calls colored would flag the same 4 and cost
+        // nothing. It is not worth it, because the shade test is the measurement this doubt
+        // cannot rely on: what hid sealed_016's move is a vignette darkening that the test does
+        // not recognize on a textured board (see HighlightDetector.shadeMinimumStrength), so a
+        // rule resting on it would let the next board of that kind through in silence.
+        if resolution == nil, Set(tintAnalysis.groups).count >= 2, pieces != Position.start.board {
+            doubts.append(.unreadableHighlight(tintedCells.map {
+                DisplayGrid.square(row: $0 / 8, column: $0 % 8, whiteAtBottom: whiteAtBottom)
+            }))
+        }
         if !repairs.isEmpty {
             let squares = repairs.map { DisplayGrid.square(row: $0.cell / 8, column: $0.cell % 8, whiteAtBottom: whiteAtBottom) }
             doubts.append(.relabeledSquares(squares, detail: zip(squares, repairs).map { square, repair in

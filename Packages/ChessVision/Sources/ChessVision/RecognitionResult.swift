@@ -58,6 +58,11 @@ public enum RecognitionDoubt: Sendable, Hashable {
     /// The side to move rests on evidence that may mislead, such as a highlighted move the piece
     /// standing there cannot have made. `reason` is the whole line, naming that evidence.
     case sideToMove(reason: String)
+    /// The board carries tinted squares in more than one tint color and no two of them read as a
+    /// move, so no last move was found although something is drawn on the board. What is drawn
+    /// may be the move, with one of its squares taken for another mark or missed altogether;
+    /// `squares` are the tinted squares, strongest first.
+    case unreadableHighlight([Square])
     /// The board's art (its square colors, or how colored its piece ink is) falls outside the
     /// range the classifier was trained on (`ThemeFamiliarity`), so its probabilities are not
     /// calibrated. `reason` names the statistics that are out of range.
@@ -89,6 +94,8 @@ public enum RecognitionDoubt: Sendable, Hashable {
             return "relabeled to make the position possible: " + detail
         case .orientation(let reason), .sideToMove(let reason):
             return reason
+        case .unreadableHighlight(let squares):
+            return "tinted squares in several colors that form no move: " + names(squares)
         case .unfamiliarBoardArt(let reason):
             return "board art outside the trained range: " + reason
         }

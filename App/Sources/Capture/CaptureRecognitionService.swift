@@ -304,6 +304,7 @@ final class CaptureRecognitionService: RecognitionService {
         case .impossiblePosition, .relabeledSquares: .impossiblePosition
         case .orientation: .orientationUnconfirmed
         case .sideToMove: .sideToMoveUncertain
+        case .unreadableHighlight(let squares): .unreadableHighlight(Set(squares))
         case .unfamiliarBoardArt: .unfamiliarTheme
         @unknown default: .other
         }

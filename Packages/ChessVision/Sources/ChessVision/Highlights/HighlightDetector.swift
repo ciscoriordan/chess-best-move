@@ -337,6 +337,31 @@ public enum HighlightDetector {
     /// Strength a cell whose change is a plain brightening or darkening needs to count as tinted
     /// (translucent themes highlight by brightening; real example: strength 3.3, while shaded
     /// untinted cells reach about 2.1).
+    ///
+    /// The shade test above (`residual < 0.12 && abs(k - 1) < 0.25`) is measured against the
+    /// cell's own deviation, which is tight for a textured board: the base color is a median of
+    /// neighbors, so a cell's own grain leaves a chroma of its own and the ratio never falls to
+    /// 0.12. On sealed_016, a marble board with a vignette, ten corner cells darken by up to 73 L1
+    /// units at ratios of 0.14 to 0.30 and the strongest of them outranks both squares of the real
+    /// tint. Two ways of widening it were measured over the 3,556 evaluated images of
+    /// 2026-09-18 (221,952 cells), and both cost more than they gave, so the test stands as it is:
+    ///
+    /// * against the board's chroma noise, `chroma < 0.6 * chromaThreshold`: 191 cells no label
+    ///   calls tinted become shades, against 24 that a label does, and 61 more labeled cells leave
+    ///   the faint-candidate pool. Over all 16 sets, silently wrong 24 -> 35 and wrong last moves
+    ///   301 -> 326, most of it in `tints` (4 -> 11 silently wrong);
+    /// * the texture-aware form `chroma < 0.12 * deviation + chromaNoise`, which is the smallest
+    ///   bound that reclassifies sealed_016's vignette: 143 unlabeled cells against 6 labeled, and
+    ///   39 labeled cells out of the faint pool. Silently wrong 24 -> 27, wrong last moves
+    ///   301 -> 307, `covered` 102 -> 106, and the gate fails on ten limits.
+    ///
+    /// Neither reads sealed_016's move, because the pair is not the shade test's to make: with the
+    /// vignette out of the way the board offers exactly g4 (tinted) and f5 (faint), and their
+    /// relative tint distance is 0.0387, past `LastMoveResolver.faintPairRadius` (0.025). That
+    /// radius separates a real faint tint from texture on the 21 boards it was fitted to, whose
+    /// texture cells start at 0.034, so widening it to reach 0.0387 would undo that. What closes
+    /// sealed_016 instead is the doubt `BoardRecognizer` raises when tints in several colors read
+    /// as no move.
     static let shadeMinimumStrength = 2.5
 
     /// A tinted square at least this strong without a same-tint partner gets its partner searched

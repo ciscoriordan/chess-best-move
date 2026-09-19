@@ -133,6 +133,11 @@ enum BoardDoubt: Sendable, Hashable {
     /// The side to move was not established, so the user confirms it before anything is spent
     /// (owner decision of 2026-09-17).
     case sideToMoveNotEstablished
+    /// The board carries colored squares in more than one color and no two of them read as a
+    /// move, so the last move was not read although something is drawn on the board. One of
+    /// those colored squares may be half of the move, which makes the side to move worth a
+    /// check. `Set` holds the colored squares.
+    case unreadableHighlight(Set<Square>)
     /// The board's colors or its pieces are unlike the board styles recognition was trained on,
     /// so the pieces may be read wrong (owner decision of 2026-09-17).
     case unfamiliarTheme
@@ -151,6 +156,7 @@ enum BoardDoubt: Sendable, Hashable {
         case .squaresOutsideImage(let squares): return .squaresOutsideImage(rotate(squares))
         case .squaresCovered(let squares): return .squaresCovered(rotate(squares))
         case .uncertainSquares(let squares): return .uncertainSquares(rotate(squares))
+        case .unreadableHighlight(let squares): return .unreadableHighlight(rotate(squares))
         case .squaresTooSmall, .severalBoards, .invertedSquareColors, .weakBoardMatch,
              .impossiblePosition, .orientationUnconfirmed, .sideToMoveUncertain,
              .sideToMoveNotEstablished, .unfamiliarTheme, .other:

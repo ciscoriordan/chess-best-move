@@ -55,10 +55,27 @@ enum Layout {
     /// Maximum board side on iPad and in landscape.
     static let maximumBoardSide: CGFloat = 600
 
-    /// Side gutter: 16 on phones up to 402 pt wide, 20 above.
+    /// Side gutter: 16 on phones up to 402 pt wide, 20 above (design.md section 5).
+    ///
+    /// `width` must be a width the gutter itself cannot change, such as the width of the
+    /// window (`EnvironmentValues.windowWidth`) or of a container measured before the gutter
+    /// is applied. Reading back the width of a view this gutter already padded makes the two
+    /// answers chase each other (see `SideGutterModifier`).
+    ///
+    /// The comparison allows half a point of slack because 402 pt is exactly the width of a
+    /// shipping phone (iPhone 17 Pro, iPhone 16 Pro): a width that arrives a fraction of a
+    /// point over, as a measured width can, must still answer 16. The next phone width above
+    /// 402 pt is 430 pt, so no real device falls in the slack.
     static func sideGutter(forWidth width: CGFloat) -> CGFloat {
-        width > 402 ? 20 : 16
+        width > narrowScreenWidth + 0.5 ? wideSideGutter : narrowSideGutter
     }
+
+    /// The widest screen that still gets the 16 pt gutter.
+    static let narrowScreenWidth: CGFloat = 402
+    /// The gutter up to `narrowScreenWidth`, and the gutter used when no width is known.
+    static let narrowSideGutter: CGFloat = 16
+    /// The gutter above `narrowScreenWidth`.
+    static let wideSideGutter: CGFloat = 20
 }
 
 /// Animation durations (docs/design.md section 11). Every animation must also respect
@@ -79,23 +96,64 @@ enum Motion {
     static let boardCropSpring = Animation.spring(response: boardCrop, dampingFraction: 1.0)
 }
 
-private struct SideGutterModifier: ViewModifier {
+extension EnvironmentValues {
+    /// The width of the window the app draws in, in points, or nil before it has been measured.
+    /// Published once at the root of the scene by `measuresWindowWidth()`; the side gutter reads
+    /// it instead of measuring a view of its own.
+    @Entry var windowWidth: CGFloat?
+}
+
+/// Measures the width of the view it is applied to and publishes it as
+/// `EnvironmentValues.windowWidth`. Applied once, at the root of the scene, so the width it
+/// publishes is the window's and nothing further down the tree can change it.
+private struct WindowWidthModifier: ViewModifier {
+    @State private var width: CGFloat?
+
     func body(content: Content) -> some View {
-        content.padding(.horizontal, gutter)
+        content
             .onGeometryChange(for: CGFloat.self) { proxy in
                 proxy.size.width
-            } action: { width in
-                // The measured view includes the padding, so this is the full width.
-                gutter = Layout.sideGutter(forWidth: width)
-            }
+            } action: { width = $0 }
+            .environment(\.windowWidth, width)
+    }
+}
+
+/// The screen side gutter, taken from the window width rather than from a measurement of its
+/// own view.
+///
+/// It used to apply its padding and then read the width of the padded view back into the
+/// `@State` the padding came from. That is a layout feedback loop: when the content inside
+/// stops shrinking, the padded view is wider than the width the parent proposed, so the
+/// measured width depends on the gutter, and the gutter depends on the measured width. On an
+/// iPhone 17 Pro at `UICTContentSizeCategoryAccessibilityXXXL` the two answers alternated
+/// forever (gutter 16 measured 402.333 pt and asked for 20, gutter 20 measured 402.000 pt and
+/// asked for 16; 26,363 flips in 12 s, measured 2026-09-18), the app never drew a frame and
+/// every accessibility query timed out. The window width cannot be changed by padding applied
+/// inside the window, so reading it settles in one pass.
+private struct SideGutterModifier: ViewModifier {
+    @Environment(\.windowWidth) private var windowWidth
+
+    func body(content: Content) -> some View {
+        content.padding(.horizontal, gutter)
     }
 
-    @State private var gutter: CGFloat = 16
+    /// Before the first measurement the narrow gutter is used: it is the phone value, and one
+    /// layout pass later the measured width decides.
+    private var gutter: CGFloat {
+        guard let windowWidth else { return Layout.narrowSideGutter }
+        return Layout.sideGutter(forWidth: windowWidth)
+    }
 }
 
 extension View {
-    /// Applies the screen side gutter (16 or 20 pt depending on the available width).
+    /// Applies the screen side gutter (16 or 20 pt depending on the window width).
     func sideGutter() -> some View {
         modifier(SideGutterModifier())
+    }
+
+    /// Publishes this view's width as `EnvironmentValues.windowWidth` for everything inside it.
+    /// Apply once, at the root of the scene; `sideGutter()` reads it.
+    func measuresWindowWidth() -> some View {
+        modifier(WindowWidthModifier())
     }
 }

@@ -31,6 +31,9 @@ struct ChessBestMoveApp: App {
         WindowGroup {
             RootView()
                 .environment(model)
+                // The window's width, published once here so the side gutter never measures a
+                // view its own padding took part in sizing (DesignSystem/Metrics.swift).
+                .measuresWindowWidth()
                 .background(Palette.canvas.ignoresSafeArea())
                 .task {
                     // Loads the recognition model in the background shortly after the first

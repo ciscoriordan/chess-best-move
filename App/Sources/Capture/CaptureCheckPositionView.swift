@@ -372,7 +372,9 @@ struct CaptureCheckPositionSummary: Equatable, Sendable {
                 return "This board style is unfamiliar, so pieces on it are easier to misread. Check the pieces against your screenshot."
             case .weakBoardMatch, .squaresOutsideImage, .squaresCovered, .uncertainSquares,
                  .impossiblePosition, .orientationUnconfirmed, .sideToMoveUncertain,
-                 .sideToMoveNotEstablished, .other:
+                 .sideToMoveNotEstablished, .unreadableHighlight, .other:
+                // An unread highlight is said at the side-to-move chip (`chipNote`), because
+                // what it puts in doubt is whose turn it is.
                 continue
             }
         }
@@ -388,16 +390,24 @@ struct CaptureCheckPositionSummary: Equatable, Sendable {
             sentences.append("Recognition is not sure which way the board faces. Check that the right color is at the bottom, and flip it if it is not.")
         }
         if snapshot.sideToMoveOrigin != .user {
-            for doubt in snapshot.doubts {
-                switch doubt {
-                case .sideToMoveNotEstablished:
-                    sentences.append("Nothing in your screenshot says who is to move: no highlighted last move and no clock. Check the side to move.")
-                case .sideToMoveUncertain:
-                    sentences.append("Recognition is not sure who is to move. Check the side to move.")
-                default:
-                    continue
+            // An unread highlight comes first whatever order the doubts arrive in: it says what
+            // the two others cannot, that something is drawn on the board and was not read.
+            // Saying instead that there is "no highlighted last move" would contradict the
+            // screenshot the user is looking at.
+            if snapshot.doubts.contains(where: \.isAboutAnUnreadHighlight) {
+                sentences.append("This board has colored squares that do not add up to a move, so the last move could not be read. Check the side to move.")
+            } else {
+                for doubt in snapshot.doubts {
+                    switch doubt {
+                    case .sideToMoveNotEstablished:
+                        sentences.append("Nothing in your screenshot says who is to move: no highlighted last move and no clock. Check the side to move.")
+                    case .sideToMoveUncertain:
+                        sentences.append("Recognition is not sure who is to move. Check the side to move.")
+                    default:
+                        continue
+                    }
+                    break
                 }
-                break
             }
         }
         return sentences.isEmpty ? nil : sentences.joined(separator: " ")
@@ -405,12 +415,20 @@ struct CaptureCheckPositionSummary: Equatable, Sendable {
 }
 
 extension BoardDoubt {
-    /// Whether this doubt is about who is to move.
+    /// Whether this doubt asks the user to check who is to move. An unread highlight does: the
+    /// side to move then rests on the clock, the check rule or the player at the bottom, and one
+    /// of the colored squares the recognizer could not read may be half of the last move.
     var isAboutTheSideToMove: Bool {
         switch self {
-        case .sideToMoveUncertain, .sideToMoveNotEstablished: true
+        case .sideToMoveUncertain, .sideToMoveNotEstablished, .unreadableHighlight: true
         default: false
         }
+    }
+
+    /// Whether this doubt is the unread highlight (colored squares that read as no move).
+    var isAboutAnUnreadHighlight: Bool {
+        if case .unreadableHighlight = self { return true }
+        return false
     }
 }
 
