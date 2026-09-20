@@ -101,10 +101,17 @@ extension ButtonStyle where Self == TextLinkStyle {
 }
 
 /// A primary button with an optional leading SF Symbol at 17 pt.
+///
+/// The symbol is hidden from VoiceOver: the button's words are its label, and a symbol left in
+/// the tree is announced by its own name ("stop fill, Stop"), which design.md 12 forbids. It
+/// grows with the label up to `Layout.maximumRowIcon`, past which it would take the width the
+/// words need.
 struct PrimaryButton: View {
     let title: String
     var systemImage: String?
     let action: () -> Void
+
+    @ScaledMetric(relativeTo: .body) private var symbolSize: CGFloat = 17
 
     init(_ title: String, systemImage: String? = nil, action: @escaping () -> Void) {
         self.title = title
@@ -116,7 +123,9 @@ struct PrimaryButton: View {
         Button(action: action) {
             HStack(spacing: Spacing.s2) {
                 if let systemImage {
-                    Image(systemName: systemImage).font(.system(size: 17, weight: .semibold))
+                    Image(systemName: systemImage)
+                        .font(.system(size: min(symbolSize, Layout.maximumRowIcon), weight: .semibold))
+                        .accessibilityHidden(true)
                 }
                 Text(title)
             }
@@ -125,12 +134,15 @@ struct PrimaryButton: View {
     }
 }
 
-/// A secondary button with an optional leading SF Symbol.
+/// A secondary button with an optional leading SF Symbol, hidden from VoiceOver like
+/// `PrimaryButton`'s.
 struct SecondaryButton: View {
     let title: String
     var systemImage: String?
     var dense = false
     let action: () -> Void
+
+    @ScaledMetric(relativeTo: .body) private var symbolSize: CGFloat = 17
 
     init(_ title: String, systemImage: String? = nil, dense: Bool = false, action: @escaping () -> Void) {
         self.title = title
@@ -143,7 +155,9 @@ struct SecondaryButton: View {
         Button(action: action) {
             HStack(spacing: Spacing.s2) {
                 if let systemImage {
-                    Image(systemName: systemImage).font(.system(size: 17, weight: .regular))
+                    Image(systemName: systemImage)
+                        .font(.system(size: min(symbolSize, Layout.maximumRowIcon), weight: .regular))
+                        .accessibilityHidden(true)
                 }
                 Text(title)
             }

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Transparent foreground layer: the knight's move, bottom-left square up two and right one,
+       ending at the center of the top-middle square.
+
+       ONE closed filled path, deliberately. This was two paths, a stroked L and a filled
+       triangle, and Icon Composer joined them: it drew a straight line from the arrowhead's
+       lower base vertex (376, 265) to the shaft's first point (171, 853), which showed on
+       device as a thin diagonal across the board. Strokes and separate subpaths are not safe
+       here, so the shaft's 96-wide round-capped stroke is written out as its own outline:
+       half-width 48, a quarter-circle outer join at the corner, a sharp inner corner, and a
+       semicircular cap at the bottom. The arrowhead is part of the same contour rather than a
+       shape sitting on top of it. -->
+  <path
+    d="M122.666667 853.333333
+       L122.666667 170.666667
+       A48 48 0 0 1 170.666667 122.666667
+       L376 122.666667
+       L376 76.666667
+       L512 170.666667
+       L376 264.666667
+       L376 218.666667
+       L218.666667 218.666667
+       L218.666667 853.333333
+       A48 48 0 0 1 122.666667 853.333333
+       Z"
+    fill="#9BDF5A"
+  />
+</svg>

@@ -59,6 +59,10 @@ struct RecognizingView: View {
                 Text("Finding the board...")
                     .typography(.callout)
                     .foregroundStyle(Palette.ink2)
+                    // Wraps rather than being squeezed: at the largest text sizes the sentence
+                    // needs about 465 pt against a 370 pt column, and the container clips
+                    // instead of scrolling because the screenshot animates inside it.
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .opacity(isLanded ? 0 : 1)
             .accessibilityElement(children: .combine)

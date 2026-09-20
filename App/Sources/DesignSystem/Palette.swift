@@ -20,8 +20,9 @@ enum Palette {
     static let ink = dynamic(light: 0x17150F, dark: 0xEEEAE0)
     /// Secondary text and labels.
     static let ink2 = dynamic(light: 0x57524A, dark: 0xA9A396, increasedLight: 0x45413A, increasedDark: 0xC9C3B6)
-    /// Disabled text, placeholders, coordinates. Never for essential text.
-    static let ink3 = dynamic(light: 0x8A8475, dark: 0x6F6A5F)
+    /// Disabled text and placeholders. Never for essential text, and never for board
+    /// coordinates: those are drawn on the diagram and take `boardCoordinate`.
+    static let ink3 = dynamic(light: 0x8A8475, dark: 0x6F6A5F, increasedLight: 0x6B6659, increasedDark: 0x8D887B)
     /// Hairlines between groups.
     static let rule = dynamic(light: 0xD9D3C5, dark: 0x2D2A24, increasedLight: 0x8F8878, increasedDark: 0x6A655B)
     /// Borders of chips, secondary buttons and the board crop.
@@ -44,16 +45,44 @@ enum Palette {
 
     /// Best-move arrow fill, both themes.
     static let arrowFill = fixed(0x2350E6)
-    /// Halo stroke around the arrow.
-    static let arrowHalo = fixed(0xFFFFFF, opacity: 0.92)
-    /// 1 px outer edge outside the halo.
-    static let arrowEdge = fixed(0x000000, opacity: 0.28)
+    /// Halo stroke around the arrow. Opaque: at 92% over the dark square of the board themes
+    /// the app reads, it fell to between 2.3:1 and 3.1:1 (docs/design.md section 7).
+    static let arrowHalo = fixed(0xFFFFFF)
+    /// The outer edge outside the halo, and the second of the arrow's two contrast guarantees.
+    ///
+    /// The halo carries the arrow against a dark square and this edge carries it against a
+    /// light one, so between them every board theme has one edge at 3:1 or better
+    /// (docs/design.md section 7). At the old 28% the edge carried nothing, and on the dark
+    /// square of a blue or a blue-grey board the halo alone does not reach 3:1 either: white
+    /// on the darker square of a mid-blue board measures 2.66:1 at full opacity, so no amount
+    /// of halo fixes it.
+    /// 55% is the lowest value at which every board tested clears 3:1 on one edge or the other
+    /// (`AccessibilityContrastTests`); the app's own dark diagram square is the tight one.
+    static let arrowEdge = fixed(0x000000, opacity: 0.55)
     /// White share of the evaluation bar.
     static let evalWhite = dynamic(light: 0xF7F5EF, dark: 0xEDEAE2)
     /// Black share of the evaluation bar.
     static let evalBlack = dynamic(light: 0x1B1915, dark: 0x050504)
+    /// The empty evaluation track, before the engine has reported anything.
+    ///
+    /// Fixed, and a mid tone, because a full bar is a real reading - it is what a forced mate
+    /// gives - so an empty track drawn in either half's own color IS that reading. `sunken`
+    /// measured 1.18:1 against `evalWhite` in light mode and 1.02:1 against `evalBlack` in
+    /// dark, which made "the engine has not reported" look like "White has everything" in one
+    /// theme and "Black has everything" in the other. The two halves sit at both ends of the
+    /// range in both appearances, so one value tells them both apart: this is 3.7:1 or more
+    /// from each half, and from the canvas, under every trait combination
+    /// (`AccessibilityContrastTests`).
+    static let evalEmpty = fixed(0x7A7468)
     /// 1 px outline of the evaluation bar.
-    static let evalOutline = rule2
+    ///
+    /// The bar carries no text and its whole meaning is where it starts and stops, so the
+    /// outline is the only boundary it has and WCAG 1.4.11 asks 3:1 of it. `rule2` gives 2.0:1
+    /// in both themes, which is why this is a token of its own: it is `rule2`'s Increase
+    /// Contrast value at all times (3.1:1 light, 3.3:1 dark against `canvas`). Without it the
+    /// white half of the bar dissolves into the paper at 1.04:1 in light mode and the black
+    /// half into the background at 1.08:1 in dark mode.
+    static let evalOutline = dynamic(light: 0x8F8878, dark: 0x6A655B)
     /// Light squares of the app's own diagram board.
     static let diagramLight = dynamic(light: 0xEFE9DC, dark: 0xD6CFBF)
     /// Dark squares of the app's own diagram board.
@@ -62,6 +91,29 @@ enum Palette {
     static let pieceInk = fixed(0x17150F)
     /// White piece fill.
     static let piecePaper = fixed(0xFFFFFF)
+
+    // MARK: Board marks (drawn on the diagram, which does not follow the theme)
+
+    // The diagram board is a warm paper board in both appearances: its four square colors span
+    // a relative luminance of 0.31 to 0.82. A mark drawn on it therefore has to be chosen
+    // against those four squares and not against `canvas`, which is why these are fixed rather
+    // than dynamic. Drawn in the theme-following `caution`, `danger` and `accent` they measured
+    // between 1.04:1 and 1.80:1 in dark mode - the editor's selection outline, which is the
+    // only confirmation that a tap landed, was invisible at 1.04:1.
+    //
+    // Each of the three clears 3:1 against all four diagram squares, in both appearances.
+
+    /// Low-confidence square outline and its "?" badge: 3.2:1 on the darkest diagram square,
+    /// 7.6:1 on the lightest.
+    static let markLowConfidence = fixed(0x6B3D05)
+    /// Blocking-issue square outline and its "!" badge: 3.6:1 to 8.6:1.
+    static let markIssue = fixed(0x7E1710)
+    /// Selected square outline: the dark cut of the cobalt, 3.8:1 to 9.0:1.
+    static let markSelection = fixed(0x16309A)
+    /// Rank and file coordinates inside the board's edge squares. Text, so it needs 4.5:1, and
+    /// it clears it on every diagram square (4.8:1 to 11.4:1). `ink3` gave 1.86:1 on a dark
+    /// square, which made half of every board's coordinates unreadable.
+    static let boardCoordinate = fixed(0x332C22)
 
     /// Width multiplier for the arrow halo under Increase Contrast.
     static func arrowHaloScale(for contrast: ColorSchemeContrast) -> CGFloat {

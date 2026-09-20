@@ -52,7 +52,10 @@ struct CheckPositionView: View {
                     Text(isPeeking ? "Showing your screenshot" : "Press and hold the board to compare it with your screenshot.")
                         .typography(.caption)
                         .foregroundStyle(Palette.ink2)
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, Spacing.s2)
+                        // The board carries the same instruction as a custom action, which is
+                        // the form a VoiceOver or Switch Control user can actually take.
                         .accessibilityHidden(true)
                 }
                 chips(summary)
@@ -107,6 +110,7 @@ struct CheckPositionView: View {
                 }
             }
         }
+        .boardTapTargetRelief()
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(CaptureBoardSpeech.boardLabel(whiteAtBottom: whiteAtBottom))
         .accessibilityValue(boardAccessibilityValue)
@@ -114,6 +118,15 @@ struct CheckPositionView: View {
         .accessibilityAddTraits(.isButton)
         .accessibilityAction { openEditor(selecting: nil) }
         .accessibilityActions {
+            // A press and hold cannot reach this view while VoiceOver is running, and it is
+            // hard to hold within 30 pt for a quarter of a second with a tremor or a stylus.
+            // The comparison is the only free way to check recognition before a credit is
+            // spent, so it is also a custom action, which toggles rather than holds.
+            if snapshot.boardImage != nil {
+                Button(isPeeking ? CaptureBoardSpeech.hideScreenshotAction : CaptureBoardSpeech.compareAction) {
+                    isPeeking.toggle()
+                }
+            }
             ForEach(flaggedSquares, id: \.self) { square in
                 Button("Fix \(square.algebraic)") { openEditor(selecting: square) }
             }
@@ -132,13 +145,19 @@ struct CheckPositionView: View {
 
     // MARK: Chips
 
-    /// The side-to-move and Flip chips, with the caption naming where the side to move came
-    /// from and, when recognition doubted the orientation or the side to move, what to check
-    /// here (design.md 9.5). The doubt is said next to the controls that settle it, not in the
-    /// summary below.
+    /// The side-to-move and Flip chips, with the caption naming where the player whose move it
+    /// is sits and where the side to move came from, and, when recognition doubted the
+    /// orientation or the side to move, what to check here (design.md 9.5). The doubt is said
+    /// next to the controls that settle it, not in the summary below.
+    ///
+    /// This screen shows no "Switch to the player at the bottom" link (design.md 9.4): it is
+    /// already the screen where the user settles the side to move, and the chip is the control.
     private func chips(_ summary: CaptureCheckPositionSummary) -> some View {
         let side = snapshot.position.sideToMove
-        let caption = CapturePositionIssues.sideToMoveCaption(snapshot.sideToMoveOrigin)
+        // "the player at the top, from the clock" (design.md 9.5): where the player whose move
+        // it is sits, then where the side to move came from. The same line as on the Analysis
+        // result (`SideToMoveCopy`), so the board says the same thing on both screens.
+        let caption = SideToMoveCopy.caption(side: side, whiteAtBottom: snapshot.whiteAtBottom, origin: snapshot.sideToMoveOrigin)
         let emphasized = summary.emphasizesSideToMove
         return VStack(alignment: .leading, spacing: Spacing.s1) {
             CaptureFlowLayout {
@@ -150,21 +169,26 @@ struct CheckPositionView: View {
                     snapshot = snapshot.withSideToMove(side.opposite)
                     selectionFeedback += 1
                 }
-                .accessibilityLabel("Side to move")
-                .accessibilityValue(CapturePositionIssues.name(side))
+                // The label is the text on the chip, so a Voice Control user can say what they
+                // read ("Tap White to move"); where that side came from is the value.
+                .accessibilityLabel("\(CapturePositionIssues.name(side)) to move")
+                .accessibilityValue(SideToMoveCopy.spoken(side: side, whiteAtBottom: snapshot.whiteAtBottom, origin: snapshot.sideToMoveOrigin))
+                .accessibilityInputLabels(["\(CapturePositionIssues.name(side)) to move", "Side to move"])
                 .accessibilityHint("Switches the side to move")
 
                 Chip("Flip board", glyph: .systemImage("arrow.up.arrow.down")) {
                     flip()
                     selectionFeedback += 1
                 }
+                .accessibilityLabel("Flip board")
                 .accessibilityHint("Swaps which side is at the bottom")
             }
-            if let caption {
-                Text(caption)
-                    .typography(.caption)
-                    .foregroundStyle(emphasized ? Palette.caution : Palette.ink2)
-            }
+            Text(caption)
+                .typography(.caption)
+                .foregroundStyle(emphasized ? Palette.caution : Palette.ink2)
+                .fixedSize(horizontal: false, vertical: true)
+                // The chip's VoiceOver value already says it.
+                .accessibilityHidden(true)
             if let note = summary.chipNote {
                 Text(note)
                     .typography(.body)
@@ -193,9 +217,12 @@ struct CheckPositionView: View {
                         selectionFeedback += 1
                     }
                     .disabled(!available)
-                    .opacity(available ? 1 : 0.4)
                     .accessibilityLabel(option.spokenTitle)
                     .accessibilityValue(on ? "On" : "Off")
+                    // The same reason the editor gives for the same disabled control. Without
+                    // it the chip reads "White castles kingside, Off, dimmed" and stops.
+                    .accessibilityHint(available ? "" : CaptureCastlingOption.unavailableHint)
+                    .accessibilityInputLabels([option.title, option.spokenTitle])
                 }
             }
         }
@@ -231,16 +258,24 @@ struct CheckPositionView: View {
 
     // MARK: Actions
 
+    /// The pinned bar. The two buttons stack from the first accessibility size, not from the
+    /// third: at AccessibilityM the primary label already wraps to two lines beside the dense
+    /// Edit button on a 375 pt phone, which makes the bar about 120 pt tall and pushes the
+    /// scrolling content up.
     private func actionBar(canAnalyze: Bool) -> some View {
         PinnedActionBar {
-            let layout = dynamicTypeSize >= .accessibility3
+            let stacked = dynamicTypeSize.isAccessibilitySize
+            let layout = stacked
                 ? AnyLayout(VStackLayout(spacing: Spacing.s2))
                 : AnyLayout(HStackLayout(spacing: Spacing.s3))
             layout {
                 PrimaryButton("Analyze") { analyze() }
                     .disabled(!canAnalyze)
+                    // A disabled button that gives no reason is a dead end for a reader who
+                    // reached the bar before the issue list above it.
+                    .accessibilityHint(canAnalyze ? "" : "Fix the problems listed above first")
                     .accessibilityIdentifier(CaptureAccessibilityID.checkPositionAnalyze)
-                SecondaryButton("Edit", dense: dynamicTypeSize < .accessibility3) { openEditor(selecting: nil) }
+                SecondaryButton("Edit", dense: !stacked) { openEditor(selecting: nil) }
                     .accessibilityHint("Opens the position editor")
             }
         }
@@ -454,6 +489,9 @@ struct CaptureCastlingOption: Identifiable, Hashable, Sendable {
     let spokenTitle: String
 
     var id: UInt8 { right.rawValue }
+
+    /// Why a castling toggle is unavailable, said on both screens that show these chips.
+    static let unavailableHint = "The king or rook is not on its starting square"
 
     static let all: [CaptureCastlingOption] = [
         CaptureCastlingOption(right: .whiteKingside, title: "White O-O", spokenTitle: "White castles kingside"),

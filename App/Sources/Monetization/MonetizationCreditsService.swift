@@ -43,7 +43,7 @@ protocol MonetizationPackLedgerHost: AnyObject {
 ///   Pro is allowed, and nothing is written over the stored data.
 @MainActor
 @Observable
-final class MonetizationCreditsService: CreditsService, MonetizationPackLedger {
+final class MonetizationCreditsService: CreditsService, MonetizationPackLedger, MonetizationTestingGrants {
     let freeAllowance = MonetizationRules.freeAllowance
 
     /// 0 while the local record is unavailable.
@@ -285,6 +285,76 @@ final class MonetizationCreditsService: CreditsService, MonetizationPackLedger {
     func reloadPurchasedCredits() {
         loadLocalIfNeeded()
         reloadPurchased()
+    }
+
+    // MARK: MonetizationTestingGrants
+
+    /// What the Settings Testing section shows (MonetizationTesting.swift). Reading it costs
+    /// nothing: every number is already in memory.
+    var testingCounts: MonetizationTestingCounts {
+        MonetizationTestingCounts(
+            freeRemaining: freeRemaining,
+            freeAllowance: freeAllowance,
+            purchasedRemaining: purchasedRemaining,
+            paidBoards: localLoaded ? local.paidBoards.count : 0,
+            isStorageReadable: localLoaded
+        )
+    }
+
+    /// Back to what a new install has: the full free allowance, no remembered paid boards (so
+    /// no board is free under the 3-square rule any more), no downsell pause, and every pack
+    /// this section granted taken back.
+    ///
+    /// Granted packs are taken back through `revokePack`, the same path a refund takes, so a
+    /// bought pack is never touched and analyses spent beyond what is left are written off
+    /// rather than left as a debt against the next real purchase.
+    @discardableResult
+    func resetFreeAnalyses(for channel: MonetizationBuildChannel) -> Bool {
+        guard channel.offersTestingTools else { return false }
+        loadLocalIfNeeded()
+        reloadPurchased()
+        guard localLoaded else {
+            MonetizationLog.credits.error("testing reset without a readable local record: nothing changed")
+            return false
+        }
+        let granted = purchased
+            .validPacks(historyPackIDs: historySource?.verifiedPackTransactionIDs)
+            .filter(MonetizationTestingGrant.isTestingTransactionID)
+            .sorted()
+        for transactionID in granted {
+            revokePack(transactionID: transactionID)
+        }
+        local.freeRemaining = freeAllowance
+        local.paidBoards = []
+        local.lastDownsellDeclinedAt = nil
+        let stored = saveLocal()
+        MonetizationLog.credits.notice(
+            "testing reset: free analyses back to \(self.freeAllowance, privacy: .public), paid boards forgotten, \(granted.count, privacy: .public) granted packs taken back, stored \(stored, privacy: .public)"
+        )
+        return stored
+    }
+
+    /// One pack's worth of analyses without a purchase, credited through the ordinary pack
+    /// ledger under an id the App Store cannot issue (`MonetizationTestingGrant`).
+    @discardableResult
+    func grantTestingAnalyses(for channel: MonetizationBuildChannel) -> Bool {
+        guard channel.offersTestingTools else { return false }
+        loadLocalIfNeeded()
+        reloadPurchased()
+        guard localLoaded else {
+            MonetizationLog.credits.error("testing grant without a readable local record: nothing changed")
+            return false
+        }
+        var used = purchased.creditedPackTransactionIDs.union(purchased.revokedPackTransactionIDs)
+        used.formUnion(historySource?.verifiedPackTransactionIDs ?? [])
+        let transactionID = MonetizationTestingGrant.nextTransactionID(notIn: used)
+        let before = purchasedRemaining
+        creditPack(transactionID: transactionID)
+        let granted = purchasedRemaining - before
+        MonetizationLog.credits.notice(
+            "testing grant: \(granted, privacy: .public) analyses as pack \(transactionID, privacy: .public)"
+        )
+        return granted > 0
     }
 
     // MARK: Storage

@@ -77,11 +77,10 @@ App/
                               Intents/       the "Find Best Move" App Shortcut
   Resources/
     Assets.xcassets/        app icon and the two named colors
-    Fonts/                  the three bundled typefaces and their license texts
+    Fonts/                  the bundled chess-glyph typeface and its license text
     Settings/               Stockfish's license text and author list, shown in the app
     PrivacyInfo.xcprivacy   the app's privacy manifest
   Scripts/
-    render-app-icon.swift          draws the app icon images in Assets.xcassets
     sync-stockfish-notices.sh      copies Stockfish's notices into App/Resources/Settings
 Packages/
   ChessCore/                squares, pieces, positions, FEN, legal moves, algebraic notation
@@ -233,16 +232,18 @@ makes that data available under the Open Database License (ODbL).
 
 ## Fonts
 
-The app bundles three typefaces, all under the SIL Open Font License 1.1, unmodified. Each
-license text is in `App/Resources/Fonts/`.
+The app sets its text in the system faces, SF Pro and SF Mono. They belong to the operating
+system, are reached through `UIFont`, and are not copied into the app or redistributed here.
+
+One typeface is bundled, under the SIL Open Font License 1.1, unmodified. Its license text is in
+`App/Resources/Fonts/`.
 
 | Typeface | Copyright | License text |
 | --- | --- | --- |
-| Bricolage Grotesque | Copyright 2022 The Bricolage Grotesque Project Authors | `BricolageGrotesque-OFL.txt` |
-| IBM Plex Mono | Copyright 2017 IBM Corp., with Reserved Font Name "Plex" | `IBMPlexMono-OFL.txt` |
 | Noto Sans Symbols 2 | Copyright 2022 The Noto Project Authors | `NotoSansSymbols2-OFL.txt` |
 
-Noto Sans Symbols 2 supplies the chess piece glyphs the app draws on its board diagrams.
+Noto Sans Symbols 2 supplies the chess piece glyphs the app draws on its board diagrams, which is
+the only reason any font is bundled: the system font has no chess pieces.
 
 ## Attribution
 

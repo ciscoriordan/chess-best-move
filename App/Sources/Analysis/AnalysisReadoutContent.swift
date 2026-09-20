@@ -1,0 +1,204 @@
+import ChessCore
+
+/// What the Analysis result readout shows (design.md 9.4), derived from the run state, the
+/// board and the engine's line and from nothing else, so it can be read and checked without
+/// building the view.
+///
+/// The readout is one badge with the move in it, a pill and the evaluation beside the badge,
+/// and, when the screenshot caught the turn of the player at the top, the move of that player
+/// which the badge's move answers (owner decisions of 2026-09-20, `build/ui-requests.md`
+/// items 1, 2 and 3).
+struct AnalysisReadoutContent: Sendable, Hashable {
+    /// What the screen is doing, from `AnalysisScreenModel.RunState`. The readout keeps the
+    /// same shape in every one of them, so nothing jumps when the engine finishes.
+    enum Status: Sendable, Hashable {
+        /// Nothing has run yet (for example while a purchase is pending).
+        case notRun
+        case thinking
+        case done
+        /// Stop was pressed, or the app went to the background mid-search.
+        case stopped
+        case engineError
+    }
+
+    /// The pill at the top of the readout. It replaced the cobalt swatch and the BEST MOVE
+    /// label (owner decision, item 1): it names whose turn the screenshot caught, and it is
+    /// drawn in the accent only while the answer belongs to the player at the bottom.
+    struct Pill: Sendable, Hashable {
+        /// Sentence case; the `label` token draws it uppercase and VoiceOver reads this.
+        var title: String
+        /// Accent fill with `onAccent` text; otherwise the muted ink fill with `canvas` text.
+        var isAccent: Bool
+    }
+
+    /// One move as the readout shows it: the SAN for the eye, the same move in words for the
+    /// line under it and for VoiceOver, and the piece whose glyph is drawn next to the words
+    /// (item 3). `piece` is nil only when the board has nothing on the move's from-square,
+    /// which a legal move cannot do.
+    struct MoveText: Sendable, Hashable {
+        var san: String
+        var words: String
+        var piece: Piece?
+    }
+
+    var pill: Pill
+    /// The move in the badge. Nil when there is no move to show: before the first one arrives,
+    /// after a failure, and on a board with no legal moves.
+    var move: MoveText?
+    /// What the badge shows instead of a move.
+    var placeholder: String
+    /// True when `placeholder` is the result itself ("Checkmate", "Stalemate"), which is read
+    /// out and drawn in full ink; false for the waiting marks, which are `ink3` and silent.
+    var placeholderIsResult: Bool
+    /// The move of the player at the top that `move` answers, when the screenshot caught that
+    /// player's turn (item 2). Nil in every other case, including a side the user chose and a
+    /// line too short to hold a reply.
+    var guessedMove: MoveText?
+
+    /// The badge's move answers `guessedMove`, so it is drawn in the accent: cobalt is the
+    /// answer, and the guessed move beneath it is muted ink (item 2).
+    var moveIsReply: Bool { guessedMove != nil && move != nil }
+
+    /// What VoiceOver reads for the move in the badge.
+    ///
+    /// The readout is three elements read in turn - the pill, the move, the evaluation - and
+    /// the pill is not a description of the move beside it. When the screenshot caught the turn
+    /// of the player at the top, the pill says "Their move" and the badge holds the app's
+    /// answer, so the two fragments read back to back as a false statement: "Their move. Knight
+    /// to f6." A sighted reader sees the badge in cobalt with "if they play e4" tucked under
+    /// it and cannot be misled that way; a reader who hears the parts one at a time can be.
+    ///
+    /// So the move carries its own context: "Best answer if they play pawn to e4: knight to
+    /// f6." Nothing in the sentence can be read as the other player's move.
+    var spokenMove: String? {
+        guard let move else { return nil }
+        guard let guessed = guessedMove else { return move.words }
+        return "Best answer if they play " + AnalysisSpeech.lowercasingFirstLetter(guessed.words)
+            + ": " + AnalysisSpeech.lowercasingFirstLetter(move.words) + "."
+    }
+
+    // MARK: Copy
+
+    /// The start of the line naming the guessed move; the piece glyph and the SAN follow it,
+    /// so the line reads "if they play (glyph) e4".
+    static let guessedMovePrefix = "if they play "
+
+    /// The sentence under that line. The whole point of the readout in this case is that one
+    /// move of it is not on the board, so the screen says it in plain words.
+    static let guessedMoveNote =
+        "Their move is a guess from the engine's own line. This answer holds only if they play it."
+
+    /// What VoiceOver reads for the guessed-move line: words only, never a symbol name
+    /// (item 3, design.md 12).
+    static func spokenGuessedMove(_ move: MoveText) -> String {
+        "If they play " + AnalysisSpeech.lowercasingFirstLetter(move.words) + "."
+    }
+
+    // MARK: Building it
+
+    static func make(
+        status: Status,
+        position: Position,
+        whiteAtBottom: Bool,
+        sideToMoveOrigin: SideToMoveOrigin,
+        bestMove: (move: Move, san: String)?,
+        principalVariation: [String],
+        noLegalMoves: Bool?,
+        quickAnswerIsBeaten: Bool = false
+    ) -> AnalysisReadoutContent {
+        let answersForThePlayerAtTheTop = SideToMoveCopy.answersForThePlayerAtTheTop(
+            side: position.sideToMove,
+            whiteAtBottom: whiteAtBottom,
+            origin: sideToMoveOrigin
+        )
+        var move: MoveText?
+        var guessedMove: MoveText?
+        if noLegalMoves == nil, let best = bestMove {
+            let onTheBoard = moveText(san: best.san, move: best.move, in: position)
+            if answersForThePlayerAtTheTop,
+               let reply = reply(to: best.move, in: position, principalVariation: principalVariation) {
+                // The player at the top moves on this board, so the engine's best move is
+                // theirs. The answer the user came for is the next move of the same line.
+                move = reply
+                guessedMove = onTheBoard
+            } else {
+                move = onTheBoard
+            }
+        }
+        return AnalysisReadoutContent(
+            pill: pill(
+                status: status,
+                noLegalMoves: noLegalMoves,
+                answersForThePlayerAtTheTop: answersForThePlayerAtTheTop,
+                quickAnswerIsBeaten: quickAnswerIsBeaten
+            ),
+            move: move,
+            placeholder: placeholder(status: status, noLegalMoves: noLegalMoves),
+            placeholderIsResult: noLegalMoves != nil,
+            guessedMove: guessedMove
+        )
+    }
+
+    /// The pill's words and color. The accent is the answer for the player at the bottom; the
+    /// muted ink covers the guessed turn of the player at the top and every state in which
+    /// there is no answer to give.
+    ///
+    /// Once the longer search has beaten the move in the badge, the pill is what says so
+    /// (`build/ui-requests.md` item 8): the app never calls a move the best one after it has
+    /// found a better one, and QUICK ANSWER is the honest name for what is on screen until the
+    /// user takes the deeper move. It is one label rather than a second one somewhere else.
+    private static func pill(
+        status: Status,
+        noLegalMoves: Bool?,
+        answersForThePlayerAtTheTop: Bool,
+        quickAnswerIsBeaten: Bool = false
+    ) -> Pill {
+        guard noLegalMoves == nil else { return Pill(title: "No legal moves", isAccent: false) }
+        if quickAnswerIsBeaten, status == .done {
+            return Pill(title: "Quick answer", isAccent: false)
+        }
+        return switch status {
+        case .notRun: Pill(title: "Best move", isAccent: false)
+        // The accent is reserved for an answer the app can give (design.md 9.4). While the
+        // engine is still searching the badge holds a waiting mark, so the pill is muted ink
+        // whichever side the screenshot caught.
+        case .thinking: Pill(title: "Thinking", isAccent: false)
+        case .done: answersForThePlayerAtTheTop
+            ? Pill(title: "Their move", isAccent: false)
+            : Pill(title: "Best move", isAccent: true)
+        case .stopped: Pill(title: "Stopped", isAccent: false)
+        case .engineError: Pill(title: "Engine error", isAccent: false)
+        }
+    }
+
+    private static func placeholder(status: Status, noLegalMoves: Bool?) -> String {
+        if let checkmate = noLegalMoves { return checkmate ? "Checkmate" : "Stalemate" }
+        return status == .thinking ? "\u{2026}" : "\u{2014}"
+    }
+
+    private static func moveText(san: String, move: Move, in position: Position) -> MoveText {
+        MoveText(
+            san: san,
+            words: AnalysisSpeech.moveDescription(san: san, move: move),
+            piece: position.board.indices.contains(move.from.index) ? position.board[move.from.index] : nil
+        )
+    }
+
+    /// The answer the engine's own line gives to `theirMove`: the line's second move, read on
+    /// the board that follows the first one. Nothing is computed beyond that (item 2), so a
+    /// line that does not start with the move shown, or that stops after one move (a mate, or
+    /// a search that has not gone deeper yet), simply has no reply to show.
+    private static func reply(
+        to theirMove: Move,
+        in position: Position,
+        principalVariation: [String]
+    ) -> MoveText? {
+        guard principalVariation.first == theirMove.uci,
+              principalVariation.count > 1,
+              let move = Move(uci: principalVariation[1]),
+              let after = position.applying(theirMove),
+              let san = after.san(for: move)
+        else { return nil }
+        return moveText(san: san, move: move, in: after)
+    }
+}

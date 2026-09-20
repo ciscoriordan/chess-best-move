@@ -27,8 +27,13 @@ struct Chip: View {
     let action: () -> Void
 
     /// The glyph grows with the `callout` label at larger text sizes.
-    @ScaledMetric(relativeTo: .callout) private var pieceSide: CGFloat = 22
-    @ScaledMetric(relativeTo: .callout) private var symbolSize: CGFloat = 15
+    ///
+    /// The curve is `.subheadline`, which is the one the `callout` token itself follows
+    /// (Typography.swift). SwiftUI's built-in `.callout` style is a different, steeper curve
+    /// (16 to 51 against the token's 15 to 49), so a glyph scaled by it ran ahead of the words
+    /// it belongs to and pushed the chip wider than the label needed.
+    @ScaledMetric(relativeTo: .subheadline) private var pieceSide: CGFloat = 22
+    @ScaledMetric(relativeTo: .subheadline) private var symbolSize: CGFloat = 15
 
     init(
         _ title: String,
@@ -50,7 +55,11 @@ struct Chip: View {
                 HStack(spacing: Spacing.s2) {
                     switch glyph {
                     case .systemImage(let name):
-                        Image(systemName: name).font(.system(size: symbolSize, weight: .medium))
+                        // Decorative: the chip's words are its VoiceOver label, and a symbol
+                        // left in the tree is read by its own name (design.md 12).
+                        Image(systemName: name)
+                            .font(.system(size: symbolSize, weight: .medium))
+                            .accessibilityHidden(true)
                     case .piece(let piece):
                         // A piece is drawn on a small diagram square, as in a printed diagram:
                         // a black piece in `pieceInk` would vanish on the dark canvas, and a

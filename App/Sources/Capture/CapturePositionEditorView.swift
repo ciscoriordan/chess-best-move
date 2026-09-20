@@ -156,8 +156,10 @@ struct PositionEditorView: View {
     private var castling: some View {
         VStack(alignment: .leading, spacing: Spacing.s2) {
             Text("Castling")
-                .typography(.label)
+                .typography(.sectionLabel)
                 .foregroundStyle(Palette.ink2)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityLabel("Castling")
                 .accessibilityAddTraits(.isHeader)
             CaptureFlowLayout {
                 ForEach(CaptureCastlingOption.all) { option in
@@ -168,10 +170,12 @@ struct PositionEditorView: View {
                         selectionFeedback += 1
                     }
                     .disabled(!available)
-                    .opacity(available ? 1 : 0.4)
                     .accessibilityLabel(option.spokenTitle)
                     .accessibilityValue(on ? "On" : "Off")
-                    .accessibilityHint(available ? "" : "The king or rook is not on its starting square")
+                    .accessibilityHint(available ? "" : CaptureCastlingOption.unavailableHint)
+                    // Voice Control matches what is written on the chip as well as what it is
+                    // called: "W O-O" is on screen, "White castles kingside" is spoken.
+                    .accessibilityInputLabels([option.title, option.spokenTitle])
                 }
             }
         }

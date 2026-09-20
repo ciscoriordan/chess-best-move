@@ -6,8 +6,6 @@ import SwiftUI
 enum SettingsLicenseDocument: String, CaseIterable, Identifiable, Hashable, Sendable {
     case stockfishLicense
     case stockfishAuthors
-    case bricolageGrotesque
-    case plexMono
     case notoSansSymbols
 
     var id: String { rawValue }
@@ -16,8 +14,6 @@ enum SettingsLicenseDocument: String, CaseIterable, Identifiable, Hashable, Send
         switch self {
         case .stockfishLicense: "GNU General Public License v3"
         case .stockfishAuthors: "Stockfish authors"
-        case .bricolageGrotesque: "Bricolage Grotesque"
-        case .plexMono: "IBM Plex Mono"
         case .notoSansSymbols: "Noto Sans Symbols 2"
         }
     }
@@ -27,8 +23,6 @@ enum SettingsLicenseDocument: String, CaseIterable, Identifiable, Hashable, Send
         switch self {
         case .stockfishLicense: "Stockfish-Copying"
         case .stockfishAuthors: "Stockfish-AUTHORS"
-        case .bricolageGrotesque: "BricolageGrotesque-OFL"
-        case .plexMono: "IBMPlexMono-OFL"
         case .notoSansSymbols: "NotoSansSymbols2-OFL"
         }
     }
@@ -135,6 +129,8 @@ struct SettingsLicensesView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
+                // A plain SectionLabel, not a GroupedSectionLabel: what follows it is the
+                // paragraphs, which sit at the side gutter, not a card whose rows are inset.
                 SectionLabel("Chess Best Move")
                 VStack(alignment: .leading, spacing: Spacing.s3) {
                     LegalParagraph(SettingsLegal.appCopyright)
@@ -143,35 +139,37 @@ struct SettingsLicensesView: View {
                     LegalParagraph(SettingsLegal.appSourceNotice)
                 }
                 .padding(.bottom, Spacing.s4)
-                Button { openURL(SettingsLinks.appSource) } label: {
-                    ListRow("Source code of this version", showsChevron: true)
-                }
-                .buttonStyle(.listRow)
-                .accessibilityHint("Opens in Safari.")
-                Hairline()
-                NavigationLink(value: SettingsRoute.document(.stockfishLicense)) {
-                    ListRow("GNU General Public License v3", value: "Full text", showsChevron: true)
-                }
-                .buttonStyle(.listRow)
-                Hairline()
-                SectionLabel("Chess engine")
-                NavigationLink(value: SettingsRoute.document(.stockfishLicense)) {
-                    ListRow("Stockfish", value: "GPLv3", showsChevron: true)
-                }
-                .buttonStyle(.listRow)
-                Hairline()
-                NavigationLink(value: SettingsRoute.networkCredit) {
-                    ListRow("Stockfish neural network", value: "ODbL data", showsChevron: true)
-                }
-                .buttonStyle(.listRow)
-                Hairline()
-                SectionLabel("Typefaces")
-                ForEach([SettingsLicenseDocument.bricolageGrotesque, .plexMono, .notoSansSymbols]) { document in
-                    NavigationLink(value: SettingsRoute.document(document)) {
-                        ListRow(document.title, value: "OFL 1.1", showsChevron: true)
+                GroupedCard {
+                    Button { openURL(SettingsLinks.appSource) } label: {
+                        ListRow("Source code of this version", showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
-                    Hairline()
+                    .accessibilityHint("Opens in Safari.")
+                    GroupedRowSeparator(start: .content)
+                    NavigationLink(value: SettingsRoute.document(.stockfishLicense)) {
+                        ListRow("GNU General Public License v3", value: "Full text", showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                }
+                GroupedSectionLabel("Chess engine")
+                GroupedCard {
+                    NavigationLink(value: SettingsRoute.document(.stockfishLicense)) {
+                        ListRow("Stockfish", value: "GPLv3", showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                    GroupedRowSeparator(start: .content)
+                    NavigationLink(value: SettingsRoute.networkCredit) {
+                        ListRow("Stockfish neural network", value: "ODbL data", showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                }
+                GroupedSectionLabel("Typeface")
+                GroupedCard {
+                    NavigationLink(value: SettingsRoute.document(.notoSansSymbols)) {
+                        ListRow(SettingsLicenseDocument.notoSansSymbols.title, value: "OFL 1.1", showsChevron: true)
+                            .groupedRow()
+                    }
+                    .buttonStyle(.listRow)
                 }
             }
             .sideGutter()
@@ -197,7 +195,7 @@ struct SettingsLicenseTextView: View {
             ["Stockfish \u{2014} " + SettingsLegal.stockfishCopyright, SettingsLegal.stockfishFreeSoftware, SettingsLegal.stockfishNoWarranty]
         case .stockfishAuthors:
             [SettingsLegal.stockfishCopyright]
-        case .bricolageGrotesque, .plexMono, .notoSansSymbols:
+        case .notoSansSymbols:
             []
         }
     }
@@ -221,9 +219,27 @@ struct SettingsLicenseTextView: View {
                         .typography(.body)
                         .foregroundStyle(Palette.danger)
                 }
+                // Running prose is set in `body`, not in `line`.
+                //
+                // `line` is SF Mono, chosen for engine notation and never given a maximum
+                // size. In a 370 pt column at AccessibilityXXXL that is about twelve
+                // monospaced characters to the line, and the GPLv3 is full of words and URLs
+                // longer than that, so the text broke in the middle of words throughout. The
+                // app has to present this license legibly (GPLv3 section 5(d)), and a
+                // proportional face at the same size fits about half again as much.
+                //
+                // A `preformatted` block keeps the monospaced face: it is a block whose own
+                // line breaks carry meaning, such as the Stockfish authors list, and there a
+                // fixed advance is what lines the entries up.
                 ForEach(Array(blocks.enumerated()), id: \.offset) { _, block in
                     switch block {
-                    case .paragraph(let text), .preformatted(let text):
+                    case .paragraph(let text):
+                        Text(text)
+                            .typography(.body)
+                            .foregroundStyle(Palette.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .textSelection(.enabled)
+                    case .preformatted(let text):
                         Text(text)
                             .typography(.line)
                             .foregroundStyle(Palette.ink)
@@ -269,17 +285,19 @@ struct SettingsNetworkCreditView: View {
                     .foregroundStyle(Palette.ink)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.bottom, Spacing.s5)
-                Hairline()
-                Button { openURL(SettingsLinks.leelaTrainingData) } label: {
-                    ListRow("Leela Chess Zero training data", systemImage: "arrow.up.right.square", showsChevron: true)
+                GroupedCard {
+                    Button { openURL(SettingsLinks.leelaTrainingData) } label: {
+                        ListRow("Leela Chess Zero training data", systemImage: "arrow.up.right.square", showsChevron: true)
+                            .groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                    GroupedRowSeparator()
+                    Button { openURL(SettingsLinks.openDatabaseLicense) } label: {
+                        ListRow("Open Database License (ODbL)", systemImage: "arrow.up.right.square", showsChevron: true)
+                            .groupedRow()
+                    }
+                    .buttonStyle(.listRow)
                 }
-                .buttonStyle(.listRow)
-                ListRowHairline()
-                Button { openURL(SettingsLinks.openDatabaseLicense) } label: {
-                    ListRow("Open Database License (ODbL)", systemImage: "arrow.up.right.square", showsChevron: true)
-                }
-                .buttonStyle(.listRow)
-                Hairline()
             }
             .sideGutter()
             .padding(.bottom, Spacing.s6)
@@ -311,33 +329,38 @@ struct SettingsEngineView: View {
                     LegalParagraph(SettingsLegal.stockfishFreeSoftware)
                     LegalParagraph(SettingsLegal.stockfishNoWarranty)
                 }
-                SectionLabel("Source code")
-                linkRow("Source code of Stockfish", url: SettingsLinks.stockfishSource)
-                Hairline()
-                linkRow("Source code of the version in this app", url: SettingsLinks.appSource)
-                Hairline()
-                NavigationLink(value: SettingsRoute.document(.stockfishLicense)) {
-                    ListRow("GNU General Public License v3 (full text)", showsChevron: true)
+                GroupedSectionLabel("Source code")
+                GroupedCard {
+                    linkRow("Source code of Stockfish", url: SettingsLinks.stockfishSource)
+                    GroupedRowSeparator(start: .content)
+                    linkRow("Source code of the version in this app", url: SettingsLinks.appSource)
+                    GroupedRowSeparator(start: .content)
+                    NavigationLink(value: SettingsRoute.document(.stockfishLicense)) {
+                        ListRow("GNU General Public License v3 (full text)", showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                    GroupedRowSeparator(start: .content)
+                    NavigationLink(value: SettingsRoute.document(.stockfishAuthors)) {
+                        ListRow("Authors", showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
                 }
-                .buttonStyle(.listRow)
-                Hairline()
-                NavigationLink(value: SettingsRoute.document(.stockfishAuthors)) {
-                    ListRow("Authors", showsChevron: true)
-                }
-                .buttonStyle(.listRow)
-                Hairline()
+                // Paragraph first, card second, so the label lines up with the paragraph.
                 SectionLabel("Changes in this app")
                 LegalParagraph(SettingsLegal.stockfishModification)
                     .padding(.bottom, Spacing.s4)
-                linkRow("The change in the published source", url: SettingsLinks.stockfishPatch)
-                Hairline()
+                GroupedCard {
+                    linkRow("The change in the published source", url: SettingsLinks.stockfishPatch)
+                }
                 SectionLabel("Neural network")
                 LegalParagraph(SettingsLegal.networkCredit)
-                NavigationLink(value: SettingsRoute.networkCredit) {
-                    ListRow("Training data and license", showsChevron: true)
+                    .padding(.bottom, Spacing.s4)
+                GroupedCard {
+                    NavigationLink(value: SettingsRoute.networkCredit) {
+                        ListRow("Training data and license", showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
                 }
-                .buttonStyle(.listRow)
-                Hairline()
             }
             .sideGutter()
             .padding(.bottom, Spacing.s6)
@@ -349,7 +372,7 @@ struct SettingsEngineView: View {
 
     private func linkRow(_ title: String, url: URL) -> some View {
         Button { openURL(url) } label: {
-            ListRow(title, showsChevron: true)
+            ListRow(title, showsChevron: true).groupedRow()
         }
         .buttonStyle(.listRow)
         .accessibilityHint("Opens in Safari.")

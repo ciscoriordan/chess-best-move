@@ -15,7 +15,9 @@ struct Hairline: View {
     }
 }
 
-/// Rows separated by hairlines, with no card, fill or shadow ("rules, not cards").
+/// Rows separated by hairlines, with no card, fill or shadow. A group of rows on a screen
+/// goes in a `GroupedCard` instead (design.md rule 2); this is for a run of rows that is
+/// not such a group.
 /// Hairlines are drawn between rows, and optionally above the first and below the last.
 struct HairlineGroup<Data: RandomAccessCollection, ID: Hashable, Row: View>: View {
     let data: Data
@@ -79,8 +81,12 @@ struct ListRow: View {
     /// the title starts. Between rows, use `ListRowHairline`, which follows the text size.
     static let titleInsetWithIcon: CGFloat = iconSide + Spacing.s4
 
-    @ScaledMetric(relativeTo: .body) private var iconSide: CGFloat = ListRow.iconSide
-    @ScaledMetric(relativeTo: .body) private var chevronSide: CGFloat = ListRow.chevronSide
+    @ScaledMetric(relativeTo: .body) private var scaledIconSide: CGFloat = ListRow.iconSide
+    @ScaledMetric(relativeTo: .body) private var scaledChevronSide: CGFloat = ListRow.chevronSide
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    private var iconSide: CGFloat { min(scaledIconSide, Layout.maximumRowIcon) }
+    private var chevronSide: CGFloat { min(scaledChevronSide, Layout.maximumRowChevron) }
 
     init(_ title: String, systemImage: String? = nil, value: String? = nil, showsChevron: Bool = false) {
         self.title = title
@@ -98,16 +104,7 @@ struct ListRow: View {
                     .frame(width: iconSide)
                     .accessibilityHidden(true)
             }
-            Text(title)
-                .typography(.body)
-                .foregroundStyle(Palette.ink)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            if let value {
-                Text(value)
-                    .typography(.callout)
-                    .foregroundStyle(Palette.ink2)
-                    .multilineTextAlignment(.trailing)
-            }
+            titleAndValue
             if showsChevron {
                 Image(systemName: "chevron.right")
                     .font(.system(size: chevronSide, weight: .semibold))
@@ -118,6 +115,40 @@ struct ListRow: View {
         .frame(minHeight: Layout.listRowHeight)
         .contentShape(Rectangle())
     }
+
+    /// The title and its value share one line while they both fit, and stack at accessibility
+    /// text sizes.
+    ///
+    /// Neither is short at those sizes: "Restore purchases" wants about 240 pt and the value
+    /// beside it, "Restoring...", wants about 245 pt, against a row about 250 pt wide inside
+    /// the card. Two `Text` views competing for that width are broken in the middle of a word,
+    /// which is the one thing the layout must not do, so above `.accessibility1` the value
+    /// moves under the title and each gets the full width.
+    @ViewBuilder
+    private var titleAndValue: some View {
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: Spacing.s1))
+            : AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: Spacing.s4))
+        layout {
+            Text(title)
+                .typography(.body)
+                .foregroundStyle(Palette.ink)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            if let value {
+                Text(value)
+                    .typography(.callout)
+                    .foregroundStyle(Palette.ink2)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(dynamicTypeSize.isAccessibilitySize ? .leading : .trailing)
+                    .frame(
+                        maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : nil,
+                        alignment: dynamicTypeSize.isAccessibilitySize ? .leading : .trailing
+                    )
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
 }
 
 /// The hairline between rows with icons. It starts at the title's leading edge at every text
@@ -126,7 +157,7 @@ struct ListRowHairline: View {
     @ScaledMetric(relativeTo: .body) private var iconSide: CGFloat = ListRow.iconSide
 
     var body: some View {
-        Hairline(leadingInset: iconSide + Spacing.s4)
+        Hairline(leadingInset: min(iconSide, Layout.maximumRowIcon) + Spacing.s4)
     }
 }
 
@@ -142,7 +173,14 @@ extension ButtonStyle where Self == ListRowButtonStyle {
     static var listRow: ListRowButtonStyle { ListRowButtonStyle() }
 }
 
-/// SectionLabel: `label` token in `ink2`, uppercase, 24 pt above and 8 pt below.
+/// SectionLabel: `sectionLabel` token in `ink2`, uppercase, 24 pt above and 8 pt below.
+///
+/// The token is the uncapped twin of `label`: a heading names the section under it and has to
+/// stay part of the reading order, so it grows with the rows it heads rather than freezing at
+/// 20 pt under a 53 pt row (docs/design.md section 4).
+///
+/// VoiceOver is given the sentence-case string. The uppercase is the token's doing, and a
+/// short all-caps word handed to a screen reader risks being spelled out letter by letter.
 struct SectionLabel: View {
     let text: String
 
@@ -152,11 +190,13 @@ struct SectionLabel: View {
 
     var body: some View {
         Text(text)
-            .typography(.label)
+            .typography(.sectionLabel)
             .foregroundStyle(Palette.ink2)
+            .fixedSize(horizontal: false, vertical: true)
             .padding(.top, Spacing.s5)
             .padding(.bottom, Spacing.s2)
             .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityLabel(text)
             .accessibilityAddTraits(.isHeader)
     }
 }

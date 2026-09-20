@@ -44,6 +44,20 @@ struct PaywallView: View {
     @State private var opensForPendingAnalysis = false
     /// The close control was tapped while a purchase or restore was in flight.
     @State private var closeRequested = false
+    /// Where VoiceOver is moved when something appears that the reader has to know about.
+    /// A purchase failure used to be a buzz and a line of text below the footer links, which
+    /// is where nobody swipes: focus stayed on Continue and the likely next act was to press
+    /// it again.
+    @AccessibilityFocusState private var focus: PaywallFocus?
+    /// The `title3` size at the reader's text size, which is what an option row's own title
+    /// and price scale with. The loading placeholders use it so they are as tall as the rows
+    /// they stand in for at every text size (`PaywallOptionRow.minimumHeight`).
+    @ScaledMetric(relativeTo: .title3) private var optionTitleSize: CGFloat = 20
+    /// The board thumbnail grows with the copy beside it, up to 96 pt.
+    @ScaledMetric(relativeTo: .body) private var scaledThumbnailSide: CGFloat = 72
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    private var thumbnailSide: CGFloat { min(scaledThumbnailSide, 96) }
 
     init(context: PaywallContext, onFinish: @escaping (PaywallOutcome) -> Void) {
         self.context = context
@@ -83,6 +97,7 @@ struct PaywallView: View {
                                 .foregroundStyle(message.isError ? Palette.danger : Palette.ink2)
                                 .fixedSize(horizontal: false, vertical: true)
                                 .accessibilityIdentifier(MonetizationAccessibilityID.paywallMessage)
+                                .accessibilityFocused($focus, equals: .message)
                                 .id(PaywallScrollTarget.message)
                         }
                     }
@@ -90,17 +105,23 @@ struct PaywallView: View {
                     .padding(.bottom, Spacing.s5)
                 }
                 .onChange(of: phase) { _, newPhase in
-                    // Ask to Buy: bring "Waiting for approval" into view.
+                    // Ask to Buy: bring "Waiting for approval" into view, and say it, because
+                    // nothing else on the screen announces that the purchase is now waiting on
+                    // somebody else.
                     guard case .waitingForApproval = newPhase else { return }
                     withAnimation(reduceMotion ? nil : .easeOut(duration: Motion.stateLong)) {
                         scroller.scrollTo(PaywallScrollTarget.purchaseArea, anchor: .bottom)
                     }
+                    AccessibilityNotification.Announcement(MonetizationCopy.waitingForApprovalTitle).post()
+                    focus = .waitingForApproval
                 }
                 .onChange(of: message) { _, newMessage in
-                    guard newMessage != nil else { return }
+                    guard let newMessage else { return }
                     withAnimation(reduceMotion ? nil : .easeOut(duration: Motion.stateLong)) {
                         scroller.scrollTo(PaywallScrollTarget.message, anchor: .bottom)
                     }
+                    AccessibilityNotification.Announcement(newMessage.text).post()
+                    focus = .message
                 }
             }
             .background(Palette.canvas)
@@ -160,9 +181,15 @@ struct PaywallView: View {
     @ViewBuilder
     private var header: some View {
         if let board = context.board {
-            HStack(alignment: .top, spacing: Spacing.s3) {
+            // The thumbnail held a fixed 84 pt of a 370 pt row at every text size. At
+            // accessibility sizes it moves above the copy, the way `BoardNotFoundView`'s header
+            // already does, so the words get the whole width.
+            let layout = dynamicTypeSize.isAccessibilitySize
+                ? AnyLayout(VStackLayout(alignment: .leading, spacing: Spacing.s3))
+                : AnyLayout(HStackLayout(alignment: .top, spacing: Spacing.s3))
+            layout {
                 MonetizationBoardThumbnail(snapshot: board)
-                    .frame(width: 72, height: 72)
+                    .frame(width: thumbnailSide, height: thumbnailSide)
                 VStack(alignment: .leading, spacing: Spacing.s1) {
                     Text(MonetizationCopy.boardReady)
                         .typography(.body)
@@ -187,7 +214,9 @@ struct PaywallView: View {
         VStack(alignment: .leading, spacing: Spacing.s2) {
             ForEach(MonetizationCopy.benefits(deviceName: MonetizationCopy.currentDeviceName), id: \.self) { benefit in
                 HStack(alignment: .firstTextBaseline, spacing: Spacing.s3) {
-                    Text("\u{2013}")
+                    // A bullet, not a dash (owner decision, 2026-09-20). VoiceOver reads the
+                    // benefit itself, so the mark is hidden from it.
+                    Text("\u{2022}")
                         .typography(.body)
                         .foregroundStyle(Palette.ink2)
                         .accessibilityHidden(true)
@@ -203,24 +232,17 @@ struct PaywallView: View {
     // MARK: Options
 
     private var paywallProducts: [StoreProduct] {
-        let order: [MonetizationProductKind] = [.weekly, .yearly, .lifetime]
-        return app.store.products
-            .filter { order.contains(MonetizationProductKind(productID: $0.id)) }
-            .sorted {
-                order.firstIndex(of: MonetizationProductKind(productID: $0.id))!
-                    < order.firstIndex(of: MonetizationProductKind(productID: $1.id))!
-            }
+        PaywallRows.rows(app.store.products)
     }
 
-    /// The selected product: the user's choice, else the context's preselection, else Weekly.
+    /// The selected product: the user's choice, else the context's preselection, else the most
+    /// emphasized row (`PaywallRows`).
     private var selectedProduct: StoreProduct? {
-        let products = paywallProducts
-        for candidate in [selectedProductID, context.preselectedProductID] {
-            if let candidate, let product = products.first(where: { $0.id == candidate }) {
-                return product
-            }
-        }
-        return products.first { MonetizationProductKind(productID: $0.id) == .weekly } ?? products.first
+        PaywallRows.selection(
+            rows: paywallProducts,
+            chosen: selectedProductID,
+            preselected: context.preselectedProductID
+        )
     }
 
     /// Why no row can be shown, once loading has ended without the paywall products.
@@ -237,6 +259,7 @@ struct PaywallView: View {
                 ForEach(products) { product in
                     let kind = MonetizationProductKind(productID: product.id)
                     PaywallOptionRow(
+                        emphasis: PaywallRows.emphasis(of: kind),
                         title: MonetizationCopy.rowTitle(kind, product: product),
                         price: MonetizationCopy.rowPrice(product),
                         detail: MonetizationCopy.rowDetail(
@@ -273,10 +296,15 @@ struct PaywallView: View {
             }
         } else {
             VStack(spacing: Spacing.s3) {
-                ForEach(0..<3, id: \.self) { _ in
+                // One placeholder per row, each as tall as the row it stands in for at this
+                // text size, so the rows do not jump when they arrive.
+                ForEach(PaywallRows.order, id: \.self) { kind in
                     RoundedRectangle(cornerRadius: Radius.r3, style: .continuous)
                         .fill(Palette.sunken)
-                        .frame(height: PaywallOptionRow.placeholderHeight)
+                        .frame(height: PaywallOptionRow.minimumHeight(
+                            PaywallRows.emphasis(of: kind),
+                            titleSize: optionTitleSize
+                        ))
                 }
             }
             .accessibilityElement(children: .ignore)
@@ -295,6 +323,7 @@ struct PaywallView: View {
                     : MonetizationCopy.waitingForApprovalWithBoard
             )
             .accessibilityIdentifier(MonetizationAccessibilityID.paywallWaitingForApproval)
+            .accessibilityFocused($focus, equals: .waitingForApproval)
         } else if productsUnavailableReason != nil {
             // design.md 9.7: the error state is the message and "Try again" only.
             EmptyView()
@@ -307,8 +336,11 @@ struct PaywallView: View {
                 } label: {
                     HStack(spacing: Spacing.s2) {
                         if phase.isPurchasing {
+                            // `ink2`, not `ink3`: a purchase in flight is the one moment the
+                            // user must be able to see that their payment is being processed,
+                            // and its two signals sat at 2.9:1 on the disabled button's fill.
                             ProgressView()
-                                .tint(Palette.ink3)
+                                .tint(Palette.ink2)
                             Text(MonetizationCopy.confirming)
                         } else if let product {
                             Text(MonetizationCopy.continueButton(product))
@@ -355,13 +387,14 @@ struct PaywallView: View {
 
     // MARK: Links
 
+    /// The three footer links, with no separators between them (owner decision, 2026-09-20).
+    /// They are underlined, so the spacing alone tells them apart; at text sizes where the row
+    /// no longer fits they stack.
     private var links: some View {
         ViewThatFits(in: .horizontal) {
-            HStack(spacing: Spacing.s2) {
+            HStack(spacing: Spacing.s4) {
                 restoreLink
-                separator
                 termsLink
-                separator
                 privacyLink
             }
             VStack(alignment: .leading, spacing: 0) {
@@ -370,13 +403,6 @@ struct PaywallView: View {
                 privacyLink
             }
         }
-    }
-
-    private var separator: some View {
-        Text("\u{00B7}")
-            .typography(.callout)
-            .foregroundStyle(Palette.ink3)
-            .accessibilityHidden(true)
     }
 
     private var restoreLink: some View {
@@ -633,14 +659,77 @@ enum PaywallScrollTarget: Hashable {
     case message
 }
 
+/// What VoiceOver focus is moved to when the sheet reports something by itself.
+enum PaywallFocus: Hashable {
+    case message
+    case waitingForApproval
+}
+
 struct PaywallMessage: Hashable {
     var text: String
     var isError: Bool
 }
 
+/// How much weight a paywall row carries when nothing is selected (owner decision,
+/// 2026-09-20: Lifetime leads, then Yearly, then Weekly). Emphasis is resting decoration and
+/// never the selection: a selected row always draws the `accent` border, the `accentSubtle`
+/// fill and the filled radio symbol, whichever row it is.
+enum PaywallOptionEmphasis: Hashable, Sendable {
+    /// The row the paywall leads with: the largest title and price, a filled card and a 2 pt
+    /// resting border.
+    case strong
+    /// The middle row: a filled card and a 1 pt border, at the ordinary title size.
+    case medium
+    /// The last row: the ordinary title size, a 1 pt border and no fill.
+    case plain
+}
+
+/// The order of the paywall's rows, the weight each one carries and which row a freshly opened
+/// paywall selects. Free of SwiftUI so the order and the default selection are unit tested
+/// (monetization.md section 2 and 4.3).
+enum PaywallRows {
+    /// Most emphasized first (owner decision, 2026-09-20).
+    static let order: [MonetizationProductKind] = [.lifetime, .yearly, .weekly]
+
+    /// The weight a row carries: the first row leads, the second is lifted, the rest are plain.
+    static func emphasis(of kind: MonetizationProductKind) -> PaywallOptionEmphasis {
+        guard let index = order.firstIndex(of: kind) else { return .plain }
+        switch index {
+        case 0: return .strong
+        case 1: return .medium
+        default: return .plain
+        }
+    }
+
+    /// The paywall's products, in `order`. Anything the paywall does not sell is dropped, and a
+    /// product the order does not name keeps the store's own position at the end.
+    static func rows(_ products: [StoreProduct]) -> [StoreProduct] {
+        products
+            .filter { order.contains(MonetizationProductKind(productID: $0.id)) }
+            .sorted { lhs, rhs in
+                let left = order.firstIndex(of: MonetizationProductKind(productID: lhs.id)) ?? order.count
+                let right = order.firstIndex(of: MonetizationProductKind(productID: rhs.id)) ?? order.count
+                return left < right
+            }
+    }
+
+    /// The selected row: what the user chose, else what the caller asked for (the "Switch to
+    /// yearly" card asks for Yearly), else the most emphasized row that loaded.
+    static func selection(rows: [StoreProduct], chosen: String?, preselected: String?) -> StoreProduct? {
+        for candidate in [chosen, preselected] {
+            if let candidate, let product = rows.first(where: { $0.id == candidate }) {
+                return product
+            }
+        }
+        return rows.first
+    }
+}
+
 /// One paywall option: radio symbol, title, billed price, secondary line. Selected: 2 pt
-/// `accent` border on `accentSubtle`; otherwise a 1 pt `rule2` border (design.md 9.7).
+/// `accent` border on `accentSubtle`; otherwise the border and fill of its emphasis
+/// (design.md 9.7).
 struct PaywallOptionRow: View {
+    var emphasis: PaywallOptionEmphasis = .plain
     let title: String
     let price: String
     let detail: String
@@ -648,11 +737,26 @@ struct PaywallOptionRow: View {
     let isSelected: Bool
     let action: () -> Void
 
-    static let placeholderHeight: CGFloat = 76
+    /// The height a row of this emphasis takes before its text does, which is also the height
+    /// of its loading placeholder.
+    ///
+    /// `titleSize` is the `title3` size at the reader's text size, which is what the row's
+    /// title and price scale with, and 20 pt at the default size. The height follows it so a
+    /// placeholder is not left 70 pt shorter than the row it stands in for at the
+    /// accessibility sizes, which would make everything below the options jump the moment the
+    /// products arrive. It stops growing where those two tokens do, at 34 pt of 20 pt.
+    static func minimumHeight(_ emphasis: PaywallOptionEmphasis, titleSize: CGFloat = 20) -> CGFloat {
+        let base: CGFloat = emphasis == .strong ? 96 : 76
+        return base * min(max(titleSize / 20, 1), 34 / 20)
+    }
 
     @Environment(\.isEnabled) private var isEnabled
+    /// The `title3` size at the reader's text size, 20 pt at the default one. It sets the
+    /// row's minimum height, which the loading placeholder matches.
+    @ScaledMetric(relativeTo: .title3) private var titleSize: CGFloat = 20
     /// The radio symbol grows with the row's `headline` title (text style `title3`) and stops
-    /// growing where that token does (34 pt of 20 pt, so 37 pt of 22 pt).
+    /// growing where that token does (34 pt of 20 pt, so 37 pt of 22 pt). It is the same size
+    /// in every row, so the radio column is a straight line whatever the emphasis.
     @ScaledMetric(relativeTo: .title3) private var radioSize: CGFloat = 22
 
     var body: some View {
@@ -670,15 +774,14 @@ struct PaywallOptionRow: View {
                             titleText
                             Spacer(minLength: Spacing.s2)
                             priceText
+                                .fixedSize(horizontal: true, vertical: false)
                         }
                         VStack(alignment: .leading, spacing: Spacing.s1) {
                             titleText
                                 .fixedSize(horizontal: false, vertical: true)
                             // Stacked (large text, long local prices): the price wraps instead
                             // of running past the row (design.md 12: prices never truncate).
-                            Text(price)
-                                .typography(.data)
-                                .foregroundStyle(Palette.ink)
+                            priceText
                                 .fixedSize(horizontal: false, vertical: true)
                         }
                     }
@@ -689,18 +792,19 @@ struct PaywallOptionRow: View {
                 }
             }
             .padding(.horizontal, Spacing.s4)
-            .padding(.vertical, Spacing.s3)
-            .frame(maxWidth: .infinity, minHeight: Self.placeholderHeight, alignment: .leading)
+            .padding(.vertical, emphasis == .strong ? Spacing.s4 : Spacing.s3)
+            .frame(
+                maxWidth: .infinity,
+                minHeight: Self.minimumHeight(emphasis, titleSize: titleSize),
+                alignment: .leading
+            )
             .background(
                 RoundedRectangle(cornerRadius: Radius.r3, style: .continuous)
-                    .fill(isSelected ? Palette.accentSubtle : Color.clear)
+                    .fill(fill)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: Radius.r3, style: .continuous)
-                    .strokeBorder(
-                        isSelected ? Palette.accent : Palette.rule2,
-                        lineWidth: isSelected ? LineWidth.selection : LineWidth.control
-                    )
+                    .strokeBorder(borderColor, lineWidth: borderWidth)
             )
             .contentShape(RoundedRectangle(cornerRadius: Radius.r3, style: .continuous))
             .opacity(isEnabled || isSelected ? 1 : 0.6)
@@ -710,17 +814,34 @@ struct PaywallOptionRow: View {
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
+    /// The resting fill of the row. A lifted row sits on `raised`; the plain row sits on the
+    /// sheet itself.
+    private var fill: Color {
+        if isSelected { return Palette.accentSubtle }
+        return emphasis == .plain ? Color.clear : Palette.raised
+    }
+
+    /// Every resting row keeps the `rule2` border of a control (design.md 3); what changes with
+    /// the emphasis is its width and whether the row is filled.
+    private var borderColor: Color {
+        isSelected ? Palette.accent : Palette.rule2
+    }
+
+    private var borderWidth: CGFloat {
+        isSelected || emphasis == .strong ? LineWidth.selection : LineWidth.control
+    }
+
+    /// The leading row's title is a size larger, which is most of what makes it lead.
     private var titleText: some View {
         Text(title)
-            .typography(.headline)
+            .typography(emphasis == .strong ? .title : .headline)
             .foregroundStyle(Palette.ink)
     }
 
     private var priceText: some View {
         Text(price)
-            .typography(.data)
+            .typography(emphasis == .strong ? .dataLarge : .data)
             .foregroundStyle(Palette.ink)
-            .fixedSize(horizontal: true, vertical: false)
     }
 }
 
@@ -736,14 +857,14 @@ struct MonetizationWaitingForApproval: View {
     let explanation: String
 
     /// The symbol grows with the `headline` title next to it (text style `title3`) and stops
-    /// growing where that token does (34 pt of 20 pt, so 29 pt of 17 pt).
+    /// where a row glyph does, so it never takes the width the words need.
     @ScaledMetric(relativeTo: .title3) private var symbolSize: CGFloat = 17
 
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.s2) {
             HStack(alignment: .firstTextBaseline, spacing: Spacing.s2) {
                 Image(systemName: "hourglass")
-                    .font(.system(size: min(symbolSize, 29), weight: .semibold))
+                    .font(.system(size: min(symbolSize, Layout.maximumRowIcon), weight: .semibold))
                     .foregroundStyle(Palette.ink)
                     .accessibilityHidden(true)
                 Text(MonetizationCopy.waitingForApprovalTitle)

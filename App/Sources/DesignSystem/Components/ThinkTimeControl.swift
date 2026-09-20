@@ -34,6 +34,11 @@ struct ThinkTimeControl: View {
                     Text(time.label)
                         .typography(.data)
                         .lineLimit(1)
+                        // The sibling control (`LongerSearchCeilingControl`) has always had
+                        // this. On a 375 pt phone at xxxL "30 s" comes within about 2 pt of
+                        // its segment, and without a scale-down there is nothing to fall back
+                        // on. From AccessibilityM up both controls become a Menu instead.
+                        .minimumScaleFactor(0.8)
                         .foregroundStyle(isSelected ? Palette.canvas : Palette.ink)
                         .frame(maxWidth: .infinity, minHeight: Layout.chipHeight)
                         .background(
@@ -66,7 +71,7 @@ struct ThinkTimeControl: View {
         } label: {
             HStack(spacing: Spacing.s2) {
                 Text(selection.label).typography(.data)
-                Image(systemName: "chevron.up.chevron.down")
+                Image(systemName: "chevron.up.chevron.down").accessibilityHidden(true)
             }
             .foregroundStyle(Palette.ink)
             .padding(.horizontal, Spacing.s3)

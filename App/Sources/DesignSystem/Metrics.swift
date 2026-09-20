@@ -52,8 +52,30 @@ enum Layout {
     static let chipHeight: CGFloat = 36
     /// Minimum list row height.
     static let listRowHeight: CGFloat = 56
+    /// The largest a row's leading SF Symbol grows to, whatever the text size.
+    ///
+    /// The icon column and the chevron are graphics, not text: the icon identifies the row and
+    /// the chevron says it pushes a screen, and VoiceOver hides both. They scale with the
+    /// `body` text so a row does not look top-heavy at larger sizes, but they stop here,
+    /// because past this point every point they gain is a point the words lose out of the same
+    /// row. Measured on a 402 pt phone at AccessibilityXXXL: an uncapped 20 pt icon reaches
+    /// 62 pt and an uncapped 14 pt chevron 44 pt, which leaves about 200 pt of a 370 pt card
+    /// for a title that needs 240, and SwiftUI answers that by breaking words in the middle
+    /// (docs/design.md section 6).
+    static let maximumRowIcon: CGFloat = 32
+    /// The largest a row's trailing chevron grows to. See `maximumRowIcon`.
+    static let maximumRowChevron: CGFloat = 22
     /// Maximum board side on iPad and in landscape.
     static let maximumBoardSide: CGFloat = 600
+    /// The smallest board whose sixty-four squares are each a full hit target: 8 x 44 pt.
+    ///
+    /// On a screen whose content width is under this, a board laid out inside the side gutter
+    /// gives squares below the 44 pt minimum: 375 pt wide (iPhone SE, 12 mini, 13 mini) minus
+    /// two 16 pt gutters is 343, which is 42.875 pt a square. The board is the surface where a
+    /// mis-tap costs the most - it places a piece on the wrong square, or opens the editor on a
+    /// square the user did not mean - so on those screens the board wins and the gutter gives
+    /// way (`boardGutterRelief`).
+    static let minimumBoardSide: CGFloat = 8 * minimumHitTarget
 
     /// Side gutter: 16 on phones up to 402 pt wide, 20 above (design.md section 5).
     ///
@@ -76,6 +98,20 @@ enum Layout {
     static let narrowSideGutter: CGFloat = 16
     /// The gutter above `narrowScreenWidth`.
     static let wideSideGutter: CGFloat = 20
+
+    /// How far, per side, a board whose squares are tap targets may reach into the side gutter
+    /// so its squares keep the 44 pt minimum. Zero on every screen wide enough without it.
+    ///
+    /// `windowWidth` is the width of the window, which this relief cannot change, so the answer
+    /// settles in one pass (see `SideGutterModifier` for what happens when it does not).
+    static func boardGutterRelief(windowWidth: CGFloat?) -> CGFloat {
+        guard let windowWidth, windowWidth > 0 else { return 0 }
+        let gutter = sideGutter(forWidth: windowWidth)
+        let content = windowWidth - 2 * gutter
+        guard content < minimumBoardSide else { return 0 }
+        // Never past the screen edge, and never more than the gutter it borrows from.
+        return min(gutter, (min(minimumBoardSide, windowWidth) - content) / 2)
+    }
 }
 
 /// Animation durations (docs/design.md section 11). Every animation must also respect
@@ -145,10 +181,28 @@ private struct SideGutterModifier: ViewModifier {
     }
 }
 
+/// Lets a board whose squares are tap targets reach into the side gutter far enough to keep
+/// 44 pt squares (`Layout.boardGutterRelief`). Applied to the boards of Check position and the
+/// position editor, which are the two the user taps square by square.
+private struct BoardTapTargetReliefModifier: ViewModifier {
+    @Environment(\.windowWidth) private var windowWidth
+
+    func body(content: Content) -> some View {
+        content.padding(.horizontal, -Layout.boardGutterRelief(windowWidth: windowWidth))
+    }
+}
+
 extension View {
     /// Applies the screen side gutter (16 or 20 pt depending on the window width).
     func sideGutter() -> some View {
         modifier(SideGutterModifier())
+    }
+
+    /// Widens a board into the side gutter on narrow screens so each of its squares is a full
+    /// 44 pt hit target (`Layout.boardGutterRelief`). Only for boards the user taps square by
+    /// square; a board that is only looked at keeps the gutter.
+    func boardTapTargetRelief() -> some View {
+        modifier(BoardTapTargetReliefModifier())
     }
 
     /// Publishes this view's width as `EnvironmentValues.windowWidth` for everything inside it.

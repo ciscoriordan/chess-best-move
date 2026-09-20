@@ -46,6 +46,10 @@ enum ImportSource: String, Sendable, Hashable, Codable {
     case paste
     case dragAndDrop
     case shortcut
+    /// Shared to the app from the share sheet of the screenshot preview or of Photos. The
+    /// share extension puts the image in the app group container and opens the app at it
+    /// (`App/Sources/App/ShareImport.swift`); from there it is an ordinary import.
+    case shareExtension
     /// DEBUG builds only: the bundled sample screenshot.
     case debugSample
 }
@@ -86,20 +90,27 @@ struct ImportedImage: Sendable, Identifiable, Hashable {
 }
 
 /// How the side to move was decided.
+///
+/// What the screens say about each case is not written here. The Analysis result and Check
+/// position both read `SideToMoveCopy` (`App/Sources/Analysis/AnalysisSideToMoveCopy.swift`),
+/// which is the one place the wording lives, and whose caption names where that player sits
+/// before it names the origin. Any new screen that shows a side to move reads it too, rather
+/// than writing its own phrasing.
 enum SideToMoveOrigin: String, Sendable, Hashable, Codable {
-    /// From the last-move highlight ("from last-move highlight").
+    /// From the last-move highlight.
     case lastMoveHighlight
-    /// From the running clock in the screenshot ("from the clock").
+    /// From the running clock in the screenshot.
     case runningClock
-    /// The other side would be in check ("from check").
+    /// The other side would be in check.
     case checkRule
-    /// The board is the start position, so White moves first ("the game has not started"). It
-    /// is the rules of chess rather than a guess, so the chip stays in the normal state.
+    /// The board is the start position, so White moves first. It is the rules of chess rather
+    /// than a guess, so the chip stays in the normal state.
     case startPosition
-    /// No evidence: the player at the bottom ("assumed: you are at the bottom"). The chip is
-    /// shown in the attention state.
+    /// No evidence: the player at the bottom. The chip is shown in the attention state, and
+    /// this is the one case whose caption is a sentence of its own.
     case assumedBottomPlayer
-    /// The user chose it.
+    /// The user chose it. The Analysis result stops offering the switch once this is the
+    /// origin, so a board the user has settled is never asked about again.
     case user
 }
 
@@ -640,6 +651,11 @@ enum PaywallTrigger: String, Sendable, Hashable, Codable {
     case switchToYearly
     /// "That was your last free analysis." "See options".
     case lastFreeAnalysisNotice
+    /// The longer-search notice on a free tier: a deeper search found a different move, and
+    /// showing it is what Pro adds (design.md section 16, monetization.md 4.10). It offers Pro
+    /// rather than credit for a board, so it is not in `closePurchaseSheets`'s credit-only list
+    /// and it stays open when a purchase lands elsewhere.
+    case longerSearchNotice
 }
 
 /// Input for `PaywallView`.

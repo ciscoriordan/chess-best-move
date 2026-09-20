@@ -61,6 +61,7 @@ struct CaptureEditorBoard: View {
                 .accessibilityElement(children: .contain)
             }
         }
+        .boardTapTargetRelief()
         .sensoryFeedback(.selection, trigger: model.placementCount)
         .accessibilityIdentifier(CaptureAccessibilityID.editorBoard)
     }
@@ -77,7 +78,7 @@ struct CaptureEditorBoard: View {
 
     private func dragGesture(side: CGFloat, whiteAtBottom: Bool) -> some Gesture {
         LongPressGesture(minimumDuration: 0.3)
-            .sequenced(before: DragGesture(minimumDistance: 0, coordinateSpace: .local))
+            .sequenced(before: DragGesture(minimumDistance: CaptureBoardDrag.minimumDistance, coordinateSpace: .local))
             .onChanged { value in
                 guard case .second(true, let drag?) = value else { return }
                 if dragSource == nil,
@@ -93,10 +94,10 @@ struct CaptureEditorBoard: View {
                     dragLocation = nil
                 }
                 guard case .second(true, let drag?) = value, let source = dragSource else { return }
-                if let target = BoardGeometry.square(at: drag.location, side: side, whiteAtBottom: whiteAtBottom) {
-                    model.move(from: source, to: target)
-                } else {
-                    model.remove(at: source)
+                switch CaptureBoardDrag.outcome(from: source, to: drag.location, side: side, whiteAtBottom: whiteAtBottom) {
+                case .move(let target): model.move(from: source, to: target)
+                case .remove: model.remove(at: source)
+                case .cancel: break
                 }
             }
     }
@@ -152,6 +153,41 @@ struct CaptureEditorBoard: View {
     }
 }
 
+/// What a piece drag in the editor does when the finger lifts.
+///
+/// The drag used to have a minimum distance of zero, which made the release point alone decide
+/// the outcome once the 0.3 s press had succeeded: a few points of drift turned a slow tap into
+/// a move, and a release a hair outside the board deleted the piece. Neither is recoverable by
+/// noticing, because a piece that is quietly gone is exactly what the editor exists to catch.
+/// So a drag has to travel before it is a drag, a release back on the square it started from
+/// is a cancel, and a release outside the board only removes the piece when it is clearly
+/// outside (design.md 9.6).
+enum CaptureBoardDrag {
+    /// How far the finger travels before a press becomes a drag, in points.
+    static let minimumDistance: CGFloat = 10
+    /// How far outside the board a release has to be before it removes the piece, in squares.
+    static let removalMargin: CGFloat = 0.5
+
+    enum Outcome: Equatable, Sendable {
+        case move(to: Square)
+        case remove
+        case cancel
+    }
+
+    static func outcome(from source: Square, to location: CGPoint, side: CGFloat, whiteAtBottom: Bool) -> Outcome {
+        if let target = BoardGeometry.square(at: location, side: side, whiteAtBottom: whiteAtBottom) {
+            return target == source ? .cancel : .move(to: target)
+        }
+        guard side > 0 else { return .cancel }
+        let margin = side / 8 * removalMargin
+        let outside = max(
+            max(-location.x, location.x - side),
+            max(-location.y, location.y - side)
+        )
+        return outside > margin ? .remove : .cancel
+    }
+}
+
 /// The piece palette tray (design.md 9.6): White and Black rows of king, queen, rook,
 /// bishop, knight, pawn, and an Empty cell. The selected square's occupant, or the armed
 /// brush item, has an `accent` border; the occupant also gets an `accentSubtle` fill. Pieces
@@ -162,12 +198,31 @@ struct CapturePieceTray: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var width: CGFloat = 0
 
-    private static let maximumCell: CGFloat = 52
-    private static let minimumCell: CGFloat = 40
+    static let maximumCell: CGFloat = 52
+    /// A tray cell is a hit target, so it never goes under the 44 pt minimum. The width formula
+    /// has to solve for that same number: it used to size the row for a 40 pt floor, land on
+    /// 43 on a 375 pt screen, and then have `cellButton` force each cell to 44, which put the
+    /// Empty cell about 3 pt past the trailing gutter.
+    static let minimumCell: CGFloat = Layout.minimumHitTarget
+
+    /// The cell side and the gap between cells for a tray `width` points wide.
+    ///
+    /// Seven cells sit across the tray (six pieces, then Empty), with five gaps inside the
+    /// piece rows and one `Spacing.s2` gap before the Empty cell. The wider gap is only taken
+    /// when seven full hit targets still fit with it.
+    static func metrics(width: CGFloat) -> (cell: CGFloat, spacing: CGFloat) {
+        let spacing: CGFloat = width >= 7 * minimumCell + 5 * 6 + Spacing.s2 ? 6 : 4
+        let cell = max(minimumCell, min(maximumCell, ((width - 5 * spacing - Spacing.s2) / 7).rounded(.down)))
+        return (cell, spacing)
+    }
+
+    /// The width seven cells of `cell` points with `spacing` between them take.
+    static func trayWidth(cell: CGFloat, spacing: CGFloat) -> CGFloat {
+        7 * cell + 5 * spacing + Spacing.s2
+    }
 
     var body: some View {
-        let spacing: CGFloat = width >= 7 * Self.minimumCell + 6 * 6 + Spacing.s2 ? 6 : 4
-        let cell = max(Self.minimumCell, min(Self.maximumCell, ((width - 5 * spacing - Spacing.s2) / 7).rounded(.down)))
+        let (cell, spacing) = Self.metrics(width: width)
         HStack(alignment: .top, spacing: Spacing.s2) {
             VStack(alignment: .leading, spacing: spacing) {
                 ForEach(PieceColor.allCases, id: \.self) { color in

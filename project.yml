@@ -41,8 +41,8 @@ settings:
     # Declarations are nonisolated unless annotated; the app's contracts spell out
     # @MainActor explicitly.
     SWIFT_DEFAULT_ACTOR_ISOLATION: nonisolated
-    MARKETING_VERSION: "1.0.2"
-    CURRENT_PROJECT_VERSION: "3"
+    MARKETING_VERSION: "1.0.3"
+    CURRENT_PROJECT_VERSION: "4"
     ENABLE_USER_SCRIPT_SANDBOXING: YES
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
     SUPPORTS_MACCATALYST: NO
@@ -68,11 +68,19 @@ targets:
         type: syncedFolder
       - path: App/Resources
         type: syncedFolder
+      # The app group, the hand-over URL grammar and the container the share extension writes
+      # into. Compiled into both targets from one folder (see ChessBestMoveShare below). It is
+      # outside App/Sources because a synchronized folder belongs to one target, and
+      # App/Sources/App/ShareImport.swift does not compile without it.
+      - path: ShareExtension/Shared
     dependencies:
       - package: ChessCore
       - package: ChessEngine
       - package: ChessVision
         product: ChessVision
+      # The share extension ships inside this app bundle
+      # (PlugIns/ChessBestMoveShare.appex) and has no App Store Connect record of its own.
+      - target: ChessBestMoveShare
     preBuildScripts:
       # Release gate: an archive (ACTION=install) fails while App/Sources or App/Info.plist
       # still holds a URL that must not reach a release: a reserved example domain, a URL whose
@@ -96,6 +104,7 @@ targets:
     info:
       path: App/Info.plist
       properties:
+        # The name under the icon. The built product stays "Chess Best Move.app".
         CFBundleDisplayName: Chess Best Move
         CFBundleName: $(PRODUCT_NAME)
         CFBundleShortVersionString: $(MARKETING_VERSION)
@@ -104,11 +113,17 @@ targets:
         ITSAppUsesNonExemptEncryption: false
         SKIncludeConsumableInAppPurchaseHistory: true
         NSPhotoLibraryUsageDescription: "Chess Best Move reads your most recent screenshot to find the chessboard in it. Your photos stay on your device."
+        # The share extension writes the shared image into the app group container and opens the
+        # app at chessbestmove://shared-image?id=<uuid> (ShareExtension/Shared/ShareInbox.swift).
+        # A custom URL scheme is registered nowhere but here.
+        CFBundleURLTypes:
+          - CFBundleURLName: com.motomatic.chessbestmove.sharedimage
+            CFBundleTypeRole: Editor
+            CFBundleURLSchemes:
+              - chessbestmove
+        # The only bundled typeface: the chess piece glyphs (U+2654 to U+265F), which the
+        # system font does not have. All other text is SF Pro or SF Mono.
         UIAppFonts:
-          - BricolageGrotesque-Variable.ttf
-          - IBMPlexMono-Regular.ttf
-          - IBMPlexMono-Medium.ttf
-          - IBMPlexMono-SemiBold.ttf
           - NotoSansSymbols2-Regular.ttf
         UILaunchScreen:
           UIColorName: LaunchBackground
@@ -121,6 +136,14 @@ targets:
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
+    entitlements:
+      # Written by xcodegen from these properties; never edit the file by hand. The share
+      # extension target below carries the identical group, which is what gives the two
+      # processes one container to hand images over in. Nothing else is granted here.
+      path: App/ChessBestMove.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.motomatic.chessbestmove
     settings:
       base:
         PRODUCT_NAME: Chess Best Move
@@ -140,6 +163,67 @@ targets:
         LD_RUNPATH_SEARCH_PATHS:
           - "$(inherited)"
           - "@executable_path/Frameworks"
+
+  # The share extension: "Best Move" in the share sheet of the screenshot preview
+  # (including Markup) and of Photos. It accepts one image, copies it into the app group
+  # container and opens the app at it; it never loads the recognizer or the engine, because an
+  # app extension is given a fraction of the memory an app gets.
+  ChessBestMoveShare:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: ShareExtension/Sources
+      # What both processes have to agree on: the app group, the URL grammar and the container.
+      # The app target compiles this same folder, so neither side can drift from the other.
+      - path: ShareExtension/Shared
+      # The app's design system, so the extension's screen is drawn in the app's own colors and
+      # type tokens rather than in a second set that could drift from design.md.
+      - path: App/Sources/DesignSystem/Palette.swift
+      - path: App/Sources/DesignSystem/Typography.swift
+      - path: App/Sources/DesignSystem/Metrics.swift
+      - path: App/Sources/DesignSystem/Components/Buttons.swift
+      - path: App/Sources/DesignSystem/Components/CloseButton.swift
+      # The copy the app shares between screens. The type scale's SwiftUI preview sets one of
+      # its lines, so the design system does not compile without it.
+      - path: App/Sources/App/AppCopy.swift
+    info:
+      path: ShareExtension/Info.plist
+      properties:
+        # The share sheet reads this. It matches the app's own springboard label above, so the
+        # two places the user sees the app's name agree.
+        CFBundleDisplayName: Chess Best Move
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundlePackageType: XPC!
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.share-services
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShareViewController
+          NSExtensionAttributes:
+            # Exactly one image and nothing else: the extension does not offer itself for text,
+            # for URLs, for several images at once, or for anything it cannot analyze.
+            NSExtensionActivationRule:
+              NSExtensionActivationSupportsImageWithMaxCount: 1
+    entitlements:
+      # The same app group as the app target above, written by xcodegen from these properties.
+      path: ShareExtension/ChessBestMoveShare.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.motomatic.chessbestmove
+    settings:
+      base:
+        PRODUCT_NAME: ChessBestMoveShare
+        PRODUCT_MODULE_NAME: ChessBestMoveShare
+        # An app extension's bundle id must be the containing app's with exactly one more
+        # component.
+        PRODUCT_BUNDLE_IDENTIFIER: com.motomatic.chessbestmove.share
+        GENERATE_INFOPLIST_FILE: NO
+        SKIP_INSTALL: YES
+        ENABLE_PREVIEWS: YES
+        LD_RUNPATH_SEARCH_PATHS:
+          - "$(inherited)"
+          - "@executable_path/Frameworks"
+          - "@executable_path/../../Frameworks"
 
 schemes:
   ChessBestMove:

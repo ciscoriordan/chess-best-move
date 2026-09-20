@@ -73,6 +73,8 @@ final class AnalysisScreenModel {
 
     let app: AppModel
     let session: AnalysisSession
+    /// The search that keeps running quietly after the first answer (design.md section 16).
+    let longerSearch: AnalysisLongerSearch
 
     private(set) var runState: RunState = .notStarted
     private(set) var interruption: Interruption?
@@ -94,12 +96,21 @@ final class AnalysisScreenModel {
     /// returned), so a terminal phase left over from the previous run is never taken as
     /// this run's result.
     @ObservationIgnored private var awaitingRunPhase = false
+    /// The user pressed Stop. They asked the engine to stop thinking, so the longer search
+    /// does not start behind that.
+    @ObservationIgnored private var didStopEarly = false
 
     init(app: AppModel, session: AnalysisSession, ledger: AnalysisRunLedger = .shared) {
         self.app = app
         self.session = session
         self.ledger = ledger
         runThinkTime = app.settings.thinkTime
+        // A stub engine (tests, previews) cannot take a quiet search; the feature then never
+        // runs and the screen behaves exactly as it did before.
+        longerSearch = AnalysisLongerSearch(runner: app.engine as? any AnalysisLongerSearchRunner)
+        longerSearch.didFinish = { [weak self] state in
+            self?.longerSearchDidFinish(state)
+        }
     }
 
     // MARK: Derived state
@@ -111,9 +122,14 @@ final class AnalysisScreenModel {
     var isThinking: Bool { runState == .starting || runState == .running }
 
     /// The engine's readout, when it belongs to this session's run.
+    ///
+    /// Once the user (or their Pro setting) has taken the longer search's move, that search's
+    /// readout is the one the whole screen reads: the badge, the arrow, the line, the
+    /// evaluation and the depth all come from the answer that is actually shown.
     var readout: EngineReadout? {
         guard ledger.activeSessionID == session.id, runState != .notStarted else { return nil }
         if case .failed = runState { return nil }
+        if let adopted = longerSearch.adoptedReadout { return adopted }
         return app.engine.readout
     }
 
@@ -132,11 +148,55 @@ final class AnalysisScreenModel {
         return checkmate
     }
 
-    /// The hero move's VoiceOver label: the spoken form of the best move (design.md 12). Nil
-    /// when the hero shows no move (checkmate, stalemate, or no move yet).
+    /// What the result readout shows (design.md 9.4): the move in the badge, the pill and the
+    /// evaluation beside it, and the guessed move the badge answers when the screenshot caught
+    /// the turn of the player at the top.
+    var resultReadout: AnalysisReadoutContent {
+        readoutContent(for: readout, status: readoutStatus, quickAnswerIsBeaten: longerSearch.quickAnswerIsBeaten)
+    }
+
+    /// The readout a given engine answer produces on this board. `resultReadout` is this for
+    /// the answer on screen; the longer-search notice is this for the answer it found, so the
+    /// notice names the move the badge would hold rather than a move of the engine's own that
+    /// the badge would not show (the reply case of design.md 9.4).
+    private func readoutContent(
+        for readout: EngineReadout?,
+        status: AnalysisReadoutContent.Status,
+        quickAnswerIsBeaten: Bool
+    ) -> AnalysisReadoutContent {
+        let board = position
+        let best: (move: Move, san: String)? = {
+            guard let uci = readout?.bestMove, let move = Move(uci: uci), let san = board.san(for: move) else { return nil }
+            return (move, san)
+        }()
+        return AnalysisReadoutContent.make(
+            status: status,
+            position: board,
+            whiteAtBottom: session.snapshot.whiteAtBottom,
+            sideToMoveOrigin: session.snapshot.sideToMoveOrigin,
+            bestMove: best,
+            principalVariation: readout?.principalVariation ?? [],
+            noLegalMoves: noLegalMoves,
+            quickAnswerIsBeaten: quickAnswerIsBeaten
+        )
+    }
+
+    private var readoutStatus: AnalysisReadoutContent.Status {
+        switch runState {
+        case .notStarted: .notRun
+        case .starting, .running: .thinking
+        case .completed: .done
+        case .interrupted: .stopped
+        case .failed: .engineError
+        }
+    }
+
+    /// The badge move's VoiceOver label: the spoken form of the move the badge shows
+    /// (design.md 12), which is the engine's answer rather than its best move when the
+    /// screenshot caught the turn of the player at the top. Nil when the badge shows no move
+    /// (checkmate, stalemate, or no move yet).
     var heroSpokenDescription: String? {
-        guard noLegalMoves == nil, let best = bestMove else { return nil }
-        return AnalysisSpeech.moveDescription(san: best.san, move: best.move)
+        resultReadout.move?.words
     }
 
     /// The callout line under the hero (design.md 9.3 and 9.4): the spoken form of the move, or
@@ -251,6 +311,8 @@ final class AnalysisScreenModel {
     }
 
     func disappear() {
+        // The longer search belongs to a screen nobody is looking at any more.
+        longerSearch.cancel()
         if isThinking, ledger.activeSessionID == session.id {
             interruption = .leftScreen
             app.engine.stop()
@@ -266,7 +328,11 @@ final class AnalysisScreenModel {
 
     /// iOS freezes the search threads in the background: stop there and offer a re-run.
     func scenePhaseChanged(to phase: ScenePhase) {
-        guard phase == .background, isThinking, ledger.activeSessionID == session.id else { return }
+        guard phase == .background else { return }
+        // The longer search stops and forgets what it had: it would be frozen anyway, and
+        // nobody is there to read a notice (design.md section 16).
+        longerSearch.cancel()
+        guard isThinking, ledger.activeSessionID == session.id else { return }
         interruption = .background
         app.engine.stop()
     }
@@ -284,6 +350,9 @@ final class AnalysisScreenModel {
             return
         }
 
+        // Whatever the longer search had to say was about the answer this run replaces.
+        longerSearch.cancel()
+        didStopEarly = false
         runToken += 1
         let token = runToken
         runThinkTime = thinkTime
@@ -321,6 +390,7 @@ final class AnalysisScreenModel {
 
     func stop() {
         guard isThinking else { return }
+        didStopEarly = true
         app.engine.stop()
     }
 
@@ -385,6 +455,77 @@ final class AnalysisScreenModel {
     func newAnalysis() {
         if isThinking, ledger.activeSessionID == session.id { app.engine.stop() }
         app.goHome()
+    }
+
+    // MARK: The longer search (design.md section 16)
+
+    /// What the longer-search notice says, or nil when it says nothing. The notice sits under
+    /// the assumed-castling caution and above the monetization notices
+    /// (`AnalysisView.readoutGroups`).
+    var longerSearchNotice: AnalysisLongerSearchNoticeContent? {
+        guard runState == .completed, noLegalMoves == nil else { return nil }
+        return AnalysisLongerSearchCopy.content(
+            for: longerSearch.state,
+            move: longerSearchMove,
+            isPro: app.store.isPro
+        )
+    }
+
+    /// The move the notice names: the one the badge would hold if the deeper answer were
+    /// taken, which is the reply where the screenshot caught the turn of the player at the top.
+    private var longerSearchMove: AnalysisReadoutContent.MoveText? {
+        guard let preferred = longerSearch.preferredReadout else { return nil }
+        return readoutContent(for: preferred, status: .done, quickAnswerIsBeaten: false).move
+    }
+
+    /// The notice's link. With Pro it puts the deeper move in the badge; without it, it opens
+    /// the purchase options, because showing the move is what Pro adds here.
+    func longerSearchAction() {
+        guard longerSearch.quickAnswerIsBeaten else { return }
+        if app.store.isPro {
+            showTheLongerSearchMove()
+        } else {
+            app.presentPaywall(trigger: .longerSearchNotice)
+        }
+    }
+
+    /// Puts the longer search's move in the badge, with the line, evaluation and arrow that
+    /// belong to it. Nothing is spent: it is the board this session already paid for, and the
+    /// engine is not asked for anything new. `userAsked` is false when a Pro setting made the
+    /// switch, which is not a moment for a haptic.
+    func showTheLongerSearchMove(userAsked: Bool = true) {
+        guard longerSearch.quickAnswerIsBeaten else { return }
+        longerSearch.showTheBetterMove()
+        isLineExpanded = false
+        if userAsked { adjustmentCount += 1 }
+        if let best = bestMove {
+            ledger.record(.bestMove(san: best.san, move: best.move, score: readout?.score), for: session.id)
+        }
+        if let notice = longerSearchNotice { announce(notice.spokenSentence) }
+    }
+
+    /// Starts the quiet search once an answer is on screen. It does not start behind a Stop
+    /// the user pressed: they asked the engine to stop thinking about this board.
+    private func startLongerSearch() {
+        guard !didStopEarly, interruption == nil, noLegalMoves == nil,
+              let quickAnswer = app.engine.readout, quickAnswer.bestMove != nil
+        else { return }
+        longerSearch.start(
+            position: position,
+            quickAnswer: quickAnswer,
+            ceiling: app.settings.effectiveLongerSearchCeiling(isPro: app.store.isPro)
+        )
+    }
+
+    /// The quiet search settled. A notice appears by itself, so VoiceOver is told what it says;
+    /// with automatic switching on, the move is taken first and the notice says it is shown.
+    private func longerSearchDidFinish(_ state: AnalysisLongerSearch.State) {
+        guard case .prefers = state else { return }
+        if app.settings.switchesToBetterMoveAutomatically(isPro: app.store.isPro) {
+            showTheLongerSearchMove(userAsked: false)
+            return
+        }
+        if let notice = longerSearchNotice { announce(notice.spokenSentence) }
     }
 
     // MARK: Engine observation
@@ -470,16 +611,41 @@ final class AnalysisScreenModel {
         completionCount += 1
         app.settings.hasCompletedAnalysis = true
         ledger.record(.bestMove(san: best.san, move: best.move, score: score), for: session.id)
-        let description = AnalysisSpeech.moveDescription(san: best.san, move: best.move)
-        announce(AnalysisSpeech.completionAnnouncement(moveDescription: description, score: score))
+        startLongerSearch()
+        let content = resultReadout
+        let description = content.move?.words ?? AnalysisSpeech.moveDescription(san: best.san, move: best.move)
+        // With the turn of the player at the top on the board, the screen leads with the answer
+        // to the move the engine expects, so the announcement says both (design.md 9.4).
+        if let guessed = content.guessedMove {
+            announce(AnalysisSpeech.replyAnnouncement(guessedMove: guessed.words, reply: description, score: score))
+        } else {
+            announce(AnalysisSpeech.completionAnnouncement(moveDescription: description, score: score))
+        }
     }
 
     private func fail(_ message: String) {
         runState = .failed(message)
         ledger.record(.failed(message), for: session.id)
+        // A failure changes the screen on its own, like a completion, so it is announced like
+        // one. Without this the pill quietly became ENGINE ERROR and a reader who had pressed
+        // Analyze heard nothing at all and went on waiting.
+        announce(Self.failureAnnouncement(message))
     }
 
+    /// "Analysis failed. <what went wrong>" - the sentence VoiceOver is given when a search
+    /// ends in an error.
+    static func failureAnnouncement(_ message: String) -> String {
+        let trimmed = message.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return "Analysis failed." }
+        return trimmed.hasSuffix(".") ? "Analysis failed. " + trimmed : "Analysis failed. " + trimmed + "."
+    }
+
+    /// The last sentence handed to VoiceOver. Kept so the announcements can be checked without
+    /// a running screen reader.
+    private(set) var lastAnnouncement: String?
+
     private func announce(_ text: String) {
+        lastAnnouncement = text
         AccessibilityNotification.Announcement(text).post()
     }
 
@@ -487,6 +653,7 @@ final class AnalysisScreenModel {
     /// squares flagged, without spending anything. A search of this session still running
     /// (an adjustment made the board invalid mid-search) is stopped: nothing would show it.
     private func returnToCheckPosition(issues: [PositionIssue]) {
+        longerSearch.cancel()
         if isThinking, ledger.activeSessionID == session.id {
             app.engine.stop()
         }

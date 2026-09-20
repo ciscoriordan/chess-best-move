@@ -38,7 +38,10 @@ struct CreditsIndicator: View {
             Text(text)
                 .typography(.callout)
                 .foregroundStyle(isExhausted ? Palette.accent : Palette.ink2)
-                .lineLimit(1)
+                // No line limit: below the accessibility sizes the string is short enough for
+                // the toolbar, and at those sizes the indicator has moved into the scrolling
+                // content (`CreditsInlineIndicator`), where it may wrap.
+                .fixedSize(horizontal: false, vertical: true)
         }
         .frame(minHeight: Layout.minimumHitTarget)
         .contentShape(Rectangle())
@@ -61,18 +64,27 @@ struct CreditsIndicator: View {
 
 /// The tally of squares: 8 x 8 pt, radius 1, 3 pt gap. Filled `ink` for remaining,
 /// outlined `rule2` for used.
+///
+/// The squares grow with the `callout` text beside them, so the graphical half of the
+/// indicator does not disappear next to a 49 pt figure. They stop at `Layout.maximumRowIcon`
+/// for the same reason a row's icon does.
 struct CreditsTally: View {
     var remaining: Int
     var allowance: Int = 3
 
+    @ScaledMetric(relativeTo: .subheadline) private var scaledSide: CGFloat = 8
+    @ScaledMetric(relativeTo: .subheadline) private var scaledGap: CGFloat = 3
+
+    private var side: CGFloat { min(scaledSide, Layout.maximumRowIcon) }
+
     var body: some View {
-        HStack(spacing: 3) {
+        HStack(spacing: min(scaledGap, Layout.maximumRowIcon / 2)) {
             ForEach(0..<allowance, id: \.self) { index in
-                let shape = RoundedRectangle(cornerRadius: 1, style: .continuous)
+                let shape = RoundedRectangle(cornerRadius: side / 8, style: .continuous)
                 if index < remaining {
-                    shape.fill(Palette.ink).frame(width: 8, height: 8)
+                    shape.fill(Palette.ink).frame(width: side, height: side)
                 } else {
-                    shape.strokeBorder(Palette.rule2, lineWidth: 1).frame(width: 8, height: 8)
+                    shape.strokeBorder(Palette.rule2, lineWidth: 1).frame(width: side, height: side)
                 }
             }
         }

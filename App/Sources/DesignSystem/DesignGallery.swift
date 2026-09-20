@@ -14,7 +14,7 @@ struct DesignGalleryView: View {
                 VStack(alignment: .leading, spacing: Spacing.s2) {
                     Text("Nxf7+").typography(.moveHero)
                     Text("exd8=Q#").typography(.moveHero, width: 75)
-                    Text("Best Move").typography(.display)
+                    Text("Chess Best Move").typography(.display)
                     Text("No board found").typography(.title)
                     Text("Yearly").typography(.headline)
                     Text(AppCopy.homeIntro).typography(.body)
@@ -22,6 +22,7 @@ struct DesignGalleryView: View {
                     Text("Knight takes f7, check").typography(.callout)
                     Text("This didn't use a free analysis.").typography(.caption)
                     Text("Best move").typography(.label)
+                    Text("How it works").typography(.sectionLabel)
                     Text("+2.35  \u{2212}1.20  M3").typography(.dataLarge)
                     Text("depth 24    3.0\u{00A0}s    2.3 M n/s").typography(.data)
                     Text("1. Nxf7+ Kxf7 2. Qh5+ g6 3. Qxe5").typography(.line)
@@ -81,6 +82,38 @@ struct DesignGalleryView: View {
                 ListRowHairline()
                 ListRow("Chess engine", systemImage: "cpu", value: "Stockfish 19", showsChevron: true)
                 Hairline()
+
+                GroupedSectionLabel("Grouped list")
+                GroupedCard {
+                    Button {} label: {
+                        Text("Use latest screenshot")
+                    }
+                    .buttonStyle(GroupedPrimaryRowButtonStyle(minHeight: 64))
+                    Button {} label: {
+                        ListRow("Choose from Photos", systemImage: "photo.on.rectangle", showsChevron: true)
+                            .groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                    GroupedRowSeparator()
+                    ListRow("Chess engine", systemImage: "cpu", value: "Stockfish 19")
+                        .groupedRow()
+                }
+                GroupedFooter("A footer explains the group, aligned with the row content.")
+
+                GroupedSectionLabel("Pro tag")
+                GroupedCard {
+                    VStack(alignment: .leading, spacing: Spacing.s2) {
+                        ProTaggedTitle("Keep searching after the answer", isMuted: true)
+                        Text("A row a free user can read but not change.")
+                            .typography(.caption)
+                            .foregroundStyle(Palette.ink2)
+                    }
+                    .groupedRow(verticalPadding: Spacing.s3)
+                    GroupedRowSeparator(start: .content)
+                    ProTaggedTitle("The same row for a subscriber")
+                        .groupedRow()
+                }
+                GroupedFooter("The tag keeps its color on a row drawn in muted ink.")
 
                 SectionLabel("Pieces and board")
                 HStack(spacing: 0) {

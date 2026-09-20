@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Flat 3×3 chessboard background, colors sampled from the reference icon. -->
+  <rect width="1024" height="1024" fill="#3B3935"/>
+
+  <!-- Row 1 -->
+  <rect x="341.333333" y="0" width="341.333334" height="341.333333" fill="#302E2B"/>
+
+  <!-- Row 2 -->
+  <rect x="0" y="341.333333" width="341.333333" height="341.333334" fill="#302E2B"/>
+  <rect x="682.666667" y="341.333333" width="341.333333" height="341.333334" fill="#302E2B"/>
+
+  <!-- Row 3 -->
+  <rect x="341.333333" y="682.666667" width="341.333334" height="341.333333" fill="#302E2B"/>
+</svg>

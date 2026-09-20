@@ -11,6 +11,10 @@ enum SettingsRoute: Hashable {
 }
 
 /// Settings (design.md 9.8), presented as a sheet with the native close control.
+///
+/// Every section is a `GroupedCard` with a `GroupedSectionLabel` above it and, where there is
+/// something to explain, a `GroupedFooter` under it: the same components Home draws its import
+/// actions with (design.md section 6), so the two screens are one visual language.
 struct SettingsView: View {
     @Environment(AppModel.self) private var app
 
@@ -41,6 +45,7 @@ private struct SettingsRootContent: View {
 
     @State private var isRestoring = false
     @State private var restoreMessage: String?
+    @AccessibilityFocusState private var restoreMessageFocused: Bool
     @State private var restoreSucceeded = 0
     @State private var restoreFailed = 0
 
@@ -48,109 +53,122 @@ private struct SettingsRootContent: View {
         @Bindable var settings = app.settings
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                SectionLabel("Analysis")
-                Text("Default think time")
-                    .typography(.body)
-                    .foregroundStyle(Palette.ink)
-                    .padding(.bottom, Spacing.s2)
-                ThinkTimeControl(selection: $settings.thinkTime)
-                Text("Longer think times find deeper moves. Re-running a board with another think time is free.")
-                    .typography(.caption)
-                    .foregroundStyle(Palette.ink2)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.top, Spacing.s2)
-                    .padding(.bottom, Spacing.s3)
-                Hairline()
+                GroupedSectionLabel("Analysis")
+                GroupedCard {
+                    VStack(alignment: .leading, spacing: Spacing.s2) {
+                        Text("Default think time")
+                            .typography(.body)
+                            .foregroundStyle(Palette.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                        ThinkTimeControl(selection: $settings.thinkTime)
+                        Text("Longer think times find deeper moves. Re-running a board with another think time is free.")
+                            .typography(.caption)
+                            .foregroundStyle(Palette.ink2)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .groupedRow(verticalPadding: Spacing.s3)
+                    GroupedRowSeparator(start: .content)
+                    // The two Pro settings of the longer background search (design.md 16).
+                    // Shown to free users too, disabled, each carrying a Pro tag.
+                    SettingsLongerSearchSection()
+                }
+                SettingsLongerSearchFooter()
 
-                SectionLabel("Purchases")
-                ListRow("Plan", value: planText)
-                    .accessibilityElement(children: .combine)
-                if !app.store.isPro {
-                    Hairline()
+                GroupedSectionLabel("Purchases")
+                GroupedCard {
+                    ListRow("Plan", value: planText)
+                        .groupedRow()
+                        .accessibilityElement(children: .combine)
+                    if !app.store.isPro {
+                        GroupedRowSeparator(start: .content)
+                        Button {
+                            app.presentPaywall(trigger: .settings)
+                        } label: {
+                            ListRow("Unlock unlimited", showsChevron: true).groupedRow()
+                        }
+                        .buttonStyle(.listRow)
+                    }
+                    GroupedRowSeparator(start: .content)
                     Button {
-                        app.presentPaywall(trigger: .settings)
+                        restore()
                     } label: {
-                        ListRow("Unlock unlimited", showsChevron: true)
+                        ListRow("Restore purchases", value: isRestoring ? "Restoring\u{2026}" : nil).groupedRow()
                     }
                     .buttonStyle(.listRow)
+                    .disabled(isRestoring)
+                    if app.store.activeSubscriptionProductID != nil {
+                        GroupedRowSeparator(start: .content)
+                        Button {
+                            Task { await app.store.showManageSubscriptions() }
+                        } label: {
+                            ListRow("Manage subscription", showsChevron: true).groupedRow()
+                        }
+                        .buttonStyle(.listRow)
+                    }
                 }
-                Hairline()
-                Button {
-                    restore()
-                } label: {
-                    ListRow("Restore purchases", value: isRestoring ? "Restoring\u{2026}" : nil)
-                }
-                .buttonStyle(.listRow)
-                .disabled(isRestoring)
                 if let restoreMessage {
-                    Text(restoreMessage)
-                        .typography(.callout)
-                        .foregroundStyle(Palette.ink2)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.bottom, Spacing.s3)
+                    GroupedFooter(restoreMessage)
+                        .accessibilityFocused($restoreMessageFocused)
                 }
-                if app.store.activeSubscriptionProductID != nil {
-                    Hairline()
-                    Button {
-                        Task { await app.store.showManageSubscriptions() }
-                    } label: {
-                        ListRow("Manage subscription", showsChevron: true)
+
+                GroupedSectionLabel("Help")
+                GroupedCard {
+                    NavigationLink(value: SettingsRoute.screenshotHelp) {
+                        ListRow("How to take a screenshot", showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
+                    GroupedRowSeparator(start: .content)
+                    NavigationLink(value: SettingsRoute.shortcutSetup) {
+                        ListRow("Set up the one-step Shortcut", showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                    GroupedRowSeparator(start: .content)
+                    Button { openURL(SettingsLinks.support) } label: {
+                        ListRow("Support", showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                    .accessibilityHint("Opens in Safari.")
                 }
-                Hairline()
+                GroupedFooter {
+                    Text(AppCopy.fairPlayNote)
+                        .accessibilityIdentifier("settings.fairPlayNote")
+                }
 
-                SectionLabel("Help")
-                NavigationLink(value: SettingsRoute.screenshotHelp) {
-                    ListRow("How to take a screenshot", showsChevron: true)
+                GroupedSectionLabel("About")
+                GroupedCard {
+                    ListRow("Version", value: Self.version)
+                        .groupedRow()
+                        .accessibilityElement(children: .combine)
+                    GroupedRowSeparator(start: .content)
+                    NavigationLink(value: SettingsRoute.engine) {
+                        ListRow("Chess engine", value: app.engine.engineVersion, showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                    GroupedRowSeparator(start: .content)
+                    NavigationLink(value: SettingsRoute.licenses) {
+                        ListRow("Licenses", showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                    GroupedRowSeparator(start: .content)
+                    Button { openURL(SettingsLinks.privacyPolicy) } label: {
+                        ListRow("Privacy policy", showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                    .accessibilityHint("Opens in Safari.")
+                    GroupedRowSeparator(start: .content)
+                    Button { openURL(SettingsLinks.termsOfUse) } label: {
+                        ListRow("Terms of use", showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                    .accessibilityHint("Opens in Safari.")
                 }
-                .buttonStyle(.listRow)
-                Hairline()
-                NavigationLink(value: SettingsRoute.shortcutSetup) {
-                    ListRow("Set up the one-step Shortcut", showsChevron: true)
-                }
-                .buttonStyle(.listRow)
-                Hairline()
-                Button { openURL(SettingsLinks.support) } label: {
-                    ListRow("Support", showsChevron: true)
-                }
-                .buttonStyle(.listRow)
-                .accessibilityHint("Opens in Safari.")
-                Hairline()
-                Text(AppCopy.fairPlayNote)
-                    .typography(.caption)
-                    .foregroundStyle(Palette.ink2)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.vertical, Spacing.s3)
-                    .accessibilityIdentifier("settings.fairPlayNote")
-                Hairline()
 
-                SectionLabel("About")
-                ListRow("Version", value: Self.version)
-                    .accessibilityElement(children: .combine)
-                Hairline()
-                NavigationLink(value: SettingsRoute.engine) {
-                    ListRow("Chess engine", value: app.engine.engineVersion, showsChevron: true)
-                }
-                .buttonStyle(.listRow)
-                Hairline()
-                NavigationLink(value: SettingsRoute.licenses) {
-                    ListRow("Licenses", showsChevron: true)
-                }
-                .buttonStyle(.listRow)
-                Hairline()
-                Button { openURL(SettingsLinks.privacyPolicy) } label: {
-                    ListRow("Privacy policy", showsChevron: true)
-                }
-                .buttonStyle(.listRow)
-                .accessibilityHint("Opens in Safari.")
-                Hairline()
-                Button { openURL(SettingsLinks.termsOfUse) } label: {
-                    ListRow("Terms of use", showsChevron: true)
-                }
-                .buttonStyle(.listRow)
-                .accessibilityHint("Opens in Safari.")
-                Hairline()
+                // Last, and only where the App Store receipt is a sandbox one: a copy
+                // TestFlight installed, the copy App Review runs, or one Xcode installed on a
+                // device. It draws nothing in a copy from the App Store, and nothing on a
+                // simulator, whose receipt carries the App Store name
+                // (SettingsTesting.swift, monetization.md section 3).
+                SettingsTestingSection()
             }
             .sideGutter()
             .padding(.bottom, Spacing.s6)
@@ -197,6 +215,14 @@ private struct SettingsRootContent: View {
             case .success?: restoreSucceeded += 1
             case .error?: restoreFailed += 1
             case nil: break
+            }
+            // The result is a footer one element below the card and the row itself only stops
+            // being dimmed, so without this a reader tapped Restore purchases, felt a haptic
+            // and was never told what happened. This is the only route back to Pro on a new
+            // device.
+            if let message = feedback.message {
+                AccessibilityNotification.Announcement(message).post()
+                restoreMessageFocused = true
             }
         }
     }

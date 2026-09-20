@@ -70,9 +70,41 @@ enum AnalysisSpeech {
         return text
     }
 
-    /// The engine line for VoiceOver: the spoken form of the first `plies` moves.
+    /// "If they play pawn to e4: best move knight to f6. White is ahead by 0.35 pawns."
+    /// (design.md 9.4). Said when the screenshot caught the turn of the player at the top: the
+    /// screen leads with the answer, so the announcement names the move it answers first.
+    static func replyAnnouncement(guessedMove: String, reply: String, score: WhiteScore?) -> String {
+        var text = "If they play " + lowercasingFirstLetter(guessedMove)
+            + ": best move " + lowercasingFirstLetter(reply) + "."
+        if let score {
+            text += " " + AnalysisScore.spoken(score) + "."
+        }
+        return text
+    }
+
+    /// The engine line for VoiceOver: the spoken form of the first `plies` moves, and "and so
+    /// on" when the line runs longer than that.
     static func line(sanMoves: [String], plies: Int = 6) -> String {
-        sanMoves.prefix(plies).map { moveDescription(san: $0) }.joined(separator: "; ")
+        let spoken = sanMoves.prefix(plies).map { moveDescription(san: $0) }.joined(separator: "; ")
+        return sanMoves.count > plies ? spoken + "; and so on" : spoken
+    }
+
+    /// What the engine's figures say in words, for the one element the depth, clock and speed
+    /// are combined into. On screen they are abbreviated and set in a fixed monospaced column;
+    /// spoken, "depth 20, 1.4 s slash 3 s, 2.1 M n slash s" names none of the three.
+    static func engineFigures(depth: Int?, elapsed: Duration?, thinkTime: ThinkTime, nodesPerSecond: Int?) -> String {
+        var parts: [String] = []
+        parts.append(depth.map { "depth \($0)" } ?? "depth not reported yet")
+        if let elapsed {
+            let seconds = AnalysisDataText.seconds(of: elapsed)
+            parts.append(String(format: "%.1f of %d seconds", seconds, thinkTime.seconds))
+        } else {
+            parts.append("\(thinkTime.seconds) seconds")
+        }
+        if let nodesPerSecond {
+            parts.append("\(nodesPerSecond.formatted()) positions a second")
+        }
+        return parts.joined(separator: ", ")
     }
 
     static func pieceName(_ kind: PieceKind) -> String {
@@ -169,7 +201,7 @@ enum AnalysisLine {
 // MARK: - Data tokens
 
 enum AnalysisDataText {
-    /// "1.4 s" with a no-break space (IBM Plex Mono has no narrow no-break space).
+    /// "1.4 s" with a no-break space (SF Mono has no narrow no-break space, U+202F).
     static func seconds(_ duration: Duration) -> String {
         String(format: "%.1f\u{00A0}s", seconds(of: duration))
     }

@@ -78,7 +78,9 @@ private struct AnalysisScreen: View {
         .navigationTitle("Analysis")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) { CreditsToolbarIndicator() }
+            ToolbarItem(placement: .topBarTrailing) {
+                CreditsToolbarIndicator(dynamicTypeSize: dynamicTypeSize)
+            }
         }
         .safeAreaInset(edge: .bottom) {
             PinnedActionBar { actionBar }
@@ -139,10 +141,14 @@ private struct AnalysisScreen: View {
             HStack(alignment: .top, spacing: AnalysisLayout.columnSpacing) {
                 VStack(alignment: .leading, spacing: 0) { boardGroup }
                     .frame(width: boardSide + AnalysisLayout.evalBarColumn)
-                VStack(alignment: .leading, spacing: 0) { readoutGroups }
+                VStack(alignment: .leading, spacing: 0) {
+                    CreditsInlineIndicator()
+                    readoutGroups
+                }
             }
         } else {
             VStack(alignment: .leading, spacing: 0) {
+                CreditsInlineIndicator()
                 boardGroup
                 readoutGroups
             }
@@ -212,11 +218,30 @@ private struct AnalysisScreen: View {
             isPeeking = canPeek && pressing
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Board, \(snapshot.whiteAtBottom ? "White" : "Black") at bottom\(snapshot.showsDiagram && snapshot.boardImage != nil ? ", edited" : "")")
-        .accessibilityValue(boardAccessibilityValue)
+        .accessibilityLabel(Text(boardAccessibilityLabel))
+        .accessibilityValue(Text(boardAccessibilityValue))
         .accessibilityCustomContent("Pieces", AnalysisSpeech.pieceList(snapshot.position.board))
         .accessibilityCustomContent("Side to move", sideToMoveAccessibilityText)
         .accessibilityCustomContent("FEN", snapshot.position.fen)
+        // The hold that reveals the original crop under an edited diagram is undocumented on
+        // screen and unreachable with VoiceOver running, so it is also a custom action.
+        .accessibilityActions { peekAction }
+    }
+
+    /// The custom action that stands in for pressing and holding the board. Nothing to offer
+    /// when there is no screenshot under the diagram.
+    @ViewBuilder
+    private var peekAction: some View {
+        if snapshot.showsDiagram, snapshot.boardImage != nil {
+            Button(isPeeking ? CaptureBoardSpeech.hideScreenshotAction : CaptureBoardSpeech.compareAction) {
+                isPeeking.toggle()
+            }
+        }
+    }
+
+    private var boardAccessibilityLabel: String {
+        let edited = snapshot.showsDiagram && snapshot.boardImage != nil ? ", edited" : ""
+        return "Board, \(snapshot.whiteAtBottom ? "White" : "Black") at bottom" + edited
     }
 
     private var boardAccessibilityValue: String {
@@ -230,23 +255,39 @@ private struct AnalysisScreen: View {
         return (isFinal ? "Best move: " : "Best move so far: ") + AnalysisSpeech.lowercasingFirstLetter(description) + "."
     }
 
+    /// "White, the player at the top, from last-move highlight": the chip's VoiceOver value and
+    /// the board's "Side to move" custom content.
     private var sideToMoveAccessibilityText: String {
-        let color = AnalysisSpeech.colorName(snapshot.position.sideToMove)
-        guard let source = sideToMoveSourceText else { return color }
-        return "\(color), \(source)"
+        SideToMoveCopy.spoken(
+            side: snapshot.position.sideToMove,
+            whiteAtBottom: snapshot.whiteAtBottom,
+            origin: snapshot.sideToMoveOrigin
+        )
     }
 
     // MARK: Chips
 
-    private var sideToMoveSourceText: String? {
-        switch snapshot.sideToMoveOrigin {
-        case .lastMoveHighlight: "from last-move highlight"
-        case .runningClock: "from the clock"
-        case .checkRule: "from check"
-        case .startPosition: "the game has not started"
-        case .assumedBottomPlayer: "assumed: you are at the bottom"
-        case .user: nil
-        }
+    /// "the player at the top, from last-move highlight" (design.md 9.4): where the player whose
+    /// move it is sits, then where the side to move came from. With the chip above it the two
+    /// read as one statement, so a user whose own pieces are at the bottom sees at once whether
+    /// the result answers for them or for the player across the board.
+    private var sideToMoveCaption: String {
+        SideToMoveCopy.caption(
+            side: snapshot.position.sideToMove,
+            whiteAtBottom: snapshot.whiteAtBottom,
+            origin: snapshot.sideToMoveOrigin
+        )
+    }
+
+    /// The side to move is the player at the top and the user has not chosen it: offer the
+    /// switch. Taking it sets the origin to `.user`, so the offer is made once per board and
+    /// never over a result that already answers for the player at the bottom.
+    private var offersSwitchToBottomPlayer: Bool {
+        SideToMoveCopy.offersSwitchToBottomPlayer(
+            side: snapshot.position.sideToMove,
+            whiteAtBottom: snapshot.whiteAtBottom,
+            origin: snapshot.sideToMoveOrigin
+        )
     }
 
     private var chips: some View {
@@ -255,12 +296,22 @@ private struct AnalysisScreen: View {
                 HStack(alignment: .top, spacing: Spacing.s2) { chipItems }
                 VStack(alignment: .leading, spacing: Spacing.s2) { chipItems }
             }
-            if [.lastMoveHighlight, .runningClock, .checkRule, .startPosition].contains(snapshot.sideToMoveOrigin),
-               let source = sideToMoveSourceText {
-                Text(source)
+            // The assumed case says the same sentence in `caution` under its own chip
+            // (`Chip.attentionCaption`), so it is not repeated here.
+            if snapshot.sideToMoveOrigin != .assumedBottomPlayer {
+                Text(sideToMoveCaption)
                     .typography(.caption)
                     .foregroundStyle(Palette.ink2)
+                    .fixedSize(horizontal: false, vertical: true)
+                    // The chip's VoiceOver value already says it (`sideToMoveAccessibilityText`).
                     .accessibilityHidden(true)
+            }
+            if offersSwitchToBottomPlayer {
+                TextLink(SideToMoveCopy.switchToBottomPlayerTitle) {
+                    model.toggleSideToMove()
+                }
+                .accessibilityHint(SideToMoveCopy.switchToBottomPlayerHint(side: snapshot.position.sideToMove))
+                .accessibilityIdentifier("analysis.switchSideToMove")
             }
         }
     }
@@ -273,13 +324,16 @@ private struct AnalysisScreen: View {
             "\(AnalysisSpeech.colorName(side)) to move",
             glyph: .piece(Piece(color: side, kind: .king)),
             state: isAssumed ? .attention : .normal,
-            attentionCaption: sideToMoveSourceText
+            attentionCaption: sideToMoveCaption
         ) {
             model.toggleSideToMove()
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Side to move")
+        // The label is the text on the chip, so "Tap White to move" addresses it; where that
+        // side came from is the value. Voice Control matches the name, not the value.
+        .accessibilityLabel("\(AnalysisSpeech.colorName(side)) to move")
         .accessibilityValue(sideToMoveAccessibilityText)
+        .accessibilityInputLabels(["\(AnalysisSpeech.colorName(side)) to move", "Side to move"])
         .accessibilityHint("Swaps the side to move and analyzes again.")
         // At accessibility sizes a chip label wraps instead of widening the screen (design.md 12).
         .fixedSize(horizontal: !dynamicTypeSize.isAccessibilitySize, vertical: false)
@@ -313,6 +367,10 @@ private struct AnalysisScreen: View {
             castlingCaution(right)
                 .padding(.bottom, Spacing.s3)
         }
+        // The notice that a longer search prefers another move goes here (ui-requests item 8):
+        // under everything that qualifies the move on screen, above the monetization notices.
+        // It draws nothing until that round lands.
+        AnalysisLongerSearchNotice(model: model)
         if isFinal {
             // Draws nothing unless this result spent the last free analysis (Monetization).
             LastFreeAnalysisNotice(session: session)
@@ -330,59 +388,19 @@ private struct AnalysisScreen: View {
         }
     }
 
+    /// The readout itself (`AnalysisResultReadout`, design.md 9.4). The detail line is passed
+    /// only when it says something the badge does not: while it repeats the move in the badge,
+    /// the badge's own line says it and VoiceOver reads the move once.
     private var readout: some View {
-        VStack(alignment: .leading, spacing: Spacing.s1) {
-            HStack(alignment: .center, spacing: Spacing.s2) {
-                AccentLegendSquare()
-                Text(statusLabel)
-                    .typography(.label)
-                    .foregroundStyle(Palette.ink2)
-                Spacer(minLength: Spacing.s3)
-                if let score = displayedScore {
-                    Text(AnalysisScore.text(score))
-                        .typography(.dataLarge)
-                        .foregroundStyle(isFinal ? Palette.ink : Palette.ink2)
-                        .contentTransition(reduceMotion ? .identity : .numericText())
-                        .animation(reduceMotion ? nil : .easeOut(duration: Motion.valueChange), value: score)
-                        .accessibilityLabel("Evaluation")
-                        .accessibilityValue(AnalysisScore.spoken(score))
-                }
-            }
-            hero
-            Text(model.detailLine)
-                .typography(.callout)
-                .foregroundStyle(detailIsCaution ? Palette.caution : Palette.ink2)
-                .fixedSize(horizontal: false, vertical: true)
-                // The hero move already speaks this line as its label; VoiceOver reads it once.
-                .accessibilityHidden(model.detailRepeatsHero)
-        }
+        AnalysisResultReadout(
+            content: model.resultReadout,
+            score: displayedScore,
+            isFinal: isFinal,
+            detail: model.detailRepeatsHero ? nil : model.detailLine,
+            detailIsCaution: detailIsCaution
+        )
         .accessibilityElement(children: .contain)
         .accessibilityAddTraits(model.isThinking ? .updatesFrequently : [])
-    }
-
-    @ViewBuilder
-    private var hero: some View {
-        if let checkmate = model.noLegalMoves {
-            Text(checkmate ? "Checkmate" : "Stalemate")
-                .typography(.moveHero, width: 75)
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
-                .foregroundStyle(Palette.ink)
-        } else if let best = model.bestMove {
-            AnalysisHeroMove(
-                san: best.san,
-                spokenDescription: model.heroSpokenDescription ?? best.san,
-                isFinal: isFinal
-            )
-            .id(best.san)
-            .transition(.opacity.animation(reduceMotion ? nil : .easeOut(duration: Motion.valueChange)))
-        } else {
-            Text(model.isThinking ? "\u{2026}" : "\u{2014}")
-                .typography(.moveHero)
-                .lineLimit(1)
-                .foregroundStyle(Palette.ink3)
-                .accessibilityHidden(true)
-        }
     }
 
     /// The best move castles with a right that was only inferred from the screenshot
@@ -397,22 +415,16 @@ private struct AnalysisScreen: View {
                 model.turnOffAssumedCastling()
             }
             .accessibilityLabel("Turn off \(AnalysisScreenModel.spokenCastlingName(right))")
+            .accessibilityInputLabels([
+                AnalysisScreenModel.turnOffTitle(right),
+                "Turn off \(AnalysisScreenModel.spokenCastlingName(right))",
+            ])
             .accessibilityHint("Analyzes again without it. Re-running is free.")
             .accessibilityIdentifier("analysis.turnOffCastling")
         }
     }
 
-    private var statusLabel: String {
-        switch model.runState {
-        case .starting, .running: "Thinking"
-        case .completed: model.noLegalMoves != nil ? "No legal moves" : "Best move"
-        case .interrupted: "Stopped"
-        case .failed: "Engine error"
-        case .notStarted: "Best move"
-        }
-    }
-
-    /// The score shown next to the label, never for checkmate or stalemate.
+    /// The score shown beside the badge, never for checkmate or stalemate.
     private var displayedScore: WhiteScore? {
         guard model.noLegalMoves == nil, model.bestMove != nil else { return nil }
         return model.readout?.score
@@ -433,6 +445,10 @@ private struct AnalysisScreen: View {
             position: model.position,
             plies: expanded ? nil : AnalysisLine.collapsedPlies
         )
+        // The row is a button only while tapping it changes something. At accessibility text
+        // sizes the line is always fully expanded, so the trait used to advertise a button
+        // whose activation did nothing and announced nothing.
+        let canExpand = sanMoves.count > AnalysisLine.collapsedPlies && !dynamicTypeSize.isAccessibilitySize
         return AnalysisLabeledRow(label: "Line", alignment: .firstTextBaseline) {
             Text(lineText(tokens, isTruncated: isTruncated, placeholder: sanMoves.isEmpty))
                 .typography(.line)
@@ -442,21 +458,42 @@ private struct AnalysisScreen: View {
         }
         .contentShape(Rectangle())
         .onTapGesture {
-            guard sanMoves.count > AnalysisLine.collapsedPlies else { return }
+            guard canExpand else { return }
             model.isLineExpanded.toggle()
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Engine line")
-        .accessibilityValue(sanMoves.isEmpty ? "None yet" : AnalysisSpeech.line(sanMoves: sanMoves))
-        .accessibilityAddTraits(sanMoves.count > AnalysisLine.collapsedPlies ? .isButton : [])
+        // The value follows what is on screen: collapsed, it is the moves that are shown.
+        .accessibilityValue(
+            sanMoves.isEmpty
+                ? "None yet"
+                : AnalysisSpeech.line(sanMoves: sanMoves, plies: expanded ? sanMoves.count : AnalysisLine.collapsedPlies)
+        )
+        .accessibilityAddTraits(canExpand ? .isButton : [])
+        .accessibilityHint(canExpand ? (expanded ? "Shows fewer moves" : "Shows the whole line") : "")
+        // A declared action rather than a synthesized tap on an `onTapGesture`.
+        .accessibilityAction {
+            guard canExpand else { return }
+            model.isLineExpanded.toggle()
+        }
     }
 
+    /// The engine line as one attributed string.
+    ///
+    /// The first move of the line is the recommendation, and cobalt is what says so in a run of
+    /// otherwise identical monospaced text. Color alone cannot carry that: cobalt against the
+    /// ink beside it is 2.9:1 in light mode and 2.3:1 in dark, so the two are not separable by
+    /// lightness either, and a reader with a color vision deficiency has nothing to go on. It
+    /// is therefore also set in bold, which is a second signal that survives any color
+    /// treatment, Differentiate Without Color included (design.md 12).
     private func lineText(_ tokens: [AnalysisLineToken], isTruncated: Bool, placeholder: Bool) -> AttributedString {
         guard !placeholder else {
             var empty = AttributedString("\u{2014}")
             empty.foregroundColor = Palette.ink3
             return empty
         }
+        let resolved = Typography.resolve(.line, sizeCategory: UIContentSizeCategory(dynamicTypeSize))
+        let firstMoveFont = Font(UIFont.monospacedSystemFont(ofSize: resolved.pointSize, weight: .bold) as CTFont)
         var result = AttributedString()
         for token in tokens {
             if !result.characters.isEmpty {
@@ -464,6 +501,7 @@ private struct AnalysisScreen: View {
             }
             var piece = AttributedString(token.text)
             piece.foregroundColor = token.isFirstMove ? Palette.accent : (token.kind == .moveNumber ? Palette.ink2 : Palette.ink)
+            if token.isFirstMove { piece.font = firstMoveFont }
             result += piece
         }
         if isTruncated {
@@ -504,8 +542,19 @@ private struct AnalysisScreen: View {
             HStack(spacing: Spacing.s5) { statsItems(depth: depth, time: time, speed: speed) }
             VStack(alignment: .leading, spacing: Spacing.s1) { statsItems(depth: depth, time: time, speed: speed) }
         }
-        .foregroundStyle(readout == nil ? Palette.ink3 : Palette.ink2)
-        .accessibilityElement(children: .combine)
+        // `ink2`, not `ink3`, before the first report: the row is still something to read, and
+        // `ink3` is 3.3:1 on canvas.
+        .foregroundStyle(Palette.ink2)
+        .accessibilityElement(children: .ignore)
+        // The three figures are abbreviated for a fixed monospaced column. Spoken they need
+        // naming: "depth 20, 1.4 s slash 3 s, 2.1 M n slash s" says what none of them are.
+        .accessibilityLabel("Engine")
+        .accessibilityValue(AnalysisSpeech.engineFigures(
+            depth: readout?.depth,
+            elapsed: readout?.elapsed,
+            thinkTime: model.runThinkTime,
+            nodesPerSecond: readout?.nodesPerSecond
+        ))
         .accessibilityAddTraits(model.isThinking ? .updatesFrequently : [])
     }
 
@@ -525,9 +574,13 @@ private struct AnalysisScreen: View {
 
     // MARK: Pinned action bar
 
+    /// The pinned bar. The two buttons stack from the first accessibility size, not from the
+    /// third: "Think longer: 30 s" beside the dense New button already needs about 370 pt at
+    /// AccessibilityM, against 343 pt of content on a 375 pt phone, and the primary label
+    /// wraps to two lines.
     @ViewBuilder
     private var actionBar: some View {
-        let layout = dynamicTypeSize >= .accessibility3
+        let layout = dynamicTypeSize.isAccessibilitySize
             ? AnyLayout(VStackLayout(spacing: Spacing.s2))
             : AnyLayout(HStackLayout(spacing: Spacing.s3))
         layout {
@@ -567,7 +620,7 @@ private struct AnalysisScreen: View {
     }
 
     private var newButton: some View {
-        SecondaryButton("New", dense: dynamicTypeSize < .accessibility3) { model.newAnalysis() }
+        SecondaryButton("New", dense: !dynamicTypeSize.isAccessibilitySize) { model.newAnalysis() }
             .accessibilityHint("Returns to the start screen.")
     }
 
@@ -596,33 +649,6 @@ private struct AnalysisScreen: View {
 }
 
 // MARK: - Pieces
-
-/// The best move in `move.hero`. Long moves switch to the narrow width (a second layout, not a
-/// shrink); only then may the text scale down to 70%.
-private struct AnalysisHeroMove: View {
-    let san: String
-    let spokenDescription: String
-    let isFinal: Bool
-
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    var body: some View {
-        ViewThatFits(in: .horizontal) {
-            Text(san)
-                .typography(.moveHero)
-                .lineLimit(1)
-                .fixedSize(horizontal: true, vertical: false)
-            Text(san)
-                .typography(.moveHero, width: 75)
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
-        }
-        .foregroundStyle(isFinal ? Palette.ink : Palette.ink2)
-        .animation(reduceMotion ? nil : .easeOut(duration: Motion.stateShort), value: isFinal)
-        .accessibilityLabel(spokenDescription)
-        .accessibilityIdentifier(AccessibilityID.analysisBestMove)
-    }
-}
 
 /// An uppercase instrument label in a leading column, followed by content.
 private struct AnalysisLabeledRow<Content: View>: View {

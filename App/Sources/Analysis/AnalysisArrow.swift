@@ -178,9 +178,18 @@ struct AnalysisArrowGeometry: Sendable, Equatable {
 
 // MARK: - Overlay
 
-/// The arrow over the board. Group opacity 0.55 while the engine is thinking, 0.92 when the
-/// result is final. The first arrow draws from tail to tip (220 ms); a changed move fades the
-/// old arrow (120 ms) while the new one draws (180 ms). Reduce Motion: fades only.
+/// The arrow over the board. The cobalt fill is drawn at 55% while the engine is thinking and
+/// fully when the result is final; the halo and the outer edge are always drawn at full
+/// strength, because they are what carries the arrow against the board (design.md section 7).
+///
+/// Fading the whole arrow, halo included, is what the app used to do, and it put the arrow
+/// below 2.6:1 on every board theme tested for the entire length of a search - up to thirty
+/// seconds on a Pro search, during which the arrow is the only thing on screen that says which
+/// move to play. The provisional state still reads as provisional: a white-edged arrow with a
+/// translucent interior, next to a move drawn in muted ink.
+///
+/// The first arrow draws from tail to tip (220 ms); a changed move fades the old arrow (120 ms)
+/// while the new one draws (180 ms). Reduce Motion: fades only.
 struct AnalysisArrowOverlay: View {
     let move: Move?
     let whiteAtBottom: Bool
@@ -198,6 +207,7 @@ struct AnalysisArrowOverlay: View {
                     AnalysisArrowDrawing(
                         geometry: geometry,
                         haloScale: Palette.arrowHaloScale(for: contrast),
+                        fillOpacity: isFinal ? 1 : Self.provisionalFillOpacity,
                         drawDuration: reduceMotion ? nil : (hasShownArrow ? 0.18 : 0.22)
                     )
                     .id("\(move.uci)-\(whiteAtBottom)")
@@ -207,24 +217,34 @@ struct AnalysisArrowOverlay: View {
             }
             .frame(width: side, height: side)
         }
-        .opacity(isFinal ? 0.92 : 0.55)
         .animation(reduceMotion ? nil : .easeOut(duration: Motion.stateShort), value: isFinal)
         .allowsHitTesting(false)
         .accessibilityHidden(true)
     }
+
+    /// How strongly the cobalt fill is drawn while the engine is still searching. The halo and
+    /// the outer edge are not faded with it (`AccessibilityContrastTests`).
+    nonisolated static let provisionalFillOpacity: CGFloat = 0.55
 }
 
 /// One arrow instance: animates its own draw-in when it appears.
 private struct AnalysisArrowDrawing: View {
     let geometry: AnalysisArrowGeometry
     let haloScale: CGFloat
+    /// How strongly the cobalt fill is drawn: 1 for a final answer, less while searching.
+    let fillOpacity: CGFloat
     /// Seconds for the draw-in, or nil to appear complete (Reduce Motion).
     let drawDuration: Double?
 
     @State private var progress: CGFloat = 0
 
     var body: some View {
-        AnalysisArrowCanvas(geometry: geometry, progress: drawDuration == nil ? 1 : progress, haloScale: haloScale)
+        AnalysisArrowCanvas(
+            geometry: geometry,
+            progress: drawDuration == nil ? 1 : progress,
+            fillOpacity: fillOpacity,
+            haloScale: haloScale
+        )
             .onAppear {
                 guard let drawDuration else { return }
                 withAnimation(.easeOut(duration: drawDuration)) { progress = 1 }
@@ -236,11 +256,17 @@ private struct AnalysisArrowDrawing: View {
 private struct AnalysisArrowCanvas: View, Animatable {
     let geometry: AnalysisArrowGeometry
     var progress: CGFloat
+    /// Animated together with `progress`, so the fill can strengthen when the answer lands
+    /// without the halo or the edge changing with it.
+    var fillOpacity: CGFloat
     let haloScale: CGFloat
 
-    nonisolated var animatableData: CGFloat {
-        get { progress }
-        set { progress = newValue }
+    nonisolated var animatableData: AnimatablePair<CGFloat, CGFloat> {
+        get { AnimatablePair(progress, fillOpacity) }
+        set {
+            progress = newValue.first
+            fillOpacity = newValue.second
+        }
     }
 
     @Environment(\.displayScale) private var displayScale
@@ -249,6 +275,7 @@ private struct AnalysisArrowCanvas: View, Animatable {
         let geometry = geometry
         let progress = progress
         let haloScale = haloScale
+        let fillOpacity = fillOpacity
         let pixel = 1 / max(displayScale, 1)
         Canvas { context, _ in
             let side = geometry.squareSide
@@ -260,7 +287,7 @@ private struct AnalysisArrowCanvas: View, Animatable {
             // 2. Halo and 3. fill replace what is under them, so overlaps never double up.
             context.blendMode = .copy
             context.stroke(outline, with: .color(Palette.arrowHalo), style: StrokeStyle(lineWidth: 2 * halo, lineJoin: .round))
-            context.fill(outline, with: .color(Palette.arrowFill))
+            context.fill(outline, with: .color(Palette.arrowFill.opacity(fillOpacity)))
 
             if progress >= 1, let center = geometry.promotionBadgeCenter, let promotion = geometry.promotion {
                 let ring = AnalysisArrowGeometry.Proportion.badgeRing * side
@@ -269,7 +296,7 @@ private struct AnalysisArrowCanvas: View, Animatable {
                                                    width: 2 * (radius + ring), height: 2 * (radius + ring)))
                 let inner = Path(ellipseIn: CGRect(x: center.x - radius, y: center.y - radius, width: 2 * radius, height: 2 * radius))
                 context.fill(outer, with: .color(Palette.arrowHalo))
-                context.fill(inner, with: .color(Palette.arrowFill))
+                context.fill(inner, with: .color(Palette.arrowFill.opacity(fillOpacity)))
                 context.blendMode = .normal
                 if let glyph = GlyphOutlines.shared.path(for: promotion, solid: true) {
                     let bounds = glyph.boundingRect

@@ -4,22 +4,30 @@ import UIKit
 import UniformTypeIdentifiers
 
 /// Home (design.md 9.1): the intro at the top, the import actions anchored at the bottom
-/// within thumb reach, stacked by speed: latest screenshot, Photos, Paste, then the
-/// one-step Shortcut. The whole screen accepts dropped images.
+/// within thumb reach, stacked by speed in one inset grouped card: latest screenshot, Photos,
+/// Paste, then the one-step Shortcut. The whole screen accepts dropped images.
 struct HomeView: View {
     @Environment(AppModel.self) private var app
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.openURL) private var openURL
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     @State private var model = CaptureHomeModel()
+    /// An import failure is a footer four elements below the button that caused it, so it is
+    /// announced and focused rather than left to be found.
+    @AccessibilityFocusState private var importErrorFocused: Bool
     @State private var pickerItem: PhotosPickerItem?
     @State private var isDropTargeted = false
 
     /// Row symbols grow with the `body` text next to them (ListRow's 20 pt icon column and
-    /// 14 pt chevron at the default size).
-    @ScaledMetric(relativeTo: .body) private var rowIconSide: CGFloat = 20
-    @ScaledMetric(relativeTo: .body) private var chevronSize: CGFloat = 14
+    /// 14 pt chevron at the default size), and stop where ListRow's do, so the words in the
+    /// row keep their width (`Layout.maximumRowIcon`).
+    @ScaledMetric(relativeTo: .body) private var scaledRowIconSide: CGFloat = 20
+    @ScaledMetric(relativeTo: .body) private var scaledChevronSize: CGFloat = 14
+
+    private var rowIconSide: CGFloat { min(scaledRowIconSide, Layout.maximumRowIcon) }
+    private var chevronSize: CGFloat { min(scaledChevronSize, Layout.maximumRowChevron) }
 
     init() {}
 
@@ -27,6 +35,7 @@ struct HomeView: View {
         GeometryReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
+                    CreditsInlineIndicator()
                     intro
                     Spacer(minLength: Spacing.s6)
                     actions
@@ -42,7 +51,9 @@ struct HomeView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) { SettingsToolbarButton() }
-            ToolbarItem(placement: .topBarTrailing) { CreditsToolbarIndicator() }
+            ToolbarItem(placement: .topBarTrailing) {
+                CreditsToolbarIndicator(dynamicTypeSize: dynamicTypeSize)
+            }
         }
         .overlay {
             if isDropTargeted {
@@ -53,6 +64,11 @@ struct HomeView: View {
         .animation(reduceMotion ? nil : .easeOut(duration: Motion.stateShort), value: isDropTargeted)
         .onDrop(of: [.image], isTargeted: $isDropTargeted) { providers in
             model.importItemProviders(providers, source: .dragAndDrop, app: app)
+        }
+        .onChange(of: model.importError) { _, error in
+            guard let error else { return }
+            AccessibilityNotification.Announcement(error).post()
+            importErrorFocused = true
         }
         .photosPicker(
             isPresented: $model.showsScreenshotPicker,
@@ -93,7 +109,11 @@ struct HomeView: View {
 
     private var intro: some View {
         VStack(alignment: .leading, spacing: Spacing.s3) {
-            Text("Best Move")
+            // The app's name, the same string as CFBundleDisplayName and the share sheet, so
+            // every place the user reads the name agrees. It is longer than the store name's
+            // brand alone and wraps to two lines on a narrow phone at large text sizes, which
+            // is why nothing below it assumes a one-line height.
+            Text("Chess Best Move")
                 .typography(.display)
                 .foregroundStyle(Palette.ink)
                 .accessibilityAddTraits(.isHeader)
@@ -153,21 +173,31 @@ struct HomeView: View {
 
     // MARK: Actions
 
+    /// The four import actions as one inset grouped list: a `GroupedCard` holding the primary
+    /// "Use latest screenshot" row, Photos, Paste and the Shortcut, with the state captions and
+    /// any import error as the group's footer under the card.
     private var actions: some View {
         VStack(alignment: .leading, spacing: 0) {
-            latestScreenshot
-            if let error = model.importError {
-                Text(error)
-                    .typography(.caption)
-                    .foregroundStyle(Palette.danger)
-                    .padding(.top, Spacing.s2)
+            GroupedCard {
+                latestScreenshotRow
+                photosRow
+                GroupedRowSeparator()
+                pasteRow
+                GroupedRowSeparator()
+                shortcutSetupRow
+                #if DEBUG
+                GroupedRowSeparator()
+                debugSampleRow
+                #endif
             }
-            rows
-                .padding(.top, Spacing.s4)
+            footer
         }
     }
 
-    private var latestScreenshot: some View {
+    /// The primary row. Its title and second line follow the clock (relative ages such as
+    /// "Taken 12 seconds ago"), so it redraws on a timeline of its own rather than redrawing
+    /// the whole card every second.
+    private var latestScreenshotRow: some View {
         let ticks = model.latest == nil ? 3600.0 : 1.0
         return TimelineView(.periodic(from: .now, by: ticks)) { timeline in
             let now = timeline.date
@@ -177,30 +207,47 @@ struct HomeView: View {
                 analyzed: model.analyzed,
                 now: now
             )
-            VStack(alignment: .leading, spacing: Spacing.s2) {
-                Button {
-                    #if DEBUG
-                    DebugTimeline.shared.begin("latestScreenshotTap")
-                    #endif
-                    Task {
-                        await model.useLatestScreenshot(app: app) {
-                            if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
-                        }
+            Button {
+                #if DEBUG
+                DebugTimeline.shared.begin("latestScreenshotTap")
+                #endif
+                Task {
+                    await model.useLatestScreenshot(app: app) {
+                        if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
                     }
-                } label: {
-                    latestLabel(state, now: now)
                 }
-                .buttonStyle(PrimaryButtonStyle(minHeight: 64))
-                .disabled(!state.isEnabled || model.isImporting)
-                .accessibilityIdentifier(CaptureAccessibilityID.homeLatestScreenshot)
-                .accessibilityLabel(state.title(now: now))
-                .accessibilityValue(spokenDetail(state, now: now))
+            } label: {
+                latestLabel(state, now: now)
+            }
+            .buttonStyle(GroupedPrimaryRowButtonStyle(minHeight: 64))
+            .disabled(!state.isEnabled || model.isImporting)
+            .accessibilityIdentifier(CaptureAccessibilityID.homeLatestScreenshot)
+            .accessibilityLabel(state.title(now: now))
+            .accessibilityValue(spokenDetail(state, now: now))
+            // The steps above name a fixed string ("Tap Use latest screenshot") while the
+            // title changes to "Analyze new screenshot" for a fresh screenshot, which is
+            // exactly the state a first-time reader following the steps is in. Voice Control
+            // matches either name.
+            .accessibilityInputLabels([state.title(now: now), "Use latest screenshot"])
+        }
+    }
 
-                if let caption = state.caption(deviceName: AppDevice.current.name) {
+    /// The footer under the card, the way an inset grouped list explains a section: the import
+    /// error first, then the caption for the current photo-access state, then the Settings link
+    /// that limited access offers. It is absent when there is nothing to say.
+    @ViewBuilder
+    private var footer: some View {
+        let state = photoAccessState
+        let caption = state.caption(deviceName: AppDevice.current.name)
+        if model.importError != nil || caption != nil || state == .limited {
+            GroupedFooter {
+                if let error = model.importError {
+                    Text(error)
+                        .foregroundStyle(Palette.danger)
+                        .accessibilityFocused($importErrorFocused)
+                }
+                if let caption {
                     Text(caption)
-                        .typography(.caption)
-                        .foregroundStyle(Palette.ink2)
-                        .fixedSize(horizontal: false, vertical: true)
                 }
                 if state == .limited {
                     TextLink("Allow full access in Settings") {
@@ -209,6 +256,18 @@ struct HomeView: View {
                 }
             }
         }
+    }
+
+    /// The button state as far as the footer needs it. The caption and the limited-access link
+    /// depend only on photo access, never on the clock, so the footer does not need the primary
+    /// row's timeline date (only the promoted title inside the row does).
+    private var photoAccessState: CaptureLatestScreenshotButton {
+        CaptureLatestScreenshotButton.make(
+            access: model.access,
+            latest: model.latest,
+            analyzed: model.analyzed,
+            now: .now
+        )
     }
 
     private func latestLabel(_ state: CaptureLatestScreenshotButton, now: Date) -> some View {
@@ -234,23 +293,32 @@ struct HomeView: View {
         .padding(.vertical, Spacing.s2)
     }
 
+    /// The tile at the head of the primary row.
+    ///
+    /// It grows with the text like the icon column of the rows under it, and stops where that
+    /// column stops (`Layout.maximumRowIcon` plus the tile's own padding), so the card's icon
+    /// column stays a straight vertical line at every text size. It used to be frozen at 48 pt
+    /// while the rows below it grew past 60.
+    private var thumbnailSide: CGFloat { max(48, rowIconSide + 2 * Spacing.s2) }
+
     @ViewBuilder
     private func thumbnail(for state: CaptureLatestScreenshotButton) -> some View {
         let shape = RoundedRectangle(cornerRadius: Radius.r1, style: .continuous)
+        let side = thumbnailSide
         if case .latest = state, let image = model.thumbnail {
             Image(decorative: image, scale: 1)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 48, height: 48)
+                .frame(width: side, height: side)
                 .clipShape(shape)
                 .overlay(shape.strokeBorder(Palette.onAccent.opacity(0.4), lineWidth: LineWidth.control))
                 .accessibilityIgnoresInvertColors()
         } else {
-            // Scales with the text, up to what the 48 pt thumbnail slot holds.
             Image(systemName: Self.symbol(for: state))
-                .font(.system(size: min(rowIconSide, 28), weight: .regular))
-                .frame(width: 48, height: 48)
+                .font(.system(size: side * 0.58, weight: .regular))
+                .frame(width: side, height: side)
                 .overlay(shape.strokeBorder(.foreground.opacity(0.4), lineWidth: LineWidth.control))
+                .accessibilityHidden(true)
         }
     }
 
@@ -262,102 +330,102 @@ struct HomeView: View {
         }
     }
 
+    /// What VoiceOver reads as the row's value.
+    ///
+    /// While an import runs it says so, because the row is disabled for the duration and the
+    /// spinner inside it is swallowed by the row's own label. When photo access is off or
+    /// restricted the reason comes with it, rather than being left in the card's footer four
+    /// elements further down: without that, a reader taps the main button of the first screen,
+    /// hears nothing, and the button goes dim and comes back.
     private func spokenDetail(_ state: CaptureLatestScreenshotButton, now: Date) -> String {
+        if model.isImporting { return "Importing" }
+        var parts: [String] = []
         switch state {
         case .latest(let asset, _):
-            guard let date = asset.creationDate else { return "" }
-            return "Taken " + CaptureRecentScreenshotPolicy.spokenAgeText(since: date, now: now)
+            if let date = asset.creationDate {
+                parts.append("Taken " + CaptureRecentScreenshotPolicy.spokenAgeText(since: date, now: now))
+            }
         default:
-            return state.detail(now: now) ?? ""
+            if let detail = state.detail(now: now) { parts.append(detail) }
         }
+        if let caption = state.caption(deviceName: AppDevice.current.name) { parts.append(caption) }
+        return parts.joined(separator: ". ")
     }
 
-    private var rows: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Hairline()
-            let photosRow = ListRow("Choose from Photos", systemImage: "photo.on.rectangle", showsChevron: true)
-            PhotosPicker(selection: $pickerItem, matching: .images, preferredItemEncoding: .current, photoLibrary: .shared()) {
-                photosRow
-            }
-            .buttonStyle(.listRow)
-            .disabled(model.isImporting)
-            .accessibilityIdentifier(CaptureAccessibilityID.homeChooseFromPhotos)
-
-            Hairline(leadingInset: rowTitleInset)
-            pasteRow
-
-            Hairline(leadingInset: rowTitleInset)
-            Button {
-                app.presentShortcutSetup()
-            } label: {
-                shortcutRow
-            }
-            .buttonStyle(.listRow)
-            .accessibilityIdentifier(CaptureAccessibilityID.homeShortcutSetup)
-
-            #if DEBUG
-            Hairline(leadingInset: rowTitleInset)
-            Button {
-                if let sample = DebugSample.load() { app.importImage(sample) }
-            } label: {
-                ListRow("Analyze sample screenshot", systemImage: "ladybug")
-            }
-            .buttonStyle(.listRow)
-            .accessibilityIdentifier(AccessibilityID.homeDebugSample)
-            #endif
+    private var photosRow: some View {
+        PhotosPicker(selection: $pickerItem, matching: .images, preferredItemEncoding: .current, photoLibrary: .shared()) {
+            ListRow("Choose from Photos", systemImage: "photo.on.rectangle", showsChevron: true)
+                .groupedRow()
         }
+        .buttonStyle(.listRow)
+        .disabled(model.isImporting)
+        .accessibilityIdentifier(CaptureAccessibilityID.homeChooseFromPhotos)
     }
 
-    /// Where row titles start, and so the hairlines between rows: the icon column plus 16 pt.
-    private var rowTitleInset: CGFloat { rowIconSide + Spacing.s4 }
-
-    /// Paste (design.md 9.1), laid out as a ListRow: the clipboard symbol in the icon column
-    /// and the system paste control, 44 pt tall and tinted `ink`, at the title column. The
-    /// system enables the control only while the pasteboard holds an image.
+    /// Paste (design.md 9.1), laid out as a row of the card: the clipboard symbol in the icon
+    /// column and the system paste control, 44 pt tall and filled with the card's own color so
+    /// its label reads like the other row titles, at the title column. The system enables the
+    /// control only while the pasteboard holds an image, and dims it otherwise.
     private var pasteRow: some View {
         HStack(spacing: Spacing.s4) {
-            Image(systemName: "doc.on.clipboard")
-                .font(.system(size: rowIconSide))
-                .foregroundStyle(Palette.ink)
-                .frame(width: rowIconSide)
-                .accessibilityHidden(true)
-            CapturePasteControl(isEnabled: !model.isImporting, showsIcon: false, accessibilityIdentifier: CaptureAccessibilityID.homePaste) { providers in
+            CapturePasteControl(isEnabled: !model.isImporting, showsIcon: true, accessibilityIdentifier: CaptureAccessibilityID.homePaste) { providers in
                 model.importItemProviders(providers, source: .paste, app: app)
             }
+            // The control pads its own label; pulling it back by that much starts the control
+            // at the same leading edge as the icon column of the rows above and below it.
+            .padding(.leading, -CapturePasteControl.labelInset)
             Spacer(minLength: 0)
         }
-        .frame(minHeight: Layout.listRowHeight)
+        .groupedRow()
     }
 
     /// The Shortcut row explains the zero-tap path: Take Screenshot then Find Best Move, run
     /// from the Action button or Back Tap. Setup opens the Shortcut sheet.
-    private var shortcutRow: some View {
-        HStack(spacing: Spacing.s4) {
-            Image(systemName: "bolt")
-                .font(.system(size: rowIconSide))
-                .foregroundStyle(Palette.ink)
-                .frame(width: rowIconSide)
-                .accessibilityHidden(true)
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Set up the one-step Shortcut")
-                    .typography(.body)
+    private var shortcutSetupRow: some View {
+        Button {
+            app.presentShortcutSetup()
+        } label: {
+            HStack(spacing: Spacing.s4) {
+                Image(systemName: "bolt")
+                    .font(.system(size: rowIconSide))
                     .foregroundStyle(Palette.ink)
-                Text("Take Screenshot, then Find Best Move, from the Action button or Back Tap.")
-                    .typography(.caption)
-                    .foregroundStyle(Palette.ink2)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(width: rowIconSide)
+                    .accessibilityHidden(true)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Set up the one-step Shortcut")
+                        .typography(.body)
+                        .foregroundStyle(Palette.ink)
+                    Text("Take Screenshot, then Find Best Move, from the Action button or Back Tap.")
+                        .typography(.caption)
+                        .foregroundStyle(Palette.ink2)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                Image(systemName: "chevron.right")
+                    .font(.system(size: chevronSize, weight: .semibold))
+                    .foregroundStyle(Palette.ink3)
+                    .accessibilityHidden(true)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            Image(systemName: "chevron.right")
-                .font(.system(size: chevronSize, weight: .semibold))
-                .foregroundStyle(Palette.ink3)
-                .accessibilityHidden(true)
+            .padding(.vertical, Spacing.s2)
+            .groupedRow()
+            .accessibilityElement(children: .combine)
         }
-        .padding(.vertical, Spacing.s2)
-        .frame(minHeight: Layout.listRowHeight)
-        .contentShape(Rectangle())
-        .accessibilityElement(children: .combine)
+        .buttonStyle(.listRow)
+        .accessibilityIdentifier(CaptureAccessibilityID.homeShortcutSetup)
     }
+
+    #if DEBUG
+    private var debugSampleRow: some View {
+        Button {
+            if let sample = DebugSample.load() { app.importImage(sample) }
+        } label: {
+            ListRow("Analyze sample screenshot", systemImage: "ladybug")
+                .groupedRow()
+        }
+        .buttonStyle(.listRow)
+        .accessibilityIdentifier(AccessibilityID.homeDebugSample)
+    }
+    #endif
 
     // MARK: Drag and drop
 

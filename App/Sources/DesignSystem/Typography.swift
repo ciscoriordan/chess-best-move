@@ -4,149 +4,218 @@ import UIKit
 
 /// Text tokens from docs/design.md section 4.
 ///
-/// Apply with `.typography(.headline)`. The modifier builds the font for the current
-/// Dynamic Type size: it scales the base size with the token's text style, caps it at the
-/// token's maximum, and then sets Bricolage Grotesque's variation axes (`wght`, `opsz`,
-/// `wdth`) explicitly for the final size, because Core Text does not apply optical size
-/// automatically (design.md section 2).
+/// Apply with `.typography(.headline)`. Every token is set in a system face: SF Pro for text,
+/// SF Mono for notation and numbers. The system font carries its own optical sizing (it swaps
+/// between the Text and the Display cut as the point size crosses 20 pt), a full weight range
+/// and three widths, so the tokens ask for those rather than driving variation axes by hand.
+///
+/// The modifier builds the font for the current Dynamic Type size: it scales the base size with
+/// the token's text style and caps it at the token's maximum. A token may also ask for a line
+/// height of its own; most do not, and take the font's natural one.
+///
+/// One bundled typeface is left: Noto Sans Symbols 2, for the chess piece glyphs, because the
+/// system has no chess glyphs (`Typography.symbols`).
 enum TypeToken: String, CaseIterable, Sendable {
-    /// The best move. Bricolage 88/84, 800 / opsz 96 fixed / wdth 90.
+    /// The best move. SF Pro Heavy 80, trimmed to an 80 pt box so the badge around it is tight.
     case moveHero
-    /// Home wordmark, paywall headline. Bricolage 40/42, 750 / auto / 95.
+    /// Home wordmark, paywall headline. SF Pro Bold 34.
     case display
-    /// Screen titles. Bricolage 28/32, 700.
+    /// Screen titles. SF Pro Bold 28.
     case title
-    /// Row titles, paywall option titles. Bricolage 20/24, 650.
+    /// Row titles, paywall option titles. SF Pro Semibold 20.
     case headline
-    /// Paragraphs, instructions. Bricolage 17/23, 420.
+    /// Paragraphs, instructions. SF Pro Regular 17.
     case body
-    /// Button labels. Bricolage 17/22, 650.
+    /// Button labels. SF Pro Semibold 17.
     case button
-    /// Chips, list secondary text, spoken move. Bricolage 15/20, 500.
+    /// Chips, list secondary text, spoken move. SF Pro Regular 15.
     case callout
-    /// Fine print, hints. Bricolage 13/17, 520.
+    /// Fine print, hints. SF Pro Regular 13.
     case caption
-    /// Uppercase instrument labels (BEST MOVE, LINE, THINK). Bricolage 12/16, 650, `case`
-    /// feature, +6% tracking. Short labels only.
+    /// Uppercase instrument labels on a fixed-geometry readout (BEST MOVE, LINE, THINK, PRO,
+    /// EDITED). SF Pro Semibold 12, +6% tracking. Short labels only, and the one text token
+    /// that still stops growing: see `TypeSpec.maximumSize`.
     case label
-    /// Eval next to the hero move. IBM Plex Mono SemiBold 22/26.
+    /// Uppercase section headings (HOW IT WORKS, PURCHASES, CASTLING). The same lettering as
+    /// `label`, with no maximum size, because a heading is part of the reading order and must
+    /// stay larger than nothing in the section it names.
+    case sectionLabel
+    /// Eval next to the hero move. SF Mono Semibold 22.
     case dataLarge
-    /// Depth, clock, nodes per second, prices. IBM Plex Mono Medium 15/20.
+    /// Depth, clock, nodes per second, prices. SF Mono Medium 15.
     case data
-    /// Engine line. IBM Plex Mono Regular 15/22.
+    /// Engine line. SF Mono Regular 15, opened up to a 21 pt line height because a wrapped
+    /// principal variation is dense.
     case line
-    /// Board coordinates, version numbers. IBM Plex Mono Regular 12/16.
+    /// Board coordinates, version numbers. SF Mono Regular 12.
     case dataSmall
 
     var spec: TypeSpec {
         switch self {
         case .moveHero:
-            TypeSpec(face: .bricolage(weight: 800, opticalSize: .fixed(96), width: 90), size: 88, lineHeight: 84,
-                     textStyle: .largeTitle, maximumSize: 110, trackingEm: -0.01)
+            TypeSpec(face: .text(weight: .heavy), size: 80, lineHeight: 80,
+                     textStyle: .largeTitle, maximumSize: 100)
         case .display:
-            TypeSpec(face: .bricolage(weight: 750, opticalSize: .automatic, width: 95), size: 40, lineHeight: 42,
-                     textStyle: .largeTitle, maximumSize: 64)
+            TypeSpec(face: .text(weight: .bold), size: 34, textStyle: .largeTitle, maximumSize: nil)
         case .title:
-            TypeSpec(face: .bricolage(weight: 700, opticalSize: .automatic, width: 100), size: 28, lineHeight: 32,
-                     textStyle: .title1, maximumSize: 44)
+            TypeSpec(face: .text(weight: .bold), size: 28, textStyle: .title1, maximumSize: nil)
         case .headline:
-            TypeSpec(face: .bricolage(weight: 650, opticalSize: .automatic, width: 100), size: 20, lineHeight: 24,
-                     textStyle: .title3, maximumSize: 34)
+            TypeSpec(face: .text(weight: .semibold), size: 20, textStyle: .title3, maximumSize: nil)
         case .body:
-            TypeSpec(face: .bricolage(weight: 420, opticalSize: .automatic, width: 100), size: 17, lineHeight: 23,
-                     textStyle: .body, maximumSize: nil)
+            TypeSpec(face: .text(weight: .regular), size: 17, textStyle: .body, maximumSize: nil)
         case .button:
-            TypeSpec(face: .bricolage(weight: 650, opticalSize: .automatic, width: 100), size: 17, lineHeight: 22,
-                     textStyle: .body, maximumSize: 28)
+            TypeSpec(face: .text(weight: .semibold), size: 17, textStyle: .body, maximumSize: nil)
         case .callout:
-            TypeSpec(face: .bricolage(weight: 500, opticalSize: .automatic, width: 100), size: 15, lineHeight: 20,
-                     textStyle: .callout, maximumSize: nil)
+            TypeSpec(face: .text(weight: .regular), size: 15, textStyle: .subheadline, maximumSize: nil)
         case .caption:
-            TypeSpec(face: .bricolage(weight: 520, opticalSize: .automatic, width: 100), size: 13, lineHeight: 17,
-                     textStyle: .caption1, maximumSize: nil)
+            TypeSpec(face: .text(weight: .regular), size: 13, textStyle: .footnote, maximumSize: nil)
         case .label:
-            TypeSpec(face: .bricolage(weight: 650, opticalSize: .automatic, width: 100), size: 12, lineHeight: 16,
-                     textStyle: .caption2, maximumSize: 20, trackingEm: 0.06, uppercase: true)
+            TypeSpec(face: .text(weight: .semibold), size: 12, textStyle: .caption1, maximumSize: 20,
+                     trackingEm: 0.06, uppercase: true)
+        case .sectionLabel:
+            TypeSpec(face: .text(weight: .semibold), size: 12, textStyle: .caption1, maximumSize: nil,
+                     trackingEm: 0.06, uppercase: true)
         case .dataLarge:
-            TypeSpec(face: .plexMono(.semiBold), size: 22, lineHeight: 26, textStyle: .title3, maximumSize: 34)
+            TypeSpec(face: .mono(weight: .semibold), size: 22, textStyle: .title3, maximumSize: nil)
         case .data:
-            TypeSpec(face: .plexMono(.medium), size: 15, lineHeight: 20, textStyle: .callout, maximumSize: nil)
+            TypeSpec(face: .mono(weight: .medium), size: 15, textStyle: .subheadline, maximumSize: nil)
         case .line:
-            TypeSpec(face: .plexMono(.regular), size: 15, lineHeight: 22, textStyle: .callout, maximumSize: nil)
+            TypeSpec(face: .mono(weight: .regular), size: 15, lineHeight: 21,
+                     textStyle: .subheadline, maximumSize: nil)
         case .dataSmall:
-            TypeSpec(face: .plexMono(.regular), size: 12, lineHeight: 16, textStyle: .caption2, maximumSize: 18)
+            TypeSpec(face: .mono(weight: .regular), size: 12, textStyle: .caption1, maximumSize: 18)
         }
     }
 }
 
 /// The definition of one text token.
 struct TypeSpec: Sendable, Hashable {
-    enum OpticalSize: Sendable, Hashable {
-        /// `opsz` follows the final (Dynamic Type scaled) point size, clamped to 12...96.
-        case automatic
-        /// `opsz` stays at this value at every size.
-        case fixed(CGFloat)
+    /// The weights this app draws from the system font's range.
+    enum Weight: Sendable, Hashable {
+        case regular, medium, semibold, bold, heavy
+
+        var uiWeight: UIFont.Weight {
+            switch self {
+            case .regular: .regular
+            case .medium: .medium
+            case .semibold: .semibold
+            case .bold: .bold
+            case .heavy: .heavy
+            }
+        }
     }
 
-    enum PlexWeight: String, Sendable, Hashable {
-        case regular = "IBMPlexMono-Regular"
-        case medium = "IBMPlexMono-Medium"
-        case semiBold = "IBMPlexMono-SemiBold"
+    /// The system font's widths. Only the hero move asks for a narrow one, and only when a long
+    /// move would otherwise not fit its line.
+    enum Width: Sendable, Hashable {
+        case standard, condensed, compressed
+
+        var uiWidth: UIFont.Width {
+            switch self {
+            case .standard: .standard
+            case .condensed: .condensed
+            case .compressed: .compressed
+            }
+        }
+
+        /// The width for a value on the 75...100 scale the design document uses for the hero
+        /// move's second layout: 100 is the token's own width, below 100 is condensed and 80 or
+        /// less is compressed.
+        static func forDesignWidth(_ value: CGFloat) -> Width {
+            if value <= 80 { return .compressed }
+            if value < 100 { return .condensed }
+            return .standard
+        }
     }
 
     enum Face: Sendable, Hashable {
-        case bricolage(weight: CGFloat, opticalSize: OpticalSize, width: CGFloat)
-        case plexMono(PlexWeight)
+        /// SF Pro, the system text face.
+        case text(weight: Weight, width: Width = .standard)
+        /// SF Mono, for notation, evaluations and other figures that must not jitter.
+        case mono(weight: Weight)
     }
 
     var face: Face
     /// Base size at the default Dynamic Type size (Large).
     var size: CGFloat
-    /// Line height at the base size; scales proportionally.
-    var lineHeight: CGFloat
+    /// The line height at the base size, scaling proportionally, or nil to take the font's
+    /// natural line height. Only the two tokens whose layout depends on it set a value.
+    var lineHeight: CGFloat?
     /// The text style whose Dynamic Type curve this token follows.
     var textStyle: UIFont.TextStyle
     /// The largest point size at accessibility sizes, or nil for no cap.
+    ///
+    /// A cap is a refusal: the reader asked for larger text and the app declined. Owner
+    /// decision of 2026-09-20 (docs/design.md section 4): only three tokens keep one, and
+    /// each is a fixed-geometry instrument rather than something to read.
+    ///
+    /// - `moveHero` stops at 100 pt because it is already the largest type in the app by a
+    ///   factor of two and it sits in a badge the board's width has to hold.
+    /// - `label` stops at 20 pt because it letters instruments that are drawn at a fixed size
+    ///   (the status pill beside the move, the LINE and THINK column labels, the PRO tag, the
+    ///   EDITED badge on the board). Every one of them is one or two words whose meaning does
+    ///   not depend on size, and every one is also spoken by VoiceOver.
+    /// - `dataSmall` stops at 18 pt because its only shipping use is the rank and file
+    ///   coordinates drawn inside the board's edge squares, which are one eighth of a board
+    ///   whose side comes from the window, not from the text size.
+    ///
+    /// Everything a reader reads - titles, headings, button labels, section headings,
+    /// paragraphs, captions, prices and engine figures - scales without a cap, and the
+    /// layouts give way instead.
     var maximumSize: CGFloat?
-    /// Tracking as a fraction of the point size (-0.01 is -1%).
+    /// Tracking as a fraction of the point size (0.06 is +6%).
     var trackingEm: CGFloat = 0
-    /// Uppercase text with the `case` feature (label token).
+    /// Uppercase text (label token).
     var uppercase: Bool = false
+
+    init(
+        face: Face,
+        size: CGFloat,
+        lineHeight: CGFloat? = nil,
+        textStyle: UIFont.TextStyle,
+        maximumSize: CGFloat?,
+        trackingEm: CGFloat = 0,
+        uppercase: Bool = false
+    ) {
+        self.face = face
+        self.size = size
+        self.lineHeight = lineHeight
+        self.textStyle = textStyle
+        self.maximumSize = maximumSize
+        self.trackingEm = trackingEm
+        self.uppercase = uppercase
+    }
 }
 
 /// A resolved font for one token at one Dynamic Type size.
 struct ResolvedType {
     var uiFont: UIFont
     var pointSize: CGFloat
-    var lineHeight: CGFloat
+    /// The line height the token asked for, or nil when it takes the font's own.
+    var requestedLineHeight: CGFloat?
     var tracking: CGFloat
     var uppercase: Bool
 
     var font: Font { Font(uiFont as CTFont) }
-    /// Extra spacing between lines to approach the token's line height (SwiftUI cannot
-    /// reduce line spacing below the font's natural line height).
+    /// The line height this token lays out on.
+    var lineHeight: CGFloat { requestedLineHeight ?? uiFont.lineHeight }
+    /// Extra spacing between lines to reach the token's line height (SwiftUI cannot reduce line
+    /// spacing below the font's natural line height).
     var lineSpacing: CGFloat { max(0, lineHeight - uiFont.lineHeight) }
-    /// Negative padding for the top and the bottom when the font's natural line height is
-    /// taller than the token's (Bricolage at display sizes: `moveHero` is 105.6 pt natural
-    /// against 84 pt). It trims the excess evenly, like CSS half-leading, so a single line
-    /// takes exactly the token's line height. Lines inside wrapped text keep the natural
-    /// spacing, because SwiftUI's `lineSpacing` cannot be negative.
+    /// Negative padding for the top and the bottom when the font's natural line height is taller
+    /// than the token's. The system font leaves generous leading at display sizes (`moveHero` is
+    /// 95.4 pt natural against 80 pt), which would put air inside the badge around the move. This
+    /// trims the excess evenly, like CSS half-leading, so a single line takes exactly the token's
+    /// line height. Lines inside wrapped text keep the natural spacing, because SwiftUI's
+    /// `lineSpacing` cannot be negative.
     var verticalTrim: CGFloat { min(0, (lineHeight - uiFont.lineHeight) / 2) }
 }
 
 @MainActor
 enum Typography {
-    /// PostScript name of the variable font's default instance ("96pt ExtraBold"). The
-    /// named instances have no PostScript names; every weight comes from variation axes.
-    nonisolated static let bricolagePostScriptName = "BricolageGrotesque-96ptExtraBold"
+    /// The one typeface the app still bundles: chess piece glyphs (U+2654 to U+265F), which the
+    /// system font does not have.
     nonisolated static let symbolsPostScriptName = "NotoSansSymbols2-Regular"
-
-    /// Variation axis tags as integers.
-    enum AxisTag {
-        static let weight = 0x7767_6874  // 'wght'
-        static let opticalSize = 0x6F70_737A  // 'opsz'
-        static let width = 0x7764_7468  // 'wdth'
-    }
 
     private struct CacheKey: Hashable {
         var token: TypeToken
@@ -156,8 +225,9 @@ enum Typography {
 
     private static var cache: [CacheKey: ResolvedType] = [:]
 
-    /// The font for `token` at `sizeCategory`. `width` overrides the `wdth` axis of a
-    /// Bricolage token (for example 75 for the hero move's second layout).
+    /// The font for `token` at `sizeCategory`. `width` narrows a text token for one use, on the
+    /// 75...100 scale of design.md section 4 (the hero move's second layout passes 75). It is
+    /// ignored by the monospaced tokens, which have one width.
     static func resolve(
         _ token: TypeToken,
         sizeCategory: UIContentSizeCategory = .large,
@@ -170,26 +240,16 @@ enum Typography {
         let pointSize = scaledSize(spec, sizeCategory: sizeCategory)
         let uiFont: UIFont
         switch spec.face {
-        case .bricolage(let weight, let opticalSize, let defaultWidth):
-            let opsz: CGFloat
-            switch opticalSize {
-            case .automatic: opsz = pointSize
-            case .fixed(let value): opsz = value
-            }
-            uiFont = bricolage(
-                size: pointSize,
-                weight: weight,
-                opticalSize: opsz,
-                width: width ?? defaultWidth,
-                uppercaseForms: spec.uppercase
-            )
-        case .plexMono(let weight):
-            uiFont = UIFont(name: weight.rawValue, size: pointSize) ?? .monospacedSystemFont(ofSize: pointSize, weight: .regular)
+        case .text(let weight, let defaultWidth):
+            let resolvedWidth = width.map(TypeSpec.Width.forDesignWidth) ?? defaultWidth
+            uiFont = .systemFont(ofSize: pointSize, weight: weight.uiWeight, width: resolvedWidth.uiWidth)
+        case .mono(let weight):
+            uiFont = .monospacedSystemFont(ofSize: pointSize, weight: weight.uiWeight)
         }
         let resolved = ResolvedType(
             uiFont: uiFont,
             pointSize: pointSize,
-            lineHeight: spec.lineHeight * pointSize / spec.size,
+            requestedLineHeight: spec.lineHeight.map { $0 * pointSize / spec.size },
             tracking: spec.trackingEm * pointSize,
             uppercase: spec.uppercase
         )
@@ -203,32 +263,6 @@ enum Typography {
         let scaled = UIFontMetrics(forTextStyle: spec.textStyle).scaledValue(for: spec.size, compatibleWith: traits)
         let capped = spec.maximumSize.map { min(scaled, $0) } ?? scaled
         return (capped * 2).rounded() / 2
-    }
-
-    /// Bricolage Grotesque with every variation axis set explicitly.
-    static func bricolage(
-        size: CGFloat,
-        weight: CGFloat,
-        opticalSize: CGFloat,
-        width: CGFloat,
-        uppercaseForms: Bool = false
-    ) -> UIFont {
-        let variations: [Int: CGFloat] = [
-            AxisTag.weight: min(max(weight, 200), 800),
-            AxisTag.opticalSize: min(max(opticalSize, 12), 96),
-            AxisTag.width: min(max(width, 75), 100),
-        ]
-        var attributes: [UIFontDescriptor.AttributeName: Any] = [
-            .name: bricolagePostScriptName,
-            UIFontDescriptor.AttributeName(rawValue: kCTFontVariationAttribute as String): variations,
-        ]
-        if uppercaseForms {
-            attributes[.featureSettings] = [[
-                UIFontDescriptor.FeatureKey(rawValue: kCTFontOpenTypeFeatureTag as String): "case",
-                UIFontDescriptor.FeatureKey(rawValue: kCTFontOpenTypeFeatureValue as String): 1,
-            ]]
-        }
-        return UIFont(descriptor: UIFontDescriptor(fontAttributes: attributes), size: size)
     }
 
     /// Noto Sans Symbols 2 (chess glyphs) at `size`.
@@ -255,7 +289,7 @@ private struct TypographyModifier: ViewModifier {
 
 extension View {
     /// Sets the font, line spacing, tracking and case of a design-system text token.
-    /// `width` overrides the Bricolage `wdth` axis (75...100).
+    /// `width` narrows the face for this one use, on the 75...100 scale of design.md section 4.
     func typography(_ token: TypeToken, width: CGFloat? = nil) -> some View {
         modifier(TypographyModifier(token: token, width: width))
     }
@@ -266,7 +300,7 @@ extension View {
         VStack(alignment: .leading, spacing: Spacing.s3) {
             Text("Nxf7+").typography(.moveHero)
             Text("exd8=Q#").typography(.moveHero, width: 75)
-            Text("Best Move").typography(.display)
+            Text("Chess Best Move").typography(.display)
             Text("No board found").typography(.title)
             Text("Yearly").typography(.headline)
             Text(AppCopy.homeIntro).typography(.body)
@@ -274,6 +308,7 @@ extension View {
             Text("Knight takes f7, check").typography(.callout)
             Text("This didn't use a free analysis.").typography(.caption)
             Text("Best move").typography(.label)
+            Text("How it works").typography(.sectionLabel)
             Text("+2.35").typography(.dataLarge)
             Text("depth 24    3.0\u{00A0}s    2.3 M n/s").typography(.data)
             Text("1. Nxf7+ Kxf7 2. Qh5+ g6 3. Qxe5").typography(.line)

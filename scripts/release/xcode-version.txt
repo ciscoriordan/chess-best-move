@@ -1,0 +1,15 @@
+# The Xcode that archives for the App Store. scripts/check-release-xcode.sh fails an archive
+# built with any other one.
+#
+# Two Xcodes are installed on this Mac: /Applications/Xcode.app and a beta alongside it. A
+# submission built with a beta Xcode or a beta SDK is rejected by App Store Connect, and
+# nothing in the build says which one ran, so the version is pinned here instead of remembered.
+# LicenseInfo.plist cannot be used to tell them apart: on 2026-09-20 both the release and the
+# 27.1 beta reported licenseType GM.
+#
+# To move to a new Xcode: select it (sudo xcode-select -s /Applications/<the one>.app), check
+# that it is a released version and not a beta, run the tests, then put its build version here.
+# `xcodebuild -version` prints the two values.
+
+version 27.0
+build 27A266a

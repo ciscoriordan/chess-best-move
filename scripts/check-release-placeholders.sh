@@ -18,6 +18,10 @@
 # line. The check also fails when it cannot read the sources, so a build phase that denies it
 # access blocks the archive instead of passing it.
 #
+# It then runs scripts/check-release-xcode.sh, which fails the archive when the Xcode running it
+# is not the one pinned in scripts/release/xcode-version.txt. Two Xcodes are installed on this
+# Mac, and a build made with a beta one is rejected by App Store Connect.
+#
 # It then runs scripts/check-release-source-tag.sh, which resolves the source links the app
 # builds from its own version. A URL that resolves is not something a pattern can see, so that
 # part is a network check; it fails the archive only when it reaches GitHub and the tag is not
@@ -73,6 +77,15 @@ if [ -n "$all" ]; then
     exit 1
 fi
 echo "Release gate: no placeholder or forbidden URLs in App/Sources or App/Info.plist."
+
+# Which Xcode produced the archive. A beta Xcode or a beta SDK is rejected by App Store
+# Connect, and a finished archive does not say which one built it, so this runs before it.
+xcode_check="$(dirname "$0")/check-release-xcode.sh"
+if [ ! -r "$xcode_check" ]; then
+    echo "error: Release gate: $xcode_check is missing. It checks that this archive is built with the Xcode submissions are pinned to."
+    exit 1
+fi
+sh "$xcode_check" --always || exit 1
 
 # The GPLv3 source links are built at run time from the app's version (SettingsLegal.swift,
 # sourceURL), so no pattern above can see whether they resolve. The companion script asks

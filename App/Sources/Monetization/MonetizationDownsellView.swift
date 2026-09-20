@@ -26,6 +26,13 @@ struct DownsellView: View {
     /// content instead of a fixed half-height detent with empty space below the button.
     @State private var contentHeight: CGFloat = 0
     @State private var chromeHeight: CGFloat = 0
+    /// Placeholder heights that follow the reader's text size, so the sheet's detent does not
+    /// jump when the products arrive. `@ScaledMetric` is a pure function of the text size and
+    /// never reads the height it helps produce, so there is no layout loop here.
+    @ScaledMetric(relativeTo: .body) private var bodyPlaceholderHeight: CGFloat = 46
+    @ScaledMetric(relativeTo: .body) private var buttonPlaceholderHeight: CGFloat = 52
+    /// Focus is moved to a purchase error, which otherwise only buzzes.
+    @AccessibilityFocusState private var errorFocused: Bool
 
     init(context: DownsellContext, onFinish: @escaping (DownsellOutcome) -> Void) {
         self.context = context
@@ -46,6 +53,7 @@ struct DownsellView: View {
                             .typography(.callout)
                             .foregroundStyle(Palette.danger)
                             .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityFocused($errorFocused)
                     }
                 }
                 .sideGutter()
@@ -57,6 +65,11 @@ struct DownsellView: View {
                 }
             }
             .scrollBounceBehavior(.basedOnSize)
+            .onChange(of: errorText) { _, text in
+                guard let text else { return }
+                AccessibilityNotification.Announcement(text).post()
+                errorFocused = true
+            }
             .onGeometryChange(for: CGFloat.self) { proxy in
                 proxy.safeAreaInsets.top + proxy.safeAreaInsets.bottom
             } action: { height in
@@ -130,8 +143,9 @@ struct DownsellView: View {
                 } label: {
                     HStack(spacing: Spacing.s2) {
                         if phase == .purchasing {
+                            // `ink2`: see the same spinner on the paywall.
                             ProgressView()
-                                .tint(Palette.ink3)
+                                .tint(Palette.ink2)
                             Text(MonetizationCopy.confirming)
                         } else {
                             Text(MonetizationCopy.downsellButton(price: pack.displayPrice))
@@ -152,13 +166,19 @@ struct DownsellView: View {
                 Task { await app.store.loadProducts() }
             }
         } else {
+            // The placeholders follow the reader's text size, the way the paywall's option
+            // placeholders already do (`PaywallOptionRow.minimumHeight`). Fixed at 46 and 52 pt
+            // they stood in for content about 380 pt tall at AccessibilityXXXL, and the sheet's
+            // detent is computed from the measured content height: the buy button jumped
+            // several hundred points out from under the reader's thumb the moment the products
+            // arrived.
             VStack(alignment: .leading, spacing: Spacing.s2) {
                 RoundedRectangle(cornerRadius: Radius.r1, style: .continuous)
                     .fill(Palette.sunken)
-                    .frame(height: 46)
+                    .frame(height: bodyPlaceholderHeight)
                 RoundedRectangle(cornerRadius: Radius.r2, style: .continuous)
                     .fill(Palette.sunken)
-                    .frame(height: Layout.buttonHeight)
+                    .frame(height: max(Layout.buttonHeight, buttonPlaceholderHeight))
                     .padding(.top, Spacing.s2)
             }
             .accessibilityElement(children: .ignore)

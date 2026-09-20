@@ -17,7 +17,9 @@ enum MonetizationCopy {
         "You've used your first \(allowance) analyses."
     }
 
-    static let headline = "Unlimited best moves"
+    /// Title Case, the owner's decision of 2026-09-20 for this one line and the three footer
+    /// links (monetization.md section 6, design.md 14).
+    static let headline = "Unlimited Best Moves"
     /// The benefit lines. The app is universal, so the second line names the device it runs on
     /// ("iPhone", "iPad", "Mac").
     static func benefits(deviceName: String) -> [String] {
@@ -35,11 +37,13 @@ enum MonetizationCopy {
     }
 
     static let confirming = "Confirming..."
-    static let restorePurchases = "Restore purchases"
+    /// The three footer links are Title Case and carry no separators between them (owner
+    /// decision, 2026-09-20; design.md 14 records the exception). The same three labels stay
+    /// in sentence case in Settings, where they are list rows rather than a purchase footer.
+    static let restorePurchases = "Restore Purchases"
     static let restoring = "Restoring..."
-    /// Sentence case, like every button and like the same links in Settings (design.md 14).
-    static let termsOfUse = "Terms of use"
-    static let privacyPolicy = "Privacy policy"
+    static let termsOfUse = "Terms of Use"
+    static let privacyPolicy = "Privacy Policy"
     static let purchasesRestored = "Purchases restored."
     static let nothingToRestore = "No previous purchases found."
     static let tryAgain = "Try again"
@@ -88,6 +92,12 @@ enum MonetizationCopy {
 
     static let lastFreeAnalysis = "That was your last free analysis."
     static let seeOptions = "See options"
+    /// The sentence the last-free-analysis banner carries: the notice and what a tap does. The
+    /// whole strip is one control, so the two parts are one string (monetization.md 4.1).
+    static var lastFreeAnalysisBanner: String { "\(lastFreeAnalysis) \(seeOptions)" }
+    /// VoiceOver hint of that banner. It says what double tapping does, because the banner's
+    /// own label is the sentence rather than a verb.
+    static let seeOptionsHint = "Double tap to see the purchase options."
     static func switchToYearlyTitle(price: String) -> String {
         "Switch to yearly: \(price)/year"
     }

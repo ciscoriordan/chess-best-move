@@ -132,7 +132,7 @@ struct BoardScreenshot: View {
 }
 
 /// The app's own book-diagram board: `diagramLight` / `diagramDark` squares, `PieceGlyph`
-/// pieces, and coordinates in `dataSmall` / `ink3` inside the edge squares.
+/// pieces, and coordinates in `dataSmall` / `boardCoordinate` inside the edge squares.
 struct DiagramBoard: View {
     /// 64 entries in `Square.index` order.
     let board: [Piece?]
@@ -216,7 +216,9 @@ private struct DiagramBoardLabels {
         let placed = label.path.applying(CGAffineTransform(translationX: baselineStart.x, y: baselineStart.y))
         context.stroke(placed, with: .color(squareColor),
                        style: StrokeStyle(lineWidth: 2 * Self.outlineWidth, lineCap: .round, lineJoin: .round))
-        context.fill(placed, with: .color(Palette.ink3))
+        // `boardCoordinate`, not `ink3`: the label sits on the diagram, which does not follow
+        // the theme, and `ink3` measured 1.86:1 on a dark square (`Palette` "Board marks").
+        context.fill(placed, with: .color(Palette.boardCoordinate))
     }
 
     private static func label(_ text: String, font: CTFont) -> Label {
@@ -230,7 +232,7 @@ private struct DiagramBoardLabels {
             var positions = [CGPoint](repeating: .zero, count: count)
             CTRunGetGlyphs(run, CFRange(location: 0, length: count), &glyphs)
             CTRunGetPositions(run, CFRange(location: 0, length: count), &positions)
-            // Plex Mono has every digit and lowercase letter, so no run falls back to another font.
+            // SF Mono has every digit and lowercase letter, so no run falls back to another font.
             for (glyph, position) in zip(glyphs, positions) {
                 guard let outline = CTFontCreatePathForGlyph(font, glyph, nil) else { continue }
                 // Font outlines have y up; the canvas has y down.

@@ -35,6 +35,10 @@ struct ChessBestMoveApp: App {
                 // view its own padding took part in sizing (DesignSystem/Metrics.swift).
                 .measuresWindowWidth()
                 .background(Palette.canvas.ignoresSafeArea())
+                // An image shared to the app from the screenshot preview or from Photos
+                // (App/Sources/App/ShareImport.swift). It enters the flow where a Photos
+                // import does.
+                .receivesSharedImages(app: model)
                 .task {
                     // Loads the recognition model in the background shortly after the first
                     // frame, so the first import does not wait for it (AppModel).

@@ -25,9 +25,13 @@ enum AnalysisFeature {
 ///
 /// Scene-phase handling (stopping when the app goes to the background) is done by the
 /// Analysis screen, which knows whether the search belongs to the board on screen.
+///
+/// It also runs the quiet longer search of `AnalysisLongerSearchRunner` (design.md section 16).
+/// That one reports through a stream of its own and never writes `phase` or `readout`, so the
+/// answer on screen stays the answer the user asked for until they take the deeper move.
 @MainActor
 @Observable
-final class AnalysisEngineController: EngineController {
+final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunner {
     private(set) var phase: EnginePhase = .idle
     private(set) var readout: EngineReadout?
     private(set) var thinkTime: ThinkTime?
@@ -48,6 +52,11 @@ final class AnalysisEngineController: EngineController {
     @ObservationIgnored private var pendingReadout: EngineReadout?
     @ObservationIgnored private var stopRequested = false
     @ObservationIgnored private var isPrepared = false
+    @ObservationIgnored private var longerSearchTask: Task<Void, Never>?
+    @ObservationIgnored private var longerSearchGeneration = 0
+    /// True while the quiet longer search is the one Stockfish is running, so stopping it can
+    /// never stop a search the user started.
+    @ObservationIgnored private var longerSearchOwnsEngine = false
 
     init(updateInterval: Duration = .milliseconds(100)) {
         self.updateInterval = updateInterval
@@ -61,6 +70,10 @@ final class AnalysisEngineController: EngineController {
     /// Starts a search for `movetime`. `thinkTime` is what `thinkTime` reports (nil for a
     /// custom duration, used by tests).
     func start(_ position: Position, movetime: Duration, thinkTime: ThinkTime?) async -> Bool {
+        // One engine: anything the user starts takes it back from the quiet longer search.
+        // `StockfishEngine.analyze` stops the search that is running, so nothing else is needed
+        // to hand the engine over.
+        cancelLongerSearch()
         generation += 1
         let generation = generation
         cancelConsumption()
@@ -161,6 +174,80 @@ final class AnalysisEngineController: EngineController {
         case .idle, .finished, .noLegalMoves, .failed:
             break
         }
+    }
+
+    // MARK: The longer search (design.md section 16)
+
+    func startLongerSearch(_ position: Position, ceiling: Duration) -> AsyncStream<EngineReadout>? {
+        // Never before the engine is loaded: a search nobody asked for must not pull the
+        // network in, and must not be the reason the next analysis waits.
+        guard isPrepared else { return nil }
+        switch phase {
+        case .preparing, .searching:
+            // The user's own search owns the engine.
+            return nil
+        case .idle, .finished, .noLegalMoves, .failed:
+            break
+        }
+        cancelLongerSearch()
+
+        let prepared = AnalysisPositionCheck.sanitized(position)
+        guard prepared.validate().isEmpty else { return nil }
+
+        let milliseconds = max(1, Int((ceiling / .milliseconds(1)).rounded()))
+        let sideToMove = prepared.sideToMove
+        let fen = prepared.fen
+        longerSearchGeneration += 1
+        let generation = longerSearchGeneration
+        longerSearchOwnsEngine = true
+        let (stream, continuation) = AsyncStream<EngineReadout>.makeStream()
+        longerSearchTask = Task { [weak self] in
+            var accumulator = AnalysisReadoutAccumulator(sideToMove: sideToMove)
+            var reported: EngineReadout?
+            let startedAt = ContinuousClock.now
+            let events = await StockfishEngine.shared.analyze(fen: fen, limit: .movetime(milliseconds: milliseconds))
+            do {
+                for try await event in events {
+                    guard !Task.isCancelled else { break }
+                    accumulator.apply(event, elapsed: ContinuousClock.now - startedAt)
+                    let readout = accumulator.readout
+                    // One report per completed iteration and one per new move, rather than the
+                    // engine's several per second: the stopping rule counts depths, and the
+                    // reader is on the main actor.
+                    if readout.depth != reported?.depth || readout.bestMove != reported?.bestMove || accumulator.isFinished {
+                        reported = readout
+                        continuation.yield(readout)
+                    }
+                    if accumulator.isFinished { break }
+                }
+            } catch {
+                // A quiet search that fails says nothing at all: the answer on screen stands.
+            }
+            continuation.finish()
+            // The search ended by itself: it no longer owns the engine. A newer longer search,
+            // or a search the user started, has a newer generation and is left alone.
+            if let self, generation == self.longerSearchGeneration {
+                self.longerSearchOwnsEngine = false
+            }
+        }
+        return stream
+    }
+
+    func stopLongerSearch() {
+        let wasRunning = longerSearchOwnsEngine
+        cancelLongerSearch()
+        // Only when the quiet search is the one running: a search the user started since then
+        // must not be stopped by this.
+        if wasRunning {
+            Task { await StockfishEngine.shared.stop() }
+        }
+    }
+
+    private func cancelLongerSearch() {
+        longerSearchGeneration += 1
+        longerSearchOwnsEngine = false
+        longerSearchTask?.cancel()
+        longerSearchTask = nil
     }
 
     // MARK: Publishing

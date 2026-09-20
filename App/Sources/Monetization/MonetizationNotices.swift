@@ -1,7 +1,58 @@
 import SwiftUI
 
-/// The line under a result that used the last free analysis (monetization.md 4.1): "That was
-/// your last free analysis." with a "See options" link that opens the paywall. No popup.
+/// A banner under a result: a rule, then one strip carrying a sentence and a chevron at the
+/// trailing edge. The `Button` wraps the whole strip and the fill is drawn inside it, so a tap
+/// anywhere on the width opens what the banner offers. VoiceOver reads the sentence and then
+/// the hint, which says what double tapping does.
+///
+/// It spans the width it is given, which on the result screen is the content column inside the
+/// side gutter.
+struct MonetizationBanner: View {
+    let message: String
+    /// The VoiceOver hint: what double tapping does.
+    let hint: String
+    let identifier: String
+    let action: () -> Void
+
+    /// The chevron grows with the `callout` message (text style `subheadline`) and stops at
+    /// 28 pt, so at accessibility sizes the message keeps the width it needs to wrap in.
+    @ScaledMetric(relativeTo: .subheadline) private var chevronSize: CGFloat = 17
+
+    var body: some View {
+        VStack(spacing: 0) {
+            Hairline()
+            Button(action: action) {
+                HStack(spacing: Spacing.s3) {
+                    Text(message)
+                        .typography(.callout)
+                        .foregroundStyle(Palette.ink)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Image(systemName: "chevron.right.circle.fill")
+                        .font(.system(size: min(chevronSize, 28)))
+                        .foregroundStyle(Palette.ink2)
+                        .accessibilityHidden(true)
+                }
+                .padding(.horizontal, Spacing.s3)
+                .padding(.vertical, Spacing.s3)
+                .frame(maxWidth: .infinity, minHeight: Layout.minimumHitTarget, alignment: .leading)
+                // The fill belongs inside the button: it is what makes the whole strip, rather
+                // than the words in it, the tap target.
+                .background(Palette.raised)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier(identifier)
+            .accessibilityLabel(message)
+            .accessibilityHint(hint)
+        }
+        .frame(maxWidth: .infinity)
+    }
+}
+
+/// The banner under a result that used the last free analysis (monetization.md 4.1): "That was
+/// your last free analysis. See options", tappable across its whole width, which opens the
+/// paywall. No popup.
 ///
 /// Analysis places it under the result of any session; it draws nothing unless that session
 /// spent the last free analysis and no other credit or Pro remains.
@@ -22,18 +73,13 @@ struct LastFreeAnalysisNotice: View {
             purchasedRemaining: app.credits.purchasedRemaining,
             isPro: app.store.isPro
         ) {
-            ViewThatFits(in: .horizontal) {
-                HStack(alignment: .firstTextBaseline, spacing: Spacing.s2) {
-                    message
-                    link
-                }
-                VStack(alignment: .leading, spacing: 0) {
-                    message
-                    link
-                }
+            MonetizationBanner(
+                message: MonetizationCopy.lastFreeAnalysisBanner,
+                hint: MonetizationCopy.seeOptionsHint,
+                identifier: MonetizationAccessibilityID.lastFreeAnalysisNotice
+            ) {
+                app.presentPaywall(trigger: .lastFreeAnalysisNotice)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .accessibilityIdentifier(MonetizationAccessibilityID.lastFreeAnalysisNotice)
         }
     }
 
@@ -47,28 +93,21 @@ struct LastFreeAnalysisNotice: View {
     ) -> Bool {
         decision == .spendFree && isCreditCommitted && freeRemaining == 0 && purchasedRemaining == 0 && !isPro
     }
-
-    private var message: some View {
-        Text(MonetizationCopy.lastFreeAnalysis)
-            .typography(.callout)
-            .foregroundStyle(Palette.ink2)
-            .fixedSize(horizontal: false, vertical: true)
-    }
-
-    private var link: some View {
-        Button(MonetizationCopy.seeOptions) {
-            app.presentPaywall(trigger: .lastFreeAnalysisNotice)
-        }
-        .buttonStyle(.textLink)
-    }
 }
 
 /// The one-time "Switch to yearly" card for weekly subscribers from their 4th paid week
 /// (monetization.md 4.9). Analysis places it on the result screen; it draws nothing unless
 /// `StoreService.shouldOfferSwitchToYearly` is true. Tapping it opens the paywall with Yearly
 /// preselected; tapping it or its dismiss control records that it was shown.
+///
+/// It is not a `MonetizationBanner`, and forcing it into one would cost the user something:
+/// the card carries a second control (the dismiss button), so the whole strip cannot be one
+/// tap target, and it carries a title and a body line rather than a single sentence.
 struct SwitchToYearlyCard: View {
     @Environment(AppModel.self) private var app
+
+    /// The dismiss glyph grows with the body text beside it.
+    @ScaledMetric(relativeTo: .body) private var dismissGlyphSize: CGFloat = 13
 
     init() {}
 
@@ -101,10 +140,16 @@ struct SwitchToYearlyCard: View {
                         Button {
                             app.store.recordSwitchToYearlyOfferShown()
                         } label: {
+                            // The only way to decline the offer without opening the paywall.
+                            // It used to be a literal 13 pt glyph at every text size, which
+                            // made it the smallest affordance in the app.
                             Image(systemName: "xmark")
-                                .font(.system(size: 13, weight: .semibold))
+                                .font(.system(size: min(dismissGlyphSize, Layout.maximumRowChevron), weight: .semibold))
                                 .foregroundStyle(Palette.ink2)
-                                .frame(width: Layout.minimumHitTarget, height: Layout.minimumHitTarget)
+                                .frame(
+                                    minWidth: Layout.minimumHitTarget,
+                                    minHeight: Layout.minimumHitTarget
+                                )
                                 .contentShape(Rectangle())
                         }
                         .buttonStyle(.plain)
