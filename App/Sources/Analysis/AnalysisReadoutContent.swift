@@ -31,11 +31,16 @@ struct AnalysisReadoutContent: Sendable, Hashable {
         var isAccent: Bool
     }
 
-    /// One move as the readout shows it: the SAN for the eye, the same move in words for the
-    /// line under it and for VoiceOver, and the piece whose glyph is drawn next to the words
-    /// (item 3). `piece` is nil only when the board has nothing on the move's from-square,
-    /// which a legal move cannot do.
+    /// One move as the readout shows it: the move itself for the board, the SAN for the eye,
+    /// the same move in words for the line under it and for VoiceOver, and the piece whose
+    /// glyph is drawn next to the words (item 3). `piece` is nil only when the board has
+    /// nothing on the move's from-square, which a legal move cannot do.
+    ///
+    /// The move travels with its own words so that the arrow on the board and the sentence
+    /// under it are read off the same value. Deriving the arrow a second way is how the two
+    /// would come to name different moves.
     struct MoveText: Sendable, Hashable {
+        var move: Move
         var san: String
         var words: String
         var piece: Piece?
@@ -54,10 +59,38 @@ struct AnalysisReadoutContent: Sendable, Hashable {
     /// player's turn (item 2). Nil in every other case, including a side the user chose and a
     /// line too short to hold a reply.
     var guessedMove: MoveText?
+    /// The screenshot caught the turn of the player at the top, so the move the engine found
+    /// on this board belongs to that player rather than to the user.
+    ///
+    /// It is stored rather than inferred from `guessedMove`, because the two come apart in the
+    /// case that matters to the board: a line with no reply in it yet leaves `guessedMove` nil
+    /// and puts THEIR move in the badge, and an arrow for that move must not be cobalt.
+    var answersForThePlayerAtTheTop = false
 
     /// The badge's move answers `guessedMove`, so it is drawn in the accent: cobalt is the
     /// answer, and the guessed move beneath it is muted ink (item 2).
     var moveIsReply: Bool { guessedMove != nil && move != nil }
+
+    /// The arrows the board draws, in the order the moves are played (design.md section 7).
+    ///
+    /// Both come from this readout rather than from the engine a second time, so the board and
+    /// the words under it always name the same moves. Three shapes come out of it:
+    ///
+    /// - the ordinary case, the user's own turn: one cobalt arrow, exactly as before;
+    /// - the screenshot caught the other turn and the line holds a reply: their move first,
+    ///   the reply second;
+    /// - the same turn with no reply in the line yet (a mate, or a search that has not gone
+    ///   deep enough): one arrow, and because it is their move it is not the cobalt one.
+    var boardArrows: [AnalysisBoardArrow] {
+        guard let move else { return [] }
+        if let guessed = guessedMove {
+            return [
+                AnalysisBoardArrow(move: guessed.move, role: .theirMove),
+                AnalysisBoardArrow(move: move.move, role: .answer),
+            ]
+        }
+        return [AnalysisBoardArrow(move: move.move, role: answersForThePlayerAtTheTop ? .theirMove : .answer)]
+    }
 
     /// What VoiceOver reads for the move in the badge.
     ///
@@ -135,7 +168,8 @@ struct AnalysisReadoutContent: Sendable, Hashable {
             move: move,
             placeholder: placeholder(status: status, noLegalMoves: noLegalMoves),
             placeholderIsResult: noLegalMoves != nil,
-            guessedMove: guessedMove
+            guessedMove: guessedMove,
+            answersForThePlayerAtTheTop: answersForThePlayerAtTheTop
         )
     }
 
@@ -178,6 +212,7 @@ struct AnalysisReadoutContent: Sendable, Hashable {
 
     private static func moveText(san: String, move: Move, in position: Position) -> MoveText {
         MoveText(
+            move: move,
             san: san,
             words: AnalysisSpeech.moveDescription(san: san, move: move),
             piece: position.board.indices.contains(move.from.index) ? position.board[move.from.index] : nil

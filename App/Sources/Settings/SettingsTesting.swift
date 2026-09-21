@@ -11,6 +11,9 @@ enum SettingsTestingAccessibilityID {
     static let reset = "settings.testing.reset"
     static let grant = "settings.testing.grant"
     static let message = "settings.testing.message"
+    static let launchCohort = "settings.testing.launchCohort"
+    static let showsPurchaseScreens = "settings.testing.showsPurchaseScreens"
+    static let launchCohortNote = "settings.testing.launchCohortNote"
 }
 
 /// The Testing section at the bottom of Settings: free analyses back to three, and the pack's
@@ -40,11 +43,14 @@ struct SettingsTestingSection: View {
     @ViewBuilder
     var body: some View {
         if channel.offersTestingTools, let grants = app.credits as? any MonetizationTestingGrants {
-            content(grants)
+            content(grants, cohort: app.store as? any MonetizationLaunchCohortTesting)
         }
     }
 
-    private func content(_ grants: any MonetizationTestingGrants) -> some View {
+    private func content(
+        _ grants: any MonetizationTestingGrants,
+        cohort: (any MonetizationLaunchCohortTesting)?
+    ) -> some View {
         let counts = grants.testingCounts
         return VStack(alignment: .leading, spacing: 0) {
             GroupedSectionLabel(MonetizationTestingCopy.sectionLabel)
@@ -75,6 +81,34 @@ struct SettingsTestingSection: View {
                 }
                 .buttonStyle(.listRow)
                 .accessibilityIdentifier(SettingsTestingAccessibilityID.grant)
+                // The free launch window (monetization.md section 11). A reviewer installs the
+                // app inside it, so without this switch the four in-app purchases cannot be
+                // exercised at all, and purchases a reviewer cannot exercise are refused.
+                if let cohort {
+                    GroupedRowSeparator(start: .content)
+                    ListRow(
+                        MonetizationTestingCopy.launchCohortRow,
+                        value: MonetizationTestingCopy.launchCohortValue(cohort.launchCohortStatus)
+                    )
+                    .groupedRow()
+                    .accessibilityElement(children: .combine)
+                    .accessibilityIdentifier(SettingsTestingAccessibilityID.launchCohort)
+                    GroupedRowSeparator(start: .content)
+                    Toggle(
+                        MonetizationTestingCopy.showsPurchaseScreens,
+                        isOn: Binding(
+                            get: { cohort.leavesLaunchCohortForTesting },
+                            set: { leaves in
+                                guard cohort.setLeavesLaunchCohortForTesting(leaves, for: channel) else { return }
+                                actionCount += 1
+                            }
+                        )
+                    )
+                    .tint(Palette.accent)
+                    .frame(minHeight: Layout.minimumHitTarget)
+                    .groupedRow()
+                    .accessibilityIdentifier(SettingsTestingAccessibilityID.showsPurchaseScreens)
+                }
             }
             // The footer carries what the section is and what the last action did. Both
             // actions ask before they change anything, and the confirmation dialog repeats
@@ -82,6 +116,10 @@ struct SettingsTestingSection: View {
             GroupedFooter {
                 Text(MonetizationTestingCopy.note)
                     .accessibilityIdentifier(SettingsTestingAccessibilityID.note)
+                if cohort != nil {
+                    Text(MonetizationTestingCopy.launchCohortNote)
+                        .accessibilityIdentifier(SettingsTestingAccessibilityID.launchCohortNote)
+                }
                 if let message {
                     Text(message)
                         .accessibilityIdentifier(SettingsTestingAccessibilityID.message)

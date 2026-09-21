@@ -1,5 +1,13 @@
 import SwiftUI
 
+/// Accessibility identifiers of Settings rows the UI tests look up.
+enum SettingsAccessibilityID {
+    /// The footer under the Purchases card that explains the free launch offer.
+    static let launchOfferFooter = "settings.launchOffer"
+    /// The Plan row's value.
+    static let planValue = "settings.plan"
+}
+
 /// Screens pushed inside the Settings sheet.
 enum SettingsRoute: Hashable {
     case engine
@@ -79,6 +87,7 @@ private struct SettingsRootContent: View {
                     ListRow("Plan", value: planText)
                         .groupedRow()
                         .accessibilityElement(children: .combine)
+                        .accessibilityIdentifier(SettingsAccessibilityID.planValue)
                     if !app.store.isPro {
                         GroupedRowSeparator(start: .content)
                         Button {
@@ -106,9 +115,25 @@ private struct SettingsRootContent: View {
                         .buttonStyle(.listRow)
                     }
                 }
-                if let restoreMessage {
-                    GroupedFooter(restoreMessage)
-                        .accessibilityFocused($restoreMessageFocused)
+                if app.store.isConfirmedLaunchCohortMember || restoreMessage != nil {
+                    GroupedFooter {
+                        // The launch offer explains itself where the plan row names it, and
+                        // says what Restore purchases is still for (monetization.md 11). Only
+                        // once Apple has confirmed it: the footer names the date this Apple
+                        // Account installed the app, which an undecided cohort does not know.
+                        if app.store.isConfirmedLaunchCohortMember {
+                            Text(MonetizationLaunchCohortCopy.planFooter)
+                                .accessibilityIdentifier(SettingsAccessibilityID.launchOfferFooter)
+                        }
+                        if let restoreMessage {
+                            // The focus goes on the result of the restore, not on the whole
+                            // footer: a member's footer also carries the launch-offer
+                            // explanation, and a reader who just tapped Restore purchases wants
+                            // to hear what it did first.
+                            Text(restoreMessage)
+                                .accessibilityFocused($restoreMessageFocused)
+                        }
+                    }
                 }
 
                 GroupedSectionLabel("Help")
@@ -181,26 +206,16 @@ private struct SettingsRootContent: View {
         .sensoryFeedback(.error, trigger: restoreFailed)
     }
 
-    /// "Free, 2 of 3 left", "12 analyses left", "Pro, weekly".
     private var planText: String {
-        let store = app.store
-        let credits = app.credits
-        if store.isPro {
-            switch store.activeSubscriptionProductID {
-            case ProductID.proWeekly?: return "Pro, weekly"
-            case ProductID.proAnnual?: return "Pro, yearly"
-            case nil: return "Pro, lifetime"
-            default: return "Pro"
-            }
-        }
-        let purchased = credits.purchasedRemaining
-        let purchasedText = purchased == 1 ? "1 analysis" : "\(purchased) analyses"
-        if credits.freeRemaining > 0 {
-            let free = "Free, \(credits.freeRemaining) of \(credits.freeAllowance) left"
-            return purchased > 0 ? "\(free), plus \(purchasedText)" : free
-        }
-        if purchased > 0 { return "\(purchasedText) left" }
-        return "Free, none left"
+        SettingsPlanRow.value(
+            hasPurchasedPro: app.store.hasPurchasedPro,
+            activeSubscriptionProductID: app.store.activeSubscriptionProductID,
+            isLaunchCohortMember: app.store.isLaunchCohortMember,
+            isConfirmedLaunchCohortMember: app.store.isConfirmedLaunchCohortMember,
+            freeRemaining: app.credits.freeRemaining,
+            freeAllowance: app.credits.freeAllowance,
+            purchasedRemaining: app.credits.purchasedRemaining
+        )
     }
 
     private func restore() {
@@ -231,6 +246,46 @@ private struct SettingsRootContent: View {
         let marketing = AppBuild.shortVersion
         let build = AppBuild.buildNumber
         return "\(marketing.isEmpty ? "?" : marketing) (\(build.isEmpty ? "?" : build))"
+    }
+}
+
+/// The value of the Plan row in Settings' Purchases card.
+///
+/// It is asked what was **bought** first, and separately from `StoreService.isPro`, which is
+/// also true for a member of the free launch cohort: the row must never tell somebody who
+/// bought nothing that they are on "Pro, lifetime" (monetization.md section 11). The launch
+/// offer has its own name instead, and names itself only once Apple has confirmed it: while
+/// the cohort is undecided the app grants the offer without knowing it is theirs, and the row
+/// says what it is doing ("Unlimited") rather than why.
+enum SettingsPlanRow {
+    /// "Pro, weekly", "Unlimited, launch offer", "Unlimited", "Free, 2 of 3 left",
+    /// "12 analyses left".
+    static func value(
+        hasPurchasedPro: Bool,
+        activeSubscriptionProductID: String?,
+        isLaunchCohortMember: Bool,
+        isConfirmedLaunchCohortMember: Bool,
+        freeRemaining: Int,
+        freeAllowance: Int,
+        purchasedRemaining: Int
+    ) -> String {
+        if hasPurchasedPro {
+            switch activeSubscriptionProductID {
+            case ProductID.proWeekly?: return "Pro, weekly"
+            case ProductID.proAnnual?: return "Pro, yearly"
+            case nil: return "Pro, lifetime"
+            default: return "Pro"
+            }
+        }
+        if isConfirmedLaunchCohortMember { return MonetizationLaunchCohortCopy.planRow }
+        if isLaunchCohortMember { return MonetizationLaunchCohortCopy.undecidedPlanRow }
+        let purchasedText = purchasedRemaining == 1 ? "1 analysis" : "\(purchasedRemaining) analyses"
+        if freeRemaining > 0 {
+            let free = "Free, \(freeRemaining) of \(freeAllowance) left"
+            return purchasedRemaining > 0 ? "\(free), plus \(purchasedText)" : free
+        }
+        if purchasedRemaining > 0 { return "\(purchasedText) left" }
+        return "Free, none left"
     }
 }
 

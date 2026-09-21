@@ -608,9 +608,25 @@ protocol StoreService: AnyObject, Observable, Sendable {
     var loadState: StoreLoadState { get }
     /// Loaded products, in `ProductID.all` order.
     var products: [StoreProduct] { get }
-    /// Any active transaction in the Pro subscription group, or a verified lifetime purchase.
-    /// Never a check against a fixed list of subscription ids (monetization.md section 2).
+    /// **Unlimited analyses and no commercial surface.** True for a purchase and for a member
+    /// of the free launch cohort (monetization.md section 11), which grants the same thing
+    /// without one. Everything that decides whether to charge, to show a price or to offer an
+    /// upgrade reads this, so the launch cohort never has to be threaded through a screen.
     var isPro: Bool { get }
+    /// **Somebody bought something**: any active transaction in the Pro subscription group, or
+    /// a verified lifetime purchase. Never a check against a fixed list of subscription ids
+    /// (monetization.md section 2). Only copy and outcomes that must be honest about where the
+    /// entitlement came from read this: Settings' plan row, and what Restore purchases reports.
+    var hasPurchasedPro: Bool { get }
+    /// The app is granting the free launch offer to this Apple Account (monetization.md
+    /// section 11). It is also true while the cohort is undecided, which is deliberate; see
+    /// `MonetizationLaunchCohort`. Everything that hides a commercial surface reads this.
+    var isLaunchCohortMember: Bool { get }
+    /// Apple has **confirmed** the free launch offer, rather than the app granting it while
+    /// nothing is known. Only copy that makes a claim about the past reads this: Settings says
+    /// "you installed Chess Best Move before October 15, 2026", which must not be said to
+    /// somebody whose app transaction has not been read yet (monetization.md section 11).
+    var isConfirmedLaunchCohortMember: Bool { get }
     /// The product id of the active auto-renewable subscription, if any.
     var activeSubscriptionProductID: String? { get }
     /// True once `Transaction.currentEntitlements` has been read in this launch; until then

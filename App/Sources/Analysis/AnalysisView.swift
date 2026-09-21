@@ -185,8 +185,25 @@ private struct AnalysisScreen: View {
             .padding(.top, Spacing.s3)
     }
 
+    /// The original crop can be revealed under an edited diagram.
+    private var canPeek: Bool { snapshot.showsDiagram && snapshot.boardImage != nil }
+
+    /// Shows the original crop under an edited diagram, or puts it away: what pressing and
+    /// holding the board does, as something that is not a gesture.
+    ///
+    /// Nothing on this board is tappable and it has no squares to move a cursor over, so it is
+    /// one focus stop whose **activation** is the comparison - which is the only thing the board
+    /// does. That is what Full Keyboard Access presses Space for, and what Switch Control taps.
+    /// Without it the comparison would be reachable by a finger and by VoiceOver's custom
+    /// action and by nothing else. (The boards with squares on them read their own keys
+    /// instead; design.md 12, "Keyboard".)
+    private func togglePeek() {
+        guard canPeek else { return }
+        isPeeking.toggle()
+    }
+
     private var board: some View {
-        let canPeek = snapshot.showsDiagram && snapshot.boardImage != nil
+        let canPeek = canPeek
         let showsScreenshot = snapshot.boardImage != nil && (!snapshot.showsDiagram || isPeeking)
         return BoardFrame {
             ZStack(alignment: .topTrailing) {
@@ -196,7 +213,9 @@ private struct AnalysisScreen: View {
                     DiagramBoard(board: snapshot.position.board, whiteAtBottom: snapshot.whiteAtBottom)
                 }
                 AnalysisArrowOverlay(
-                    move: isPeeking ? nil : model.bestMove?.move,
+                    // The readout is what decides which moves are drawn and whose they are,
+                    // so the board and the words under it can never disagree (design.md 9.4).
+                    arrows: isPeeking ? [] : model.resultReadout.boardArrows,
                     whiteAtBottom: snapshot.whiteAtBottom,
                     isFinal: isFinal
                 )
@@ -217,6 +236,7 @@ private struct AnalysisScreen: View {
         } onPressingChanged: { pressing in
             isPeeking = canPeek && pressing
         }
+        .focusable(canPeek, interactions: .activate)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(boardAccessibilityLabel))
         .accessibilityValue(Text(boardAccessibilityValue))
@@ -224,7 +244,10 @@ private struct AnalysisScreen: View {
         .accessibilityCustomContent("Side to move", sideToMoveAccessibilityText)
         .accessibilityCustomContent("FEN", snapshot.position.fen)
         // The hold that reveals the original crop under an edited diagram is undocumented on
-        // screen and unreachable with VoiceOver running, so it is also a custom action.
+        // screen and unreachable with VoiceOver running, so it is also the board's activation -
+        // which is what a keyboard and Switch Control can reach - and a named custom action,
+        // which is what says out loud what activating it will do.
+        .accessibilityAction { togglePeek() }
         .accessibilityActions { peekAction }
     }
 
@@ -244,15 +267,32 @@ private struct AnalysisScreen: View {
         return "Board, \(snapshot.whiteAtBottom ? "White" : "Black") at bottom" + edited
     }
 
+    /// What the board is read out as: the moves its arrows draw, in the order they are played
+    /// (design.md section 7 and 12). A reader who cannot see the two colors or the two heads
+    /// gets which move is whose, and that the reply depends on the other one being played.
     private var boardAccessibilityValue: String {
         if let checkmate = model.noLegalMoves {
             return checkmate ? "Checkmate." : "Stalemate."
         }
-        guard let best = model.bestMove else {
+        let readout = model.resultReadout
+        guard let shown = readout.move else {
             return model.isThinking ? "Thinking." : "No best move yet."
         }
-        let description = AnalysisSpeech.moveDescription(san: best.san, move: best.move, alwaysIncludeFromSquare: true)
-        return (isFinal ? "Best move: " : "Best move so far: ") + AnalysisSpeech.lowercasingFirstLetter(description) + "."
+        let spoken = { (move: AnalysisReadoutContent.MoveText) in
+            AnalysisSpeech.moveDescription(san: move.san, move: move.move, alwaysIncludeFromSquare: true)
+        }
+        if let guessed = readout.guessedMove {
+            return AnalysisSpeech.boardArrowPair(
+                theirMove: spoken(guessed),
+                reply: spoken(shown),
+                isFinal: isFinal
+            )
+        }
+        if readout.answersForThePlayerAtTheTop {
+            return AnalysisSpeech.boardTheirMoveOnly(theirMove: spoken(shown), isFinal: isFinal)
+        }
+        return (isFinal ? "Best move: " : "Best move so far: ")
+            + AnalysisSpeech.lowercasingFirstLetter(spoken(shown)) + "."
     }
 
     /// "White, the player at the top, from last-move highlight": the chip's VoiceOver value and
@@ -342,6 +382,8 @@ private struct AnalysisScreen: View {
             model.flip()
         }
         .accessibilityLabel("Flip board")
+        // Voice Control matches the name, and the word on the chip is "Flip".
+        .accessibilityInputLabels(["Flip", "Flip board"])
         // A board set up by hand only turns around on screen (BoardSnapshot.flippedByUser).
         .accessibilityHint(snapshot.boardImage == nil ? "Turns the board around." : "Turns the board around and analyzes again.")
         // At accessibility sizes a chip label wraps instead of widening the screen (design.md 12).
@@ -351,6 +393,7 @@ private struct AnalysisScreen: View {
             model.edit()
         }
         .accessibilityLabel("Edit position")
+        .accessibilityInputLabels(["Edit", "Edit position"])
         // At accessibility sizes a chip label wraps instead of widening the screen (design.md 12).
         .fixedSize(horizontal: !dynamicTypeSize.isAccessibilitySize, vertical: false)
     }
@@ -437,6 +480,17 @@ private struct AnalysisScreen: View {
 
     // MARK: Engine line
 
+    /// The engine line, which expands and collapses.
+    ///
+    /// A real `Button` rather than a plain view with an `onTapGesture`. A tap gesture is
+    /// reachable by a finger and by nothing else: a hardware keyboard, Full Keyboard Access and
+    /// Switch Control mapped to keys all drive the focus system, and a plain view is not in it.
+    /// `.buttonStyle(.plain)` keeps the row exactly as it was drawn.
+    ///
+    /// The row is a button only while activating it changes something. At accessibility text
+    /// sizes the line is always fully expanded, so a button there would be a focus stop whose
+    /// activation did nothing and announced nothing.
+    @ViewBuilder
     private var lineRow: some View {
         let sanMoves = model.readout.map { model.position.sanLine($0.principalVariation) } ?? []
         let expanded = model.isLineExpanded || dynamicTypeSize.isAccessibilitySize
@@ -445,11 +499,11 @@ private struct AnalysisScreen: View {
             position: model.position,
             plies: expanded ? nil : AnalysisLine.collapsedPlies
         )
-        // The row is a button only while tapping it changes something. At accessibility text
-        // sizes the line is always fully expanded, so the trait used to advertise a button
-        // whose activation did nothing and announced nothing.
         let canExpand = sanMoves.count > AnalysisLine.collapsedPlies && !dynamicTypeSize.isAccessibilitySize
-        return AnalysisLabeledRow(label: "Line", alignment: .firstTextBaseline) {
+        let spoken = sanMoves.isEmpty
+            ? "None yet"
+            : AnalysisSpeech.line(sanMoves: sanMoves, plies: expanded ? sanMoves.count : AnalysisLine.collapsedPlies)
+        let row = AnalysisLabeledRow(label: "Line", alignment: .firstTextBaseline) {
             Text(lineText(tokens, isTruncated: isTruncated, placeholder: sanMoves.isEmpty))
                 .typography(.line)
                 .lineLimit(expanded ? nil : 2)
@@ -457,24 +511,30 @@ private struct AnalysisScreen: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .contentShape(Rectangle())
-        .onTapGesture {
-            guard canExpand else { return }
-            model.isLineExpanded.toggle()
-        }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Engine line")
-        // The value follows what is on screen: collapsed, it is the moves that are shown.
-        .accessibilityValue(
-            sanMoves.isEmpty
-                ? "None yet"
-                : AnalysisSpeech.line(sanMoves: sanMoves, plies: expanded ? sanMoves.count : AnalysisLine.collapsedPlies)
-        )
-        .accessibilityAddTraits(canExpand ? .isButton : [])
-        .accessibilityHint(canExpand ? (expanded ? "Shows fewer moves" : "Shows the whole line") : "")
-        // A declared action rather than a synthesized tap on an `onTapGesture`.
-        .accessibilityAction {
-            guard canExpand else { return }
-            model.isLineExpanded.toggle()
+        if canExpand {
+            Button {
+                model.isLineExpanded.toggle()
+            } label: {
+                row
+            }
+            .buttonStyle(.plain)
+            .accessibilityElement(children: .ignore)
+            // Said explicitly: taking the element over with `children: .ignore` drops the trait
+            // the `Button` would have carried, and with it the row stops being a button to
+            // VoiceOver, to Full Keyboard Access and to a UI test.
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("Engine line")
+            // Voice Control matches the name, and the word on the row is "Line".
+            .accessibilityInputLabels(["Line", "Engine line"])
+            // The value follows what is on screen: collapsed, it is the moves that are shown.
+            .accessibilityValue(spoken)
+            .accessibilityHint(expanded ? "Shows fewer moves" : "Shows the whole line")
+        } else {
+            row
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Engine line")
+                .accessibilityInputLabels(["Line", "Engine line"])
+                .accessibilityValue(spoken)
         }
     }
 

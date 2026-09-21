@@ -50,17 +50,24 @@ struct ProTaggedTitle: View {
     /// `true` on a row whose control is disabled, which draws the title in `ink2` the way the
     /// disabled control below it is drawn. The tag keeps its own color either way.
     var isMuted = false
+    /// `false` draws the title alone. The tag is an offer, so it goes away for a reader who
+    /// already has the thing: a Pro subscriber, and a member of the free launch cohort, who
+    /// must be shown no Pro row at all (monetization.md section 11).
+    var showsTag = true
 
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
-    init(_ title: String, isMuted: Bool = false) {
+    init(_ title: String, isMuted: Bool = false, showsTag: Bool = true) {
         self.title = title
         self.isMuted = isMuted
+        self.showsTag = showsTag
     }
 
     var body: some View {
         Group {
-            if dynamicTypeSize.isAccessibilitySize {
+            if !showsTag {
+                titleText
+            } else if dynamicTypeSize.isAccessibilitySize {
                 VStack(alignment: .leading, spacing: Spacing.s1) {
                     ProTag()
                     titleText

@@ -49,9 +49,10 @@ enum DebugLaunchOptions {
         UserDefaults.standard.bool(forKey: "debugGallery")
     }
 
-    /// `-resetStateForUITests YES`: start as a fresh install. Deletes the Keychain credit items
-    /// (which survive reinstalling the app) and the app's saved preferences before any service
-    /// is created. For UI tests that exercise the real Keychain and StoreKit.
+    /// `-resetStateForUITests YES`: start as a fresh install. Deletes every Keychain item the
+    /// app writes - the credit records and the launch-cohort verdict, all of which survive
+    /// reinstalling - and the app's saved preferences, before any service is created. For UI
+    /// tests that exercise the real Keychain and StoreKit.
     static var resetState: Bool {
         UserDefaults.standard.bool(forKey: "resetStateForUITests")
     }
@@ -102,6 +103,11 @@ enum DebugLaunchOptions {
         let vault = MonetizationKeychainVault()
         try? vault.removeData(for: .local)
         try? vault.removeData(for: .purchased)
+        // The launch-cohort verdict survives reinstalling too (monetization.md section 11), so
+        // a run that left it behind would not be a fresh install: a member verdict written by
+        // an earlier run hides the credits indicator and the paywall from every test after it,
+        // and those tests would pass without measuring anything.
+        try? vault.removeData(for: .launchCohort)
         if let domain = Bundle.main.bundleIdentifier {
             UserDefaults.standard.removePersistentDomain(forName: domain)
         }

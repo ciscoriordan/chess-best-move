@@ -51,6 +51,9 @@ struct ThinkTimeControl: View {
                 .buttonStyle(.plain)
                 .accessibilityAddTraits(isSelected ? .isSelected : [])
                 .accessibilityLabel(time.spokenLabel)
+                // Voice Control matches the name, which is spoken in words ("3 seconds"); the
+                // segment is written "3 s", and a user says what they can read.
+                .accessibilityInputLabels([time.label, time.spokenLabel])
             }
         }
         .padding(.horizontal, 2)

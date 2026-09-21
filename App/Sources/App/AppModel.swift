@@ -33,6 +33,15 @@ enum SheetRoute: Identifiable, Hashable {
         case .shortcutSetup: "shortcutSetup"
         }
     }
+
+    /// Whether this sheet asks the user to buy something. `AppModel.present(_:)` refuses these
+    /// for a member of the free launch cohort (monetization.md section 11).
+    var offersAPurchase: Bool {
+        switch self {
+        case .paywall, .downsell: true
+        case .settings, .shortcutSetup: false
+        }
+    }
 }
 
 /// Input for the full-screen position editor (design.md 9.6).
@@ -445,7 +454,17 @@ final class AppModel {
     /// Presents a sheet, replacing (after its dismissal) any sheet already showing or still
     /// going away. Presenting while the previous sheet is still being dismissed would let
     /// that dismissal's callback end the new sheet.
+    ///
+    /// A member of the free launch cohort is never shown a purchase screen (monetization.md
+    /// section 11). Nothing should ask: the credit rules answer `.allowedPro` for them, so
+    /// there is no credit trigger, and every control that opens the paywall is hidden. This is
+    /// the last lock, here because the cost of one missed control is a member meeting a price
+    /// they were promised they would never see.
     func present(_ route: SheetRoute) {
+        if store.isLaunchCohortMember, route.offersAPurchase {
+            MonetizationLog.store.notice("a purchase sheet was refused: this Apple Account is in the free launch cohort")
+            return
+        }
         if sheet != nil || presentedSheet != nil {
             queuedSheet = route
             sheet = nil

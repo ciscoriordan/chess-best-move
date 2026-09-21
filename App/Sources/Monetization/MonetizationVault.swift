@@ -14,6 +14,11 @@ struct MonetizationVaultItem: Sendable, Hashable {
     static let local = MonetizationVaultItem(account: "credits.local.v1", synchronizable: false)
     /// Purchased-credit bookkeeping. Synchronizable, so the balance follows the Apple Account.
     static let purchased = MonetizationVaultItem(account: "credits.purchased.v1", synchronizable: true)
+    /// The launch-cohort verdict (`MonetizationLaunchCohort`, monetization.md section 11).
+    /// Synchronizable, because the Apple Account is what the verdict is about: it follows that
+    /// account to a new device, so a member's first launch on a new phone is already decided
+    /// even with no connection.
+    static let launchCohort = MonetizationVaultItem(account: "launchCohort.v1", synchronizable: true)
 }
 
 /// Storage for the credits service. The live implementation is the Keychain

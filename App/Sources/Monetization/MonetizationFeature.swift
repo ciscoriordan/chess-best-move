@@ -14,7 +14,9 @@
 import Foundation
 
 enum MonetizationFeature {
-    /// The live store: StoreKit 2 through `MonetizationLiveStoreKitClient`.
+    /// The live store: StoreKit 2 through `MonetizationLiveStoreKitClient`, with the launch
+    /// cohort decided from Apple's app transaction and kept in the Keychain
+    /// (`MonetizationLaunchCohort`).
     @MainActor
     static func makeStoreService() -> any StoreService {
         #if DEBUG
@@ -23,13 +25,20 @@ enum MonetizationFeature {
             // The scripted StoreKit starts empty at every launch; a Pro state cached by an earlier
             // launch would contradict it.
             MonetizationStoreService.forgetCachedEntitlements(in: defaults)
+            // The demo is the freemium app, so its scripted app transaction is a post-window
+            // install (`MonetizationScriptedStoreKitClient.appTransactionPurchaseDate`) and its
+            // cohort lives in memory. `-monetizationLaunchCohort member` overrides it.
             return MonetizationStoreService(
                 client: MonetizationDebugOptions.makeDemoClient(),
+                launchCohort: MonetizationDebugOptions.makeDemoLaunchCohort(defaults: defaults),
                 defaults: defaults
             )
         }
         #endif
-        return MonetizationStoreService(client: MonetizationLiveStoreKitClient())
+        return MonetizationStoreService(
+            client: MonetizationLiveStoreKitClient(),
+            launchCohort: MonetizationLaunchCohort(vault: MonetizationKeychainVault())
+        )
     }
 
     /// The live credits service: Keychain storage, with purchased credits derived from the
@@ -91,4 +100,24 @@ enum MonetizationRules {
     /// How soon the store reads the renewal status again when a subscription is listed past its
     /// expiration date but the end of its grace period could not be read.
     static let gracePeriodStatusRetry: TimeInterval = 60 * 60
+
+    /// The instant the app flips from free to freemium (monetization.md section 11,
+    /// build/ui-requests.md item 16, owner decision of 2026-09-20): **2026-10-15T12:00:00Z**.
+    ///
+    /// An Apple Account whose `AppTransaction.originalPurchaseDate` is before this instant is
+    /// in the launch cohort, permanently; one at or after it meets the three free analyses and
+    /// the paywall. It is a fixed boundary in the binary rather than a duration that starts at
+    /// launch, so if the app is not on sale before it, nobody is ever in the launch cohort and
+    /// it ships straight into freemium.
+    ///
+    /// **Why noon UTC and not midnight.** The promise is made to readers in local dates
+    /// ("install before October 15, 2026"), and local dates run from UTC+14 to UTC-12. Noon
+    /// UTC on 15 October is the last instant at which anywhere on Earth is still on 14
+    /// October, so every reader who installs on a day they would call the 14th or earlier is
+    /// inside the window. Erring later errs in the reader's favor; midnight UTC would have
+    /// broken the promise for the eastern Pacific.
+    ///
+    /// Nothing compares this with the device clock. It is compared only with the date Apple
+    /// signed into the app transaction, so moving the clock moves nothing.
+    static let launchCohortCutoff = Date(timeIntervalSince1970: 1_792_065_600)
 }

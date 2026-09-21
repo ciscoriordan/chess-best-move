@@ -95,6 +95,10 @@ protocol MonetizationStoreKitClient: AnyObject {
     func unfinishedTransactions() async -> [MonetizationTransactionFacts]
     /// `Transaction.updates`, verified only. Called once.
     func transactionUpdates() -> AsyncStream<MonetizationTransactionFacts>
+    /// `AppTransaction.shared.originalPurchaseDate`: when the Apple Account running this copy
+    /// first downloaded this app, signed by Apple. Nil when it could not be read or did not
+    /// verify (offline on a first launch). May need the network.
+    func appTransactionOriginalPurchaseDate() async -> Date?
     func finish(_ transaction: MonetizationTransactionFacts) async
     /// `AppStore.sync()`.
     func sync() async throws
@@ -232,6 +236,21 @@ final class MonetizationLiveStoreKitClient: MonetizationStoreKitClient {
     func finish(_ transaction: MonetizationTransactionFacts) async {
         guard let storeKitTransaction = unfinished.removeValue(forKey: transaction.id) else { return }
         await storeKitTransaction.finish()
+    }
+
+    func appTransactionOriginalPurchaseDate() async -> Date? {
+        do {
+            guard case .verified(let appTransaction) = try await AppTransaction.shared else {
+                MonetizationLog.store.error("the app transaction did not verify")
+                return nil
+            }
+            return appTransaction.originalPurchaseDate
+        } catch {
+            // Offline on a first launch is the ordinary case here, not a fault: the launch
+            // cohort stays undecided and the question is asked again (MonetizationLaunchCohort).
+            MonetizationLog.store.notice("the app transaction could not be read: \(String(describing: error), privacy: .public)")
+            return nil
+        }
     }
 
     func sync() async throws {

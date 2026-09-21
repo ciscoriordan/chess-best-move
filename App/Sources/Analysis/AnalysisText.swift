@@ -82,6 +82,30 @@ enum AnalysisSpeech {
         return text
     }
 
+    /// What the board reads out when it carries both arrows (design.md section 7 and 12).
+    ///
+    /// The board is one accessibility element whose value is what is drawn on it, so with two
+    /// arrows it has to say which move is whose, which order they happen in, and that the
+    /// second one is conditional. A reader who cannot see the two colors or the two heads gets
+    /// the whole of it from this sentence: "Two arrows. Their likely move first: pawn from e7
+    /// to e5. Then your best answer, which holds only if they play it: knight from g8 to f6."
+    ///
+    /// Words only, never a symbol name, and never SAN letters.
+    static func boardArrowPair(theirMove: String, reply: String, isFinal: Bool) -> String {
+        (isFinal ? "Two arrows. " : "Two arrows so far. ")
+            + "Their likely move first: " + lowercasingFirstLetter(theirMove)
+            + ". Then your best answer, which holds only if they play it: "
+            + lowercasingFirstLetter(reply) + "."
+    }
+
+    /// What the board reads out when the only arrow on it is the other player's move: the
+    /// engine's line stopped after one move, so there is no reply to draw (design.md 9.4).
+    /// The arrow is not the cobalt one and the value does not call it a best move.
+    static func boardTheirMoveOnly(theirMove: String, isFinal: Bool) -> String {
+        (isFinal ? "Their likely move: " : "Their likely move so far: ")
+            + lowercasingFirstLetter(theirMove) + "."
+    }
+
     /// The engine line for VoiceOver: the spoken form of the first `plies` moves, and "and so
     /// on" when the line runs longer than that.
     static func line(sanMoves: [String], plies: Int = 6) -> String {

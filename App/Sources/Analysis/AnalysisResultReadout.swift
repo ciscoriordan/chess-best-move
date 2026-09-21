@@ -239,7 +239,7 @@ struct AnalysisGlyphLine: View {
             AnalysisResultReadout(
                 content: AnalysisReadoutContent(
                     pill: .init(title: "Best move", isAccent: true),
-                    move: .init(san: "b3", words: "Pawn to b3", piece: Piece(color: .white, kind: .pawn)),
+                    move: .init(move: Move(uci: "b2b3")!, san: "b3", words: "Pawn to b3", piece: Piece(color: .white, kind: .pawn)),
                     placeholder: "\u{2014}",
                     placeholderIsResult: false,
                     guessedMove: nil
@@ -251,10 +251,10 @@ struct AnalysisGlyphLine: View {
             AnalysisResultReadout(
                 content: AnalysisReadoutContent(
                     pill: .init(title: "Their move", isAccent: false),
-                    move: .init(san: "Nf6", words: "Knight to f6", piece: Piece(color: .black, kind: .knight)),
+                    move: .init(move: Move(uci: "g8f6")!, san: "Nf6", words: "Knight to f6", piece: Piece(color: .black, kind: .knight)),
                     placeholder: "\u{2014}",
                     placeholderIsResult: false,
-                    guessedMove: .init(san: "e4", words: "Pawn to e4", piece: Piece(color: .white, kind: .pawn))
+                    guessedMove: .init(move: Move(uci: "e2e4")!, san: "e4", words: "Pawn to e4", piece: Piece(color: .white, kind: .pawn))
                 ),
                 score: .centipawns(-20),
                 isFinal: true

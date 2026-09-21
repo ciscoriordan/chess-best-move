@@ -13,6 +13,7 @@ enum CaptureAccessibilityID {
     static let checkPositionAnalyze = "checkPosition.analyze"
     static let checkPositionReason = "checkPosition.reason"
     static let checkPositionChipNote = "checkPosition.chipNote"
+    static let checkPositionCompare = "checkPosition.compare"
     static let boardNotFoundTitle = "boardNotFound.title"
     static let editorBoard = "editor.board"
     static let editorAnalyze = "editor.analyze"
@@ -33,6 +34,8 @@ struct CheckPositionView: View {
     @State private var appeared = false
     @State private var selectionFeedback = 0
     @State private var isPeeking = false
+    /// The keyboard cursor, or nil until a key summons it, so a touch user never sees one.
+    @State private var keyboardCursor: Square?
 
     init(snapshot: BoardSnapshot) {
         _snapshot = State(initialValue: snapshot)
@@ -49,14 +52,17 @@ struct CheckPositionView: View {
             VStack(alignment: .leading, spacing: 0) {
                 board(issues: issues)
                 if snapshot.boardImage != nil {
-                    Text(isPeeking ? "Showing your screenshot" : "Press and hold the board to compare it with your screenshot.")
-                        .typography(.caption)
-                        .foregroundStyle(Palette.ink2)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.top, Spacing.s2)
-                        // The board carries the same instruction as a custom action, which is
-                        // the form a VoiceOver or Switch Control user can actually take.
-                        .accessibilityHidden(true)
+                    // A link, not the sentence "Press and hold the board to compare it with your
+                    // screenshot." that used to be here. That sentence described a gesture, and a
+                    // gesture is what a keyboard, Switch Control or Voice Control user cannot
+                    // make: the comparison is the only free way to check recognition before a
+                    // credit is spent, so it needs a control and not an instruction. The hold
+                    // still works, and the words are the ones the custom action already used.
+                    TextLink(isPeeking ? CaptureBoardSpeech.hideScreenshotAction : CaptureBoardSpeech.compareAction) {
+                        isPeeking.toggle()
+                    }
+                    .padding(.top, Spacing.s1)
+                    .accessibilityIdentifier(CaptureAccessibilityID.checkPositionCompare)
                 }
                 chips(summary)
                     .padding(.top, Spacing.s4)
@@ -81,9 +87,23 @@ struct CheckPositionView: View {
 
     // MARK: Board
 
+    /// The board, as one keyboard stop: an arrow key summons a cursor and the arrow keys move
+    /// it, and Space or Return opens the editor on the cursor's square, which is what a tap on
+    /// that square does. Escape puts the cursor away (design.md 12, "Keyboard").
     private func board(issues: [PositionIssue]) -> some View {
         let whiteAtBottom = snapshot.whiteAtBottom
-        return BoardFrame {
+        return BoardKeyboardControl(
+            whiteAtBottom: whiteAtBottom,
+            home: { BoardKeyboard.home(selected: nil, flagged: snapshot.lowConfidenceSquares, whiteAtBottom: whiteAtBottom) },
+            activate: { openEditor(selecting: $0) },
+            cursor: $keyboardCursor
+        ) {
+            boardFrame(issues: issues, whiteAtBottom: whiteAtBottom)
+        }
+    }
+
+    private func boardFrame(issues: [PositionIssue], whiteAtBottom: Bool) -> some View {
+        BoardFrame {
             GeometryReader { proxy in
                 let side = min(proxy.size.width, proxy.size.height)
                 ZStack {
@@ -107,6 +127,13 @@ struct CheckPositionView: View {
                     if snapshot.boardImage != nil { isPeeking = true }
                 } onPressingChanged: { pressing in
                     if !pressing { isPeeking = false }
+                }
+                // Last, so nothing on the board can cover the keyboard cursor.
+                .overlay(alignment: .topLeading) {
+                    if let keyboardCursor {
+                        BoardKeyboardCursorRing(square: keyboardCursor, whiteAtBottom: whiteAtBottom)
+                            .frame(width: side, height: side)
+                    }
                 }
             }
         }

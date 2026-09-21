@@ -195,6 +195,28 @@ enum MonetizationTestingCopy {
 
     static let cancel = "Cancel"
 
+    // MARK: The free launch window
+
+    /// The row that says where this Apple Account stands with the free launch window.
+    static let launchCohortRow = "Launch cohort"
+    static func launchCohortValue(_ status: MonetizationLaunchCohortStatus) -> String {
+        switch status {
+        case .member: "Member"
+        case .notMember: "Not a member"
+        case .undecided: "Not decided yet"
+        }
+    }
+
+    /// The switch that makes the build behave as an install made after the window closed. Its
+    /// name says what a tester or a reviewer wants from it, and the note says what it does.
+    static let showsPurchaseScreens = "Show the purchase screens"
+
+    /// The second paragraph of the section's footer. App Review installs the app during the
+    /// free window, so a reviewer is in the launch cohort and would otherwise never reach the
+    /// paywall or the four products (monetization.md section 11).
+    static let launchCohortNote =
+        "Chess Best Move is unlimited for everyone whose Apple Account installed it before \(MonetizationLaunchCohortCopy.cutoffDate), and this build is one of those installs, so it shows no purchase screen. Turn on \"\(showsPurchaseScreens)\" and it behaves as an install made after that date: three analyses, then the purchase screen with all four products. Turn it off to go back."
+
     /// "2 of 3" for the free row.
     static func freeValue(_ counts: MonetizationTestingCounts) -> String {
         "\(counts.freeRemaining) of \(counts.freeAllowance)"

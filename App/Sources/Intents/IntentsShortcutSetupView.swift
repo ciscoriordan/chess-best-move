@@ -19,6 +19,7 @@ struct ShortcutSetupView: View {
 
 /// The setup steps, shared by the sheet and the Settings > Help page.
 struct IntentsShortcutSetupContent: View {
+    @Environment(AppModel.self) private var app
     @Environment(\.openURL) private var openURL
 
     var body: some View {
@@ -47,12 +48,18 @@ struct IntentsShortcutSetupContent: View {
             IntentsSetupStep(number: 3, text: "With a position on screen, run the shortcut. Chess Best Move opens and analyzes the screenshot.")
                 .padding(.bottom, Spacing.s4)
 
-            Hairline()
-            Text("The shortcut uses the same free analyses as the app. Board not found never uses one.")
-                .typography(.caption)
-                .foregroundStyle(Palette.ink2)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.top, Spacing.s3)
+            // Only for a reader who has a free allowance to spend. A Pro subscriber and a
+            // member of the free launch window (monetization.md section 11) have unlimited
+            // analyses, so this is the one line left in the app that would tell a member
+            // about an allowance they do not have and never see counted anywhere else.
+            if !app.store.isPro {
+                Hairline()
+                Text("The shortcut uses the same free analyses as the app. Board not found never uses one.")
+                    .typography(.caption)
+                    .foregroundStyle(Palette.ink2)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, Spacing.s3)
+            }
         }
         .sideGutter()
         .padding(.top, Spacing.s4)

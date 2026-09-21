@@ -7,6 +7,10 @@ import SwiftUI
 /// rather than not seeing them at all: a setting nobody can find is not an offer, and hiding
 /// them would leave the notice they do see ("Pro shows it") unexplained.
 ///
+/// A reader who already has them sees neither the tag nor the footer, because neither says
+/// anything to them: a Pro subscriber, and a member of the free launch cohort, for whom the
+/// app carries no commercial surface at all (monetization.md section 11).
+///
 /// These are the second and third rows of the ANALYSIS card in Settings, so this view draws
 /// rows and the separator between them and nothing else. The card's footer is
 /// `SettingsLongerSearchFooter`, which sits under the card.
@@ -40,7 +44,7 @@ struct SettingsLongerSearchSection: View {
         let isPro = app.store.isPro
         VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: Spacing.s2) {
-                ProTaggedTitle(Copy.title, isMuted: !isPro)
+                ProTaggedTitle(Copy.title, isMuted: !isPro, showsTag: !isPro)
                 LongerSearchCeilingControl(selection: $settings.longerSearchCeiling)
                     .disabled(!isPro)
                 Text(Copy.explanation)
@@ -80,8 +84,11 @@ private struct AutomaticSwitchRow: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     /// What VoiceOver says for the row, stacked or not: the title, then what the tag means.
+    /// With the setting already unlocked there is no tag, so the label is the title alone.
     private var spokenLabel: String {
-        "\(SettingsLongerSearchSection.Copy.automaticTitle), \(ProTag.spokenLabel)"
+        isPro
+            ? SettingsLongerSearchSection.Copy.automaticTitle
+            : "\(SettingsLongerSearchSection.Copy.automaticTitle), \(ProTag.spokenLabel)"
     }
 
     var body: some View {
@@ -89,7 +96,7 @@ private struct AutomaticSwitchRow: View {
             VStack(alignment: .leading, spacing: Spacing.s2) {
                 // Drawn for the eye only: the switch under it carries the whole spoken label,
                 // so VoiceOver reads the row once rather than as a title and then a switch.
-                ProTaggedTitle(SettingsLongerSearchSection.Copy.automaticTitle, isMuted: !isPro)
+                ProTaggedTitle(SettingsLongerSearchSection.Copy.automaticTitle, isMuted: !isPro, showsTag: !isPro)
                     .accessibilityHidden(true)
                 toggle
                     .labelsHidden()
@@ -102,7 +109,7 @@ private struct AutomaticSwitchRow: View {
 
     private var toggle: some View {
         Toggle(isOn: $isOn) {
-            ProTaggedTitle(SettingsLongerSearchSection.Copy.automaticTitle, isMuted: !isPro)
+            ProTaggedTitle(SettingsLongerSearchSection.Copy.automaticTitle, isMuted: !isPro, showsTag: !isPro)
         }
         .tint(Palette.accent)
         .disabled(!isPro)
@@ -192,6 +199,9 @@ struct LongerSearchCeilingControl: View {
                 .buttonStyle(.plain)
                 .accessibilityAddTraits(isSelected ? .isSelected : [])
                 .accessibilityLabel(ceiling.spokenLabel)
+                // The segment reads "30 s" and is named "30 seconds"; Voice Control matches the
+                // name, so the written form is given as an input label too.
+                .accessibilityInputLabels([ceiling.label, ceiling.spokenLabel])
                 // Said on the segment as well as on the group, because a reader may land on a
                 // segment without entering through the group.
                 .accessibilityHint(isEnabled ? "" : ProTag.spokenLabel)

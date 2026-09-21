@@ -42,12 +42,20 @@ final class MonetizationScriptedStoreKitClient: MonetizationStoreKitClient {
     /// Products `loadProducts` leaves out, as App Store Connect does for a product that is not
     /// cleared for sale.
     var unservedProductIDs: Set<String> = []
+    /// What `appTransactionOriginalPurchaseDate` answers; nil is a read that failed (offline on
+    /// a first launch). The default is a day after `MonetizationRules.launchCohortCutoff`, so a
+    /// scripted store is an ordinary post-window install and every test written before the
+    /// launch window keeps meeting the free allowance and the paywall.
+    var appTransactionPurchaseDate: Date? = MonetizationRules.launchCohortCutoff.addingTimeInterval(24 * 60 * 60)
 
     private(set) var transactions: [MonetizationTransactionFacts] = []
     private(set) var finishedTransactionIDs: Set<UInt64> = []
     private(set) var pendingProductIDs: [String] = []
     private(set) var loadCount = 0
     private(set) var syncCount = 0
+    /// How often the launch cohort asked for the app transaction, so a test can show that a
+    /// stored verdict stops it being asked again.
+    private(set) var appTransactionReadCount = 0
     private(set) var manageSubscriptionsCount = 0
     private var nextTransactionID: UInt64 = 1_000
     private var updatesContinuation: AsyncStream<MonetizationTransactionFacts>.Continuation?
@@ -177,6 +185,11 @@ final class MonetizationScriptedStoreKitClient: MonetizationStoreKitClient {
 
     func finish(_ transaction: MonetizationTransactionFacts) async {
         finishedTransactionIDs.insert(transaction.id)
+    }
+
+    func appTransactionOriginalPurchaseDate() async -> Date? {
+        appTransactionReadCount += 1
+        return appTransactionPurchaseDate
     }
 
     func sync() async throws {
@@ -322,6 +335,24 @@ enum MonetizationDebugOptions {
         default: break
         }
         return client
+    }
+
+    /// The demo's launch cohort, decided before the first frame and outside the free launch
+    /// window: `-monetizationDemo` exists to show the freemium app (the indicator, the paywall,
+    /// the downsell), and an undecided cohort would grant unlimited analyses and hide all of
+    /// it. `-monetizationLaunchCohort member` overrides this, for the tests of the window.
+    @MainActor
+    static func makeDemoLaunchCohort(defaults: UserDefaults) -> MonetizationLaunchCohort {
+        let vault = MonetizationInMemoryVault()
+        let record = MonetizationLaunchCohortRecord(
+            isMember: false,
+            originalPurchaseDate: MonetizationRules.launchCohortCutoff.addingTimeInterval(24 * 60 * 60),
+            cutoff: MonetizationRules.launchCohortCutoff
+        )
+        if let data = try? JSONEncoder().encode(record) {
+            try? vault.setData(data, for: .launchCohort)
+        }
+        return MonetizationLaunchCohort(vault: vault, defaults: defaults)
     }
 
     static func makeDemoVault(freeRemaining: Int) -> MonetizationInMemoryVault {

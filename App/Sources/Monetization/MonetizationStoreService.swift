@@ -187,12 +187,24 @@ struct MonetizationCachedEntitlements: Codable, Sendable, Hashable {
 ///   subscription status reads.
 /// - A subscription in a billing grace period stays Pro, also for the next launch, until the
 ///   grace period ends, and a refresh is scheduled for that moment.
+/// - The free launch cohort (monetization.md section 11) is decided here too, because it grants
+///   the same thing a purchase grants. `isPro` is "unlimited analyses, no commercial surface"
+///   and is true for a member; `hasPurchasedPro` is the narrower fact that somebody bought
+///   something, and it is what Settings' plan row and `restore()` answer to.
 @MainActor
 @Observable
-final class MonetizationStoreService: StoreService, MonetizationPackHistorySource, MonetizationPackLedgerHost {
+final class MonetizationStoreService: StoreService, MonetizationPackHistorySource, MonetizationPackLedgerHost, MonetizationLaunchCohortTesting {
     private(set) var loadState: StoreLoadState = .idle
     private(set) var products: [StoreProduct] = []
-    private(set) var isPro = false
+    private(set) var hasPurchasedPro = false
+    /// Unlimited analyses: a purchase, or membership of the free launch cohort.
+    var isPro: Bool { hasPurchasedPro || isLaunchCohortMember }
+    /// Whether the app is granting the launch offer. See `MonetizationLaunchCohort`: it is
+    /// also true while nothing has been decided yet, which is the honest answer for a first
+    /// launch with no connection.
+    var isLaunchCohortMember: Bool { launchCohort.grantsUnlimitedAnalyses }
+    /// Apple has confirmed the offer, so copy may say so. See `MonetizationLaunchCohort`.
+    var isConfirmedLaunchCohortMember: Bool { launchCohort.offerIsConfirmed }
     private(set) var activeSubscriptionProductID: String?
     private(set) var shouldOfferSwitchToYearly = false
     private(set) var verifiedPackTransactionIDs: Set<UInt64>?
@@ -204,6 +216,7 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
     @ObservationIgnored weak var packLedger: (any MonetizationPackLedger)?
 
     @ObservationIgnored private let client: any MonetizationStoreKitClient
+    @ObservationIgnored private let launchCohort: MonetizationLaunchCohort
     @ObservationIgnored private let defaults: UserDefaults
     @ObservationIgnored private let now: () -> Date
     @ObservationIgnored private var observers: [@MainActor (StoreEvent) -> Void] = []
@@ -230,14 +243,16 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
 
     init(
         client: any MonetizationStoreKitClient,
+        launchCohort: MonetizationLaunchCohort,
         defaults: UserDefaults = .standard,
         now: @escaping () -> Date = Date.init
     ) {
         self.client = client
+        self.launchCohort = launchCohort
         self.defaults = defaults
         self.now = now
         if let cached = cachedEntitlements, cached.isPro(at: now()) {
-            isPro = true
+            hasPurchasedPro = true
             ownsLifetime = cached.ownsLifetime
             if let end = cached.subscriptionAccessEnd, end > now() {
                 activeSubscriptionProductID = cached.activeSubscriptionProductID
@@ -278,16 +293,41 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            Task { @MainActor in await self?.refreshEntitlements() }
+            Task { @MainActor in
+                await self?.refreshEntitlements()
+                // Asked again every time the app comes forward while nothing is decided, so a
+                // launch that started with no connection is settled as soon as there is one.
+                await self?.resolveLaunchCohort()
+            }
         }
         Task { [weak self] in
             guard let self else { return }
+            // Before the transactions: this decides whether there is anything to sell at all,
+            // and a member must not see a purchase screen flash past while it is decided.
+            await self.resolveLaunchCohort()
             for transaction in await self.client.unfinishedTransactions() {
                 await self.process(transaction)
             }
             await self.refreshEntitlements()
             await self.loadProducts()
         }
+    }
+
+    /// Decides the launch cohort from Apple's signed app transaction, once
+    /// (`MonetizationLaunchCohort`). Does nothing once a verdict is stored.
+    func resolveLaunchCohort() async {
+        await launchCohort.resolve { [client] in await client.appTransactionOriginalPurchaseDate() }
+    }
+
+    // MARK: MonetizationLaunchCohortTesting
+
+    var launchCohortStatus: MonetizationLaunchCohortStatus { launchCohort.status }
+
+    var leavesLaunchCohortForTesting: Bool { launchCohort.leavesCohortForTesting }
+
+    @discardableResult
+    func setLeavesLaunchCohortForTesting(_ leaves: Bool, for channel: MonetizationBuildChannel) -> Bool {
+        launchCohort.setLeavesCohortForTesting(leaves, for: channel)
     }
 
     /// Loads the products. Loads again when any product of `ProductID.all` is missing, for
@@ -354,7 +394,9 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
         await refreshEntitlements()
         packLedger?.reloadPurchasedCredits()
         // `Transaction.all` keeps finished packs, including every pack whose credits are spent.
-        return isPro || !(verifiedPackTransactionIDs ?? []).isEmpty ? .restored : .nothingFound
+        // `hasPurchasedPro`, not `isPro`: a launch-cohort member bought nothing, so telling
+        // them purchases were restored would be a lie.
+        return hasPurchasedPro || !(verifiedPackTransactionIDs ?? []).isEmpty ? .restored : .nothingFound
     }
 
     func refreshEntitlements() async {
@@ -508,7 +550,9 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
             return true
         }
         await refreshEntitlements()
-        if !isPro, MonetizationEntitlementRules.provesProNow(transaction, proGroupID: proSubscriptionGroupID, now: now()) {
+        // `hasPurchasedPro`: a launch-cohort member already has unlimited analyses, and their
+        // purchase still has to be recorded as a purchase.
+        if !hasPurchasedPro, MonetizationEntitlementRules.provesProNow(transaction, proGroupID: proSubscriptionGroupID, now: now()) {
             // The verified transaction itself proves the entitlement, even if the refreshed
             // entitlements do not list it yet. Refresh again when it ends.
             switch transaction.kind {
@@ -536,7 +580,8 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
         return true
     }
 
-    /// Publishes the Pro state and keeps it for the next launch.
+    /// Publishes the purchased-Pro state and keeps it for the next launch. It never touches
+    /// the launch cohort, which is decided from Apple's app transaction and nothing else.
     private func setEntitlements(
         isPro: Bool,
         activeSubscriptionProductID: String?,
@@ -544,7 +589,7 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
         subscriptionExpiration: Date?,
         gracePeriodExpiration: Date?
     ) {
-        if self.isPro != isPro { self.isPro = isPro }
+        if hasPurchasedPro != isPro { hasPurchasedPro = isPro }
         if self.activeSubscriptionProductID != activeSubscriptionProductID { self.activeSubscriptionProductID = activeSubscriptionProductID }
         if self.ownsLifetime != ownsLifetime { self.ownsLifetime = ownsLifetime }
         let cached = MonetizationCachedEntitlements(

@@ -11,16 +11,34 @@ import UIKit
 /// - VoiceOver: 64 elements in rows from the top of the displayed board, labeled with the
 ///   square ("e4") and valued with its content ("White pawn"); swipe up or down cycles the
 ///   content and VoiceOver reads the new value; double tap selects the square for the palette.
+/// - Keyboard: the whole board is one keyboard stop (`BoardKeyboardControl`). An arrow key
+///   summons a cursor and the arrow keys move it square by square, Space or Return does what a
+///   tap on that square does, and Escape puts it away. The 64 VoiceOver elements are a separate
+///   model and are not keyboard stops, because 64 Tab presses to cross one screen is not access.
 struct CaptureEditorBoard: View {
     let model: CaptureEditorModel
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var dragSource: Square?
     @State private var dragLocation: CGPoint?
+    /// The keyboard cursor, or nil until a key summons it, so a touch user never sees one.
+    @State private var keyboardCursor: Square?
 
     var body: some View {
         let snapshot = model.snapshot
         let whiteAtBottom = snapshot.whiteAtBottom
+        BoardKeyboardControl(
+            whiteAtBottom: whiteAtBottom,
+            home: { BoardKeyboard.home(selected: model.selectedSquare, flagged: snapshot.lowConfidenceSquares, whiteAtBottom: whiteAtBottom) },
+            // The same call a tap makes, so the keyboard and the finger cannot diverge.
+            activate: { model.tap($0) },
+            cursor: $keyboardCursor
+        ) {
+            board(snapshot: snapshot, whiteAtBottom: whiteAtBottom)
+        }
+    }
+
+    private func board(snapshot: BoardSnapshot, whiteAtBottom: Bool) -> some View {
         BoardFrame {
             GeometryReader { proxy in
                 let side = min(proxy.size.width, proxy.size.height)
@@ -55,6 +73,13 @@ struct CaptureEditorBoard: View {
                             .frame(width: cell * 1.3, height: cell * 1.3)
                             .position(dragLocation)
                             .allowsHitTesting(false)
+                    }
+                }
+                // Last, so nothing on the board can cover the keyboard cursor.
+                .overlay(alignment: .topLeading) {
+                    if let keyboardCursor {
+                        BoardKeyboardCursorRing(square: keyboardCursor, whiteAtBottom: whiteAtBottom)
+                            .frame(width: side, height: side)
                     }
                 }
                 .simultaneousGesture(dragGesture(side: side, whiteAtBottom: whiteAtBottom))

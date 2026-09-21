@@ -43,8 +43,24 @@ enum Palette {
 
     // MARK: Theme-invariant tokens (drawn over the screenshot or the diagram)
 
-    /// Best-move arrow fill, both themes.
+    /// The answer arrow's fill, both themes: the move the app is telling the user to play.
     static let arrowFill = fixed(0x2350E6)
+    /// The other arrow's fill: the move the app expects the player at the top to make first,
+    /// which the answer replies to (design.md section 7, "two arrows").
+    ///
+    /// A warm near-black rather than the muted ink of the text below it, for two reasons that
+    /// were measured rather than guessed (`AccessibilityContrastTests`). `ink2` is a dynamic
+    /// token chosen as text on the app's own surfaces, and the board is the user's screenshot,
+    /// which does not follow the app's theme; and in light mode `ink2` sits 1.24:1 from the
+    /// cobalt in luminance, so a reader who cannot separate blue from warm grey by hue would
+    /// see the same mark twice.
+    ///
+    /// The value is forced by the two ratios it has to clear at once. To reach 3:1 against the
+    /// cobalt a fill must be either lighter than a relative luminance of 0.454 or darker than
+    /// 0.0060, and anything in the light branch falls below 3:1 against the opaque white halo
+    /// that wraps every arrow. Only the dark branch satisfies both, so the arrow is a near
+    /// black: 3.11:1 from the cobalt and 19.4:1 from the halo.
+    static let arrowTheirMoveFill = fixed(0x0E0D0A)
     /// Halo stroke around the arrow. Opaque: at 92% over the dark square of the board themes
     /// the app reads, it fell to between 2.3:1 and 3.1:1 (docs/design.md section 7).
     static let arrowHalo = fixed(0xFFFFFF)
