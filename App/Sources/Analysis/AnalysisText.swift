@@ -70,12 +70,14 @@ enum AnalysisSpeech {
         return text
     }
 
-    /// "If they play pawn to e4: best move knight to f6. White is ahead by 0.35 pawns."
+    /// "Their likely move: pawn to e4. Best reply: knight to f6. White is ahead by 0.35 pawns."
     /// (design.md 9.4). Said when the screenshot caught the turn of the player at the top: the
-    /// screen leads with the answer, so the announcement names the move it answers first.
+    /// screen shows the move the engine expects above the answer to it, and the announcement
+    /// names them in the same order and with the same words as the heading and the pill, so
+    /// the reply is never called the best move (owner decision 2026-09-21).
     static func replyAnnouncement(guessedMove: String, reply: String, score: WhiteScore?) -> String {
-        var text = "If they play " + lowercasingFirstLetter(guessedMove)
-            + ": best move " + lowercasingFirstLetter(reply) + "."
+        var text = AnalysisReadoutContent.guessedMoveTitle + ": " + lowercasingFirstLetter(guessedMove)
+            + ". Best reply: " + lowercasingFirstLetter(reply) + "."
         if let score {
             text += " " + AnalysisScore.spoken(score) + "."
         }
@@ -88,13 +90,14 @@ enum AnalysisSpeech {
     /// arrows it has to say which move is whose, which order they happen in, and that the
     /// second one is conditional. A reader who cannot see the two colors or the two heads gets
     /// the whole of it from this sentence: "Two arrows. Their likely move first: pawn from e7
-    /// to e5. Then your best answer, which holds only if they play it: knight from g8 to f6."
+    /// to e5. Then your best reply, which holds only if they play it: knight from g8 to f6."
+    /// It says "best reply" because the pill beside the badge does (owner decision 2026-09-21).
     ///
     /// Words only, never a symbol name, and never SAN letters.
     static func boardArrowPair(theirMove: String, reply: String, isFinal: Bool) -> String {
         (isFinal ? "Two arrows. " : "Two arrows so far. ")
             + "Their likely move first: " + lowercasingFirstLetter(theirMove)
-            + ". Then your best answer, which holds only if they play it: "
+            + ". Then your best reply, which holds only if they play it: "
             + lowercasingFirstLetter(reply) + "."
     }
 

@@ -19,9 +19,10 @@ struct CaptureScreenshotAsset: Sendable, Hashable {
     let creationDate: Date?
 }
 
-/// Remembers which photo library screenshots were already imported, so the Home promotion
-/// ("Analyze new screenshot") never offers the same screenshot twice. Stored in
-/// `UserDefaults`; only the most recent `limit` identifiers are kept.
+/// Remembers which photo library screenshots were already imported, so Home's promotion
+/// ("Analyze new screenshot") and the new-screenshot row on the Analysis result and Check
+/// position (design.md 9.4) never offer the same screenshot twice. Stored in `UserDefaults`;
+/// only the most recent `limit` identifiers are kept.
 struct CaptureAnalyzedScreenshots {
     static let defaultsKey = "capture.analyzedScreenshotIdentifiers"
     static let limit = 50
@@ -49,7 +50,9 @@ struct CaptureAnalyzedScreenshots {
 }
 
 /// When Home promotes the newest screenshot, and how it words the screenshot's age
-/// (design.md 9.1, "Recommendation for the App owner").
+/// (design.md 9.1, "Recommendation for the App owner"). The new-screenshot row of the Analysis
+/// result and Check position offers only screenshots this rule would promote, and words their
+/// age the same way (`CaptureNewScreenshotPolicy`, design.md 9.4).
 enum CaptureRecentScreenshotPolicy {
     /// A screenshot younger than this is "recent".
     static let window: TimeInterval = 120
@@ -186,5 +189,22 @@ enum CaptureLatestScreenshotButton: Hashable {
         case .noScreenshots, .restricted: false
         default: true
         }
+    }
+}
+
+/// Loads a photo library screenshot for import: its data (from iCloud if needed), decoded off
+/// the main actor with the orientation and the 4096 px cap of every import. Home's first row and
+/// the new-screenshot row (design.md 9.4) both use it, so the two imports cannot drift apart.
+/// The caller marks the screenshot analyzed.
+enum CaptureScreenshotImport {
+    static func importedImage(for asset: CaptureScreenshotAsset, library: CapturePhotoLibraryClient) async throws -> ImportedImage {
+        let (data, orientation) = try await library.imageData(asset.localIdentifier)
+        let image = try CaptureImageDecoder.decode(data: data, orientation: orientation)
+        return ImportedImage(
+            image: image,
+            source: .latestScreenshot,
+            photoAssetIdentifier: asset.localIdentifier,
+            creationDate: asset.creationDate
+        )
     }
 }

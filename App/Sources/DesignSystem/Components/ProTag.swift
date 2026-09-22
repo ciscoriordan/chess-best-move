@@ -13,7 +13,7 @@ import SwiftUI
 /// so a row that carries it explains itself without the reader having to know the convention.
 /// Use `ProTaggedTitle` to put it after a row title as one VoiceOver element.
 ///
-/// The tier is called Pro in the app and in the store, never "Plus" (CLAUDE.md, design.md 14).
+/// The tier is called Pro in the app and in the store, never "Plus" (design.md 14).
 struct ProTag: View {
     /// The letters on screen. The `label` token uppercases them.
     static let title = "Pro"

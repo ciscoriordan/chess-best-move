@@ -83,8 +83,16 @@ private struct AnalysisScreen: View {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            PinnedActionBar { actionBar }
+            PinnedActionBar {
+                VStack(spacing: 0) {
+                    // A screenshot taken while the user was away (design.md 9.4). Draws nothing
+                    // when there is none, and nothing here at accessibility sizes.
+                    NewScreenshotRow(placement: .pinnedBar)
+                    actionBar
+                }
+            }
         }
+        .offersNewScreenshot()
         .onAppear { model.appear() }
         .onDisappear { model.disappear() }
         .onChange(of: session.canAnalyze) { _, _ in model.creditStateChanged() }
@@ -143,12 +151,15 @@ private struct AnalysisScreen: View {
                     .frame(width: boardSide + AnalysisLayout.evalBarColumn)
                 VStack(alignment: .leading, spacing: 0) {
                     CreditsInlineIndicator()
+                    NewScreenshotRow(placement: .scrollingContent)
                     readoutGroups
                 }
             }
         } else {
             VStack(alignment: .leading, spacing: 0) {
                 CreditsInlineIndicator()
+                // The pinned bar's row, moved here at accessibility sizes (design.md 9.4).
+                NewScreenshotRow(placement: .scrollingContent)
                 boardGroup
                 readoutGroups
             }

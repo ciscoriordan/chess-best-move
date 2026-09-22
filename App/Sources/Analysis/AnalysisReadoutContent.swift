@@ -6,8 +6,8 @@ import ChessCore
 ///
 /// The readout is one badge with the move in it, a pill and the evaluation beside the badge,
 /// and, when the screenshot caught the turn of the player at the top, the move of that player
-/// which the badge's move answers (owner decisions of 2026-09-20, `build/ui-requests.md`
-/// items 1, 2 and 3).
+/// which the badge's move answers, shown above the badge because it is played first (owner
+/// decisions of 2026-09-20, `build/ui-requests.md` items 1, 2 and 3, and of 2026-09-21).
 struct AnalysisReadoutContent: Sendable, Hashable {
     /// What the screen is doing, from `AnalysisScreenModel.RunState`. The readout keeps the
     /// same shape in every one of them, so nothing jumps when the engine finishes.
@@ -21,9 +21,10 @@ struct AnalysisReadoutContent: Sendable, Hashable {
         case engineError
     }
 
-    /// The pill at the top of the readout. It replaced the cobalt swatch and the BEST MOVE
-    /// label (owner decision, item 1): it names whose turn the screenshot caught, and it is
-    /// drawn in the accent only while the answer belongs to the player at the bottom.
+    /// The pill beside the badge. It replaced the cobalt swatch and the BEST MOVE label (owner
+    /// decision, item 1). It is drawn in the accent only while the badge holds an answer for the
+    /// player at the bottom: "Best move" on their own turn, "Best reply" when the screenshot
+    /// caught the other turn and the badge answers the move shown above it.
     struct Pill: Sendable, Hashable {
         /// Sentence case; the `label` token draws it uppercase and VoiceOver reads this.
         var title: String
@@ -56,8 +57,8 @@ struct AnalysisReadoutContent: Sendable, Hashable {
     /// out and drawn in full ink; false for the waiting marks, which are `ink3` and silent.
     var placeholderIsResult: Bool
     /// The move of the player at the top that `move` answers, when the screenshot caught that
-    /// player's turn (item 2). Nil in every other case, including a side the user chose and a
-    /// line too short to hold a reply.
+    /// player's turn (item 2). It is shown above the badge under "Their likely move". Nil in
+    /// every other case, including a side the user chose and a line too short to hold a reply.
     var guessedMove: MoveText?
     /// The screenshot caught the turn of the player at the top, so the move the engine found
     /// on this board belongs to that player rather than to the user.
@@ -66,9 +67,16 @@ struct AnalysisReadoutContent: Sendable, Hashable {
     /// case that matters to the board: a line with no reply in it yet leaves `guessedMove` nil
     /// and puts THEIR move in the badge, and an arrow for that move must not be cobalt.
     var answersForThePlayerAtTheTop = false
+    /// The engine is still searching a board on which the player at the top moves, and its line
+    /// holds no reply yet: before its first report, and while that report is the only one on
+    /// screen, since `AnalysisReadoutAccumulator` shows the first report at once and its line is
+    /// usually one move long. The view keeps the guessed move's place above the badge with a
+    /// silent waiting mark, so the badge does not drop when the reply arrives a moment later
+    /// (design.md 9.3).
+    var guessedMoveIsPending = false
 
     /// The badge's move answers `guessedMove`, so it is drawn in the accent: cobalt is the
-    /// answer, and the guessed move beneath it is muted ink (item 2).
+    /// answer, and the guessed move above it is muted ink (item 2).
     var moveIsReply: Bool { guessedMove != nil && move != nil }
 
     /// The arrows the board draws, in the order the moves are played (design.md section 7).
@@ -94,37 +102,53 @@ struct AnalysisReadoutContent: Sendable, Hashable {
 
     /// What VoiceOver reads for the move in the badge.
     ///
-    /// The readout is three elements read in turn - the pill, the move, the evaluation - and
-    /// the pill is not a description of the move beside it. When the screenshot caught the turn
-    /// of the player at the top, the pill says "Their move" and the badge holds the app's
-    /// answer, so the two fragments read back to back as a false statement: "Their move. Knight
-    /// to f6." A sighted reader sees the badge in cobalt with "if they play e4" tucked under
-    /// it and cannot be misled that way; a reader who hears the parts one at a time can be.
+    /// The readout is read one element at a time, and the badge does not always hold the same
+    /// player's move: when the screenshot caught the turn of the player at the top it holds the
+    /// user's reply if the engine's line has one, and that player's own move if it does not.
+    /// Read in order the elements now make a true sentence - "Their likely move: pawn to e4.
+    /// Best reply. Knight to f6." - but a reader who lands on the badge alone (touch
+    /// exploration, or swiping back to it) hears only the badge, and "Knight to f6" by itself
+    /// does not say that it is the reply or that it holds only if the other move is played.
     ///
-    /// So the move carries its own context: "Best answer if they play pawn to e4: knight to
-    /// f6." Nothing in the sentence can be read as the other player's move.
+    /// So the reply carries its own condition, after the move so the move is heard first:
+    /// "Knight to f6, if they play pawn to e4." It no longer opens with "Best answer": the pill
+    /// read just before it says "Best reply" (owner decision 2026-09-21), and the old prefix
+    /// was only there because that pill used to say "Their move".
     var spokenMove: String? {
         guard let move else { return nil }
         guard let guessed = guessedMove else { return move.words }
-        return "Best answer if they play " + AnalysisSpeech.lowercasingFirstLetter(guessed.words)
-            + ": " + AnalysisSpeech.lowercasingFirstLetter(move.words) + "."
+        return move.words + ", if they play " + AnalysisSpeech.lowercasingFirstLetter(guessed.words) + "."
     }
 
     // MARK: Copy
 
-    /// The start of the line naming the guessed move; the piece glyph and the SAN follow it,
-    /// so the line reads "if they play (glyph) e4".
-    static let guessedMovePrefix = "if they play "
+    /// The heading above the badge that names the guessed move (owner decision 2026-09-21).
+    /// Sentence case: the `sectionLabel` token draws it uppercase and VoiceOver reads this. It
+    /// names the player by their move, never by their part in a game (design.md 14).
+    static let guessedMoveTitle = "Their likely move"
 
-    /// The sentence under that line. The whole point of the readout in this case is that one
+    /// The line under that heading, after the piece glyph: the move as notation, then the same
+    /// move in words, "e4  Pawn to e4", with an em space between them so they read as two
+    /// things. Where that does not fit on one line (the accessibility text sizes), the words go
+    /// to a line of their own, "Be2" / "Bishop to e2", rather than breaking inside the words,
+    /// "Be2  Bishop" / "to e2".
+    static func guessedMoveText(_ move: MoveText, onOneLine: Bool = true) -> String {
+        guessedMoveText(san: move.san, words: move.words, onOneLine: onOneLine)
+    }
+
+    static func guessedMoveText(san: String, words: String, onOneLine: Bool = true) -> String {
+        san + (onOneLine ? "\u{2003}" : "\n") + words
+    }
+
+    /// The sentence under the badge. The whole point of the readout in this case is that one
     /// move of it is not on the board, so the screen says it in plain words.
     static let guessedMoveNote =
         "Their move is a guess from the engine's own line. This answer holds only if they play it."
 
-    /// What VoiceOver reads for the guessed-move line: words only, never a symbol name
-    /// (item 3, design.md 12).
+    /// What VoiceOver reads for the heading and the line under it, which are one element:
+    /// words only, never a symbol name or notation (item 3, design.md 12).
     static func spokenGuessedMove(_ move: MoveText) -> String {
-        "If they play " + AnalysisSpeech.lowercasingFirstLetter(move.words) + "."
+        guessedMoveTitle + ": " + AnalysisSpeech.lowercasingFirstLetter(move.words) + "."
     }
 
     // MARK: Building it
@@ -163,19 +187,26 @@ struct AnalysisReadoutContent: Sendable, Hashable {
                 status: status,
                 noLegalMoves: noLegalMoves,
                 answersForThePlayerAtTheTop: answersForThePlayerAtTheTop,
+                hasReply: guessedMove != nil,
                 quickAnswerIsBeaten: quickAnswerIsBeaten
             ),
             move: move,
             placeholder: placeholder(status: status, noLegalMoves: noLegalMoves),
             placeholderIsResult: noLegalMoves != nil,
             guessedMove: guessedMove,
-            answersForThePlayerAtTheTop: answersForThePlayerAtTheTop
+            answersForThePlayerAtTheTop: answersForThePlayerAtTheTop,
+            guessedMoveIsPending: status == .thinking && answersForThePlayerAtTheTop
+                && noLegalMoves == nil && guessedMove == nil
         )
     }
 
-    /// The pill's words and color. The accent is the answer for the player at the bottom; the
-    /// muted ink covers the guessed turn of the player at the top and every state in which
-    /// there is no answer to give.
+    /// The pill's words and color. The accent is the answer for the player at the bottom: BEST
+    /// MOVE on their own turn, and BEST REPLY when the screenshot caught the turn of the player
+    /// at the top and the badge answers the move shown above it. The pill describes the move
+    /// beside it; the heading above the badge is what says whose turn it is (owner decision
+    /// 2026-09-21). The muted ink covers the same turn when the engine's line holds no reply
+    /// yet, where the badge holds that player's own move and the pill says THEIR MOVE, and
+    /// every state in which there is no answer to give.
     ///
     /// Once the longer search has beaten the move in the badge, the pill is what says so
     /// (`build/ui-requests.md` item 8): the app never calls a move the best one after it has
@@ -185,6 +216,7 @@ struct AnalysisReadoutContent: Sendable, Hashable {
         status: Status,
         noLegalMoves: Bool?,
         answersForThePlayerAtTheTop: Bool,
+        hasReply: Bool,
         quickAnswerIsBeaten: Bool = false
     ) -> Pill {
         guard noLegalMoves == nil else { return Pill(title: "No legal moves", isAccent: false) }
@@ -197,9 +229,9 @@ struct AnalysisReadoutContent: Sendable, Hashable {
         // engine is still searching the badge holds a waiting mark, so the pill is muted ink
         // whichever side the screenshot caught.
         case .thinking: Pill(title: "Thinking", isAccent: false)
-        case .done: answersForThePlayerAtTheTop
-            ? Pill(title: "Their move", isAccent: false)
-            : Pill(title: "Best move", isAccent: true)
+        case .done where !answersForThePlayerAtTheTop: Pill(title: "Best move", isAccent: true)
+        case .done where hasReply: Pill(title: "Best reply", isAccent: true)
+        case .done: Pill(title: "Their move", isAccent: false)
         case .stopped: Pill(title: "Stopped", isAccent: false)
         case .engineError: Pill(title: "Engine error", isAccent: false)
         }

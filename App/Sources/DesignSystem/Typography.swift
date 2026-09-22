@@ -32,13 +32,15 @@ enum TypeToken: String, CaseIterable, Sendable {
     case callout
     /// Fine print, hints. SF Pro Regular 13.
     case caption
-    /// Uppercase instrument labels on a fixed-geometry readout (BEST MOVE, LINE, THINK, PRO,
-    /// EDITED). SF Pro Semibold 12, +6% tracking. Short labels only, and the one text token
-    /// that still stops growing: see `TypeSpec.maximumSize`.
+    /// Uppercase instrument labels on a fixed-geometry readout (BEST MOVE, BEST REPLY, LINE,
+    /// THINK, PRO, EDITED). SF Pro Semibold 12, +6% tracking. Short labels only, and the one
+    /// text token that still stops growing: see `TypeSpec.maximumSize`.
     case label
-    /// Uppercase section headings (HOW IT WORKS, PURCHASES, CASTLING). The same lettering as
-    /// `label`, with no maximum size, because a heading is part of the reading order and must
-    /// stay larger than nothing in the section it names.
+    /// Uppercase section headings (HOW IT WORKS, PURCHASES, CASTLING, and THEIR LIKELY MOVE over
+    /// the guessed move on Analysis). The same lettering as `label`, with no maximum size,
+    /// because a heading is part of the reading order and must stay larger than nothing in the
+    /// section it names. So at the largest text sizes THEIR LIKELY MOVE outgrows the BEST REPLY
+    /// pill under it; that is the rule working, not a mismatch to fix (design.md 4 and 9.4).
     case sectionLabel
     /// Eval next to the hero move. SF Mono Semibold 22.
     case dataLarge

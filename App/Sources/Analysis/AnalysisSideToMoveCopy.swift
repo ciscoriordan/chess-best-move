@@ -54,8 +54,10 @@ enum SideToMoveCopy {
     /// player's move and is answered plainly).
     ///
     /// This is the case the screenshot was taken a little early for. Three things follow from
-    /// it on the Analysis result (design.md 9.4): the pill reads "Their move" in muted ink, the
-    /// badge leads with the answer the engine's line gives to the move it expects, and the
+    /// it on the Analysis result (design.md 9.4): the move the engine expects from that player
+    /// is shown above the badge under "Their likely move"; the badge holds the answer the
+    /// engine's line gives to it, with "Best reply" in the accent pill (or, while the line
+    /// holds no reply yet, that player's own move under a muted "Their move" pill); and the
     /// switch below the caption is offered.
     static func answersForThePlayerAtTheTop(side: PieceColor, whiteAtBottom: Bool, origin: SideToMoveOrigin) -> Bool {
         origin != .user && !isAtBottom(side: side, whiteAtBottom: whiteAtBottom)

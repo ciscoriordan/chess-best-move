@@ -5,7 +5,8 @@ import os
 import Photos
 import UIKit
 
-/// PhotoKit access for Home's "Use latest screenshot".
+/// PhotoKit access for Home's "Use latest screenshot" and for the new-screenshot row that the
+/// Analysis result and Check position show (design.md 9.4).
 ///
 /// Every function is nonisolated, and the PhotoKit completion handlers are created here
 /// rather than in main-actor code, because PhotoKit may call them on a background queue.
@@ -35,18 +36,36 @@ enum CapturePhotoLibrary {
     /// The newest image whose media subtypes include `.photoScreenshot`, or nil. Returns nil
     /// without touching the library unless access was granted.
     static func newestScreenshot() -> CaptureScreenshotAsset? {
+        newestScreenshots(limit: 1).first
+    }
+
+    /// Up to `limit` screenshots, newest first. Empty without touching the library unless
+    /// access was granted.
+    static func newestScreenshots(limit: Int) -> [CaptureScreenshotAsset] {
         let access = currentAccess()
-        guard access == .authorized || access == .limited else { return nil }
+        guard access == .authorized || access == .limited else { return [] }
         let options = PHFetchOptions()
         options.predicate = NSPredicate(
             format: "(mediaSubtypes & %d) != 0",
             Int(PHAssetMediaSubtype.photoScreenshot.rawValue)
         )
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        options.fetchLimit = 1
+        options.fetchLimit = limit
         options.includeHiddenAssets = false
-        guard let asset = PHAsset.fetchAssets(with: .image, options: options).firstObject else { return nil }
-        return CaptureScreenshotAsset(localIdentifier: asset.localIdentifier, creationDate: asset.creationDate)
+        var screenshots: [CaptureScreenshotAsset] = []
+        PHAsset.fetchAssets(with: .image, options: options).enumerateObjects { asset, _, _ in
+            screenshots.append(CaptureScreenshotAsset(localIdentifier: asset.localIdentifier, creationDate: asset.creationDate))
+        }
+        return screenshots
+    }
+
+    /// Whether the library still holds the asset (it was not deleted, and access still covers it).
+    /// False without touching the library unless access was granted: a fetch before that can
+    /// show the permission prompt.
+    static func assetExists(_ localIdentifier: String) -> Bool {
+        let access = currentAccess()
+        guard access == .authorized || access == .limited else { return false }
+        return PHAsset.fetchAssets(withLocalIdentifiers: [localIdentifier], options: nil).count > 0
     }
 
     /// A square thumbnail of at least `pixelSide` pixels, cropped to fill.
@@ -107,6 +126,11 @@ enum CapturePhotoLibrary {
 /// Home; cancelling the iteration finishes that stream for good. A single shared stream would
 /// then end at once for the `.task` that starts when Home appears again, and later changes
 /// would be dropped.
+///
+/// Home is not the only owner. Each flow screen that shows the new-screenshot row (the
+/// Analysis result and Check position, design.md 9.4) has an observer of its own, owned by
+/// that screen's `CaptureNewScreenshotOfferModel` and unregistered when the model goes away,
+/// so leaving one screen never ends another's changes.
 final class CapturePhotoLibraryObserver: NSObject, PHPhotoLibraryChangeObserver, Sendable {
     private struct State {
         var continuations: [UUID: AsyncStream<Void>.Continuation] = [:]
@@ -178,6 +202,33 @@ final class CapturePhotoLibraryObserver: NSObject, PHPhotoLibraryChangeObserver,
         let continuations = state.withLock { Array($0.continuations.values) }
         for continuation in continuations { continuation.yield() }
     }
+}
+
+/// The photo library as the new-screenshot row uses it (design.md 9.4). `live` is PhotoKit;
+/// the unit tests and `-captureFakeNewScreenshot` pass their own, so neither touches the real
+/// library.
+///
+/// The async closures are nonisolated, so a fetch and a PhotoKit callback run off the main actor,
+/// as `CaptureHomeModel.fetchNewestScreenshot` does.
+struct CapturePhotoLibraryClient: Sendable {
+    var currentAccess: @Sendable () -> CapturePhotoAccess
+    /// Up to `limit` screenshots, newest first.
+    var newestScreenshots: @Sendable (_ limit: Int) async -> [CaptureScreenshotAsset]
+    var assetExists: @Sendable (_ localIdentifier: String) async -> Bool
+    var thumbnail: @Sendable (_ localIdentifier: String, _ pixelSide: CGFloat) async -> CGImage?
+    var imageData: @Sendable (_ localIdentifier: String) async throws -> (data: Data, orientation: CGImagePropertyOrientation)
+    /// Registers `observer` with PhotoKit. Call only with full access: registering earlier can
+    /// show the permission prompt.
+    var startObserving: @Sendable (CapturePhotoLibraryObserver) -> Void
+
+    static let live = CapturePhotoLibraryClient(
+        currentAccess: { CapturePhotoLibrary.currentAccess() },
+        newestScreenshots: { CapturePhotoLibrary.newestScreenshots(limit: $0) },
+        assetExists: { CapturePhotoLibrary.assetExists($0) },
+        thumbnail: { await CapturePhotoLibrary.thumbnail(for: $0, pixelSide: $1) },
+        imageData: { try await CapturePhotoLibrary.imageData(for: $0) },
+        startObserving: { $0.register() }
+    )
 }
 
 /// Loads image data from item providers (paste, drag and drop). The completion handler is

@@ -7,8 +7,15 @@ import SwiftUI
 /// bottom of the badge. The pill and the evaluation are to the right of the badge, right-
 /// aligned to the card's trailing edge and vertically centered against it; at the largest text
 /// sizes `AnalysisReadoutHeaderLayout` stacks them under the badge instead of letting anything
-/// collide, clip or shrink. When the screenshot caught the turn of the player at the top, the
-/// badge leads with the answer and the move it answers follows underneath, in muted ink.
+/// collide, clip or shrink.
+///
+/// When the screenshot caught the turn of the player at the top and the engine's line holds a
+/// reply, the move that player is expected to make comes first, above the badge, under a THEIR
+/// LIKELY MOVE heading and in muted ink; the badge holds the reply in the accent, with BEST
+/// REPLY in the pill, and a caption under it says the answer depends on the guess (owner
+/// decision 2026-09-21, design.md 9.4). The order on screen is the order the moves are played.
+/// While the engine searches and its line holds no reply yet, the heading keeps that place over
+/// a waiting mark, so the badge does not drop when the reply arrives.
 struct AnalysisResultReadout: View {
     let content: AnalysisReadoutContent
     /// The evaluation from White's point of view, once the engine reports one.
@@ -24,30 +31,23 @@ struct AnalysisResultReadout: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.s2) {
-            AnalysisReadoutHeaderLayout {
-                badge
-                    // VoiceOver reads the pill first (it says what the readout is), then the
-                    // move, then the evaluation; the layout's own order is visual.
-                    .accessibilitySortPriority(2)
-                    // The trait belongs on the elements that change while the engine searches,
-                    // not on the container around them: a `children: .contain` container is not
-                    // itself focusable, so the trait never reaches the move or the evaluation
-                    // and VoiceOver re-reads them at every depth (design.md 12).
-                    .accessibilityAddTraits(isFinal ? [] : .updatesFrequently)
-                AnalysisStatusPill(title: content.pill.title, isAccent: content.pill.isAccent)
-                    .accessibilitySortPriority(3)
-                if let score {
-                    evaluation(score)
-                        .accessibilitySortPriority(1)
-                        .accessibilityAddTraits(isFinal ? [] : .updatesFrequently)
+            // 12 pt between the guessed move and the badge, a step more than the 8 pt inside
+            // each, so the two moves read as two things (design.md 5).
+            VStack(alignment: .leading, spacing: Spacing.s3) {
+                if let guessed = content.guessedMove {
+                    guessedMoveBlock(guessed)
+                        // Read before everything else in the readout, as it is seen: the move
+                        // the answer depends on, then the pill, the answer and the evaluation.
+                        .accessibilitySortPriority(4)
+                } else if content.guessedMoveIsPending {
+                    pendingGuessedMoveBlock
                 }
+                header
             }
-            .frame(maxWidth: .infinity)
 
-            // What the badge's move depends on comes first, right under the badge; what the
+            // The condition on the badge's move comes first, right under the badge; what the
             // screen is doing (an error, a stop) follows it.
-            if let guessed = content.guessedMove {
-                guessedMoveLine(guessed)
+            if content.guessedMove != nil {
                 Text(AnalysisReadoutContent.guessedMoveNote)
                     .typography(.caption)
                     .foregroundStyle(Palette.ink2)
@@ -60,6 +60,29 @@ struct AnalysisResultReadout: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
+    }
+
+    /// The badge, with the pill and the evaluation beside it or under it.
+    private var header: some View {
+        AnalysisReadoutHeaderLayout {
+            badge
+                // VoiceOver reads the pill (after the guessed move above the badge, when there
+                // is one), then the move, then the evaluation; the layout's own order is visual.
+                .accessibilitySortPriority(2)
+                // The trait belongs on the elements that change while the engine searches, not
+                // on the container around them: a `children: .contain` container is not itself
+                // focusable, so the trait never reaches the move or the evaluation and
+                // VoiceOver re-reads them at every depth (design.md 12).
+                .accessibilityAddTraits(isFinal ? [] : .updatesFrequently)
+            AnalysisStatusPill(title: content.pill.title, isAccent: content.pill.isAccent)
+                .accessibilitySortPriority(3)
+            if let score {
+                evaluation(score)
+                    .accessibilitySortPriority(1)
+                    .accessibilityAddTraits(isFinal ? [] : .updatesFrequently)
+            }
+        }
+        .frame(maxWidth: .infinity)
     }
 
     // MARK: The badge
@@ -127,19 +150,87 @@ struct AnalysisResultReadout: View {
             .accessibilityValue(AnalysisScore.spoken(score))
     }
 
-    /// "if they play (glyph) e4": the move of the player at the top that the badge answers,
-    /// in muted ink so the cobalt answer above it stays the answer (design.md 9.4).
-    private func guessedMoveLine(_ guessed: AnalysisReadoutContent.MoveText) -> some View {
+    /// THEIR LIKELY MOVE over "(glyph) e4  Pawn to e4": the move of the player at the top that
+    /// the badge answers, above the badge because it is played first, and in muted ink so the
+    /// cobalt answer under it stays the answer (owner decision 2026-09-21, design.md 9.4).
+    ///
+    /// The heading takes `sectionLabel`, not `label`: it names the line under it and is part of
+    /// what is read, so it grows with that line instead of stopping at 20 pt (design.md 4).
+    ///
+    /// The two are one VoiceOver element, "Their likely move: pawn to e4.", so the heading is
+    /// never heard apart from the move it names and neither the glyph nor the notation is read.
+    private func guessedMoveBlock(_ guessed: AnalysisReadoutContent.MoveText) -> some View {
+        VStack(alignment: .leading, spacing: Spacing.s2) {
+            guessedMoveTitle
+            ViewThatFits(in: .horizontal) {
+                guessedMoveLine(guessed, onOneLine: true)
+                guessedMoveLine(guessed, onOneLine: false)
+            }
+            .typography(.callout)
+            .foregroundStyle(Palette.ink2)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(AnalysisReadoutContent.spokenGuessedMove(guessed))
+        .accessibilityAddTraits(.isStaticText)
+        // The engine's expected move can change while it searches, like the badge's move.
+        .accessibilityAddTraits(isFinal ? [] : .updatesFrequently)
+        .accessibilityIdentifier("analysis.guessedMove")
+    }
+
+    private func guessedMoveLine(_ guessed: AnalysisReadoutContent.MoveText, onOneLine: Bool) -> some View {
         AnalysisGlyphLine(
-            prefix: AnalysisReadoutContent.guessedMovePrefix,
             piece: guessed.piece,
-            text: guessed.san,
+            text: AnalysisReadoutContent.guessedMoveText(guessed, onOneLine: onOneLine),
             spoken: AnalysisReadoutContent.spokenGuessedMove(guessed)
         )
-        .typography(.callout)
-        .foregroundStyle(Palette.ink2)
         .fixedSize(horizontal: false, vertical: true)
-        .accessibilityIdentifier("analysis.guessedMove")
+    }
+
+    /// The guessed move's place while the engine's line holds no reply yet
+    /// (`AnalysisReadoutContent.guessedMoveIsPending`): the same heading over a waiting mark in
+    /// `ink3`. Without it the badge would drop by the height of the heading and the line a
+    /// moment into the search, when the first line long enough to hold a reply arrives, and
+    /// the badge is what the reader is watching (design.md 9.3). Like the badge's own waiting
+    /// mark it is silent: there is nothing to read yet, and the pill says the engine is
+    /// thinking.
+    private var pendingGuessedMoveBlock: some View {
+        VStack(alignment: .leading, spacing: Spacing.s2) {
+            guessedMoveTitle
+            ZStack(alignment: .topLeading) {
+                // Holds the height the move's own line is about to take, laid out the same way
+                // with a typical move: one line where the notation and the words fit side by
+                // side, two where the words go under the notation (the accessibility text
+                // sizes), and the piece glyph, which makes a line a little taller than text
+                // alone. A move much longer or shorter than the template can still differ from
+                // it by a line at the sizes in between.
+                ViewThatFits(in: .horizontal) {
+                    pendingTemplateLine(onOneLine: true)
+                    pendingTemplateLine(onOneLine: false)
+                }
+                .hidden()
+                Text("\u{2026}")
+                    .foregroundStyle(Palette.ink3)
+            }
+            .typography(.callout)
+        }
+        .accessibilityHidden(true)
+    }
+
+    /// The line `pendingGuessedMoveBlock` measures itself by, for a typical move. Never shown.
+    private func pendingTemplateLine(onOneLine: Bool) -> some View {
+        AnalysisGlyphLine(
+            piece: Piece(color: .white, kind: .knight),
+            text: AnalysisReadoutContent.guessedMoveText(san: "Nf3", words: "Knight to f3", onOneLine: onOneLine),
+            spoken: ""
+        )
+        .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private var guessedMoveTitle: some View {
+        Text(AnalysisReadoutContent.guessedMoveTitle)
+            .typography(.sectionLabel)
+            .foregroundStyle(Palette.ink2)
+            .fixedSize(horizontal: false, vertical: true)
     }
 }
 
@@ -195,7 +286,7 @@ struct AnalysisStatusPill: View {
 }
 
 /// A line of text with a chess piece's glyph in it (design.md 9.4, item 3): "(glyph) Pawn to
-/// b3", "if they play (glyph) e4".
+/// b3", "(glyph) e4  Pawn to e4", "A longer search preferred (glyph) Nf3, now shown."
 ///
 /// The glyph comes from Noto Sans Symbols 2, which is in the bundle because the system font
 /// has no chess pieces. VoiceOver reads `spoken` and nothing else, so a symbol's name is never
@@ -210,8 +301,10 @@ struct AnalysisGlyphLine: View {
     /// What VoiceOver reads instead of the line: words, never a symbol name.
     let spoken: String
 
-    /// The glyph grows with the `callout` text it sits in.
-    @ScaledMetric(relativeTo: .callout) private var glyphSize: CGFloat = 16
+    /// The glyph grows with the `callout` text it sits in, on that token's own curve: the token
+    /// scales with `.subheadline`, and SwiftUI's similarly named `.callout` style runs ahead of
+    /// it at the larger sizes (design.md 12).
+    @ScaledMetric(relativeTo: .subheadline) private var glyphSize: CGFloat = 16
 
     var body: some View {
         composed
@@ -250,7 +343,7 @@ struct AnalysisGlyphLine: View {
             Hairline()
             AnalysisResultReadout(
                 content: AnalysisReadoutContent(
-                    pill: .init(title: "Their move", isAccent: false),
+                    pill: .init(title: "Best reply", isAccent: true),
                     move: .init(move: Move(uci: "g8f6")!, san: "Nf6", words: "Knight to f6", piece: Piece(color: .black, kind: .knight)),
                     placeholder: "\u{2014}",
                     placeholderIsResult: false,
@@ -262,7 +355,7 @@ struct AnalysisGlyphLine: View {
             Hairline()
             AnalysisResultReadout(
                 content: AnalysisReadoutContent(
-                    pill: .init(title: "Thinking", isAccent: true),
+                    pill: .init(title: "Thinking", isAccent: false),
                     move: nil,
                     placeholder: "\u{2026}",
                     placeholderIsResult: false,
@@ -271,6 +364,21 @@ struct AnalysisGlyphLine: View {
                 score: nil,
                 isFinal: false,
                 detail: "Thinking."
+            )
+            Hairline()
+            // The other player's turn, before the engine's line holds a reply.
+            AnalysisResultReadout(
+                content: AnalysisReadoutContent(
+                    pill: .init(title: "Thinking", isAccent: false),
+                    move: nil,
+                    placeholder: "\u{2026}",
+                    placeholderIsResult: false,
+                    guessedMove: nil,
+                    answersForThePlayerAtTheTop: true,
+                    guessedMoveIsPending: true
+                ),
+                score: nil,
+                isFinal: false
             )
         }
         .padding(Spacing.s4)

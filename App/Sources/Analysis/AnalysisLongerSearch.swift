@@ -260,7 +260,7 @@ struct AnalysisLongerSearchNoticeContent: Sendable, Hashable {
     /// move (`confirmed`, `proOffer`).
     var move: AnalysisReadoutContent.MoveText?
     /// The words before the move, and after it. The view puts the glyph and the move between
-    /// them, the way the guessed-move line does.
+    /// them.
     var sentencePrefix: String
     var sentenceSuffix: String
     /// What VoiceOver reads instead of the line: words, never a symbol name.

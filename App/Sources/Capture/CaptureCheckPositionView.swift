@@ -17,6 +17,9 @@ enum CaptureAccessibilityID {
     static let boardNotFoundTitle = "boardNotFound.title"
     static let editorBoard = "editor.board"
     static let editorAnalyze = "editor.analyze"
+    /// The Analyze button of the new-screenshot row (design.md 9.4), on Check position and on
+    /// the Analysis result.
+    static let newScreenshotAnalyze = "newScreenshot.analyze"
 }
 
 /// Check position (design.md 9.5): recognition returned a doubtful result, or a position the
@@ -50,6 +53,8 @@ struct CheckPositionView: View {
         let summary = CaptureCheckPositionSummary(snapshot: snapshot, issues: issues)
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
+                // A screenshot taken while the user was away, at accessibility sizes (9.5).
+                NewScreenshotRow(placement: .scrollingContent)
                 board(issues: issues)
                 if snapshot.boardImage != nil {
                     // A link, not the sentence "Press and hold the board to compare it with your
@@ -80,6 +85,7 @@ struct CheckPositionView: View {
         .navigationTitle("Check position")
         .navigationBarTitleDisplayMode(.inline)
         .safeAreaInset(edge: .bottom) { actionBar(canAnalyze: issues.allSatisfy { !CapturePositionIssues.isBlocking($0) }) }
+        .offersNewScreenshot()
         .sensoryFeedback(.warning, trigger: appeared) { _, new in new }
         .sensoryFeedback(.selection, trigger: selectionFeedback)
         .onAppear { appeared = true }
@@ -289,21 +295,27 @@ struct CheckPositionView: View {
     /// third: at AccessibilityM the primary label already wraps to two lines beside the dense
     /// Edit button on a 375 pt phone, which makes the bar about 120 pt tall and pushes the
     /// scrolling content up.
+    ///
+    /// Above the buttons, below the accessibility sizes: a screenshot taken while the user was
+    /// away (design.md 9.5), which draws nothing when there is none.
     private func actionBar(canAnalyze: Bool) -> some View {
         PinnedActionBar {
             let stacked = dynamicTypeSize.isAccessibilitySize
             let layout = stacked
                 ? AnyLayout(VStackLayout(spacing: Spacing.s2))
                 : AnyLayout(HStackLayout(spacing: Spacing.s3))
-            layout {
-                PrimaryButton("Analyze") { analyze() }
-                    .disabled(!canAnalyze)
-                    // A disabled button that gives no reason is a dead end for a reader who
-                    // reached the bar before the issue list above it.
-                    .accessibilityHint(canAnalyze ? "" : "Fix the problems listed above first")
-                    .accessibilityIdentifier(CaptureAccessibilityID.checkPositionAnalyze)
-                SecondaryButton("Edit", dense: !stacked) { openEditor(selecting: nil) }
-                    .accessibilityHint("Opens the position editor")
+            VStack(spacing: 0) {
+                NewScreenshotRow(placement: .pinnedBar)
+                layout {
+                    PrimaryButton("Analyze") { analyze() }
+                        .disabled(!canAnalyze)
+                        // A disabled button that gives no reason is a dead end for a reader who
+                        // reached the bar before the issue list above it.
+                        .accessibilityHint(canAnalyze ? "" : "Fix the problems listed above first")
+                        .accessibilityIdentifier(CaptureAccessibilityID.checkPositionAnalyze)
+                    SecondaryButton("Edit", dense: !stacked) { openEditor(selecting: nil) }
+                        .accessibilityHint("Opens the position editor")
+                }
             }
         }
     }

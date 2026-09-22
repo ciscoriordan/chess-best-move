@@ -108,15 +108,9 @@ final class CaptureHomeModel {
         beginImport()
         defer { isImporting = false }
         do {
-            let (data, orientation) = try await CapturePhotoLibrary.imageData(for: asset.localIdentifier)
-            let image = try await Self.decode(data, orientation: orientation)
+            let image = try await CaptureScreenshotImport.importedImage(for: asset, library: .live)
             analyzed.markAnalyzed(asset.localIdentifier)
-            app.importImage(ImportedImage(
-                image: image,
-                source: .latestScreenshot,
-                photoAssetIdentifier: asset.localIdentifier,
-                creationDate: asset.creationDate
-            ))
+            app.importImage(image)
         } catch {
             importError = "Couldn't open your latest screenshot. Try Photos instead."
         }

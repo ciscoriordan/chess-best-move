@@ -614,8 +614,9 @@ final class AnalysisScreenModel {
         startLongerSearch()
         let content = resultReadout
         let description = content.move?.words ?? AnalysisSpeech.moveDescription(san: best.san, move: best.move)
-        // With the turn of the player at the top on the board, the screen leads with the answer
-        // to the move the engine expects, so the announcement says both (design.md 9.4).
+        // With the turn of the player at the top on the board, the screen shows the move the
+        // engine expects above the answer to it, so the announcement says both, in that order
+        // (design.md 9.4).
         if let guessed = content.guessedMove {
             announce(AnalysisSpeech.replyAnnouncement(guessedMove: guessed.words, reply: description, score: score))
         } else {

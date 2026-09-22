@@ -20,6 +20,11 @@ import Foundation
 ///   the same board instead (9.5), and `-captureBlackAtBottom YES` turns the board around, which
 ///   is the case the wording is for: the side to move is then the player at the top. Use it with
 ///   `-monetizationDemo 3`, because Analysis spends a credit like any board set up by hand.
+/// - `-captureFakeNewScreenshot YES`: the Analysis result and Check position read a stand-in
+///   photo library with full access, in which the sample screenshot appears as a screenshot
+///   taken the first time the app goes to the background, so the new-screenshot row of
+///   design.md 9.4 can be exercised without Photos (`CaptureNewScreenshotDebug`). Go to the Home
+///   Screen and back on one of those screens to see it.
 @MainActor
 enum CaptureDebugLaunch {
     static let markedSquares: Set<Square> = [Square("e4")!, Square("f6")!, Square("c3")!]
