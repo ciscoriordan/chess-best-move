@@ -130,7 +130,8 @@ struct SettingsLicensesView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 // A plain SectionLabel, not a GroupedSectionLabel: what follows it is the
-                // paragraphs, which sit at the side gutter, not a card whose rows are inset.
+                // paragraphs, not a card. Both start at the side gutter, as the card's row titles
+                // do, so the whole screen reads down one leading line.
                 SectionLabel("Chess Best Move")
                 VStack(alignment: .leading, spacing: Spacing.s3) {
                     LegalParagraph(SettingsLegal.appCopyright)
@@ -345,7 +346,7 @@ struct SettingsEngineView: View {
                     }
                     .buttonStyle(.listRow)
                 }
-                // Paragraph first, card second, so the label lines up with the paragraph.
+                // Paragraph first, card second, so the label heads the paragraph.
                 SectionLabel("Changes in this app")
                 LegalParagraph(SettingsLegal.stockfishModification)
                     .padding(.bottom, Spacing.s4)

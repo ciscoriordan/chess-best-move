@@ -203,17 +203,37 @@ struct SectionLabel: View {
 
 /// The pinned bottom action bar on `raised`, with a hairline on top. Attach with
 /// `.safeAreaInset(edge: .bottom) { PinnedActionBar { ... } }`.
-struct PinnedActionBar<Content: View>: View {
-    @ViewBuilder let content: () -> Content
+///
+/// `content` is the bar's buttons, inside the side gutter with 12 pt above and below them. `top`
+/// is drawn across the full width of the bar, directly under its hairline and outside the
+/// gutter and the padding: it is where a GroupedCard goes (the new-screenshot row, design.md
+/// 9.4), whose top edge is then the bar's hairline and which spans the bar edge to edge, as
+/// every GroupedCard spans its container (owner decision of 2026-09-22).
+struct PinnedActionBar<Top: View, Content: View>: View {
+    let top: () -> Top
+    let content: () -> Content
+
+    init(@ViewBuilder top: @escaping () -> Top, @ViewBuilder content: @escaping () -> Content) {
+        self.top = top
+        self.content = content
+    }
 
     var body: some View {
         VStack(spacing: 0) {
             Hairline()
+            top()
             content()
                 .sideGutter()
                 .padding(.vertical, Spacing.s3)
         }
         .background(Palette.raised.ignoresSafeArea(edges: .bottom))
+    }
+}
+
+extension PinnedActionBar where Top == EmptyView {
+    /// A bar that holds buttons only.
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.init(top: { EmptyView() }, content: content)
     }
 }
 

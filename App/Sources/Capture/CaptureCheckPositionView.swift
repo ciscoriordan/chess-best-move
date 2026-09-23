@@ -297,25 +297,25 @@ struct CheckPositionView: View {
     /// scrolling content up.
     ///
     /// Above the buttons, below the accessibility sizes: a screenshot taken while the user was
-    /// away (design.md 9.5), which draws nothing when there is none.
+    /// away (design.md 9.5), edge to edge under the bar's hairline, which draws nothing when
+    /// there is none.
     private func actionBar(canAnalyze: Bool) -> some View {
         PinnedActionBar {
+            NewScreenshotRow(placement: .pinnedBar)
+        } content: {
             let stacked = dynamicTypeSize.isAccessibilitySize
             let layout = stacked
                 ? AnyLayout(VStackLayout(spacing: Spacing.s2))
                 : AnyLayout(HStackLayout(spacing: Spacing.s3))
-            VStack(spacing: 0) {
-                NewScreenshotRow(placement: .pinnedBar)
-                layout {
-                    PrimaryButton("Analyze") { analyze() }
-                        .disabled(!canAnalyze)
-                        // A disabled button that gives no reason is a dead end for a reader who
-                        // reached the bar before the issue list above it.
-                        .accessibilityHint(canAnalyze ? "" : "Fix the problems listed above first")
-                        .accessibilityIdentifier(CaptureAccessibilityID.checkPositionAnalyze)
-                    SecondaryButton("Edit", dense: !stacked) { openEditor(selecting: nil) }
-                        .accessibilityHint("Opens the position editor")
-                }
+            layout {
+                PrimaryButton("Analyze") { analyze() }
+                    .disabled(!canAnalyze)
+                    // A disabled button that gives no reason is a dead end for a reader who
+                    // reached the bar before the issue list above it.
+                    .accessibilityHint(canAnalyze ? "" : "Fix the problems listed above first")
+                    .accessibilityIdentifier(CaptureAccessibilityID.checkPositionAnalyze)
+                SecondaryButton("Edit", dense: !stacked) { openEditor(selecting: nil) }
+                    .accessibilityHint("Opens the position editor")
             }
         }
     }

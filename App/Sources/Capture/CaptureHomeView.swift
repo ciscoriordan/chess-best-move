@@ -4,8 +4,9 @@ import UIKit
 import UniformTypeIdentifiers
 
 /// Home (design.md 9.1): the intro at the top, the import actions anchored at the bottom
-/// within thumb reach, stacked by speed in one inset grouped card: latest screenshot, Photos,
-/// Paste, then the one-step Shortcut. The whole screen accepts dropped images.
+/// within thumb reach, stacked by speed in one grouped card that spans the screen edge to edge:
+/// latest screenshot, Photos, Paste, then the one-step Shortcut. The whole screen accepts
+/// dropped images.
 struct HomeView: View {
     @Environment(AppModel.self) private var app
     @Environment(\.scenePhase) private var scenePhase
@@ -173,9 +174,11 @@ struct HomeView: View {
 
     // MARK: Actions
 
-    /// The four import actions as one inset grouped list: a `GroupedCard` holding the primary
+    /// The four import actions as one grouped list: a `GroupedCard` holding the primary
     /// "Use latest screenshot" row, Photos, Paste and the Shortcut, with the state captions and
-    /// any import error as the group's footer under the card.
+    /// any import error as the group's footer under the card. The card reaches out through the
+    /// screen's side gutter to both screen edges (owner decision of 2026-09-22, design.md 9.1),
+    /// and its rows, like the footer, start their content on the gutter line of the intro above.
     private var actions: some View {
         VStack(alignment: .leading, spacing: 0) {
             GroupedCard {
@@ -232,7 +235,7 @@ struct HomeView: View {
         }
     }
 
-    /// The footer under the card, the way an inset grouped list explains a section: the import
+    /// The footer under the card, the way a grouped list explains a section: the import
     /// error first, then the caption for the current photo-access state, then the Settings link
     /// that limited access offers. It is absent when there is nothing to say.
     @ViewBuilder
@@ -362,18 +365,24 @@ struct HomeView: View {
         .accessibilityIdentifier(CaptureAccessibilityID.homeChooseFromPhotos)
     }
 
-    /// Paste (design.md 9.1), laid out as a row of the card: the clipboard symbol in the icon
-    /// column and the system paste control, 44 pt tall and filled with the card's own color so
-    /// its label reads like the other row titles, at the title column. The system enables the
-    /// control only while the pasteboard holds an image, and dims it otherwise.
+    /// Paste (design.md 9.1), laid out as a row of the card: the system paste control alone,
+    /// 44 pt tall, drawing its own icon and its own label and filled with the card's own color so
+    /// that it reads like the other row titles. There is no separate symbol beside it, because a
+    /// symbol outside the control answered no taps. The system enables the control only while the
+    /// pasteboard holds an image, and dims it otherwise.
+    ///
+    /// The row places the control like any other row's icon, at the row's leading edge, because
+    /// the control's host starts at the control's icon rather than at the control's own padded
+    /// edge (`CapturePasteControlHost.contentInset(for:)`). Until 2026-09-22 the row subtracted a
+    /// hard-coded 12 pt instead, which was the padding at the default text size only, so the icon
+    /// drifted right of the icons above and below it as the text grew. The control sets its own
+    /// gap between its icon and its label, so the label does not land on the title column of the
+    /// rows around it; only the icon column is shared (design.md 9.1).
     private var pasteRow: some View {
         HStack(spacing: Spacing.s4) {
             CapturePasteControl(isEnabled: !model.isImporting, showsIcon: true, accessibilityIdentifier: CaptureAccessibilityID.homePaste) { providers in
                 model.importItemProviders(providers, source: .paste, app: app)
             }
-            // The control pads its own label; pulling it back by that much starts the control
-            // at the same leading edge as the icon column of the rows above and below it.
-            .padding(.leading, -CapturePasteControl.labelInset)
             Spacer(minLength: 0)
         }
         .groupedRow()

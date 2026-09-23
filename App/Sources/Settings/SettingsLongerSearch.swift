@@ -72,7 +72,7 @@ struct SettingsLongerSearchSection: View {
 /// switch.
 ///
 /// At accessibility text sizes the switch moves under the title instead of sitting beside it.
-/// A switch is about 51 pt wide at every text size, and inside the card's 16 pt row inset that
+/// A switch is about 51 pt wide at every text size, and inside the card's row insets that
 /// leaves the title too little width for the word "automatically" at the largest size, which
 /// SwiftUI then breaks in the middle ("automaticall" / "y"). Stacking gives the title the whole
 /// width of the row. This is the same move `LongerSearchCeilingControl` makes with its

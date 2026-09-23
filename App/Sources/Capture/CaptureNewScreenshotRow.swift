@@ -6,10 +6,14 @@ import SwiftUI
 /// dense SecondaryButton "Analyze" that imports it in place of the board on screen.
 ///
 /// A screen places it twice and applies `offersNewScreenshot()` to its root. `.pinnedBar` goes
-/// above the buttons of the screen's PinnedActionBar and draws below the accessibility text
-/// sizes; `.scrollingContent` goes at the top of the scrolling content and draws at AX1 and up,
-/// where the bar would otherwise cover the screen. Each draws nothing unless it applies, and
-/// both draw nothing without the modifier (previews, the design gallery).
+/// in the `top` of the screen's PinnedActionBar, above its buttons, and draws below the
+/// accessibility text sizes; `.scrollingContent` goes at the top of the scrolling content and
+/// draws at AX1 and up, where the bar would otherwise cover the screen. Each draws nothing unless
+/// it applies, and both draw nothing without the modifier (previews, the design gallery).
+///
+/// Like every GroupedCard it spans its container edge to edge (owner decision of 2026-09-22):
+/// the bar, whose hairline is the card's top edge, or the screen, or the readout column of the
+/// two-column Analysis layout.
 ///
 /// VoiceOver meets the row as one element, its Analyze button, so the element VoiceOver focuses
 /// is the control a finger taps, and Voice Control, Switch Control and a keyboard reach the same
@@ -34,6 +38,8 @@ struct NewScreenshotRow: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.scenePhase) private var scenePhase
+    /// The card's row inset, the side gutter, which depends on the window's width.
+    @Environment(\.sideGutterWidth) private var rowInset
 
     init(placement: Placement) {
         self.placement = placement
@@ -68,7 +74,9 @@ struct NewScreenshotRow: View {
         TimelineView(.periodic(from: .now, by: 1)) { timeline in
             switch placement {
             case .pinnedBar:
-                GroupedCard {
+                // The bar's hairline is the card's top edge, and the bar's own 12 pt above its
+                // buttons is the gap under the card.
+                GroupedCard(drawsTopRule: false) {
                     VStack(alignment: .leading, spacing: 0) {
                         // The error is outside what `ViewThatFits` measures: a sentence that long
                         // never fits beside the button, and switching layouts would rebuild the
@@ -79,13 +87,12 @@ struct NewScreenshotRow: View {
                         }
                         if let error = model.importError {
                             errorLine(error)
-                                .padding(.leading, GroupedList.rowInset + Self.thumbnailSide + Spacing.s3)
-                                .padding(.trailing, GroupedList.rowInset)
+                                .padding(.leading, rowInset + Self.thumbnailSide + Spacing.s3)
+                                .padding(.trailing, rowInset)
                                 .padding(.bottom, Spacing.s2)
                         }
                     }
                 }
-                .padding(.bottom, Spacing.s3)
             case .scrollingContent:
                 GroupedCard {
                     VStack(alignment: .leading, spacing: Spacing.s3) {
@@ -99,7 +106,7 @@ struct NewScreenshotRow: View {
                             errorLine(error)
                         }
                     }
-                    .newScreenshotRowInsets(verticalPadding: Spacing.s3)
+                    .newScreenshotRowInsets(rowInset, verticalPadding: Spacing.s3)
                 }
                 .id(Self.revealAnchor)
                 .padding(.bottom, Spacing.s5)
@@ -131,7 +138,7 @@ struct NewScreenshotRow: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             analyzeButton(model, offer, now: now, dense: true)
         }
-        .newScreenshotRowInsets(verticalPadding: Spacing.s2)
+        .newScreenshotRowInsets(rowInset, verticalPadding: Spacing.s2)
     }
 
     /// The button under the words, which wrap between words, for a width the inline row does not
@@ -145,7 +152,7 @@ struct NewScreenshotRow: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .newScreenshotRowInsets(verticalPadding: Spacing.s2)
+        .newScreenshotRowInsets(rowInset, verticalPadding: Spacing.s2)
     }
 
     // MARK: Pieces
@@ -277,8 +284,8 @@ private extension View {
     /// Analyze's accessibility frame: the focus ring, Voice Control's label and the point a
     /// tap on the element lands on were the whole row, and that point is on the words, where a
     /// tap does nothing (measured with a UI test, 2026-09-22).
-    func newScreenshotRowInsets(verticalPadding: CGFloat) -> some View {
-        padding(.horizontal, GroupedList.rowInset)
+    func newScreenshotRowInsets(_ rowInset: CGFloat, verticalPadding: CGFloat) -> some View {
+        padding(.horizontal, rowInset)
             .padding(.vertical, verticalPadding)
             .frame(maxWidth: .infinity, minHeight: 64, alignment: .leading)
     }

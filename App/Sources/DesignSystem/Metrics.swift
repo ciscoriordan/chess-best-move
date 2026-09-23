@@ -137,6 +137,29 @@ extension EnvironmentValues {
     /// Published once at the root of the scene by `measuresWindowWidth()`; the side gutter reads
     /// it instead of measuring a view of its own.
     @Entry var windowWidth: CGFloat?
+
+    /// The side gutter for this window's width (`Layout.sideGutter(forWidth:)`), and the narrow
+    /// gutter before the window has been measured: the one leading inset every line of text on a
+    /// screen starts at. The rows, section labels and footers of a GroupedCard read it to start
+    /// their text on that same line (design.md section 6).
+    var sideGutterWidth: CGFloat {
+        guard let windowWidth else { return Layout.narrowSideGutter }
+        return Layout.sideGutter(forWidth: windowWidth)
+    }
+
+    /// The side gutter the nearest `sideGutter()` around this view applied, or zero outside any.
+    ///
+    /// A view that spans the full width of its container, which is what a GroupedCard does
+    /// (owner decision of 2026-09-22, design.md section 6), reaches back out through exactly this
+    /// much with `ignoresSideGutter()`. A column of a two-column layout sets it back to zero,
+    /// because the column, not the screen, is the container its content spans.
+    ///
+    /// Three modifiers write it and nothing else should: `sideGutter()` sets it to the gutter it
+    /// applied, `ignoresSideGutter()` sets it to zero for what it has pulled out of the gutter,
+    /// and `startsSideGutterContainer()` sets it to zero for a box that is itself the container.
+    /// Written by hand at a screen it is a silent way for a card to bleed past a narrow column,
+    /// which no test would catch.
+    @Entry var enclosingSideGutter: CGFloat = 0
 }
 
 /// Measures the width of the view it is applied to and publishes it as
@@ -166,24 +189,49 @@ private struct WindowWidthModifier: ViewModifier {
 /// asked for 16; 26,363 flips in 12 s, measured 2026-09-18), the app never drew a frame and
 /// every accessibility query timed out. The window width cannot be changed by padding applied
 /// inside the window, so reading it settles in one pass.
+///
+/// Before the first measurement the narrow gutter is used (`EnvironmentValues.sideGutterWidth`):
+/// it is the phone value, and one layout pass later the measured width decides.
+///
+/// It also tells the content how much it applied (`EnvironmentValues.enclosingSideGutter`), so a
+/// view that spans the full width can undo exactly that (`ignoresSideGutter()`).
 private struct SideGutterModifier: ViewModifier {
-    @Environment(\.windowWidth) private var windowWidth
+    @Environment(\.sideGutterWidth) private var gutter
 
     func body(content: Content) -> some View {
-        content.padding(.horizontal, gutter)
+        content
+            .environment(\.enclosingSideGutter, gutter)
+            .padding(.horizontal, gutter)
     }
+}
 
-    /// Before the first measurement the narrow gutter is used: it is the phone value, and one
-    /// layout pass later the measured width decides.
-    private var gutter: CGFloat {
-        guard let windowWidth else { return Layout.narrowSideGutter }
-        return Layout.sideGutter(forWidth: windowWidth)
+/// Undoes the side gutter around this view, so it spans the full width of the container that
+/// applied the gutter: the screen, or the pinned bar. Only as far as that gutter reaches: inside a
+/// column of a two-column layout, which sets `enclosingSideGutter` to zero, it changes nothing.
+///
+/// The width the view is offered and the width it reports back to its parent stay the parent's,
+/// because the negative padding takes back on each side exactly what it gives, so nothing around
+/// it moves and no measurement feeds back into the gutter (see `SideGutterModifier`).
+private struct IgnoresSideGutterModifier: ViewModifier {
+    @Environment(\.enclosingSideGutter) private var gutter
+
+    func body(content: Content) -> some View {
+        content
+            // Nothing inside is in a gutter any more.
+            .environment(\.enclosingSideGutter, 0)
+            .padding(.horizontal, -gutter)
     }
 }
 
 /// Lets a board whose squares are tap targets reach into the side gutter far enough to keep
 /// 44 pt squares (`Layout.boardGutterRelief`). Applied to the boards of Check position and the
 /// position editor, which are the two the user taps square by square.
+///
+/// It leaves `enclosingSideGutter` alone, because a board holds squares and nothing else: what
+/// is left of the gutter beside a relieved board is still the gutter, and no GroupedCard is
+/// placed inside a board. One that were would leave the gutter a second time and reach past the
+/// screen edge, so a card inside a relieved subtree needs its own container
+/// (`startsSideGutterContainer()`).
 private struct BoardTapTargetReliefModifier: ViewModifier {
     @Environment(\.windowWidth) private var windowWidth
 
@@ -196,6 +244,23 @@ extension View {
     /// Applies the screen side gutter (16 or 20 pt depending on the window width).
     func sideGutter() -> some View {
         modifier(SideGutterModifier())
+    }
+
+    /// Spans the full width of the container whose `sideGutter()` this view sits in, reaching
+    /// out through the gutter on both sides. What a GroupedCard does (design.md section 6).
+    func ignoresSideGutter() -> some View {
+        modifier(IgnoresSideGutterModifier())
+    }
+
+    /// Makes this view the container that a full-width view inside it spans, instead of the
+    /// screen: a column of a two-column layout, or any box narrower than the one the side gutter
+    /// was applied to. A GroupedCard inside it then reaches this view's edges and stops there,
+    /// rather than reaching out through the screen's gutter (design.md section 6).
+    ///
+    /// Use this rather than writing `enclosingSideGutter` by hand, so every place that moves the
+    /// container is findable from here.
+    func startsSideGutterContainer() -> some View {
+        environment(\.enclosingSideGutter, 0)
     }
 
     /// Widens a board into the side gutter on narrow screens so each of its squares is a full

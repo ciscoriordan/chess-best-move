@@ -84,12 +84,12 @@ private struct AnalysisScreen: View {
         }
         .safeAreaInset(edge: .bottom) {
             PinnedActionBar {
-                VStack(spacing: 0) {
-                    // A screenshot taken while the user was away (design.md 9.4). Draws nothing
-                    // when there is none, and nothing here at accessibility sizes.
-                    NewScreenshotRow(placement: .pinnedBar)
-                    actionBar
-                }
+                // A screenshot taken while the user was away (design.md 9.4), edge to edge
+                // under the bar's hairline. Draws nothing when there is none, and nothing here
+                // at accessibility sizes.
+                NewScreenshotRow(placement: .pinnedBar)
+            } content: {
+                actionBar
             }
         }
         .offersNewScreenshot()
@@ -155,6 +155,14 @@ private struct AnalysisScreen: View {
                     readoutGroups
                 }
             }
+            // Each column is the container its content spans: the new-screenshot row's card, at
+            // accessibility sizes, runs across the readout column like the readout's own
+            // hairlines, and does not reach out through the screen's gutter into the board's
+            // column (design.md section 6, owner decision of 2026-09-22). Inside a column the
+            // card's rows keep their inset from the band's own edge, so they start 20 pt further
+            // in than the credits tally and the LINE label beside them; design.md section 6
+            // records why.
+            .startsSideGutterContainer()
         } else {
             VStack(alignment: .leading, spacing: 0) {
                 CreditsInlineIndicator()
