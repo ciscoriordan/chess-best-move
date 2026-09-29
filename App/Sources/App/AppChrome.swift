@@ -1,14 +1,16 @@
 import SwiftUI
 
 /// The CreditsIndicator connected to the store and credits services. Place it in the
-/// trailing toolbar of Home and Analysis. Hidden for Pro; at zero it opens the paywall.
+/// trailing toolbar of Home and Analysis. Hidden for Pro; in every other state it is a button
+/// that opens the purchase screen (owner decision of 2026-09-29: it was a button only at zero,
+/// so a tap on it did nothing while analyses remained).
 ///
 /// At accessibility text sizes it draws nothing and `CreditsInlineIndicator` takes over inside
 /// the screen's scrolling content. A navigation bar is a fixed-height strip that does not
 /// scroll and is shared with the title and the gear button: "No free analyses" needs about
 /// 390 pt at AccessibilityXXXL, so in the bar it truncated to an ellipsis from AccessibilityM
 /// on and was clipped vertically above that. A free user could not read how many analyses were
-/// left, and the same element is the button that opens the paywall at zero. Moving it into the
+/// left, and the same element is the button that opens the purchase screen. Moving it into the
 /// content is the only place it can have the room without being made smaller.
 ///
 /// **The size is passed in and not read from the environment.** A toolbar item is hosted by the

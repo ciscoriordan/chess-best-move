@@ -2,10 +2,10 @@ import SwiftUI
 
 /// Accessibility identifiers of Settings rows the UI tests look up.
 enum SettingsAccessibilityID {
-    /// The footer under the Purchases card that explains the free launch offer.
-    static let launchOfferFooter = "settings.launchOffer"
-    /// The Plan row's value.
+    /// The Plan row, which pushes the plan screen.
     static let planValue = "settings.plan"
+    /// The line under the Purchases card that says what Restore purchases did.
+    static let restoreMessage = "settings.restoreMessage"
 }
 
 /// Screens pushed inside the Settings sheet.
@@ -14,6 +14,7 @@ enum SettingsRoute: Hashable {
     case licenses
     case document(SettingsLicenseDocument)
     case networkCredit
+    case plan
     case screenshotHelp
     case shortcutSetup
 }
@@ -26,8 +27,13 @@ enum SettingsRoute: Hashable {
 struct SettingsView: View {
     @Environment(AppModel.self) private var app
 
+    /// The pushed screens. It is a bound path, rather than SwiftUI's own, only so a DEBUG launch
+    /// argument can open Settings with one screen already pushed for the screenshot runs; every
+    /// row still pushes itself through its `NavigationLink`.
+    @State private var path: [SettingsRoute] = []
+
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             SettingsRootContent()
                 .navigationDestination(for: SettingsRoute.self) { route in
                     switch route {
@@ -35,6 +41,7 @@ struct SettingsView: View {
                     case .licenses: SettingsLicensesView()
                     case .document(let document): SettingsLicenseTextView(document: document)
                     case .networkCredit: SettingsNetworkCreditView()
+                    case .plan: SettingsPlanView()
                     case .screenshotHelp: SettingsScreenshotHelpView()
                     case .shortcutSetup:
                         ScrollView { IntentsShortcutSetupContent() }
@@ -44,6 +51,13 @@ struct SettingsView: View {
                 }
         }
         .tint(Palette.ink)
+        #if DEBUG
+        .onAppear {
+            if let route = DebugLaunchOptions.settingsRoute, path.isEmpty {
+                path = [route]
+            }
+        }
+        #endif
     }
 }
 
@@ -51,11 +65,8 @@ private struct SettingsRootContent: View {
     @Environment(AppModel.self) private var app
     @Environment(\.openURL) private var openURL
 
-    @State private var isRestoring = false
-    @State private var restoreMessage: String?
+    @State private var purchases = SettingsPurchasesModel()
     @AccessibilityFocusState private var restoreMessageFocused: Bool
-    @State private var restoreSucceeded = 0
-    @State private var restoreFailed = 0
 
     var body: some View {
         @Bindable var settings = app.settings
@@ -84,10 +95,17 @@ private struct SettingsRootContent: View {
 
                 GroupedSectionLabel("Purchases")
                 GroupedCard {
-                    ListRow("Plan", value: planText)
-                        .groupedRow()
-                        .accessibilityElement(children: .combine)
-                        .accessibilityIdentifier(SettingsAccessibilityID.planValue)
+                    // A control, not a value row (owner decision of 2026-09-28). It was a plain
+                    // `ListRow`, so a tap on it did nothing in every state, and App Review
+                    // rejected version 1.0.6 for exactly that: "the app did not produce any
+                    // further actions after tapping Plan button". It now pushes the plan screen,
+                    // which has Restore purchases on it whatever the state, so the row leads
+                    // somewhere for every reader (`SettingsPlanView`).
+                    NavigationLink(value: SettingsRoute.plan) {
+                        ListRow("Plan", value: planText, showsChevron: true).groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                    .accessibilityIdentifier(SettingsAccessibilityID.planValue)
                     if !app.store.isPro {
                         GroupedRowSeparator(start: .content)
                         Button {
@@ -99,40 +117,37 @@ private struct SettingsRootContent: View {
                     }
                     GroupedRowSeparator(start: .content)
                     Button {
-                        restore()
+                        Task { await purchases.restore(store: app.store, focus: $restoreMessageFocused) }
                     } label: {
-                        ListRow("Restore purchases", value: isRestoring ? "Restoring\u{2026}" : nil).groupedRow()
+                        ListRow("Restore purchases", value: purchases.isRestoring ? "Restoring\u{2026}" : nil).groupedRow()
                     }
                     .buttonStyle(.listRow)
-                    .disabled(isRestoring)
+                    .disabled(purchases.isRestoring)
                     if app.store.activeSubscriptionProductID != nil {
                         GroupedRowSeparator(start: .content)
+                        // Apple's sheet can refuse to open (a sandbox Apple Account, or an account
+                        // with no manageable subscription for this app), so the outcome is
+                        // reported in the footer below and the App Store's subscriptions page is
+                        // opened instead. A tap here never does nothing
+                        // (`MonetizationManageSubscriptionFeedback`).
                         Button {
-                            Task { await app.store.showManageSubscriptions() }
+                            Task {
+                                await purchases.manageSubscription(store: app.store, focus: $restoreMessageFocused) {
+                                    await openURL.accepted($0)
+                                }
+                            }
                         } label: {
                             ListRow("Manage subscription", showsChevron: true).groupedRow()
                         }
                         .buttonStyle(.listRow)
+                        .disabled(purchases.isManagingSubscription)
                     }
                 }
-                if app.store.isConfirmedLaunchCohortMember || restoreMessage != nil {
+                if let message = purchases.message {
                     GroupedFooter {
-                        // The launch offer explains itself where the plan row names it, and
-                        // says what Restore purchases is still for (monetization.md 11). Only
-                        // once Apple has confirmed it: the footer names the date this Apple
-                        // Account installed the app, which an undecided cohort does not know.
-                        if app.store.isConfirmedLaunchCohortMember {
-                            Text(MonetizationLaunchCohortCopy.planFooter)
-                                .accessibilityIdentifier(SettingsAccessibilityID.launchOfferFooter)
-                        }
-                        if let restoreMessage {
-                            // The focus goes on the result of the restore, not on the whole
-                            // footer: a member's footer also carries the launch-offer
-                            // explanation, and a reader who just tapped Restore purchases wants
-                            // to hear what it did first.
-                            Text(restoreMessage)
-                                .accessibilityFocused($restoreMessageFocused)
-                        }
+                        Text(message)
+                            .accessibilityFocused($restoreMessageFocused)
+                            .accessibilityIdentifier(SettingsAccessibilityID.restoreMessage)
                     }
                 }
 
@@ -188,10 +203,12 @@ private struct SettingsRootContent: View {
                     .accessibilityHint("Opens in Safari.")
                 }
 
-                // Last, and only where the App Store receipt is a sandbox one: a copy
-                // TestFlight installed, the copy App Review runs, or one Xcode installed on a
-                // device. It draws nothing in a copy from the App Store, and nothing on a
-                // simulator, whose receipt carries the App Store name
+                // Last, and only in a sandbox build: a copy TestFlight installed, the copy App
+                // Review runs, or one Xcode installed on a device. Which build this is,
+                // `AppTransaction.environment` decides once it has been read, and the name of the
+                // receipt file decides until then (owner decision of 2026-09-28). It draws nothing
+                // in a copy from the App Store, and nothing on a simulator, whose receipt carries
+                // the App Store name and whose app transaction usually cannot be read at all
                 // (SettingsTesting.swift, monetization.md section 3).
                 SettingsTestingSection()
             }
@@ -202,8 +219,8 @@ private struct SettingsRootContent: View {
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
         .modalCloseButton { app.dismissSheet() }
-        .sensoryFeedback(.success, trigger: restoreSucceeded)
-        .sensoryFeedback(.error, trigger: restoreFailed)
+        .sensoryFeedback(.success, trigger: purchases.succeeded)
+        .sensoryFeedback(.error, trigger: purchases.failed)
     }
 
     private var planText: String {
@@ -211,35 +228,10 @@ private struct SettingsRootContent: View {
             hasPurchasedPro: app.store.hasPurchasedPro,
             activeSubscriptionProductID: app.store.activeSubscriptionProductID,
             isLaunchCohortMember: app.store.isLaunchCohortMember,
-            isConfirmedLaunchCohortMember: app.store.isConfirmedLaunchCohortMember,
             freeRemaining: app.credits.freeRemaining,
             freeAllowance: app.credits.freeAllowance,
             purchasedRemaining: app.credits.purchasedRemaining
         )
-    }
-
-    private func restore() {
-        isRestoring = true
-        restoreMessage = nil
-        Task {
-            let outcome = await app.store.restore()
-            isRestoring = false
-            let feedback = SettingsRestoreFeedback(outcome)
-            restoreMessage = feedback.message
-            switch feedback.haptic {
-            case .success?: restoreSucceeded += 1
-            case .error?: restoreFailed += 1
-            case nil: break
-            }
-            // The result is a footer one element below the card and the row itself only stops
-            // being dimmed, so without this a reader tapped Restore purchases, felt a haptic
-            // and was never told what happened. This is the only route back to Pro on a new
-            // device.
-            if let message = feedback.message {
-                AccessibilityNotification.Announcement(message).post()
-                restoreMessageFocused = true
-            }
-        }
     }
 
     private static var version: String {
@@ -254,17 +246,16 @@ private struct SettingsRootContent: View {
 /// It is asked what was **bought** first, and separately from `StoreService.isPro`, which is
 /// also true for a member of the free launch cohort: the row must never tell somebody who
 /// bought nothing that they are on "Pro, lifetime" (monetization.md section 11). The launch
-/// offer has its own name instead, and names itself only once Apple has confirmed it: while
-/// the cohort is undecided the app grants the offer without knowing it is theirs, and the row
-/// says what it is doing ("Unlimited") rather than why.
+/// offer reads "Unlimited" instead, which is what the app is doing and claims nothing about
+/// when this Apple Account installed the app. It used to read "Unlimited, launch offer" for a
+/// member Apple had confirmed and "Unlimited" while the cohort was undecided; the window closed
+/// on 2026-09-28, so no shipped string names an offer any more and the two states read alike.
 enum SettingsPlanRow {
-    /// "Pro, weekly", "Unlimited, launch offer", "Unlimited", "Free, 2 of 3 left",
-    /// "12 analyses left".
+    /// "Pro, weekly", "Unlimited", "Free, 2 of 3 left", "Pay as you go, 12 left".
     static func value(
         hasPurchasedPro: Bool,
         activeSubscriptionProductID: String?,
         isLaunchCohortMember: Bool,
-        isConfirmedLaunchCohortMember: Bool,
         freeRemaining: Int,
         freeAllowance: Int,
         purchasedRemaining: Int
@@ -277,15 +268,18 @@ enum SettingsPlanRow {
             default: return "Pro"
             }
         }
-        if isConfirmedLaunchCohortMember { return MonetizationLaunchCohortCopy.planRow }
-        if isLaunchCohortMember { return MonetizationLaunchCohortCopy.undecidedPlanRow }
+        if isLaunchCohortMember { return MonetizationLaunchCohortCopy.planRow }
         let purchasedText = purchasedRemaining == 1 ? "1 analysis" : "\(purchasedRemaining) analyses"
         if freeRemaining > 0 {
-            let free = "Free, \(freeRemaining) of \(freeAllowance) left"
+            let free = "\(SettingsPlanDetail.freeTitle), \(freeRemaining) of \(freeAllowance) left"
             return purchasedRemaining > 0 ? "\(free), plus \(purchasedText)" : free
         }
-        if purchasedRemaining > 0 { return "\(purchasedText) left" }
-        return "Free, none left"
+        // The plan's name, then the count: with the three free analyses spent and a pack bought,
+        // the word "free" would be wrong about the count and "Free" wrong about the plan, so both
+        // the row and the screen call it "Pay as you go" (design.md 9.8). It used to read
+        // "12 analyses left", which named no plan and disagreed with the screen's heading.
+        if purchasedRemaining > 0 { return "\(SettingsPlanDetail.payAsYouGoTitle), \(purchasedRemaining) left" }
+        return "\(SettingsPlanDetail.freeTitle), none left"
     }
 }
 

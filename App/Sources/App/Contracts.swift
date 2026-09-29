@@ -594,6 +594,22 @@ enum RestoreOutcome: Sendable, Hashable {
     case failed(String)
 }
 
+/// What a tap on "Manage subscription" did.
+///
+/// It is a returned value rather than a log line because the outcome is the only thing the
+/// reader has to go on: `AppStore.showManageSubscriptions(in:)` throws for an Apple Account with
+/// no manageable subscription for this app and in the sandbox, and a control that swallows that
+/// is the defect App Review rejected version 1.0.6 for ("the app did not produce any further
+/// actions after tapping Plan button"). Every caller says something for `.unavailable`
+/// (`MonetizationManageSubscriptionFeedback`).
+enum ManageSubscriptionsOutcome: Sendable, Hashable {
+    /// Apple's subscription sheet was shown. It says everything; the app says nothing.
+    case shown
+    /// The sheet could not be shown: no foreground window scene, or StoreKit threw. The caller
+    /// sends the reader to their subscriptions another way and says so.
+    case unavailable
+}
+
 /// Delivered to observers registered with `StoreService.addTransactionObserver`.
 enum StoreEvent: Sendable, Hashable {
     /// A verified transaction arrived and was finished (including Ask to Buy approvals).
@@ -623,9 +639,11 @@ protocol StoreService: AnyObject, Observable, Sendable {
     /// `MonetizationLaunchCohort`. Everything that hides a commercial surface reads this.
     var isLaunchCohortMember: Bool { get }
     /// Apple has **confirmed** the free launch offer, rather than the app granting it while
-    /// nothing is known. Only copy that makes a claim about the past reads this: Settings says
-    /// "you installed Chess Best Move before October 15, 2026", which must not be said to
-    /// somebody whose app transaction has not been read yet (monetization.md section 11).
+    /// nothing is known. It is the property copy that makes a claim about the past has to read:
+    /// Settings used to say "you installed Chess Best Move before October 15, 2026", which must
+    /// not be said to somebody whose app transaction has not been read yet. Nothing reads it
+    /// today, because the window closed on 2026-09-28 and that footer went with it
+    /// (monetization.md section 11); it is kept with the rest of the mechanism.
     var isConfirmedLaunchCohortMember: Bool { get }
     /// The product id of the active auto-renewable subscription, if any.
     var activeSubscriptionProductID: String? { get }
@@ -644,8 +662,10 @@ protocol StoreService: AnyObject, Observable, Sendable {
     /// `AppStore.sync()` then a refresh of entitlements.
     func restore() async -> RestoreOutcome
     func refreshEntitlements() async
-    /// Opens the system subscription management sheet.
-    func showManageSubscriptions() async
+    /// Opens the system subscription management sheet, and says whether it was shown. A caller
+    /// that gets `.unavailable` has to produce the action the tap promised itself
+    /// (`MonetizationManageSubscriptionFeedback`).
+    func showManageSubscriptions() async -> ManageSubscriptionsOutcome
     /// Registers an observer for verified and revoked transactions. Observers live as long as
     /// the store.
     func addTransactionObserver(_ observer: @escaping @MainActor (StoreEvent) -> Void)

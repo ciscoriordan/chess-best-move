@@ -39,6 +39,24 @@ enum DebugLaunchOptions {
         UserDefaults.standard.string(forKey: "debugSheet")
     }
 
+    /// `-debugSettingsRoute plan|engine|licenses|networkCredit|screenshotHelp|shortcutSetup`:
+    /// opens Settings with that screen already pushed, so a screenshot run reaches it without
+    /// tapping (`SettingsView`). Pass it with `-debugSheet settings`.
+    ///
+    /// The plan screen is why it exists: it is what Settings' Plan row leads to and what the App
+    /// Review notes send a reviewer to, and `xcrun simctl` can launch the app but cannot tap.
+    static var settingsRoute: SettingsRoute? {
+        switch UserDefaults.standard.string(forKey: "debugSettingsRoute") {
+        case "plan": .plan
+        case "engine": .engine
+        case "licenses": .licenses
+        case "networkCredit": .networkCredit
+        case "screenshotHelp": .screenshotHelp
+        case "shortcutSetup": .shortcutSetup
+        default: nil
+        }
+    }
+
     /// `-debugEditor YES`: present the position editor with the start position at launch.
     static var editor: Bool {
         UserDefaults.standard.bool(forKey: "debugEditor")

@@ -99,13 +99,18 @@ protocol MonetizationStoreKitClient: AnyObject {
     /// first downloaded this app, signed by Apple. Nil when it could not be read or did not
     /// verify (offline on a first launch). May need the network.
     func appTransactionOriginalPurchaseDate() async -> Date?
+    /// `AppTransaction.shared.environment`: which App Store environment served this copy, signed
+    /// by Apple. Nil when it could not be read or did not verify. May need the network, so
+    /// nothing draws while waiting for it (`MonetizationBuildChannelResolver`).
+    func appTransactionEnvironment() async -> MonetizationAppStoreEnvironment?
     func finish(_ transaction: MonetizationTransactionFacts) async
     /// `AppStore.sync()`.
     func sync() async throws
     /// The renewal state of the active subscription in `subscriptionGroupID`, or nil when there
     /// is none or it could not be read. May need the network.
     func renewalStatus(subscriptionGroupID: String) async -> MonetizationRenewalFacts?
-    func showManageSubscriptions() async
+    /// Apple's subscription sheet, and whether it was shown (`ManageSubscriptionsOutcome`).
+    func showManageSubscriptions() async -> ManageSubscriptionsOutcome
 }
 
 enum MonetizationStoreKitFailure: Error, Sendable {
@@ -239,15 +244,37 @@ final class MonetizationLiveStoreKitClient: MonetizationStoreKitClient {
     }
 
     func appTransactionOriginalPurchaseDate() async -> Date? {
+        await verifiedAppTransaction()?.originalPurchaseDate
+    }
+
+    func appTransactionEnvironment() async -> MonetizationAppStoreEnvironment? {
+        guard let environment = await verifiedAppTransaction()?.environment else { return nil }
+        switch environment {
+        case .production: return .production
+        case .sandbox: return .sandbox
+        case .xcode: return .xcode
+        default:
+            MonetizationLog.store.notice(
+                "the app transaction names an environment this build does not know: \(environment.rawValue, privacy: .public)"
+            )
+            return .unrecognized
+        }
+    }
+
+    /// `AppTransaction.shared`, verified. StoreKit caches it, so asking twice in one launch costs
+    /// one read.
+    private func verifiedAppTransaction() async -> AppTransaction? {
         do {
             guard case .verified(let appTransaction) = try await AppTransaction.shared else {
                 MonetizationLog.store.error("the app transaction did not verify")
                 return nil
             }
-            return appTransaction.originalPurchaseDate
+            return appTransaction
         } catch {
-            // Offline on a first launch is the ordinary case here, not a fault: the launch
-            // cohort stays undecided and the question is asked again (MonetizationLaunchCohort).
+            // Offline on a first launch is the ordinary case here, not a fault: the build channel
+            // stays at the receipt name's answer (`MonetizationBuildChannelResolver`) and the
+            // launch cohort, if its window is open, stays undecided and asks again
+            // (`MonetizationLaunchCohort`).
             MonetizationLog.store.notice("the app transaction could not be read: \(String(describing: error), privacy: .public)")
             return nil
         }
@@ -270,12 +297,19 @@ final class MonetizationLiveStoreKitClient: MonetizationStoreKitClient {
         return nil
     }
 
-    func showManageSubscriptions() async {
-        guard let scene = Self.activeWindowScene else { return }
+    /// Both failures are reported rather than logged: the caller has to say something, because
+    /// the only other thing that happens is nothing (`ManageSubscriptionsOutcome`).
+    func showManageSubscriptions() async -> ManageSubscriptionsOutcome {
+        guard let scene = Self.activeWindowScene else {
+            MonetizationLog.store.error("showManageSubscriptions has no foreground window scene")
+            return .unavailable
+        }
         do {
             try await AppStore.showManageSubscriptions(in: scene)
+            return .shown
         } catch {
             MonetizationLog.store.error("showManageSubscriptions failed: \(String(describing: error), privacy: .public)")
+            return .unavailable
         }
     }
 

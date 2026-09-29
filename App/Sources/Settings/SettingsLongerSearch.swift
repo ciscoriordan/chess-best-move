@@ -7,6 +7,11 @@ import SwiftUI
 /// rather than not seeing them at all: a setting nobody can find is not an offer, and hiding
 /// them would leave the notice they do see ("Pro shows it") unexplained.
 ///
+/// The rows stay disabled, and the way from them to the purchase screen is the link in
+/// `SettingsLongerSearchFooter` under the card: a disabled control is honest about what a free
+/// reader may change, but a card whose only Pro affordances answer no tap at all is the defect
+/// App Review rejected version 1.0.6 for one card further down (owner decision of 2026-09-28).
+///
 /// A reader who already has them sees neither the tag nor the footer, because neither says
 /// anything to them: a Pro subscriber, and a member of the free launch cohort, for whom the
 /// app carries no commercial surface at all (monetization.md section 11).
@@ -37,6 +42,17 @@ struct SettingsLongerSearchSection: View {
         static func proFooter(_ ceiling: LongerSearchCeiling) -> String {
             "Without Pro the longer search still runs, stops at \(ceiling.spokenLabel), and says when it finds a better move. What you choose here is saved for when you get Pro."
         }
+
+        /// The link under that footer, which is the free reader's way from these two rows to the
+        /// purchase screen (owner decision of 2026-09-28, design.md 9.8).
+        ///
+        /// The same words the longer-search notice uses for the same offer
+        /// (`AnalysisLongerSearchCopy.seePro`), read from that one place so the two cannot drift.
+        /// Not "Unlock unlimited": that is the PURCHASES card's row, further down the same screen,
+        /// and two controls with one label on one screen is what a test cannot tell apart and a
+        /// reader cannot either.
+        static var proLink: String { AnalysisLongerSearchCopy.seePro }
+        static var proLinkHint: String { AnalysisLongerSearchCopy.seeProHint }
     }
 
     var body: some View {
@@ -117,7 +133,16 @@ private struct AutomaticSwitchRow: View {
     }
 }
 
-/// The footer under the ANALYSIS card, present only for a free user.
+/// The footer under the ANALYSIS card, present only for a free user: the line about what the
+/// longer search does without Pro, and the link that leads to the purchase screen.
+///
+/// **Why the link is here (owner decision of 2026-09-28).** The two rows above are `.disabled`
+/// for a free reader and their `ProTag` is a label, not a control, so every tap anywhere in the
+/// ANALYSIS card did nothing and the card offered no route to the paywall. In the iPad form
+/// sheet that card fills the screen, which makes those rows the first purchase-looking things a
+/// reader meets — above the Plan row App Review rejected 1.0.6 for doing nothing. The rows stay
+/// disabled, because a Pro setting a free reader could change would be a worse lie; the footer,
+/// which is already where the word Pro is spelled out in a sentence, carries the way out.
 struct SettingsLongerSearchFooter: View {
     @Environment(AppModel.self) private var app
 
@@ -125,6 +150,8 @@ struct SettingsLongerSearchFooter: View {
     /// line read "Both settings come with Pro.", so a test that watches the free state keeps
     /// finding it.
     static let accessibilityIdentifier = "settings.longerSearchProOnly"
+    /// The link's identifier, so a UI test can press exactly this route to the paywall.
+    static let proLinkAccessibilityIdentifier = "settings.longerSearchSeePro"
 
     @ViewBuilder
     var body: some View {
@@ -132,6 +159,11 @@ struct SettingsLongerSearchFooter: View {
             GroupedFooter {
                 Text(SettingsLongerSearchSection.Copy.proFooter(.defaultValue))
                     .accessibilityIdentifier(Self.accessibilityIdentifier)
+                TextLink(SettingsLongerSearchSection.Copy.proLink) {
+                    app.presentPaywall(trigger: .settings)
+                }
+                .accessibilityHint(SettingsLongerSearchSection.Copy.proLinkHint)
+                .accessibilityIdentifier(Self.proLinkAccessibilityIdentifier)
             }
         }
     }

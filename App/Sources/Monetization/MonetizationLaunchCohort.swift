@@ -6,6 +6,12 @@ import Observation
 // `MonetizationRules.launchCohortCutoff` keeps unlimited analyses permanently and never sees a
 // paywall, a price or a Pro row. Everyone who arrives afterwards meets the ordinary three free
 // analyses and the paywall.
+//
+// **The window is closed (owner decision of 2026-09-28).** `MonetizationRules.launchCohortCutoff`
+// is `launchWindowClosed`, so `MonetizationRules.launchWindowIsOpen()` is false, nobody is a
+// member and every install meets the ordinary freemium flow. Everything below is the mechanism,
+// kept so the owner can reopen the window by moving that one constant; the copy that named a date
+// is gone, because a shipped build must promise nothing it is not doing.
 
 // MARK: - Where an Apple Account stands
 
@@ -78,6 +84,11 @@ struct MonetizationLaunchCohortRecord: Codable, Sendable, Equatable {
     /// Membership is sticky and the download date decides everything else, so this is the only
     /// place the two are combined. Ask `carriesAVerdict` first: this answers `.notMember` for a
     /// record that says nothing.
+    ///
+    /// Stickiness is why a closed window is not expressed by moving the cutoff alone. A build
+    /// that already wrote `isMember: true` would keep that verdict under any later cutoff, so
+    /// `MonetizationLaunchCohort` asks `MonetizationRules.launchWindowIsOpen(cutoff:)` before it
+    /// reads a record at all, and this function is not reached while the window is closed.
     func status(under cutoff: Date) -> MonetizationLaunchCohortStatus {
         isMember || originalPurchaseDate < cutoff ? .member : .notMember
     }
@@ -149,8 +160,18 @@ final class MonetizationLaunchCohort {
         self.channel = channel
         self.defaults = defaults
         self.cutoff = cutoff
-        // Synchronous, so the first frame is already right for everybody who has been decided.
-        status = Self.storedStatus(vault: vault, cutoff: cutoff)
+        if MonetizationRules.launchWindowIsOpen(cutoff: cutoff) {
+            // Synchronous, so the first frame is already right for everybody who has been decided.
+            status = Self.storedStatus(vault: vault, cutoff: cutoff)
+        } else {
+            // The window is closed, so there is no cohort to be in: not for a fresh install, and
+            // not for an Apple Account whose Keychain still holds a member verdict a build with
+            // an open window wrote (membership is sticky, see `status(under:)`). Nothing is read
+            // and nothing is written, so the stored record is left exactly as it is and a build
+            // that reopens the window finds it again. `resolve` then has nothing to ask Apple
+            // for either, which takes the app transaction off the launch path.
+            status = .notMember
+        }
         // The override only exists where the Testing section exists, and it is read through the
         // same channel gate, so a value left in another build's defaults can do nothing.
         leavesCohortForTesting = channel.offersTestingTools && defaults.bool(forKey: DefaultsKey.leavesCohortForTesting)
@@ -180,11 +201,13 @@ final class MonetizationLaunchCohort {
     ///
     /// The grant above is deliberately wider than the truth: an undecided cohort is granted
     /// unlimited analyses, because denying them would be the unrecoverable mistake. Copy that
-    /// makes a claim about the past reads this narrower one instead. Settings otherwise tells
-    /// a first launch with no connection "you installed Chess Best Move before October 15,
-    /// 2026, so every analysis is unlimited and stays that way" - a dated, permanent promise
-    /// to somebody who may turn out to have installed it in November, and the next launch
-    /// would take it back.
+    /// makes a claim about the past read this narrower one instead. Settings used to tell a
+    /// first launch with no connection "you installed Chess Best Move before October 15, 2026,
+    /// so every analysis is unlimited and stays that way" - a dated, permanent promise to
+    /// somebody who may turn out to have installed it in November, which the next launch would
+    /// have taken back. The window closed on 2026-09-28 and that footer went with it, so
+    /// nothing reads this today (monetization.md section 11); it is kept with the rest of the
+    /// mechanism, for a window that is reopened.
     var offerIsConfirmed: Bool { grantsUnlimitedAnalyses && status == .member }
 
     /// Whether Apple has answered. The app behaves the same for `.undecided` as for `.member`,
@@ -196,6 +219,9 @@ final class MonetizationLaunchCohort {
     /// `readOriginalPurchaseDate` is `MonetizationStoreKitClient.appTransactionOriginalPurchaseDate`,
     /// which returns nil when the transaction could not be read or did not verify. Nothing is
     /// written for a nil: the verdict is made only from an answer that actually arrived.
+    ///
+    /// While the window is closed the status is already `.notMember`, so the guard below returns
+    /// at once and Apple is never asked.
     func resolve(readOriginalPurchaseDate: () async -> Date?) async {
         guard !isFixedForDebug, status == .undecided, !isResolving else { return }
         isResolving = true
@@ -298,22 +324,24 @@ protocol MonetizationLaunchCohortTesting: AnyObject, Observable, Sendable {
 /// What Settings says to a member. It is not purchase-screen copy: there is nothing to buy on
 /// this screen for the people who read it.
 ///
-/// The plan row must never read "Pro, lifetime" for someone who bought nothing, so the state
-/// has its own name: the **launch offer**.
+/// The plan row must never read "Pro, lifetime" for someone who bought nothing, so the state has
+/// a name of its own.
+///
+/// **Nothing here names a date or a launch offer any more (owner decision of 2026-09-28).** The
+/// window is closed (`MonetizationRules.launchCohortCutoff`), so no shipped string may promise
+/// one: the plan row that read "Unlimited, launch offer" and the footer that named the date this
+/// Apple Account installed the app are gone, and
+/// `MonetizationClosedLaunchWindowTests.noShippedStringPromisesALaunchWindowOrNamesItsDate` fails
+/// the build if a dated promise comes back. What is left says only what the app is doing, which is
+/// true whether or not Apple has confirmed anything, so the confirmed and undecided states no
+/// longer need separate wording.
 enum MonetizationLaunchCohortCopy {
-    /// The cutoff as a reader sees it, in the app and in the App Store listing.
-    static let cutoffDate = "October 15, 2026"
+    /// The value of Settings' Plan row while the offer is being granted.
+    static let planRow = "Unlimited"
 
-    /// The value of Settings' Plan row for a member Apple has confirmed.
-    static let planRow = "Unlimited, launch offer"
-
-    /// The value of the Plan row while the offer is being granted but nothing has been decided
-    /// yet (a first launch with no connection). It says what the app is doing and claims
-    /// nothing about when this Apple Account installed it, because that is not known.
-    static let undecidedPlanRow = "Unlimited"
-
-    /// The footer under Settings' Purchases card for a member. It says why they have it, that
-    /// it lasts, and what the Restore purchases row above it is still for.
-    static let planFooter =
-        "You installed Chess Best Move before \(cutoffDate), so every analysis is unlimited and stays that way, at no cost. Restore purchases is here for anything you bought on another device."
+    /// The line the plan screen shows under that value. It claims nothing about when this Apple
+    /// Account installed the app, and it says what Restore purchases is still for, because a
+    /// member who bought nothing is told "No previous purchases found".
+    static let planDetail =
+        "Every analysis is unlimited, at no cost, and stays that way. Restore purchases is here for anything you bought on another device."
 }

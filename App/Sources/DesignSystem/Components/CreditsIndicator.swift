@@ -3,9 +3,16 @@ import SwiftUI
 /// CreditsIndicator (design.md section 6, monetization.md section 3).
 ///
 /// Remaining free analyses as a tally of small squares followed by text. At zero free
-/// analyses the squares are all outlined and the text reads "No free analyses" in `accent`,
-/// and the whole indicator opens the paywall. Purchased credits (a separate balance) show
-/// in text ("12 analyses left") once the free ones are used up. Hidden entirely for Pro.
+/// analyses the squares are all outlined and the text reads "No free analyses" in `accent`.
+/// Purchased credits (a separate balance) show in text ("12 analyses left") once the free ones
+/// are used up. Hidden entirely for Pro.
+///
+/// **It opens the paywall in every state (owner decision of 2026-09-28).** It used to be a
+/// button only at zero, while keeping its 44 pt hit target and its tappable shape in every
+/// state: a reader on a fresh install who tapped "3 free" got nothing, which is the defect App
+/// Review rejected version 1.0.6 for on Settings' Plan row, on the one purchase-adjacent thing
+/// the first screen shows. Buying early is also a thing a reader may want to do, and this is
+/// the shortest way to the prices.
 ///
 /// This view is presentation only; `CreditsToolbarIndicator` (App/Sources/App) connects it
 /// to the credits and store services.
@@ -18,15 +25,14 @@ struct CreditsIndicator: View {
 
     var body: some View {
         if !isPro {
-            if isExhausted {
-                Button(action: onOpenPaywall) { content }
-                    .buttonStyle(.plain)
-                    .accessibilityHint("Opens purchase options")
-            } else {
-                content
-            }
+            Button(action: onOpenPaywall) { content }
+                .buttonStyle(.plain)
+                .accessibilityHint(Self.hint)
         }
     }
+
+    /// Said in every state, because the button is there in every state.
+    static let hint = "Opens purchase options"
 
     private var isExhausted: Bool { freeRemaining <= 0 && purchasedRemaining <= 0 }
 

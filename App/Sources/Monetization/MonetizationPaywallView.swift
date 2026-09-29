@@ -36,6 +36,7 @@ struct PaywallView: View {
     @State private var phase: PaywallPhase = .choosing
     @State private var message: PaywallMessage?
     @State private var isRestoring = false
+    @State private var isManagingSubscription = false
     @State private var successFeedback = 0
     @State private var errorFeedback = 0
     @State private var hasFinished = false
@@ -377,9 +378,15 @@ struct PaywallView: View {
                 .typography(.body)
                 .foregroundStyle(Palette.ink2)
                 .fixedSize(horizontal: false, vertical: true)
+            // The primary button of a screen that blocks swipe dismissal, so it must never do
+            // nothing: Apple's sheet refuses to open for a sandbox Apple Account, and this screen
+            // is reached by buying lifetime while subscribed, which in the sandbox is exactly how
+            // App Review gets here. The outcome is reported in `message`, below the links
+            // (`MonetizationManageSubscriptionFeedback`).
             PrimaryButton(MonetizationCopy.manageSubscription) {
-                Task { await app.store.showManageSubscriptions() }
+                Task { await manageSubscription() }
             }
+            .disabled(isManagingSubscription)
             .padding(.top, Spacing.s2)
         }
         .accessibilityIdentifier(MonetizationAccessibilityID.paywallLifetimeNotice)
@@ -458,6 +465,25 @@ struct PaywallView: View {
                 errorFeedback += 1
             }
         }
+    }
+
+    /// Apple's subscription sheet, and a line when it cannot be shown. The same rule the two
+    /// Settings screens follow (`MonetizationManageSubscriptionFeedback`), so no screen that
+    /// offers Manage subscription is the silent one.
+    private func manageSubscription() async {
+        guard !isManagingSubscription else { return }
+        isManagingSubscription = true
+        message = nil
+        let outcome = await app.store.showManageSubscriptions()
+        var openedAccountPage = false
+        if outcome == .unavailable {
+            openedAccountPage = await openURL.accepted(MonetizationAppleLinks.accountSubscriptions)
+        }
+        isManagingSubscription = false
+        let feedback = MonetizationManageSubscriptionFeedback(outcome: outcome, openedAccountPage: openedAccountPage)
+        guard let text = feedback.message else { return }
+        message = PaywallMessage(text: text, isError: feedback.isError)
+        if feedback.isError { errorFeedback += 1 }
     }
 
     private func restore() async {

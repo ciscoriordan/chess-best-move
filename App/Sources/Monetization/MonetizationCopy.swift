@@ -64,6 +64,14 @@ enum MonetizationCopy {
     static let subscriptionStillActiveBody =
         "Apple doesn't cancel it for you. Cancel it in your subscriptions to stop the renewals."
     static let manageSubscription = "Manage subscription"
+    /// Apple's sheet refused to open and the App Store took the reader to their subscriptions
+    /// instead. Said, not silent, because the app went to the background: this is the line the
+    /// reader finds when they come back, and it names what happened.
+    static let manageSubscriptionOpenedInAppStore = "Your subscriptions opened in the App Store."
+    /// Apple's sheet refused to open and so did the App Store page, so the words are all that is
+    /// left. It names the one route that is always there.
+    static let manageSubscriptionUnavailable =
+        "Apple's subscription settings didn't open. Manage your subscription in the Settings app, under your Apple Account."
 
     // MARK: Store messages (also used as `StoreLoadState.failed` and `PurchaseOutcome.failed` text)
 
@@ -190,5 +198,49 @@ enum MonetizationCopy {
         }
         let weeks = weeksPerUnit * Decimal(value)
         return (product.price / weeks).formatted(product.priceFormatStyle)
+    }
+}
+
+/// What the app says after a tap on "Manage subscription", wherever it is offered: Settings'
+/// PURCHASES card, the plan screen behind the Plan row, and the primary button of the paywall's
+/// "your subscription is still active" screen (design.md 9.7 and 9.8).
+///
+/// **Why it exists (owner decision of 2026-09-28).** `showManageSubscriptions` used to return
+/// `Void` and log its failures, so a tap that could not show Apple's sheet did nothing at all,
+/// on a purchase control one screen from the Plan row App Review rejected 1.0.6 over. The sheet
+/// throws for an Apple Account with no manageable subscription for this app and in the sandbox,
+/// which is the account a reviewer uses. So the failure now has words, and the app also opens
+/// the Apple Account's subscriptions in the App Store, which is a route that exists whatever
+/// StoreKit says.
+///
+/// One type for the three screens, so none of them can be the silent one.
+struct MonetizationManageSubscriptionFeedback: Equatable, Sendable {
+    /// The line to show, or nil when Apple's own sheet is on screen and says everything.
+    let message: String?
+    /// Drawn and felt as a failure: nothing opened, so the words are all the reader has.
+    let isError: Bool
+
+    init(message: String?, isError: Bool) {
+        self.message = message
+        self.isError = isError
+    }
+
+    /// - Parameters:
+    ///   - outcome: what `StoreService.showManageSubscriptions()` answered.
+    ///   - openedAccountPage: whether the system accepted
+    ///     `MonetizationAppleLinks.accountSubscriptions` afterwards. Ignored for `.shown`,
+    ///     because the page is only tried when the sheet refused.
+    init(outcome: ManageSubscriptionsOutcome, openedAccountPage: Bool) {
+        switch outcome {
+        case .shown:
+            self.init(message: nil, isError: false)
+        case .unavailable:
+            self.init(
+                message: openedAccountPage
+                    ? MonetizationCopy.manageSubscriptionOpenedInAppStore
+                    : MonetizationCopy.manageSubscriptionUnavailable,
+                isError: !openedAccountPage
+            )
+        }
     }
 }

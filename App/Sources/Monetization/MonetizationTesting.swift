@@ -8,41 +8,50 @@ import Observation
 
 // MARK: - Which channel installed this build
 
-/// Which App Store channel installed this build, read from the name of the receipt file the
-/// installer put in the app bundle (`Bundle.main.appStoreReceiptURL`).
+/// Which App Store channel installed this build.
 ///
-/// Apple gives that file one of two names and no other:
+/// Two signals answer it, and they answer the same question in the same three values:
 ///
-/// - `sandboxReceipt` on a device whose copy was installed by TestFlight, on the copy App
-///   Review runs, and on a copy installed by Xcode. All of those buy from the StoreKit sandbox.
-/// - `receipt` for a copy downloaded from the App Store.
+/// - **StoreKit's `AppTransaction.environment`** (`MonetizationAppStoreEnvironment`), which Apple
+///   signs: `.sandbox` for a copy TestFlight installed and for the copy App Review runs, `.xcode`
+///   for a copy Xcode installed or a simulator run against a StoreKit configuration file, and
+///   `.production` for a copy downloaded from the App Store. This is the documented signal and
+///   the one that decides once it has been read, because it comes from Apple rather than from a
+///   file name.
+/// - **The name of the receipt file** the installer put in the app bundle
+///   (`Bundle.main.appStoreReceiptURL`): `sandboxReceipt` for TestFlight, App Review and an Xcode
+///   install, `receipt` for an App Store copy. It is synchronous and always available, so it is
+///   what the first frame draws with, and it is the answer that stands if the app transaction
+///   cannot be read at all.
 ///
-/// The name is written by whoever installed the app, not by the app. An App Store build has no
-/// way to be given a sandbox receipt: it would have to be installed by TestFlight instead, and
-/// then it is not an App Store build. That is what makes this safe as the gate for the Testing
-/// section, and it is the same signal Apple's own receipt validation uses to choose between the
-/// production and the sandbox verification server.
+/// Neither signal is written by the app. An App Store build has no way to be given a sandbox
+/// receipt (it would have to have been installed by TestFlight, and then it is not an App Store
+/// build) and no way to be given a sandbox app transaction. That is what makes this safe as the
+/// gate for the Testing section, and the receipt name is the same signal Apple's own receipt
+/// validation uses to choose between the production and the sandbox verification server.
 ///
-/// **A simulator is not a sandbox build here.** Measured on Xcode 27 with the iOS 26.5 runtime,
-/// `Bundle.main.appStoreReceiptURL` on a simulator ends in `StoreKit/receipt`, the App Store
-/// name, and the file usually does not exist. So a simulator reads as `.appStore` and shows no
-/// Testing section; the UI tests that need the section put another name in its place with the
-/// DEBUG-only launch argument below.
+/// **A simulator is not a sandbox build by its receipt.** Measured on Xcode 27 with the iOS 26.5
+/// and iOS 27.0 runtimes, `Bundle.main.appStoreReceiptURL` on a simulator ends in
+/// `StoreKit/receipt`, the App Store name, and the file usually does not exist. So a simulator
+/// reads as `.appStore` and shows no Testing section; the UI tests that need the section put
+/// another name in its place with the DEBUG-only launch argument below.
 ///
-/// The name says which channel installed the build, never who is running it. The copy App
-/// Review runs is installed the TestFlight way and carries a sandbox receipt, so a reviewer
-/// sees the Testing section. That is disclosed in the App Review notes
-/// (`metadata/en-US/review_notes.txt`).
+/// Both signals say which channel installed the build, never who is running it. The copy App
+/// Review runs is installed the TestFlight way, so a reviewer sees the Testing section. That is
+/// disclosed in the App Review notes (`metadata/en-US/review_notes.txt`).
 enum MonetizationBuildChannel: Sendable, Hashable {
-    /// The receipt is named `receipt`: an App Store copy (and, measured, a simulator).
+    /// An App Store copy: the receipt is named `receipt`, or the app transaction says
+    /// `.production`. (A simulator reads this way too, by its receipt name.)
     case appStore
-    /// The receipt is named `sandboxReceipt`: TestFlight, App Review or an Xcode install.
+    /// TestFlight, App Review or an Xcode install: the receipt is named `sandboxReceipt`, or the
+    /// app transaction says `.sandbox` or `.xcode`.
     case sandbox
-    /// There is no receipt at all, or it carries a name that is neither of the two.
+    /// Neither signal said anything: no receipt at all, or one whose name is neither of the two,
+    /// and no app transaction.
     case unknown
 
     /// The channel `receiptURL` names. A missing receipt is `.unknown`, never `.sandbox`: the
-    /// Testing tools appear only where the receipt positively says sandbox, so anything unusual
+    /// Testing tools appear only where a signal positively says sandbox, so anything unusual
     /// keeps the shipping behavior.
     ///
     /// Only the file name decides. A directory in the path called `sandboxReceipt` would not
@@ -55,15 +64,29 @@ enum MonetizationBuildChannel: Sendable, Hashable {
         }
     }
 
+    /// The channel `environment` names, Apple's own answer.
+    ///
+    /// `.xcode` is a sandbox build: it is a copy Xcode installed, which buys from the StoreKit
+    /// sandbox exactly as a TestFlight copy does. A value StoreKit adds after this build was
+    /// compiled is `.unknown`, never `.sandbox`, for the same reason a missing receipt is.
+    static func channel(environment: MonetizationAppStoreEnvironment) -> MonetizationBuildChannel {
+        switch environment {
+        case .production: .appStore
+        case .sandbox, .xcode: .sandbox
+        case .unrecognized: .unknown
+        }
+    }
+
     /// Whether this channel may show the Testing section in Settings. Only `.sandbox` may.
     var offersTestingTools: Bool { self == .sandbox }
 
-    /// This build's channel, read once: the receipt cannot change while the app runs.
+    /// This build's channel from the receipt's name, read once: the receipt cannot change while
+    /// the app runs. It is what `MonetizationBuildChannelResolver` starts from and falls back on.
     ///
     /// In DEBUG builds a launch argument can put another receipt name in its place, so both
     /// states can be seen on one simulator (see the override key below). That override is
     /// compiled out of Release, so the only thing that decides in a shipping build is the name
-    /// of the receipt the installer wrote.
+    /// of the receipt the installer wrote and the app transaction Apple signed.
     static let current: MonetizationBuildChannel = {
         #if DEBUG
         if let override = receiptNameOverride {
@@ -72,11 +95,12 @@ enum MonetizationBuildChannel: Sendable, Hashable {
         #endif
         // `appStoreReceiptURL` is deprecated from iOS 18 in favor of StoreKit's
         // `AppTransaction.shared`, and this build carries that one warning deliberately
-        // (App/APP_CONTRACT.md section 7 lists it). `AppTransaction.shared` is asynchronous,
-        // can make a network round trip and can ask the user to sign in to their Apple
-        // Account; this gate has to answer synchronously while Settings draws, offline, and
-        // without any prompt. The receipt's name is a local file name the installer wrote, so
-        // it always answers and it cannot be wrong.
+        // (App/APP_CONTRACT.md section 7 lists it). `AppTransaction.shared` is asynchronous, can
+        // make a network round trip and can ask the user to sign in to their Apple Account,
+        // while this value has to answer synchronously while Settings draws, offline and without
+        // any prompt. That is why it is still read: it is the answer of the first frame and the
+        // fallback, and `MonetizationBuildChannelResolver` replaces it with Apple's own as soon
+        // as the app transaction has been read.
         //
         // The warning cannot be silenced without hiding the dependency. Swift suppresses a
         // deprecation only inside a declaration that is itself deprecated, so moving the call
@@ -99,6 +123,104 @@ enum MonetizationBuildChannel: Sendable, Hashable {
         return name == "none" ? "" : name
     }
     #endif
+}
+
+/// `AppTransaction.environment` as this app needs it, so the store logic and its tests do not
+/// have to build a `StoreKit.AppStore.Environment`.
+enum MonetizationAppStoreEnvironment: Sendable, Hashable {
+    /// A copy downloaded from the App Store.
+    case production
+    /// A copy TestFlight installed, and the copy App Review runs.
+    case sandbox
+    /// A copy Xcode installed, and a simulator run against a StoreKit configuration file.
+    case xcode
+    /// A value StoreKit added after this build was compiled.
+    case unrecognized
+}
+
+/// This build's channel, resolved once at launch (`MonetizationBuildChannel`).
+///
+/// **Why this exists (owner decision of 2026-09-28).** The Testing section used to be gated on
+/// the receipt's file name alone, an API deprecated since iOS 18, and nobody had confirmed that
+/// an App Review install on iPadOS 27 still writes a file named `sandboxReceipt`. If it does not,
+/// the section a reviewer is sent to by the App Review notes was never on screen. The gate now
+/// decides from `AppTransaction.environment`, which Apple documents and signs, and keeps the
+/// receipt name as the fallback for the case where the app transaction cannot be read.
+///
+/// **And it still does not delay Settings drawing** (monetization.md section 3 defends that
+/// property). `channel` starts at the receipt name's synchronous answer, so the first frame of
+/// Settings is drawn from a value that is already there; the app transaction is read once, in a
+/// task of its own at launch, and `channel` is `@Observable`, so a Settings that is already open
+/// redraws if the answer changes. Nothing waits for it, and nothing is sequenced behind it: the
+/// read is not inside the store's launch task, so the entitlements refresh and the products do
+/// not wait for a call that can go to the network (`MonetizationStoreService.start`).
+///
+/// **It is read on every launch of every copy, including App Store copies**, because the whole
+/// premise of this gate is that the receipt name may be wrong and the app cannot know which copy
+/// it is until Apple answers. `AppTransaction.shared` can ask the user to sign in to their Apple
+/// Account, so that prompt is possible at launch; it is accepted (owner decision of 2026-09-28,
+/// recorded in APP_CONTRACT.md section 7), because it is Apple's documented API for the question,
+/// the answer is cached by StoreKit after the first successful read, and a failed read costs
+/// nothing but the receipt name's answer standing for another launch.
+///
+/// **An App Store copy still cannot show the section.** Apple answers `.production` for one, and
+/// `.production` replaces a receipt name that said sandbox, so an App Store copy shows nothing
+/// however it was installed. A `.sandbox` or `.xcode` answer does grant the section where the
+/// receipt name said nothing or said App Store, which is what an App Review install on iPadOS 27
+/// needed (`MonetizationTestingToolsTests.aReviewersBuildShowsTheTestingSection`).
+@MainActor
+@Observable
+final class MonetizationBuildChannelResolver {
+    /// The one the app uses. Views read `MonetizationBuildChannel.resolved`.
+    static let shared = MonetizationBuildChannelResolver()
+
+    /// The channel as currently known: the receipt name's answer until the app transaction has
+    /// been read, Apple's answer afterwards.
+    private(set) var channel: MonetizationBuildChannel
+
+    /// Whether `channel` is Apple's own answer rather than the receipt name's.
+    private(set) var isFromAppTransaction = false
+
+    init(fallback: MonetizationBuildChannel = .current) {
+        channel = fallback
+    }
+
+    /// Reads the app transaction's environment once and adopts its answer. A nil read (offline
+    /// on a first launch, or a build with no app transaction at all) leaves the receipt name's
+    /// answer in place, which is exactly the behavior this replaced.
+    func resolve(readEnvironment: () async -> MonetizationAppStoreEnvironment?) async {
+        guard !isFromAppTransaction else { return }
+        let read = await readEnvironment()
+        // An environment StoreKit adds after this build was compiled says nothing this build can
+        // act on, so it counts as a read that said nothing rather than as an answer. Adopting it
+        // would make `.unknown` the verdict and latch it, which would take the Testing section
+        // away from a TestFlight or App Review build whose receipt name correctly said sandbox,
+        // and the next launch would not ask again.
+        guard let environment = read, environment != .unrecognized else {
+            let reason = read == nil
+                ? "the app transaction could not be read"
+                : "the app transaction named an environment this build does not know"
+            MonetizationLog.store.notice(
+                "the build channel stays at the receipt name's answer: \(reason, privacy: .public)"
+            )
+            return
+        }
+        isFromAppTransaction = true
+        let resolved = MonetizationBuildChannel.channel(environment: environment)
+        if resolved != channel {
+            MonetizationLog.store.notice(
+                "the build channel changed from the receipt name's answer to Apple's: \(String(describing: resolved), privacy: .public)"
+            )
+        }
+        channel = resolved
+    }
+}
+
+extension MonetizationBuildChannel {
+    /// This build's channel as the app should act on it now. Read it inside a view's body: it is
+    /// an `@Observable` property, so the view redraws when the app transaction answers.
+    @MainActor
+    static var resolved: MonetizationBuildChannel { MonetizationBuildChannelResolver.shared.channel }
 }
 
 // MARK: - What a grant is
@@ -148,9 +270,12 @@ struct MonetizationTestingCounts: Sendable, Hashable {
 /// them; the Settings section reaches them by casting `AppModel.credits`, so the shell's
 /// `CreditsService` contract does not have to carry them.
 ///
-/// Both actions take the channel that asked for them and do nothing unless it is `.sandbox`.
-/// That is the second of two locks: the Settings section is not built at all outside a sandbox
-/// build, and even a caller that reached these would change nothing in an App Store build.
+/// Both actions take the channel that asked for them and do nothing unless the caller's channel
+/// **and** this build's own channel are `.sandbox` (`MonetizationCreditsService`). Those are the
+/// second and third of three locks: the Settings section is not built at all outside a sandbox
+/// build, a caller that reached these anyway has to name a sandbox channel, and even then the
+/// build itself has to be one. The third lock is what makes one wrong call site harmless rather
+/// than a shipping build that grants analyses.
 @MainActor
 protocol MonetizationTestingGrants: AnyObject, Observable, Sendable {
     var testingCounts: MonetizationTestingCounts { get }
@@ -195,27 +320,13 @@ enum MonetizationTestingCopy {
 
     static let cancel = "Cancel"
 
-    // MARK: The free launch window
-
-    /// The row that says where this Apple Account stands with the free launch window.
-    static let launchCohortRow = "Launch cohort"
-    static func launchCohortValue(_ status: MonetizationLaunchCohortStatus) -> String {
-        switch status {
-        case .member: "Member"
-        case .notMember: "Not a member"
-        case .undecided: "Not decided yet"
-        }
-    }
-
-    /// The switch that makes the build behave as an install made after the window closed. Its
-    /// name says what a tester or a reviewer wants from it, and the note says what it does.
-    static let showsPurchaseScreens = "Show the purchase screens"
-
-    /// The second paragraph of the section's footer. App Review installs the app during the
-    /// free window, so a reviewer is in the launch cohort and would otherwise never reach the
-    /// paywall or the four products (monetization.md section 11).
-    static let launchCohortNote =
-        "Chess Best Move is unlimited for everyone whose Apple Account installed it before \(MonetizationLaunchCohortCopy.cutoffDate), and this build is one of those installs, so it shows no purchase screen. Turn on \"\(showsPurchaseScreens)\" and it behaves as an install made after that date: three analyses, then the purchase screen with all four products. Turn it off to go back."
+    // The free launch window's two rows, "Launch cohort" and the "Show the purchase screens"
+    // switch, were removed on 2026-09-28 with the window itself (monetization.md section 11).
+    // With the window closed every install, a reviewer's included, already meets the three free
+    // analyses and the purchase screen, so the switch had nothing left to do and the note under
+    // it named a date the build no longer honors. `MonetizationLaunchCohortTesting` and
+    // `MonetizationLaunchCohort.setLeavesCohortForTesting` are kept, so reopening the window
+    // means restoring these rows and not rebuilding the mechanism.
 
     /// "2 of 3" for the free row.
     static func freeValue(_ counts: MonetizationTestingCounts) -> String {

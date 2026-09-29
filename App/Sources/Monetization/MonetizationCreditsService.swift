@@ -65,6 +65,11 @@ final class MonetizationCreditsService: CreditsService, MonetizationPackLedger, 
     @ObservationIgnored private weak var historySource: (any MonetizationPackHistorySource)?
     @ObservationIgnored private let vault: any MonetizationVault
     @ObservationIgnored private let now: () -> Date
+    /// This build's own channel, asked at the moment an action runs rather than cached, because
+    /// Apple's answer replaces the receipt name's during a launch
+    /// (`MonetizationBuildChannelResolver`). It is the second lock on the two Testing actions:
+    /// they change nothing unless this build is a sandbox build **and** the caller said so.
+    @ObservationIgnored private let buildChannel: @MainActor () -> MonetizationBuildChannel
     @ObservationIgnored private var synced: SyncedItem = .unread
     @ObservationIgnored private var committedAuthorizationIDs: Set<UUID> = []
     /// The free-edit scope of each outstanding authorization, oldest first.
@@ -101,11 +106,13 @@ final class MonetizationCreditsService: CreditsService, MonetizationPackLedger, 
     init(
         store: any StoreService,
         vault: any MonetizationVault,
-        now: @escaping () -> Date = Date.init
+        now: @escaping () -> Date = Date.init,
+        buildChannel: @escaping @MainActor () -> MonetizationBuildChannel = { MonetizationBuildChannel.resolved }
     ) {
         self.store = store
         self.vault = vault
         self.now = now
+        self.buildChannel = buildChannel
         local = .newInstall
         purchased = MonetizationPurchasedRecord()
         historySource = store as? any MonetizationPackHistorySource
@@ -310,7 +317,7 @@ final class MonetizationCreditsService: CreditsService, MonetizationPackLedger, 
     /// rather than left as a debt against the next real purchase.
     @discardableResult
     func resetFreeAnalyses(for channel: MonetizationBuildChannel) -> Bool {
-        guard channel.offersTestingTools else { return false }
+        guard channel.offersTestingTools, buildChannel().offersTestingTools else { return false }
         loadLocalIfNeeded()
         reloadPurchased()
         guard localLoaded else {
@@ -338,7 +345,7 @@ final class MonetizationCreditsService: CreditsService, MonetizationPackLedger, 
     /// ledger under an id the App Store cannot issue (`MonetizationTestingGrant`).
     @discardableResult
     func grantTestingAnalyses(for channel: MonetizationBuildChannel) -> Bool {
-        guard channel.offersTestingTools else { return false }
+        guard channel.offersTestingTools, buildChannel().offersTestingTools else { return false }
         loadLocalIfNeeded()
         reloadPurchased()
         guard localLoaded else {

@@ -217,6 +217,10 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
 
     @ObservationIgnored private let client: any MonetizationStoreKitClient
     @ObservationIgnored private let launchCohort: MonetizationLaunchCohort
+    /// Which channel installed this build, resolved from Apple's app transaction at launch. The
+    /// store owns the resolution because it owns the StoreKit client; the value itself is read
+    /// through `MonetizationBuildChannel.resolved`.
+    @ObservationIgnored private let buildChannel: MonetizationBuildChannelResolver
     @ObservationIgnored private let defaults: UserDefaults
     @ObservationIgnored private let now: () -> Date
     @ObservationIgnored private var observers: [@MainActor (StoreEvent) -> Void] = []
@@ -245,12 +249,14 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
         client: any MonetizationStoreKitClient,
         launchCohort: MonetizationLaunchCohort,
         defaults: UserDefaults = .standard,
-        now: @escaping () -> Date = Date.init
+        now: @escaping () -> Date = Date.init,
+        buildChannel: MonetizationBuildChannelResolver = .shared
     ) {
         self.client = client
         self.launchCohort = launchCohort
         self.defaults = defaults
         self.now = now
+        self.buildChannel = buildChannel
         if let cached = cachedEntitlements, cached.isPro(at: now()) {
             hasPurchasedPro = true
             ownsLifetime = cached.ownsLifetime
@@ -300,6 +306,14 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
                 await self?.resolveLaunchCohort()
             }
         }
+        // Its own task, so nothing is sequenced behind it. `AppTransaction.shared` can make a
+        // network round trip, and inside the launch task everything after it - the unfinished
+        // transactions, the entitlements refresh, the products - would wait for that round trip,
+        // which a paywall opened in the first seconds of a cold launch would show as loading
+        // placeholders. Nothing downstream needs the channel: the Testing section is drawn from
+        // the receipt name's answer until this lands, and Settings redraws if Apple's answer
+        // differs (`MonetizationBuildChannelResolver`).
+        Task { [weak self] in await self?.resolveBuildChannel() }
         Task { [weak self] in
             guard let self else { return }
             // Before the transactions: this decides whether there is anything to sell at all,
@@ -314,9 +328,17 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
     }
 
     /// Decides the launch cohort from Apple's signed app transaction, once
-    /// (`MonetizationLaunchCohort`). Does nothing once a verdict is stored.
+    /// (`MonetizationLaunchCohort`). Does nothing once a verdict is stored, and nothing at all
+    /// while the free launch window is closed, which is what this build carries.
     func resolveLaunchCohort() async {
         await launchCohort.resolve { [client] in await client.appTransactionOriginalPurchaseDate() }
+    }
+
+    /// Replaces the receipt name's guess at the build channel with Apple's own answer, once
+    /// (`MonetizationBuildChannelResolver`). The store does it because it owns the only StoreKit
+    /// client; nothing in the app waits for the result.
+    func resolveBuildChannel() async {
+        await buildChannel.resolve { [client] in await client.appTransactionEnvironment() }
     }
 
     // MARK: MonetizationLaunchCohortTesting
@@ -491,7 +513,7 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
         return end
     }
 
-    func showManageSubscriptions() async {
+    func showManageSubscriptions() async -> ManageSubscriptionsOutcome {
         await client.showManageSubscriptions()
     }
 

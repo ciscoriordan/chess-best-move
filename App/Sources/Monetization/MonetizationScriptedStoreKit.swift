@@ -20,6 +20,11 @@ final class MonetizationScriptedStoreKitClient: MonetizationStoreKitClient {
 
     static let groupID = "scripted.pro.group"
 
+    /// A first-download date after every free launch window this app has carried:
+    /// 2027-01-15T08:00:00Z. It is what makes a scripted store an ordinary post-window install,
+    /// whatever `MonetizationRules.launchCohortCutoff` is set to.
+    static let postWindowPurchaseDate = Date(timeIntervalSince1970: 1_800_000_000)
+
     var availableProducts: [MonetizationLoadedProduct]
     var loadFailsOffline = false
     var purchaseBehavior: PurchaseBehavior = .succeed
@@ -31,6 +36,10 @@ final class MonetizationScriptedStoreKitClient: MonetizationStoreKitClient {
     var gracePeriodEnds: [String: Date] = [:]
     /// Makes `renewalStatus` return nil, as when the status cannot be read.
     var renewalStatusFails = false
+    /// Makes `showManageSubscriptions` answer `.unavailable`, which is what a real
+    /// `AppStore.showManageSubscriptions(in:)` does when it throws: for a sandbox Apple Account,
+    /// or for an account that holds no manageable subscription for this app.
+    var manageSubscriptionsFails = false
     var now = Date()
     /// How long `purchase` takes before it returns (StoreKit's sheet and the network).
     var purchaseDelay: Duration = .zero
@@ -43,10 +52,14 @@ final class MonetizationScriptedStoreKitClient: MonetizationStoreKitClient {
     /// cleared for sale.
     var unservedProductIDs: Set<String> = []
     /// What `appTransactionOriginalPurchaseDate` answers; nil is a read that failed (offline on
-    /// a first launch). The default is a day after `MonetizationRules.launchCohortCutoff`, so a
-    /// scripted store is an ordinary post-window install and every test written before the
-    /// launch window keeps meeting the free allowance and the paywall.
-    var appTransactionPurchaseDate: Date? = MonetizationRules.launchCohortCutoff.addingTimeInterval(24 * 60 * 60)
+    /// a first launch). The default is `postWindowPurchaseDate`, so a scripted store is an
+    /// ordinary post-window install and every test written before the launch window keeps
+    /// meeting the free allowance and the paywall.
+    var appTransactionPurchaseDate: Date? = MonetizationScriptedStoreKitClient.postWindowPurchaseDate
+    /// What `appTransactionEnvironment` answers; nil is a read that failed, which is what a
+    /// simulator with no StoreKit configuration does, and it leaves the build channel at the
+    /// receipt name's answer (`MonetizationBuildChannelResolver`).
+    var appTransactionEnvironment: MonetizationAppStoreEnvironment?
 
     private(set) var transactions: [MonetizationTransactionFacts] = []
     private(set) var finishedTransactionIDs: Set<UInt64> = []
@@ -56,6 +69,9 @@ final class MonetizationScriptedStoreKitClient: MonetizationStoreKitClient {
     /// How often the launch cohort asked for the app transaction, so a test can show that a
     /// stored verdict stops it being asked again.
     private(set) var appTransactionReadCount = 0
+    /// How often the build-channel resolver asked for the app transaction's environment, so a
+    /// test can show that it is asked once and not again.
+    private(set) var appTransactionEnvironmentReadCount = 0
     private(set) var manageSubscriptionsCount = 0
     private var nextTransactionID: UInt64 = 1_000
     private var updatesContinuation: AsyncStream<MonetizationTransactionFacts>.Continuation?
@@ -192,6 +208,11 @@ final class MonetizationScriptedStoreKitClient: MonetizationStoreKitClient {
         return appTransactionPurchaseDate
     }
 
+    func appTransactionEnvironment() async -> MonetizationAppStoreEnvironment? {
+        appTransactionEnvironmentReadCount += 1
+        return appTransactionEnvironment
+    }
+
     func sync() async throws {
         syncCount += 1
         if syncFails { throw URLError(.notConnectedToInternet) }
@@ -217,8 +238,9 @@ final class MonetizationScriptedStoreKitClient: MonetizationStoreKitClient {
         return snapshot
     }
 
-    func showManageSubscriptions() async {
+    func showManageSubscriptions() async -> ManageSubscriptionsOutcome {
         manageSubscriptionsCount += 1
+        return manageSubscriptionsFails ? .unavailable : .shown
     }
 
     // MARK: Helpers
@@ -300,10 +322,14 @@ final class MonetizationScriptedStoreKitClient: MonetizationStoreKitClient {
 /// - `-monetizationDemo <free analyses left>` uses `MonetizationScriptedStoreKitClient` and an
 ///   in-memory vault with that many free analyses (0 to 3).
 /// - `-monetizationDemoPurchase succeed|pending|cancel|offline` sets what a purchase does.
-/// - `-monetizationDemoSubscribed weekly|yearly` starts with an active subscription.
+/// - `-monetizationDemoSubscribed weekly|yearly` starts with an active subscription, and
+///   `lifetime` with the lifetime purchase, which is not a subscription.
 /// - `-monetizationDemoLoad offline` makes loading products fail as if offline;
 ///   `-monetizationDemoLoad noPack` loads every product except the 15-pack.
 /// - `-monetizationDemoPurchaseDelay <seconds>` makes a purchase take that long to return.
+/// - `-monetizationDemoManageSubscriptions fails` makes Apple's subscription sheet refuse to
+///   open, which is what it does for a sandbox Apple Account. It is how the message that then
+///   has to appear is seen and tested (`MonetizationManageSubscriptionFeedback`).
 enum MonetizationDebugOptions {
     static var demoFreeRemaining: Int? {
         guard UserDefaults.standard.object(forKey: "monetizationDemo") != nil else { return nil }
@@ -325,6 +351,9 @@ enum MonetizationDebugOptions {
         case "noPack": client.unservedProductIDs = [ProductID.credits15]
         default: break
         }
+        if defaults.string(forKey: "monetizationDemoManageSubscriptions") == "fails" {
+            client.manageSubscriptionsFails = true
+        }
         let purchaseDelay = defaults.double(forKey: "monetizationDemoPurchaseDelay")
         if purchaseDelay > 0 {
             client.purchaseDelay = .milliseconds(Int(purchaseDelay * 1000))
@@ -332,6 +361,9 @@ enum MonetizationDebugOptions {
         switch defaults.string(forKey: "monetizationDemoSubscribed") {
         case "weekly": client.addHistoricalTransaction(ProductID.proWeekly, purchaseDate: Date().addingTimeInterval(-3600))
         case "yearly": client.addHistoricalTransaction(ProductID.proAnnual, purchaseDate: Date().addingTimeInterval(-3600))
+        // Not a subscription, so Settings' plan row reads "Pro, lifetime" and no Manage
+        // subscription row is drawn. It is here so the screenshot runs can reach that state.
+        case "lifetime": client.addHistoricalTransaction(ProductID.proLifetime, purchaseDate: Date().addingTimeInterval(-3600))
         default: break
         }
         return client
@@ -341,12 +373,16 @@ enum MonetizationDebugOptions {
     /// window: `-monetizationDemo` exists to show the freemium app (the indicator, the paywall,
     /// the downsell), and an undecided cohort would grant unlimited analyses and hide all of
     /// it. `-monetizationLaunchCohort member` overrides this, for the tests of the window.
+    ///
+    /// With the window closed the seeded record decides nothing (the cohort is `.notMember`
+    /// without reading it), and it is kept so a build that reopens the window still finds a demo
+    /// that is a post-window install.
     @MainActor
     static func makeDemoLaunchCohort(defaults: UserDefaults) -> MonetizationLaunchCohort {
         let vault = MonetizationInMemoryVault()
         let record = MonetizationLaunchCohortRecord(
             isMember: false,
-            originalPurchaseDate: MonetizationRules.launchCohortCutoff.addingTimeInterval(24 * 60 * 60),
+            originalPurchaseDate: MonetizationScriptedStoreKitClient.postWindowPurchaseDate,
             cutoff: MonetizationRules.launchCohortCutoff
         )
         if let data = try? JSONEncoder().encode(record) {
