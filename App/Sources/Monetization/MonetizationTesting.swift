@@ -320,13 +320,7 @@ enum MonetizationTestingCopy {
 
     static let cancel = "Cancel"
 
-    // The free launch window's two rows, "Launch cohort" and the "Show the purchase screens"
-    // switch, were removed on 2026-09-28 with the window itself (monetization.md section 11).
-    // With the window closed every install, a reviewer's included, already meets the three free
-    // analyses and the purchase screen, so the switch had nothing left to do and the note under
-    // it named a date the build no longer honors. `MonetizationLaunchCohortTesting` and
-    // `MonetizationLaunchCohort.setLeavesCohortForTesting` are kept, so reopening the window
-    // means restoring these rows and not rebuilding the mechanism.
+    // SettingsTestingSection restores the sandbox purchase-flow override for the October offer.
 
     /// "2 of 3" for the free row.
     static func freeValue(_ counts: MonetizationTestingCounts) -> String {

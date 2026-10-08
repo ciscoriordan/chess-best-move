@@ -122,36 +122,15 @@ enum MonetizationRules {
     /// (`originalPurchaseDate < cutoff`) that no signed date can satisfy.
     static let launchWindowClosed = Date(timeIntervalSince1970: 0)
 
-    /// The instant the app flips from free to freemium (monetization.md section 11).
-    ///
-    /// **The window is closed (owner decision of 2026-09-28).** It was 2026-10-15T12:00:00Z
-    /// (owner decision of 2026-09-20, build/ui-requests.md item 16). App Review rejected
-    /// version 1.0.6 under Guideline 2.1(b) because a reviewer, being inside that window, could
-    /// reach none of the four products, so the window is set to `launchWindowClosed` and grants
-    /// nobody. The app has never been on sale, so the cohort has no members and nobody is owed
-    /// anything; monetization.md section 11 already said that if approval slipped past the
-    /// cutoff "nobody is ever in the launch cohort and it ships straight into freemium".
-    ///
-    /// **Why the epoch and not a date a few days back.** An Apple Account whose
-    /// `AppTransaction.originalPurchaseDate` is before this instant is a member, permanently, so
-    /// the value has to be one no install can be before. A cutoff of "today" would still take in
-    /// every TestFlight install of this app, the earliest of which is from 2026-09-18, and those
-    /// installs are the ones App Review and the owner run. The epoch is before the App Store
-    /// existed, so it takes in no install of any age. See `launchWindowClosed`.
-    ///
-    /// The mechanism around it is kept, so the window can be reopened by moving this one
-    /// constant: `MonetizationLaunchCohort` still reads Apple's app transaction, still stores
-    /// the verdict and still answers `MonetizationRules.launchWindowIsOpen(cutoff:)` with false
-    /// while the cutoff is this value, which is what makes it grant nobody even on a device
-    /// where an earlier build already stored a member verdict.
-    ///
-    /// Nothing compares this with the device clock. It is compared only with the date Apple
-    /// signed into the app transaction, so moving the clock moves nothing.
-    static let launchCohortCutoff = MonetizationRules.launchWindowClosed
+    /// First downloads through October 31, 2026 keep unlimited analyses permanently.
+    /// Noon UTC on November 1 includes October 31 in every time zone (UTC-12 last).
+    /// Owner decision: 2026-10-08, reopening the window closed on September 28.
+    /// Compared with Apple's signed originalPurchaseDate, never the device clock.
+    static let launchCohortCutoff = Date(timeIntervalSince1970: 1793534400) // 2026-11-01T12:00:00Z
 
     /// Whether `cutoff` leaves a free launch window open at all.
     ///
-    /// False for `launchWindowClosed`, which is what the shipping build carries. While it is
+    /// False for `launchWindowClosed`, retained for testing the disabled state. While it is
     /// false nobody is a member, whatever an earlier build wrote into the Keychain, and
     /// `MonetizationLaunchCohort` neither reads that record nor asks Apple for the app
     /// transaction.

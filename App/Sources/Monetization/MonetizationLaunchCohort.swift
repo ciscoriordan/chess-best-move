@@ -7,11 +7,8 @@ import Observation
 // paywall, a price or a Pro row. Everyone who arrives afterwards meets the ordinary three free
 // analyses and the paywall.
 //
-// **The window is closed (owner decision of 2026-09-28).** `MonetizationRules.launchCohortCutoff`
-// is `launchWindowClosed`, so `MonetizationRules.launchWindowIsOpen()` is false, nobody is a
-// member and every install meets the ordinary freemium flow. Everything below is the mechanism,
-// kept so the owner can reopen the window by moving that one constant; the copy that named a date
-// is gone, because a shipped build must promise nothing it is not doing.
+// Reopened on 2026-10-08 through October 31 worldwide. Existing downloads qualify too.
+// Sandbox testers can opt out through Settings to exercise the ordinary purchase flow.
 
 // MARK: - Where an Apple Account stands
 
@@ -327,14 +324,7 @@ protocol MonetizationLaunchCohortTesting: AnyObject, Observable, Sendable {
 /// The plan row must never read "Pro, lifetime" for someone who bought nothing, so the state has
 /// a name of its own.
 ///
-/// **Nothing here names a date or a launch offer any more (owner decision of 2026-09-28).** The
-/// window is closed (`MonetizationRules.launchCohortCutoff`), so no shipped string may promise
-/// one: the plan row that read "Unlimited, launch offer" and the footer that named the date this
-/// Apple Account installed the app are gone, and
-/// `MonetizationClosedLaunchWindowTests.noShippedStringPromisesALaunchWindowOrNamesItsDate` fails
-/// the build if a dated promise comes back. What is left says only what the app is doing, which is
-/// true whether or not Apple has confirmed anything, so the confirmed and undecided states no
-/// longer need separate wording.
+/// The plan describes current access without assuming an unverified first-download date.
 enum MonetizationLaunchCohortCopy {
     /// The value of Settings' Plan row while the offer is being granted.
     static let planRow = "Unlimited"
@@ -343,5 +333,5 @@ enum MonetizationLaunchCohortCopy {
     /// Account installed the app, and it says what Restore purchases is still for, because a
     /// member who bought nothing is told "No previous purchases found".
     static let planDetail =
-        "Every analysis is unlimited, at no cost, and stays that way. Restore purchases is here for anything you bought on another device."
+        "Every analysis is unlimited, at no cost. Restore purchases is here for anything you bought on another device."
 }

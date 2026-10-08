@@ -58,6 +58,16 @@ struct SettingsTestingSection: View {
         return VStack(alignment: .leading, spacing: 0) {
             GroupedSectionLabel(MonetizationTestingCopy.sectionLabel)
             GroupedCard {
+                if let cohort = app.store as? any MonetizationLaunchCohortTesting {
+                    Toggle("Show the purchase screens", isOn: Binding(
+                        get: { cohort.leavesLaunchCohortForTesting },
+                        set: { _ = cohort.setLeavesLaunchCohortForTesting($0, for: channel) }
+                    ))
+                    .typography(.body)
+                    .groupedRow()
+                    .accessibilityIdentifier("settings.testing.purchaseScreens")
+                    GroupedRowSeparator(start: .content)
+                }
                 ListRow(MonetizationTestingCopy.freeRow, value: MonetizationTestingCopy.freeValue(counts))
                     .groupedRow()
                     .accessibilityElement(children: .combine)
@@ -89,6 +99,7 @@ struct SettingsTestingSection: View {
             // actions ask before they change anything, and the confirmation dialog repeats
             // the detail, so nothing here has to be read before a tap.
             GroupedFooter {
+                Text("Turn on Show the purchase screens to test the three-free-analysis allowance and purchases instead of the launch offer. Turn it off to restore launch access. This only affects sandbox testing.")
                 Text(MonetizationTestingCopy.note)
                     .accessibilityIdentifier(SettingsTestingAccessibilityID.note)
                 if let message {
