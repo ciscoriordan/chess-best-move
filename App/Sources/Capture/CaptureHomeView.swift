@@ -14,7 +14,7 @@ struct HomeView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
-    @State private var model = CaptureHomeModel()
+    @State private var model: CaptureHomeModel
     /// An import failure is a footer four elements below the button that caused it, so it is
     /// announced and focused rather than left to be found.
     @AccessibilityFocusState private var importErrorFocused: Bool
@@ -30,7 +30,9 @@ struct HomeView: View {
     private var rowIconSide: CGFloat { min(scaledRowIconSide, Layout.maximumRowIcon) }
     private var chevronSize: CGFloat { min(scaledChevronSize, Layout.maximumRowChevron) }
 
-    init() {}
+    init(model: CaptureHomeModel = CaptureHomeModel()) {
+        _model = State(initialValue: model)
+    }
 
     var body: some View {
         GeometryReader { proxy in
@@ -388,8 +390,8 @@ struct HomeView: View {
         .groupedRow()
     }
 
-    /// The Shortcut row explains the zero-tap path: Take Screenshot then Find Best Move, run
-    /// from the Action button or Back Tap. Setup opens the Shortcut sheet.
+    /// The Shortcut row explains the capture, save, and analyze path, run
+    /// from Control Center, the Action button, or Back Tap. Setup opens the Shortcut sheet.
     private var shortcutSetupRow: some View {
         Button {
             app.presentShortcutSetup()
@@ -404,7 +406,7 @@ struct HomeView: View {
                     Text("Set up the one-step Shortcut")
                         .typography(.body)
                         .foregroundStyle(Palette.ink)
-                    Text("Take Screenshot, then Find Best Move, from the Action button or Back Tap.")
+                    Text("Take a screenshot, save it, and find the best move from Control Center, the Action button, or Back Tap.")
                         .typography(.caption)
                         .foregroundStyle(Palette.ink2)
                         .fixedSize(horizontal: false, vertical: true)

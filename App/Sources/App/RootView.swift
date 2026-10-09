@@ -6,6 +6,10 @@ import SwiftUI
 struct RootView: View {
     @Environment(AppModel.self) private var app
 
+    @State private var capture = CaptureHomeModel()
+    @State private var widgetImportInProgress = false
+    @Environment(\.openURL) private var openURL
+
     var body: some View {
         #if DEBUG
         if DebugLaunchOptions.gallery {
@@ -23,10 +27,21 @@ struct RootView: View {
     private var navigation: some View {
         @Bindable var app = app
         return NavigationStack(path: $app.path) {
-            HomeView()
+            HomeView(model: capture)
                 .navigationDestination(for: Route.self) { route in
                     destination(for: route)
                 }
+        }
+        .onOpenURL { url in
+            guard WidgetDestination.isLatestScreenshot(url), !widgetImportInProgress else { return }
+            widgetImportInProgress = true
+            app.prepareForWidgetImport()
+            Task { @MainActor in
+                defer { widgetImportInProgress = false }
+                await capture.useLatestScreenshot(app: app) {
+                    if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
+                }
+            }
         }
         .tint(Palette.ink)
         .sheet(item: $app.sheet, onDismiss: { app.sheetDidDismiss() }) { route in

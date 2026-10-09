@@ -264,6 +264,12 @@ final class AppModel {
         }
     }
 
+    /// A widget starts a new import, without treating a dismissed paywall as a decline.
+    func prepareForWidgetImport() {
+        replaceSheets()
+        goHome()
+    }
+
     /// Back to Home. Drops the pending analysis.
     func goHome() {
         editor = nil
