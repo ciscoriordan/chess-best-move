@@ -628,6 +628,7 @@ private struct AnalysisScreen: View {
         // The three figures are abbreviated for a fixed monospaced column. Spoken they need
         // naming: "depth 20, 1.4 s slash 3 s, 2.1 M n slash s" says what none of them are.
         .accessibilityLabel("Engine")
+        .accessibilityAddTraits(.isStaticText)
         .accessibilityValue(AnalysisSpeech.engineFigures(
             depth: readout?.depth,
             elapsed: readout?.elapsed,

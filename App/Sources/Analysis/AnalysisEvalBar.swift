@@ -59,6 +59,7 @@ struct AnalysisEvalBar: View {
         // identical sentence twice with nothing to tell the two apart (design.md section 8).
         .accessibilityLabel("Evaluation bar")
         .accessibilityValue(accessibilityValueText)
+        .accessibilityAddTraits(.isStaticText)
         .accessibilityIgnoresInvertColors()
     }
 

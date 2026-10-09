@@ -79,6 +79,18 @@ struct AnalysisReadoutContent: Sendable, Hashable {
     /// answer, and the guessed move above it is muted ink (item 2).
     var moveIsReply: Bool { guessedMove != nil && move != nil }
 
+    /// The consequence of the move actually shown, including a reply when there is one.
+    /// A mate score alone does not mean this move is checkmate.
+    var checkBannerTitle: String? {
+        if let move {
+            if move.san.hasSuffix("#") { return "Checkmate" }
+            if move.san.hasSuffix("+") { return "Check" }
+        } else if placeholderIsResult, placeholder == "Checkmate" {
+            return "Checkmate"
+        }
+        return nil
+    }
+
     /// The arrows the board draws, in the order the moves are played (design.md section 7).
     ///
     /// Both come from this readout rather than from the engine a second time, so the board and

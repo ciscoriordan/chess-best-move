@@ -39,7 +39,7 @@ struct IntentsShortcutSetupContent: View {
                 SecondaryButton("Open Shortcuts", systemImage: "square.2.layers.3d") {
                     if let url = URL(string: "shortcuts://") { openURL(url) }
                 }
-                .fixedSize(horizontal: true, vertical: false)
+                .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, Spacing.s2)
             }
             .padding(.bottom, Spacing.s4)

@@ -113,21 +113,21 @@ enum Palette {
 
     // MARK: Board marks (drawn on the diagram, which does not follow the theme)
 
-    // The diagram board is a warm paper board in both appearances: its four square colors span
-    // a relative luminance of 0.31 to 0.82. A mark drawn on it therefore has to be chosen
-    // against those four squares and not against `canvas`, which is why these are fixed rather
+    // The Standard diagram is warm paper in both appearances; Classic green keeps the same
+    // green and cream squares in either appearance. Choose marks against all of these squares
+    // rather than `canvas`, which is why these are fixed rather
     // than dynamic. Drawn in the theme-following `caution`, `danger` and `accent` they measured
     // between 1.04:1 and 1.80:1 in dark mode - the editor's selection outline, which is the
     // only confirmation that a tap landed, was invisible at 1.04:1.
     //
-    // Each of the three clears 3:1 against all four diagram squares, in both appearances.
+    // Each of the three clears 3:1 on both board styles, in both appearances.
 
-    /// Low-confidence square outline and its "?" badge: 3.2:1 on the darkest diagram square,
-    /// 7.6:1 on the lightest.
-    static let markLowConfidence = fixed(0x6B3D05)
-    /// Blocking-issue square outline and its "!" badge: 3.6:1 to 8.6:1.
+    /// Low-confidence square outline and its "?" badge. The darker amber also clears 3:1
+    /// on Classic green's dark squares; the former #6B3D05 only reached 2.73:1 there.
+    static let markLowConfidence = fixed(0x603604)
+    /// Blocking-issue square outline and its "!" badge: at least 3.1:1 on either board style.
     static let markIssue = fixed(0x7E1710)
-    /// Selected square outline: the dark cut of the cobalt, 3.8:1 to 9.0:1.
+    /// Selected square outline: the dark cut of the cobalt, at least 3.2:1 on either style.
     static let markSelection = fixed(0x16309A)
     /// Rank and file coordinates inside the board's edge squares. Text, so it needs 4.5:1, and
     /// it clears it on every diagram square (4.8:1 to 11.4:1). `ink3` gave 1.86:1 on a dark

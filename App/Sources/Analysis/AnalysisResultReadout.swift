@@ -42,7 +42,26 @@ struct AnalysisResultReadout: View {
                 } else if content.guessedMoveIsPending {
                     pendingGuessedMoveBlock
                 }
-                header
+                if let title = content.checkBannerTitle {
+                    Text(title)
+                        .typography(.headline)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, Spacing.s4)
+                        .padding(.vertical, Spacing.s3)
+                        .foregroundStyle(Palette.canvas)
+                        .background(Palette.ink, in: RoundedRectangle(cornerRadius: Radius.r2))
+                        .accessibilityAddTraits(.isHeader)
+                        // The hero already speaks the move's check or checkmate, including
+                        // its condition when it is a reply. Read it only once.
+                        .accessibilityHidden(content.move != nil)
+                }
+                // On a finished, checkmated board the banner is the result itself.
+                // There is no move or evaluation to repeat in another badge below it.
+                if content.move != nil || content.checkBannerTitle == nil {
+                    header
+                }
             }
 
             // The condition on the badge's move comes first, right under the badge; what the

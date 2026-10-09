@@ -1,6 +1,7 @@
 #if DEBUG
 import ChessCore
 import SwiftUI
+import WidgetKit
 
 /// Every token and shared component on one scrolling screen, for checking fonts, colors and
 /// components on a simulator or device (launch with `-debugGallery YES`). DEBUG builds only.
@@ -8,6 +9,37 @@ struct DesignGalleryView: View {
     @State private var thinkTime = ThinkTime.defaultValue
 
     var body: some View {
+        if UserDefaults.standard.bool(forKey: "debugWidgetGallery") {
+            widgetGallery
+        } else {
+            components
+        }
+    }
+
+    private var widgetGallery: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: Spacing.s4) {
+                Text("Widget layouts").typography(.headline)
+                widgetPreview(.systemSmall, width: 155, height: 155, name: "Small")
+                widgetPreview(.systemMedium, width: 330, height: 155, name: "Medium")
+                widgetPreview(.accessoryRectangular, width: 155, height: 72, name: "Lock Screen")
+                widgetPreview(.accessoryCircular, width: 72, height: 72, name: "Circular")
+            }
+            .padding()
+        }
+        .background(Palette.canvas)
+    }
+
+    private func widgetPreview(_ family: WidgetFamily, width: CGFloat, height: CGFloat, name: String) -> some View {
+        let inset: CGFloat = family == .systemSmall || family == .systemMedium ? 16 : 0
+        return ScreenshotWidgetContent(family: family)
+            .frame(width: width - 2 * inset, height: height - 2 * inset)
+            .padding(inset)
+            .background(Palette.raised, in: RoundedRectangle(cornerRadius: Radius.r3))
+            .accessibilityIdentifier("widget.preview.\(name)")
+    }
+
+    private var components: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 SectionLabel("Type scale")
