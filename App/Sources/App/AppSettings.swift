@@ -7,6 +7,7 @@ import Observation
 @Observable
 final class AppSettings {
     enum Key {
+        static let boardAppearance = "boardAppearance"
         static let thinkTime = "thinkTimeSeconds"
         static let hasCompletedAnalysis = "hasCompletedAnalysis"
         static let pendingApprovalBoard = "pendingApprovalBoard"
@@ -15,6 +16,10 @@ final class AppSettings {
     }
 
     @ObservationIgnored private let defaults: UserDefaults
+
+    var boardAppearance: BoardAppearance {
+        didSet { defaults.set(boardAppearance.rawValue, forKey: Key.boardAppearance) }
+    }
 
     /// The saved think time (default 3 s). Tapping a THINK segment on the result screen also
     /// makes it the saved default (design.md 9.4).
@@ -56,6 +61,7 @@ final class AppSettings {
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
+        boardAppearance = BoardAppearance(rawValue: defaults.string(forKey: Key.boardAppearance) ?? "") ?? .screenshot
         thinkTime = ThinkTime(rawValue: defaults.integer(forKey: Key.thinkTime)) ?? .defaultValue
         longerSearchCeiling = LongerSearchCeiling(rawValue: defaults.integer(forKey: Key.longerSearchCeiling)) ?? .defaultValue
         switchesToBetterMoveAutomatically = defaults.bool(forKey: Key.switchesToBetterMoveAutomatically)

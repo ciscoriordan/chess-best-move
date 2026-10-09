@@ -272,14 +272,14 @@ struct BoardSnapshot: Sendable, Identifiable, Hashable {
         assumedCastlingRights.remove(right)
     }
 
-    /// The pieces differ from what was recognized, so screens show the diagram board with
-    /// an EDITED label instead of the screenshot crop.
+    /// The pieces differ from what was recognized. Show EDITED regardless of board style.
     var isEdited: Bool {
         guard let recognizedBoard else { return false }
         return recognizedBoard != position.board
     }
 
-    /// Show the diagram board rather than the screenshot crop.
+    /// Legacy flag for the edited badge/original comparison, not the board appearance.
+    /// Rendering uses ScreenshotStyledBoard and the saved appearance preference.
     var showsDiagram: Bool { boardImage == nil || isEdited }
 
     /// The same board with the other side to move, chosen by the user.

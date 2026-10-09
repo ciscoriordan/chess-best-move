@@ -158,7 +158,7 @@ struct RecognizingView: View {
         switch found.destination {
         case .checkPosition:
             ZStack {
-                DiagramBoard(board: snapshot.position.board, whiteAtBottom: snapshot.whiteAtBottom)
+                ScreenshotStyledBoard(snapshot: snapshot, appearance: app.settings.boardAppearance)
                 CaptureBoardMarks(
                     whiteAtBottom: snapshot.whiteAtBottom,
                     lowConfidence: snapshot.lowConfidenceSquares,
@@ -166,9 +166,7 @@ struct RecognizingView: View {
                 )
             }
         case .analysis, nil:
-            if let crop = snapshot.boardImage {
-                BoardScreenshot(image: crop, snapshot: snapshot)
-            }
+            ScreenshotStyledBoard(snapshot: snapshot, appearance: app.settings.boardAppearance)
         }
     }
 

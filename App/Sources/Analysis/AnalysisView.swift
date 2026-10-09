@@ -223,13 +223,13 @@ private struct AnalysisScreen: View {
 
     private var board: some View {
         let canPeek = canPeek
-        let showsScreenshot = snapshot.boardImage != nil && (!snapshot.showsDiagram || isPeeking)
+        let showsScreenshot = snapshot.boardImage != nil && isPeeking
         return BoardFrame {
             ZStack(alignment: .topTrailing) {
                 if showsScreenshot, let image = snapshot.boardImage {
                     BoardScreenshot(image: image, snapshot: snapshot)
                 } else {
-                    DiagramBoard(board: snapshot.position.board, whiteAtBottom: snapshot.whiteAtBottom)
+                    ScreenshotStyledBoard(snapshot: snapshot, appearance: app.settings.boardAppearance)
                 }
                 AnalysisArrowOverlay(
                     // The readout is what decides which moves are drawn and whose they are,

@@ -17,6 +17,7 @@ import UIKit
 ///   model and are not keyboard stops, because 64 Tab presses to cross one screen is not access.
 struct CaptureEditorBoard: View {
     let model: CaptureEditorModel
+    @Environment(AppModel.self) private var app
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var dragSource: Square?
@@ -43,9 +44,10 @@ struct CaptureEditorBoard: View {
             GeometryReader { proxy in
                 let side = min(proxy.size.width, proxy.size.height)
                 let cell = side / 8
-                let animatedSquare = reduceMotion ? nil : model.lastPlacedSquare
+                let animatedSquare = reduceMotion || (app.settings.boardAppearance == .screenshot && snapshot.boardImage != nil) ? nil : model.lastPlacedSquare
                 ZStack(alignment: .topLeading) {
-                    DiagramBoard(board: displayedBoard(hiding: [dragSource, animatedSquare]), whiteAtBottom: whiteAtBottom)
+                    ScreenshotStyledBoard(snapshot: snapshot, appearance: app.settings.boardAppearance,
+                                          board: displayedBoard(hiding: [dragSource, animatedSquare]))
                     CaptureBoardMarks(
                         whiteAtBottom: whiteAtBottom,
                         lowConfidence: snapshot.lowConfidenceSquares,
@@ -69,7 +71,7 @@ struct CaptureEditorBoard: View {
                 }
                 .overlay(alignment: .topLeading) {
                     if let dragSource, let dragLocation, let piece = model.piece(at: dragSource) {
-                        PieceGlyph(piece: piece)
+                        dragPiece(piece, snapshot: snapshot)
                             .frame(width: cell * 1.3, height: cell * 1.3)
                             .position(dragLocation)
                             .allowsHitTesting(false)
@@ -89,6 +91,18 @@ struct CaptureEditorBoard: View {
         .boardTapTargetRelief()
         .sensoryFeedback(.selection, trigger: model.placementCount)
         .accessibilityIdentifier(CaptureAccessibilityID.editorBoard)
+    }
+
+    @ViewBuilder
+    private func dragPiece(_ piece: Piece, snapshot: BoardSnapshot) -> some View {
+        if app.settings.boardAppearance == .screenshot, let image = snapshot.boardImage {
+            Canvas { context, size in
+                ScreenshotBoardArtwork(snapshot: snapshot, image: image)
+                    .draw(piece, in: CGRect(origin: .zero, size: size), context: &context)
+            }
+        } else {
+            PieceGlyph(piece: piece)
+        }
     }
 
     private func displayedBoard(hiding squares: [Square?]) -> [Piece?] {

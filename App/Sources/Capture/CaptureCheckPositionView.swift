@@ -23,11 +23,8 @@ enum CaptureAccessibilityID {
 }
 
 /// Check position (design.md 9.5): recognition returned a doubtful result, or a position the
-/// engine cannot take. The board shows what recognition read: the recognized pieces on the
-/// app's diagram board, with a dashed `caution` outline and a "?" badge on uncertain squares.
-/// Over the user's own screenshot crop the marks could not show which piece was read on a
-/// doubtful square, so the crop is shown only while the board is pressed and held, for
-/// comparison. (Analysis, which does not ask the user to check pieces, shows the crop.)
+/// engine cannot take. The board retains the screenshot style by default, with uncertainty
+/// marks and explicit recognized-piece labels; Settings can override it with the diagram.
 /// Nothing is spent until Analyze.
 struct CheckPositionView: View {
     @Environment(AppModel.self) private var app
@@ -113,7 +110,7 @@ struct CheckPositionView: View {
             GeometryReader { proxy in
                 let side = min(proxy.size.width, proxy.size.height)
                 ZStack {
-                    DiagramBoard(board: snapshot.position.board, whiteAtBottom: whiteAtBottom)
+                    ScreenshotStyledBoard(snapshot: snapshot, appearance: app.settings.boardAppearance)
                     CaptureBoardMarks(
                         whiteAtBottom: whiteAtBottom,
                         lowConfidence: snapshot.lowConfidenceSquares,
@@ -274,6 +271,17 @@ struct CheckPositionView: View {
                 .typography(.body)
                 .foregroundStyle(Palette.ink2)
                 .fixedSize(horizontal: false, vertical: true)
+            if app.settings.boardAppearance == .screenshot, snapshot.boardImage != nil {
+                ForEach(flaggedSquares, id: \.self) { square in
+                    let occupant = snapshot.position.board[square.index].map(CapturePositionIssues.name) ?? "empty"
+                    TextLink("\(square.algebraic): read as \(occupant)") {
+                        openEditor(selecting: square)
+                    }
+                }
+                Text("Tap a square to check or correct the piece read there.")
+                    .typography(.caption)
+                    .foregroundStyle(Palette.ink2)
+            }
             if let reason = summary.reason {
                 Text(reason)
                     .typography(.body)

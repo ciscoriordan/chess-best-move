@@ -911,15 +911,12 @@ struct MonetizationWaitingForApproval: View {
 /// The user's board at thumbnail size: the screenshot crop, or the diagram when the board was
 /// edited or set up by hand.
 struct MonetizationBoardThumbnail: View {
+    @Environment(AppModel.self) private var app
     let snapshot: BoardSnapshot
 
     var body: some View {
         BoardFrame {
-            if !snapshot.showsDiagram, let image = snapshot.boardImage {
-                BoardScreenshot(image: image, snapshot: snapshot)
-            } else {
-                DiagramBoard(board: snapshot.position.board, whiteAtBottom: snapshot.whiteAtBottom, showsCoordinates: false)
-            }
+            ScreenshotStyledBoard(snapshot: snapshot, appearance: app.settings.boardAppearance, showsCoordinates: false)
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Your board")

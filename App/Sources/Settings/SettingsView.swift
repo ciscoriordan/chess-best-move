@@ -93,6 +93,21 @@ private struct SettingsRootContent: View {
                 }
                 SettingsLongerSearchFooter()
 
+                GroupedSectionLabel("Board appearance")
+                GroupedCard {
+                    Picker("Board style", selection: $settings.boardAppearance) {
+                        ForEach(BoardAppearance.allCases) { appearance in
+                            Text(appearance.label).tag(appearance)
+                        }
+                    }
+                    .typography(.body)
+                    .tint(Palette.ink)
+                    .pickerStyle(.menu)
+                    .groupedRow(verticalPadding: Spacing.s3)
+                    .accessibilityIdentifier("settings.boardAppearance")
+                }
+                GroupedFooter("Match screenshot keeps your board’s colors and pieces while checking, editing, and analyzing. A piece absent from the screenshot uses a standard symbol when added. Boards created without a screenshot use the standard board.")
+
                 GroupedSectionLabel("Purchases")
                 GroupedCard {
                     // A control, not a value row (owner decision of 2026-09-28). It was a plain
