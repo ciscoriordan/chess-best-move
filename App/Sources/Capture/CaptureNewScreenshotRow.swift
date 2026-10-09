@@ -3,7 +3,8 @@ import SwiftUI
 /// NewScreenshotRow (design.md section 6, 9.4 and 9.5; owner decision of 2026-09-21): a
 /// screenshot the user took while away from the app, offered on the Analysis result and on Check
 /// position. A GroupedCard holding one row: the thumbnail, "New screenshot" over its age, and a
-/// dense SecondaryButton "Analyze" that imports it in place of the board on screen.
+/// dense "Analyze" button that imports it in place of the board on screen. Analysis promotes
+/// it to primary; Check position keeps its own confirmation primary.
 ///
 /// A screen places it twice and applies `offersNewScreenshot()` to its root. `.pinnedBar` goes
 /// in the `top` of the screen's PinnedActionBar, above its buttons, and draws below the
@@ -32,6 +33,7 @@ struct NewScreenshotRow: View {
     static let thumbnailSide: CGFloat = 48
 
     let placement: Placement
+    let emphasized: Bool
 
     @Environment(CaptureNewScreenshotOfferModel.self) private var model: CaptureNewScreenshotOfferModel?
     @Environment(AppModel.self) private var app
@@ -41,8 +43,9 @@ struct NewScreenshotRow: View {
     /// The card's row inset, the side gutter, which depends on the window's width.
     @Environment(\.sideGutterWidth) private var rowInset
 
-    init(placement: Placement) {
+    init(placement: Placement, emphasized: Bool = false) {
         self.placement = placement
+        self.emphasized = emphasized
     }
 
     var body: some View {
@@ -255,7 +258,7 @@ struct NewScreenshotRow: View {
                     }
                 }
         }
-        .buttonStyle(SecondaryButtonStyle(dense: dense))
+        .buttonStyle(NewScreenshotButtonStyle(emphasized: emphasized, dense: dense))
         .disabled(model.isImporting)
         .accessibilityLabel(CaptureNewScreenshotCopy.accessibilityLabel)
         .accessibilityValue(spokenValue(model, offer, now: now))
@@ -274,6 +277,23 @@ struct NewScreenshotRow: View {
     private struct AnnouncementKey: Hashable {
         let identifier: String
         let isCovered: Bool
+    }
+}
+
+/// Keeps the offer's existing compact layout while giving Analysis its one primary action.
+private struct NewScreenshotButtonStyle: ButtonStyle {
+    let emphasized: Bool
+    let dense: Bool
+
+    @ViewBuilder
+    func makeBody(configuration: Configuration) -> some View {
+        if emphasized {
+            PrimaryButtonStyle(minHeight: dense ? Layout.denseButtonHeight : Layout.buttonHeight)
+                .makeBody(configuration: configuration)
+                .fixedSize(horizontal: dense, vertical: false)
+        } else {
+            SecondaryButtonStyle(dense: dense).makeBody(configuration: configuration)
+        }
     }
 }
 

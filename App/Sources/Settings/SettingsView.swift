@@ -106,7 +106,7 @@ private struct SettingsRootContent: View {
                     .groupedRow(verticalPadding: Spacing.s3)
                     .accessibilityIdentifier("settings.boardAppearance")
                 }
-                GroupedFooter("Match screenshot keeps your board’s colors and pieces while checking, editing, and analyzing. A piece absent from the screenshot uses a standard symbol when added. Boards created without a screenshot use the standard board.")
+                GroupedFooter("Classic green uses the same green-and-cream board while checking, editing, and analyzing. Choose Match screenshot to keep the imported board’s colors and pieces, or Standard board for the paper style.")
 
                 GroupedSectionLabel("Purchases")
                 GroupedCard {

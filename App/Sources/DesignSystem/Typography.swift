@@ -13,12 +13,12 @@ import UIKit
 /// the token's text style and caps it at the token's maximum. A token may also ask for a line
 /// height of its own; most do not, and take the font's natural one.
 ///
-/// One bundled typeface is left: Noto Sans Symbols 2, for the chess piece glyphs, because the
-/// system has no chess glyphs (`Typography.symbols`).
+/// Noto Sans Symbols 2 supplies the chess glyphs. Home uses an outlined image wordmark;
+/// its source typeface is not used by the runtime typography system.
 enum TypeToken: String, CaseIterable, Sendable {
     /// The best move. SF Pro Heavy 80, trimmed to an 80 pt box so the badge around it is tight.
     case moveHero
-    /// Home wordmark, paywall headline. SF Pro Bold 34.
+    /// Large headings, paywall headline. SF Pro Bold 34.
     case display
     /// Screen titles. SF Pro Bold 28.
     case title
@@ -215,7 +215,7 @@ struct ResolvedType {
 
 @MainActor
 enum Typography {
-    /// The one typeface the app still bundles: chess piece glyphs (U+2654 to U+265F), which the
+    /// The runtime custom typeface: chess piece glyphs (U+2654 to U+265F), which the
     /// system font does not have.
     nonisolated static let symbolsPostScriptName = "NotoSansSymbols2-Regular"
 

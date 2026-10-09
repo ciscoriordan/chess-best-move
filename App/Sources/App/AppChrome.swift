@@ -1,7 +1,8 @@
 import SwiftUI
 
 /// The CreditsIndicator connected to the store and credits services. Place it in the
-/// trailing toolbar of Home and Analysis. Hidden for Pro; in every other state it is a button
+/// trailing toolbar of Analysis. Home keeps it in the content to center its wordmark.
+/// Hidden for Pro; in every other state it is a button
 /// that opens the purchase screen (owner decision of 2026-09-29: it was a button only at zero,
 /// so a tap on it did nothing while analyses remained).
 ///
@@ -41,14 +42,16 @@ struct CreditsToolbarIndicator: View {
 }
 
 /// The CreditsIndicator inside a screen's scrolling content, which is where it lives at
-/// accessibility text sizes (see `CreditsToolbarIndicator`). Draws nothing below those sizes,
-/// so the indicator is never in two places at once.
+/// accessibility text sizes (see `CreditsToolbarIndicator`). Home opts in at every size
+/// to leave the navigation bar for Settings and its centered wordmark.
 struct CreditsInlineIndicator: View {
+    var alwaysVisible = false
+
     @Environment(AppModel.self) private var app
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
-        if dynamicTypeSize.isAccessibilitySize {
+        if alwaysVisible || dynamicTypeSize.isAccessibilitySize {
             CreditsIndicator(
                 freeRemaining: app.credits.freeRemaining,
                 freeAllowance: app.credits.freeAllowance,

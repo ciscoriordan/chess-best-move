@@ -87,9 +87,9 @@ private struct AnalysisScreen: View {
                 // A screenshot taken while the user was away (design.md 9.4), edge to edge
                 // under the bar's hairline. Draws nothing when there is none, and nothing here
                 // at accessibility sizes.
-                NewScreenshotRow(placement: .pinnedBar)
+                NewScreenshotRow(placement: .pinnedBar, emphasized: model.runState != .notStarted)
             } content: {
-                actionBar
+                AnalysisActionBar(model: model)
             }
         }
         .offersNewScreenshot()
@@ -151,7 +151,7 @@ private struct AnalysisScreen: View {
                     .frame(width: boardSide + AnalysisLayout.evalBarColumn)
                 VStack(alignment: .leading, spacing: 0) {
                     CreditsInlineIndicator()
-                    NewScreenshotRow(placement: .scrollingContent)
+                    NewScreenshotRow(placement: .scrollingContent, emphasized: model.runState != .notStarted)
                     readoutGroups
                 }
             }
@@ -167,7 +167,7 @@ private struct AnalysisScreen: View {
             VStack(alignment: .leading, spacing: 0) {
                 CreditsInlineIndicator()
                 // The pinned bar's row, moved here at accessibility sizes (design.md 9.4).
-                NewScreenshotRow(placement: .scrollingContent)
+                NewScreenshotRow(placement: .scrollingContent, emphasized: model.runState != .notStarted)
                 boardGroup
                 readoutGroups
             }
@@ -651,58 +651,6 @@ private struct AnalysisScreen: View {
         .animation(reduceMotion ? nil : .easeOut(duration: Motion.valueChange), value: depth + time + speed)
     }
 
-    // MARK: Pinned action bar
-
-    /// The pinned bar. The two buttons stack from the first accessibility size, not from the
-    /// third: "Think longer: 30 s" beside the dense New button already needs about 370 pt at
-    /// AccessibilityM, against 343 pt of content on a 375 pt phone, and the primary label
-    /// wraps to two lines.
-    @ViewBuilder
-    private var actionBar: some View {
-        let layout = dynamicTypeSize.isAccessibilitySize
-            ? AnyLayout(VStackLayout(spacing: Spacing.s2))
-            : AnyLayout(HStackLayout(spacing: Spacing.s3))
-        layout {
-            switch model.runState {
-            case .starting, .running:
-                SecondaryButton("Stop", systemImage: "stop.fill") { model.stop() }
-            case .completed:
-                if model.noLegalMoves != nil || model.bestMove == nil {
-                    PrimaryButton("New") { model.newAnalysis() }
-                } else {
-                    PrimaryButton(model.thinkLongerTitle) { model.thinkLonger() }
-                    newButton
-                }
-            case .interrupted:
-                PrimaryButton("Run again: \(model.runThinkTime.label)") { model.runAgain() }
-                newButton
-            case .failed:
-                PrimaryButton("Try again") { model.runAgain() }
-                newButton
-            case .notStarted:
-                switch session.creditState {
-                case .waitingForPurchase:
-                    PrimaryButton("Analyze") { model.analyzeAfterPaywall() }
-                    newButton
-                case .waitingForApproval:
-                    // A declined Ask to Buy request is never reported, so the user can still
-                    // choose another purchase; an approval starts the analysis by itself.
-                    PrimaryButton("See options") { model.analyzeAfterPaywall() }
-                        .accessibilityHint("Opens purchase options.")
-                    newButton
-                case .authorized:
-                    SecondaryButton("Stop", systemImage: "stop.fill") {}
-                        .disabled(true)
-                }
-            }
-        }
-    }
-
-    private var newButton: some View {
-        SecondaryButton("New", dense: !dynamicTypeSize.isAccessibilitySize) { model.newAnalysis() }
-            .accessibilityHint("Returns to the start screen.")
-    }
-
     // MARK: Evaluation bar input
 
     private var evalShare: Double {
@@ -724,6 +672,72 @@ private struct AnalysisScreen: View {
         }
         guard let score = displayedScore else { return "Not evaluated yet" }
         return AnalysisScore.spoken(score)
+    }
+}
+
+/// The next screenshot is the primary next step. A detected screenshot carries that action
+/// in its own row; otherwise the bar leads back to the import choices. Re-running this board
+/// stays available as a quieter text action below it (owner decision of 2026-10-09).
+private struct AnalysisActionBar: View {
+    let model: AnalysisScreenModel
+
+    @Environment(CaptureNewScreenshotOfferModel.self) private var screenshotOffer: CaptureNewScreenshotOfferModel?
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    private var showsScreenshotOffer: Bool {
+        screenshotOffer?.offer != nil && (!dynamicTypeSize.isAccessibilitySize || screenshotOffer?.isShownAtTop == true)
+    }
+
+    var body: some View {
+        VStack(spacing: Spacing.s1) {
+            switch model.runState {
+            case .starting, .running:
+                SecondaryButton("Stop", systemImage: "stop.fill") { model.stop() }
+            case .completed, .interrupted, .failed:
+                if !showsScreenshotOffer {
+                    PrimaryButton("Analyze new screenshot") { model.newAnalysis() }
+                        .accessibilityHint("Opens the start screen to choose a screenshot.")
+                        .accessibilityIdentifier("analysis.newScreenshot")
+                }
+                switch model.runState {
+                case .completed:
+                    if model.noLegalMoves == nil, model.bestMove != nil {
+                        Button(model.thinkLongerTitle) { model.thinkLonger() }
+                            .buttonStyle(.textLink)
+                    }
+                case .interrupted:
+                    Button("Run again: \(model.runThinkTime.label)") { model.runAgain() }
+                        .buttonStyle(.textLink)
+                case .failed:
+                    Button("Try again") { model.runAgain() }
+                        .buttonStyle(.textLink)
+                default:
+                    EmptyView()
+                }
+            case .notStarted:
+                switch model.session.creditState {
+                case .waitingForPurchase:
+                    PrimaryButton("Analyze") { model.analyzeAfterPaywall() }
+                    chooseAnotherScreenshot
+                case .waitingForApproval:
+                    // An approval starts this board's analysis by itself.
+                    PrimaryButton("See options") { model.analyzeAfterPaywall() }
+                        .accessibilityHint("Opens purchase options.")
+                    chooseAnotherScreenshot
+                case .authorized:
+                    SecondaryButton("Stop", systemImage: "stop.fill") {}
+                        .disabled(true)
+                }
+            }
+        }
+        .multilineTextAlignment(.center)
+    }
+
+    private var chooseAnotherScreenshot: some View {
+        Button("Choose another screenshot") { model.newAnalysis() }
+            .buttonStyle(.textLink)
+            .accessibilityHint("Opens the start screen to choose a screenshot.")
+            .accessibilityIdentifier("analysis.newScreenshot")
     }
 }
 

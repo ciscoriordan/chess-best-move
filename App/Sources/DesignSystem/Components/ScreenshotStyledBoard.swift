@@ -3,11 +3,18 @@ import SwiftUI
 
 /// A saved choice, independent of light/dark mode and recognition confidence.
 enum BoardAppearance: String, CaseIterable, Identifiable {
+    case green
     case screenshot
     case standard
 
     var id: String { rawValue }
-    var label: String { self == .screenshot ? "Match screenshot" : "Standard board" }
+    var label: String {
+        switch self {
+        case .green: "Classic green"
+        case .screenshot: "Match screenshot"
+        case .standard: "Standard board"
+        }
+    }
 }
 
 /// Every feature uses this presentation. Unchanged squares retain the actual screenshot;
@@ -45,7 +52,7 @@ struct ScreenshotStyledBoard: View {
             .accessibilityIgnoresInvertColors()
         } else {
             DiagramBoard(board: board ?? snapshot.position.board, whiteAtBottom: snapshot.whiteAtBottom,
-                         showsCoordinates: showsCoordinates)
+                         showsCoordinates: showsCoordinates, usesGreenPalette: appearance == .green)
         }
     }
 }

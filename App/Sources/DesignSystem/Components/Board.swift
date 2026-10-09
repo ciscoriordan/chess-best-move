@@ -138,6 +138,7 @@ struct DiagramBoard: View {
     let board: [Piece?]
     var whiteAtBottom = true
     var showsCoordinates = true
+    var usesGreenPalette = false
 
     var body: some View {
         let labels = showsCoordinates ? DiagramBoardLabels(font: Typography.resolve(.dataSmall).uiFont) : nil
@@ -150,7 +151,11 @@ struct DiagramBoard: View {
                 for column in 0..<8 {
                     guard let square = BoardGeometry.square(row: row, column: column, whiteAtBottom: whiteAtBottom) else { continue }
                     let rect = CGRect(x: CGFloat(column) * cellSize, y: CGFloat(row) * cellSize, width: cellSize, height: cellSize)
-                    let squareColor = (square.file + square.rank).isMultiple(of: 2) ? Palette.diagramDark : Palette.diagramLight
+                    let isDark = (square.file + square.rank).isMultiple(of: 2)
+                    let light = usesGreenPalette ? Palette.greenBoardLight : Palette.diagramLight
+                    let dark = usesGreenPalette ? Palette.greenBoardDark : Palette.diagramDark
+                    let squareColor = isDark ? dark : light
+                    let coordinateColor = usesGreenPalette ? Palette.pieceInk : Palette.boardCoordinate
                     context.fill(Path(rect), with: .color(squareColor))
                     if board.indices.contains(square.index), let piece = board[square.index] {
                         PieceGlyphRenderer.draw(piece, in: rect, context: &context)
@@ -158,11 +163,11 @@ struct DiagramBoard: View {
                     guard let labels else { continue }
                     if column == 0 {
                         labels.draw(rank: square.rank, topLeading: CGPoint(x: rect.minX + 2, y: rect.minY + 1),
-                                    squareColor: squareColor, context: &context)
+                                    squareColor: squareColor, ink: coordinateColor, context: &context)
                     }
                     if row == 7 {
                         labels.draw(file: square.file, bottomTrailing: CGPoint(x: rect.maxX - 2, y: rect.maxY - 1),
-                                    squareColor: squareColor, context: &context)
+                                    squareColor: squareColor, ink: coordinateColor, context: &context)
                     }
                 }
             }
@@ -199,26 +204,26 @@ private struct DiagramBoardLabels {
     }
 
     /// Draws the rank number (0-based `rank`) with the text's top-leading corner at `point`.
-    func draw(rank: Int, topLeading point: CGPoint, squareColor: Color, context: inout GraphicsContext) {
+    func draw(rank: Int, topLeading point: CGPoint, squareColor: Color, ink: Color, context: inout GraphicsContext) {
         guard ranks.indices.contains(rank) else { return }
         let label = ranks[rank]
-        draw(label, baselineStart: CGPoint(x: point.x, y: point.y + ascent), squareColor: squareColor, context: &context)
+        draw(label, baselineStart: CGPoint(x: point.x, y: point.y + ascent), squareColor: squareColor, ink: ink, context: &context)
     }
 
     /// Draws the file letter (0-based `file`) with the text's bottom-trailing corner at `point`.
-    func draw(file: Int, bottomTrailing point: CGPoint, squareColor: Color, context: inout GraphicsContext) {
+    func draw(file: Int, bottomTrailing point: CGPoint, squareColor: Color, ink: Color, context: inout GraphicsContext) {
         guard files.indices.contains(file) else { return }
         let label = files[file]
-        draw(label, baselineStart: CGPoint(x: point.x - label.width, y: point.y - descent), squareColor: squareColor, context: &context)
+        draw(label, baselineStart: CGPoint(x: point.x - label.width, y: point.y - descent), squareColor: squareColor, ink: ink, context: &context)
     }
 
-    private func draw(_ label: Label, baselineStart: CGPoint, squareColor: Color, context: inout GraphicsContext) {
+    private func draw(_ label: Label, baselineStart: CGPoint, squareColor: Color, ink: Color, context: inout GraphicsContext) {
         let placed = label.path.applying(CGAffineTransform(translationX: baselineStart.x, y: baselineStart.y))
         context.stroke(placed, with: .color(squareColor),
                        style: StrokeStyle(lineWidth: 2 * Self.outlineWidth, lineCap: .round, lineJoin: .round))
         // `boardCoordinate`, not `ink3`: the label sits on the diagram, which does not follow
         // the theme, and `ink3` measured 1.86:1 on a dark square (`Palette` "Board marks").
-        context.fill(placed, with: .color(Palette.boardCoordinate))
+        context.fill(placed, with: .color(ink))
     }
 
     private static func label(_ text: String, font: CTFont) -> Label {

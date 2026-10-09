@@ -7,6 +7,7 @@ enum SettingsLicenseDocument: String, CaseIterable, Identifiable, Hashable, Send
     case stockfishLicense
     case stockfishAuthors
     case notoSansSymbols
+    case oleoScript
 
     var id: String { rawValue }
 
@@ -15,6 +16,7 @@ enum SettingsLicenseDocument: String, CaseIterable, Identifiable, Hashable, Send
         case .stockfishLicense: "GNU General Public License v3"
         case .stockfishAuthors: "Stockfish authors"
         case .notoSansSymbols: "Noto Sans Symbols 2"
+        case .oleoScript: "Oleo Script"
         }
     }
 
@@ -24,6 +26,7 @@ enum SettingsLicenseDocument: String, CaseIterable, Identifiable, Hashable, Send
         case .stockfishLicense: "Stockfish-Copying"
         case .stockfishAuthors: "Stockfish-AUTHORS"
         case .notoSansSymbols: "NotoSansSymbols2-OFL"
+        case .oleoScript: "OleoScript-OFL"
         }
     }
 
@@ -164,10 +167,16 @@ struct SettingsLicensesView: View {
                     }
                     .buttonStyle(.listRow)
                 }
-                GroupedSectionLabel("Typeface")
+                GroupedSectionLabel("Typefaces")
                 GroupedCard {
                     NavigationLink(value: SettingsRoute.document(.notoSansSymbols)) {
                         ListRow(SettingsLicenseDocument.notoSansSymbols.title, value: "OFL 1.1", showsChevron: true)
+                            .groupedRow()
+                    }
+                    .buttonStyle(.listRow)
+                    GroupedRowSeparator(start: .content)
+                    NavigationLink(value: SettingsRoute.document(.oleoScript)) {
+                        ListRow(SettingsLicenseDocument.oleoScript.title, value: "OFL 1.1", showsChevron: true)
                             .groupedRow()
                     }
                     .buttonStyle(.listRow)
@@ -196,7 +205,7 @@ struct SettingsLicenseTextView: View {
             ["Stockfish \u{2014} " + SettingsLegal.stockfishCopyright, SettingsLegal.stockfishFreeSoftware, SettingsLegal.stockfishNoWarranty]
         case .stockfishAuthors:
             [SettingsLegal.stockfishCopyright]
-        case .notoSansSymbols:
+        case .notoSansSymbols, .oleoScript:
             []
         }
     }

@@ -103,6 +103,9 @@ enum Palette {
     static let diagramLight = dynamic(light: 0xEFE9DC, dark: 0xD6CFBF)
     /// Dark squares of the app's own diagram board.
     static let diagramDark = dynamic(light: 0xC2B8A3, dark: 0xA1977F)
+    /// Classic green board, kept identical in light and dark mode.
+    static let greenBoardLight = fixed(0xEEEED2)
+    static let greenBoardDark = fixed(0x769656)
     /// Piece outlines and black piece fill.
     static let pieceInk = fixed(0x17150F)
     /// White piece fill.

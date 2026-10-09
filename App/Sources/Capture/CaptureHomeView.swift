@@ -12,7 +12,6 @@ struct HomeView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.openURL) private var openURL
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     @State private var model: CaptureHomeModel
     /// An import failure is a footer four elements below the button that caused it, so it is
@@ -38,7 +37,7 @@ struct HomeView: View {
         GeometryReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
-                    CreditsInlineIndicator()
+                    CreditsInlineIndicator(alwaysVisible: true)
                     intro
                     Spacer(minLength: Spacing.s6)
                     actions
@@ -54,9 +53,7 @@ struct HomeView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) { SettingsToolbarButton() }
-            ToolbarItem(placement: .topBarTrailing) {
-                CreditsToolbarIndicator(dynamicTypeSize: dynamicTypeSize)
-            }
+            ToolbarItem(placement: .principal) { AppWordmark() }
         }
         .overlay {
             if isDropTargeted {
@@ -112,14 +109,6 @@ struct HomeView: View {
 
     private var intro: some View {
         VStack(alignment: .leading, spacing: Spacing.s3) {
-            // The app's name, the same string as CFBundleDisplayName and the share sheet, so
-            // every place the user reads the name agrees. It is longer than the store name's
-            // brand alone and wraps to two lines on a narrow phone at large text sizes, which
-            // is why nothing below it assumes a one-line height.
-            Text("Chess Best Move")
-                .typography(.display)
-                .foregroundStyle(Palette.ink)
-                .accessibilityAddTraits(.isHeader)
             Text(AppCopy.homeIntro)
                 .typography(.body)
                 .foregroundStyle(Palette.ink2)

@@ -41,8 +41,8 @@ settings:
     # Declarations are nonisolated unless annotated; the app's contracts spell out
     # @MainActor explicitly.
     SWIFT_DEFAULT_ACTOR_ISOLATION: nonisolated
-    MARKETING_VERSION: "1.0.10"
-    CURRENT_PROJECT_VERSION: "11"
+    MARKETING_VERSION: "1.0.11"
+    CURRENT_PROJECT_VERSION: "12"
     ENABLE_USER_SCRIPT_SANDBOXING: YES
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
     SUPPORTS_MACCATALYST: NO
@@ -125,8 +125,7 @@ targets:
             CFBundleTypeRole: Editor
             CFBundleURLSchemes:
               - chessbestmove
-        # The only bundled typeface: the chess piece glyphs (U+2654 to U+265F), which the
-        # system font does not have. All other text is SF Pro or SF Mono.
+        # The chess glyph font; Home uses an image wordmark, and UI text uses system fonts.
         UIAppFonts:
           - NotoSansSymbols2-Regular.ttf
         UILaunchScreen:

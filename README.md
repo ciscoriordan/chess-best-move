@@ -76,8 +76,8 @@ App/
                               Settings/      settings and license screens
                               Intents/       the "Find Best Move" App Shortcut
   Resources/
-    Assets.xcassets/        app icon and the two named colors
-    Fonts/                  the bundled chess-glyph typeface and its license text
+    Assets.xcassets/        named colors and the rasterized Home wordmark
+    Fonts/                  chess-glyph and wordmark-source typefaces with their licenses
     Settings/               Stockfish's license text and author list, shown in the app
     PrivacyInfo.xcprivacy   the app's privacy manifest
   Scripts/
@@ -235,15 +235,18 @@ makes that data available under the Open Database License (ODbL).
 The app sets its text in the system faces, SF Pro and SF Mono. They belong to the operating
 system, are reached through `UIFont`, and are not copied into the app or redistributed here.
 
-One typeface is bundled, under the SIL Open Font License 1.1, unmodified. Its license text is in
+Two typefaces are bundled unmodified under the SIL Open Font License 1.1. Their license texts are in
 `App/Resources/Fonts/`.
 
 | Typeface | Copyright | License text |
 | --- | --- | --- |
 | Noto Sans Symbols 2 | Copyright 2022 The Noto Project Authors | `NotoSansSymbols2-OFL.txt` |
+| Oleo Script Bold | Copyright 2012 Soytutype | `OleoScript-OFL.txt` |
 
-Noto Sans Symbols 2 supplies the chess piece glyphs the app draws on its board diagrams, which is
-the only reason any font is bundled: the system font has no chess pieces.
+Noto Sans Symbols 2 supplies the chess piece glyphs the system font lacks. Oleo Script Bold is
+the source for Home’s outlined wordmark, rendered as transparent template PNGs. Its SVG master
+is `design/wordmark.svg`; rebuild the SVG and 1x/2x/3x images with
+`python3 scripts/design/make-wordmark.py` (requires fonttools, uharfbuzz, and librsvg).
 
 ## Attribution
 
