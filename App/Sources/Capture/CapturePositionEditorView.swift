@@ -49,7 +49,7 @@ struct PositionEditorView: View {
                 .padding(.bottom, Spacing.s5)
             }
             .background(Palette.canvas)
-            .navigationTitle("Edit position")
+            .navigationTitle("Edit Position")
             .navigationBarTitleDisplayMode(.inline)
             .modalCloseButton { close() }
             .toolbar { trailingToolbar }

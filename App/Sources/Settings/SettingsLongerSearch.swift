@@ -24,11 +24,11 @@ struct SettingsLongerSearchSection: View {
 
     /// What the section says. Kept here so `AppCopyTests` and the settings tests read one place.
     enum Copy {
-        static let title = "Keep searching after the answer"
+        static let title = "Keep Searching After the Answer"
         static let explanation =
             "The engine keeps searching the same board after the first move appears, and stops at this time at the latest. It stops earlier once the move has held for several depths, and right away when the device is saving power or has warmed up."
-        static let ceilingLabel = "Longest search"
-        static let automaticTitle = "Switch to a better move automatically"
+        static let ceilingLabel = "Longest Search"
+        static let automaticTitle = "Switch to a Better Move Automatically"
         static let automaticExplanation =
             "With this off, a notice offers the move instead, so the move on screen does not change while you are reading it."
 
@@ -48,7 +48,7 @@ struct SettingsLongerSearchSection: View {
         ///
         /// The same words the longer-search notice uses for the same offer
         /// (`AnalysisLongerSearchCopy.seePro`), read from that one place so the two cannot drift.
-        /// Not "Unlock unlimited": that is the PURCHASES card's row, further down the same screen,
+        /// Not "Unlock Unlimited": that is the PURCHASES card's row, further down the same screen,
         /// and two controls with one label on one screen is what a test cannot tell apart and a
         /// reader cannot either.
         static var proLink: String { AnalysisLongerSearchCopy.seePro }
@@ -84,7 +84,7 @@ struct SettingsLongerSearchSection: View {
     }
 }
 
-/// The "Switch to a better move automatically" row: the title with its `ProTag`, and the
+/// The "Switch to a Better Move Automatically" row: the title with its `ProTag`, and the
 /// switch.
 ///
 /// At accessibility text sizes the switch moves under the title instead of sitting beside it.
@@ -199,7 +199,7 @@ struct LongerSearchCeilingControl: View {
                     .accessibilityValue(selection.spokenLabel)
             } else {
                 // The group label goes on a container, so each segment keeps its own label
-                // ("30 seconds") instead of every segment reading "Longest search".
+                // ("30 seconds") instead of every segment reading "Longest Search".
                 segments
                     .accessibilityElement(children: .contain)
                     .accessibilityLabel(groupLabel)
@@ -288,6 +288,6 @@ private struct LongerSearchCeilingControlPreview: View {
     }
 }
 
-#Preview("Longest search") {
+#Preview("Longest Search") {
     LongerSearchCeilingControlPreview()
 }

@@ -301,17 +301,17 @@ enum MonetizationTestingCopy {
     static let note =
         "These controls are in TestFlight builds and never in an App Store build. They grant analyses, never Pro: Pro comes from a purchase, which costs nothing in the TestFlight sandbox."
 
-    static let freeRow = "Free analyses"
-    static let purchasedRow = "Purchased analyses"
-    static let paidBoardsRow = "Boards already paid for"
+    static let freeRow = "Free Analyses"
+    static let purchasedRow = "Purchased Analyses"
+    static let paidBoardsRow = "Boards Already Paid For"
 
-    static let reset = "Reset free analyses"
+    static let reset = "Reset Free Analyses"
     static let resetQuestion = "Reset free analyses?"
     static let resetDetail =
         "Free analyses go back to 3, the boards already paid for are forgotten, and analyses added here are taken back. Bought analyses and Pro are not touched."
     static let resetConfirm = "Reset"
 
-    static func grant(_ count: Int) -> String { "Add \(count) analyses" }
+    static func grant(_ count: Int) -> String { "Add \(count) Analyses" }
     static func grantQuestion(_ count: Int) -> String { "Add \(count) analyses?" }
     static func grantDetail(_ count: Int) -> String {
         "Adds the same \(count) analyses the pack grants, without a purchase. \"\(reset)\" takes them back."

@@ -59,7 +59,7 @@ struct SettingsTestingSection: View {
             GroupedSectionLabel(MonetizationTestingCopy.sectionLabel)
             GroupedCard {
                 if let cohort = app.store as? any MonetizationLaunchCohortTesting {
-                    Toggle("Show the purchase screens", isOn: Binding(
+                    Toggle("Show the Purchase Screens", isOn: Binding(
                         get: { cohort.leavesLaunchCohortForTesting },
                         set: { _ = cohort.setLeavesLaunchCohortForTesting($0, for: channel) }
                     ))

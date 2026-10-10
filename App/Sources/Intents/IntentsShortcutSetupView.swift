@@ -24,7 +24,7 @@ struct IntentsShortcutSetupContent: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("One-step Shortcut")
+            Text("One-Step Shortcut")
                 .typography(.title)
                 .foregroundStyle(Palette.ink)
                 .accessibilityAddTraits(.isHeader)

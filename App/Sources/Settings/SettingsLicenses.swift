@@ -14,7 +14,7 @@ enum SettingsLicenseDocument: String, CaseIterable, Identifiable, Hashable, Send
     var title: String {
         switch self {
         case .stockfishLicense: "GNU General Public License v3"
-        case .stockfishAuthors: "Stockfish authors"
+        case .stockfishAuthors: "Stockfish Authors"
         case .notoSansSymbols: "Noto Sans Symbols 2"
         case .oleoScript: "Oleo Script"
         }
@@ -145,13 +145,13 @@ struct SettingsLicensesView: View {
                 .padding(.bottom, Spacing.s4)
                 GroupedCard {
                     Button { openURL(SettingsLinks.appSource) } label: {
-                        ListRow("Source code of this version", showsChevron: true).groupedRow()
+                        ListRow("Source Code of This Version", showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     .accessibilityHint("Opens in Safari.")
                     GroupedRowSeparator(start: .content)
                     NavigationLink(value: SettingsRoute.document(.stockfishLicense)) {
-                        ListRow("GNU General Public License v3", value: "Full text", showsChevron: true).groupedRow()
+                        ListRow("GNU General Public License v3", value: "Full Text", showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                 }
@@ -163,7 +163,7 @@ struct SettingsLicensesView: View {
                     .buttonStyle(.listRow)
                     GroupedRowSeparator(start: .content)
                     NavigationLink(value: SettingsRoute.networkCredit) {
-                        ListRow("Stockfish neural network", value: "ODbL data", showsChevron: true).groupedRow()
+                        ListRow("Stockfish Neural Network", value: "ODbL Data", showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                 }
@@ -284,7 +284,7 @@ struct SettingsNetworkCreditView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                Text("Stockfish neural network")
+                Text("Stockfish Neural Network")
                     .typography(.title)
                     .foregroundStyle(Palette.ink)
                     .padding(.top, Spacing.s4)
@@ -297,7 +297,7 @@ struct SettingsNetworkCreditView: View {
                     .padding(.bottom, Spacing.s5)
                 GroupedCard {
                     Button { openURL(SettingsLinks.leelaTrainingData) } label: {
-                        ListRow("Leela Chess Zero training data", systemImage: "arrow.up.right.square", showsChevron: true)
+                        ListRow("Leela Chess Zero Training Data", systemImage: "arrow.up.right.square", showsChevron: true)
                             .groupedRow()
                     }
                     .buttonStyle(.listRow)
@@ -313,7 +313,7 @@ struct SettingsNetworkCreditView: View {
             .padding(.bottom, Spacing.s6)
         }
         .background(Palette.canvas)
-        .navigationTitle("Neural network")
+        .navigationTitle("Neural Network")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -341,12 +341,12 @@ struct SettingsEngineView: View {
                 }
                 GroupedSectionLabel("Source code")
                 GroupedCard {
-                    linkRow("Source code of Stockfish", url: SettingsLinks.stockfishSource)
+                    linkRow("Source Code of Stockfish", url: SettingsLinks.stockfishSource)
                     GroupedRowSeparator(start: .content)
-                    linkRow("Source code of the version in this app", url: SettingsLinks.appSource)
+                    linkRow("Source Code of the Version in This App", url: SettingsLinks.appSource)
                     GroupedRowSeparator(start: .content)
                     NavigationLink(value: SettingsRoute.document(.stockfishLicense)) {
-                        ListRow("GNU General Public License v3 (full text)", showsChevron: true).groupedRow()
+                        ListRow("GNU General Public License v3 (Full Text)", showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     GroupedRowSeparator(start: .content)
@@ -360,14 +360,14 @@ struct SettingsEngineView: View {
                 LegalParagraph(SettingsLegal.stockfishModification)
                     .padding(.bottom, Spacing.s4)
                 GroupedCard {
-                    linkRow("The change in the published source", url: SettingsLinks.stockfishPatch)
+                    linkRow("The Change in the Published Source", url: SettingsLinks.stockfishPatch)
                 }
                 SectionLabel("Neural network")
                 LegalParagraph(SettingsLegal.networkCredit)
                     .padding(.bottom, Spacing.s4)
                 GroupedCard {
                     NavigationLink(value: SettingsRoute.networkCredit) {
-                        ListRow("Training data and license", showsChevron: true).groupedRow()
+                        ListRow("Training Data and License", showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                 }
@@ -376,7 +376,7 @@ struct SettingsEngineView: View {
             .padding(.bottom, Spacing.s6)
         }
         .background(Palette.canvas)
-        .navigationTitle("Chess engine")
+        .navigationTitle("Chess Engine")
         .navigationBarTitleDisplayMode(.inline)
     }
 

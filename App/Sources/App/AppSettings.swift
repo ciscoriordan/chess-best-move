@@ -17,6 +17,7 @@ final class AppSettings {
 
     @ObservationIgnored private let defaults: UserDefaults
 
+    /// Match each imported screenshot unless the user explicitly saves a fixed style.
     var boardAppearance: BoardAppearance {
         didSet { defaults.set(boardAppearance.rawValue, forKey: Key.boardAppearance) }
     }
@@ -61,7 +62,7 @@ final class AppSettings {
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
-        boardAppearance = BoardAppearance(rawValue: defaults.string(forKey: Key.boardAppearance) ?? "") ?? .green
+        boardAppearance = BoardAppearance(rawValue: defaults.string(forKey: Key.boardAppearance) ?? "") ?? .screenshot
         thinkTime = ThinkTime(rawValue: defaults.integer(forKey: Key.thinkTime)) ?? .defaultValue
         longerSearchCeiling = LongerSearchCeiling(rawValue: defaults.integer(forKey: Key.longerSearchCeiling)) ?? .defaultValue
         switchesToBetterMoveAutomatically = defaults.bool(forKey: Key.switchesToBetterMoveAutomatically)

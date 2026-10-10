@@ -303,7 +303,7 @@ extension View {
             Text("Nxf7+").typography(.moveHero)
             Text("exd8=Q#").typography(.moveHero, width: 75)
             Text("Chess Best Move").typography(.display)
-            Text("No board found").typography(.title)
+            Text("No Board Found").typography(.title)
             Text("Yearly").typography(.headline)
             Text(AppCopy.homeIntro).typography(.body)
             Text("Think longer: 10 s").typography(.button)

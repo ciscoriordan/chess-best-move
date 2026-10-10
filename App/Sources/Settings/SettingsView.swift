@@ -75,7 +75,7 @@ private struct SettingsRootContent: View {
                 GroupedSectionLabel("Analysis")
                 GroupedCard {
                     VStack(alignment: .leading, spacing: Spacing.s2) {
-                        Text("Default think time")
+                        Text("Default Think Time")
                             .typography(.body)
                             .foregroundStyle(Palette.ink)
                             .fixedSize(horizontal: false, vertical: true)
@@ -95,7 +95,7 @@ private struct SettingsRootContent: View {
 
                 GroupedSectionLabel("Board appearance")
                 GroupedCard {
-                    Picker("Board style", selection: $settings.boardAppearance) {
+                    Picker("Board Style", selection: $settings.boardAppearance) {
                         ForEach(BoardAppearance.allCases) { appearance in
                             Text(appearance.label).tag(appearance)
                         }
@@ -106,7 +106,7 @@ private struct SettingsRootContent: View {
                     .groupedRow(verticalPadding: Spacing.s3)
                     .accessibilityIdentifier("settings.boardAppearance")
                 }
-                GroupedFooter("Classic green uses the same green-and-cream board while checking, editing, and analyzing. Choose Match screenshot to keep the imported board’s colors and pieces, or Standard board for the paper style.")
+                GroupedFooter("By default, the board and pieces match each screenshot. Without a screenshot, they use the Classic Green style. Choose Classic Green or Standard Board to always use that style instead.")
 
                 GroupedSectionLabel("Purchases")
                 GroupedCard {
@@ -126,7 +126,7 @@ private struct SettingsRootContent: View {
                         Button {
                             app.presentPaywall(trigger: .settings)
                         } label: {
-                            ListRow("Unlock unlimited", showsChevron: true).groupedRow()
+                            ListRow("Unlock Unlimited", showsChevron: true).groupedRow()
                         }
                         .buttonStyle(.listRow)
                     }
@@ -134,7 +134,7 @@ private struct SettingsRootContent: View {
                     Button {
                         Task { await purchases.restore(store: app.store, focus: $restoreMessageFocused) }
                     } label: {
-                        ListRow("Restore purchases", value: purchases.isRestoring ? "Restoring\u{2026}" : nil).groupedRow()
+                        ListRow("Restore Purchases", value: purchases.isRestoring ? "Restoring\u{2026}" : nil).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     .disabled(purchases.isRestoring)
@@ -152,7 +152,7 @@ private struct SettingsRootContent: View {
                                 }
                             }
                         } label: {
-                            ListRow("Manage subscription", showsChevron: true).groupedRow()
+                            ListRow("Manage Subscription", showsChevron: true).groupedRow()
                         }
                         .buttonStyle(.listRow)
                         .disabled(purchases.isManagingSubscription)
@@ -169,12 +169,12 @@ private struct SettingsRootContent: View {
                 GroupedSectionLabel("Help")
                 GroupedCard {
                     NavigationLink(value: SettingsRoute.screenshotHelp) {
-                        ListRow("How to take a screenshot", showsChevron: true).groupedRow()
+                        ListRow("How to Take a Screenshot", showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     GroupedRowSeparator(start: .content)
                     NavigationLink(value: SettingsRoute.shortcutSetup) {
-                        ListRow("Set up the one-step Shortcut", showsChevron: true).groupedRow()
+                        ListRow("Set Up the One-Step Shortcut", showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     GroupedRowSeparator(start: .content)
@@ -196,7 +196,7 @@ private struct SettingsRootContent: View {
                         .accessibilityElement(children: .combine)
                     GroupedRowSeparator(start: .content)
                     NavigationLink(value: SettingsRoute.engine) {
-                        ListRow("Chess engine", value: app.engine.engineVersion, showsChevron: true).groupedRow()
+                        ListRow("Chess Engine", value: app.engine.engineVersion, showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     GroupedRowSeparator(start: .content)
@@ -206,13 +206,13 @@ private struct SettingsRootContent: View {
                     .buttonStyle(.listRow)
                     GroupedRowSeparator(start: .content)
                     Button { openURL(SettingsLinks.privacyPolicy) } label: {
-                        ListRow("Privacy policy", showsChevron: true).groupedRow()
+                        ListRow("Privacy Policy", showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     .accessibilityHint("Opens in Safari.")
                     GroupedRowSeparator(start: .content)
                     Button { openURL(SettingsLinks.termsOfUse) } label: {
-                        ListRow("Terms of use", showsChevron: true).groupedRow()
+                        ListRow("Terms of Use", showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     .accessibilityHint("Opens in Safari.")
@@ -342,7 +342,7 @@ struct SettingsScreenshotHelpView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                Text("How to take a screenshot")
+                Text("How to Take a Screenshot")
                     .typography(.title)
                     .foregroundStyle(Palette.ink)
                     .padding(.top, Spacing.s4)

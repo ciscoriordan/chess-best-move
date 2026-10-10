@@ -79,7 +79,7 @@ struct CheckPositionView: View {
             .padding(.bottom, Spacing.s5)
         }
         .background(Palette.canvas)
-        .navigationTitle("Check position")
+        .navigationTitle("Check Position")
         .navigationBarTitleDisplayMode(.inline)
         .safeAreaInset(edge: .bottom) { actionBar(canAnalyze: issues.allSatisfy { !CapturePositionIssues.isBlocking($0) }) }
         .offersNewScreenshot()
@@ -393,11 +393,11 @@ struct CaptureCheckPositionSummary: Equatable, Sendable {
         let covered = snapshot.doubts.squares(outsideTheImage: false).intersection(flagged)
 
         if !flagged.isEmpty {
-            title = flagged.count == 1 ? "1 square needs a look" : "\(flagged.count) squares need a look"
+            title = flagged.count == 1 ? "1 Square Needs a Look" : "\(flagged.count) Squares Need a Look"
         } else if !blocking.isEmpty {
-            title = "Fix the position"
+            title = "Fix the Position"
         } else {
-            title = "Check the position"
+            title = "Check the Position"
         }
 
         // Reasons that point at the screenshot apply only to pieces as recognized from one.

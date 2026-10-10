@@ -25,11 +25,12 @@ struct RecognizingView: View {
     @Environment(AppModel.self) private var app
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.displayScale) private var displayScale
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var appeared = false
     @State private var found: FoundBoard?
     @State private var outlineProgress: CGFloat = 0
     @State private var isLanded = false
-    @State private var containerWidth: CGFloat = 0
+    @State private var containerSize: CGSize = .zero
 
     private static let coordinateSpace = "recognizing"
 
@@ -71,10 +72,10 @@ struct RecognizingView: View {
         .sideGutter()
         .padding(.vertical, Spacing.s4)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .onGeometryChange(for: CGFloat.self) { proxy in
-            proxy.size.width
-        } action: { width in
-            containerWidth = width
+        .onGeometryChange(for: CGSize.self) { proxy in
+            proxy.size
+        } action: { size in
+            containerSize = size
         }
         .coordinateSpace(.named(Self.coordinateSpace))
         // While it scales up, the fading screenshot must not draw under the navigation bar.
@@ -104,7 +105,12 @@ struct RecognizingView: View {
             CaptureBoardLanding.boardFrame(pixelRect: $0.pixelRect, imageSize: imageSize, imageFrame: resting)
         }
         let landing: CGRect? = found?.destination.map { destination in
-            CaptureBoardLanding.boardFrame(for: destination, containerWidth: containerWidth)
+            CaptureBoardLanding.boardFrame(
+                for: destination,
+                containerWidth: containerSize.width,
+                containerHeight: containerSize.height,
+                isAccessibilitySize: dynamicTypeSize.isAccessibilitySize
+            )
                 .offsetBy(dx: -slot.minX, dy: -slot.minY)
         }
         // Reduce Motion: nothing moves; the board crossfades in at its landing frame.
@@ -363,9 +369,9 @@ extension CaptureRecognitionFailure {
     /// The Board not found screen title.
     var title: String {
         switch self {
-        case .boardNotFound: "No board found"
-        case .invalidImage: "Couldn't read this image"
-        case .recognizerUnavailable: "Recognition isn't available"
+        case .boardNotFound: "No Board Found"
+        case .invalidImage: "Couldn't Read This Image"
+        case .recognizerUnavailable: "Recognition Isn't Available"
         }
     }
 

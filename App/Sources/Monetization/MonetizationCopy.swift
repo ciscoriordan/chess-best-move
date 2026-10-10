@@ -54,7 +54,7 @@ enum MonetizationCopy {
     static let waitingForApprovalWithoutBoard =
         "The person who approves purchases for your Apple Account needs to confirm it. Pro unlocks as soon as it's approved."
 
-    static let lifetimeUnlocked = "Lifetime is unlocked"
+    static let lifetimeUnlocked = "Lifetime Is Unlocked"
     static func subscriptionStillActive(_ plan: MonetizationProductKind) -> String {
         switch plan {
         case .yearly: "Your yearly subscription is still active"
@@ -86,7 +86,7 @@ enum MonetizationCopy {
 
     // MARK: Downsell
 
-    static let downsellTitle = "Just need a few?"
+    static let downsellTitle = "Just Need a Few?"
     static func downsellBody(price: String) -> String {
         "\(ProductID.creditsPerPack) analyses for \(price). One-time purchase, not a subscription. They never expire."
     }

@@ -3,8 +3,9 @@ import SwiftUI
 /// NewScreenshotRow (design.md section 6, 9.4 and 9.5; owner decision of 2026-09-21): a
 /// screenshot the user took while away from the app, offered on the Analysis result and on Check
 /// position. A GroupedCard holding one row: the thumbnail, "New screenshot" over its age, and a
-/// dense "Analyze" button that imports it in place of the board on screen. Analysis promotes
-/// it to primary; Check position keeps its own confirmation primary.
+/// button that imports it in place of the board on screen. Analysis places a full-width
+/// "Analyze new screenshot" button below the thumbnail and age; Check position keeps a dense
+/// secondary "Analyze" button beside them.
 ///
 /// A screen places it twice and applies `offersNewScreenshot()` to its root. `.pinnedBar` goes
 /// in the `top` of the screen's PinnedActionBar, above its buttons, and draws below the
@@ -84,13 +85,17 @@ struct NewScreenshotRow: View {
                         // The error is outside what `ViewThatFits` measures: a sentence that long
                         // never fits beside the button, and switching layouts would rebuild the
                         // button and lose VoiceOver and keyboard focus on every failed try.
-                        ViewThatFits(in: .horizontal) {
-                            inlineRow(model, offer, now: timeline.date)
-                            wrappedRow(model, offer, now: timeline.date)
+                        if emphasized {
+                            emphasizedRow(model, offer, now: timeline.date)
+                        } else {
+                            ViewThatFits(in: .horizontal) {
+                                inlineRow(model, offer, now: timeline.date)
+                                wrappedRow(model, offer, now: timeline.date)
+                            }
                         }
                         if let error = model.importError {
                             errorLine(error)
-                                .padding(.leading, rowInset + Self.thumbnailSide + Spacing.s3)
+                                .padding(.leading, emphasized ? rowInset : rowInset + Self.thumbnailSide + Spacing.s3)
                                 .padding(.trailing, rowInset)
                                 .padding(.bottom, Spacing.s2)
                         }
@@ -128,6 +133,19 @@ struct NewScreenshotRow: View {
             do { try await Task.sleep(for: .seconds(1)) } catch { return }
             model.announceIfDue(key.identifier, placement: placement)
         }
+    }
+
+    /// The primary action spans the bar's content width, with the screenshot it imports above it.
+    private func emphasizedRow(_ model: CaptureNewScreenshotOfferModel, _ offer: CaptureNewScreenshotOfferModel.Offer, now: Date) -> some View {
+        VStack(alignment: .leading, spacing: Spacing.s3) {
+            HStack(spacing: Spacing.s3) {
+                tile(offer.thumbnail)
+                words(offer, now: now, wraps: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            analyzeButton(model, offer, now: now, dense: false)
+        }
+        .newScreenshotRowInsets(rowInset, verticalPadding: Spacing.s3)
     }
 
     /// The title and the age on one line each, beside the button. Chosen while it fits, judged
@@ -249,7 +267,8 @@ struct NewScreenshotRow: View {
             #endif
             Task { await model.analyzeOffer(app: app, tappedOn: screen) }
         } label: {
-            Text(CaptureNewScreenshotCopy.button)
+            Text(emphasized ? CaptureNewScreenshotCopy.accessibilityLabel : CaptureNewScreenshotCopy.button)
+                .multilineTextAlignment(.center)
                 .opacity(model.isImporting ? 0 : 1)
                 .overlay {
                     if model.isImporting {
@@ -280,7 +299,7 @@ struct NewScreenshotRow: View {
     }
 }
 
-/// Keeps the offer's existing compact layout while giving Analysis its one primary action.
+/// Analysis uses the full-width primary style; Check position keeps its secondary treatment.
 private struct NewScreenshotButtonStyle: ButtonStyle {
     let emphasized: Bool
     let dense: Bool
@@ -288,9 +307,8 @@ private struct NewScreenshotButtonStyle: ButtonStyle {
     @ViewBuilder
     func makeBody(configuration: Configuration) -> some View {
         if emphasized {
-            PrimaryButtonStyle(minHeight: dense ? Layout.denseButtonHeight : Layout.buttonHeight)
+            PrimaryButtonStyle()
                 .makeBody(configuration: configuration)
-                .fixedSize(horizontal: dense, vertical: false)
         } else {
             SecondaryButtonStyle(dense: dense).makeBody(configuration: configuration)
         }
@@ -330,8 +348,8 @@ private struct CaptureNewScreenshotOfferModifier: ViewModifier {
         ScrollViewReader { proxy in
             content
                 .environment(model)
-                // The pinned bar grows to hold the row, and the scroll view's bottom inset with
-                // it; both are above the row, so the animation is applied here (design.md 11).
+                // The pinned bar grows to hold the row and leaves less room for scrolling.
+                // Animate their shared container as well as the row (design.md 11).
                 .animation(reduceMotion ? nil : .easeOut(duration: Motion.stateLong), value: model?.offer?.asset)
                 // Whether the reader is at the top of the screen's scroll view, for a row that
                 // arrives while the reader is further down (design.md 9.4, "Where").
@@ -364,7 +382,7 @@ private struct CaptureNewScreenshotOfferModifier: ViewModifier {
 
 extension View {
     /// Offers a screenshot the user took while away (design.md 9.4). Apply to the root of a
-    /// screen that places `NewScreenshotRow`, after its `.safeAreaInset`.
+    /// screen that places `NewScreenshotRow`, enclosing its scroll view and bottom action bar.
     func offersNewScreenshot() -> some View {
         modifier(CaptureNewScreenshotOfferModifier())
     }

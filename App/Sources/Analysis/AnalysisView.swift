@@ -32,18 +32,30 @@ enum AnalysisLayout {
         contentWidth >= twoColumnMinimumWidth
     }
 
-    /// The board side for a content width (inside the side gutters): the width left after the
-    /// evaluation bar, capped at `Layout.maximumBoardSide`.
-    @MainActor static func boardSide(contentWidth: CGFloat) -> CGFloat {
+    /// Leave room for scrolling details and the action bar when the board stays on screen.
+    /// Height is the safe area below the navigation bar, before the bottom action bar is added,
+    /// so the board does not resize when the screenshot offer arrives or the search finishes.
+    @MainActor static func boardSide(
+        contentWidth: CGFloat,
+        containerHeight: CGFloat? = nil,
+        isAccessibilitySize: Bool = false
+    ) -> CGFloat {
         let available = isWide(contentWidth: contentWidth) ? (contentWidth - columnSpacing) / 2 : contentWidth
         let side = available - evalBarColumn
-        return side > 0 ? min(side, Layout.maximumBoardSide) : 300
+        let widthBound = side > 0 ? min(side, Layout.maximumBoardSide) : 300
+        guard let containerHeight else { return widthBound }
+        let fraction: CGFloat = if isWide(contentWidth: contentWidth) {
+            isAccessibilitySize ? 0.5 : 0.7
+        } else {
+            isAccessibilitySize ? 1 / 3 : 0.5
+        }
+        let heightBound = max(0, containerHeight * fraction - topPadding - Spacing.s2 - 2)
+        return min(widthBound, heightBound)
     }
 }
 
 private struct AnalysisScreen: View {
     @State private var model: AnalysisScreenModel
-    @State private var contentWidth: CGFloat = 0
     @State private var isPeeking = false
 
     @Environment(\.scenePhase) private var scenePhase
@@ -58,21 +70,18 @@ private struct AnalysisScreen: View {
     private var session: AnalysisSession { model.session }
     private var snapshot: BoardSnapshot { session.snapshot }
     private var isFinal: Bool { model.runState == .completed }
-    /// Two columns on iPad and in landscape (design.md section 5).
-    private var isWide: Bool { AnalysisLayout.isWide(contentWidth: contentWidth) }
 
     var body: some View {
-        ScrollView {
-            content
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .onGeometryChange(for: CGFloat.self) { proxy in
-                    proxy.size.width
-                } action: { width in
-                    contentWidth = width
+        GeometryReader { geometry in
+            VStack(spacing: 0) {
+                content(in: geometry.size)
+                PinnedActionBar {
+                    NewScreenshotRow(placement: .pinnedBar, emphasized: model.runState != .notStarted)
+                } content: {
+                    AnalysisActionBar(model: model)
                 }
-                .sideGutter()
-                .padding(.top, AnalysisLayout.topPadding)
-                .padding(.bottom, Spacing.s5)
+                .fixedSize(horizontal: false, vertical: true)
+            }
         }
         .background(Palette.canvas)
         .navigationTitle("Analysis")
@@ -80,16 +89,6 @@ private struct AnalysisScreen: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 CreditsToolbarIndicator(dynamicTypeSize: dynamicTypeSize)
-            }
-        }
-        .safeAreaInset(edge: .bottom) {
-            PinnedActionBar {
-                // A screenshot taken while the user was away (design.md 9.4), edge to edge
-                // under the bar's hairline. Draws nothing when there is none, and nothing here
-                // at accessibility sizes.
-                NewScreenshotRow(placement: .pinnedBar, emphasized: model.runState != .notStarted)
-            } content: {
-                AnalysisActionBar(model: model)
             }
         }
         .offersNewScreenshot()
@@ -144,64 +143,79 @@ private struct AnalysisScreen: View {
     #endif
 
     @ViewBuilder
-    private var content: some View {
+    private func content(in size: CGSize) -> some View {
+        let contentWidth = max(0, size.width - 2 * Layout.sideGutter(forWidth: size.width))
+        let isWide = AnalysisLayout.isWide(contentWidth: contentWidth)
+        let side = AnalysisLayout.boardSide(
+            contentWidth: contentWidth,
+            containerHeight: size.height,
+            isAccessibilitySize: dynamicTypeSize.isAccessibilitySize
+        )
         if isWide {
             HStack(alignment: .top, spacing: AnalysisLayout.columnSpacing) {
-                VStack(alignment: .leading, spacing: 0) { boardGroup }
-                    .frame(width: boardSide + AnalysisLayout.evalBarColumn)
-                VStack(alignment: .leading, spacing: 0) {
-                    CreditsInlineIndicator()
-                    NewScreenshotRow(placement: .scrollingContent, emphasized: model.runState != .notStarted)
-                    readoutGroups
+                boardGroup(side: side)
+                    .frame(width: (contentWidth - AnalysisLayout.columnSpacing) / 2, alignment: .leading)
+                    .padding(.top, AnalysisLayout.topPadding)
+                ScrollView {
+                    details
+                        .padding(.top, Spacing.s3)
+                        .padding(.bottom, Spacing.s5)
                 }
+                .accessibilityIdentifier("analysis.details")
             }
-            // Each column is the container its content spans: the new-screenshot row's card, at
-            // accessibility sizes, runs across the readout column like the readout's own
-            // hairlines, and does not reach out through the screen's gutter into the board's
-            // column (design.md section 6, owner decision of 2026-09-22). Inside a column the
-            // card's rows keep their inset from the band's own edge, so they start 20 pt further
-            // in than the credits tally and the LINE label beside them; design.md section 6
-            // records why.
             .startsSideGutterContainer()
+            .sideGutter()
         } else {
-            VStack(alignment: .leading, spacing: 0) {
-                CreditsInlineIndicator()
-                // The pinned bar's row, moved here at accessibility sizes (design.md 9.4).
-                NewScreenshotRow(placement: .scrollingContent, emphasized: model.runState != .notStarted)
-                boardGroup
-                readoutGroups
+            VStack(spacing: 0) {
+                boardGroup(side: side)
+                    .frame(maxWidth: .infinity)
+                    .sideGutter()
+                    .padding(.top, AnalysisLayout.topPadding)
+                ScrollView {
+                    details
+                        .sideGutter()
+                        .padding(.top, Spacing.s3)
+                        .padding(.bottom, Spacing.s5)
+                }
+                .accessibilityIdentifier("analysis.details")
             }
         }
     }
 
-    /// The board side: the width left after the eval bar, capped at 600 pt.
-    private var boardSide: CGFloat {
-        AnalysisLayout.boardSide(contentWidth: contentWidth)
+    /// All text and controls can scroll, including at the largest text size. Only the board,
+    /// evaluation bar and progress rule stay put; the bottom action bar remains separate.
+    private var details: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            CreditsInlineIndicator()
+            NewScreenshotRow(placement: .scrollingContent, emphasized: model.runState != .notStarted)
+            chips
+            readoutGroups
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: Board
 
-    @ViewBuilder
-    private var boardGroup: some View {
-        HStack(alignment: .top, spacing: AnalysisEvalBar.spacing) {
-            AnalysisEvalBar(
-                whiteShare: evalShare,
-                isPlaceholder: evalIsPlaceholder,
-                whiteAtBottom: snapshot.whiteAtBottom,
-                accessibilityValueText: evalSpoken
+    private func boardGroup(side: CGFloat) -> some View {
+        VStack(alignment: .leading, spacing: Spacing.s2) {
+            HStack(alignment: .top, spacing: AnalysisEvalBar.spacing) {
+                AnalysisEvalBar(
+                    whiteShare: evalShare,
+                    isPlaceholder: evalIsPlaceholder,
+                    whiteAtBottom: snapshot.whiteAtBottom,
+                    accessibilityValueText: evalSpoken
+                )
+                .frame(height: side)
+                board
+                    .frame(width: side, height: side)
+            }
+            AnalysisThinkProgress(
+                startedAt: model.searchStartedAt,
+                thinkTime: model.runThinkTime,
+                isActive: model.isThinking
             )
-            .frame(height: boardSide)
-            board
-                .frame(width: boardSide, height: boardSide)
         }
-        AnalysisThinkProgress(
-            startedAt: model.searchStartedAt,
-            thinkTime: model.runThinkTime,
-            isActive: model.isThinking
-        )
-        .padding(.top, Spacing.s2)
-        chips
-            .padding(.top, Spacing.s3)
+        .frame(width: side + AnalysisLayout.evalBarColumn)
     }
 
     /// The original crop can be revealed under an edited diagram.
@@ -257,6 +271,7 @@ private struct AnalysisScreen: View {
         }
         .focusable(canPeek, interactions: .activate)
         .accessibilityElement(children: .ignore)
+        .accessibilityIdentifier("analysis.board")
         .accessibilityLabel(Text(boardAccessibilityLabel))
         .accessibilityValue(Text(boardAccessibilityValue))
         .accessibilityCustomContent("Pieces", AnalysisSpeech.pieceList(snapshot.position.board))

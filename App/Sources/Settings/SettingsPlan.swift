@@ -54,7 +54,7 @@ struct SettingsPlanDetail: Equatable, Sendable {
     /// The name of the free tier once the three free analyses are spent and a pack was bought.
     /// A reader in that state paid for what they have, so the screen does not call it free
     /// (design.md 9.8). `SettingsPlanRow.value` leads with the same name.
-    static let payAsYouGoTitle = "Pay as you go"
+    static let payAsYouGoTitle = "Pay as You Go"
 
     /// The plan this Apple Account is on.
     ///
@@ -160,8 +160,8 @@ struct SettingsPlanDetail: Equatable, Sendable {
 }
 
 /// A row in the plan screen's Purchases card. Their titles are the same words Settings' own
-/// Purchases card uses, because they are the same actions (design.md section 14: plain verbs, and
-/// the paywall's Title Case exception stops at the paywall).
+/// Purchases card uses, because they are the same actions. All Settings row labels use title case
+/// (owner decision of 2026-10-10, design.md section 14).
 enum SettingsPlanAction: Sendable, Hashable, CaseIterable {
     /// Opens the purchase screen.
     case unlock
@@ -172,9 +172,9 @@ enum SettingsPlanAction: Sendable, Hashable, CaseIterable {
 
     var title: String {
         switch self {
-        case .unlock: "Unlock unlimited"
-        case .restore: "Restore purchases"
-        case .manageSubscription: "Manage subscription"
+        case .unlock: "Unlock Unlimited"
+        case .restore: "Restore Purchases"
+        case .manageSubscription: "Manage Subscription"
         }
     }
 }

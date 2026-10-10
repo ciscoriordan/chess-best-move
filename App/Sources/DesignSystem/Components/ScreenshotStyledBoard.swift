@@ -3,22 +3,23 @@ import SwiftUI
 
 /// A saved choice, independent of light/dark mode and recognition confidence.
 enum BoardAppearance: String, CaseIterable, Identifiable {
-    case green
     case screenshot
+    case green
     case standard
 
     var id: String { rawValue }
     var label: String {
         switch self {
-        case .green: "Classic green"
-        case .screenshot: "Match screenshot"
-        case .standard: "Standard board"
+        case .green: "Classic Green"
+        case .screenshot: "Match Screenshot"
+        case .standard: "Standard Board"
         }
     }
 }
 
 /// Every feature uses this presentation. Unchanged squares retain the actual screenshot;
 /// edits replace only the affected squares, borrowing piece artwork from that screenshot.
+/// Without a screenshot, automatic matching uses the classic green board and built-in pieces.
 struct ScreenshotStyledBoard: View {
     let snapshot: BoardSnapshot
     let appearance: BoardAppearance
@@ -52,7 +53,7 @@ struct ScreenshotStyledBoard: View {
             .accessibilityIgnoresInvertColors()
         } else {
             DiagramBoard(board: board ?? snapshot.position.board, whiteAtBottom: snapshot.whiteAtBottom,
-                         showsCoordinates: showsCoordinates, usesGreenPalette: appearance == .green)
+                         showsCoordinates: showsCoordinates, usesGreenPalette: appearance != .standard)
         }
     }
 }
@@ -101,7 +102,7 @@ struct ScreenshotBoardArtwork {
             }
         }
         if let tile = tile(at: square), let pixels = Pixels(tile) { return pixels.backgroundColor }
-        return (square.file + square.rank).isMultiple(of: 2) ? Palette.diagramDark : Palette.diagramLight
+        return (square.file + square.rank).isMultiple(of: 2) ? Palette.greenBoardDark : Palette.greenBoardLight
     }
 
     func sprite(for piece: Piece) -> CGImage? {

@@ -35,13 +35,24 @@ enum CaptureBoardLanding {
     /// columns on wide screens), and a mirror of `CheckPositionView` (side gutter, 16 pt top
     /// padding, full content width, capped at `Layout.maximumBoardSide`).
     @MainActor
-    static func boardFrame(for destination: Destination, containerWidth: CGFloat) -> CGRect {
+    static func boardFrame(
+        for destination: Destination,
+        containerWidth: CGFloat,
+        containerHeight: CGFloat? = nil,
+        isAccessibilitySize: Bool = false
+    ) -> CGRect {
         let gutter = Layout.sideGutter(forWidth: containerWidth)
         let contentWidth = max(0, containerWidth - 2 * gutter)
         switch destination {
         case .analysis:
-            let side = AnalysisLayout.boardSide(contentWidth: contentWidth)
-            return CGRect(x: gutter + AnalysisLayout.evalBarColumn, y: AnalysisLayout.topPadding, width: side, height: side)
+            let side = AnalysisLayout.boardSide(
+                contentWidth: contentWidth,
+                containerHeight: containerHeight,
+                isAccessibilitySize: isAccessibilitySize
+            )
+            let centering = AnalysisLayout.isWide(contentWidth: contentWidth)
+                ? 0 : (contentWidth - side - AnalysisLayout.evalBarColumn) / 2
+            return CGRect(x: gutter + centering + AnalysisLayout.evalBarColumn, y: AnalysisLayout.topPadding, width: side, height: side)
         case .checkPosition:
             let side = min(contentWidth, Layout.maximumBoardSide)
             return CGRect(x: gutter, y: Spacing.s4, width: side, height: side)
