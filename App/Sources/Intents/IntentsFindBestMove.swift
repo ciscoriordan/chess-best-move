@@ -98,7 +98,7 @@ enum IntentsImageDecoding {
 /// How the app's flow ended for an image the shortcut imported.
 enum IntentsShortcutOutcome: Sendable, Hashable {
     /// `move` gives the spoken form its full from-square when the SAN disambiguates.
-    case bestMove(san: String, move: Move?, score: WhiteScore?)
+    case bestMove(san: String, move: Move?, score: WhiteScore?, capture: AnalysisCapture? = nil)
     case noLegalMoves(checkmate: Bool)
     case boardNotFound
     case needsCheck
@@ -115,9 +115,9 @@ enum IntentsShortcutOutcome: Sendable, Hashable {
     /// Analysis screen's completion announcement.
     var dialog: String {
         switch self {
-        case .bestMove(let san, let move, let score):
+        case .bestMove(let san, let move, let score, let capture):
             AnalysisSpeech.completionAnnouncement(
-                moveDescription: AnalysisSpeech.moveDescription(san: san, move: move),
+                moveDescription: AnalysisSpeech.moveDescription(san: san, move: move, capture: capture),
                 score: score
             )
         case .noLegalMoves(let checkmate):
@@ -188,7 +188,7 @@ struct IntentsShortcutWaiter {
                 break
             }
             switch ledger.completion(for: session.id) {
-            case .bestMove(let san, let move, let score)?: return .bestMove(san: san, move: move, score: score)
+            case .bestMove(let san, let move, let score, let capture)?: return .bestMove(san: san, move: move, score: score, capture: capture)
             case .noLegalMoves(let checkmate)?: return .noLegalMoves(checkmate: checkmate)
             case .invalidPosition?: return .needsCheck
             case .failed?: return .failed

@@ -7,7 +7,8 @@ screenshot. You take a screenshot of a position, import it into the app, and the
 board in the image, recognizes every piece with a Core ML model that runs on the device, works
 out which way the board is turned and whose turn it is, and searches the position with
 Stockfish 19 compiled into the app. It draws the best move as an arrow over your own board
-image and shows the move in standard algebraic notation with the evaluation. Everything runs on
+image and shows a prominent plain-language move with smaller algebraic notation and the evaluation.
+Captures name and show symbols for both pieces. Everything runs on
 the device and no image is sent anywhere.
 
 Automatic screenshot analysis is on by default in Settings. With Full Access to Photos,

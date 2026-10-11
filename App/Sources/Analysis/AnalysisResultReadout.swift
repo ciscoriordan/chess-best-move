@@ -110,13 +110,16 @@ struct AnalysisResultReadout: View {
         VStack(spacing: Spacing.s1) {
             move
             if let move = content.move {
-                AnalysisGlyphLine(piece: move.piece, text: move.words, spoken: move.words)
-                    .typography(.callout)
-                    .foregroundStyle(Palette.ink2)
+                AnalysisGlyphLine(
+                    piece: move.piece, text: move.words,
+                    spoken: content.spokenMove ?? move.words,
+                    capturedPiece: move.capture?.piece, glyphToken: .title
+                )
+                    .typography(.title)
+                    .foregroundStyle(isFinal ? (content.moveIsReply ? Palette.accent : Palette.ink) : Palette.ink2)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier(AccessibilityID.analysisBestMove)
                     .multilineTextAlignment(.center)
-                    // The move above it carries the same words as its VoiceOver label, and
-                    // design.md 12 has the move read once.
-                    .accessibilityHidden(true)
             }
         }
         .padding(.horizontal, Spacing.s4)
@@ -134,14 +137,13 @@ struct AnalysisResultReadout: View {
     @ViewBuilder
     private var move: some View {
         if let move = content.move {
-            AnalysisHeroMove(
-                san: move.san,
-                spokenDescription: content.spokenMove ?? move.words,
-                isFinal: isFinal,
-                isReply: content.moveIsReply
-            )
-            .id(move.san)
-            .transition(.opacity.animation(reduceMotion ? nil : .easeOut(duration: Motion.valueChange)))
+            Text(move.san)
+                .typography(.data)
+                .foregroundStyle(Palette.ink2)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityHidden(true)
+                .id(move.san)
+                .transition(.opacity.animation(reduceMotion ? nil : .easeOut(duration: Motion.valueChange)))
         } else if content.placeholderIsResult {
             // Checkmate and Stalemate are the result itself: full ink, and read out.
             Text(content.placeholder)
@@ -181,12 +183,17 @@ struct AnalysisResultReadout: View {
     private func guessedMoveBlock(_ guessed: AnalysisReadoutContent.MoveText) -> some View {
         VStack(alignment: .leading, spacing: Spacing.s2) {
             guessedMoveTitle
-            ViewThatFits(in: .horizontal) {
-                guessedMoveLine(guessed, onOneLine: true)
-                guessedMoveLine(guessed, onOneLine: false)
-            }
-            .typography(.callout)
+            Text(guessed.san)
+                .typography(.data)
+                .foregroundStyle(Palette.ink2)
+            AnalysisGlyphLine(
+                piece: guessed.piece, text: guessed.words,
+                spoken: AnalysisReadoutContent.spokenGuessedMove(guessed),
+                capturedPiece: guessed.capture?.piece, glyphToken: .headline
+            )
+            .typography(.headline)
             .foregroundStyle(Palette.ink2)
+            .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(AnalysisReadoutContent.spokenGuessedMove(guessed))
@@ -194,15 +201,6 @@ struct AnalysisResultReadout: View {
         // The engine's expected move can change while it searches, like the badge's move.
         .accessibilityAddTraits(isFinal ? [] : .updatesFrequently)
         .accessibilityIdentifier("analysis.guessedMove")
-    }
-
-    private func guessedMoveLine(_ guessed: AnalysisReadoutContent.MoveText, onOneLine: Bool) -> some View {
-        AnalysisGlyphLine(
-            piece: guessed.piece,
-            text: AnalysisReadoutContent.guessedMoveText(guessed, onOneLine: onOneLine),
-            spoken: AnalysisReadoutContent.spokenGuessedMove(guessed)
-        )
-        .fixedSize(horizontal: false, vertical: true)
     }
 
     /// The guessed move's place while the engine's line holds no reply yet
@@ -217,14 +215,15 @@ struct AnalysisResultReadout: View {
             guessedMoveTitle
             ZStack(alignment: .topLeading) {
                 // Holds the height the move's own line is about to take, laid out the same way
-                // with a typical move: one line where the notation and the words fit side by
-                // side, two where the words go under the notation (the accessibility text
-                // sizes), and the piece glyph, which makes a line a little taller than text
-                // alone. A move much longer or shorter than the template can still differ from
-                // it by a line at the sizes in between.
-                ViewThatFits(in: .horizontal) {
-                    pendingTemplateLine(onOneLine: true)
-                    pendingTemplateLine(onOneLine: false)
+                // with a typical move: small notation above larger words. Longer moves may
+                // wrap to additional lines, including at accessibility text sizes.
+                VStack(alignment: .leading, spacing: Spacing.s2) {
+                    Text("Nf6").typography(.data)
+                    AnalysisGlyphLine(
+                        piece: Piece(color: .black, kind: .knight),
+                        text: "Knight to f6", spoken: "", glyphToken: .headline
+                    )
+                    .typography(.headline)
                 }
                 .hidden()
                 Text("\u{2026}")
@@ -235,16 +234,6 @@ struct AnalysisResultReadout: View {
         .accessibilityHidden(true)
     }
 
-    /// The line `pendingGuessedMoveBlock` measures itself by, for a typical move. Never shown.
-    private func pendingTemplateLine(onOneLine: Bool) -> some View {
-        AnalysisGlyphLine(
-            piece: Piece(color: .white, kind: .knight),
-            text: AnalysisReadoutContent.guessedMoveText(san: "Nf3", words: "Knight to f3", onOneLine: onOneLine),
-            spoken: ""
-        )
-        .fixedSize(horizontal: false, vertical: true)
-    }
-
     private var guessedMoveTitle: some View {
         Text(AnalysisReadoutContent.guessedMoveTitle)
             .typography(.sectionLabel)
@@ -253,41 +242,6 @@ struct AnalysisResultReadout: View {
     }
 }
 
-// MARK: - Pieces of the readout
-
-/// The move in the badge, in `move.hero`. Long moves switch to the narrow width (a second
-/// layout, not a shrink); only then may the text scale down to 70%.
-struct AnalysisHeroMove: View {
-    let san: String
-    let spokenDescription: String
-    let isFinal: Bool
-    /// The move answers a guessed move of the player at the top, so it is drawn in the accent:
-    /// cobalt is the answer (design.md 9.4, item 2).
-    var isReply = false
-
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    var body: some View {
-        ViewThatFits(in: .horizontal) {
-            Text(san)
-                .typography(.moveHero)
-                .lineLimit(1)
-                .fixedSize(horizontal: true, vertical: false)
-            Text(san)
-                .typography(.moveHero, width: 75)
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
-        }
-        .foregroundStyle(isFinal ? (isReply ? Palette.accent : Palette.ink) : Palette.ink2)
-        .animation(reduceMotion ? nil : .easeOut(duration: Motion.stateShort), value: isFinal)
-        .accessibilityLabel(spokenDescription)
-        .accessibilityIdentifier(AccessibilityID.analysisBestMove)
-    }
-}
-
-/// The pill that replaced the cobalt swatch and the BEST MOVE label (design.md 9.4): the
-/// `label` token on an accent fill while the answer belongs to the player at the bottom, and
-/// on a muted ink fill otherwise.
 struct AnalysisStatusPill: View {
     let title: String
     let isAccent: Bool
@@ -320,10 +274,10 @@ struct AnalysisGlyphLine: View {
     /// What VoiceOver reads instead of the line: words, never a symbol name.
     let spoken: String
 
-    /// The glyph grows with the `callout` text it sits in, on that token's own curve: the token
-    /// scales with `.subheadline`, and SwiftUI's similarly named `.callout` style runs ahead of
-    /// it at the larger sizes (design.md 12).
-    @ScaledMetric(relativeTo: .subheadline) private var glyphSize: CGFloat = 16
+    /// Both glyphs follow the surrounding text token at every Dynamic Type size.
+    var capturedPiece: Piece? = nil
+    var glyphToken: TypeToken = .callout
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         composed
@@ -334,13 +288,22 @@ struct AnalysisGlyphLine: View {
     /// the token the line is set in. Built as an `AttributedString` with the font set on the
     /// glyph run, because adding `Text` values together is deprecated from iOS 26.
     private var composed: Text {
-        guard let piece else { return Text(prefix + text) }
+        let size = Typography.resolve(glyphToken, sizeCategory: UIContentSizeCategory(dynamicTypeSize)).pointSize
+        func symbol(_ piece: Piece) -> AttributedString {
+            var glyph = AttributedString(GlyphOutlines.text(for: piece))
+            glyph.font = Font(Typography.symbols(size: size) as CTFont)
+            glyph.append(AttributedString("\u{00A0}"))
+            return glyph
+        }
         var line = AttributedString(prefix)
-        var glyph = AttributedString(GlyphOutlines.text(for: piece))
-        glyph.font = Font(Typography.symbols(size: glyphSize) as CTFont)
-        line.append(glyph)
-        // A no-break space keeps the glyph and the move it belongs to on one line.
-        line.append(AttributedString("\u{00A0}" + text))
+        if let piece { line.append(symbol(piece)) }
+        if let capturedPiece, let takes = text.range(of: " takes ") {
+            line.append(AttributedString(String(text[..<takes.upperBound])))
+            line.append(symbol(capturedPiece))
+            line.append(AttributedString(String(text[takes.upperBound...])))
+        } else {
+            line.append(AttributedString(text))
+        }
         return Text(line)
     }
 }

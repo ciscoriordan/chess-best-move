@@ -45,6 +45,7 @@ struct AnalysisReadoutContent: Sendable, Hashable {
         var san: String
         var words: String
         var piece: Piece?
+        var capture: AnalysisCapture? = nil
     }
 
     var pill: Pill
@@ -255,11 +256,13 @@ struct AnalysisReadoutContent: Sendable, Hashable {
     }
 
     private static func moveText(san: String, move: Move, in position: Position) -> MoveText {
-        MoveText(
+        let capture = AnalysisCapture.find(for: move, in: position)
+        return MoveText(
             move: move,
             san: san,
-            words: AnalysisSpeech.moveDescription(san: san, move: move),
-            piece: position.board.indices.contains(move.from.index) ? position.board[move.from.index] : nil
+            words: AnalysisSpeech.moveDescription(san: san, move: move, capture: capture),
+            piece: position.board.indices.contains(move.from.index) ? position.board[move.from.index] : nil,
+            capture: capture
         )
     }
 

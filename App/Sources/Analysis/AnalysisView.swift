@@ -313,7 +313,7 @@ private struct AnalysisScreen: View {
             return model.isThinking ? "Thinking." : "No best move yet."
         }
         let spoken = { (move: AnalysisReadoutContent.MoveText) in
-            AnalysisSpeech.moveDescription(san: move.san, move: move.move, alwaysIncludeFromSquare: true)
+            AnalysisSpeech.moveDescription(san: move.san, move: move.move, capture: move.capture, alwaysIncludeFromSquare: true)
         }
         if let guessed = readout.guessedMove {
             return AnalysisSpeech.boardArrowPair(

@@ -7,7 +7,7 @@ import SwiftUI
 /// How one analysis run of a session ended.
 enum AnalysisRunCompletion: Sendable, Hashable {
     /// `move` gives the spoken form its full from-square ("knight from b1 to d2").
-    case bestMove(san: String, move: Move?, score: WhiteScore?)
+    case bestMove(san: String, move: Move?, score: WhiteScore?, capture: AnalysisCapture? = nil)
     case noLegalMoves(checkmate: Bool)
     /// The engine rejected the board; the app went back to Check position.
     case invalidPosition
@@ -610,7 +610,7 @@ final class AnalysisScreenModel {
         #endif
         completionCount += 1
         app.settings.hasCompletedAnalysis = true
-        ledger.record(.bestMove(san: best.san, move: best.move, score: score), for: session.id)
+        ledger.record(.bestMove(san: best.san, move: best.move, score: score, capture: AnalysisCapture.find(for: best.move, in: position)), for: session.id)
         startLongerSearch()
         let content = resultReadout
         let description = content.move?.words ?? AnalysisSpeech.moveDescription(san: best.san, move: best.move)

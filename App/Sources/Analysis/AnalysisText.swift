@@ -6,6 +6,28 @@ import Foundation
 
 // MARK: - Spoken moves
 
+/// The captured piece and its square before a legal move is played. En passant removes a
+/// pawn from a different square than the moving pawn's destination.
+struct AnalysisCapture: Sendable, Hashable {
+    var piece: Piece
+    var square: Square
+
+    static func find(for move: Move, in position: Position) -> Self? {
+        guard position.board.count == 64, let moving = position.board[move.from.index] else { return nil }
+        if let target = position.board[move.to.index], target.color != moving.color {
+            return Self(piece: target, square: move.to)
+        }
+        guard moving.kind == .pawn, move.to == position.enPassant,
+              abs(move.from.file - move.to.file) == 1,
+              position.board[move.to.index] == nil,
+              let square = Square(file: move.to.file, rank: move.from.rank),
+              let target = position.board[square.index],
+              target.kind == .pawn, target.color != moving.color
+        else { return nil }
+        return Self(piece: target, square: square)
+    }
+}
+
 enum AnalysisSpeech {
     /// The spoken form of a SAN move, which is also the visible line under the hero move:
     /// "Knight takes f7, check", "Pawn to e8 promotes to queen, checkmate", "Castles kingside".
@@ -14,7 +36,10 @@ enum AnalysisSpeech {
     /// names the file), or always when `alwaysIncludeFromSquare` is true (the board's VoiceOver
     /// value: "knight from g5 takes f7, check"). `move` supplies the full from-square; without
     /// it the SAN's disambiguation letters are spoken.
-    static func moveDescription(san: String, move: Move? = nil, alwaysIncludeFromSquare: Bool = false) -> String {
+    static func moveDescription(
+        san: String, move: Move? = nil, capture: AnalysisCapture? = nil,
+        alwaysIncludeFromSquare: Bool = false
+    ) -> String {
         var text = san.trimmingCharacters(in: .whitespaces)
         var suffix = ""
         if text.hasSuffix("#") {
@@ -53,8 +78,16 @@ enum AnalysisSpeech {
         if alwaysIncludeFromSquare || !disambiguation.isEmpty {
             words += " from " + (move?.from.algebraic ?? disambiguation)
         }
-        words += isCapture ? " takes " : " to "
-        words += destination
+        if isCapture, let capture {
+            words += " takes " + pieceName(capture.piece.kind).lowercased()
+            if let move, capture.square != move.to {
+                words += " on " + capture.square.algebraic + " and moves to " + destination + ", en passant"
+            } else {
+                words += " on " + destination
+            }
+        } else {
+            words += (isCapture ? " takes " : " to ") + destination
+        }
         if let promotion {
             words += " promotes to " + pieceName(promotion).lowercased()
         }
