@@ -10,7 +10,7 @@ Stockfish 19 compiled into the app. It draws the best move as an arrow over your
 image and shows the move in standard algebraic notation with the evaluation. Everything runs on
 the device and no image is sent anywhere.
 
-Website: <https://ciscoriordan.github.io/chessbestmove.app/>
+Website: <https://chessbestmove.app/>
 
 Chess Best Move is free software, licensed under the GNU General Public License version 3. See
 [License](#license) below.
@@ -257,7 +257,7 @@ written by hand, so it cannot drift from the art the weights were actually fitte
 ## Support
 
 The app's support page, privacy policy and terms of use are on the website:
-<https://ciscoriordan.github.io/chessbestmove.app/>. For questions about the app itself,
+<https://chessbestmove.app/>. For questions about the app itself,
 <support@motomatic.com>.
 
 This repository is published because GPLv3 requires it. It is not a collaborative project and

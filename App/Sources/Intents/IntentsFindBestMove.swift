@@ -20,12 +20,14 @@ import UniformTypeIdentifiers
 struct FindBestMoveIntent: AppIntent {
     static let title: LocalizedStringResource = "Find Best Move"
     static let description = IntentDescription(
-        "Finds the best move in a screenshot of a chess position. Chess Best Move opens and shows the analysis."
+        "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Move opens."
     )
     static let openAppWhenRun = true
 
-    @Parameter(title: "Screenshot", description: "A screenshot of a chess position.", supportedContentTypes: [.image])
-    var screenshot: IntentFile
+    // Required IntentFile parameters make Spotlight ask for a file before perform() runs.
+    // With no supplied image, let the app present the system Photos picker instead.
+    @Parameter(title: "Screenshot", description: "A screenshot of a chess position. Leave empty to choose from Photos.", supportedContentTypes: [.image])
+    var screenshot: IntentFile?
 
     static var parameterSummary: some ParameterSummary {
         Summary("Find the best move in \(\.$screenshot)")
@@ -37,6 +39,10 @@ struct FindBestMoveIntent: AppIntent {
     func perform() async throws -> some IntentResult & ProvidesDialog {
         guard let app = AppModel.current else {
             return .result(dialog: IntentDialog("\(IntentsShortcutOutcome.appNotReady.dialog)"))
+        }
+        guard let screenshot else {
+            app.presentShortcutPhotoPicker()
+            return .result(dialog: "Choose a screenshot from Photos.")
         }
         let data = screenshot.data
         let image = await Task.detached(priority: .userInitiated) {

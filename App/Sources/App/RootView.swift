@@ -84,6 +84,12 @@ struct RootView: View {
             SettingsView()
         case .shortcutSetup:
             ShortcutSetupView()
+        case .shortcutPhotoPicker:
+            CaptureShortcutPhotoPicker { result in
+                app.dismissSheet()
+                guard let result else { return }
+                capture.importItemProviders([result.itemProvider], source: .shortcut, app: app)
+            }
         }
     }
 
@@ -111,6 +117,9 @@ struct RootView: View {
         }
         if DebugLaunchOptions.editor {
             app.presentEditor(EditorContext(snapshot: BoardSnapshot(position: .start), purpose: .handSetup))
+        }
+        if DebugLaunchOptions.findBestMoveWithoutImage {
+            Task { _ = try? await FindBestMoveIntent().perform() }
         }
     }
 

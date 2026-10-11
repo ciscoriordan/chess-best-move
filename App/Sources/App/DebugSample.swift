@@ -57,6 +57,12 @@ enum DebugLaunchOptions {
         }
     }
 
+    /// `-debugFindBestMoveWithoutImage YES`: invoke the actual App Intent with no input,
+    /// as Spotlight does, so UI tests exercise its Photos picker handoff.
+    static var findBestMoveWithoutImage: Bool {
+        UserDefaults.standard.bool(forKey: "debugFindBestMoveWithoutImage")
+    }
+
     /// `-debugEditor YES`: present the position editor with the start position at launch.
     static var editor: Bool {
         UserDefaults.standard.bool(forKey: "debugEditor")

@@ -24,6 +24,7 @@ enum SheetRoute: Identifiable, Hashable {
     case downsell(DownsellContext)
     case settings
     case shortcutSetup
+    case shortcutPhotoPicker
 
     var id: String {
         switch self {
@@ -31,6 +32,7 @@ enum SheetRoute: Identifiable, Hashable {
         case .downsell(let context): "downsell-\(context.id)"
         case .settings: "settings"
         case .shortcutSetup: "shortcutSetup"
+        case .shortcutPhotoPicker: "shortcutPhotoPicker"
         }
     }
 
@@ -39,7 +41,7 @@ enum SheetRoute: Identifiable, Hashable {
     var offersAPurchase: Bool {
         switch self {
         case .paywall, .downsell: true
-        case .settings, .shortcutSetup: false
+        case .settings, .shortcutSetup, .shortcutPhotoPicker: false
         }
     }
 }
@@ -268,6 +270,16 @@ final class AppModel {
     func prepareForWidgetImport() {
         replaceSheets()
         goHome()
+    }
+
+    /// Spotlight and Siri can invoke Find Best Move without an image. Choose from Photos
+    /// in the foreground app, using the same dismissal queue as other sheets. Opening or
+    /// canceling the picker never requests an analysis or spends a credit.
+    func presentShortcutPhotoPicker() {
+        guard sheet != .shortcutPhotoPicker, queuedSheet != .shortcutPhotoPicker else { return }
+        replaceSheets()
+        goHome()
+        present(.shortcutPhotoPicker)
     }
 
     /// Back to Home. Drops the pending analysis.
@@ -546,7 +558,7 @@ final class AppModel {
             switch dismissed {
             case .paywall(let context): paywallFinished(context, outcome: .closed)
             case .downsell(let context): downsellFinished(context, outcome: .closed)
-            case .settings, .shortcutSetup: break
+            case .settings, .shortcutSetup, .shortcutPhotoPicker: break
             }
             presentedSheetFinished = true
         }
@@ -587,7 +599,7 @@ final class AppModel {
             switch route {
             case .downsell?: true
             case .paywall(let context)?: [.creditsExhausted, .creditsIndicator, .lastFreeAnalysisNotice].contains(context.trigger)
-            case .settings?, .shortcutSetup?, nil: false
+            case .settings?, .shortcutSetup?, .shortcutPhotoPicker?, nil: false
             }
         }
         if offersCreditOnly(queuedSheet) { queuedSheet = nil }

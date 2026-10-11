@@ -34,6 +34,13 @@ struct IntentsShortcutSetupContent: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, Spacing.s2)
 
+            SectionLabel("Choose a saved screenshot")
+            Text("Tap Find Best Move in Siri Suggestions to open Photos, then select a screenshot to analyze. This opens a saved image; it does not take a new screenshot. To capture the board on screen, create the shortcut below.")
+                .typography(.body)
+                .foregroundStyle(Palette.ink2)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, Spacing.s4)
+
             SectionLabel("Create the shortcut")
             IntentsSetupStep(number: 1, text: "In the Shortcuts app, create a shortcut named \u{201C}Analyze my chess screenshot\u{201D}. Add \u{201C}Take Screenshot\u{201D} as its first action.") {
                 SecondaryButton("Open Shortcuts", systemImage: "square.2.layers.3d") {
