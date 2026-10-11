@@ -52,6 +52,14 @@ struct CheckPositionView: View {
             VStack(alignment: .leading, spacing: 0) {
                 // A screenshot taken while the user was away, at accessibility sizes (9.5).
                 NewScreenshotRow(placement: .scrollingContent)
+                if app.automaticScreenshotConfirmationID == snapshot.id {
+                    Text("New chess screenshot found. Tap Analyze to continue. Individual analyses are used only after you tap.")
+                        .typography(.body)
+                        .foregroundStyle(Palette.ink2)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.bottom, Spacing.s3)
+                        .accessibilityIdentifier("checkPosition.automaticConfirmation")
+                }
                 board(issues: issues)
                 if snapshot.boardImage != nil {
                     // A link, not the sentence "Press and hold the board to compare it with your
@@ -83,7 +91,7 @@ struct CheckPositionView: View {
         .navigationBarTitleDisplayMode(.inline)
         .safeAreaInset(edge: .bottom) { actionBar(canAnalyze: issues.allSatisfy { !CapturePositionIssues.isBlocking($0) }) }
         .offersNewScreenshot()
-        .sensoryFeedback(.warning, trigger: appeared) { _, new in new }
+        .sensoryFeedback(.warning, trigger: appeared) { _, new in new && app.automaticScreenshotConfirmationID != snapshot.id }
         .sensoryFeedback(.selection, trigger: selectionFeedback)
         .onAppear { appeared = true }
     }
@@ -262,12 +270,12 @@ struct CheckPositionView: View {
 
     private func summary(_ summary: CaptureCheckPositionSummary, issues: [PositionIssue]) -> some View {
         VStack(alignment: .leading, spacing: Spacing.s3) {
-            Text(summary.title)
+            Text(app.automaticScreenshotConfirmationID == snapshot.id ? "Ready to Analyze" : summary.title)
                 .typography(.title)
                 .foregroundStyle(Palette.ink)
                 .accessibilityAddTraits(.isHeader)
                 .accessibilityIdentifier(CaptureAccessibilityID.checkPositionTitle)
-            Text(summary.body)
+            Text(app.automaticScreenshotConfirmationID == snapshot.id ? "Check the pieces, then tap Analyze when you’re ready." : summary.body)
                 .typography(.body)
                 .foregroundStyle(Palette.ink2)
                 .fixedSize(horizontal: false, vertical: true)

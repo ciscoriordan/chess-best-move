@@ -10,6 +10,12 @@ Stockfish 19 compiled into the app. It draws the best move as an arrow over your
 image and shows the move in standard algebraic notation with the evaluation. Everything runs on
 the device and no image is sent anywhere.
 
+Automatic screenshot analysis is on by default in Settings. With Full Access to Photos,
+opening the app recognizes a new chess screenshot taken within two minutes. Unlimited users
+proceed to analysis; individual analyses require a tap. Uncertain boards open Check Position.
+Unrelated, previously handled and in-app screenshots are ignored, and explicit image selections
+and editing take priority. You can turn this behavior off and continue importing manually.
+
 Website: <https://chessbestmove.app/>
 
 Chess Best Move is free software, licensed under the GNU General Public License version 3. See

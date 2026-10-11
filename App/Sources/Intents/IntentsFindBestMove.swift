@@ -44,6 +44,7 @@ struct FindBestMoveIntent: AppIntent {
             app.presentShortcutPhotoPicker()
             return .result(dialog: "Choose a screenshot from Photos.")
         }
+        app.beginExplicitScreenshotSelection()
         let data = screenshot.data
         let image = await Task.detached(priority: .userInitiated) {
             IntentsImageDecoding.image(from: data)

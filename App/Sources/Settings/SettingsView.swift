@@ -72,6 +72,13 @@ private struct SettingsRootContent: View {
         @Bindable var settings = app.settings
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
+                GroupedSectionLabel("Screenshots")
+                GroupedCard {
+                    SettingsAutomaticScreenshotRow(isOn: $settings.automaticallyAnalyzesScreenshots)
+                        .groupedRow(verticalPadding: Spacing.s3)
+                }
+                GroupedFooter("When you open the app, look for a new chess screenshot and analyze it automatically. Requires Full Access to Photos. Individual analyses are used only after you tap Analyze.")
+
                 GroupedSectionLabel("Analysis")
                 GroupedCard {
                     VStack(alignment: .leading, spacing: Spacing.s2) {
@@ -336,7 +343,7 @@ struct SettingsRestoreFeedback: Equatable, Sendable {
 struct SettingsScreenshotHelpView: View {
     /// The button combinations of this device family, then the way back.
     private var steps: [String] {
-        AppDevice.current.screenshotButtonSteps + ["Come back to Chess Best Move and tap Use latest screenshot."]
+        AppDevice.current.screenshotButtonSteps + ["Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot."]
     }
 
     var body: some View {
@@ -384,5 +391,35 @@ struct SettingsNumberedStep: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityElement(children: .combine)
+    }
+}
+
+/// Stack the long setting title above its switch at accessibility text sizes.
+private struct SettingsAutomaticScreenshotRow: View {
+    @Binding var isOn: Bool
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    private let title = "Automatically Analyze New Screenshots"
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: Spacing.s2) {
+            if dynamicTypeSize.isAccessibilitySize {
+                Text(title)
+                    .typography(.body)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityHidden(true)
+                toggle.labelsHidden().accessibilityLabel(title)
+            } else {
+                toggle
+            }
+        }
+    }
+
+    private var toggle: some View {
+        Toggle(isOn: $isOn) {
+            Text(title).typography(.body).fixedSize(horizontal: false, vertical: true)
+        }
+        .tint(Palette.accent)
+        .frame(minHeight: Layout.minimumHitTarget)
+        .accessibilityIdentifier("settings.automaticallyAnalyzeScreenshots")
     }
 }

@@ -7,6 +7,8 @@ import Observation
 @Observable
 final class AppSettings {
     enum Key {
+        static let automaticallyAnalyzesScreenshots = "automaticallyAnalyzesScreenshots"
+        static let explicitScreenshotSelectionDate = "explicitScreenshotSelectionDate"
         static let boardAppearance = "boardAppearance"
         static let thinkTime = "thinkTimeSeconds"
         static let hasCompletedAnalysis = "hasCompletedAnalysis"
@@ -16,6 +18,15 @@ final class AppSettings {
     }
 
     @ObservationIgnored private let defaults: UserDefaults
+
+    /// Automatic imports only consider screenshots taken after the last explicit selection.
+    var explicitScreenshotSelectionDate: Date? {
+        didSet { defaults.set(explicitScreenshotSelectionDate, forKey: Key.explicitScreenshotSelectionDate) }
+    }
+
+    var automaticallyAnalyzesScreenshots: Bool {
+        didSet { defaults.set(automaticallyAnalyzesScreenshots, forKey: Key.automaticallyAnalyzesScreenshots) }
+    }
 
     /// Match each imported screenshot unless the user explicitly saves a fixed style.
     var boardAppearance: BoardAppearance {
@@ -62,6 +73,8 @@ final class AppSettings {
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
+        automaticallyAnalyzesScreenshots = defaults.object(forKey: Key.automaticallyAnalyzesScreenshots) as? Bool ?? true
+        explicitScreenshotSelectionDate = defaults.object(forKey: Key.explicitScreenshotSelectionDate) as? Date
         boardAppearance = BoardAppearance(rawValue: defaults.string(forKey: Key.boardAppearance) ?? "") ?? .screenshot
         thinkTime = ThinkTime(rawValue: defaults.integer(forKey: Key.thinkTime)) ?? .defaultValue
         longerSearchCeiling = LongerSearchCeiling(rawValue: defaults.integer(forKey: Key.longerSearchCeiling)) ?? .defaultValue

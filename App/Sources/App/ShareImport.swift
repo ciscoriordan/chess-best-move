@@ -100,6 +100,7 @@ final class ShareImportReceiver {
         guard claimedItemIDs.insert(id).inserted else { return .alreadyImported }
         guard let fileURL = inbox.fileURL(forItemID: id) else { return .noSuchItem }
 
+        app.beginExplicitScreenshotSelection()
         let image = await Self.decode(fileURL)
         // The container is not storage: the image is deleted whether or not it could be read.
         inbox.remove(itemID: id)

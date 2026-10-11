@@ -22,6 +22,7 @@ final class CaptureHomeModel {
     var importError: String?
     /// Presents the Photos picker filtered to screenshots (limited access).
     var showsScreenshotPicker = false
+    var showsPhotoPicker = false
 
     let analyzed: CaptureAnalyzedScreenshots
     @ObservationIgnored let observer = CapturePhotoLibraryObserver()
@@ -71,6 +72,7 @@ final class CaptureHomeModel {
     /// "Use latest screenshot". Asks for access the first time; with limited access opens the
     /// screenshot picker; with denied access calls `openSettings`.
     func useLatestScreenshot(app: AppModel, openSettings: () -> Void) async {
+        app.beginExplicitScreenshotSelection()
         importError = nil
         access = CapturePhotoLibrary.currentAccess()
         switch access {
@@ -105,6 +107,7 @@ final class CaptureHomeModel {
 
     /// Imports a photo library screenshot and remembers it as analyzed.
     func importScreenshot(_ asset: CaptureScreenshotAsset, app: AppModel) async {
+        app.beginExplicitScreenshotSelection()
         beginImport()
         defer { isImporting = false }
         do {
@@ -118,6 +121,7 @@ final class CaptureHomeModel {
 
     /// Imports an item chosen in the Photos picker (no photo access needed).
     func importPickerItem(_ item: PhotosPickerItem, app: AppModel) async {
+        app.beginExplicitScreenshotSelection()
         beginImport()
         defer { isImporting = false }
         do {
@@ -141,6 +145,7 @@ final class CaptureHomeModel {
             importError = "That isn't an image."
             return false
         }
+        app.beginExplicitScreenshotSelection()
         beginImport()
         CaptureItemProviderLoader.loadFirstImage(from: providers) { [weak self] data in
             Task { @MainActor in
@@ -152,6 +157,7 @@ final class CaptureHomeModel {
 
     /// Imports raw image data (paste, drop, tests).
     func importData(_ data: Data, source: ImportSource, app: AppModel) async {
+        app.beginExplicitScreenshotSelection()
         beginImport()
         defer { isImporting = false }
         do {

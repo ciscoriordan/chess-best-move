@@ -78,15 +78,17 @@ struct CaptureForegroundLog: Sendable, Hashable {
 /// activity is the scene's.
 @MainActor
 final class CaptureAppActivity {
-    /// Created the first time a flow screen asks for it. Absences before then never matter:
-    /// every offer needs a date after its screen appeared.
+    /// Created at launch so screenshots of Home are recorded too.
     static let shared = CaptureAppActivity(
         observesApplication: true,
-        isActive: UIApplication.shared.applicationState == .active
+        isActive: UIApplication.shared.applicationState == .active,
+        defaults: .standard
     )
 
     private(set) var log: CaptureForegroundLog
     private let now: () -> Date
+    private let defaults: UserDefaults?
+    static let ownScreenshotsKey = "capture.ownScreenshotDates"
 
     /// `observesApplication` false is for tests, which call the three methods themselves. A test
     /// of the notifications passes a center of its own, so its posts never reach the host app.
@@ -94,10 +96,15 @@ final class CaptureAppActivity {
         observesApplication: Bool,
         isActive: Bool,
         center: NotificationCenter = .default,
+        defaults: UserDefaults? = nil,
         now: @escaping () -> Date = Date.init
     ) {
         self.now = now
+        self.defaults = defaults
         log = CaptureForegroundLog(isActive: isActive, now: now())
+        for date in defaults?.array(forKey: Self.ownScreenshotsKey) as? [Date] ?? [] {
+            log.screenshotTaken(at: date)
+        }
         guard observesApplication else { return }
         // The notification center keeps each registration for the life of the process, which is
         // the life of `shared`.
@@ -122,6 +129,7 @@ final class CaptureAppActivity {
 
     func screenshotTaken(at date: Date? = nil) {
         log.screenshotTaken(at: date ?? now())
+        defaults?.set(log.screenshotsOfThisApp, forKey: Self.ownScreenshotsKey)
     }
 }
 

@@ -135,12 +135,22 @@ final class AppModel {
     /// The navigation stack (see `Route`). Leaving a board's Analysis screen by any means
     /// (New, the back button or edge swipe, a new import) drops its pending analysis.
     var path: [Route] = [] {
-        didSet { dropPendingAnalysisIfOffScreen() }
+        didSet { screenshotInteractionRevision += 1; dropPendingAnalysisIfOffScreen() }
     }
     /// The presented sheet.
-    var sheet: SheetRoute?
+    var sheet: SheetRoute? { didSet { screenshotInteractionRevision += 1 } }
     /// The full-screen position editor.
-    var editor: EditorContext?
+    var editor: EditorContext? { didSet { screenshotInteractionRevision += 1 } }
+
+    /// Invalidates background screenshot checks even if navigation changes and changes back.
+    private(set) var screenshotInteractionRevision = 0
+    /// A confident automatic import still needs an explicit tap before using a finite credit.
+    var automaticScreenshotConfirmationID: UUID?
+
+    func beginExplicitScreenshotSelection() {
+        screenshotInteractionRevision += 1
+        settings.explicitScreenshotSelectionDate = now()
+    }
 
     /// The position waiting for a credit decision (paywall, downsell or Ask to Buy approval).
     /// Always a board on the navigation stack.
@@ -239,6 +249,7 @@ final class AppModel {
     /// downsell taken down this way reports nothing (no downsell follows, no decline is
     /// recorded).
     func importImage(_ image: ImportedImage) {
+        beginExplicitScreenshotSelection()
         #if DEBUG
         DebugTimeline.shared.mark("imported")
         #endif
@@ -268,6 +279,7 @@ final class AppModel {
 
     /// A widget starts a new import, without treating a dismissed paywall as a decline.
     func prepareForWidgetImport() {
+        beginExplicitScreenshotSelection()
         replaceSheets()
         goHome()
     }
@@ -276,6 +288,7 @@ final class AppModel {
     /// in the foreground app, using the same dismissal queue as other sheets. Opening or
     /// canceling the picker never requests an analysis or spends a credit.
     func presentShortcutPhotoPicker() {
+        beginExplicitScreenshotSelection()
         guard sheet != .shortcutPhotoPicker, queuedSheet != .shortcutPhotoPicker else { return }
         replaceSheets()
         goHome()

@@ -77,6 +77,13 @@ struct HomeView: View {
             preferredItemEncoding: .current,
             photoLibrary: .shared()
         )
+        .photosPicker(
+            isPresented: $model.showsPhotoPicker,
+            selection: $pickerItem,
+            matching: .images,
+            preferredItemEncoding: .current,
+            photoLibrary: .shared()
+        )
         .onChange(of: pickerItem) { _, item in
             guard let item else { return }
             #if DEBUG
@@ -105,6 +112,10 @@ struct HomeView: View {
         }
     }
 
+    private var automaticCaptureAvailable: Bool {
+        app.settings.automaticallyAnalyzesScreenshots && model.access == .authorized
+    }
+
     // MARK: Intro
 
     private var intro: some View {
@@ -114,7 +125,7 @@ struct HomeView: View {
                 .foregroundStyle(Palette.ink2)
                 .fixedSize(horizontal: false, vertical: true)
             if app.settings.hasCompletedAnalysis {
-                Text(AppCopy.homeCollapsedSteps)
+                Text(automaticCaptureAvailable ? AppCopy.homeAutomaticSteps : AppCopy.homeCollapsedSteps)
                     .typography(.caption)
                     .foregroundStyle(Palette.ink2)
                     .fixedSize(horizontal: false, vertical: true)
@@ -123,7 +134,7 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     SectionLabel("How it works")
                     VStack(alignment: .leading, spacing: Spacing.s2) {
-                        ForEach(Array(Self.steps(for: .current).enumerated()), id: \.offset) { index, step in
+                        ForEach(Array(Self.steps(for: .current, automatic: automaticCaptureAvailable).enumerated()), id: \.offset) { index, step in
                             HStack(alignment: .firstTextBaseline, spacing: Spacing.s3) {
                                 Text("\(index + 1)")
                                     .typography(.data)
@@ -155,11 +166,11 @@ struct HomeView: View {
     }
 
     /// HOW IT WORKS. The first step names the screenshot buttons of this device.
-    static func steps(for device: AppDevice) -> [String] {
+    static func steps(for device: AppDevice, automatic: Bool = false) -> [String] {
         [
             device.screenshotStep,
             "Come back here.",
-            "Tap Use latest screenshot.",
+            automatic ? "New chess screenshots are recognized automatically. Tap Analyze if asked." : "Tap Use latest screenshot.",
         ]
     }
 
@@ -347,7 +358,10 @@ struct HomeView: View {
     }
 
     private var photosRow: some View {
-        PhotosPicker(selection: $pickerItem, matching: .images, preferredItemEncoding: .current, photoLibrary: .shared()) {
+        Button {
+            app.beginExplicitScreenshotSelection()
+            model.showsPhotoPicker = true
+        } label: {
             ListRow("Choose from Photos", systemImage: "photo.on.rectangle", showsChevron: true)
                 .groupedRow()
         }

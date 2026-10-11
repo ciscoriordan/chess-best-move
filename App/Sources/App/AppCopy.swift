@@ -10,6 +10,8 @@ enum AppCopy {
     /// Home's one-line reminder once HOW IT WORKS has collapsed after the first analysis.
     static let homeCollapsedSteps = "Screenshot a position, then tap Use latest screenshot."
 
+    static let homeAutomaticSteps = "Take a chess screenshot, then open this app. Analysis starts automatically with unlimited access; otherwise, tap Analyze when asked."
+
     /// The one-line fair-play note, on Home under the steps and in Settings > Help.
     static let fairPlayNote = "Most chess sites do not allow engine help in games you are playing."
 }

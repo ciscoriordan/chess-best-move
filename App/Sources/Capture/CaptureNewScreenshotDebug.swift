@@ -21,7 +21,10 @@ enum CaptureNewScreenshotDebug {
     /// Built the first time a flow screen creates its model, which is before the app can first
     /// go to the background from that screen.
     static let library: CapturePhotoLibraryClient = {
-        let screenshot = OSAllocatedUnfairLock<CaptureScreenshotAsset?>(initialState: nil)
+        let initial: CaptureScreenshotAsset? = UserDefaults.standard.string(forKey: "captureAutomaticScreenshot") == "launch"
+            ? CaptureScreenshotAsset(localIdentifier: "debug-automatic-launch", creationDate: Date().addingTimeInterval(-1))
+            : nil
+        let screenshot = OSAllocatedUnfairLock<CaptureScreenshotAsset?>(initialState: initial)
         // The notification center keeps the registration for the life of the process.
         _ = NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { _ in
             screenshot.withLock { current in

@@ -13,6 +13,7 @@ struct ChessBestMoveApp: App {
         #endif
         let model = AppModel.live()
         model.makeCurrent()
+        _ = CaptureAppActivity.shared
         // The Transaction.updates listener must run from launch so purchases made outside
         // the app (Ask to Buy approvals, renewals, refunds) are never missed. Not in the unit
         // test host: the tests build their own store stacks, and a live listener there would
