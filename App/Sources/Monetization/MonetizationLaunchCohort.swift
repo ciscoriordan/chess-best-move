@@ -7,8 +7,14 @@ import Observation
 // paywall, a price or a Pro row. Everyone who arrives afterwards meets the ordinary three free
 // analyses and the paywall.
 //
-// Reopened on 2026-10-08 through October 31 worldwide. Existing downloads qualify too.
-// Sandbox testers can opt out through Settings to exercise the ordinary purchase flow.
+// The offer ended on 2026-10-13. Existing production customers keep their earned access.
+// Sandbox installs use freemium without an override; synthetic download dates do not earn
+// a production promotion. The old open-window policy remains available to regression tests.
+
+enum MonetizationLaunchPolicy {
+    case preservedAccess
+    case openWindow
+}
 
 // MARK: - Where an Apple Account stands
 
@@ -19,10 +25,8 @@ enum MonetizationLaunchCohortStatus: String, Sendable, Hashable, Codable {
     case member
     /// Apple's signed app transaction says the first download was at or after the cutoff.
     case notMember
-    /// Nothing has been decided: no verdict is stored, and the app transaction has not been
-    /// read yet or could not be read (a first launch with no connection). The app grants
-    /// unlimited analyses while this lasts and writes nothing down; see
-    /// `grantsUnlimitedAnalyses`.
+    /// No stored verdict or verified production transaction is available yet. New installs
+    /// use the ordinary free allowance until access is recovered. Nothing is persisted.
     case undecided
 }
 
@@ -73,7 +77,7 @@ struct MonetizationLaunchCohortRecord: Codable, Sendable, Equatable {
     /// one would be the single unrecoverable mistake of this feature: a member who was promised
     /// the app free forever would be paywalled, and `resolve` would never ask Apple again,
     /// because there is a verdict in front of it. Treated as no record, the cohort is undecided
-    /// instead, which grants the offer for that launch only and asks Apple at once.
+    /// instead, which allows the app to ask Apple again without persisting a false denial.
     var carriesAVerdict: Bool { isMember || originalPurchaseDate != .distantFuture }
 
     /// The verdict this record gives under `cutoff`, which may be a later build's.
@@ -82,10 +86,8 @@ struct MonetizationLaunchCohortRecord: Codable, Sendable, Equatable {
     /// place the two are combined. Ask `carriesAVerdict` first: this answers `.notMember` for a
     /// record that says nothing.
     ///
-    /// Stickiness is why a closed window is not expressed by moving the cutoff alone. A build
-    /// that already wrote `isMember: true` would keep that verdict under any later cutoff, so
-    /// `MonetizationLaunchCohort` asks `MonetizationRules.launchWindowIsOpen(cutoff:)` before it
-    /// reads a record at all, and this function is not reached while the window is closed.
+    /// A previously earned grant survives the end of the offer. The shipping policy ignores
+    /// these records in sandbox without changing them, so production access is preserved.
     func status(under cutoff: Date) -> MonetizationLaunchCohortStatus {
         isMember || originalPurchaseDate < cutoff ? .member : .notMember
     }
@@ -109,20 +111,11 @@ struct MonetizationLaunchCohortRecord: Codable, Sendable, Equatable {
 /// This one may take its time, because the stored verdict answers every launch after the first
 /// and the app has an honest answer for the launch where there is none yet.
 ///
-/// **An undecided cohort grants unlimited analyses.** On a first launch with no connection
-/// there is no stored verdict and no app transaction, so nothing is known. The app then behaves
-/// as if this were a member and writes nothing down, for the length of that launch:
-///
-/// - Treating an unknown user as a non-member would put a paywall in front of someone who was
-///   promised the app free forever, with no way for them to say so. That is unrecoverable.
-/// - Treating an unknown user as a member costs, at most, unlimited analyses until the device
-///   next reaches the network. It corrects itself the moment an answer arrives, and it takes
-///   nothing away in the meantime: an analysis allowed this way is allowed as Pro is allowed,
-///   so it spends none of the three free analyses.
-///
-/// It is never written down, so one failed read cannot make somebody a member forever: the
-/// question is asked again at every launch and every return to the foreground until Apple
-/// answers it.
+/// **The offer has ended.** A stored production grant remains usable offline. Without one,
+/// the app uses the ordinary three-analysis allowance while asking Apple for a verified
+/// production download date. A pre-cutoff date recovers the grant after reinstalling or moving
+/// devices. Sandbox dates never earn it. Failed reads persist nothing and can be retried.
+/// `.openWindow` retains the old behavior solely for historical regression tests.
 @MainActor
 @Observable
 final class MonetizationLaunchCohort {
@@ -130,15 +123,16 @@ final class MonetizationLaunchCohort {
     /// says otherwise.
     private(set) var status: MonetizationLaunchCohortStatus
 
-    /// True while the Testing section has asked this build to behave as an install made after
-    /// the window closed (`MonetizationLaunchCohortTesting`). Always false outside a sandbox
-    /// build.
+    /// Historical sandbox override, retained for regression fixtures and older defaults.
+    /// The shipping Settings screen no longer exposes it.
     private(set) var leavesCohortForTesting: Bool
 
     @ObservationIgnored private let vault: any MonetizationVault
     @ObservationIgnored private let channel: MonetizationBuildChannel
     @ObservationIgnored private let defaults: UserDefaults
     @ObservationIgnored private let cutoff: Date
+    @ObservationIgnored private let policy: MonetizationLaunchPolicy
+    @ObservationIgnored private var hasResolvedPreservedAccess = false
     @ObservationIgnored private var isResolving = false
     /// A DEBUG launch argument fixed the status; Apple's answer must not replace it.
     @ObservationIgnored private var isFixedForDebug = false
@@ -151,13 +145,19 @@ final class MonetizationLaunchCohort {
         vault: any MonetizationVault,
         channel: MonetizationBuildChannel = .current,
         defaults: UserDefaults = .standard,
-        cutoff: Date = MonetizationRules.launchCohortCutoff
+        cutoff: Date = MonetizationRules.launchCohortCutoff,
+        policy: MonetizationLaunchPolicy = .preservedAccess
     ) {
         self.vault = vault
         self.channel = channel
         self.defaults = defaults
         self.cutoff = cutoff
-        if MonetizationRules.launchWindowIsOpen(cutoff: cutoff) {
+        self.policy = policy
+        if policy == .preservedAccess && channel == .sandbox {
+            // Keep stored records intact for the customer's production app. TestFlight and
+            // App Review exercise purchases rather than receiving a real launch promotion.
+            status = .notMember
+        } else if MonetizationRules.launchWindowIsOpen(cutoff: cutoff) {
             // Synchronous, so the first frame is already right for everybody who has been decided.
             status = Self.storedStatus(vault: vault, cutoff: cutoff)
         } else {
@@ -182,33 +182,21 @@ final class MonetizationLaunchCohort {
 
     /// Whether the app grants unlimited analyses and hides every commercial surface.
     ///
-    /// True for a member and while nothing is decided (see the note above); false once Apple
-    /// has said this Apple Account arrived after the window, and false while the Testing
-    /// section asks this build to behave as a post-window install.
+    /// Shipping builds require a member verdict. The historical open-window policy also
+    /// grants temporary access while undecided; sandbox testing overrides can suppress it.
     var grantsUnlimitedAnalyses: Bool {
         guard !leavesCohortForTesting else { return false }
         switch status {
-        case .member, .undecided: return true
+        case .member: return true
+        case .undecided: return policy == .openWindow
         case .notMember: return false
         }
     }
 
-    /// Whether Apple has actually said this Apple Account is a member, **and** the offer is
-    /// being granted.
-    ///
-    /// The grant above is deliberately wider than the truth: an undecided cohort is granted
-    /// unlimited analyses, because denying them would be the unrecoverable mistake. Copy that
-    /// makes a claim about the past read this narrower one instead. Settings used to tell a
-    /// first launch with no connection "you installed Chess Best Move before October 15, 2026,
-    /// so every analysis is unlimited and stays that way" - a dated, permanent promise to
-    /// somebody who may turn out to have installed it in November, which the next launch would
-    /// have taken back. The window closed on 2026-09-28 and that footer went with it, so
-    /// nothing reads this today (monetization.md section 11); it is kept with the rest of the
-    /// mechanism, for a window that is reopened.
+    /// Whether a confirmed grant is currently honored.
     var offerIsConfirmed: Bool { grantsUnlimitedAnalyses && status == .member }
 
-    /// Whether Apple has answered. The app behaves the same for `.undecided` as for `.member`,
-    /// so this is only for the Testing section and the logs.
+    /// Whether a stored record or verified transaction has supplied a verdict.
     var isDecided: Bool { status != .undecided }
 
     /// Reads Apple's app transaction and writes the verdict, unless one is already stored.
@@ -217,12 +205,37 @@ final class MonetizationLaunchCohort {
     /// which returns nil when the transaction could not be read or did not verify. Nothing is
     /// written for a nil: the verdict is made only from an answer that actually arrived.
     ///
-    /// While the window is closed the status is already `.notMember`, so the guard below returns
-    /// at once and Apple is never asked.
-    func resolve(readOriginalPurchaseDate: () async -> Date?) async {
-        guard !isFixedForDebug, status == .undecided, !isResolving else { return }
+    /// The preserved-access policy checks the signed environment before using download dates.
+    /// Product loading runs independently, so a slow transaction read cannot hide purchases.
+    func resolve(
+        readEnvironment: () async -> MonetizationAppStoreEnvironment? = { nil },
+        readOriginalPurchaseDate: () async -> Date?
+    ) async {
+        guard !isFixedForDebug, !isResolving else { return }
+        if policy == .preservedAccess {
+            guard !hasResolvedPreservedAccess else { return }
+        } else {
+            guard status == .undecided else { return }
+        }
         isResolving = true
         defer { isResolving = false }
+        if policy == .preservedAccess {
+            // The signed environment is authoritative even if the deprecated receipt filename
+            // gave the wrong initial channel. Never infer promotion eligibility from a sandbox
+            // transaction's synthetic date, or overwrite an earned production record with it.
+            guard let environment = await readEnvironment(), environment != .unrecognized else { return }
+            guard environment == .production else {
+                status = .notMember
+                hasResolvedPreservedAccess = true
+                return
+            }
+            let stored = Self.storedStatus(vault: vault, cutoff: cutoff)
+            if stored != .undecided {
+                status = stored
+                hasResolvedPreservedAccess = true
+                return
+            }
+        }
         guard let originalPurchaseDate = await readOriginalPurchaseDate() else {
             MonetizationLog.store.notice("launch cohort still undecided: the app transaction could not be read")
             return
@@ -236,6 +249,7 @@ final class MonetizationLaunchCohort {
         // is not available yet only means the next launch asks Apple again.
         save(record)
         status = record.status(under: cutoff)
+        hasResolvedPreservedAccess = policy == .preservedAccess
         MonetizationLog.store.notice(
             "launch cohort decided: \(self.status.rawValue, privacy: .public)"
         )

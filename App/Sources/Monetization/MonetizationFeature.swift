@@ -122,11 +122,11 @@ enum MonetizationRules {
     /// (`originalPurchaseDate < cutoff`) that no signed date can satisfy.
     static let launchWindowClosed = Date(timeIntervalSince1970: 0)
 
-    /// First downloads through October 31, 2026 keep unlimited analyses permanently.
-    /// Noon UTC on November 1 includes October 31 in every time zone (UTC-12 last).
-    /// Owner decision: 2026-10-08, reopening the window closed on September 28.
+    /// The offer ended on October 13, 2026. Earlier production downloads and saved member
+    /// records keep their earned access; new downloads use the three-analysis allowance.
+    /// This is a recovery boundary for existing customers, not a new promotion.
     /// Compared with Apple's signed originalPurchaseDate, never the device clock.
-    static let launchCohortCutoff = Date(timeIntervalSince1970: 1793534400) // 2026-11-01T12:00:00Z
+    static let launchCohortCutoff = Date(timeIntervalSince1970: 1791913418) // 2026-10-13T17:43:38Z
 
     /// Whether `cutoff` leaves a free launch window open at all.
     ///

@@ -17,6 +17,10 @@ proceed to analysis; individual analyses require a tap. Uncertain boards open Ch
 Unrelated, previously handled and in-app screenshots are ignored, and explicit image selections
 and editing take priority. You can turn this behavior off and continue importing manually.
 
+New users receive three free analyses before optional purchases. The October launch offer
+has ended; existing production customers keep earned unlimited access and paid purchases.
+Sandbox installs use the normal purchase flow without a promotion override.
+
 Website: <https://chessbestmove.app/>
 
 Chess Best Move is free software, licensed under the GNU General Public License version 3. See

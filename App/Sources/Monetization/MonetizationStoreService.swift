@@ -199,9 +199,7 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
     private(set) var hasPurchasedPro = false
     /// Unlimited analyses: a purchase, or membership of the free launch cohort.
     var isPro: Bool { hasPurchasedPro || isLaunchCohortMember }
-    /// Whether the app is granting the launch offer. See `MonetizationLaunchCohort`: it is
-    /// also true while nothing has been decided yet, which is the honest answer for a first
-    /// launch with no connection.
+    /// Whether the app honors free unlimited access earned before the promotion ended.
     var isLaunchCohortMember: Bool { launchCohort.grantsUnlimitedAnalyses }
     /// Apple has confirmed the offer, so copy may say so. See `MonetizationLaunchCohort`.
     var isConfirmedLaunchCohortMember: Bool { launchCohort.offerIsConfirmed }
@@ -314,11 +312,11 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
         // the receipt name's answer until this lands, and Settings redraws if Apple's answer
         // differs (`MonetizationBuildChannelResolver`).
         Task { [weak self] in await self?.resolveBuildChannel() }
+        // Legacy access recovery may need the network. New users must still be able to load
+        // purchase options immediately, while stored production members retain access offline.
+        Task { [weak self] in await self?.resolveLaunchCohort() }
         Task { [weak self] in
             guard let self else { return }
-            // Before the transactions: this decides whether there is anything to sell at all,
-            // and a member must not see a purchase screen flash past while it is decided.
-            await self.resolveLaunchCohort()
             for transaction in await self.client.unfinishedTransactions() {
                 await self.process(transaction)
             }
@@ -327,11 +325,13 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
         }
     }
 
-    /// Decides the launch cohort from Apple's signed app transaction, once
-    /// (`MonetizationLaunchCohort`). Does nothing once a verdict is stored, and nothing at all
-    /// while the free launch window is closed, which is what this build carries.
+    /// Recovers existing production access from Apple's signed app transaction.
+    /// Sandbox always uses the normal purchase flow; failed lookups can be retried.
     func resolveLaunchCohort() async {
-        await launchCohort.resolve { [client] in await client.appTransactionOriginalPurchaseDate() }
+        await launchCohort.resolve(
+            readEnvironment: { [client] in await client.appTransactionEnvironment() },
+            readOriginalPurchaseDate: { [client] in await client.appTransactionOriginalPurchaseDate() }
+        )
     }
 
     /// Replaces the receipt name's guess at the build channel with Apple's own answer, once
