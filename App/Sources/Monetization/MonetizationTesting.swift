@@ -198,8 +198,8 @@ final class MonetizationBuildChannelResolver {
         // and the next launch would not ask again.
         guard let environment = read, environment != .unrecognized else {
             let reason = read == nil
-                ? "the app transaction could not be read"
-                : "the app transaction named an environment this build does not know"
+                ? String(localized: "the app transaction could not be read")
+                : String(localized: "the app transaction named an environment this build does not know")
             MonetizationLog.store.notice(
                 "the build channel stays at the receipt name's answer: \(reason, privacy: .public)"
             )
@@ -297,56 +297,56 @@ protocol MonetizationTestingGrants: AnyObject, Observable, Sendable {
 /// The text of the Testing section (design.md 14: sentence case, plain verbs, American
 /// spelling). It is not purchase-screen copy, so it may say "free".
 enum MonetizationTestingCopy {
-    static let sectionLabel = "Testing"
+    static let sectionLabel = String(localized: "Testing")
     static let note =
-        "These controls are in TestFlight builds and never in an App Store build. They grant analyses, never Pro: Pro comes from a purchase, which costs nothing in the TestFlight sandbox."
+        String(localized: "These controls are in TestFlight builds and never in an App Store build. They grant analyses, never Pro: Pro comes from a purchase, which costs nothing in the TestFlight sandbox.")
 
-    static let freeRow = "Free Analyses"
-    static let purchasedRow = "Purchased Analyses"
-    static let paidBoardsRow = "Boards Already Paid For"
+    static let freeRow = String(localized: "Free Analyses")
+    static let purchasedRow = String(localized: "Purchased Analyses")
+    static let paidBoardsRow = String(localized: "Boards Already Paid For")
 
-    static let reset = "Reset Free Analyses"
-    static let resetQuestion = "Reset free analyses?"
+    static let reset = String(localized: "Reset Free Analyses")
+    static let resetQuestion = String(localized: "Reset free analyses?")
     static let resetDetail =
-        "Free analyses go back to 3, the boards already paid for are forgotten, and analyses added here are taken back. Bought analyses and Pro are not touched."
-    static let resetConfirm = "Reset"
+        String(localized: "Free analyses go back to 3, the boards already paid for are forgotten, and analyses added here are taken back. Bought analyses and Pro are not touched.")
+    static let resetConfirm = String(localized: "Reset")
 
-    static func grant(_ count: Int) -> String { "Add \(count) Analyses" }
-    static func grantQuestion(_ count: Int) -> String { "Add \(count) analyses?" }
+    static func grant(_ count: Int) -> String { String(localized: "Add \(count) Analyses") }
+    static func grantQuestion(_ count: Int) -> String { String(localized: "Add \(count) analyses?") }
     static func grantDetail(_ count: Int) -> String {
-        "Adds the same \(count) analyses the pack grants, without a purchase. \"\(reset)\" takes them back."
+        String(localized: "Adds the same \(count) analyses the pack grants, without a purchase. \"\(reset)\" takes them back.")
     }
-    static let grantConfirm = "Add"
+    static let grantConfirm = String(localized: "Add")
 
-    static let cancel = "Cancel"
+    static let cancel = String(localized: "Cancel")
 
     // SettingsTestingSection restores the sandbox purchase-flow override for the October offer.
 
     /// "2 of 3" for the free row.
     static func freeValue(_ counts: MonetizationTestingCounts) -> String {
-        "\(counts.freeRemaining) of \(counts.freeAllowance)"
+        String(localized: "\(counts.freeRemaining) of \(counts.freeAllowance)")
     }
 
     /// The plural of "analysis" this count needs.
     static func analyses(_ count: Int) -> String {
-        count == 1 ? "1 analysis" : "\(count) analyses"
+        count == 1 ? String(localized: "1 analysis") : String(localized: "\(count) analyses")
     }
 
     /// The plural of "board" this count needs.
     static func boards(_ count: Int) -> String {
-        count == 1 ? "1 board" : "\(count) boards"
+        count == 1 ? String(localized: "1 board") : String(localized: "\(count) boards")
     }
 
     /// What the reset did: the free analyses it restored, the boards it forgot and the granted
     /// analyses it took back.
     static func resetDone(before: MonetizationTestingCounts, after: MonetizationTestingCounts) -> String {
-        var sentences = ["Free analyses back to \(after.freeRemaining) of \(after.freeAllowance)."]
+        var sentences = [String(localized: "Free analyses back to \(after.freeRemaining) of \(after.freeAllowance).")]
         if before.paidBoards > 0 {
-            sentences.append("\(boards(before.paidBoards)) forgotten.")
+            sentences.append(String(localized: "\(boards(before.paidBoards)) forgotten."))
         }
         let takenBack = max(0, before.purchasedRemaining - after.purchasedRemaining)
         if takenBack > 0 {
-            sentences.append("\(analyses(takenBack)) added here taken back.")
+            sentences.append(String(localized: "\(analyses(takenBack)) added here taken back."))
         }
         return sentences.joined(separator: " ")
     }
@@ -354,10 +354,10 @@ enum MonetizationTestingCopy {
     /// What the grant did.
     static func grantDone(before: MonetizationTestingCounts, after: MonetizationTestingCounts) -> String {
         let added = max(0, after.purchasedRemaining - before.purchasedRemaining)
-        return "\(analyses(added)) added. \(after.purchasedRemaining) purchased now."
+        return String(localized: "\(analyses(added)) added. \(after.purchasedRemaining) purchased now.")
     }
 
     /// Neither action could change anything: the stored record could not be read (a Keychain
     /// that is not available yet), so nothing was written over it.
-    static let nothingChanged = "Nothing changed: the stored analyses could not be read."
+    static let nothingChanged = String(localized: "Nothing changed: the stored analyses could not be read.")
 }

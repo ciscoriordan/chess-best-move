@@ -1,0 +1,3087 @@
+{
+  "007974afac170444eacf": {
+    "source": "No Board Found",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Nenhum tabuleiro encontrado"
+  },
+  "007c61ca2efa377fe6e1": {
+    "source": "Stalemate.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Pato."
+  },
+  "00986616ee2a1e0d5e55": {
+    "source": "Match Screenshot",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Corresponder à captura de tela"
+  },
+  "009c6524a33736da0fda": {
+    "source": "Opens purchase options.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abre as opções de compra."
+  },
+  "00e6391d64001dfe0cd5": {
+    "source": "Off",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Desativado"
+  },
+  "012d240e132919177bc3": {
+    "source": "Chess Best Move couldn't analyze this position.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "O Chess Best Move não conseguiu analisar esta posição."
+  },
+  "0187a339e5ca6ddd774c": {
+    "source": "Tap Use latest screenshot.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Toque em “Usar a captura de tela mais recente”."
+  },
+  "027181fddd448e651a00": {
+    "source": "1 analysis left",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "Falta 1 análise"
+  },
+  "02ae84b85ede5fa01a13": {
+    "source": "Stockfish is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "O Stockfish é distribuído na esperança de que seja útil, mas SEM QUALQUER GARANTIA; sem sequer a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM FIM ESPECÍFICO. Consulte a Licença Pública Geral GNU para obter mais detalhes."
+  },
+  "02eb0cb6873c203b8652": {
+    "source": "No analyses left.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Não há mais análises."
+  },
+  "0355de754655c496fb6b": {
+    "source": "Chess Best Move, Copyright (C) 2026 Motomatic LLC",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
+  },
+  "03b0f6bbda9b26e2d5ee": {
+    "source": "Tap squares to clear them",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Toque nas casas para limpá-las"
+  },
+  "03ecf4f51a7ef23b8090": {
+    "source": "Couldn't read that image",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Não foi possível ler essa imagem"
+  },
+  "0403b09f47d667370194": {
+    "source": "Leela Chess Zero Training Data",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Dados de treinamento do Leela Chess Zero"
+  },
+  "0432c8166b79eca1bdcf": {
+    "source": "Use latest screenshot",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Use a captura de tela mais recente"
+  },
+  "054616e04fd8e84ede0c": {
+    "source": "Add %lld analyses?",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Adicionar análises d%1$lld?"
+  },
+  "0549a3a0adf16be325b6": {
+    "source": "This app contains a modified version of Stockfish 19 (release tag sf_19). On September 13, 2026, src/shm.h was changed so that an app embedding Stockfish can turn off its cross-process shared-memory store for the neural network. That store creates files in /tmp, a socket server thread and an exit handler, which do not belong in an app. With the store turned off, the network is kept in ordinary app memory, which is Stockfish's existing fallback. Without the switch, the source behaves exactly like the release.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Este aplicativo contém uma versão modificada do Stockfish 19 (tag de lançamento sf_19). Em 13 de setembro de 2026, o arquivo src/shm.h foi alterado para que um aplicativo que incorpore o Stockfish possa desativar seu armazenamento de memória compartilhada entre processos para a rede neural. Esse armazenamento cria arquivos em /tmp, uma thread de servidor de socket e um manipulador de saída, que não pertencem a um aplicativo. Com o armazenamento desativado, a rede é mantida na memória comum do aplicativo, que é o mecanismo de fallback existente do Stockfish. Sem essa alteração, o código-fonte se comporta exatamente como a versão de lançamento."
+  },
+  "058ef25c75bc92d1e49c": {
+    "source": "Take a screenshot of the position.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Faça uma captura de tela da posição."
+  },
+  "05eac7f98e3ccc543eec": {
+    "source": "Compare with your screenshot",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Compare com sua captura de tela"
+  },
+  "0677621edf693ea299fb": {
+    "source": "How it works",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Como funciona"
+  },
+  "06a44a7a62b13832a255": {
+    "source": "Start position",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Posição inicial"
+  },
+  "06ece4c42faf8985aa64": {
+    "source": "Keep the chess position you want to analyze on screen. Say “Siri, analyze my chess screenshot”, using the exact name of the shortcut you created.",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Mantenha a posição de xadrez que você deseja analisar na tela. Diga “Siri, analise minha captura de tela de xadrez”, usando o nome exato do atalho que você criou."
+  },
+  "074b3292bd81b2cefcbd": {
+    "source": "Take a screenshot of the position: press the top button and the Home button together.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Faça uma captura de tela da posição: pressione o botão superior e o botão Home ao mesmo tempo."
+  },
+  "07cd9a7dacd8e221c7c0": {
+    "source": "no pieces",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "sem peças"
+  },
+  "07f6b2aedf3ea8ea1626": {
+    "source": "rook",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "torre"
+  },
+  "08228bed0e2d0e56cb83": {
+    "source": "No legal moves",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Nenhum lance válido"
+  },
+  "0892b10b8d3de4c7cd39": {
+    "source": "Switch to a Better Move Automatically",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Mudar automaticamente para uma jogada melhor"
+  },
+  "08ac348e22ee77ecfad6": {
+    "source": "You've used your free analyses. Open Chess Best Move to continue.",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "Você já utilizou suas análises gratuitas. Abra o Chess Best Move para continuar."
+  },
+  "09779c722155ed14295b": {
+    "source": "the app transaction named an environment this build does not know",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "a transação do aplicativo nomeou um ambiente que esta compilação não reconhece"
+  },
+  "0a04aae9ba0156694e01": {
+    "source": "More",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Mais"
+  },
+  "0acc1ec9328d9d08b986": {
+    "source": "knight",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "cavalo"
+  },
+  "0ad4ed023ca426403778": {
+    "source": "For the best result",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Para obter o melhor resultado"
+  },
+  "0adf6846feb83dc0dce5": {
+    "source": "Set up the position by hand",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Configure a posição manualmente"
+  },
+  "0b6254ff69bc66a58cb3": {
+    "source": "Stopped before the think time was up. Run it again for the full think time.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Parou antes do tempo de reflexão terminar. Execute novamente para o tempo de reflexão completo."
+  },
+  "0bae0bf9808958bcded1": {
+    "source": "Support",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Suporte"
+  },
+  "0bfe023410db144139fc": {
+    "source": "Castling",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Roque"
+  },
+  "0c53f61082949683b25e": {
+    "source": "Stockfish is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "O Stockfish é um software livre: você pode redistribuí-lo e/ou modificá-lo de acordo com os termos da Licença Pública Geral GNU, conforme publicada pela Free Software Foundation, seja a versão 3 da Licença, seja (a seu critério) qualquer versão posterior."
+  },
+  "0cdb35f6b90c84ee81ba": {
+    "source": "the player at the top",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "o jogador na parte superior"
+  },
+  "0dac740991ff133beb2b": {
+    "source": "Cancel",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Cancelar"
+  },
+  "0dd968779af61a2e559a": {
+    "source": "Taken 59 min ago",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Capturado há 59 minutos"
+  },
+  "0eb2df13db53236ced00": {
+    "source": "Apple doesn't cancel it for you. Cancel it in your subscriptions to stop the renewals.",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "A Apple não cancela isso para você. Cancele em suas assinaturas para interromper as renovações."
+  },
+  "0ef34df19fe1d577969b": {
+    "source": "Your current plan.",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "Seu plano atual."
+  },
+  "0f01a1a8cc6f6a349c54": {
+    "source": "Black O-O-O",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Preto O-O-O"
+  },
+  "0f12bc70d61b3ec39146": {
+    "source": "Nxf7+",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Nxf7+"
+  },
+  "0f504c4081aa0f2e6344": {
+    "source": "Their likely move: %1$@. Best reply: %2$@.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Jogada provável deles: %1$@. Melhor resposta: %2$@."
+  },
+  "0ffbb7b15649bbf3aa9a": {
+    "source": "Thinking.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Pensando."
+  },
+  "100c2557c667df48e598": {
+    "source": "1 day ago",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "1 dia atrás"
+  },
+  "1047429c0c0319aa162b": {
+    "source": "Analyze new screenshot",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Analise a nova captura de tela"
+  },
+  "10d1b6824baebe2ff02e": {
+    "source": "1 board",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "1 tabuleiro"
+  },
+  "11947776992fd53831f3": {
+    "source": "2 minutes",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "2 minutos"
+  },
+  "12677ab516e8275a1897": {
+    "source": "the player at the bottom",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "o jogador na parte inferior"
+  },
+  "129e71a42eae5c12fb18": {
+    "source": "bishop",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "bispo"
+  },
+  "13645bf6138ae0040355": {
+    "source": "GNU General Public License v3 (Full Text)",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Licença Pública Geral GNU v3 (Texto Completo)"
+  },
+  "1375dd906e7683041219": {
+    "source": "Switch side to move",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Troque de lado para jogar"
+  },
+  "146661ba8a518347b3df": {
+    "source": "Couldn't open that image.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Não foi possível abrir essa imagem."
+  },
+  "1468beeaf6d0def04c93": {
+    "source": "the app transaction could not be read",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "Não foi possível ler a transação do aplicativo"
+  },
+  "14b55054c36bcc34a181": {
+    "source": "queen",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "rainha"
+  },
+  "14fe9c3a42e647f3cc31": {
+    "source": "Show it",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Mostrar"
+  },
+  "15b1e164872f801468d5": {
+    "source": "Swaps the side to move and analyzes again.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Troca o lado que deve jogar e analisa novamente."
+  },
+  "15f2b82c40088322ef56": {
+    "source": "%1$lld of %2$lld analyses left.",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld Restam análises de %2$lld."
+  },
+  "1601660955debed8f960": {
+    "source": "Move the board cursor down",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Mova o cursor do tabuleiro para baixo"
+  },
+  "16fadb9bb33ccc894531": {
+    "source": "The engine keeps searching the same board after the first move appears, and stops at this time at the latest. It stops earlier once the move has held for several depths, and right away when the device is saving power or has warmed up.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O mecanismo continua pesquisando o mesmo tabuleiro após o primeiro lance aparecer e para, no máximo, nesse momento. Ele para mais cedo assim que o lance se mantiver por várias profundidades e imediatamente quando o dispositivo estiver economizando energia ou tiver aquecido."
+  },
+  "1768af8b251241310463": {
+    "source": "Use a screenshot of the board, not a photo of a screen.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Use uma captura de tela do tabuleiro, não uma foto da tela."
+  },
+  "1773a59b5cb9ef4ddfb2": {
+    "source": "%1$@ promotes to %2$@",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ promove a %2$@"
+  },
+  "17781e0a5e7c8cdc64ef": {
+    "source": "Think longer: 10 s",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Pense por mais tempo: 10 s"
+  },
+  "18546381211cd8783844": {
+    "source": "depth 24    3.0 s    2.3 M n/s",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "profundidade 24    3,0 s    2,3 M n/s"
+  },
+  "19e6c99d9f8b6cdf12f6": {
+    "source": "%1$lld%2$@s ago",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld%2$@s atrás"
+  },
+  "1abdcf413b6aa956817b": {
+    "source": "1. Nxf7+ Kxf7 2. Qh5+ g6 3. Qxe5",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "1. Nxf7+ Kxf7 2. Qh5+ g6 3. Qxe5"
+  },
+  "1b3dd144a38b1fe23be5": {
+    "source": "Best value",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Melhor valor"
+  },
+  "1be398e115ff7bfb69a2": {
+    "source": "bishop",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "bispo"
+  },
+  "1c97a7a5bb4d26281b12": {
+    "source": "The chess engine can't analyze this position. Use Edit to check the pieces.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O mecanismo de xadrez não consegue analisar esta posição. Use “Editar” para verificar as peças."
+  },
+  "1dcb2a12854f0e750611": {
+    "source": "${applicationName} find best move",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "${applicationName} encontrar a melhor jogada"
+  },
+  "1e457ffc8d678b8b888f": {
+    "source": "Your screenshot shows %lld boards. If this is not the one you want, crop the screenshot to that board and import it again.",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "Sua captura de tela mostra tabuleiros d%1$lld. Se esse não for o que você deseja, recorte a captura de tela para esse tabuleiro e importe-a novamente."
+  },
+  "1e5eec716b6e4aee5049": {
+    "source": "%1$@ takes %2$@",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ takes%2$@"
+  },
+  "1ee52f5482efacf123d6": {
+    "source": "Limited access can't see new screenshots. Pick it yourself, or use Photos or Paste.",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "O acesso limitado não permite visualizar novas capturas de tela. Escolha você mesmo ou use o aplicativo Fotos ou a função Colar."
+  },
+  "1f14d2fa33e4ebd48483": {
+    "source": "%@ you bought",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ você comprou"
+  },
+  "1f3283b3953812c24142": {
+    "source": "Black O-O",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Preto O-O"
+  },
+  "1f99c6c4d889c2f64017": {
+    "source": "Taken %@",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Retirado de %1$@"
+  },
+  "1fa77558440a6f2b2f6e": {
+    "source": "A Pro subscription, which renews until you cancel it.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Uma assinatura Pro, que se renova até que você a cancele."
+  },
+  "1fc6cc648dcac64cdd3f": {
+    "source": "Edit",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Editar"
+  },
+  "2077cf00f9bc50a43c74": {
+    "source": "Open Control Center, tap +, and choose Add a Control > Shortcut. Tap Choose and select the version of your shortcut with the wait. With a chess position on screen, open Control Center and tap your shortcut control. Immediately dismiss Control Center so the board is visible before the wait ends. Take Screenshot captures whatever is visible, including Control Center if it is still open. Increase the wait if you need more time.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abra o Centro de Controle, toque em + e escolha “Adicionar um controle” > “Atalho”. Toque em “Escolher” e selecione a versão do seu atalho com a espera. Com uma posição de xadrez na tela, abra o Centro de Controle e toque no controle do seu atalho. Feche imediatamente o Centro de Controle para que o tabuleiro fique visível antes que a espera termine. A opção “Capturar tela” captura tudo o que estiver visível, incluindo o Centro de Controle, caso ele ainda esteja aberto. Aumente o tempo de espera se precisar de mais tempo."
+  },
+  "209729a584d8ed19c09e": {
+    "source": "Just Need a Few?",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Precisa apenas de alguns?"
+  },
+  "211995faf032a8d34134": {
+    "source": "Checkmate. There are no legal moves.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Xeque-mate. Não há jogadas válidas."
+  },
+  "212a2552ea7bcab0a375": {
+    "source": "Reset Free Analyses",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Redefinir Análises Gratuitas"
+  },
+  "2159efbd15d68244e187": {
+    "source": "Best move",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Melhor jogada"
+  },
+  "22aa50cb345272a4ec12": {
+    "source": "Full Text",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Texto completo"
+  },
+  "22cb803d6d8ef79c4aa6": {
+    "source": "Board, %@ at bottom",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Tabuleiro, “%1$@” na parte inferior"
+  },
+  "233b0a28a2eaaf6096fd": {
+    "source": "Widget layouts",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Layouts de widgets"
+  },
+  "233f8f0c4becc60ba5fe": {
+    "source": "Source Code of This Version",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Código-fonte desta versão"
+  },
+  "241c4f144e363a91eaee": {
+    "source": "knight",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "cavalo"
+  },
+  "24704a2e10a4939717d9": {
+    "source": "Keep editing",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Continue editando"
+  },
+  "2482418fee77ecbc2dcf": {
+    "source": "Source code",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Código-fonte"
+  },
+  "24992166253cec8f9001": {
+    "source": "ODbL Data",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Dados ODbL"
+  },
+  "24b02dbe58fef218ce5c": {
+    "source": "Take a screenshot of the position: press the side button and volume up together.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Faça uma captura de tela da posição: pressione o botão lateral e o botão de aumentar o volume ao mesmo tempo."
+  },
+  "25352df419001705be32": {
+    "source": "Think time",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Tempo de reflexão"
+  },
+  "256c8d374fc4c10397a6": {
+    "source": "Loading purchase options",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Carregando opções de compra"
+  },
+  "25864b10dfa3882bef09": {
+    "source": "Queen",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Rainha"
+  },
+  "25acdbba03e74422a3c3": {
+    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Your photos stay on your device.",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "O Chess Best Move lê sua captura de tela mais recente para localizar o tabuleiro de xadrez nela. Suas fotos permanecem no seu dispositivo."
+  },
+  "26336eb38bf024047a48": {
+    "source": "Couldn't restore purchases. Please try again.",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Não foi possível restaurar as compras. Tente novamente."
+  },
+  "2678f09a1d196035c32a": {
+    "source": "Testing",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Testes"
+  },
+  "273a5d99c600ab4c0fa6": {
+    "source": "depth %lld",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "%1$lld de profundidade"
+  },
+  "28710ad8ab38f2e871ba": {
+    "source": "Adds the same %1$lld analyses the pack grants, without a purchase. \"%2$@\" takes them back.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Adiciona as mesmas análises do “%1$lld” que o pacote oferece, sem necessidade de compra. “%2$@” as retira."
+  },
+  "28d5401157ece996fff2": {
+    "source": "Analysis failed.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Falha na análise."
+  },
+  "28f856758613e727b1d0": {
+    "source": "Pro Lifetime",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Pro Lifetime"
+  },
+  "291cfbdc85c10d3c9545": {
+    "source": "Clears %@",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Limpa “%1$@”"
+  },
+  "29efc36d1d312129bec1": {
+    "source": "30 seconds",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "30 segundos"
+  },
+  "2a15c3f80976cb703227": {
+    "source": "Keeps %@ as recognized",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Mantém “%1$@” conforme reconhecido"
+  },
+  "2a2163c5a7ce0a527d6e": {
+    "source": "Analyze sample screenshot",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Analise a captura de tela de exemplo"
+  },
+  "2a4ec2b732f672fa9a87": {
+    "source": "That isn't an image",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Isso não é uma imagem"
+  },
+  "2a82d963622cbe51143d": {
+    "source": "Free analyses go back to 3, the boards already paid for are forgotten, and analyses added here are taken back. Bought analyses and Pro are not touched.",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "As análises gratuitas voltam para 3; os tabuleiros já pagos são esquecidos; e as análises adicionadas aqui são revertidas. As análises compradas e a versão Pro não são afetadas."
+  },
+  "2ae2cc278eb86d50fc20": {
+    "source": "Add “Find Best Move” from Chess Best Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Adicione “Encontrar a melhor jogada” a partir do Chess Best Move. Toque na entrada “Captura de tela”, escolha “Selecionar variável” e selecione a saída de “Fazer captura de tela”. Deve aparecer “Encontrar a melhor jogada na captura de tela”, com “Captura de tela” exibida como um token variável com o ícone de captura de tela, como a entrada em “Salvar no Álbum de Fotos”. Um placeholder “Captura de tela” esmaecido não é uma imagem conectada. Não digite a palavra “Captura de tela” nem deixe a entrada definida como “Perguntar a cada vez”. O aplicativo recebe essa imagem diretamente, sem procurá-la no aplicativo Fotos."
+  },
+  "2b2055913ff4f2294155": {
+    "source": "Only used to find your newest screenshot.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Usado apenas para localizar sua captura de tela mais recente."
+  },
+  "2ba49e535edce8b78cd1": {
+    "source": "%1$.1f of %2$lld seconds",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$.1f %2$lld segundos"
+  },
+  "2c078b492eb43806e746": {
+    "source": "%lld hours ago",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld horas atrás"
+  },
+  "2c376f854a6c83925135": {
+    "source": "Add",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Adicionar"
+  },
+  "2c4071921346a6476f99": {
+    "source": "Edit Position",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Editar posição"
+  },
+  "2c44292c1b932a8f01e0": {
+    "source": "1 second",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "1 segundo"
+  },
+  "2ca92ea6fc826b79bd73": {
+    "source": "Knight",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Cavalo"
+  },
+  "2cc4c08985ce6edd7438": {
+    "source": "Screenshots saved in Photos work best.",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Capturas de tela salvas no aplicativo Fotos funcionam melhor."
+  },
+  "2cd5885585eede5e7b87": {
+    "source": "Allow access to your screenshots",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Permita o acesso às suas capturas de tela"
+  },
+  "2d1300cd8d36a3daf3f9": {
+    "source": "%1$lld%2$@h ago",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld%2$@h atrás"
+  },
+  "2dcfdb8c6e9baa6ac6c0": {
+    "source": "Find the best move in ${screenshot}",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Encontre a melhor jogada em ${screenshot}"
+  },
+  "2e30b66c15a10b7113cb": {
+    "source": "Share a screenshot that shows a chessboard.",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Compartilhe uma captura de tela que mostre um tabuleiro de xadrez."
+  },
+  "2e39af28e8c942e9815f": {
+    "source": "No screenshots yet",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Ainda não há capturas de tela"
+  },
+  "2e3f4c9b95150ceff0f8": {
+    "source": "pawn",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "peão"
+  },
+  "2e9c90b8cc8b518ba0de": {
+    "source": "White O-O-O",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Brancas O-O-O"
+  },
+  "2f1ba14a0b52a16ce1a4": {
+    "source": "Pro Yearly",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Pro Anual"
+  },
+  "2f369c1b8ae0c0d289be": {
+    "source": "Pro Yearly, which renews every year until you cancel it.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Pro Anual, que se renova a cada ano até que você cancele a assinatura."
+  },
+  "2f4ce54c19a6034b7297": {
+    "source": "Empty",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Vazio"
+  },
+  "2f616b622eaaef1e545b": {
+    "source": "Every analysis is unlimited, at no cost. Restore purchases is here for anything you bought on another device.",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Todas as análises são ilimitadas e gratuitas. A função “Restaurar compras” está disponível para tudo o que você comprou em outro dispositivo."
+  },
+  "2fdba261a29a0419c058": {
+    "source": "%@ has more than one king.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ tem mais de um rei."
+  },
+  "2ffc8adfbeb26dc9ef3d": {
+    "source": "%lld months",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld meses"
+  },
+  "3049b08e5c73229eb355": {
+    "source": "Pro Lifetime, bought once. It does not renew and it does not expire.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Pro Vitalício, comprado uma vez. Não se renova e não expira."
+  },
+  "3091e21e96a9aa07dd8a": {
+    "source": "Places it on %@",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Coloque-o em %1$@"
+  },
+  "30d6c00b714cdc4e5bb9": {
+    "source": "Bishop",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Bispo"
+  },
+  "316ba0c132f86044c59a": {
+    "source": "Use the square the board cursor is on",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Use a casa em que o cursor está no tabuleiro"
+  },
+  "31fa484caf119329073e": {
+    "source": "White knight",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Cavalo branco"
+  },
+  "33698b9ed1e411a48093": {
+    "source": "Find Best Move",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Encontre a melhor jogada"
+  },
+  "33aa9217c69148ce87b3": {
+    "source": "Chess Best Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "O Chess Best Move é um software livre: você pode usá-lo, estudar como ele funciona, modificá-lo e compartilhá-lo, com ou sem alterações, de acordo com os termos da versão 3 da Licença Pública Geral GNU, conforme publicada pela Free Software Foundation. O aplicativo inclui o Stockfish, que está sob a mesma licença; portanto, o aplicativo como um todo é distribuído sob essa licença."
+  },
+  "3428bcc46141d84ee515": {
+    "source": "White bishop",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Bispo branco"
+  },
+  "346b741e88e3f4d397a0": {
+    "source": "%@ is checkmated",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ está em xeque-mate"
+  },
+  "34a6dd2a4b64246452c4": {
+    "source": "Restoring…",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Restaurando…"
+  },
+  "34e6bece1a4cda8858e4": {
+    "source": "Recognition wasn't sure it read the right board. Press and hold the board to compare it with your screenshot, then analyze.",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "O reconhecimento não teve certeza se leu o tabuleiro correto. Pressione e mantenha pressionado o tabuleiro para compará-lo com sua captura de tela e, em seguida, analise."
+  },
+  "354a9df0257659c20a7e": {
+    "source": "The move on screen switches to a better one by itself, if you ask it to.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "A jogada na tela muda automaticamente para uma melhor, se você solicitar."
+  },
+  "3743137866cea1acab93": {
+    "source": "15 seconds",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "15 segundos"
+  },
+  "375caca84e951b3b6939": {
+    "source": "%@, from last-move highlight",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ (A última jogada foi...), a partir do destaque da última jogada"
+  },
+  "379903159723d70e240b": {
+    "source": "With the position on screen, press the top button and either volume button at the same time.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Com a posição na tela, pressione o botão superior e qualquer um dos botões de volume ao mesmo tempo."
+  },
+  "384eb19d6aaf9b0e9633": {
+    "source": "Board themes with textures may not be recognized yet.",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Temas de tabuleiro com texturas podem ainda não ser reconhecidos."
+  },
+  "385b2291125e7cc703b6": {
+    "source": "A longer search prefers ",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Uma pesquisa mais longa prefere "
+  },
+  "38b52056774d59d7a63f": {
+    "source": "Allow access in Settings",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Permitir acesso em Ajustes"
+  },
+  "38f3a0fe4819d9ddedab": {
+    "source": "Optional: create a separate shortcut named Chess Action Button. Add Get Current App, then an If action that compares the current app’s Name with the name of your board app. Inside If, add Run Shortcut and choose Analyze my chess screenshot without the Wait action. Leave Otherwise empty. Assign Chess Action Button to the Action button. It will do nothing in other apps, rather than return to the button’s previous function.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Opcional: crie um atalho separado chamado “Botão de Ação de Xadrez”. Adicione “Obter aplicativo atual” e, em seguida, uma ação “Se” que compare o nome do aplicativo atual com o nome do seu aplicativo de tabuleiro de xadrez. Dentro da ação “Se”, adicione “Executar atalho” e escolha “Analisar minha captura de tela de xadrez” sem a ação “Aguardar”. Deixe “Caso contrário” em branco. Atribua o “Botão de Ação de Xadrez” ao botão de ação. Ele não fará nada em outros aplicativos, em vez de retornar à função anterior do botão."
+  },
+  "3a7a45fb3c5639cf30e0": {
+    "source": "Chess Best Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "O Chess Best Move analisa posições com o Stockfish, um mecanismo de xadrez gratuito e de código aberto desenvolvido pela equipe do Stockfish. Ele é executado no seu %1$@; nada é enviado para a nuvem."
+  },
+  "3b74d45b4ec6d3cea58e": {
+    "source": "Source Code of Stockfish",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Código-fonte do Stockfish"
+  },
+  "3b92b4d34b06f5de8bad": {
+    "source": "White castling queenside",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Roque branco pelo lado da rainha"
+  },
+  "3bb2f08055958d6f4312": {
+    "source": "You're offline. Connect to the internet and try again.",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "Você está offline. Conecte-se à internet e tente novamente."
+  },
+  "3c0b229567dbc18d1c7e": {
+    "source": "Choose another image",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Escolha outra imagem"
+  },
+  "3c0ce43317d218badeb0": {
+    "source": "The side to move has no legal moves.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "O lado que deve jogar não tem jogadas válidas."
+  },
+  "3c8fc96bf1a29921c609": {
+    "source": "Add %lld Analyses",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Adicionar análises do “%1$lld”"
+  },
+  "3c95790657e7889c3dd3": {
+    "source": "%1$@ to %2$@",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ para %2$@"
+  },
+  "3d1d4bc28319adea88c9": {
+    "source": "Check the Position",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Verifique a posição"
+  },
+  "3d2416eec10357fca8e4": {
+    "source": "With the position on screen, press the side button and the volume up button at the same time.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Com a posição na tela, pressione o botão lateral e o botão de aumentar o volume ao mesmo tempo."
+  },
+  "3d9b2632efac1ceb17cc": {
+    "source": "Photo access is off. Use Photos or Paste instead.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "O acesso ao Fotos está desativado. Use “Fotos” ou “Colar” em vez disso."
+  },
+  "3df8ab587ee1c1996b05": {
+    "source": "rook",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "torre"
+  },
+  "3e17aeb07eccf536b940": {
+    "source": "Couldn't Read This Image",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Não foi possível ler esta imagem"
+  },
+  "3e8dcd1ff986437b7336": {
+    "source": "The purchase didn't go through. Please try again.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "A compra não foi concluída. Tente novamente."
+  },
+  "3ec6e7763f9b75742706": {
+    "source": "Best move: %@.",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Melhor jogada: %1$@."
+  },
+  "3ec8c7f6d164efab7e97": {
+    "source": "Settings",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Ajustes"
+  },
+  "3f38eeffa9f8c5978844": {
+    "source": "month",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "mês"
+  },
+  "3f4570ba899e77893c59": {
+    "source": "Finding the board...",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Encontrando o tabuleiro..."
+  },
+  "3f5bd7395e779be85720": {
+    "source": "Analyzes %@ to move instead. Re-running is free.",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Analise “%1$@” para “move” em vez disso. A reexecução é gratuita."
+  },
+  "3f780709f4f80ae6ea0b": {
+    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Desbloqueie seu dispositivo e conceda todas as permissões solicitadas. Quando a Siri executa o atalho, ela captura a tela, salva a imagem em “Recentes” e abre o Chess Best Move para analisá-la."
+  },
+  "3fa20c3bb030ed094bad": {
+    "source": "Keep Searching After the Answer",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Continue pesquisando após a resposta"
+  },
+  "3ff6f7858a0bb538090e": {
+    "source": "%1$@ mates in %2$lld",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ mates em %2$lld"
+  },
+  "400b9cc6fbc041c9f3f5": {
+    "source": "Copyright (C) 2004-2026 The Stockfish developers (see the list of authors).",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Copyright (C) 2004-2026 Os desenvolvedores do Stockfish (consulte a lista de autores)."
+  },
+  "404e8804634f813b2079": {
+    "source": "Buy %1$lld analyses: %2$@",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Compre as análises do “%1$lld”: %2$@"
+  },
+  "40c1ba017a653b81f275": {
+    "source": "%@ has no king.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ não tem rei."
+  },
+  "41ceac55b63ca4436488": {
+    "source": ", now shown.",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": ", agora exibido."
+  },
+  "41ffb8c66795d8e3abc0": {
+    "source": "%lld days",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld dias"
+  },
+  "420561b9014f1a323b88": {
+    "source": "White castles kingside",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "As brancas fazem o roque no flanco do rei"
+  },
+  "423b8ea192c86cc81134": {
+    "source": "Terms of Use",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Termos de Uso"
+  },
+  "428d3af832ea3e7cdb6a": {
+    "source": "Comes with Pro",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Inclui a versão Pro"
+  },
+  "4293f639c8634ec0be30": {
+    "source": "No legal moves: checkmate or stalemate.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Nenhum lance válido: xeque-mate ou empate."
+  },
+  "42d647f647364baa0089": {
+    "source": "Find the best move in your latest saved screenshot",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Encontre a melhor jogada na sua captura de tela salva mais recente"
+  },
+  "4445be496451ba32af00": {
+    "source": "Run from Control Center",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Executar a partir do Centro de Controle"
+  },
+  "45926917dce5c1a0638c": {
+    "source": "Recognition is not sure which way the board faces. Check that the right color is at the bottom, and flip it if it is not.",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "O reconhecimento não tem certeza de qual lado o tabuleiro está voltado. Verifique se a cor correta está na parte inferior e inverta-a se não estiver."
+  },
+  "460ea97ea8d1083e044a": {
+    "source": "Pay as You Go",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Pagamento por uso"
+  },
+  "463819cac0fd4e019ef6": {
+    "source": "%lld analyses left",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld análises restantes"
+  },
+  "46b806594b00fdf970d1": {
+    "source": "%1$lld analyses for %2$@. One-time purchase, not a subscription. They never expire.",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld Análises para %2$@. Compra única, não é uma assinatura. Elas nunca expiram."
+  },
+  "473117d968771f650279": {
+    "source": "See options",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Veja as opções"
+  },
+  "4865cf2cfedfe285c1bd": {
+    "source": "Analyze any position from a screenshot: a game you are reviewing, a puzzle or a study.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Analise qualquer posição a partir de uma captura de tela: uma partida que você está revisando, um quebra-cabeça ou um estudo."
+  },
+  "49c1fc898a3e0c6e6dcf": {
+    "source": "rook",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "torre"
+  },
+  "4a010dbebf56e69553ad": {
+    "source": "Needs a look: ",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Precisa ser revisado: "
+  },
+  "4a040553d42d7508d75e": {
+    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Move opens.",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Encontra a melhor jogada em uma captura de tela de uma posição de xadrez. Passe uma captura de tela ou escolha uma no aplicativo Fotos quando o Chess Best Move for aberto."
+  },
+  "4aba6710fac685f9b5ad": {
+    "source": "Photo access is restricted on this %@. Use Photos or Paste instead.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "O acesso ao aplicativo Fotos está restrito neste %1$@. Use “Fotos” ou “Colar” em vez disso."
+  },
+  "4b114f98a06dcfff6ed6": {
+    "source": "Black castling kingside",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Roque do lado do rei pelas pretas"
+  },
+  "4b19fe9ee7488f769f31": {
+    "source": "Unlimited analyses, one payment",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Análises ilimitadas, um único pagamento"
+  },
+  "4b237c36a369bb8fa1c7": {
+    "source": "Engine error",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Erro do mecanismo"
+  },
+  "4c395ddb1182a0fdf9e0": {
+    "source": "Unlimited",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Ilimitado"
+  },
+  "4c81f1da0d4cc238c00c": {
+    "source": "Importing",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Importação"
+  },
+  "4c9336b5f557f3856642": {
+    "source": "Finding the board",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Encontrando o tabuleiro"
+  },
+  "4d78df0bd643416845a7": {
+    "source": "queen",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "rainha"
+  },
+  "4dda5e24d3764d8baec6": {
+    "source": "Opens the position editor",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abre o editor de posições"
+  },
+  "4e172ca1303d88490e5b": {
+    "source": "%@ positions a second",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ posições por segundo"
+  },
+  "4ecb6995c000437cba1a": {
+    "source": "Renews every %@. Cancel anytime.",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Renova a cada %1$@. Cancele a qualquer momento."
+  },
+  "4ee240c5831f2084d505": {
+    "source": "Pro Weekly, which renews every week until you cancel it.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Pro Weekly, que se renova semanalmente até que você cancele a assinatura."
+  },
+  "4f2bad8512fe942d4add": {
+    "source": "With Pro",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Com o Pro"
+  },
+  "4f6f8d95ddfee8b27edd": {
+    "source": "%lld seconds",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld segundos"
+  },
+  "4f80b4c12caef78cd90c": {
+    "source": "%@ pieces",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ peças"
+  },
+  "4feb854ed01ae2bb98ca": {
+    "source": "%@ added here taken back.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ adicionado aqui, retirado."
+  },
+  "5047829ca0c669a496fa": {
+    "source": ", edited",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": ", editado"
+  },
+  "505d97e045fce6daef1c": {
+    "source": "Purchased Analyses",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Análises adquiridas"
+  },
+  "505fef72a1d85e5da5ae": {
+    "source": "No free analyses left",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Não há mais análises gratuitas disponíveis"
+  },
+  "50cb2104f5e6ab9a119b": {
+    "source": "Stopped",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Interrompido"
+  },
+  "52a8cad2e968eab8877f": {
+    "source": "Side to move",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Jogada do lado"
+  },
+  "549342cc819bac01d613": {
+    "source": "Analyze every new screenshot and position, with no limit",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Analise cada nova captura de tela e posição, sem limite"
+  },
+  "54d6025515e5c164d8f9": {
+    "source": "The king or rook is not on its starting square",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O rei ou a torre não está na sua casa inicial"
+  },
+  "54e3721c08f302df291e": {
+    "source": "Payment is charged to your Apple Account when you confirm. The subscription renews automatically at the same price %@ unless you cancel at least 24 hours before the current period ends. Manage or cancel in Settings > Apple Account > Subscriptions.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "O pagamento será cobrado na sua Conta Apple quando você confirmar. A assinatura é renovada automaticamente pelo mesmo preço %1$@, a menos que você cancele pelo menos 24 horas antes do término do período atual. Gerencie ou cancele em Ajustes > Conta Apple > Assinaturas."
+  },
+  "554a70b65bb954910299": {
+    "source": "This board style is unfamiliar, so pieces on it are easier to misread. Check the pieces against your screenshot.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Esse estilo de tabuleiro é pouco familiar, portanto, é mais fácil interpretar erroneamente as peças nele. Compare as peças com sua captura de tela."
+  },
+  "559f04965e6bef90840c": {
+    "source": "Black bishop",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Bispo preto"
+  },
+  "55d9ec5fec759f5a9368": {
+    "source": "Your weekly subscription is still active",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "Sua assinatura semanal ainda está ativa"
+  },
+  "562b8b71ca2436b81f58": {
+    "source": "White castles queenside",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "O branco faz o roque pelo lado da rainha"
+  },
+  "565a2f0bd4c04f44d895": {
+    "source": "assumed: you are at the bottom",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "presumido: você está na parte inferior"
+  },
+  "575af5d5ce253bbe2e3b": {
+    "source": "The analysis is still running in Chess Best Move.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "A análise ainda está em andamento no Chess Best Move."
+  },
+  "57b1a1b6aad0a13ead0f": {
+    "source": "Black castling queenside",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Roque do lado da rainha pelas pretas"
+  },
+  "586abfc611fa3491df9a": {
+    "source": "White rook",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Torre branca"
+  },
+  "58988684c09444e71889": {
+    "source": "Find the best move with ${applicationName}",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "Encontre a melhor jogada com o ${applicationName}"
+  },
+  "59b08c926afefbd9033c": {
+    "source": "Set up the one-step Shortcut",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Configure o atalho de uma etapa"
+  },
+  "5a0c146da5f59124de16": {
+    "source": "Find the best move in ${applicationName}",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "Encontre a melhor jogada em ${applicationName}"
+  },
+  "5a4c52ac958c621c955a": {
+    "source": "every %@",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": ""
+  },
+  "5a5d27a76be0e32a14a6": {
+    "source": "Pro, weekly",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Pro, semanal"
+  },
+  "5ad93a37f8f83d6f82b4": {
+    "source": "Turns the board around.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Vira o tabuleiro."
+  },
+  "5ad9754cdbae5479abf0": {
+    "source": "Fix the Position",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Corrija a posição"
+  },
+  "5af2b2c44d2a15f6caaf": {
+    "source": "Allow full access in Settings",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Permita acesso total em Ajustes"
+  },
+  "5b13490a1f22e0229cc5": {
+    "source": "Chess Best Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "O Chess Best Move é distribuído na esperança de que seja útil, mas SEM QUALQUER GARANTIA; sem sequer a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM FIM ESPECÍFICO. Consulte a Licença Pública Geral GNU para mais detalhes."
+  },
+  "5b4d0c120adf8cbd2262": {
+    "source": "The Change in the Published Source",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "A alteração na fonte publicada"
+  },
+  "5bacd811417f205a5ef3": {
+    "source": "Authors",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Autores"
+  },
+  "5c17d3346a2d1b8f6a4f": {
+    "source": "Black castles kingside",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "As pretas fazem o roque pelo lado do rei"
+  },
+  "5c22ba1cd41609c671e7": {
+    "source": "Recognition is not sure who is to move. Check the side to move.",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "O reconhecimento não tem certeza de quem deve jogar. Verifique qual lado deve jogar."
+  },
+  "5c25a56fd8ec010216eb": {
+    "source": "Swaps which side is at the bottom",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Troca o lado que fica na parte inferior"
+  },
+  "5c5fc224db6811288bcc": {
+    "source": "week",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "semana"
+  },
+  "5caf3cb39cbc98371a90": {
+    "source": "Some squares need a look. Check the position in Chess Best Move.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Algumas casas precisam ser verificadas. Confira a posição no Chess Best Move."
+  },
+  "5d483a2a98693c68626a": {
+    "source": "exd8=Q#",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "exd8=Q#"
+  },
+  "5d95c8891f389e1e9b9d": {
+    "source": "a b c d e f g h  1.0 (1)",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "a b c d e f g h  1.0 (1)"
+  },
+  "5dac7363d8fb6f3b41c8": {
+    "source": "Puts that move in the badge. Nothing is spent.",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Coloca esse movimento no emblema. Nada é gasto."
+  },
+  "5db0039e2699c1162539": {
+    "source": "Works on every device signed in to your Apple Account",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Funciona em todos os dispositivos conectados à sua Conta Apple"
+  },
+  "5de73f04e367b67a3d2a": {
+    "source": "Thinking",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Reflexão"
+  },
+  "5fea4386604ca48e0509": {
+    "source": "White",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Brancas"
+  },
+  "600a3470ba1043cc7509": {
+    "source": "Equal",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Igual"
+  },
+  "603910b7d36bd24f1184": {
+    "source": "1 second ago",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "1 segundo atrás"
+  },
+  "61221d47069dfa1d32d2": {
+    "source": "Recognition Isn't Available",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "O reconhecimento não está disponível"
+  },
+  "614fe6a4430ad2779c22": {
+    "source": "White pawn",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Peão branco"
+  },
+  "617e648e76d276ab4ee5": {
+    "source": "Move the board cursor up",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Mova o cursor do tabuleiro para cima"
+  },
+  "6264d5b9f1930a60a77a": {
+    "source": "The complete source code of this version is published, as the license requires, with a tag for each App Store version.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O código-fonte completo desta versão está publicado, conforme exige a licença, com uma tag para cada versão da App Store."
+  },
+  "62fb472abbc1909f12b4": {
+    "source": "Take a screenshot of the position: press the top button and a volume button together.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Faça uma captura de tela da posição: pressione o botão superior e um botão de volume ao mesmo tempo."
+  },
+  "635a9c9198b90d714703": {
+    "source": "This copy of the app is missing its piece recognition model, so boards can't be read from images.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Esta versão do aplicativo não possui o modelo de reconhecimento de peças, portanto, os tabuleiros não podem ser lidos a partir de imagens."
+  },
+  "639a29e00d919a30bee6": {
+    "source": "Confirming...",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Confirmando..."
+  },
+  "63a6ac2b728cf771a5d2": {
+    "source": "1 Square Needs a Look",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "1 casa precisa de uma olhada"
+  },
+  "63d75508d071e117828f": {
+    "source": "king",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "rei"
+  },
+  "640e656d6c901c2a0a28": {
+    "source": "Stockfish Authors",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Autores do Stockfish"
+  },
+  "64e585029e8501952659": {
+    "source": "Taken 12 seconds ago",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Capturada há 12 segundos"
+  },
+  "64fae4bca4b889b23fa0": {
+    "source": "Black king",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Rei preto"
+  },
+  "652801d62697912e4623": {
+    "source": "Analysis not run.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Análise não executada."
+  },
+  "6583067c2a2a4c9e23f9": {
+    "source": "Engine line",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Linha do mecanismo"
+  },
+  "65cfb7d46f6e0bd0a6e5": {
+    "source": "In the Shortcuts app, create a shortcut named “Analyze my chess screenshot”. Add “Take Screenshot” as its first action.",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "No aplicativo Atalhos, crie um atalho chamado “Analisar minha captura de tela de xadrez”. Adicione “Fazer captura de tela” como sua primeira ação."
+  },
+  "6624dc2fbca091a5464d": {
+    "source": "Open Chess Best Move to see the best move.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abra o Chess Best Move para ver a melhor jogada."
+  },
+  "6733e7cb1f741b9c0bf5": {
+    "source": "On",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Em"
+  },
+  "6741733797aebfeadf42": {
+    "source": "a %@",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": ""
+  },
+  "67a58bcd5a7fc2ad3fce": {
+    "source": "Quick answer",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Resposta rápida"
+  },
+  "67b5dc887ad7225fd214": {
+    "source": ", low confidence",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": ", baixa confiança"
+  },
+  "67d23f0c63ef05b20d50": {
+    "source": "Your board is ready.",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "Seu tabuleiro está pronto."
+  },
+  "69355cb5e586d4168a6e": {
+    "source": "Opens the start screen to choose a screenshot.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abre a tela inicial para escolher uma captura de tela."
+  },
+  "6960c25d76fb1facea60": {
+    "source": "New chess screenshots are recognized automatically. Tap Analyze if asked.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Novas capturas de tela de xadrez são reconhecidas automaticamente. Toque em “Analisar” se solicitado."
+  },
+  "69c15e9d2e3542c71551": {
+    "source": "Turn off %@",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Desative a opção “%1$@”"
+  },
+  "6a420a97ee8fd68325b5": {
+    "source": "Unlimited analyses, at every think time.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Análises ilimitadas, a cada tempo de reflexão."
+  },
+  "6a72c6479458520c732f": {
+    "source": "Neural network",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Rede neural"
+  },
+  "6a982379d19f4d2434a8": {
+    "source": "The think time is not valid.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "O “tempo de reflexão” não é válido."
+  },
+  "6ad65af4d4cbbcb58e13": {
+    "source": "Tap a square to check or correct the piece read there.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Toque em uma casa para verificar ou corrigir a peça indicada ali."
+  },
+  "6afb6c18b32902446c59": {
+    "source": "Loading the engine.",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Carregando o mecanismo."
+  },
+  "6b09c080f2efb0998c85": {
+    "source": "Taken ",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Capturado "
+  },
+  "6b38e2d9c0ac9816c3a6": {
+    "source": "Apple's subscription settings didn't open. Manage your subscription in the Settings app, under your Apple Account.",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "As configurações de assinatura da Apple não abriram. Gerencie sua assinatura no app “Ajustes”, na seção da sua Conta Apple."
+  },
+  "6b8d405809f08a4d0804": {
+    "source": "About %@ a week. The change starts at your next renewal.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Sobre o “%1$@” por semana. A alteração entra em vigor na sua próxima renovação."
+  },
+  "6b9bb782c7a8ee36dbc7": {
+    "source": "Marked squares were hard to read. Something may cover them in your screenshot, such as a banner, an arrow or a menu.",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "As casas marcadas estavam difíceis de ler. Algo pode estar cobrindo-as em sua captura de tela, como um banner, uma seta ou um menu."
+  },
+  "6c4a73a8a4a0f439163d": {
+    "source": "The file may be damaged, too small, or in a format this app can't open.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O arquivo pode estar corrompido, ser muito pequeno ou estar em um formato que este aplicativo não consegue abrir."
+  },
+  "6cb943ee731f603b7374": {
+    "source": "Analysis",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Análise"
+  },
+  "6cd9a061e2169392df33": {
+    "source": "%1$@ takes %2$@ on %3$@",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ %2$@ em %3$@"
+  },
+  "6e2d8e266a94c5aae8ed": {
+    "source": "Tap a square, then a piece. Or tap a piece, then squares.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Toque em uma casa e, em seguida, em uma peça. Ou toque em uma peça e, em seguida, nas casas."
+  },
+  "6f831fc7738454a4966d": {
+    "source": "White king",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Rei branco"
+  },
+  "70038ea50f35c80af88c": {
+    "source": "See Pro",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Veja Pro"
+  },
+  "7073440d12be404f77e1": {
+    "source": "White castling kingside",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Roque do lado do rei pelas brancas"
+  },
+  "70ac200f3e7ab4da02eb": {
+    "source": "A longer search that keeps running after the answer, up to 2 minutes.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Uma pesquisa mais longa que continua em execução após a resposta, por até 2 minutos."
+  },
+  "7126cbfe690ae7fcd3bc": {
+    "source": "Automatically Analyze New Screenshots",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Analisar automaticamente novas capturas de tela"
+  },
+  "7162071d3eaa15c0019c": {
+    "source": "%@, check",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@, check"
+  },
+  "727e45b78149119cd649": {
+    "source": "Tap Find Best Move in Siri Suggestions to open Photos, then select a screenshot to analyze. This opens a saved image; it does not take a new screenshot. To capture the board on screen, create the shortcut below.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Toque em “Encontrar a melhor jogada” nas sugestões da Siri para abrir o aplicativo Fotos e, em seguida, selecione uma captura de tela para analisar. Isso abre uma imagem salva; não é feita uma nova captura de tela. Para capturar o tabuleiro na tela, crie o atalho abaixo."
+  },
+  "728262d94deea2888725": {
+    "source": "Chess engine",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Motor de xadrez"
+  },
+  "734cdf0fd11085c1d6b8": {
+    "source": "Think longer: %@",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Pense mais a fundo: %1$@"
+  },
+  "737a2cbd406241db1b05": {
+    "source": "Flip",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Inverter"
+  },
+  "73b1e853726b33712d03": {
+    "source": "No best move.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Não há jogada ideal."
+  },
+  "73d4318d453d91b4f39c": {
+    "source": "With the position on screen, take a screenshot.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Com a posição na tela, faça uma captura de tela."
+  },
+  "74607185f921c4306728": {
+    "source": "depth —",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "profundidade —"
+  },
+  "752ad3721c9ca8121ac3": {
+    "source": "%@ has no legal moves. The game is drawn.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ não há jogadas válidas. O jogo termina em empate."
+  },
+  "75a96793c8e3929b3f6b": {
+    "source": "Version",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Versão"
+  },
+  "75ea5bc260f0ff122deb": {
+    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Salve uma captura de tela primeiro. Toque e mantenha pressionado a tela inicial e, em seguida, selecione Editar > Adicionar widget > Melhor jogada de xadrez. Na tela de bloqueio, toque e mantenha pressionado, selecione Personalizar e, em seguida, Adicionar widgets. Toque no widget para abrir o aplicativo e analisar sua captura de tela salva mais recente. Com acesso limitado ao app Fotos, selecione a captura de tela quando solicitado."
+  },
+  "760c54035e53d1958f63": {
+    "source": "The person who approves purchases for your Apple Account needs to confirm it. Your board is analyzed as soon as it's approved.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "A pessoa que aprova as compras na sua Conta Apple precisa confirmar isso. Seu tabuleiro é analisado assim que for aprovado."
+  },
+  "7673853074fe3a3b7be0": {
+    "source": "No free analyses left, and %@.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Não há mais análises gratuitas disponíveis, e %1$@."
+  },
+  "767c675b007435223c55": {
+    "source": "billing period",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "período de cobrança"
+  },
+  "77120fc6b5f4f2db783b": {
+    "source": "Analyze latest screenshot",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Analise a captura de tela mais recente"
+  },
+  "7767a063ae62bb4146f2": {
+    "source": "Move the board cursor right",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Mova o cursor do tabuleiro para a direita"
+  },
+  "78356393817438eac772": {
+    "source": "Free analyses back to %1$lld of %2$lld.",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Envie análises gratuitamente para %1$lld ou %2$lld."
+  },
+  "792280911fffbd80f19b": {
+    "source": "1 hour ago",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "1 hora atrás"
+  },
+  "79439b9e21d6d4f66096": {
+    "source": "Opens Chess Best Move to analyze it",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abre o Chess Best Move para analisá-la"
+  },
+  "797c61d3c4f3a8da4465": {
+    "source": "focusSystem=%1$lld;holdsKeys=%2$lld;keys=%3$lld;raw=%4$@;last=%5$@;cursor=%6$@",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "focusSystem=%1$lld;holdsKeys=%2$lld;keys=%3$lld;raw=%4$@;last=%5$@;cursor=%6$@"
+  },
+  "798e5b9d329da41834be": {
+    "source": "Only for the Control Center path: add Wait (3 seconds) before Take Screenshot. Do not add this delay for Siri, the Action button, or Back Tap. If you use both paths, duplicate the shortcut, name the copy Chess Screenshot Control, and add Wait only to that copy. A Wait action runs every time its shortcut runs.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Apenas para o caminho do Centro de Controle: adicione “Esperar (3 segundos)” antes de “Capturar tela”. Não adicione esse atraso para a Siri, o botão de ação ou o Back Tap. Se você usar ambos os caminhos, duplique o atalho, nomeie a cópia como “Controle de Captura de Tela de Xadrez” e adicione “Esperar” apenas a essa cópia. Uma ação “Esperar” é executada toda vez que seu atalho é acionado."
+  },
+  "7bae0c65e93e04699b70": {
+    "source": "Dismiss",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Ignorar"
+  },
+  "7bb2fec23dc9d1f62cdf": {
+    "source": "With this off, a notice offers the move instead, so the move on screen does not change while you are reading it.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Com essa opção desativada, um aviso sugere o lance; assim, o lance na tela não muda enquanto você o estiver lendo."
+  },
+  "7bcf08061753c2eb3eb1": {
+    "source": "Board appearance",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Aparência do tabuleiro"
+  },
+  "7bf1ebd7a8ee3c118454": {
+    "source": "Their likely move: %@.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "O lance provável deles: %1$@."
+  },
+  "7c7ad931cc4fa0d3c303": {
+    "source": "An analysis is spent on a position you have not analyzed before. Re-running the same board, at any think time, is free.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Uma análise é realizada em uma posição que você ainda não analisou. Reexecutar o mesmo tabuleiro, em qualquer momento de reflexão, é gratuito."
+  },
+  "7c8bceb6d0d55aad7cfc": {
+    "source": "%1$@ is ahead by %2$@ pawns",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ está à frente por %2$@ peões"
+  },
+  "7ca1370fea0e853a5760": {
+    "source": "Choose another screenshot",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Escolha outra captura de tela"
+  },
+  "7d67ddb8ae65f954b980": {
+    "source": "1 analysis",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "1 análise"
+  },
+  "7d7152b92164b2b1d7ae": {
+    "source": "Run again: %@",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Execute novamente: %1$@"
+  },
+  "7e4d22971b5986575357": {
+    "source": "Waiting for approval",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Aguardando aprovação"
+  },
+  "7e7d1ed1100c4ead2d29": {
+    "source": "Use a screenshot of the board, not a photo of a screen. The whole board must be visible.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Use uma captura de tela do tabuleiro, não uma foto da tela. O tabuleiro inteiro deve estar visível."
+  },
+  "7eb6f52a9496dc0e0366": {
+    "source": "Check the pieces, then analyze.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Verifique as peças e, em seguida, analise."
+  },
+  "7fa59d1dcb14a0c87628": {
+    "source": "Opening Chess Best Move",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Melhor jogada na abertura do xadrez"
+  },
+  "7faa7019894d7b773f99": {
+    "source": "White O-O",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Brancas O-O"
+  },
+  "81298ba6b748cae97c27": {
+    "source": "%1$@ is in check but it's %2$@'s move.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ está em xeque, mas é a vez d%2$@ de jogar."
+  },
+  "8194473d181df1f094b1": {
+    "source": "Nothing in your screenshot says who is to move: no highlighted last move and no clock. Check the side to move.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Nada na sua captura de tela indica quem deve jogar: não há destaque para o último lance nem relógio. Verifique qual lado deve jogar."
+  },
+  "81e800f8b77b003b3d93": {
+    "source": "Show the recognized board",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Mostrar o tabuleiro reconhecido"
+  },
+  "820c3bc2222a7d0281d3": {
+    "source": "Clear board",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Limpar o tabuleiro"
+  },
+  "82bae0ce69dffb1e093b": {
+    "source": "%lld weeks",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld semanas"
+  },
+  "82cc3d6d984025195684": {
+    "source": "No free analyses",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Sem análises livres"
+  },
+  "832bd01668310a53e09a": {
+    "source": "Screenshot",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Captura de tela"
+  },
+  "83c681f5761337efd935": {
+    "source": "Choose a saved screenshot",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Escolha uma captura de tela salva"
+  },
+  "83ff7f715e5a2efd38ed": {
+    "source": "%@; and so on",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$@; e assim por diante"
+  },
+  "8447d13b35a04b52c36b": {
+    "source": "day",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "dia"
+  },
+  "849bf0c228477a5d7a2d": {
+    "source": "Stockfish's neural network (nn-1a298aa575a0.nnue) is trained on data provided by the Leela Chess Zero project, which is made available under the Open Database License (ODbL).",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "A rede neural do Stockfish (nn-1a298aa575a0.nnue) é treinada com dados fornecidos pelo projeto Leela Chess Zero, que está disponível sob a Licença de Banco de Dados Aberto (ODbL)."
+  },
+  "85345deb4e1e542d4adf": {
+    "source": "%@ has more than 8 pawns.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ tem mais de 8 peões."
+  },
+  "856d2112cbf0b108cbfc": {
+    "source": "Opens in Safari.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abre no Safari."
+  },
+  "857137f093e0e14ab880": {
+    "source": "Lifetime Is Unlocked",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Vigência: Desbloqueada"
+  },
+  "85a656cee46268df0615": {
+    "source": "On an iPad with a Home button, press the top button and the Home button at the same time.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Em um iPad com botão Home, pressione o botão superior e o botão Home ao mesmo tempo."
+  },
+  "866adb7843d564c0c460": {
+    "source": "%1$lld%2$@min ago",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld%2$@min atrás"
+  },
+  "8672a79e15c7ced57f64": {
+    "source": "%@, from check",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@, a partir de “check”"
+  },
+  "86a5c013902bd91b7872": {
+    "source": "A screenshot of a chess position. Leave empty to choose from Photos.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Uma captura de tela de uma posição de xadrez. Deixe em branco para escolher a partir do aplicativo Fotos."
+  },
+  "86ac161fa2e72255a7a1": {
+    "source": "No best move yet.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Ainda não há a melhor jogada."
+  },
+  "8717b07025278440cf7a": {
+    "source": "Put the board cursor away",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Remova o cursor do tabuleiro"
+  },
+  "875163eff219232bd981": {
+    "source": "Reset",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Redefinir"
+  },
+  "87572165e9fa7107f0e0": {
+    "source": "Steps",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Etapas"
+  },
+  "878d44ec4f76a2a29707": {
+    "source": "A longer search preferred ",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "É preferível uma pesquisa mais longa "
+  },
+  "87cbb7f2c7804a8fe49d": {
+    "source": "Part of the board is outside your screenshot, so pieces on the marked edge squares may be missing.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Parte do tabuleiro está fora da sua captura de tela, portanto, as peças nas casas marcadas nas bordas podem estar faltando."
+  },
+  "886987f7f3ec81942e11": {
+    "source": "Open Settings > Accessibility > Touch > Back Tap. Choose Double Tap or Triple Tap, scroll to Shortcuts, and select Analyze my chess screenshot without the Wait action.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abra Ajustes > Acessibilidade > Toque > Toque na Parte de Trás. Escolha Toque Duplo ou Toque Triplo, role até Atalhos e selecione “Analisar minha captura de tela de xadrez” sem a ação “Aguardar”."
+  },
+  "88f3d6668540f57e4b24": {
+    "source": "king",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "rei"
+  },
+  "89940af61c6f09a6b6e1": {
+    "source": "Knight takes f7, check",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Cavalo captura em f7, xeque"
+  },
+  "89b6c21f76fb8bbca1ab": {
+    "source": "Stalemate. There are no legal moves.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Pato. Não há jogadas válidas."
+  },
+  "8a6d71a3398988ca9a87": {
+    "source": "%@ is in check from more than two pieces.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ está em xeque por mais de duas peças."
+  },
+  "8b6207c3be40244768b9": {
+    "source": "Analyzes again without it. Re-running is free.",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Analise novamente sem ele. A reexecução é gratuita."
+  },
+  "8c0e600246bb7d2aab96": {
+    "source": "Help",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Ajuda"
+  },
+  "8c19d5b9fa1fb7b28925": {
+    "source": "Neural Network",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Rede Neural"
+  },
+  "8d9709a97c374dc375f8": {
+    "source": "knight",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "cavalo"
+  },
+  "8e0abfe5ed0c8fd09e95": {
+    "source": "Restore Purchases",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Restaurar compras"
+  },
+  "8e2798d03ff659459b2c": {
+    "source": "%@ forgotten.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ esquecido."
+  },
+  "8e8981c6ef9af745a2f9": {
+    "source": "Open Settings > Action Button. Swipe to Shortcut, tap Choose a Shortcut, and select Analyze my chess screenshot without the Wait action.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abra Ajustes > Botão de Ação. Deslize até “Atalho”, toque em “Escolher um atalho” e selecione “Analisar minha captura de tela de xadrez” sem a ação “Aguardar”."
+  },
+  "8f95380e7baa068f365e": {
+    "source": "No chessboard found in that image. This didn't use a free analysis.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Não foi encontrado nenhum tabuleiro de xadrez nessa imagem. Isso não utilizou uma análise gratuita."
+  },
+  "903a4800c31fe1193ae8": {
+    "source": "Open Shortcuts",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abrir Atalhos"
+  },
+  "909fae6f5b46b2f3ac41": {
+    "source": "Check",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Verificar"
+  },
+  "90e63fb23a464450e98d": {
+    "source": "Try again",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Tente novamente"
+  },
+  "90eabed501ac867eae87": {
+    "source": "Chess Best Move couldn't read that image. Pass a screenshot to the shortcut.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "O Chess Best Move não conseguiu ler essa imagem. Envie uma captura de tela para o atalho."
+  },
+  "912113e1b96740a5a48d": {
+    "source": "Standard Board",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Tabuleiro padrão"
+  },
+  "91abea317998f7502dd8": {
+    "source": "depth not reported yet",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "profundidade ainda não relatada"
+  },
+  "91d804d27d00db4c17e1": {
+    "source": "Assumes castling is still allowed.",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Presume-se que o roque ainda seja permitido."
+  },
+  "928e1d60f399462a63b1": {
+    "source": "Run with Back Tap",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Executar com Back Tap"
+  },
+  "92aa806b22330a936028": {
+    "source": "Black queen",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Rainha preta"
+  },
+  "934c1900fec600cad798": {
+    "source": "Tap a square to fix it. You can analyze once the problems below are fixed.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Toque em uma casa para corrigi-la. Você poderá analisar assim que os problemas abaixo forem corrigidos."
+  },
+  "939f6f75e17a4853b8fd": {
+    "source": "If Siri offers ChatGPT instead, try saying “Siri, run the shortcut Analyze my chess screenshot”. If it still does not run your shortcut, use one of the controls above. If Siri asks for a screenshot, check that you are running your saved shortcut and that both image inputs use the Screenshot variable from Take Screenshot.",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Se a Siri oferecer o ChatGPT em vez disso, tente dizer “Siri, execute o atalho ‘Analisar minha captura de tela de xadrez’”. Se ela ainda assim não executar seu atalho, use um dos controles acima. Se a Siri solicitar uma captura de tela, verifique se você está executando o atalho salvo e se ambas as entradas de imagem usam a variável “Captura de tela” do atalho “Fazer captura de tela”."
+  },
+  "9421050e59edfc2bcb8b": {
+    "source": "Best value, about %@ a week",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Melhor custo-benefício, cerca de %1$@ por semana"
+  },
+  "9459d472b0c5506eaad0": {
+    "source": "Unlimited Best Moves",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Melhores jogadas ilimitadas"
+  },
+  "954a58172de86aba72f8": {
+    "source": "The chess engine did not start.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O mecanismo de xadrez não iniciou."
+  },
+  "95528a8cde698638c712": {
+    "source": "The board is small in your screenshot, about %lld pixels a square, which makes the pieces hard to read. A screenshot with the board larger reads better.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O tabuleiro está pequeno na sua captura de tela, com cerca de %1$lld pixels por casa, o que dificulta a leitura das peças. Uma captura de tela com o tabuleiro maior fica mais legível."
+  },
+  "95e9363ed7686175f07d": {
+    "source": "The chess engine could not start.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O mecanismo de xadrez não conseguiu iniciar."
+  },
+  "961c3ad0961e5ad2dc8a": {
+    "source": "Invalid position: ",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Posição inválida: "
+  },
+  "96818e33a487daa23f19": {
+    "source": "Switch to the player at the bottom",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Alterne para o jogador na parte inferior"
+  },
+  "96f42601047b145aabba": {
+    "source": "Double tap to see the purchase options.",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Toque duas vezes para ver as opções de compra."
+  },
+  "9743cc7d960f588c0f7c": {
+    "source": "Your board",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "Seu tabuleiro"
+  },
+  "978946309bfc24b9cfca": {
+    "source": "Purchases restored.",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Compras restauradas."
+  },
+  "97be1605c9ca6064e0ff": {
+    "source": "Best reply",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Melhor resposta"
+  },
+  "9897b1f38af92e3c928c": {
+    "source": "%lld free",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld grátis"
+  },
+  "98b4e785361ece333132": {
+    "source": "Create the shortcut",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Crie o atalho"
+  },
+  "98ccfd32dfc9ef54626b": {
+    "source": "Get the best move from ${applicationName}",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "Descubra a melhor jogada em ${applicationName}"
+  },
+  "9a55ff7a921ff515efb7": {
+    "source": "Free Analyses",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Análises gratuitas"
+  },
+  "9b362ab8b1ca3fc9f8f6": {
+    "source": "%1$@ from %2$@",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ de %2$@"
+  },
+  "9b3e6a5792164172a913": {
+    "source": "%1$lld of %2$lld free analyses left",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld %2$lld: análises gratuitas restantes"
+  },
+  "9b416ce17873386e99b5": {
+    "source": "About",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Sobre"
+  },
+  "9c2646b2ed7985ee9ab9": {
+    "source": "Continue: %@ once",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Continuar: %1$@ uma vez"
+  },
+  "9c3374e8eb4fa79c5ea4": {
+    "source": "Engine",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Motor"
+  },
+  "9c55c0d8512760820bf3": {
+    "source": "Longer think times find deeper moves. Re-running a board with another think time is free.",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Tempos de reflexão mais longos levam a jogadas mais profundas. É possível repetir uma partida com outro tempo de reflexão gratuitamente."
+  },
+  "9c5a8dbbc95fc9d576af": {
+    "source": "Training Data and License",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Dados de treinamento e licença"
+  },
+  "9c8d8f9368b064f05143": {
+    "source": "Discard changes?",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Descartar as alterações?"
+  },
+  "9c96ee7b8891330a88ee": {
+    "source": "Waiting for purchase approval. The analysis starts when it is approved.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Aguardando aprovação da compra. A análise começa assim que for aprovada."
+  },
+  "9ccb83072a05cc2a7fe9": {
+    "source": "Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abra o Chess Best Move. Com a análise automática e o Acesso Total às Fotos ativados, o aplicativo reconhece sua nova captura de tela de xadrez. Toque em “Analisar” se solicitado. Caso contrário, toque em “Usar a captura de tela mais recente”."
+  },
+  "9d70cda159108bfc4849": {
+    "source": "Black pawn",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Peão preto"
+  },
+  "9da24b77ca0b41632bf2": {
+    "source": "Their move is a guess from the engine's own line. This answer holds only if they play it.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "O lance deles é uma suposição baseada na própria linha do mecanismo. Essa resposta só se aplica se eles realmente jogarem esse lance."
+  },
+  "9da44f04484df27ce333": {
+    "source": "%@, none left",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$@, none left"
+  },
+  "9dbc0788f34f50fa78a7": {
+    "source": "Something in your screenshot covers the marked squares, such as a banner, a card or a menu.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Algo na sua captura de tela cobre as casas marcadas, como um banner, um cartão ou um menu."
+  },
+  "9e1ebd87b738808636de": {
+    "source": "The app reads the board and finds the best move.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O aplicativo analisa o tabuleiro e encontra a melhor jogada."
+  },
+  "9eeb44a68fb0da0bdb2a": {
+    "source": "Switch to yearly: %@/year",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Mude para anual: %1$@/year"
+  },
+  "9efe4741cc7a1bb0a6ba": {
+    "source": "Troubleshooting",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Solução de problemas"
+  },
+  "9f3de5998533211e1319": {
+    "source": "15 analyses that never expire",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "15 análises que nunca expiram"
+  },
+  "a019f51db708546428c3": {
+    "source": "%@, from the clock",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ (o relógio), do relógio"
+  },
+  "a094f3ba8e223226d6ed": {
+    "source": "Their likely move",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "O lance provável deles"
+  },
+  "a0c61be8e2b0c85387bc": {
+    "source": "Edit position",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Editar posição"
+  },
+  "a15ecb28c2864404d4cf": {
+    "source": "The chess engine stopped unexpectedly.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O mecanismo de xadrez parou inesperadamente."
+  },
+  "a17dbcf65dc84988ad01": {
+    "source": "Discard",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Descartar"
+  },
+  "a1b515dfdaa69b9bb5cd": {
+    "source": "Your subscriptions opened in the App Store.",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "Suas assinaturas foram abertas na App Store."
+  },
+  "a2960b9ff94d3fe45185": {
+    "source": "Free",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Gratuito"
+  },
+  "a2c2ba0d198cc83e3a6e": {
+    "source": ", if they play ",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": ", se jogarem "
+  },
+  "a2c3126b61c8afd29a5b": {
+    "source": "Choose from Photos",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Escolha entre Fotos"
+  },
+  "a39dbad0ea5e98a95cf9": {
+    "source": "Think longer: 10 s",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Pense por mais tempo: 10 s"
+  },
+  "a5b36aede10d2667dc0f": {
+    "source": "King",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Rei"
+  },
+  "a665846ee616ee6cfe46": {
+    "source": "Two arrows. Their likely move first: %1$@. Then your best reply, which holds only if they play it: %2$@.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Duas setas. O provável primeiro lance deles: %1$@. Em seguida, sua melhor resposta, que só se mantém se eles jogarem assim: %2$@."
+  },
+  "a72331674cc7698afc46": {
+    "source": "Edited",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Editado"
+  },
+  "a745d75f624a87d78e2a": {
+    "source": "Longest Search",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Pesquisa mais longa"
+  },
+  "a7eaadbcd22646ad6ffd": {
+    "source": "Keychain %1$@ failed with status %2$d (%3$@)",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "O %1$@ do Keychain falhou com o status “%2$d” (%3$@)"
+  },
+  "a837f5e7924d9ca39ea4": {
+    "source": "When you open the app, look for a new chess screenshot and analyze it automatically. Requires Full Access to Photos. Individual analyses are used only after you tap Analyze.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Ao abrir o aplicativo, procure uma nova captura de tela de xadrez e analise-a automaticamente. Requer acesso total ao aplicativo Fotos. As análises individuais são utilizadas somente após você tocar em “Analisar”."
+  },
+  "a8c250f71ea2c6a16434": {
+    "source": "Nothing changed: the stored analyses could not be read.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Nada mudou: as análises armazenadas não puderam ser lidas."
+  },
+  "a971baf40a9f840f561d": {
+    "source": "Shows fewer moves",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Mostra menos jogadas"
+  },
+  "a99f29c74cc6a77fee6e": {
+    "source": "A longer search found a different move. Pro shows it.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Uma busca mais aprofundada encontrou um lance diferente. O Pro mostra isso."
+  },
+  "aa8e4d22a630fafd9a7a": {
+    "source": "Checkmate",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Xeque-mate"
+  },
+  "aaead9d7cd525402b68c": {
+    "source": "Classic Green",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Verde Clássico"
+  },
+  "ab3500ca75a622bd6216": {
+    "source": "%1$lld%2$@days ago",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld%2$@dias atrás"
+  },
+  "ab3a9011928e21529d82": {
+    "source": "Pro, lifetime",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Pro, vitalício"
+  },
+  "ab3e0b7ab147a4fb75be": {
+    "source": "That was your last free analysis.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Essa foi sua última análise gratuita."
+  },
+  "ab78367e1fadefd53594": {
+    "source": "%1$@, %2$@ per %3$@. %4$@",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@, %2$@ conforme %3$@. %4$@"
+  },
+  "ab9d92769c80eccdad01": {
+    "source": "How to Take a Screenshot",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Como fazer uma captura de tela"
+  },
+  "ac188e469c563badc4b2": {
+    "source": "Not evaluated yet",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Ainda não avaliado"
+  },
+  "ac9f60d2888961121261": {
+    "source": "Stockfish Neural Network",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Rede Neural Stockfish"
+  },
+  "acc13c5ed87a9cbdc06b": {
+    "source": "Evaluation",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Avaliação"
+  },
+  "acd23dcc21df7ecd69c7": {
+    "source": "Licenses",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Licenças"
+  },
+  "ace1520e0d39b009e597": {
+    "source": "Use the name reported by Get Current App, which may differ from the App Store title. To check it, temporarily add Show Result with the current app’s Name after Get Current App, then run it with the Action button while your board app is visible. Remove Show Result after checking. Test the finished shortcut with your board app visible and again in another app. Running it from the shortcut editor checks Shortcuts instead of your board app.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Use o nome informado por “Get Current App”, que pode diferir do título da App Store. Para verificar isso, adicione temporariamente “Mostrar resultado com o nome do aplicativo atual” após “Get Current App” e, em seguida, execute-o com o botão de ação enquanto seu aplicativo de tabuleiro estiver visível. Remova “Mostrar resultado” após a verificação. Teste o atalho finalizado com seu aplicativo de quadro visível e, novamente, em outro aplicativo. Executá-lo a partir do editor de atalhos verifica o “Shortcuts” em vez do seu aplicativo de quadro."
+  },
+  "ad0dca3d3ce2fa7ddfe0": {
+    "source": "%lld days ago",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld dias atrás"
+  },
+  "adc598f9e585613296c1": {
+    "source": "year",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "ano"
+  },
+  "adde2435cdd5eb6a0773": {
+    "source": "Privacy Policy",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Política de Privacidade"
+  },
+  "ae2b728f8e8445ab95ee": {
+    "source": "Rook",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Torre"
+  },
+  "af0a2f11226d747cbacf": {
+    "source": "This didn't use a free analysis.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Esta análise não utilizou uma versão gratuita."
+  },
+  "af972a5193874f4370ab": {
+    "source": "Without Pro the longer search still runs, stops at %@, and says when it finds a better move. What you choose here is saved for when you get Pro.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Sem a versão Pro, a busca mais longa ainda é executada, para em “%1$@” e avisa quando encontra um lance melhor. O que você escolher aqui fica salvo para quando você adquirir a versão Pro."
+  },
+  "afa06d6753ccb6cfea3c": {
+    "source": "Opens purchase options",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abre as opções de compra"
+  },
+  "b0195811fc38ee9f929e": {
+    "source": "Changes in this app",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Alterações neste aplicativo"
+  },
+  "b0336f0645d90184847a": {
+    "source": "Castles kingside",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Rocada pelo lado do rei"
+  },
+  "b166d382e19c6badd884": {
+    "source": "Keep the chess position on screen, then quickly tap the back of your iPhone two or three times, matching your setting. You do not need to open Control Center or add a three-second wait.",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Mantenha a posição do xadrez na tela e, em seguida, toque rapidamente na parte de trás do seu iPhone duas ou três vezes, conforme sua configuração. Você não precisa abrir o Centro de Controle nem adicionar uma espera de três segundos."
+  },
+  "b1673e38ed8243d7ed5b": {
+    "source": "%1$@, plus %2$@",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$@, além de %2$@"
+  },
+  "b1cabfbc0168a110e6bb": {
+    "source": "%lld years",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld anos"
+  },
+  "b220f7834976d35be904": {
+    "source": "Looks right",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Parece correto"
+  },
+  "b2c6ef07f853d793100a": {
+    "source": "Arms it: then every square you tap gets it",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Ative-o: então, cada casa em que você tocar será capturada"
+  },
+  "b32b286a1187f3b038dc": {
+    "source": "%1$@, %2$lld of %3$lld left",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@, %2$lld de %3$lld à esquerda"
+  },
+  "b3fc6b71331f9bb46562": {
+    "source": "Undo",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Desfazer"
+  },
+  "b471e33644a8abfc7a9f": {
+    "source": "No legal moves: it's checkmate.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Não há jogadas válidas: é xeque-mate."
+  },
+  "b4864aef5a4d974950ae": {
+    "source": "New screenshot",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Nova captura de tela"
+  },
+  "b4ceb317eeb8d6bc3df5": {
+    "source": "Pro, yearly",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Pro, anual"
+  },
+  "b5e64080447fcb9eb166": {
+    "source": "Chess Best Move isn't ready. Open the app, then run the shortcut again.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "O Chess Best Move não está pronto. Abra o aplicativo e execute o atalho novamente."
+  },
+  "b5f6556910a08b38ac41": {
+    "source": "Stopped when the app went to the background. Run it again for the full think time.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Parou quando o aplicativo foi para o segundo plano. Execute-o novamente para obter o tempo total de reflexão."
+  },
+  "b6092eb6e2f17b475331": {
+    "source": "Open Chess Best Move and import the screenshot from Photos.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abra o Chess Best Move e importe a captura de tela do aplicativo Fotos."
+  },
+  "b61106566308373f8ec3": {
+    "source": "None yet",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Ainda não há nada"
+  },
+  "b62594f5b58d9b8afc6b": {
+    "source": "%1$lld of %2$lld free analyses left, plus %3$@.",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld Ainda restam análises gratuitas em %2$lld, além de %3$@."
+  },
+  "b656924b03dc5f4fa78d": {
+    "source": "Back Tap lets you run a shortcut by quickly tapping the back of your iPhone with your finger two or three times. It is a gesture on the back of the phone, not a button on the screen.",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "O “Back Tap” permite executar um atalho tocando rapidamente na parte de trás do seu iPhone com o dedo duas ou três vezes. Trata-se de um gesto na parte de trás do telefone, não de um botão na tela."
+  },
+  "b6723e8e7153f782f191": {
+    "source": "%1$@ takes %2$@ on %3$@ and moves to %4$@, en passant",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ captura %2$@ em %3$@ e se move para %4$@, en passant"
+  },
+  "b6c66c4869cf001e6066": {
+    "source": "Shows the whole line",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Mostra a linha inteira"
+  },
+  "b7b5eb5f9e51152440f8": {
+    "source": "You can still set up the position by hand and analyze it.",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Você ainda pode configurar a posição manualmente e analisá-la."
+  },
+  "b7b93905479d667c7621": {
+    "source": "The analysis was canceled.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "A análise foi cancelada."
+  },
+  "b8c7d4197ddc1b726a76": {
+    "source": "each %@",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "cada %1$@"
+  },
+  "b994f52449076e53aedb": {
+    "source": "%lld seconds ago",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld segundos atrás"
+  },
+  "ba54df2eb5218e3a5d48": {
+    "source": "bishop",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "bispo"
+  },
+  "ba5f35e98c8af991665b": {
+    "source": "Couldn't open your latest screenshot. Try Photos instead.",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Não foi possível abrir sua captura de tela mais recente. Tente usar o Fotos."
+  },
+  "ba9524a075f7823ae3e2": {
+    "source": "New chess screenshot found. Tap Analyze to continue. Individual analyses are used only after you tap.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Nova captura de tela de xadrez encontrada. Toque em “Analisar” para continuar. As análises individuais são utilizadas somente após você tocar."
+  },
+  "bc23a29e879ef7873e2b": {
+    "source": "Manage subscription",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Gerenciar assinatura"
+  },
+  "bc33f7c195058e337012": {
+    "source": "Yearly",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Anual"
+  },
+  "bc74d52136e61330dc17": {
+    "source": "%lld minutes ago",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld minutos atrás"
+  },
+  "bc92a4b71fdf2bd27d58": {
+    "source": "Tap squares to place %@",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Toque nas casas para posicionar um%1$@"
+  },
+  "bcb2b478013fbe0de671": {
+    "source": "Flip board",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Virar o tabuleiro"
+  },
+  "bd27d75311ebe85fa349": {
+    "source": "On an iPhone with a Home button, press the side button and the Home button at the same time.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Em um iPhone com botão Home, pressione o botão lateral e o botão Home ao mesmo tempo."
+  },
+  "bd33623895d3718a6086": {
+    "source": "Come back here.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Volte aqui."
+  },
+  "bd399341b1ccd0cf5342": {
+    "source": "15 Analyses",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "15 Análises"
+  },
+  "bd3b1f004f60708da28e": {
+    "source": "Runs on your %@: works offline, nothing is uploaded",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Funciona no seu %1$@: funciona offline, nada é enviado"
+  },
+  "bdeb37d13704a9213f4b": {
+    "source": "The pawn on %@ can't stand on the back rank.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O peão em %1$@ não pode ficar na última fileira."
+  },
+  "bed787f84e05bb36228a": {
+    "source": "Choose a screenshot from Photos.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Escolha uma captura de tela do app Fotos."
+  },
+  "bf24a220f2beab4eca7a": {
+    "source": "Best move so far: ",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Melhor jogada até agora: "
+  },
+  "bf38ef2c0068c3c7bde3": {
+    "source": "%@, the game has not started",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$@ (O jogo ainda não começou)"
+  },
+  "bf4cf391452ff391634f": {
+    "source": "Lifetime",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Vida útil"
+  },
+  "bf57ac94f3c721537f33": {
+    "source": "The payment went through, but the analyses couldn't be added yet. They are added the next time you open the app.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "O pagamento foi processado, mas as análises ainda não puderam ser adicionadas. Elas serão adicionadas na próxima vez que você abrir o aplicativo."
+  },
+  "bf62c09c51d76ad963fd": {
+    "source": "Typefaces",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Tipos de letra"
+  },
+  "bf73ec2ed0246c725147": {
+    "source": "The whole board must be visible.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Todo o tabuleiro deve estar visível."
+  },
+  "c0b21a1b11bdff761d7c": {
+    "source": "Default Think Time",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Tempo de reflexão padrão"
+  },
+  "c11bdc89be60d8487b51": {
+    "source": "No previous purchases found.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Nenhuma compra anterior encontrada."
+  },
+  "c144fb8884421f3d176c": {
+    "source": "Remove piece",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Remova a peça"
+  },
+  "c15d40f71f35d8603532": {
+    "source": "%1$@, %2$lld left",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@, %2$lld left"
+  },
+  "c1ae1274933d7443b024": {
+    "source": "These controls are in TestFlight builds and never in an App Store build. They grant analyses, never Pro: Pro comes from a purchase, which costs nothing in the TestFlight sandbox.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Esses controles estão nas compilações do TestFlight e nunca em uma compilação da App Store. Eles concedem análises, nunca a versão Pro: a versão Pro é obtida por meio de uma compra, que não custa nada no ambiente de teste do TestFlight."
+  },
+  "c35f12c4a2f33312cb50": {
+    "source": "Your yearly subscription is still active",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "Sua assinatura anual ainda está ativa"
+  },
+  "c3f254b58f195e20f9cf": {
+    "source": "Reset to recognized",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Redefinir para reconhecido"
+  },
+  "c44dab0aea47b3f177f4": {
+    "source": "Fix the problems listed above first",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Corrija primeiro os problemas listados acima"
+  },
+  "c4a56e0ea8b74af1ded0": {
+    "source": "Line",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Linha"
+  },
+  "c4d55f91f28b25ac8503": {
+    "source": "Knight to f6",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Cavalo para f6"
+  },
+  "c54996e63716961c3bec": {
+    "source": "%@, checkmate",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@, xeque-mate"
+  },
+  "c56cbd29da31e662ae11": {
+    "source": "pawn",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "peão"
+  },
+  "c5b2aa0e828e1a3a9b90": {
+    "source": "Restoring...",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Restaurando..."
+  },
+  "c5f4a36f673c34fdd619": {
+    "source": "Take a screenshot of the position: press the side button and the Home button together.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Faça uma captura de tela da posição: pressione o botão lateral e o botão Home ao mesmo tempo."
+  },
+  "c629d3d12e6b7cfec1ca": {
+    "source": "Check Position",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Verificar posição"
+  },
+  "c70520fbb95d0976c4d6": {
+    "source": "Couldn't open this screenshot. Try again, or use Choose from Photos on the start screen.",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Não foi possível abrir esta captura de tela. Tente novamente ou use “Escolher das Fotos” na tela inicial."
+  },
+  "c71a21cd5495c30c8238": {
+    "source": "Turns the board around and analyzes again.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Vira o tabuleiro e analisa novamente."
+  },
+  "c74f209188178832127e": {
+    "source": "1%@day ago",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "1%1$@dias atrás"
+  },
+  "c7f01441a336513ef483": {
+    "source": "The chess engine's neural network is missing from the app.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "A rede neural do mecanismo de xadrez não está presente no aplicativo."
+  },
+  "c9659dffbae58ec49868": {
+    "source": "One-Step Shortcut",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Atalho de uma etapa"
+  },
+  "ca45c5be79c65d1ec084": {
+    "source": "Chess Engine",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Motor de xadrez"
+  },
+  "caf47f6242e3eab33378": {
+    "source": "Stalemate",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Pato"
+  },
+  "cbf240dce89ba6223c75": {
+    "source": "Switches the side to move",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Alterna o lado que deve jogar"
+  },
+  "cc62bddd9cda7794eec7": {
+    "source": "Plan",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Plano"
+  },
+  "cc6f7fcffaef3f0767af": {
+    "source": "%@ are kept, and you can spend them if Pro ends.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ são mantidos, e você pode gastá-los se o Pro terminar."
+  },
+  "ce9976b2455cdbbf1b4b": {
+    "source": "One-time payment. No renewal.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Pagamento único. Sem renovação."
+  },
+  "cf05f14d49f7c223d607": {
+    "source": "Best move: ",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Melhor jogada: "
+  },
+  "cf119788804288753a44": {
+    "source": ", not sure",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": ", não tenho certeza"
+  },
+  "cf217128eb5b3fdf6b2b": {
+    "source": "Their move",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "A jogada deles"
+  },
+  "d0df18c25448324ffe56": {
+    "source": "Continue: %1$@ / %2$@",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Continuar: %1$@ / %2$@"
+  },
+  "d0e62292494c3da51c8f": {
+    "source": "1 minute ago",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "1 minuto atrás"
+  },
+  "d0f811b988ccf3b52309": {
+    "source": "Choose your screenshot",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Escolha sua captura de tela"
+  },
+  "d1128ff2e1ec462d48b3": {
+    "source": "Take a screenshot, save it, and find the best move from Control Center, the Action button, or Back Tap.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Faça uma captura de tela, salve-a e encontre a melhor jogada no Centro de Controle, no botão de ação ou com o Back Tap."
+  },
+  "d13aeb1fa75cf36814fa": {
+    "source": "Add “Save to Photo Album”. Choose Recents as the album. For its input, select the Screenshot variable produced by Take Screenshot. This saves a copy to Photos; Take Screenshot alone does not save one.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Adicione “Salvar no Álbum de Fotos”. Escolha “Recentes” como álbum. Como entrada, selecione a variável “Captura de tela” gerada por “Fazer captura de tela”. Isso salva uma cópia no aplicativo Fotos; o comando “Fazer captura de tela” por si só não salva nenhuma cópia."
+  },
+  "d2455cac5dfb201414c6": {
+    "source": "%@ to move",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ para mover"
+  },
+  "d257928b89a64e912a3f": {
+    "source": "New screenshot, taken %1$@. %2$@ is at the %3$@ of the screen.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Nova captura de tela, tirada em %1$@. %2$@ está no canto %3$@ da tela."
+  },
+  "d28afeceb111a6cc7991": {
+    "source": "Two arrows so far. Their likely move first: %1$@. Then your best reply, which holds only if they play it: %2$@.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Duas setas até agora. O provável primeiro lance deles: %1$@. Em seguida, sua melhor resposta, que só se mantém se eles jogarem assim: %2$@."
+  },
+  "d2e2694f422e616d2610": {
+    "source": "You've used your first %lld analyses.",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "Você já utilizou suas primeiras análises do “%1$lld”."
+  },
+  "d2f53d1981ac1460b08d": {
+    "source": "Think",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Pense"
+  },
+  "d30b0c23d181ee222997": {
+    "source": "%lld Squares Need a Look",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld As casas precisam de uma olhada"
+  },
+  "d34b6a5e25fa6c4b8960": {
+    "source": "Unlimited analyses, billed weekly",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Análises ilimitadas, cobradas semanalmente"
+  },
+  "d3707a2a2e1e511e4383": {
+    "source": "Only in your board app",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Apenas no seu aplicativo de tabuleiro"
+  },
+  "d391207f3e96047bbecb": {
+    "source": "Fix %@",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Corrija “%1$@”"
+  },
+  "d3edc7c6b17e60085c36": {
+    "source": "%@ has more queens, rooks, bishops or knights than its missing pawns could have promoted to.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ tem mais rainhas, torres, bispos ou cavalos do que os peões ausentes poderiam ter promovido."
+  },
+  "d4c951990a067fb4f21f": {
+    "source": "1 minute",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "1 minuto"
+  },
+  "d5b98d1dcbc95b2b0002": {
+    "source": "%@ is checkmated.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ está em xeque-mate."
+  },
+  "d5d2bc1e507978500d7c": {
+    "source": "One payment. Not a subscription.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Um único pagamento. Não é uma assinatura."
+  },
+  "d6083f8052ed2dac745a": {
+    "source": "Set Up the One-Step Shortcut",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Configurar o atalho de uma etapa"
+  },
+  "d63489f6889b742e26b7": {
+    "source": "The Action button is a physical button on the left side of supported iPhones, above the volume buttons. It replaces the Ring/Silent switch and can run a shortcut when you press and hold it. If your iPhone has a Ring/Silent switch instead, use Back Tap or another option.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O botão de ação é um botão físico localizado no lado esquerdo dos iPhones compatíveis, acima dos botões de volume. Ele substitui o botão de modo de toque/silêncio e pode executar um atalho quando você o pressiona e mantém pressionado. Se o seu iPhone tiver um botão de modo de toque/silêncio, use o Back Tap ou outra opção."
+  },
+  "d6495a57c7ebe72c0c1a": {
+    "source": "Stop",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Parar"
+  },
+  "d677602289a626246a1a": {
+    "source": "By default, the board and pieces match each screenshot. Without a screenshot, they use the Classic Green style. Choose Classic Green or Standard Board to always use that style instead.",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Por padrão, o tabuleiro e as peças correspondem a cada captura de tela. Na ausência de uma captura de tela, eles usam o estilo “Verde Clássico”. Escolha “Verde Clássico” ou “Tabuleiro Padrão” para usar sempre esse estilo."
+  },
+  "d67eeb70cb36cb44cda7": {
+    "source": "Latest screenshot",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Captura de tela mais recente"
+  },
+  "d70ac59e47e56c1addd2": {
+    "source": "Tap a marked square to fix it, or analyze as recognized.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Toque em uma casa marcada para confirmá-la ou analise conforme reconhecido."
+  },
+  "d73c64f680db2c2fc9a6": {
+    "source": "on ",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "em "
+  },
+  "d79e3c4d75439386aede": {
+    "source": "Screenshots",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Capturas de tela"
+  },
+  "d7e69d5fde2ffff73c27": {
+    "source": "This board has colored squares that do not add up to a move, so the last move could not be read. Check the side to move.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Este tabuleiro tem casas coloridas que não formam um lance, portanto, o último lance não pôde ser lido. Verifique o lado que deve jogar."
+  },
+  "d811ee014378dcf0784b": {
+    "source": "Take a chess screenshot, then open this app. Analysis starts automatically with unlimited access; otherwise, tap Analyze when asked.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Tire uma captura de tela do xadrez e, em seguida, abra este aplicativo. A análise começa automaticamente com acesso ilimitado; caso contrário, toque em “Analisar” quando solicitado."
+  },
+  "d8922d6556481e6ec2fc": {
+    "source": "Couldn't load purchase options.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Não foi possível carregar as opções de compra."
+  },
+  "d8e9380a825ed6c4f8cf": {
+    "source": "Home and Lock Screen widgets",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Widgets da tela inicial e da tela de bloqueio"
+  },
+  "db1660a24ce7dafda93f": {
+    "source": "Analyze",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Analisar"
+  },
+  "db4c999b99830a8e3a37": {
+    "source": "%@ has more than 16 pieces.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ tem mais de 16 peças."
+  },
+  "dba6a7d0fda4eb0f03bd": {
+    "source": "Black rook",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Torre preta"
+  },
+  "dbd7ee39720af424a22e": {
+    "source": "Swipe up or down to change the piece. Double tap to select it for the palette.",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Deslize para cima ou para baixo para trocar a peça. Toque duas vezes para selecioná-la na paleta."
+  },
+  "dd60aea6c2d9fafd5354": {
+    "source": "Stockfish — ",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Stockfish — "
+  },
+  "ddc680fb1fcd987d2970": {
+    "source": "The engine keeps searching the same board after the first move appears.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "O mecanismo continua analisando o mesmo tabuleiro após o primeiro lance aparecer."
+  },
+  "dee3ca0f80485f21bb12": {
+    "source": "Pawn",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Peão"
+  },
+  "df104219e21ad039f896": {
+    "source": "Take a screenshot, save it to Photos, and analyze it with one shortcut.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Faça uma captura de tela, salve-a no aplicativo Fotos e analise-a com um único atalho."
+  },
+  "df1eef77e201fa39c343": {
+    "source": "queen",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "rainha"
+  },
+  "df90399987f65b2ee2af": {
+    "source": "%@ of the three that come with the app",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ dos três que vêm com o aplicativo"
+  },
+  "e06a6a0ce46571dfbea1": {
+    "source": "Unlimited analyses, billed yearly",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Análises ilimitadas, cobradas anualmente"
+  },
+  "e0a41bca7bc6a1d87a52": {
+    "source": "Most chess sites do not allow engine help in games you are playing.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "A maioria dos sites de xadrez não permite o uso de ajuda de motor nas partidas que você está jogando."
+  },
+  "e1041f5bce845741990e": {
+    "source": "Move the board cursor left",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Mova o cursor do tabuleiro para a esquerda"
+  },
+  "e1490b8842819c4b962b": {
+    "source": "Continue",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Continuar"
+  },
+  "e15a96028995fc1bc8e9": {
+    "source": "Run with the Action button",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Executar com o botão de ação"
+  },
+  "e17f1b855686714bc12b": {
+    "source": "Black knight",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Cavalo preto"
+  },
+  "e1fc61d27ebe5899c153": {
+    "source": "Screenshot a position, then tap Use latest screenshot.",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Faça uma captura de tela de uma posição e, em seguida, toque em “Usar a captura de tela mais recente”."
+  },
+  "e287382e05cb4952e8af": {
+    "source": " Other marked squares were hard to read.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": " Outras casas marcadas estavam difíceis de ler."
+  },
+  "e2b757ff330302322765": {
+    "source": "Best Move from Screenshot",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Melhor jogada a partir da captura de tela"
+  },
+  "e2eb2f07795837bcbb54": {
+    "source": "pawn",
+    "translatedAt": "2026-10-15T02:13:40Z",
+    "translation": "peão"
+  },
+  "e2f731493d190c16b57a": {
+    "source": "%1$lld of %2$lld",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld %2$lld"
+  },
+  "e3455804cebe1a4f0891": {
+    "source": "%lld boards",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld tabuleiros"
+  },
+  "e4555aa78fc29ac842bd": {
+    "source": "Pro Weekly",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Pro Weekly"
+  },
+  "e58646d13a80d165c919": {
+    "source": "Run with Siri",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Executar com a Siri"
+  },
+  "e59cf4c987982efd0947": {
+    "source": "+2.35  −1.20  M3",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "+2,35  −1,20  M3"
+  },
+  "e5c21247165c39983b03": {
+    "source": "That isn't an image.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "Isso não é uma imagem."
+  },
+  "e6664b42ad9101a0cdee": {
+    "source": "A longer search still prefers this move.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Uma análise mais aprofundada ainda prefere este lance."
+  },
+  "e716ab98fbe379faf996": {
+    "source": "A row a free user can read but not change.",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Uma linha que um usuário gratuito pode ler, mas não alterar."
+  },
+  "e795b200998876359e94": {
+    "source": "%1$@ added. %2$lld purchased now.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ adicionado. %2$lld comprado agora."
+  },
+  "e99c4aa63377d0d59d54": {
+    "source": "The shortcut uses the same free analyses as the app. Board not found never uses one.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "O atalho usa as mesmas análises gratuitas que o aplicativo. “Tabuleiro não encontrado” nunca usa uma."
+  },
+  "ead5b1a70bc71388f873": {
+    "source": "You're offline. Connect to the internet to see purchase options.",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "Você está offline. Conecte-se à internet para ver as opções de compra."
+  },
+  "ec4eebe8803eed5f87bf": {
+    "source": "Black",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Preto"
+  },
+  "ec745537d66627b545f2": {
+    "source": "Paste",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Colar"
+  },
+  "ecc65fca178a06bdde4a": {
+    "source": "Analysis failed. ",
+    "translatedAt": "2026-10-15T02:12:05Z",
+    "translation": "Falha na análise. "
+  },
+  "edf1e96c2ca0f9e3c574": {
+    "source": " The other marked squares were hard to read.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": " As outras casas marcadas estavam difíceis de ler."
+  },
+  "eef8340673b1d4365cc5": {
+    "source": "Manage Subscription",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Gerenciar assinatura"
+  },
+  "ef06085810beb2d35264": {
+    "source": "Purchases",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Compras"
+  },
+  "ef61ce3e8944ecb20edd": {
+    "source": "Unlock Unlimited",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Desbloqueie o acesso ilimitado"
+  },
+  "efcbdc7ff2aeea4e80d6": {
+    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Move when it is approved.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "A compra está aguardando aprovação. A análise começa no Chess Best Move assim que for aprovada."
+  },
+  "f0826ec96d9e44a761a2": {
+    "source": "Drop to analyze",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Arraste para analisar"
+  },
+  "f1ef1715d942f72e1abe": {
+    "source": "Source Code of the Version in This App",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "Código-fonte da versão deste aplicativo"
+  },
+  "f2588b0ada339a1671b5": {
+    "source": "Step %1$lld: %2$@",
+    "translatedAt": "2026-10-15T02:12:13Z",
+    "translation": "%1$lld passo a passo: %2$@"
+  },
+  "f2dd0e37c1d1211e5b1d": {
+    "source": "Their likely move so far: %@.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Seu provável movimento até agora: %1$@."
+  },
+  "f3162f6f42f27dedba34": {
+    "source": "Keep the chess position on screen and press and hold the Action button. You do not need to open Control Center or add a three-second wait. The button now runs this shortcut instead of its previous action.",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Mantenha a posição do xadrez na tela e mantenha pressionado o botão de ação. Não é necessário abrir o Centro de Controle nem adicionar uma espera de três segundos. O botão agora executa esse atalho em vez de sua ação anterior."
+  },
+  "f3885976e6de5a315666": {
+    "source": "%1$@: read as %2$@",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$@ (Aplicativo de Códigos de Acesso): leia-se “%2$@”"
+  },
+  "f38d92940a9f54630697": {
+    "source": "Board Style",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Estilo do tabuleiro"
+  },
+  "f4d54f15444739ad54a6": {
+    "source": "Reset free analyses?",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Redefinir análises gratuitas?"
+  },
+  "f4fd75173d8a7fc8311e": {
+    "source": "Evaluation bar",
+    "translatedAt": "2026-10-15T02:12:08Z",
+    "translation": "Barra de avaliação"
+  },
+  "f50ce373ac095a75824c": {
+    "source": "Castles queenside",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Roque do lado da rainha"
+  },
+  "f6923e9169ba2255d36f": {
+    "source": "Weekly",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Semanal"
+  },
+  "f776e7e8f0a46e46c3d2": {
+    "source": "White queen",
+    "translatedAt": "2026-10-15T02:12:16Z",
+    "translation": "Rainha branca"
+  },
+  "f780f517f4f720559ff4": {
+    "source": "Black castles queenside",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "As pretas fazem o roque pelo flanco da rainha"
+  },
+  "f8b99826b6ea8fdae70c": {
+    "source": " Something in your screenshot covers the other marked squares.",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": " Algo na sua captura de tela está cobrindo as outras casas marcadas."
+  },
+  "f915d77f25defa06bbbe": {
+    "source": "Mark as correct",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Marcar como correto"
+  },
+  "f94df632c7953eb8b752": {
+    "source": "Checkmate.",
+    "translatedAt": "2026-10-15T02:12:07Z",
+    "translation": "Xeque-mate."
+  },
+  "f9b4198941d36a32d73e": {
+    "source": "king",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "rei"
+  },
+  "f9ce998d7ffca752a146": {
+    "source": "The person who approves purchases for your Apple Account needs to confirm it. Pro unlocks as soon as it's approved.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "A pessoa responsável por aprovar compras na sua Conta Apple precisa confirmar a transação. O Pro é desbloqueado assim que for aprovado."
+  },
+  "fa42cc05fdb500ea4cb1": {
+    "source": "The light and dark squares are the other way round on this board. Some board themes look like that; so does a mirrored screenshot, and then the pieces sit on mirrored squares.",
+    "translatedAt": "2026-10-15T02:12:14Z",
+    "translation": "As casas claras e escuras estão invertidas neste tabuleiro. Alguns temas de tabuleiro têm essa aparência; o mesmo ocorre com uma captura de tela espelhada, e, nesse caso, as peças ficam em casas espelhadas."
+  },
+  "fa45f0288e119657242d": {
+    "source": "This text is missing from the app. It is available at %@.",
+    "translatedAt": "2026-10-15T02:12:15Z",
+    "translation": "Este texto está ausente no aplicativo. Ele está disponível em %1$@."
+  },
+  "fab1dcd2d1af3e7e9e56": {
+    "source": "a b c d e f g h",
+    "translatedAt": "2026-10-15T02:13:39Z",
+    "translation": "a b c d e f g h"
+  },
+  "fb4c0d1a1e65bb8821c2": {
+    "source": "%lld analyses",
+    "translatedAt": "2026-10-15T02:12:04Z",
+    "translation": "%1$lld análises"
+  },
+  "fb924016c86869523093": {
+    "source": "Boards Already Paid For",
+    "translatedAt": "2026-10-15T02:12:06Z",
+    "translation": "Tabuleiros já pagos"
+  },
+  "fbd268a25bdae97a2076": {
+    "source": "No legal moves: it's stalemate.",
+    "translatedAt": "2026-10-15T02:12:10Z",
+    "translation": "Não há jogadas válidas: é um empate."
+  },
+  "fc2642b22ec645a68b49": {
+    "source": "Replaces the board on this screen.",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Substitui o tabuleiro nesta tela."
+  },
+  "fd0b77ff1a4781e67c30": {
+    "source": "%@ is ahead by 1 pawn",
+    "translatedAt": "2026-10-15T02:12:03Z",
+    "translation": "%1$@ está à frente por 1 peão"
+  },
+  "fd5e5666f3ff4af56c06": {
+    "source": "Open Chess Best Move and analyze your latest saved screenshot.",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Abra o Chess Best Move e analise sua última captura de tela salva."
+  },
+  "fe5dec5d30fb5fe59c33": {
+    "source": "Pieces",
+    "translatedAt": "2026-10-15T02:12:11Z",
+    "translation": "Peças"
+  },
+  "ff58679170268d0c0c5f": {
+    "source": "Ready to analyze",
+    "translatedAt": "2026-10-15T02:12:12Z",
+    "translation": "Pronto para análise"
+  },
+  "ffb44cbb1aee1f3ea122": {
+    "source": "Included",
+    "translatedAt": "2026-10-15T02:12:09Z",
+    "translation": "Incluído"
+  }
+}

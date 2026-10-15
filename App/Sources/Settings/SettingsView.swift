@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 /// Accessibility identifiers of Settings rows the UI tests look up.
@@ -72,14 +73,14 @@ private struct SettingsRootContent: View {
         @Bindable var settings = app.settings
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                GroupedSectionLabel("Screenshots")
+                GroupedSectionLabel(String(localized: "Screenshots"))
                 GroupedCard {
                     SettingsAutomaticScreenshotRow(isOn: $settings.automaticallyAnalyzesScreenshots)
                         .groupedRow(verticalPadding: Spacing.s3)
                 }
-                GroupedFooter("When you open the app, look for a new chess screenshot and analyze it automatically. Requires Full Access to Photos. Individual analyses are used only after you tap Analyze.")
+                GroupedFooter(String(localized: "When you open the app, look for a new chess screenshot and analyze it automatically. Requires Full Access to Photos. Individual analyses are used only after you tap Analyze."))
 
-                GroupedSectionLabel("Analysis")
+                GroupedSectionLabel(String(localized: "Analysis"))
                 GroupedCard {
                     VStack(alignment: .leading, spacing: Spacing.s2) {
                         Text("Default Think Time")
@@ -100,7 +101,7 @@ private struct SettingsRootContent: View {
                 }
                 SettingsLongerSearchFooter()
 
-                GroupedSectionLabel("Board appearance")
+                GroupedSectionLabel(String(localized: "Board appearance"))
                 GroupedCard {
                     Picker("Board Style", selection: $settings.boardAppearance) {
                         ForEach(BoardAppearance.allCases) { appearance in
@@ -113,9 +114,9 @@ private struct SettingsRootContent: View {
                     .groupedRow(verticalPadding: Spacing.s3)
                     .accessibilityIdentifier("settings.boardAppearance")
                 }
-                GroupedFooter("By default, the board and pieces match each screenshot. Without a screenshot, they use the Classic Green style. Choose Classic Green or Standard Board to always use that style instead.")
+                GroupedFooter(String(localized: "By default, the board and pieces match each screenshot. Without a screenshot, they use the Classic Green style. Choose Classic Green or Standard Board to always use that style instead."))
 
-                GroupedSectionLabel("Purchases")
+                GroupedSectionLabel(String(localized: "Purchases"))
                 GroupedCard {
                     // A control, not a value row (owner decision of 2026-09-28). It was a plain
                     // `ListRow`, so a tap on it did nothing in every state, and App Review
@@ -124,7 +125,7 @@ private struct SettingsRootContent: View {
                     // which has Restore purchases on it whatever the state, so the row leads
                     // somewhere for every reader (`SettingsPlanView`).
                     NavigationLink(value: SettingsRoute.plan) {
-                        ListRow("Plan", value: planText, showsChevron: true).groupedRow()
+                        ListRow(String(localized: "Plan"), value: planText, showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     .accessibilityIdentifier(SettingsAccessibilityID.planValue)
@@ -133,7 +134,7 @@ private struct SettingsRootContent: View {
                         Button {
                             app.presentPaywall(trigger: .settings)
                         } label: {
-                            ListRow("Unlock Unlimited", showsChevron: true).groupedRow()
+                            ListRow(String(localized: "Unlock Unlimited"), showsChevron: true).groupedRow()
                         }
                         .buttonStyle(.listRow)
                     }
@@ -141,7 +142,7 @@ private struct SettingsRootContent: View {
                     Button {
                         Task { await purchases.restore(store: app.store, focus: $restoreMessageFocused) }
                     } label: {
-                        ListRow("Restore Purchases", value: purchases.isRestoring ? "Restoring\u{2026}" : nil).groupedRow()
+                        ListRow(String(localized: "Restore Purchases"), value: purchases.isRestoring ? String(localized: "Restoring\u{2026}") : nil).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     .disabled(purchases.isRestoring)
@@ -159,7 +160,7 @@ private struct SettingsRootContent: View {
                                 }
                             }
                         } label: {
-                            ListRow("Manage Subscription", showsChevron: true).groupedRow()
+                            ListRow(String(localized: "Manage Subscription"), showsChevron: true).groupedRow()
                         }
                         .buttonStyle(.listRow)
                         .disabled(purchases.isManagingSubscription)
@@ -173,20 +174,20 @@ private struct SettingsRootContent: View {
                     }
                 }
 
-                GroupedSectionLabel("Help")
+                GroupedSectionLabel(String(localized: "Help"))
                 GroupedCard {
                     NavigationLink(value: SettingsRoute.screenshotHelp) {
-                        ListRow("How to Take a Screenshot", showsChevron: true).groupedRow()
+                        ListRow(String(localized: "How to Take a Screenshot"), showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     GroupedRowSeparator(start: .content)
                     NavigationLink(value: SettingsRoute.shortcutSetup) {
-                        ListRow("Set Up the One-Step Shortcut", showsChevron: true).groupedRow()
+                        ListRow(String(localized: "Set Up the One-Step Shortcut"), showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     GroupedRowSeparator(start: .content)
                     Button { openURL(SettingsLinks.support) } label: {
-                        ListRow("Support", showsChevron: true).groupedRow()
+                        ListRow(String(localized: "Support"), showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     .accessibilityHint("Opens in Safari.")
@@ -196,30 +197,30 @@ private struct SettingsRootContent: View {
                         .accessibilityIdentifier("settings.fairPlayNote")
                 }
 
-                GroupedSectionLabel("About")
+                GroupedSectionLabel(String(localized: "About"))
                 GroupedCard {
-                    ListRow("Version", value: Self.version)
+                    ListRow(String(localized: "Version"), value: Self.version)
                         .groupedRow()
                         .accessibilityElement(children: .combine)
                     GroupedRowSeparator(start: .content)
                     NavigationLink(value: SettingsRoute.engine) {
-                        ListRow("Chess Engine", value: app.engine.engineVersion, showsChevron: true).groupedRow()
+                        ListRow(String(localized: "Chess Engine"), value: app.engine.engineVersion, showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     GroupedRowSeparator(start: .content)
                     NavigationLink(value: SettingsRoute.licenses) {
-                        ListRow("Licenses", showsChevron: true).groupedRow()
+                        ListRow(String(localized: "Licenses"), showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     GroupedRowSeparator(start: .content)
                     Button { openURL(SettingsLinks.privacyPolicy) } label: {
-                        ListRow("Privacy Policy", showsChevron: true).groupedRow()
+                        ListRow(String(localized: "Privacy Policy"), showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     .accessibilityHint("Opens in Safari.")
                     GroupedRowSeparator(start: .content)
                     Button { openURL(SettingsLinks.termsOfUse) } label: {
-                        ListRow("Terms of Use", showsChevron: true).groupedRow()
+                        ListRow(String(localized: "Terms of Use"), showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     .accessibilityHint("Opens in Safari.")
@@ -284,24 +285,24 @@ enum SettingsPlanRow {
     ) -> String {
         if hasPurchasedPro {
             switch activeSubscriptionProductID {
-            case ProductID.proWeekly?: return "Pro, weekly"
-            case ProductID.proAnnual?: return "Pro, yearly"
-            case nil: return "Pro, lifetime"
+            case ProductID.proWeekly?: return String(localized: "Pro, weekly")
+            case ProductID.proAnnual?: return String(localized: "Pro, yearly")
+            case nil: return String(localized: "Pro, lifetime")
             default: return "Pro"
             }
         }
         if isLaunchCohortMember { return MonetizationLaunchCohortCopy.planRow }
-        let purchasedText = purchasedRemaining == 1 ? "1 analysis" : "\(purchasedRemaining) analyses"
+        let purchasedText = purchasedRemaining == 1 ? String(localized: "1 analysis") : String(localized: "\(purchasedRemaining) analyses")
         if freeRemaining > 0 {
-            let free = "\(SettingsPlanDetail.freeTitle), \(freeRemaining) of \(freeAllowance) left"
-            return purchasedRemaining > 0 ? "\(free), plus \(purchasedText)" : free
+            let free = String(localized: "\(SettingsPlanDetail.freeTitle), \(freeRemaining) of \(freeAllowance) left")
+            return purchasedRemaining > 0 ? String(localized: "\(free), plus \(purchasedText)") : free
         }
         // The plan's name, then the count: with the three free analyses spent and a pack bought,
         // the word "free" would be wrong about the count and "Free" wrong about the plan, so both
         // the row and the screen call it "Pay as you go" (design.md 9.8). It used to read
         // "12 analyses left", which named no plan and disagreed with the screen's heading.
-        if purchasedRemaining > 0 { return "\(SettingsPlanDetail.payAsYouGoTitle), \(purchasedRemaining) left" }
-        return "\(SettingsPlanDetail.freeTitle), none left"
+        if purchasedRemaining > 0 { return String(localized: "\(SettingsPlanDetail.payAsYouGoTitle), \(purchasedRemaining) left") }
+        return String(localized: "\(SettingsPlanDetail.freeTitle), none left")
     }
 }
 
@@ -343,7 +344,7 @@ struct SettingsRestoreFeedback: Equatable, Sendable {
 struct SettingsScreenshotHelpView: View {
     /// The button combinations of this device family, then the way back.
     private var steps: [String] {
-        AppDevice.current.screenshotButtonSteps + ["Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot."]
+        AppDevice.current.screenshotButtonSteps + [String(localized: "Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.")]
     }
 
     var body: some View {
@@ -354,12 +355,12 @@ struct SettingsScreenshotHelpView: View {
                     .foregroundStyle(Palette.ink)
                     .padding(.top, Spacing.s4)
                     .accessibilityAddTraits(.isHeader)
-                SectionLabel("Steps")
+                SectionLabel(String(localized: "Steps"))
                 ForEach(Array(steps.enumerated()), id: \.offset) { index, step in
                     SettingsNumberedStep(number: index + 1, text: step)
                         .padding(.bottom, Spacing.s3)
                 }
-                SectionLabel("For the best result")
+                SectionLabel(String(localized: "For the best result"))
                 Text("Use a screenshot of the board, not a photo of a screen. The whole board must be visible.")
                     .typography(.body)
                     .foregroundStyle(Palette.ink)
@@ -398,7 +399,7 @@ struct SettingsNumberedStep: View {
 private struct SettingsAutomaticScreenshotRow: View {
     @Binding var isOn: Bool
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    private let title = "Automatically Analyze New Screenshots"
+    private let title = String(localized: "Automatically Analyze New Screenshots")
 
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.s2) {

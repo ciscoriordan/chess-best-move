@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 /// CreditsIndicator (design.md section 6, monetization.md section 3).
@@ -32,7 +33,7 @@ struct CreditsIndicator: View {
     }
 
     /// Said in every state, because the button is there in every state.
-    static let hint = "Opens purchase options"
+    static let hint = String(localized: "Opens purchase options")
 
     private var isExhausted: Bool { freeRemaining <= 0 && purchasedRemaining <= 0 }
 
@@ -56,15 +57,15 @@ struct CreditsIndicator: View {
     }
 
     private var text: String {
-        if freeRemaining > 0 { return "\(freeRemaining) free" }
-        if purchasedRemaining > 0 { return purchasedRemaining == 1 ? "1 analysis left" : "\(purchasedRemaining) analyses left" }
-        return "No free analyses"
+        if freeRemaining > 0 { return String(localized: "\(freeRemaining) free") }
+        if purchasedRemaining > 0 { return purchasedRemaining == 1 ? String(localized: "1 analysis left") : String(localized: "\(purchasedRemaining) analyses left") }
+        return String(localized: "No free analyses")
     }
 
     private var accessibilityText: String {
-        if freeRemaining > 0 { return "\(freeRemaining) of \(freeAllowance) free analyses left" }
+        if freeRemaining > 0 { return String(localized: "\(freeRemaining) of \(freeAllowance) free analyses left") }
         if purchasedRemaining > 0 { return text }
-        return "No free analyses left"
+        return String(localized: "No free analyses left")
     }
 }
 

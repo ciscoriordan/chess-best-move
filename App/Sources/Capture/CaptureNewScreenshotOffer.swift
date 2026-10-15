@@ -179,33 +179,35 @@ enum CaptureNewScreenshotRefreshTrigger: Sendable, Hashable {
 
 /// The words of the new-screenshot row (design.md 6 and 9.4).
 enum CaptureNewScreenshotCopy {
-    static let title = "New screenshot"
-    static let button = "Analyze"
+    static let title = String(localized: "New screenshot")
+    static let button = String(localized: "Analyze")
     /// Home's promoted title, on purpose: one screenshot is spoken the same way on every screen.
-    static let accessibilityLabel = "Analyze new screenshot"
-    static let hint = "Replaces the board on this screen."
-    static let importing = "Importing"
+    static let accessibilityLabel = String(localized: "Analyze new screenshot")
+    static let hint = String(localized: "Replaces the board on this screen.")
+    static let importing = String(localized: "Importing")
     /// Home's own message names a Photos row these screens do not have.
-    static let importFailed = "Couldn't open this screenshot. Try again, or use Choose from Photos on the start screen."
+    static let importFailed = String(localized: "Couldn't open this screenshot. Try again, or use Choose from Photos on the start screen.")
     /// The widest age line the row is laid out for, so the button does not move as the age counts.
-    static let widestAge = "Taken 59\u{00A0}min ago"
+    static let widestAge = String(localized: "Taken 59\u{00A0}min ago")
 
     /// "Taken 8 s ago".
     static func age(since date: Date, now: Date) -> String {
-        "Taken " + CaptureRecentScreenshotPolicy.ageText(since: date, now: now)
+        String(localized: "Taken \(CaptureRecentScreenshotPolicy.ageText(since: date, now: now))")
     }
 
     /// "Taken 8 seconds ago".
     static func spokenAge(since date: Date, now: Date) -> String {
-        "Taken " + CaptureRecentScreenshotPolicy.spokenAgeText(since: date, now: now)
+        String(localized: "Taken \(CaptureRecentScreenshotPolicy.spokenAgeText(since: date, now: now))")
     }
 
     /// "New screenshot, taken 8 seconds ago. Analyze new screenshot is at the bottom of the
     /// screen.", or "at the top" where the row is at the top of the scrolling content.
     static func announcement(since date: Date, now: Date, placement: NewScreenshotRow.Placement) -> String {
         let spoken = CaptureRecentScreenshotPolicy.spokenAgeText(since: date, now: now)
-        let edge = placement == .pinnedBar ? "bottom" : "top"
-        return "New screenshot, taken \(spoken). \(accessibilityLabel) is at the \(edge) of the screen."
+        let edge = placement == .pinnedBar
+            ? String(localized: "bottom", comment: "Location of a control: at the bottom of the screen.")
+            : String(localized: "top", comment: "Location of a control: at the top of the screen.")
+        return String(localized: "New screenshot, taken \(spoken). \(accessibilityLabel) is at the \(edge) of the screen.")
     }
 
     /// What Voice Control answers to: the spoken name, the title and the word on the button.

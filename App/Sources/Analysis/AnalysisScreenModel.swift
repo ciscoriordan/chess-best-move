@@ -1,3 +1,4 @@
+import Foundation
 import ChessCore
 import Observation
 import SwiftUI
@@ -204,23 +205,23 @@ final class AnalysisScreenModel {
     var detailLine: String {
         let side = AnalysisSpeech.colorName(session.snapshot.position.sideToMove)
         if let checkmate = noLegalMoves {
-            return checkmate ? "\(side) is checkmated." : "\(side) has no legal moves. The game is drawn."
+            return checkmate ? String(localized: "\(side) is checkmated.") : String(localized: "\(side) has no legal moves. The game is drawn.")
         }
         switch runState {
         case .failed(let message):
             return message
         case .interrupted where interruption == .background:
-            return "Stopped when the app went to the background. Run it again for the full think time."
+            return String(localized: "Stopped when the app went to the background. Run it again for the full think time.")
         case .interrupted:
-            return "Stopped before the think time was up. Run it again for the full think time."
+            return String(localized: "Stopped before the think time was up. Run it again for the full think time.")
         case .notStarted:
             switch session.creditState {
-            case .waitingForApproval: return "Waiting for purchase approval. The analysis starts when it is approved."
-            case .waitingForPurchase, .authorized: return "Analysis not run."
+            case .waitingForApproval: return String(localized: "Waiting for purchase approval. The analysis starts when it is approved.")
+            case .waitingForPurchase, .authorized: return String(localized: "Analysis not run.")
             }
         case .starting, .running, .completed:
             if let spoken = heroSpokenDescription { return spoken }
-            return app.engine.phase == .preparing ? "Loading the engine." : "Thinking."
+            return app.engine.phase == .preparing ? String(localized: "Loading the engine.") : String(localized: "Thinking.")
         }
     }
 
@@ -270,33 +271,33 @@ final class AnalysisScreenModel {
 
     /// "Turn off White O-O" for the assumed right.
     nonisolated static func turnOffTitle(_ right: CastlingRights) -> String {
-        "Turn off \(castlingName(right))"
+        String(localized: "Turn off \(castlingName(right))")
     }
 
     /// "White O-O", as on the castling chips of Check position and the editor.
     nonisolated static func castlingName(_ right: CastlingRights) -> String {
         switch right {
-        case .whiteKingside: "White O-O"
-        case .whiteQueenside: "White O-O-O"
-        case .blackKingside: "Black O-O"
-        default: "Black O-O-O"
+        case .whiteKingside: String(localized: "White O-O")
+        case .whiteQueenside: String(localized: "White O-O-O")
+        case .blackKingside: String(localized: "Black O-O")
+        default: String(localized: "Black O-O-O")
         }
     }
 
     /// "White castling kingside", for VoiceOver.
     nonisolated static func spokenCastlingName(_ right: CastlingRights) -> String {
         switch right {
-        case .whiteKingside: "White castling kingside"
-        case .whiteQueenside: "White castling queenside"
-        case .blackKingside: "Black castling kingside"
-        default: "Black castling queenside"
+        case .whiteKingside: String(localized: "White castling kingside")
+        case .whiteQueenside: String(localized: "White castling queenside")
+        case .blackKingside: String(localized: "Black castling kingside")
+        default: String(localized: "Black castling queenside")
         }
     }
 
     /// "Think longer: 10 s", or "Run again: 30 s" at the longest preset.
     var thinkLongerTitle: String {
-        if let next = runThinkTime.next { return "Think longer: \(next.label)" }
-        return "Run again: \(runThinkTime.label)"
+        if let next = runThinkTime.next { return String(localized: "Think longer: \(next.label)") }
+        return String(localized: "Run again: \(runThinkTime.label)")
     }
 
     // MARK: Lifecycle
@@ -382,7 +383,7 @@ final class AnalysisScreenModel {
             } else {
                 self.handle(engine.phase)
                 if self.runState == .starting {
-                    self.fail("The chess engine did not start.")
+                    self.fail(String(localized: "The chess engine did not start."))
                 }
             }
         }
@@ -579,7 +580,7 @@ final class AnalysisScreenModel {
             runState = .completed
             ledger.record(.noLegalMoves(checkmate: checkmate), for: session.id)
             completionCount += 1
-            announce(checkmate ? "Checkmate. There are no legal moves." : "Stalemate. There are no legal moves.")
+            announce(checkmate ? String(localized: "Checkmate. There are no legal moves.") : String(localized: "Stalemate. There are no legal moves."))
         case .failed(let message):
             if AnalysisEngineFailure.isInvalidPosition(phase) {
                 let issues = AnalysisPositionCheck.blockingIssues(in: position)
@@ -601,7 +602,7 @@ final class AnalysisScreenModel {
         }
         runState = .completed
         guard let best = bestMove else {
-            ledger.record(.failed("No best move."), for: session.id)
+            ledger.record(.failed(String(localized: "No best move.")), for: session.id)
             return
         }
         let score = readout?.score
@@ -637,8 +638,8 @@ final class AnalysisScreenModel {
     /// ends in an error.
     static func failureAnnouncement(_ message: String) -> String {
         let trimmed = message.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return "Analysis failed." }
-        return trimmed.hasSuffix(".") ? "Analysis failed. " + trimmed : "Analysis failed. " + trimmed + "."
+        guard !trimmed.isEmpty else { return String(localized: "Analysis failed.") }
+        return trimmed.hasSuffix(".") ? String(localized: "Analysis failed. ") + trimmed : String(localized: "Analysis failed. ") + trimmed + "."
     }
 
     /// The last sentence handed to VoiceOver. Kept so the announcements can be checked without

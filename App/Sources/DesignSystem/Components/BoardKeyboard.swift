@@ -1,3 +1,4 @@
+import Foundation
 import ChessCore
 import SwiftUI
 import UIKit
@@ -49,10 +50,10 @@ enum BoardKeyboard {
         /// Command key brings up.
         var commandTitle: String {
             switch self {
-            case .up: "Move the board cursor up"
-            case .down: "Move the board cursor down"
-            case .left: "Move the board cursor left"
-            case .right: "Move the board cursor right"
+            case .up: String(localized: "Move the board cursor up")
+            case .down: String(localized: "Move the board cursor down")
+            case .left: String(localized: "Move the board cursor left")
+            case .right: String(localized: "Move the board cursor right")
             }
         }
     }
@@ -76,8 +77,8 @@ enum BoardKeyboard {
 
     /// What the key commands are called in the keyboard shortcut list a long press on the
     /// Command key brings up.
-    static let activateCommandTitle = "Use the square the board cursor is on"
-    static let dismissCommandTitle = "Put the board cursor away"
+    static let activateCommandTitle = String(localized: "Use the square the board cursor is on")
+    static let dismissCommandTitle = String(localized: "Put the board cursor away")
 
     /// Where the cursor starts the first time a board takes keyboard focus.
     ///

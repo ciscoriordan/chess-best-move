@@ -70,10 +70,10 @@ enum MonetizationLegalLinks {
     /// Stockfish is linked into the binary, so the whole app is under GPLv3
     /// (Packages/ChessEngine/README.md, "License obligations"). The published terms grant
     /// GPLv3 for the software and add no restriction to it.
-    static let termsOfUse = URL(string: "https://ciscoriordan.github.io/chessbestmove.app/terms.html")!
+    static var termsOfUse: URL { AppLocalization.websiteURL("terms.html") }
 
     /// The published privacy policy.
-    static let privacyPolicy = URL(string: "https://ciscoriordan.github.io/chessbestmove.app/privacy.html")!
+    static var privacyPolicy: URL { AppLocalization.websiteURL("privacy.html") }
 }
 
 /// Apple's own pages the app sends a reader to.

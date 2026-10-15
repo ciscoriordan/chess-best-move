@@ -115,7 +115,7 @@ final class CaptureHomeModel {
             analyzed.markAnalyzed(asset.localIdentifier)
             app.importImage(image)
         } catch {
-            importError = "Couldn't open your latest screenshot. Try Photos instead."
+            importError = String(localized: "Couldn't open your latest screenshot. Try Photos instead.")
         }
     }
 
@@ -134,7 +134,7 @@ final class CaptureHomeModel {
             }
             app.importImage(ImportedImage(image: image, source: .photosPicker, photoAssetIdentifier: item.itemIdentifier))
         } catch {
-            importError = "Couldn't open that image."
+            importError = String(localized: "Couldn't open that image.")
         }
     }
 
@@ -142,7 +142,7 @@ final class CaptureHomeModel {
     @discardableResult
     func importItemProviders(_ providers: [NSItemProvider], source: ImportSource, app: AppModel) -> Bool {
         guard CaptureItemProviderLoader.hasImage(providers) else {
-            importError = "That isn't an image."
+            importError = String(localized: "That isn't an image.")
             return false
         }
         app.beginExplicitScreenshotSelection()
@@ -164,7 +164,7 @@ final class CaptureHomeModel {
             let image = try await Self.decode(data, orientation: nil)
             app.importImage(ImportedImage(image: image, source: source))
         } catch {
-            importError = "Couldn't open that image."
+            importError = String(localized: "Couldn't open that image.")
         }
     }
 
@@ -173,7 +173,7 @@ final class CaptureHomeModel {
     private func finishProviderImport(_ data: Data?, source: ImportSource, app: AppModel) async {
         guard let data else {
             isImporting = false
-            importError = "Couldn't open that image."
+            importError = String(localized: "Couldn't open that image.")
             return
         }
         await importData(data, source: source, app: app)

@@ -1,3 +1,4 @@
+import Foundation
 import ChessCore
 
 /// What the Analysis result (design.md 9.4) and Check position (9.5) say about whose move the
@@ -20,7 +21,7 @@ enum SideToMoveCopy {
 
     /// "the player at the bottom" or "the player at the top".
     static func seat(side: PieceColor, whiteAtBottom: Bool) -> String {
-        isAtBottom(side: side, whiteAtBottom: whiteAtBottom) ? "the player at the bottom" : "the player at the top"
+        isAtBottom(side: side, whiteAtBottom: whiteAtBottom) ? String(localized: "the player at the bottom") : String(localized: "the player at the top")
     }
 
     /// The caption under the side-to-move chip: where that player sits, then where the side to
@@ -32,11 +33,11 @@ enum SideToMoveCopy {
     static func caption(side: PieceColor, whiteAtBottom: Bool, origin: SideToMoveOrigin) -> String {
         let seat = seat(side: side, whiteAtBottom: whiteAtBottom)
         switch origin {
-        case .lastMoveHighlight: return "\(seat), from last-move highlight"
-        case .runningClock: return "\(seat), from the clock"
-        case .checkRule: return "\(seat), from check"
-        case .startPosition: return "\(seat), the game has not started"
-        case .assumedBottomPlayer: return "assumed: you are at the bottom"
+        case .lastMoveHighlight: return String(localized: "\(seat), from last-move highlight")
+        case .runningClock: return String(localized: "\(seat), from the clock")
+        case .checkRule: return String(localized: "\(seat), from check")
+        case .startPosition: return String(localized: "\(seat), the game has not started")
+        case .assumedBottomPlayer: return String(localized: "assumed: you are at the bottom")
         case .user: return seat
         }
     }
@@ -45,7 +46,7 @@ enum SideToMoveCopy {
     /// content: "White, the player at the top, from last-move highlight". VoiceOver never sees
     /// the chip and the caption as one statement, so the value says the side itself.
     static func spoken(side: PieceColor, whiteAtBottom: Bool, origin: SideToMoveOrigin) -> String {
-        "\(AnalysisSpeech.colorName(side)), \(caption(side: side, whiteAtBottom: whiteAtBottom, origin: origin))"
+        String(localized: "\(AnalysisSpeech.colorName(side)), \(caption(side: side, whiteAtBottom: whiteAtBottom, origin: origin))")
     }
 
     /// Whether the result answers for the player at the top: the side to move is that player,
@@ -72,12 +73,12 @@ enum SideToMoveCopy {
 
     /// The link under the caption. It does what the side-to-move chip does; it is spelled out
     /// because the chip says which side moves, not which player that is.
-    static let switchToBottomPlayerTitle = "Switch to the player at the bottom"
+    static let switchToBottomPlayerTitle = String(localized: "Switch to the player at the bottom")
 
     /// The VoiceOver hint of that link. `side` is the side to move now, so the link switches to
     /// its opposite. Swapping the side re-runs the same board, which costs nothing
     /// (monetization.md: adjustments of one board are free).
     static func switchToBottomPlayerHint(side: PieceColor) -> String {
-        "Analyzes \(AnalysisSpeech.colorName(side.opposite)) to move instead. Re-running is free."
+        String(localized: "Analyzes \(AnalysisSpeech.colorName(side.opposite)) to move instead. Re-running is free.")
     }
 }

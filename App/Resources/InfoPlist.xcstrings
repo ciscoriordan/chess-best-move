@@ -1,0 +1,53 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "NSPhotoLibraryUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chess Best Move liest deinen neuesten Screenshot, um das Schachbrett darin zu finden. Deine Fotos bleiben auf deinem Gerät."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Your photos stay on your device."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chess Best Move lee tu captura de pantalla más reciente para encontrar el tablero de ajedrez en ella. Tus fotos permanecen en tu dispositivo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chess Best Move lit votre dernière capture d’écran pour y repérer l’échiquier. Vos photos restent sur votre appareil."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chess Best Move legge il tuo screenshot più recente per individuare la scacchiera. Le tue foto restano sul dispositivo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Chess Best Move lê sua captura de tela mais recente para localizar o tabuleiro de xadrez nela. Suas fotos permanecem no seu dispositivo."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chess Best Move, içindeki satranç tahtasını bulmak için en son ekran görüntünüzü okur. Fotoğraflarınız aygıtınızda kalır."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

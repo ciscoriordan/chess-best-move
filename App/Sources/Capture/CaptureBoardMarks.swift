@@ -1,3 +1,4 @@
+import Foundation
 import ChessCore
 import SwiftUI
 import UIKit
@@ -118,8 +119,8 @@ enum CaptureBoardSpeech {
     /// The value of an editor square's VoiceOver element: "White pawn" or "empty", plus
     /// ", low confidence" when flagged.
     static func squareValue(piece: Piece?, lowConfidence: Bool) -> String {
-        var text = piece.map(CapturePositionIssues.name) ?? "empty"
-        if lowConfidence { text += ", low confidence" }
+        var text = piece.map(CapturePositionIssues.name) ?? String(localized: "empty")
+        if lowConfidence { text += String(localized: ", low confidence") }
         return text
     }
 
@@ -127,13 +128,13 @@ enum CaptureBoardSpeech {
     /// the user's screenshot. VoiceOver swallows a touch and hold before it reaches the view,
     /// and a quarter-second hold within 30 pt is not something every hand can do, so the
     /// comparison is an action as well as a gesture (design.md 9.4, 9.5, 12).
-    static let compareAction = "Compare with your screenshot"
+    static let compareAction = String(localized: "Compare with your screenshot")
     /// The same action once the screenshot is showing.
-    static let hideScreenshotAction = "Show the recognized board"
+    static let hideScreenshotAction = String(localized: "Show the recognized board")
 
     /// "Board, White at bottom".
     static func boardLabel(whiteAtBottom: Bool) -> String {
-        "Board, \(whiteAtBottom ? "White" : "Black") at bottom"
+        String(localized: "Board, \(AnalysisSpeech.colorName(whiteAtBottom ? .white : .black)) at bottom")
     }
 
     /// Pieces grouped by color: "White: king e1, queen d1, ... Black: ...".
@@ -142,9 +143,9 @@ enum CaptureBoardSpeech {
             let pieces = CapturePaletteItem.kindOrder.flatMap { kind in
                 Square.all
                     .filter { board[$0.index] == Piece(color: color, kind: kind) }
-                    .map { "\(CapturePositionIssues.kindName(kind)) \($0.algebraic)" }
+                    .map { String(localized: "\(CapturePositionIssues.kindName(kind)) \($0.algebraic)") }
             }
-            return "\(CapturePositionIssues.name(color)): " + (pieces.isEmpty ? "no pieces" : pieces.joined(separator: ", "))
+            return String(localized: "\(CapturePositionIssues.name(color)): ") + (pieces.isEmpty ? String(localized: "no pieces") : pieces.joined(separator: ", "))
         }
         .joined(separator: ". ")
     }

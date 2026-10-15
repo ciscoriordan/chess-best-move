@@ -1,3 +1,4 @@
+import Foundation
 import ChessCore
 import SwiftUI
 import UIKit
@@ -338,7 +339,7 @@ struct CapturePieceTray: View {
         .accessibilityHint(hint(for: item))
     }
 
-    static let emptyTitle = "Empty"
+    static let emptyTitle = String(localized: "Empty")
     static let emptySymbol = "eraser"
     static let emptyTitleMinimumScale: CGFloat = 0.7
     static let emptyTitlePadding: CGFloat = 2
@@ -355,8 +356,8 @@ struct CapturePieceTray: View {
 
     private func hint(for item: CapturePaletteItem) -> String {
         if let square = model.selectedSquare {
-            return item.piece == nil ? "Clears \(square.algebraic)" : "Places it on \(square.algebraic)"
+            return item.piece == nil ? String(localized: "Clears \(square.algebraic)") : String(localized: "Places it on \(square.algebraic)")
         }
-        return "Arms it: then every square you tap gets it"
+        return String(localized: "Arms it: then every square you tap gets it")
     }
 }

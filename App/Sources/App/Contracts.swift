@@ -29,7 +29,7 @@ enum ThinkTime: Int, CaseIterable, Identifiable, Sendable, Codable, Hashable {
     /// "3 s" with a no-break space before the unit (design.md section 4).
     var label: String { "\(rawValue)\u{00A0}s" }
     /// "3 seconds" for VoiceOver.
-    var spokenLabel: String { rawValue == 1 ? "1 second" : "\(rawValue) seconds" }
+    var spokenLabel: String { rawValue == 1 ? String(localized: "1 second") : String(localized: "\(rawValue) seconds") }
 
     /// The next preset up, for "Think longer"; nil at 30 s ("Run again: 30 s").
     var next: ThinkTime? {

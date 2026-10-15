@@ -66,9 +66,9 @@ released version.
 
 ## What this repository contains
 
-Everything needed to build the app, and nothing else. Development material that the build does
-not need is not here: the tests, the test images, the program and the images used to train the
-recognition model, and internal design notes.
+Everything needed to build the app, including the translation sources and tooling used to
+reproduce its string catalogs. The tests, test images, program and images used to train the
+recognition model, and internal design notes are not included.
 
 ```
 project.yml                 XcodeGen specification; ChessBestMove.xcodeproj is generated from
@@ -76,6 +76,11 @@ project.yml                 XcodeGen specification; ChessBestMove.xcodeproj is g
 LICENSE                     the GNU General Public License version 3
 scripts/
   check-release-placeholders.sh   the app target's first build phase (see "Build phases")
+  localization/             string catalog extraction and generation tooling
+localization/
+  source.json               extracted English strings, keyed by stable identifiers
+  reviewed/                 translations with their source text, review date and rationale
+  deepl/                    original translation drafts, where available
 App/
   Info.plist                generated from project.yml by xcodegen; not committed
   Sources/                  the app's Swift code, one module, in folders by area:
@@ -90,6 +95,9 @@ App/
     Assets.xcassets/        named colors and the rasterized Home wordmark
     Fonts/                  chess-glyph and wordmark-source typefaces with their licenses
     Settings/               Stockfish's license text and author list, shown in the app
+    Localizable.xcstrings   interface, move, purchase and accessibility text for all targets
+    AppShortcuts.xcstrings  localized Siri phrases
+    InfoPlist.xcstrings     localized Photos permission text
     PrivacyInfo.xcprivacy   the app's privacy manifest
   Scripts/
     sync-stockfish-notices.sh      copies Stockfish's notices into App/Resources/Settings
@@ -191,6 +199,43 @@ read the source files it has to check.
 If you build a changed version of this app for distribution, point
 `SettingsLinks.appSourceRepository` in `App/Sources/Settings/SettingsLegal.swift` at your own
 published source; that check then asks about your repository and your tag, not this one.
+
+## Languages and translation sources
+
+The app, share extension, widgets, App Shortcuts, and Photos permission prompt support English,
+Spanish, Brazilian Portuguese, French, German, Italian, and Turkish. iOS chooses the app language;
+users can override it under Settings > Apps > Chess Best Move > Language. Support and legal links
+open the corresponding language on chessbestmove.app. Brand names, chess notation and square
+coordinates stay unchanged. Move descriptions, piece names, purchase controls and VoiceOver text
+are localized, using Apple's localized feature names where appropriate.
+
+The three string catalogs in `App/Resources/` are generated from records in `localization/`.
+The app bundles all three; the share and widget extensions each bundle `Localizable.xcstrings`.
+The committed catalogs are ready for an ordinary Xcode build. To change source strings, first
+make a Debug simulator build so the Swift compiler extracts localizable text:
+
+```sh
+python3 -m pip install -r scripts/localization/requirements.txt
+xcodegen generate
+xcodebuild build -project ChessBestMove.xcodeproj -scheme ChessBestMove \
+  -configuration Debug -destination 'generic/platform=iOS Simulator' \
+  -derivedDataPath build/DD ARCHS=arm64 CODE_SIGNING_ALLOWED=NO
+python3 scripts/localization/app.py sync
+```
+
+The sync step reads the compiler's `arm64` string data for the app and both extensions, then
+updates `localization/source.json`. Add or update the corresponding entries in
+`localization/reviewed/<language>.json`, preserving each source string, review date and rationale.
+Translations can be written directly; the original drafts in `localization/deepl/` are retained
+for reference. Keep numbered format arguments, Siri parameters and their types intact; reorder
+them when the translated sentence requires it. Optional `plural` forms provide singular and
+plural variants.
+
+Run `python3 scripts/localization/app.py build` to regenerate the catalogs, then rebuild the app.
+The generator rejects missing reviews, stale source text and changed format arguments. Edit the
+source and review records instead of making one-off changes to generated catalogs. `--draft` is
+only for local previews. Extraction and catalog generation do not contact a translation service,
+and the app translates nothing at runtime; it uses the bundled strings.
 
 ## Stockfish
 

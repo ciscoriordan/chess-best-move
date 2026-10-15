@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 // MARK: - Documents
@@ -14,7 +15,7 @@ enum SettingsLicenseDocument: String, CaseIterable, Identifiable, Hashable, Send
     var title: String {
         switch self {
         case .stockfishLicense: "GNU General Public License v3"
-        case .stockfishAuthors: "Stockfish Authors"
+        case .stockfishAuthors: String(localized: "Stockfish Authors")
         case .notoSansSymbols: "Noto Sans Symbols 2"
         case .oleoScript: "Oleo Script"
         }
@@ -145,17 +146,17 @@ struct SettingsLicensesView: View {
                 .padding(.bottom, Spacing.s4)
                 GroupedCard {
                     Button { openURL(SettingsLinks.appSource) } label: {
-                        ListRow("Source Code of This Version", showsChevron: true).groupedRow()
+                        ListRow(String(localized: "Source Code of This Version"), showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     .accessibilityHint("Opens in Safari.")
                     GroupedRowSeparator(start: .content)
                     NavigationLink(value: SettingsRoute.document(.stockfishLicense)) {
-                        ListRow("GNU General Public License v3", value: "Full Text", showsChevron: true).groupedRow()
+                        ListRow("GNU General Public License v3", value: String(localized: "Full Text"), showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                 }
-                GroupedSectionLabel("Chess engine")
+                GroupedSectionLabel(String(localized: "Chess engine"))
                 GroupedCard {
                     NavigationLink(value: SettingsRoute.document(.stockfishLicense)) {
                         ListRow("Stockfish", value: "GPLv3", showsChevron: true).groupedRow()
@@ -163,11 +164,11 @@ struct SettingsLicensesView: View {
                     .buttonStyle(.listRow)
                     GroupedRowSeparator(start: .content)
                     NavigationLink(value: SettingsRoute.networkCredit) {
-                        ListRow("Stockfish Neural Network", value: "ODbL Data", showsChevron: true).groupedRow()
+                        ListRow(String(localized: "Stockfish Neural Network"), value: String(localized: "ODbL Data"), showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                 }
-                GroupedSectionLabel("Typefaces")
+                GroupedSectionLabel(String(localized: "Typefaces"))
                 GroupedCard {
                     NavigationLink(value: SettingsRoute.document(.notoSansSymbols)) {
                         ListRow(SettingsLicenseDocument.notoSansSymbols.title, value: "OFL 1.1", showsChevron: true)
@@ -202,7 +203,7 @@ struct SettingsLicenseTextView: View {
     private var notices: [String] {
         switch document {
         case .stockfishLicense:
-            ["Stockfish \u{2014} " + SettingsLegal.stockfishCopyright, SettingsLegal.stockfishFreeSoftware, SettingsLegal.stockfishNoWarranty]
+            [String(localized: "Stockfish \u{2014} ") + SettingsLegal.stockfishCopyright, SettingsLegal.stockfishFreeSoftware, SettingsLegal.stockfishNoWarranty]
         case .stockfishAuthors:
             [SettingsLegal.stockfishCopyright]
         case .notoSansSymbols, .oleoScript:
@@ -297,7 +298,7 @@ struct SettingsNetworkCreditView: View {
                     .padding(.bottom, Spacing.s5)
                 GroupedCard {
                     Button { openURL(SettingsLinks.leelaTrainingData) } label: {
-                        ListRow("Leela Chess Zero Training Data", systemImage: "arrow.up.right.square", showsChevron: true)
+                        ListRow(String(localized: "Leela Chess Zero Training Data"), systemImage: "arrow.up.right.square", showsChevron: true)
                             .groupedRow()
                     }
                     .buttonStyle(.listRow)
@@ -339,35 +340,35 @@ struct SettingsEngineView: View {
                     LegalParagraph(SettingsLegal.stockfishFreeSoftware)
                     LegalParagraph(SettingsLegal.stockfishNoWarranty)
                 }
-                GroupedSectionLabel("Source code")
+                GroupedSectionLabel(String(localized: "Source code"))
                 GroupedCard {
-                    linkRow("Source Code of Stockfish", url: SettingsLinks.stockfishSource)
+                    linkRow(String(localized: "Source Code of Stockfish"), url: SettingsLinks.stockfishSource)
                     GroupedRowSeparator(start: .content)
-                    linkRow("Source Code of the Version in This App", url: SettingsLinks.appSource)
+                    linkRow(String(localized: "Source Code of the Version in This App"), url: SettingsLinks.appSource)
                     GroupedRowSeparator(start: .content)
                     NavigationLink(value: SettingsRoute.document(.stockfishLicense)) {
-                        ListRow("GNU General Public License v3 (Full Text)", showsChevron: true).groupedRow()
+                        ListRow(String(localized: "GNU General Public License v3 (Full Text)"), showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                     GroupedRowSeparator(start: .content)
                     NavigationLink(value: SettingsRoute.document(.stockfishAuthors)) {
-                        ListRow("Authors", showsChevron: true).groupedRow()
+                        ListRow(String(localized: "Authors"), showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                 }
                 // Paragraph first, card second, so the label heads the paragraph.
-                SectionLabel("Changes in this app")
+                SectionLabel(String(localized: "Changes in this app"))
                 LegalParagraph(SettingsLegal.stockfishModification)
                     .padding(.bottom, Spacing.s4)
                 GroupedCard {
-                    linkRow("The Change in the Published Source", url: SettingsLinks.stockfishPatch)
+                    linkRow(String(localized: "The Change in the Published Source"), url: SettingsLinks.stockfishPatch)
                 }
-                SectionLabel("Neural network")
+                SectionLabel(String(localized: "Neural network"))
                 LegalParagraph(SettingsLegal.networkCredit)
                     .padding(.bottom, Spacing.s4)
                 GroupedCard {
                     NavigationLink(value: SettingsRoute.networkCredit) {
-                        ListRow("Training Data and License", showsChevron: true).groupedRow()
+                        ListRow(String(localized: "Training Data and License"), showsChevron: true).groupedRow()
                     }
                     .buttonStyle(.listRow)
                 }

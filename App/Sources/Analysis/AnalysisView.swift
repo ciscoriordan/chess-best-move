@@ -1,3 +1,4 @@
+import Foundation
 import ChessCore
 import SwiftUI
 
@@ -297,8 +298,8 @@ private struct AnalysisScreen: View {
     }
 
     private var boardAccessibilityLabel: String {
-        let edited = snapshot.showsDiagram && snapshot.boardImage != nil ? ", edited" : ""
-        return "Board, \(snapshot.whiteAtBottom ? "White" : "Black") at bottom" + edited
+        let edited = snapshot.showsDiagram && snapshot.boardImage != nil ? String(localized: ", edited") : ""
+        return String(localized: "Board, \(AnalysisSpeech.colorName(snapshot.whiteAtBottom ? .white : .black)) at bottom") + edited
     }
 
     /// What the board is read out as: the moves its arrows draw, in the order they are played
@@ -306,11 +307,11 @@ private struct AnalysisScreen: View {
     /// gets which move is whose, and that the reply depends on the other one being played.
     private var boardAccessibilityValue: String {
         if let checkmate = model.noLegalMoves {
-            return checkmate ? "Checkmate." : "Stalemate."
+            return checkmate ? String(localized: "Checkmate.") : String(localized: "Stalemate.")
         }
         let readout = model.resultReadout
         guard let shown = readout.move else {
-            return model.isThinking ? "Thinking." : "No best move yet."
+            return model.isThinking ? String(localized: "Thinking.") : String(localized: "No best move yet.")
         }
         let spoken = { (move: AnalysisReadoutContent.MoveText) in
             AnalysisSpeech.moveDescription(san: move.san, move: move.move, capture: move.capture, alwaysIncludeFromSquare: true)
@@ -325,7 +326,7 @@ private struct AnalysisScreen: View {
         if readout.answersForThePlayerAtTheTop {
             return AnalysisSpeech.boardTheirMoveOnly(theirMove: spoken(shown), isFinal: isFinal)
         }
-        return (isFinal ? "Best move: " : "Best move so far: ")
+        return (isFinal ? String(localized: "Best move: ") : String(localized: "Best move so far: "))
             + AnalysisSpeech.lowercasingFirstLetter(spoken(shown)) + "."
     }
 
@@ -395,7 +396,7 @@ private struct AnalysisScreen: View {
         let side = snapshot.position.sideToMove
         let isAssumed = snapshot.sideToMoveOrigin == .assumedBottomPlayer
         Chip(
-            "\(AnalysisSpeech.colorName(side)) to move",
+            String(localized: "\(AnalysisSpeech.colorName(side)) to move"),
             glyph: .piece(Piece(color: side, kind: .king)),
             state: isAssumed ? .attention : .normal,
             attentionCaption: sideToMoveCaption
@@ -412,7 +413,7 @@ private struct AnalysisScreen: View {
         // At accessibility sizes a chip label wraps instead of widening the screen (design.md 12).
         .fixedSize(horizontal: !dynamicTypeSize.isAccessibilitySize, vertical: false)
 
-        Chip("Flip", glyph: .systemImage("arrow.up.arrow.down")) {
+        Chip(String(localized: "Flip"), glyph: .systemImage("arrow.up.arrow.down")) {
             model.flip()
         }
         .accessibilityLabel("Flip board")
@@ -423,7 +424,7 @@ private struct AnalysisScreen: View {
         // At accessibility sizes a chip label wraps instead of widening the screen (design.md 12).
         .fixedSize(horizontal: !dynamicTypeSize.isAccessibilitySize, vertical: false)
 
-        Chip("Edit", glyph: .systemImage("square.and.pencil")) {
+        Chip(String(localized: "Edit"), glyph: .systemImage("square.and.pencil")) {
             model.edit()
         }
         .accessibilityLabel("Edit position")
@@ -491,10 +492,10 @@ private struct AnalysisScreen: View {
             TextLink(AnalysisScreenModel.turnOffTitle(right)) {
                 model.turnOffAssumedCastling()
             }
-            .accessibilityLabel("Turn off \(AnalysisScreenModel.spokenCastlingName(right))")
+            .accessibilityLabel(String(localized: "Turn off \(AnalysisScreenModel.spokenCastlingName(right))"))
             .accessibilityInputLabels([
                 AnalysisScreenModel.turnOffTitle(right),
-                "Turn off \(AnalysisScreenModel.spokenCastlingName(right))",
+                String(localized: "Turn off \(AnalysisScreenModel.spokenCastlingName(right))"),
             ])
             .accessibilityHint("Analyzes again without it. Re-running is free.")
             .accessibilityIdentifier("analysis.turnOffCastling")
@@ -535,9 +536,9 @@ private struct AnalysisScreen: View {
         )
         let canExpand = sanMoves.count > AnalysisLine.collapsedPlies && !dynamicTypeSize.isAccessibilitySize
         let spoken = sanMoves.isEmpty
-            ? "None yet"
+            ? String(localized: "None yet")
             : AnalysisSpeech.line(sanMoves: sanMoves, plies: expanded ? sanMoves.count : AnalysisLine.collapsedPlies)
-        let row = AnalysisLabeledRow(label: "Line", alignment: .firstTextBaseline) {
+        let row = AnalysisLabeledRow(label: String(localized: "Line"), alignment: .firstTextBaseline) {
             Text(lineText(tokens, isTruncated: isTruncated, placeholder: sanMoves.isEmpty))
                 .typography(.line)
                 .lineLimit(expanded ? nil : 2)
@@ -610,7 +611,7 @@ private struct AnalysisScreen: View {
 
     private var thinkRow: some View {
         VStack(alignment: .leading, spacing: Spacing.s2) {
-            AnalysisLabeledRow(label: "Think") {
+            AnalysisLabeledRow(label: String(localized: "Think")) {
                 ThinkTimeControl(selection: Binding(
                     get: { model.runThinkTime },
                     set: { model.selectThinkTime($0) }
@@ -624,7 +625,7 @@ private struct AnalysisScreen: View {
 
     private var statsRow: some View {
         let readout = model.readout
-        let depth = readout.map { AnalysisDataText.depth($0.depth) } ?? "depth \u{2014}"
+        let depth = readout.map { AnalysisDataText.depth($0.depth) } ?? String(localized: "depth \u{2014}")
         let time: String = {
             guard let readout else { return model.runThinkTime.label }
             return model.isThinking
@@ -684,9 +685,9 @@ private struct AnalysisScreen: View {
     private var evalSpoken: String {
         if let checkmate = model.noLegalMoves {
             let side = AnalysisSpeech.colorName(snapshot.position.sideToMove)
-            return checkmate ? "\(side) is checkmated" : "Stalemate"
+            return checkmate ? String(localized: "\(side) is checkmated") : String(localized: "Stalemate")
         }
-        guard let score = displayedScore else { return "Not evaluated yet" }
+        guard let score = displayedScore else { return String(localized: "Not evaluated yet") }
         return AnalysisScore.spoken(score)
     }
 }
@@ -708,10 +709,10 @@ private struct AnalysisActionBar: View {
         VStack(spacing: Spacing.s1) {
             switch model.runState {
             case .starting, .running:
-                SecondaryButton("Stop", systemImage: "stop.fill") { model.stop() }
+                SecondaryButton(String(localized: "Stop"), systemImage: "stop.fill") { model.stop() }
             case .completed, .interrupted, .failed:
                 if !showsScreenshotOffer {
-                    PrimaryButton("Analyze new screenshot") { model.newAnalysis() }
+                    PrimaryButton(String(localized: "Analyze new screenshot")) { model.newAnalysis() }
                         .accessibilityHint("Opens the start screen to choose a screenshot.")
                         .accessibilityIdentifier("analysis.newScreenshot")
                 }
@@ -733,15 +734,15 @@ private struct AnalysisActionBar: View {
             case .notStarted:
                 switch model.session.creditState {
                 case .waitingForPurchase:
-                    PrimaryButton("Analyze") { model.analyzeAfterPaywall() }
+                    PrimaryButton(String(localized: "Analyze")) { model.analyzeAfterPaywall() }
                     chooseAnotherScreenshot
                 case .waitingForApproval:
                     // An approval starts this board's analysis by itself.
-                    PrimaryButton("See options") { model.analyzeAfterPaywall() }
+                    PrimaryButton(String(localized: "See options")) { model.analyzeAfterPaywall() }
                         .accessibilityHint("Opens purchase options.")
                     chooseAnotherScreenshot
                 case .authorized:
-                    SecondaryButton("Stop", systemImage: "stop.fill") {}
+                    SecondaryButton(String(localized: "Stop"), systemImage: "stop.fill") {}
                         .disabled(true)
                 }
             }

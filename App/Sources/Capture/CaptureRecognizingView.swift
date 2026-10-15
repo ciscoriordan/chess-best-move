@@ -1,3 +1,4 @@
+import Foundation
 import ChessCore
 import SwiftUI
 
@@ -348,11 +349,11 @@ struct BoardNotFoundView: View {
     private func buttons(_ failure: CaptureRecognitionFailure) -> some View {
         VStack(spacing: Spacing.s3) {
             if case .recognizerUnavailable = failure {
-                PrimaryButton("Set up the position by hand") { setUpByHand() }
-                SecondaryButton("Choose another image") { app.goHome() }
+                PrimaryButton(String(localized: "Set up the position by hand")) { setUpByHand() }
+                SecondaryButton(String(localized: "Choose another image")) { app.goHome() }
             } else {
-                PrimaryButton("Choose another image") { app.goHome() }
-                SecondaryButton("Set up the position by hand") { setUpByHand() }
+                PrimaryButton(String(localized: "Choose another image")) { app.goHome() }
+                SecondaryButton(String(localized: "Set up the position by hand")) { setUpByHand() }
             }
         }
     }
@@ -369,9 +370,9 @@ extension CaptureRecognitionFailure {
     /// The Board not found screen title.
     var title: String {
         switch self {
-        case .boardNotFound: "No Board Found"
-        case .invalidImage: "Couldn't Read This Image"
-        case .recognizerUnavailable: "Recognition Isn't Available"
+        case .boardNotFound: String(localized: "No Board Found")
+        case .invalidImage: String(localized: "Couldn't Read This Image")
+        case .recognizerUnavailable: String(localized: "Recognition Isn't Available")
         }
     }
 
@@ -380,19 +381,19 @@ extension CaptureRecognitionFailure {
         switch self {
         case .boardNotFound:
             [
-                "Use a screenshot of the board, not a photo of a screen.",
-                "The whole board must be visible.",
-                "Board themes with textures may not be recognized yet.",
+                String(localized: "Use a screenshot of the board, not a photo of a screen."),
+                String(localized: "The whole board must be visible."),
+                String(localized: "Board themes with textures may not be recognized yet."),
             ]
         case .invalidImage:
             [
-                "The file may be damaged, too small, or in a format this app can't open.",
-                "Screenshots saved in Photos work best.",
+                String(localized: "The file may be damaged, too small, or in a format this app can't open."),
+                String(localized: "Screenshots saved in Photos work best."),
             ]
         case .recognizerUnavailable:
             [
-                "This copy of the app is missing its piece recognition model, so boards can't be read from images.",
-                "You can still set up the position by hand and analyze it.",
+                String(localized: "This copy of the app is missing its piece recognition model, so boards can't be read from images."),
+                String(localized: "You can still set up the position by hand and analyze it."),
             ]
         }
     }

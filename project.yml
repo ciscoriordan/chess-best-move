@@ -11,6 +11,7 @@ options:
   deploymentTarget:
     iOS: "26.0"
   developmentLanguage: en
+  knownRegions: [en, es, pt-BR, fr, de, it, tr]
   createIntermediateGroups: true
   groupSortPosition: top
   xcodeVersion: "26.6"
@@ -41,10 +42,11 @@ settings:
     # Declarations are nonisolated unless annotated; the app's contracts spell out
     # @MainActor explicitly.
     SWIFT_DEFAULT_ACTOR_ISOLATION: nonisolated
-    MARKETING_VERSION: "1.0.17"
+    MARKETING_VERSION: "1.0.18"
     CURRENT_PROJECT_VERSION: "1"
     ENABLE_USER_SCRIPT_SANDBOXING: YES
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+    SWIFT_EMIT_LOC_STRINGS: YES
     SUPPORTS_MACCATALYST: NO
     SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
     SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
@@ -175,6 +177,8 @@ targets:
       - path: WidgetExtension/Sources
       - path: WidgetExtension/Shared
       - path: App/Sources/DesignSystem/Metrics.swift
+      - path: App/Resources/Localizable.xcstrings
+        buildPhase: resources
       - path: App/Sources/DesignSystem/Palette.swift
       - path: App/Sources/DesignSystem/Typography.swift
       - path: App/Sources/App/AppCopy.swift
@@ -221,6 +225,8 @@ targets:
       # The copy the app shares between screens. The type scale's SwiftUI preview sets one of
       # its lines, so the design system does not compile without it.
       - path: App/Sources/App/AppCopy.swift
+      - path: App/Resources/Localizable.xcstrings
+        buildPhase: resources
       # The extension's own privacy manifest. Apple reads one per bundle, and an app extension
       # is its own bundle, so the app's manifest does not speak for this one. It declares the
       # same thing the app's does - no tracking, no tracking domains, nothing collected - plus

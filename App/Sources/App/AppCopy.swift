@@ -1,3 +1,4 @@
+import Foundation
 /// Copy shared by several screens (design.md section 14).
 ///
 /// The app is presented as a tool for analyzing positions, reviewing games and solving
@@ -5,13 +6,13 @@
 /// and Settings > Help both show the fair-play note.
 enum AppCopy {
     /// Home's intro line under the wordmark.
-    static let homeIntro = "Analyze any position from a screenshot: a game you are reviewing, a puzzle or a study."
+    static let homeIntro = String(localized: "Analyze any position from a screenshot: a game you are reviewing, a puzzle or a study.")
 
     /// Home's one-line reminder once HOW IT WORKS has collapsed after the first analysis.
-    static let homeCollapsedSteps = "Screenshot a position, then tap Use latest screenshot."
+    static let homeCollapsedSteps = String(localized: "Screenshot a position, then tap Use latest screenshot.")
 
-    static let homeAutomaticSteps = "Take a chess screenshot, then open this app. Analysis starts automatically with unlimited access; otherwise, tap Analyze when asked."
+    static let homeAutomaticSteps = String(localized: "Take a chess screenshot, then open this app. Analysis starts automatically with unlimited access; otherwise, tap Analyze when asked.")
 
     /// The one-line fair-play note, on Home under the steps and in Settings > Help.
-    static let fairPlayNote = "Most chess sites do not allow engine help in games you are playing."
+    static let fairPlayNote = String(localized: "Most chess sites do not allow engine help in games you are playing.")
 }

@@ -37,7 +37,7 @@ struct MonetizationVaultError: Error, CustomStringConvertible {
 
     var description: String {
         let message = SecCopyErrorMessageString(status, nil) as String? ?? "unknown"
-        return "Keychain \(operation) failed with status \(status) (\(message))"
+        return String(localized: "Keychain \(operation) failed with status \(status) (\(message))")
     }
 }
 

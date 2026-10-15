@@ -1,3 +1,4 @@
+import Foundation
 import ChessCore
 import SwiftUI
 
@@ -55,7 +56,7 @@ struct PositionEditorView: View {
             .toolbar { trailingToolbar }
             .safeAreaInset(edge: .bottom) {
                 PinnedActionBar {
-                    PrimaryButton("Analyze") { analyze() }
+                    PrimaryButton(String(localized: "Analyze")) { analyze() }
                         .disabled(!model.canAnalyze)
                         .accessibilityIdentifier(CaptureAccessibilityID.editorAnalyze)
                         .accessibilityHint(model.canAnalyze ? "" : "Fix the problems listed above first")
@@ -117,7 +118,7 @@ struct PositionEditorView: View {
                 .foregroundStyle(Palette.ink)
                 .frame(maxWidth: .infinity, alignment: .leading)
             if let square = model.selectedSquare, model.isLowConfidence(square) {
-                TextLink("Looks right") { model.confirm(square) }
+                TextLink(String(localized: "Looks right")) { model.confirm(square) }
                     .accessibilityHint("Keeps \(square.algebraic) as recognized")
             }
         }
@@ -126,14 +127,14 @@ struct PositionEditorView: View {
 
     private var trayCaptionText: String {
         if let square = model.selectedSquare {
-            let occupant = model.piece(at: square).map(CapturePositionIssues.name) ?? "empty"
-            return "\(square.algebraic): \(occupant)" + (model.isLowConfidence(square) ? ", not sure" : "")
+            let occupant = model.piece(at: square).map(CapturePositionIssues.name) ?? String(localized: "empty")
+            return String(localized: "\(square.algebraic): \(occupant)") + (model.isLowConfidence(square) ? String(localized: ", not sure") : "")
         }
         if let armed = model.armedItem {
-            let name = armed.piece.map { "a \(CapturePositionIssues.name($0))" } ?? "Empty"
-            return armed.piece == nil ? "Tap squares to clear them" : "Tap squares to place \(name)"
+            let name = armed.piece.map { String(localized: "a \(CapturePositionIssues.name($0))") } ?? String(localized: "Empty")
+            return armed.piece == nil ? String(localized: "Tap squares to clear them") : String(localized: "Tap squares to place \(name)")
         }
-        return "Tap a square, then a piece. Or tap a piece, then squares."
+        return String(localized: "Tap a square, then a piece. Or tap a piece, then squares.")
     }
 
     private var sideToMove: some View {
@@ -141,7 +142,7 @@ struct PositionEditorView: View {
         return CaptureFlowLayout {
             ForEach(PieceColor.allCases, id: \.self) { color in
                 Chip(
-                    "\(CapturePositionIssues.name(color)) to move",
+                    String(localized: "\(CapturePositionIssues.name(color)) to move"),
                     glyph: .piece(Piece(color: color, kind: .king)),
                     state: side == color ? .on : .normal
                 ) {
@@ -171,7 +172,7 @@ struct PositionEditorView: View {
                     }
                     .disabled(!available)
                     .accessibilityLabel(option.spokenTitle)
-                    .accessibilityValue(on ? "On" : "Off")
+                    .accessibilityValue(on ? String(localized: "On") : String(localized: "Off"))
                     .accessibilityHint(available ? "" : CaptureCastlingOption.unavailableHint)
                     // Voice Control matches what is written on the chip as well as what it is
                     // called: "W O-O" is on screen, "White castles kingside" is spoken.

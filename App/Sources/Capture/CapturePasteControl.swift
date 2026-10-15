@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 import UIKit
 import UniformTypeIdentifiers
@@ -293,7 +294,7 @@ final class CapturePasteControlHost: UIView {
         guard category != .unspecified else { return fallbackContentInset }
         if let known = measuredContentInsets[category] { return known }
         var configuration = UIButton.Configuration.plain()
-        configuration.title = "Paste"
+        configuration.title = String(localized: "Paste")
         configuration.image = UIImage(systemName: "doc.on.clipboard")
         let window = measuringWindow
         window.traitOverrides.preferredContentSizeCategory = category

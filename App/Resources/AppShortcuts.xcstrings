@@ -1,0 +1,88 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Find the best move with ${applicationName}": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "de": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "Finde den besten Zug mit ${applicationName}",
+              "Finde den besten Zug in ${applicationName}",
+              "Zeige den besten Zug mit ${applicationName}",
+              "${applicationName} finde den besten Zug"
+            ]
+          }
+        },
+        "en": {
+          "stringSet": {
+            "state": "new",
+            "values": [
+              "Find the best move with ${applicationName}",
+              "Find the best move in ${applicationName}",
+              "Get the best move from ${applicationName}",
+              "${applicationName} find best move"
+            ]
+          }
+        },
+        "es": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "Busca la mejor jugada con ${applicationName}",
+              "Busca la mejor jugada en ${applicationName}",
+              "Dime la mejor jugada con ${applicationName}",
+              "${applicationName}, busca la mejor jugada"
+            ]
+          }
+        },
+        "fr": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "Trouve le meilleur coup avec ${applicationName}",
+              "Trouve le meilleur coup dans ${applicationName}",
+              "Donne-moi le meilleur coup avec ${applicationName}",
+              "${applicationName}, trouve le meilleur coup"
+            ]
+          }
+        },
+        "it": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "Trova la mossa migliore con ${applicationName}",
+              "Trova la mossa migliore in ${applicationName}",
+              "Chiedi la mossa migliore a ${applicationName}",
+              "${applicationName} trova la mossa migliore"
+            ]
+          }
+        },
+        "pt-BR": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "Encontre o melhor lance com ${applicationName}",
+              "Encontre o melhor lance no ${applicationName}",
+              "Mostre o melhor lance com ${applicationName}",
+              "${applicationName}, encontre o melhor lance"
+            ]
+          }
+        },
+        "tr": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "${applicationName} ile en iyi hamleyi bul",
+              "${applicationName} içinde en iyi hamleyi bul",
+              "${applicationName} ile en iyi hamleyi öğren",
+              "${applicationName} en iyi hamleyi bul"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

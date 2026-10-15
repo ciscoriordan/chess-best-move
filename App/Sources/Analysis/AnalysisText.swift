@@ -41,18 +41,24 @@ enum AnalysisSpeech {
         alwaysIncludeFromSquare: Bool = false
     ) -> String {
         var text = san.trimmingCharacters(in: .whitespaces)
-        var suffix = ""
+        var checkmate = false
+        var check = false
         if text.hasSuffix("#") {
-            suffix = ", checkmate"
+            checkmate = true
             text.removeLast()
         } else if text.hasSuffix("+") {
-            suffix = ", check"
+            check = true
             text.removeLast()
         }
         while let last = text.last, "!?".contains(last) { text.removeLast() }
 
-        if text == "O-O-O" || text == "0-0-0" { return "Castles queenside" + suffix }
-        if text == "O-O" || text == "0-0" { return "Castles kingside" + suffix }
+        func withCheck(_ words: String) -> String {
+            if checkmate { return String(localized: "\(words), checkmate") }
+            if check { return String(localized: "\(words), check") }
+            return words
+        }
+        if text == "O-O-O" || text == "0-0-0" { return withCheck(String(localized: "Castles queenside")) }
+        if text == "O-O" || text == "0-0" { return withCheck(String(localized: "Castles kingside")) }
 
         var promotion: PieceKind?
         if let equals = text.lastIndex(of: "=") {
@@ -74,29 +80,34 @@ enum AnalysisSpeech {
         let destination = String(text.suffix(2))
         let disambiguation = String(text.dropLast(2))
 
-        var words = pieceName(kind)
+        var movingPiece = pieceName(kind)
         if alwaysIncludeFromSquare || !disambiguation.isEmpty {
-            words += " from " + (move?.from.algebraic ?? disambiguation)
+            let origin = move?.from.algebraic ?? disambiguation
+            movingPiece = String(localized: "\(movingPiece) from \(origin)", comment: "A chess piece with its origin square; this becomes the subject of a move description.")
         }
+        var words: String
         if isCapture, let capture {
-            words += " takes " + pieceName(capture.piece.kind).lowercased()
+            let captured = capturePieceName(capture.piece.kind)
             if let move, capture.square != move.to {
-                words += " on " + capture.square.algebraic + " and moves to " + destination + ", en passant"
+                words = String(localized: "\(movingPiece) takes \(captured) on \(capture.square.algebraic) and moves to \(destination), en passant")
             } else {
-                words += " on " + destination
+                words = String(localized: "\(movingPiece) takes \(captured) on \(destination)")
             }
+        } else if isCapture {
+            words = String(localized: "\(movingPiece) takes \(destination)", comment: "Capture when the captured piece is unknown; second value is a square.")
         } else {
-            words += (isCapture ? " takes " : " to ") + destination
+            words = String(localized: "\(movingPiece) to \(destination)")
         }
         if let promotion {
-            words += " promotes to " + pieceName(promotion).lowercased()
+            let promoted = promotionPieceName(promotion)
+            words = String(localized: "\(words) promotes to \(promoted)")
         }
-        return words + suffix
+        return withCheck(words)
     }
 
     /// "Best move: knight takes f7, check. White is ahead by 2.35 pawns." (design.md 9.4)
     static func completionAnnouncement(moveDescription: String, score: WhiteScore?) -> String {
-        var text = "Best move: " + lowercasingFirstLetter(moveDescription) + "."
+        var text = String(localized: "Best move: \(lowercasingFirstLetter(moveDescription)).")
         if let score {
             text += " " + AnalysisScore.spoken(score) + "."
         }
@@ -109,8 +120,7 @@ enum AnalysisSpeech {
     /// names them in the same order and with the same words as the heading and the pill, so
     /// the reply is never called the best move (owner decision 2026-09-21).
     static func replyAnnouncement(guessedMove: String, reply: String, score: WhiteScore?) -> String {
-        var text = AnalysisReadoutContent.guessedMoveTitle + ": " + lowercasingFirstLetter(guessedMove)
-            + ". Best reply: " + lowercasingFirstLetter(reply) + "."
+        var text = String(localized: "Their likely move: \(lowercasingFirstLetter(guessedMove)). Best reply: \(lowercasingFirstLetter(reply)).")
         if let score {
             text += " " + AnalysisScore.spoken(score) + "."
         }
@@ -128,25 +138,26 @@ enum AnalysisSpeech {
     ///
     /// Words only, never a symbol name, and never SAN letters.
     static func boardArrowPair(theirMove: String, reply: String, isFinal: Bool) -> String {
-        (isFinal ? "Two arrows. " : "Two arrows so far. ")
-            + "Their likely move first: " + lowercasingFirstLetter(theirMove)
-            + ". Then your best reply, which holds only if they play it: "
-            + lowercasingFirstLetter(reply) + "."
+        if isFinal {
+            return String(localized: "Two arrows. Their likely move first: \(lowercasingFirstLetter(theirMove)). Then your best reply, which holds only if they play it: \(lowercasingFirstLetter(reply)).")
+        }
+        return String(localized: "Two arrows so far. Their likely move first: \(lowercasingFirstLetter(theirMove)). Then your best reply, which holds only if they play it: \(lowercasingFirstLetter(reply)).")
     }
 
     /// What the board reads out when the only arrow on it is the other player's move: the
     /// engine's line stopped after one move, so there is no reply to draw (design.md 9.4).
     /// The arrow is not the cobalt one and the value does not call it a best move.
     static func boardTheirMoveOnly(theirMove: String, isFinal: Bool) -> String {
-        (isFinal ? "Their likely move: " : "Their likely move so far: ")
-            + lowercasingFirstLetter(theirMove) + "."
+        isFinal
+            ? String(localized: "Their likely move: \(lowercasingFirstLetter(theirMove)).")
+            : String(localized: "Their likely move so far: \(lowercasingFirstLetter(theirMove)).")
     }
 
     /// The engine line for VoiceOver: the spoken form of the first `plies` moves, and "and so
     /// on" when the line runs longer than that.
     static func line(sanMoves: [String], plies: Int = 6) -> String {
         let spoken = sanMoves.prefix(plies).map { moveDescription(san: $0) }.joined(separator: "; ")
-        return sanMoves.count > plies ? spoken + "; and so on" : spoken
+        return sanMoves.count > plies ? String(localized: "\(spoken); and so on") : spoken
     }
 
     /// What the engine's figures say in words, for the one element the depth, clock and speed
@@ -154,36 +165,62 @@ enum AnalysisSpeech {
     /// spoken, "depth 20, 1.4 s slash 3 s, 2.1 M n slash s" names none of the three.
     static func engineFigures(depth: Int?, elapsed: Duration?, thinkTime: ThinkTime, nodesPerSecond: Int?) -> String {
         var parts: [String] = []
-        parts.append(depth.map { "depth \($0)" } ?? "depth not reported yet")
+        parts.append(depth.map { String(localized: "depth \($0)") } ?? String(localized: "depth not reported yet"))
         if let elapsed {
             let seconds = AnalysisDataText.seconds(of: elapsed)
-            parts.append(String(format: "%.1f of %d seconds", seconds, thinkTime.seconds))
+            parts.append(String(localized: "\(seconds, specifier: "%.1f") of \(thinkTime.seconds) seconds"))
         } else {
-            parts.append("\(thinkTime.seconds) seconds")
+            parts.append(String(localized: "\(thinkTime.seconds) seconds"))
         }
         if let nodesPerSecond {
-            parts.append("\(nodesPerSecond.formatted()) positions a second")
+            parts.append(String(localized: "\(nodesPerSecond.formatted()) positions a second"))
         }
         return parts.joined(separator: ", ")
     }
 
     static func pieceName(_ kind: PieceKind) -> String {
         switch kind {
-        case .pawn: "Pawn"
-        case .knight: "Knight"
-        case .bishop: "Bishop"
-        case .rook: "Rook"
-        case .queen: "Queen"
-        case .king: "King"
+        case .pawn: String(localized: "Pawn", comment: "Chess piece, subject of a move description.")
+        case .knight: String(localized: "Knight", comment: "Chess piece, subject of a move description.")
+        case .bishop: String(localized: "Bishop", comment: "Chess piece, subject of a move description.")
+        case .rook: String(localized: "Rook", comment: "Chess piece, subject of a move description.")
+        case .queen: String(localized: "Queen", comment: "Chess piece, subject of a move description.")
+        case .king: String(localized: "King", comment: "Chess piece, subject of a move description.")
+        }
+    }
+
+    /// The object of "takes", including any article or case required by the language.
+    /// Kept separate from the subject so both text and the captured-piece glyph use it.
+    static func capturePieceName(_ kind: PieceKind) -> String {
+        switch kind {
+        case .pawn: String(localized: "pawn", comment: "Captured chess piece: object of takes. Include the appropriate definite article and accusative case where required.")
+        case .knight: String(localized: "knight", comment: "Captured chess piece: object of takes. Include the appropriate definite article and accusative case where required.")
+        case .bishop: String(localized: "bishop", comment: "Captured chess piece: object of takes. Include the appropriate definite article and accusative case where required.")
+        case .rook: String(localized: "rook", comment: "Captured chess piece: object of takes. Include the appropriate definite article and accusative case where required.")
+        case .queen: String(localized: "queen", comment: "Captured chess piece: object of takes. Include the appropriate definite article and accusative case where required.")
+        case .king: String(localized: "king", comment: "Captured chess piece: object of takes. Include the appropriate definite article and accusative case where required.")
+        }
+    }
+
+    static func promotionPieceName(_ kind: PieceKind) -> String {
+        switch kind {
+        case .pawn: String(localized: "promotion.pawn", defaultValue: "pawn", comment: "Chess piece after promotes to. Use the grammatical form after the translated promotion verb.")
+        case .knight: String(localized: "promotion.knight", defaultValue: "knight", comment: "Chess piece after promotes to. Use the grammatical form after the translated promotion verb.")
+        case .bishop: String(localized: "promotion.bishop", defaultValue: "bishop", comment: "Chess piece after promotes to. Use the grammatical form after the translated promotion verb.")
+        case .rook: String(localized: "promotion.rook", defaultValue: "rook", comment: "Chess piece after promotes to. Use the grammatical form after the translated promotion verb.")
+        case .queen: String(localized: "promotion.queen", defaultValue: "queen", comment: "Chess piece after promotes to. Use the grammatical form after the translated promotion verb.")
+        case .king: String(localized: "promotion.king", defaultValue: "king", comment: "Chess piece after promotes to. Use the grammatical form after the translated promotion verb.")
         }
     }
 
     static func colorName(_ color: PieceColor) -> String {
-        color == .white ? "White" : "Black"
+        color == .white ? String(localized: "White") : String(localized: "Black")
     }
 
     static func lowercasingFirstLetter(_ text: String) -> String {
-        guard let first = text.first else { return text }
+        // German nouns and other languages must retain their grammatical capitalization.
+        guard Bundle.main.preferredLocalizations.first?.hasPrefix("en") != false,
+              let first = text.first else { return text }
         return first.lowercased() + text.dropFirst()
     }
 
@@ -200,8 +237,8 @@ enum AnalysisSpeech {
                 let left = order.firstIndex(of: lhs.0) ?? 0, right = order.firstIndex(of: rhs.0) ?? 0
                 return left == right ? lhs.1.index < rhs.1.index : left < right
             }
-            .map { "\(pieceName($0.0).lowercased()) \($0.1.algebraic)" }
-            let list = pieces.isEmpty ? "no pieces" : pieces.joined(separator: ", ")
+            .map { "\(lowercasingFirstLetter(pieceName($0.0))) \($0.1.algebraic)" }
+            let list = pieces.isEmpty ? String(localized: "no pieces") : pieces.joined(separator: ", ")
             return "\(colorName(color)): \(list)"
         }
         .joined(separator: "; ")
@@ -284,7 +321,7 @@ enum AnalysisDataText {
     }
 
     static func depth(_ depth: Int) -> String {
-        "depth \(depth)"
+        String(localized: "depth \(depth)")
     }
 
     static func seconds(of duration: Duration) -> Double {

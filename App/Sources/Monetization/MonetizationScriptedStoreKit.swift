@@ -310,10 +310,10 @@ final class MonetizationScriptedStoreKitClient: MonetizationStoreKitClient {
             )
         }
         return [
-            product(ProductID.proWeekly, "Pro Weekly", "Unlimited analyses, billed weekly", "5.99", .autoRenewable(period: .week, value: 1)),
-            product(ProductID.proAnnual, "Pro Yearly", "Unlimited analyses, billed yearly", "39.99", .autoRenewable(period: .year, value: 1)),
-            product(ProductID.proLifetime, "Pro Lifetime", "Unlimited analyses, one payment", "59.99", .nonConsumable),
-            product(ProductID.credits15, "15 Analyses", "15 analyses that never expire", "2.99", .consumable),
+            product(ProductID.proWeekly, String(localized: "Pro Weekly"), String(localized: "Unlimited analyses, billed weekly"), "5.99", .autoRenewable(period: .week, value: 1)),
+            product(ProductID.proAnnual, String(localized: "Pro Yearly"), String(localized: "Unlimited analyses, billed yearly"), "39.99", .autoRenewable(period: .year, value: 1)),
+            product(ProductID.proLifetime, String(localized: "Pro Lifetime"), String(localized: "Unlimited analyses, one payment"), "59.99", .nonConsumable),
+            product(ProductID.credits15, String(localized: "15 Analyses"), String(localized: "15 analyses that never expire"), "2.99", .consumable),
         ]
     }
 }

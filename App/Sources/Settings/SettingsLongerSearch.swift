@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 /// The two Pro settings for the search that keeps running after the first answer
@@ -24,13 +25,13 @@ struct SettingsLongerSearchSection: View {
 
     /// What the section says. Kept here so `AppCopyTests` and the settings tests read one place.
     enum Copy {
-        static let title = "Keep Searching After the Answer"
+        static let title = String(localized: "Keep Searching After the Answer")
         static let explanation =
-            "The engine keeps searching the same board after the first move appears, and stops at this time at the latest. It stops earlier once the move has held for several depths, and right away when the device is saving power or has warmed up."
-        static let ceilingLabel = "Longest Search"
-        static let automaticTitle = "Switch to a Better Move Automatically"
+            String(localized: "The engine keeps searching the same board after the first move appears, and stops at this time at the latest. It stops earlier once the move has held for several depths, and right away when the device is saving power or has warmed up.")
+        static let ceilingLabel = String(localized: "Longest Search")
+        static let automaticTitle = String(localized: "Switch to a Better Move Automatically")
         static let automaticExplanation =
-            "With this off, a notice offers the move instead, so the move on screen does not change while you are reading it."
+            String(localized: "With this off, a notice offers the move instead, so the move on screen does not change while you are reading it.")
 
         /// The footer under the ANALYSIS card, for a free user only.
         ///
@@ -40,7 +41,7 @@ struct SettingsLongerSearchSection: View {
         /// that the longer search runs for a free user too, at the default ceiling, and that a
         /// value saved now survives until Pro is bought.
         static func proFooter(_ ceiling: LongerSearchCeiling) -> String {
-            "Without Pro the longer search still runs, stops at \(ceiling.spokenLabel), and says when it finds a better move. What you choose here is saved for when you get Pro."
+            String(localized: "Without Pro the longer search still runs, stops at \(ceiling.spokenLabel), and says when it finds a better move. What you choose here is saved for when you get Pro.")
         }
 
         /// The link under that footer, which is the free reader's way from these two rows to the
@@ -104,7 +105,7 @@ private struct AutomaticSwitchRow: View {
     private var spokenLabel: String {
         isPro
             ? SettingsLongerSearchSection.Copy.automaticTitle
-            : "\(SettingsLongerSearchSection.Copy.automaticTitle), \(ProTag.spokenLabel)"
+            : String(localized: "\(SettingsLongerSearchSection.Copy.automaticTitle), \(ProTag.spokenLabel)")
     }
 
     var body: some View {
@@ -188,7 +189,7 @@ struct LongerSearchCeilingControl: View {
     private var groupLabel: String {
         isEnabled
             ? SettingsLongerSearchSection.Copy.ceilingLabel
-            : "\(SettingsLongerSearchSection.Copy.ceilingLabel), \(ProTag.spokenLabel)"
+            : String(localized: "\(SettingsLongerSearchSection.Copy.ceilingLabel), \(ProTag.spokenLabel)")
     }
 
     var body: some View {

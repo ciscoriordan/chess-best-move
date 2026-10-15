@@ -326,7 +326,7 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
     }
 
     /// Recovers existing production access from Apple's signed app transaction.
-    /// Sandbox always uses the normal purchase flow; failed lookups can be retried.
+    /// Saved grants also work in test installs; failed production lookups can be retried.
     func resolveLaunchCohort() async {
         await launchCohort.resolve(
             readEnvironment: { [client] in await client.appTransactionEnvironment() },
@@ -414,6 +414,7 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
             return .failed(error.monetizationIsOffline ? MonetizationCopy.restoreFailedOffline : MonetizationCopy.restoreFailed)
         }
         await refreshEntitlements()
+        await resolveLaunchCohort()
         packLedger?.reloadPurchasedCredits()
         // `Transaction.all` keeps finished packs, including every pack whose credits are spent.
         // `hasPurchasedPro`, not `isPro`: a launch-cohort member bought nothing, so telling

@@ -85,29 +85,27 @@ enum CaptureRecentScreenshotPolicy {
         let seconds = max(0, Int(now.timeIntervalSince(date)))
         let space = "\u{00A0}"
         switch seconds {
-        case ..<60: return "\(seconds)\(space)s ago"
-        case ..<3600: return "\(seconds / 60)\(space)min ago"
-        case ..<86_400: return "\(seconds / 3600)\(space)h ago"
+        case ..<60: return String(localized: "\(seconds)\(space)s ago")
+        case ..<3600: return String(localized: "\(seconds / 60)\(space)min ago")
+        case ..<86_400: return String(localized: "\(seconds / 3600)\(space)h ago")
         case ..<(7 * 86_400):
             let days = seconds / 86_400
-            return days == 1 ? "1\(space)day ago" : "\(days)\(space)days ago"
+            return days == 1 ? String(localized: "1\(space)day ago") : String(localized: "\(days)\(space)days ago")
         default:
-            return "on " + date.formatted(.dateTime.month(.abbreviated).day())
+            return String(localized: "on \(date.formatted(.dateTime.month(.abbreviated).day()))")
         }
     }
 
     /// The spoken form of `ageText` for VoiceOver ("12 seconds ago").
     static func spokenAgeText(since date: Date, now: Date) -> String {
         let seconds = max(0, Int(now.timeIntervalSince(date)))
-        func unit(_ value: Int, _ singular: String) -> String {
-            value == 1 ? "1 \(singular) ago" : "\(value) \(singular)s ago"
-        }
+
         switch seconds {
-        case ..<60: return unit(seconds, "second")
-        case ..<3600: return unit(seconds / 60, "minute")
-        case ..<86_400: return unit(seconds / 3600, "hour")
-        case ..<(7 * 86_400): return unit(seconds / 86_400, "day")
-        default: return "on " + date.formatted(.dateTime.month(.wide).day())
+        case ..<60: return seconds == 1 ? String(localized: "1 second ago") : String(localized: "\(seconds) seconds ago")
+        case ..<3600: return seconds / 60 == 1 ? String(localized: "1 minute ago") : String(localized: "\(seconds / 60) minutes ago")
+        case ..<86_400: return seconds / 3600 == 1 ? String(localized: "1 hour ago") : String(localized: "\(seconds / 3600) hours ago")
+        case ..<(7 * 86_400): return seconds / 86_400 == 1 ? String(localized: "1 day ago") : String(localized: "\(seconds / 86_400) days ago")
+        default: return String(localized: "on \(date.formatted(.dateTime.month(.wide).day()))")
         }
     }
 }
@@ -149,26 +147,26 @@ enum CaptureLatestScreenshotButton: Hashable {
     /// The button title.
     func title(now: Date) -> String {
         switch self {
-        case .requestAccess: return "Allow access to your screenshots"
+        case .requestAccess: return String(localized: "Allow access to your screenshots")
         case .latest(_, let promoted):
             // The promotion names what is new, not how fast it was: the app is for studying
             // positions, not for help during a game (AppCopy).
-            return promoted ? "Analyze new screenshot" : "Use latest screenshot"
-        case .noScreenshots: return "Use latest screenshot"
-        case .limited: return "Choose your screenshot"
-        case .denied: return "Allow access in Settings"
-        case .restricted: return "Use latest screenshot"
+            return promoted ? String(localized: "Analyze new screenshot") : String(localized: "Use latest screenshot")
+        case .noScreenshots: return String(localized: "Use latest screenshot")
+        case .limited: return String(localized: "Choose your screenshot")
+        case .denied: return String(localized: "Allow access in Settings")
+        case .restricted: return String(localized: "Use latest screenshot")
         }
     }
 
     /// The second line inside the button, if any.
     func detail(now: Date) -> String? {
         switch self {
-        case .requestAccess: return "Only used to find your newest screenshot."
+        case .requestAccess: return String(localized: "Only used to find your newest screenshot.")
         case .latest(let asset, _):
             guard let date = asset.creationDate else { return nil }
-            return "Taken \(CaptureRecentScreenshotPolicy.ageText(since: date, now: now))"
-        case .noScreenshots: return "No screenshots yet"
+            return String(localized: "Taken \(CaptureRecentScreenshotPolicy.ageText(since: date, now: now))")
+        case .noScreenshots: return String(localized: "No screenshots yet")
         case .limited, .denied, .restricted: return nil
         }
     }
@@ -177,9 +175,9 @@ enum CaptureLatestScreenshotButton: Hashable {
     /// (`AppDevice.name`).
     func caption(deviceName: String) -> String? {
         switch self {
-        case .limited: "Limited access can't see new screenshots. Pick it yourself, or use Photos or Paste."
-        case .denied: "Photo access is off. Use Photos or Paste instead."
-        case .restricted: "Photo access is restricted on this \(deviceName). Use Photos or Paste instead."
+        case .limited: String(localized: "Limited access can't see new screenshots. Pick it yourself, or use Photos or Paste.")
+        case .denied: String(localized: "Photo access is off. Use Photos or Paste instead.")
+        case .restricted: String(localized: "Photo access is restricted on this \(deviceName). Use Photos or Paste instead.")
         case .requestAccess, .latest, .noScreenshots: nil
         }
     }

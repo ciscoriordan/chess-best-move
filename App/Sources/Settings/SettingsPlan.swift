@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 /// Accessibility identifiers of the plan screen, used by the UI tests.
@@ -41,20 +42,20 @@ struct SettingsPlanDetail: Equatable, Sendable {
     /// read by the plan that has it and by the free tier that does not, so the two can never
     /// describe Pro differently.
     static let proBenefits = [
-        "Unlimited analyses, at every think time.",
-        "A longer search that keeps running after the answer, up to 2 minutes.",
-        "The move on screen switches to a better one by itself, if you ask it to.",
+        String(localized: "Unlimited analyses, at every think time."),
+        String(localized: "A longer search that keeps running after the answer, up to 2 minutes."),
+        String(localized: "The move on screen switches to a better one by itself, if you ask it to."),
     ]
 
-    static let includedLabel = "Included"
-    static let withProLabel = "With Pro"
+    static let includedLabel = String(localized: "Included")
+    static let withProLabel = String(localized: "With Pro")
 
     /// The name of the free tier while it has an allowance to spend.
-    static let freeTitle = "Free"
+    static let freeTitle = String(localized: "Free")
     /// The name of the free tier once the three free analyses are spent and a pack was bought.
     /// A reader in that state paid for what they have, so the screen does not call it free
     /// (design.md 9.8). `SettingsPlanRow.value` leads with the same name.
-    static let payAsYouGoTitle = "Pay as You Go"
+    static let payAsYouGoTitle = String(localized: "Pay as You Go")
 
     /// The plan this Apple Account is on.
     ///
@@ -105,7 +106,7 @@ struct SettingsPlanDetail: Equatable, Sendable {
             ),
             // design.md 14 asks for "is free" where something is free, and this is a Settings
             // screen rather than a purchase screen, so the word is allowed here.
-            "An analysis is spent on a position you have not analyzed before. Re-running the same board, at any think time, is free.",
+            String(localized: "An analysis is spent on a position you have not analyzed before. Re-running the same board, at any think time, is free."),
         ]
         coversLabel = Self.withProLabel
         covers = Self.proBenefits
@@ -116,26 +117,26 @@ struct SettingsPlanDetail: Equatable, Sendable {
     private static func proPlan(_ activeSubscriptionProductID: String?) -> String {
         switch activeSubscriptionProductID {
         case ProductID.proWeekly?:
-            return "Pro Weekly, which renews every week until you cancel it."
+            return String(localized: "Pro Weekly, which renews every week until you cancel it.")
         case ProductID.proAnnual?:
-            return "Pro Yearly, which renews every year until you cancel it."
+            return String(localized: "Pro Yearly, which renews every year until you cancel it.")
         case nil:
-            return "Pro Lifetime, bought once. It does not renew and it does not expire."
+            return String(localized: "Pro Lifetime, bought once. It does not renew and it does not expire.")
         default:
             // An experiment's product id (monetization.md section 8), which this build does not
             // know by name. It is a subscription, because a lifetime purchase has no id here.
-            return "A Pro subscription, which renews until you cancel it."
+            return String(localized: "A Pro subscription, which renews until you cancel it.")
         }
     }
 
     /// What a Pro reader still has in the bank, or nil when there is nothing.
     private static func keptWhilePro(freeRemaining: Int, purchasedRemaining: Int) -> String? {
         let counts = [
-            freeRemaining > 0 ? "\(analyses(freeRemaining)) of the three that come with the app" : nil,
-            purchasedRemaining > 0 ? "\(analyses(purchasedRemaining)) you bought" : nil,
+            freeRemaining > 0 ? String(localized: "\(analyses(freeRemaining)) of the three that come with the app") : nil,
+            purchasedRemaining > 0 ? String(localized: "\(analyses(purchasedRemaining)) you bought") : nil,
         ].compactMap(\.self)
         guard !counts.isEmpty else { return nil }
-        return "\(counts.joined(separator: " and ")) are kept, and you can spend them if Pro ends."
+        return String(localized: "\(ListFormatter.localizedString(byJoining: counts)) are kept, and you can spend them if Pro ends.")
     }
 
     /// "2 of 3 free analyses left, plus 12 analyses you bought."
@@ -144,18 +145,18 @@ struct SettingsPlanDetail: Equatable, Sendable {
     /// shape Settings' Plan row uses as well ("Free, 2 of 3 left, plus 12 analyses").
     private static func freeCount(freeRemaining: Int, freeAllowance: Int, purchasedRemaining: Int) -> String {
         guard purchasedRemaining > 0 else {
-            return freeRemaining > 0 ? "\(freeRemaining) of \(freeAllowance) analyses left." : "No analyses left."
+            return freeRemaining > 0 ? String(localized: "\(freeRemaining) of \(freeAllowance) analyses left.") : String(localized: "No analyses left.")
         }
-        let bought = "\(analyses(purchasedRemaining)) you bought"
+        let bought = String(localized: "\(analyses(purchasedRemaining)) you bought")
         if freeRemaining > 0 {
-            return "\(freeRemaining) of \(freeAllowance) free analyses left, plus \(bought)."
+            return String(localized: "\(freeRemaining) of \(freeAllowance) free analyses left, plus \(bought).")
         }
-        return "No free analyses left, and \(bought)."
+        return String(localized: "No free analyses left, and \(bought).")
     }
 
     /// The plural of "analysis" this count needs.
     private static func analyses(_ count: Int) -> String {
-        count == 1 ? "1 analysis" : "\(count) analyses"
+        count == 1 ? String(localized: "1 analysis") : String(localized: "\(count) analyses")
     }
 }
 
@@ -172,9 +173,9 @@ enum SettingsPlanAction: Sendable, Hashable, CaseIterable {
 
     var title: String {
         switch self {
-        case .unlock: "Unlock Unlimited"
-        case .restore: "Restore Purchases"
-        case .manageSubscription: "Manage Subscription"
+        case .unlock: String(localized: "Unlock Unlimited")
+        case .restore: String(localized: "Restore Purchases")
+        case .manageSubscription: String(localized: "Manage Subscription")
         }
     }
 }
@@ -233,7 +234,7 @@ struct SettingsPlanView: View {
                     }
                 }
 
-                GroupedSectionLabel("Purchases")
+                GroupedSectionLabel(String(localized: "Purchases"))
                 GroupedCard {
                     ForEach(Array(detail.actions.enumerated()), id: \.element) { index, action in
                         if index > 0 {
@@ -276,7 +277,7 @@ struct SettingsPlanView: View {
             Button {
                 Task { await purchases.restore(store: app.store, focus: $restoreMessageFocused) }
             } label: {
-                ListRow(action.title, value: purchases.isRestoring ? "Restoring\u{2026}" : nil).groupedRow()
+                ListRow(action.title, value: purchases.isRestoring ? String(localized: "Restoring\u{2026}") : nil).groupedRow()
             }
             .buttonStyle(.listRow)
             .disabled(purchases.isRestoring)

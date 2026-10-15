@@ -8,8 +8,8 @@ import Observation
 // analyses and the paywall.
 //
 // The offer ended on 2026-10-13. Existing production customers keep their earned access.
-// Sandbox installs use freemium without an override; synthetic download dates do not earn
-// a production promotion. The old open-window policy remains available to regression tests.
+// A saved grant is honored in every install channel. Fresh sandbox installs use freemium;
+// synthetic download dates never create a new grant. Historical policy remains testable.
 
 enum MonetizationLaunchPolicy {
     case preservedAccess
@@ -86,8 +86,7 @@ struct MonetizationLaunchCohortRecord: Codable, Sendable, Equatable {
     /// place the two are combined. Ask `carriesAVerdict` first: this answers `.notMember` for a
     /// record that says nothing.
     ///
-    /// A previously earned grant survives the end of the offer. The shipping policy ignores
-    /// these records in sandbox without changing them, so production access is preserved.
+    /// A previously earned grant survives the end of the offer and changes of install channel.
     func status(under cutoff: Date) -> MonetizationLaunchCohortStatus {
         isMember || originalPurchaseDate < cutoff ? .member : .notMember
     }
@@ -153,10 +152,11 @@ final class MonetizationLaunchCohort {
         self.defaults = defaults
         self.cutoff = cutoff
         self.policy = policy
-        if policy == .preservedAccess && channel == .sandbox {
-            // Keep stored records intact for the customer's production app. TestFlight and
-            // App Review exercise purchases rather than receiving a real launch promotion.
-            status = .notMember
+        if policy == .preservedAccess && MonetizationRules.launchWindowIsOpen(cutoff: cutoff) {
+            let stored = Self.storedStatus(vault: vault, cutoff: cutoff)
+            // Installing TestFlight over the App Store copy must not revoke a saved grant.
+            // With no grant, test installs still expose the ordinary purchase flow.
+            status = stored == .member ? .member : (channel == .sandbox ? .notMember : stored)
         } else if MonetizationRules.launchWindowIsOpen(cutoff: cutoff) {
             // Synchronous, so the first frame is already right for everybody who has been decided.
             status = Self.storedStatus(vault: vault, cutoff: cutoff)
@@ -171,7 +171,8 @@ final class MonetizationLaunchCohort {
         }
         // The override only exists where the Testing section exists, and it is read through the
         // same channel gate, so a value left in another build's defaults can do nothing.
-        leavesCohortForTesting = channel.offersTestingTools && defaults.bool(forKey: DefaultsKey.leavesCohortForTesting)
+        leavesCohortForTesting = policy == .openWindow && channel.offersTestingTools
+            && defaults.bool(forKey: DefaultsKey.leavesCohortForTesting)
         #if DEBUG
         if let forced = Self.debugStatus {
             status = forced
@@ -220,6 +221,12 @@ final class MonetizationLaunchCohort {
         isResolving = true
         defer { isResolving = false }
         if policy == .preservedAccess {
+            guard MonetizationRules.launchWindowIsOpen(cutoff: cutoff) else { return }
+            if status == .member || Self.storedStatus(vault: vault, cutoff: cutoff) == .member {
+                status = .member
+                hasResolvedPreservedAccess = true
+                return
+            }
             // The signed environment is authoritative even if the deprecated receipt filename
             // gave the wrong initial channel. Never infer promotion eligibility from a sandbox
             // transaction's synthetic date, or overwrite an earned production record with it.
@@ -263,7 +270,7 @@ final class MonetizationLaunchCohort {
     /// Testing actions use. Returns whether anything changed.
     @discardableResult
     func setLeavesCohortForTesting(_ leaves: Bool, for channel: MonetizationBuildChannel) -> Bool {
-        guard channel.offersTestingTools, self.channel.offersTestingTools else { return false }
+        guard policy == .openWindow, channel.offersTestingTools, self.channel.offersTestingTools else { return false }
         guard leaves != leavesCohortForTesting else { return false }
         defaults.set(leaves, forKey: DefaultsKey.leavesCohortForTesting)
         leavesCohortForTesting = leaves
@@ -341,11 +348,11 @@ protocol MonetizationLaunchCohortTesting: AnyObject, Observable, Sendable {
 /// The plan describes current access without assuming an unverified first-download date.
 enum MonetizationLaunchCohortCopy {
     /// The value of Settings' Plan row while the offer is being granted.
-    static let planRow = "Unlimited"
+    static let planRow = String(localized: "Unlimited")
 
     /// The line the plan screen shows under that value. It claims nothing about when this Apple
     /// Account installed the app, and it says what Restore purchases is still for, because a
     /// member who bought nothing is told "No previous purchases found".
     static let planDetail =
-        "Every analysis is unlimited, at no cost. Restore purchases is here for anything you bought on another device."
+        String(localized: "Every analysis is unlimited, at no cost. Restore purchases is here for anything you bought on another device.")
 }

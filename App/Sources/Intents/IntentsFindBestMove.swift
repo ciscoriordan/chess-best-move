@@ -121,25 +121,25 @@ enum IntentsShortcutOutcome: Sendable, Hashable {
                 score: score
             )
         case .noLegalMoves(let checkmate):
-            checkmate ? "No legal moves: it's checkmate." : "No legal moves: it's stalemate."
+            checkmate ? String(localized: "No legal moves: it's checkmate.") : String(localized: "No legal moves: it's stalemate.")
         case .boardNotFound:
-            "No chessboard found in that image. This didn't use a free analysis."
+            String(localized: "No chessboard found in that image. This didn't use a free analysis.")
         case .needsCheck:
-            "Some squares need a look. Check the position in Chess Best Move."
+            String(localized: "Some squares need a look. Check the position in Chess Best Move.")
         case .needsPurchase:
-            "You've used your free analyses. Open Chess Best Move to continue."
+            String(localized: "You've used your free analyses. Open Chess Best Move to continue.")
         case .waitingForApproval:
-            "The purchase is waiting for approval. The analysis starts in Chess Best Move when it is approved."
+            String(localized: "The purchase is waiting for approval. The analysis starts in Chess Best Move when it is approved.")
         case .failed:
-            "Chess Best Move couldn't analyze this position."
+            String(localized: "Chess Best Move couldn't analyze this position.")
         case .canceled:
-            "The analysis was canceled."
+            String(localized: "The analysis was canceled.")
         case .stillRunning:
-            "The analysis is still running in Chess Best Move."
+            String(localized: "The analysis is still running in Chess Best Move.")
         case .appNotReady:
-            "Chess Best Move isn't ready. Open the app, then run the shortcut again."
+            String(localized: "Chess Best Move isn't ready. Open the app, then run the shortcut again.")
         case .unreadableImage:
-            "Chess Best Move couldn't read that image. Pass a screenshot to the shortcut."
+            String(localized: "Chess Best Move couldn't read that image. Pass a screenshot to the shortcut.")
         }
     }
 }

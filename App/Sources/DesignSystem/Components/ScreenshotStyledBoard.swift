@@ -1,3 +1,4 @@
+import Foundation
 import ChessCore
 import SwiftUI
 
@@ -10,9 +11,9 @@ enum BoardAppearance: String, CaseIterable, Identifiable {
     var id: String { rawValue }
     var label: String {
         switch self {
-        case .green: "Classic Green"
-        case .screenshot: "Match Screenshot"
-        case .standard: "Standard Board"
+        case .green: String(localized: "Classic Green")
+        case .screenshot: String(localized: "Match Screenshot")
+        case .standard: String(localized: "Standard Board")
         }
     }
 }

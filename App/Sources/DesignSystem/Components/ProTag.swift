@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 /// The tag that marks one row, option or line as something the Pro tier unlocks
@@ -18,7 +19,7 @@ struct ProTag: View {
     /// The letters on screen. The `label` token uppercases them.
     static let title = "Pro"
     /// What VoiceOver says instead of reading the letters.
-    static let spokenLabel = "Comes with Pro"
+    static let spokenLabel = String(localized: "Comes with Pro")
 
     /// Horizontal and vertical padding around the letters. Small enough that the tag sits on
     /// one line of `body` text without changing the row's height.

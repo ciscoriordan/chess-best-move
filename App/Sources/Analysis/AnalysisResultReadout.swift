@@ -1,3 +1,4 @@
+import Foundation
 import ChessCore
 import SwiftUI
 
@@ -221,7 +222,7 @@ struct AnalysisResultReadout: View {
                     Text("Nf6").typography(.data)
                     AnalysisGlyphLine(
                         piece: Piece(color: .black, kind: .knight),
-                        text: "Knight to f6", spoken: "", glyphToken: .headline
+                        text: String(localized: "Knight to f6"), spoken: "", glyphToken: .headline
                     )
                     .typography(.headline)
                 }
@@ -297,10 +298,10 @@ struct AnalysisGlyphLine: View {
         }
         var line = AttributedString(prefix)
         if let piece { line.append(symbol(piece)) }
-        if let capturedPiece, let takes = text.range(of: " takes ") {
-            line.append(AttributedString(String(text[..<takes.upperBound])))
+        if let capturedPiece, let captured = text.range(of: AnalysisSpeech.capturePieceName(capturedPiece.kind)) {
+            line.append(AttributedString(String(text[..<captured.lowerBound])))
             line.append(symbol(capturedPiece))
-            line.append(AttributedString(String(text[takes.upperBound...])))
+            line.append(AttributedString(String(text[captured.lowerBound...])))
         } else {
             line.append(AttributedString(text))
         }

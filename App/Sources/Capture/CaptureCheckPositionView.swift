@@ -1,3 +1,4 @@
+import Foundation
 import ChessCore
 import SwiftUI
 
@@ -175,7 +176,7 @@ struct CheckPositionView: View {
         var parts: [String] = []
         let flagged = flaggedSquares
         if !flagged.isEmpty {
-            parts.append("Needs a look: " + flagged.map(\.algebraic).joined(separator: ", "))
+            parts.append(String(localized: "Needs a look: ") + flagged.map(\.algebraic).joined(separator: ", "))
         }
         parts.append(CaptureBoardSpeech.pieceList(snapshot.position.board))
         return parts.joined(separator: ". ")
@@ -200,7 +201,7 @@ struct CheckPositionView: View {
         return VStack(alignment: .leading, spacing: Spacing.s1) {
             CaptureFlowLayout {
                 Chip(
-                    "\(CapturePositionIssues.name(side)) to move",
+                    String(localized: "\(CapturePositionIssues.name(side)) to move"),
                     glyph: .piece(Piece(color: side, kind: .king)),
                     state: emphasized ? .attention : .normal
                 ) {
@@ -214,7 +215,7 @@ struct CheckPositionView: View {
                 .accessibilityInputLabels(["\(CapturePositionIssues.name(side)) to move", "Side to move"])
                 .accessibilityHint("Switches the side to move")
 
-                Chip("Flip board", glyph: .systemImage("arrow.up.arrow.down")) {
+                Chip(String(localized: "Flip board"), glyph: .systemImage("arrow.up.arrow.down")) {
                     flip()
                     selectionFeedback += 1
                 }
@@ -240,7 +241,7 @@ struct CheckPositionView: View {
 
     private var castling: some View {
         VStack(alignment: .leading, spacing: 0) {
-            SectionLabel("Castling")
+            SectionLabel(String(localized: "Castling"))
             CaptureFlowLayout {
                 ForEach(CaptureCastlingOption.all) { option in
                     let available = snapshot.position.inferredCastlingRights.contains(option.right)
@@ -256,7 +257,7 @@ struct CheckPositionView: View {
                     }
                     .disabled(!available)
                     .accessibilityLabel(option.spokenTitle)
-                    .accessibilityValue(on ? "On" : "Off")
+                    .accessibilityValue(on ? String(localized: "On") : String(localized: "Off"))
                     // The same reason the editor gives for the same disabled control. Without
                     // it the chip reads "White castles kingside, Off, dimmed" and stops.
                     .accessibilityHint(available ? "" : CaptureCastlingOption.unavailableHint)
@@ -270,19 +271,19 @@ struct CheckPositionView: View {
 
     private func summary(_ summary: CaptureCheckPositionSummary, issues: [PositionIssue]) -> some View {
         VStack(alignment: .leading, spacing: Spacing.s3) {
-            Text(app.automaticScreenshotConfirmationID == snapshot.id ? "Ready to Analyze" : summary.title)
+            Text(app.automaticScreenshotConfirmationID == snapshot.id ? String(localized: "Ready to Analyze") : summary.title)
                 .typography(.title)
                 .foregroundStyle(Palette.ink)
                 .accessibilityAddTraits(.isHeader)
                 .accessibilityIdentifier(CaptureAccessibilityID.checkPositionTitle)
-            Text(app.automaticScreenshotConfirmationID == snapshot.id ? "Check the pieces, then tap Analyze when you’re ready." : summary.body)
+            Text(app.automaticScreenshotConfirmationID == snapshot.id ? String(localized: "Check the pieces, then tap Analyze when you’re ready.") : summary.body)
                 .typography(.body)
                 .foregroundStyle(Palette.ink2)
                 .fixedSize(horizontal: false, vertical: true)
             if app.settings.boardAppearance == .screenshot, snapshot.boardImage != nil {
                 ForEach(flaggedSquares, id: \.self) { square in
-                    let occupant = snapshot.position.board[square.index].map(CapturePositionIssues.name) ?? "empty"
-                    TextLink("\(square.algebraic): read as \(occupant)") {
+                    let occupant = snapshot.position.board[square.index].map(CapturePositionIssues.name) ?? String(localized: "empty")
+                    TextLink(String(localized: "\(square.algebraic): read as \(occupant)")) {
                         openEditor(selecting: square)
                     }
                 }
@@ -324,13 +325,13 @@ struct CheckPositionView: View {
                 ? AnyLayout(VStackLayout(spacing: Spacing.s2))
                 : AnyLayout(HStackLayout(spacing: Spacing.s3))
             layout {
-                PrimaryButton("Analyze") { analyze() }
+                PrimaryButton(String(localized: "Analyze")) { analyze() }
                     .disabled(!canAnalyze)
                     // A disabled button that gives no reason is a dead end for a reader who
                     // reached the bar before the issue list above it.
                     .accessibilityHint(canAnalyze ? "" : "Fix the problems listed above first")
                     .accessibilityIdentifier(CaptureAccessibilityID.checkPositionAnalyze)
-                SecondaryButton("Edit", dense: !stacked) { openEditor(selecting: nil) }
+                SecondaryButton(String(localized: "Edit"), dense: !stacked) { openEditor(selecting: nil) }
                     .accessibilityHint("Opens the position editor")
             }
         }
@@ -401,24 +402,24 @@ struct CaptureCheckPositionSummary: Equatable, Sendable {
         let covered = snapshot.doubts.squares(outsideTheImage: false).intersection(flagged)
 
         if !flagged.isEmpty {
-            title = flagged.count == 1 ? "1 Square Needs a Look" : "\(flagged.count) Squares Need a Look"
+            title = flagged.count == 1 ? String(localized: "1 Square Needs a Look") : String(localized: "\(flagged.count) Squares Need a Look")
         } else if !blocking.isEmpty {
-            title = "Fix the Position"
+            title = String(localized: "Fix the Position")
         } else {
-            title = "Check the Position"
+            title = String(localized: "Check the Position")
         }
 
         // Reasons that point at the screenshot apply only to pieces as recognized from one.
         let readFromScreenshot = snapshot.boardImage != nil && !snapshot.isEdited
 
         if !blocking.isEmpty {
-            body = "Tap a square to fix it. You can analyze once the problems below are fixed."
+            body = String(localized: "Tap a square to fix it. You can analyze once the problems below are fixed.")
         } else if !flagged.isEmpty {
-            body = "Tap a marked square to fix it, or analyze as recognized."
+            body = String(localized: "Tap a marked square to fix it, or analyze as recognized.")
         } else if readFromScreenshot {
-            body = "Recognition wasn't sure it read the right board. Press and hold the board to compare it with your screenshot, then analyze."
+            body = String(localized: "Recognition wasn't sure it read the right board. Press and hold the board to compare it with your screenshot, then analyze.")
         } else {
-            body = "Check the pieces, then analyze."
+            body = String(localized: "Check the pieces, then analyze.")
         }
 
         var squareReason: String?
@@ -426,14 +427,14 @@ struct CaptureCheckPositionSummary: Equatable, Sendable {
             squareReason = nil
         } else if !outside.isEmpty {
             let rest = outside.count == flagged.count ? ""
-                : covered.isEmpty ? " Other marked squares were hard to read."
-                : " Something in your screenshot covers the other marked squares."
-            squareReason = "Part of the board is outside your screenshot, so pieces on the marked edge squares may be missing." + rest
+                : covered.isEmpty ? String(localized: " Other marked squares were hard to read.")
+                : String(localized: " Something in your screenshot covers the other marked squares.")
+            squareReason = String(localized: "Part of the board is outside your screenshot, so pieces on the marked edge squares may be missing.") + rest
         } else if !covered.isEmpty {
-            squareReason = "Something in your screenshot covers the marked squares, such as a banner, a card or a menu."
-                + (covered.count == flagged.count ? "" : " The other marked squares were hard to read.")
+            squareReason = String(localized: "Something in your screenshot covers the marked squares, such as a banner, a card or a menu.")
+                + (covered.count == flagged.count ? "" : String(localized: " The other marked squares were hard to read."))
         } else if !flagged.isEmpty {
-            squareReason = "Marked squares were hard to read. Something may cover them in your screenshot, such as a banner, an arrow or a menu."
+            squareReason = String(localized: "Marked squares were hard to read. Something may cover them in your screenshot, such as a banner, an arrow or a menu.")
         }
         // What is wrong with the whole board is said whether or not single squares are marked:
         // a banner over two squares does not explain a board that is also too small to read.
@@ -453,13 +454,13 @@ struct CaptureCheckPositionSummary: Equatable, Sendable {
         for doubt in doubts {
             switch doubt {
             case .severalBoards(let count):
-                return "Your screenshot shows \(count) boards. If this is not the one you want, crop the screenshot to that board and import it again."
+                return String(localized: "Your screenshot shows \(count) boards. If this is not the one you want, crop the screenshot to that board and import it again.")
             case .squaresTooSmall(let pixelsPerSquare):
-                return "The board is small in your screenshot, about \(Int(pixelsPerSquare.rounded())) pixels a square, which makes the pieces hard to read. A screenshot with the board larger reads better."
+                return String(localized: "The board is small in your screenshot, about \(Int(pixelsPerSquare.rounded())) pixels a square, which makes the pieces hard to read. A screenshot with the board larger reads better.")
             case .invertedSquareColors:
-                return "The light and dark squares are the other way round on this board. Some board themes look like that; so does a mirrored screenshot, and then the pieces sit on mirrored squares."
+                return String(localized: "The light and dark squares are the other way round on this board. Some board themes look like that; so does a mirrored screenshot, and then the pieces sit on mirrored squares.")
             case .unfamiliarTheme:
-                return "This board style is unfamiliar, so pieces on it are easier to misread. Check the pieces against your screenshot."
+                return String(localized: "This board style is unfamiliar, so pieces on it are easier to misread. Check the pieces against your screenshot.")
             case .weakBoardMatch, .squaresOutsideImage, .squaresCovered, .uncertainSquares,
                  .impossiblePosition, .orientationUnconfirmed, .sideToMoveUncertain,
                  .sideToMoveNotEstablished, .unreadableHighlight, .other:
@@ -477,7 +478,7 @@ struct CaptureCheckPositionSummary: Equatable, Sendable {
     static func chipNote(_ snapshot: BoardSnapshot) -> String? {
         var sentences: [String] = []
         if snapshot.doubts.contains(.orientationUnconfirmed) {
-            sentences.append("Recognition is not sure which way the board faces. Check that the right color is at the bottom, and flip it if it is not.")
+            sentences.append(String(localized: "Recognition is not sure which way the board faces. Check that the right color is at the bottom, and flip it if it is not."))
         }
         if snapshot.sideToMoveOrigin != .user {
             // An unread highlight comes first whatever order the doubts arrive in: it says what
@@ -485,14 +486,14 @@ struct CaptureCheckPositionSummary: Equatable, Sendable {
             // Saying instead that there is "no highlighted last move" would contradict the
             // screenshot the user is looking at.
             if snapshot.doubts.contains(where: \.isAboutAnUnreadHighlight) {
-                sentences.append("This board has colored squares that do not add up to a move, so the last move could not be read. Check the side to move.")
+                sentences.append(String(localized: "This board has colored squares that do not add up to a move, so the last move could not be read. Check the side to move."))
             } else {
                 for doubt in snapshot.doubts {
                     switch doubt {
                     case .sideToMoveNotEstablished:
-                        sentences.append("Nothing in your screenshot says who is to move: no highlighted last move and no clock. Check the side to move.")
+                        sentences.append(String(localized: "Nothing in your screenshot says who is to move: no highlighted last move and no clock. Check the side to move."))
                     case .sideToMoveUncertain:
-                        sentences.append("Recognition is not sure who is to move. Check the side to move.")
+                        sentences.append(String(localized: "Recognition is not sure who is to move. Check the side to move."))
                     default:
                         continue
                     }
@@ -546,13 +547,13 @@ struct CaptureCastlingOption: Identifiable, Hashable, Sendable {
     var id: UInt8 { right.rawValue }
 
     /// Why a castling toggle is unavailable, said on both screens that show these chips.
-    static let unavailableHint = "The king or rook is not on its starting square"
+    static let unavailableHint = String(localized: "The king or rook is not on its starting square")
 
     static let all: [CaptureCastlingOption] = [
-        CaptureCastlingOption(right: .whiteKingside, title: "White O-O", spokenTitle: "White castles kingside"),
-        CaptureCastlingOption(right: .whiteQueenside, title: "White O-O-O", spokenTitle: "White castles queenside"),
-        CaptureCastlingOption(right: .blackKingside, title: "Black O-O", spokenTitle: "Black castles kingside"),
-        CaptureCastlingOption(right: .blackQueenside, title: "Black O-O-O", spokenTitle: "Black castles queenside"),
+        CaptureCastlingOption(right: .whiteKingside, title: String(localized: "White O-O"), spokenTitle: String(localized: "White castles kingside")),
+        CaptureCastlingOption(right: .whiteQueenside, title: String(localized: "White O-O-O"), spokenTitle: String(localized: "White castles queenside")),
+        CaptureCastlingOption(right: .blackKingside, title: String(localized: "Black O-O"), spokenTitle: String(localized: "Black castles kingside")),
+        CaptureCastlingOption(right: .blackQueenside, title: String(localized: "Black O-O-O"), spokenTitle: String(localized: "Black castles queenside")),
     ]
 }
 
@@ -583,7 +584,7 @@ struct CaptureIssueList: View {
                         .foregroundStyle(blocking ? Palette.danger : Palette.ink2)
                         .accessibilityElement(children: .combine)
                         if issue == .sideNotToMoveInCheck {
-                            TextLink("Switch side to move", action: switchSideToMove)
+                            TextLink(String(localized: "Switch side to move"), action: switchSideToMove)
                                 .padding(.leading, symbolSize + Spacing.s2)
                         }
                     }

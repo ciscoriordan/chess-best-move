@@ -1,3 +1,4 @@
+import Foundation
 import PhotosUI
 import SwiftUI
 import UIKit
@@ -132,7 +133,7 @@ struct HomeView: View {
                     .padding(.top, Spacing.s1)
             } else {
                 VStack(alignment: .leading, spacing: 0) {
-                    SectionLabel("How it works")
+                    SectionLabel(String(localized: "How it works"))
                     VStack(alignment: .leading, spacing: Spacing.s2) {
                         ForEach(Array(Self.steps(for: .current, automatic: automaticCaptureAvailable).enumerated()), id: \.offset) { index, step in
                             HStack(alignment: .firstTextBaseline, spacing: Spacing.s3) {
@@ -169,8 +170,8 @@ struct HomeView: View {
     static func steps(for device: AppDevice, automatic: Bool = false) -> [String] {
         [
             device.screenshotStep,
-            "Come back here.",
-            automatic ? "New chess screenshots are recognized automatically. Tap Analyze if asked." : "Tap Use latest screenshot.",
+            String(localized: "Come back here."),
+            automatic ? String(localized: "New chess screenshots are recognized automatically. Tap Analyze if asked.") : String(localized: "Tap Use latest screenshot."),
         ]
     }
 
@@ -233,7 +234,7 @@ struct HomeView: View {
             // title changes to "Analyze new screenshot" for a fresh screenshot, which is
             // exactly the state a first-time reader following the steps is in. Voice Control
             // matches either name.
-            .accessibilityInputLabels([state.title(now: now), "Use latest screenshot"])
+            .accessibilityInputLabels([state.title(now: now), String(localized: "Use latest screenshot")])
         }
     }
 
@@ -255,7 +256,7 @@ struct HomeView: View {
                     Text(caption)
                 }
                 if state == .limited {
-                    TextLink("Allow full access in Settings") {
+                    TextLink(String(localized: "Allow full access in Settings")) {
                         if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
                     }
                 }
@@ -343,12 +344,12 @@ struct HomeView: View {
     /// elements further down: without that, a reader taps the main button of the first screen,
     /// hears nothing, and the button goes dim and comes back.
     private func spokenDetail(_ state: CaptureLatestScreenshotButton, now: Date) -> String {
-        if model.isImporting { return "Importing" }
+        if model.isImporting { return String(localized: "Importing") }
         var parts: [String] = []
         switch state {
         case .latest(let asset, _):
             if let date = asset.creationDate {
-                parts.append("Taken " + CaptureRecentScreenshotPolicy.spokenAgeText(since: date, now: now))
+                parts.append(String(localized: "Taken ") + CaptureRecentScreenshotPolicy.spokenAgeText(since: date, now: now))
             }
         default:
             if let detail = state.detail(now: now) { parts.append(detail) }
@@ -362,7 +363,7 @@ struct HomeView: View {
             app.beginExplicitScreenshotSelection()
             model.showsPhotoPicker = true
         } label: {
-            ListRow("Choose from Photos", systemImage: "photo.on.rectangle", showsChevron: true)
+            ListRow(String(localized: "Choose from Photos"), systemImage: "photo.on.rectangle", showsChevron: true)
                 .groupedRow()
         }
         .buttonStyle(.listRow)
@@ -433,7 +434,7 @@ struct HomeView: View {
         Button {
             if let sample = DebugSample.load() { app.importImage(sample) }
         } label: {
-            ListRow("Analyze sample screenshot", systemImage: "ladybug")
+            ListRow(String(localized: "Analyze sample screenshot"), systemImage: "ladybug")
                 .groupedRow()
         }
         .buttonStyle(.listRow)

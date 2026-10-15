@@ -49,11 +49,11 @@ enum AppDevice: Sendable, Hashable {
     /// Home's first HOW IT WORKS step (design.md 9.1).
     var screenshotStep: String {
         switch self {
-        case .iPhone(hasHomeButton: false): "Take a screenshot of the position: press the side button and volume up together."
-        case .iPhone(hasHomeButton: true): "Take a screenshot of the position: press the side button and the Home button together."
-        case .iPad(hasHomeButton: false): "Take a screenshot of the position: press the top button and a volume button together."
-        case .iPad(hasHomeButton: true): "Take a screenshot of the position: press the top button and the Home button together."
-        case .mac: "Take a screenshot of the position."
+        case .iPhone(hasHomeButton: false): String(localized: "Take a screenshot of the position: press the side button and volume up together.")
+        case .iPhone(hasHomeButton: true): String(localized: "Take a screenshot of the position: press the side button and the Home button together.")
+        case .iPad(hasHomeButton: false): String(localized: "Take a screenshot of the position: press the top button and a volume button together.")
+        case .iPad(hasHomeButton: true): String(localized: "Take a screenshot of the position: press the top button and the Home button together.")
+        case .mac: String(localized: "Take a screenshot of the position.")
         }
     }
 
@@ -64,13 +64,13 @@ enum AppDevice: Sendable, Hashable {
         let withHome: String
         switch self {
         case .iPhone:
-            withoutHome = "With the position on screen, press the side button and the volume up button at the same time."
-            withHome = "On an iPhone with a Home button, press the side button and the Home button at the same time."
+            withoutHome = String(localized: "With the position on screen, press the side button and the volume up button at the same time.")
+            withHome = String(localized: "On an iPhone with a Home button, press the side button and the Home button at the same time.")
         case .iPad:
-            withoutHome = "With the position on screen, press the top button and either volume button at the same time."
-            withHome = "On an iPad with a Home button, press the top button and the Home button at the same time."
+            withoutHome = String(localized: "With the position on screen, press the top button and either volume button at the same time.")
+            withHome = String(localized: "On an iPad with a Home button, press the top button and the Home button at the same time.")
         case .mac:
-            return ["With the position on screen, take a screenshot."]
+            return [String(localized: "With the position on screen, take a screenshot.")]
         }
         return [withoutHome, withHome]
     }

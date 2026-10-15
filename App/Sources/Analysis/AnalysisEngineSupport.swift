@@ -37,12 +37,12 @@ enum AnalysisPositionCheck {
 /// Failure messages the controller puts into `EnginePhase.failed`, so the screen can tell a
 /// rejected position (back to Check position) from an engine that could not run.
 enum AnalysisEngineFailure {
-    static let invalidPositionPrefix = "Invalid position: "
+    static let invalidPositionPrefix = String(localized: "Invalid position: ")
 
     /// Shown when the engine refuses a board that `Position.validate()` accepts. ChessCore
     /// follows the engine's rules, so this should not happen; if it does, going back to Check
     /// position would list nothing to fix and bounce straight back here.
-    static let unexplainedRejection = "The chess engine can't analyze this position. Use Edit to check the pieces."
+    static let unexplainedRejection = String(localized: "The chess engine can't analyze this position. Use Edit to check the pieces.")
 
     static func invalidPosition(_ detail: String) -> String {
         invalidPositionPrefix + detail
@@ -59,15 +59,15 @@ enum AnalysisEngineFailure {
         case EngineError.invalidPosition(let detail):
             return invalidPosition(detail)
         case EngineError.networkMissing:
-            return "The chess engine's neural network is missing from the app."
+            return String(localized: "The chess engine's neural network is missing from the app.")
         case EngineError.engineUnavailable:
-            return "The chess engine could not start."
+            return String(localized: "The chess engine could not start.")
         case EngineError.invalidLimit:
-            return "The think time is not valid."
+            return String(localized: "The think time is not valid.")
         case EngineError.noLegalMoves:
-            return "The side to move has no legal moves."
+            return String(localized: "The side to move has no legal moves.")
         default:
-            return "The chess engine stopped unexpectedly."
+            return String(localized: "The chess engine stopped unexpectedly.")
         }
     }
 }
@@ -136,13 +136,15 @@ enum AnalysisScore {
     static func spoken(_ score: WhiteScore) -> String {
         switch score {
         case .centipawns(let cp):
-            if cp == 0 { return "Equal" }
-            let side = cp > 0 ? "White" : "Black"
+            if cp == 0 { return String(localized: "Equal") }
+            let side = cp > 0 ? String(localized: "White") : String(localized: "Black")
             let pawns = trimmedDecimal(Double(abs(cp)) / 100)
-            return "\(side) is ahead by \(pawns) \(pawns == "1" ? "pawn" : "pawns")"
+            return abs(cp) == 100
+                ? String(localized: "\(side) is ahead by 1 pawn")
+                : String(localized: "\(side) is ahead by \(pawns) pawns")
         case .mate(let moves):
-            if moves == 0 { return "Checkmate" }
-            return "\(moves > 0 ? "White" : "Black") mates in \(abs(moves))"
+            if moves == 0 { return String(localized: "Checkmate") }
+            return String(localized: "\(AnalysisSpeech.colorName(moves > 0 ? .white : .black)) mates in \(abs(moves))")
         }
     }
 

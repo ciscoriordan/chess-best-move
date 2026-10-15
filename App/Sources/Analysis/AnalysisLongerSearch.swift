@@ -284,17 +284,17 @@ struct AnalysisLongerSearchNoticeContent: Sendable, Hashable {
 /// None of it frames the app as help during a game in progress (`AppCopyTests`), and none of it
 /// names the tier anything but Pro.
 enum AnalysisLongerSearchCopy {
-    static let prefersPrefix = "A longer search prefers "
+    static let prefersPrefix = String(localized: "A longer search prefers ")
     static let prefersSuffix = "."
-    static let shownPrefix = "A longer search preferred "
-    static let shownSuffix = ", now shown."
-    static let confirmed = "A longer search still prefers this move."
-    static let proOffer = "A longer search found a different move. Pro shows it."
+    static let shownPrefix = String(localized: "A longer search preferred ")
+    static let shownSuffix = String(localized: ", now shown.")
+    static let confirmed = String(localized: "A longer search still prefers this move.")
+    static let proOffer = String(localized: "A longer search found a different move. Pro shows it.")
 
-    static let showIt = "Show it"
-    static let showItHint = "Puts that move in the badge. Nothing is spent."
-    static let seePro = "See Pro"
-    static let seeProHint = "Opens purchase options."
+    static let showIt = String(localized: "Show it")
+    static let showItHint = String(localized: "Puts that move in the badge. Nothing is spent.")
+    static let seePro = String(localized: "See Pro")
+    static let seeProHint = String(localized: "Opens purchase options.")
 
     /// "A longer search prefers knight to f3."
     static func spokenPrefers(_ move: AnalysisReadoutContent.MoveText) -> String {

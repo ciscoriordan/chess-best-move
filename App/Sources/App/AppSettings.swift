@@ -125,10 +125,10 @@ enum LongerSearchCeiling: Int, CaseIterable, Identifiable, Sendable, Codable, Ha
     /// What VoiceOver reads for a segment.
     var spokenLabel: String {
         switch self {
-        case .fifteenSeconds: "15 seconds"
-        case .thirtySeconds: "30 seconds"
-        case .oneMinute: "1 minute"
-        case .twoMinutes: "2 minutes"
+        case .fifteenSeconds: String(localized: "15 seconds")
+        case .thirtySeconds: String(localized: "30 seconds")
+        case .oneMinute: String(localized: "1 minute")
+        case .twoMinutes: String(localized: "2 minutes")
         }
     }
 }

@@ -1,3 +1,4 @@
+import Foundation
 import ChessCore
 
 /// What the Analysis result readout shows (design.md 9.4), derived from the run state, the
@@ -84,10 +85,10 @@ struct AnalysisReadoutContent: Sendable, Hashable {
     /// A mate score alone does not mean this move is checkmate.
     var checkBannerTitle: String? {
         if let move {
-            if move.san.hasSuffix("#") { return "Checkmate" }
-            if move.san.hasSuffix("+") { return "Check" }
-        } else if placeholderIsResult, placeholder == "Checkmate" {
-            return "Checkmate"
+            if move.san.hasSuffix("#") { return String(localized: "Checkmate") }
+            if move.san.hasSuffix("+") { return String(localized: "Check") }
+        } else if placeholderIsResult, placeholder == String(localized: "Checkmate") {
+            return String(localized: "Checkmate")
         }
         return nil
     }
@@ -130,7 +131,7 @@ struct AnalysisReadoutContent: Sendable, Hashable {
     var spokenMove: String? {
         guard let move else { return nil }
         guard let guessed = guessedMove else { return move.words }
-        return move.words + ", if they play " + AnalysisSpeech.lowercasingFirstLetter(guessed.words) + "."
+        return move.words + String(localized: ", if they play ") + AnalysisSpeech.lowercasingFirstLetter(guessed.words) + "."
     }
 
     // MARK: Copy
@@ -138,7 +139,7 @@ struct AnalysisReadoutContent: Sendable, Hashable {
     /// The heading above the badge that names the guessed move (owner decision 2026-09-21).
     /// Sentence case: the `sectionLabel` token draws it uppercase and VoiceOver reads this. It
     /// names the player by their move, never by their part in a game (design.md 14).
-    static let guessedMoveTitle = "Their likely move"
+    static let guessedMoveTitle = String(localized: "Their likely move")
 
     /// The line under that heading, after the piece glyph: the move as notation, then the same
     /// move in words, "e4  Pawn to e4", with an em space between them so they read as two
@@ -156,7 +157,7 @@ struct AnalysisReadoutContent: Sendable, Hashable {
     /// The sentence under the badge. The whole point of the readout in this case is that one
     /// move of it is not on the board, so the screen says it in plain words.
     static let guessedMoveNote =
-        "Their move is a guess from the engine's own line. This answer holds only if they play it."
+        String(localized: "Their move is a guess from the engine's own line. This answer holds only if they play it.")
 
     /// What VoiceOver reads for the heading and the line under it, which are one element:
     /// words only, never a symbol name or notation (item 3, design.md 12).
@@ -232,26 +233,26 @@ struct AnalysisReadoutContent: Sendable, Hashable {
         hasReply: Bool,
         quickAnswerIsBeaten: Bool = false
     ) -> Pill {
-        guard noLegalMoves == nil else { return Pill(title: "No legal moves", isAccent: false) }
+        guard noLegalMoves == nil else { return Pill(title: String(localized: "No legal moves"), isAccent: false) }
         if quickAnswerIsBeaten, status == .done {
-            return Pill(title: "Quick answer", isAccent: false)
+            return Pill(title: String(localized: "Quick answer"), isAccent: false)
         }
         return switch status {
-        case .notRun: Pill(title: "Best move", isAccent: false)
+        case .notRun: Pill(title: String(localized: "Best move"), isAccent: false)
         // The accent is reserved for an answer the app can give (design.md 9.4). While the
         // engine is still searching the badge holds a waiting mark, so the pill is muted ink
         // whichever side the screenshot caught.
-        case .thinking: Pill(title: "Thinking", isAccent: false)
-        case .done where !answersForThePlayerAtTheTop: Pill(title: "Best move", isAccent: true)
-        case .done where hasReply: Pill(title: "Best reply", isAccent: true)
-        case .done: Pill(title: "Their move", isAccent: false)
-        case .stopped: Pill(title: "Stopped", isAccent: false)
-        case .engineError: Pill(title: "Engine error", isAccent: false)
+        case .thinking: Pill(title: String(localized: "Thinking"), isAccent: false)
+        case .done where !answersForThePlayerAtTheTop: Pill(title: String(localized: "Best move"), isAccent: true)
+        case .done where hasReply: Pill(title: String(localized: "Best reply"), isAccent: true)
+        case .done: Pill(title: String(localized: "Their move"), isAccent: false)
+        case .stopped: Pill(title: String(localized: "Stopped"), isAccent: false)
+        case .engineError: Pill(title: String(localized: "Engine error"), isAccent: false)
         }
     }
 
     private static func placeholder(status: Status, noLegalMoves: Bool?) -> String {
-        if let checkmate = noLegalMoves { return checkmate ? "Checkmate" : "Stalemate" }
+        if let checkmate = noLegalMoves { return checkmate ? String(localized: "Checkmate") : String(localized: "Stalemate") }
         return status == .thinking ? "\u{2026}" : "\u{2014}"
     }
 
