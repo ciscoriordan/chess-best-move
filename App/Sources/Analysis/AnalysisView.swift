@@ -62,6 +62,7 @@ private struct AnalysisScreen: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.legibilityWeight) private var legibilityWeight
 
     init(app: AppModel, session: AnalysisSession) {
         _model = State(initialValue: AnalysisScreenModel(app: app, session: session))
@@ -587,8 +588,10 @@ private struct AnalysisScreen: View {
             empty.foregroundColor = Palette.ink3
             return empty
         }
-        let resolved = Typography.resolve(.line, sizeCategory: UIContentSizeCategory(dynamicTypeSize))
-        let firstMoveFont = Font(UIFont.monospacedSystemFont(ofSize: resolved.pointSize, weight: .bold) as CTFont)
+        let resolved = Typography.resolve(.line, sizeCategory: UIContentSizeCategory(dynamicTypeSize),
+                                          boldText: Typography.boldTextEnabled(legibilityWeight))
+        let firstMoveFont = Font(UIFont.monospacedSystemFont(ofSize: resolved.pointSize,
+            weight: Typography.boldTextEnabled(legibilityWeight) ? .heavy : .bold) as CTFont)
         var result = AttributedString()
         for token in tokens {
             if !result.characters.isEmpty {

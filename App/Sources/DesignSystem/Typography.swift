@@ -105,6 +105,17 @@ struct TypeSpec: Sendable, Hashable {
             case .heavy: .heavy
             }
         }
+
+        /// Preserve the hierarchy while honoring Accessibility > Display & Text Size >
+        /// Bold Text. A UIFont converted to a SwiftUI Font does not apply this itself.
+        var boldTextWeight: UIFont.Weight {
+            switch self {
+            case .regular: .semibold
+            case .medium, .semibold: .bold
+            case .bold: .heavy
+            case .heavy: .black
+            }
+        }
     }
 
     /// The system font's widths. Only the hero move asks for a narrow one, and only when a long
@@ -223,9 +234,21 @@ enum Typography {
         var token: TypeToken
         var category: String
         var width: CGFloat?
+        var boldText: Bool
     }
 
     private static var cache: [CacheKey: ResolvedType] = [:]
+
+    /// Read the system preference at the font's point of use. Navigation and sheet hosting
+    /// can replace an outer legibility-weight environment override with their own traits.
+    static func boldTextEnabled(_ legibilityWeight: LegibilityWeight?) -> Bool {
+        #if DEBUG
+        if UserDefaults.standard.object(forKey: "debugBoldText") != nil {
+            return UserDefaults.standard.bool(forKey: "debugBoldText")
+        }
+        #endif
+        return legibilityWeight == .bold || UIAccessibility.isBoldTextEnabled
+    }
 
     /// The font for `token` at `sizeCategory`. `width` narrows a text token for one use, on the
     /// 75...100 scale of design.md section 4 (the hero move's second layout passes 75). It is
@@ -233,9 +256,10 @@ enum Typography {
     static func resolve(
         _ token: TypeToken,
         sizeCategory: UIContentSizeCategory = .large,
-        width: CGFloat? = nil
+        width: CGFloat? = nil,
+        boldText: Bool = false
     ) -> ResolvedType {
-        let key = CacheKey(token: token, category: sizeCategory.rawValue, width: width)
+        let key = CacheKey(token: token, category: sizeCategory.rawValue, width: width, boldText: boldText)
         if let cached = cache[key] { return cached }
 
         let spec = token.spec
@@ -244,9 +268,10 @@ enum Typography {
         switch spec.face {
         case .text(let weight, let defaultWidth):
             let resolvedWidth = width.map(TypeSpec.Width.forDesignWidth) ?? defaultWidth
-            uiFont = .systemFont(ofSize: pointSize, weight: weight.uiWeight, width: resolvedWidth.uiWidth)
+            uiFont = .systemFont(ofSize: pointSize, weight: boldText ? weight.boldTextWeight : weight.uiWeight,
+                                 width: resolvedWidth.uiWidth)
         case .mono(let weight):
-            uiFont = .monospacedSystemFont(ofSize: pointSize, weight: weight.uiWeight)
+            uiFont = .monospacedSystemFont(ofSize: pointSize, weight: boldText ? weight.boldTextWeight : weight.uiWeight)
         }
         let resolved = ResolvedType(
             uiFont: uiFont,
@@ -277,9 +302,11 @@ private struct TypographyModifier: ViewModifier {
     let token: TypeToken
     let width: CGFloat?
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.legibilityWeight) private var legibilityWeight
 
     func body(content: Content) -> some View {
-        let resolved = Typography.resolve(token, sizeCategory: UIContentSizeCategory(dynamicTypeSize), width: width)
+        let resolved = Typography.resolve(token, sizeCategory: UIContentSizeCategory(dynamicTypeSize),
+                                          width: width, boldText: Typography.boldTextEnabled(legibilityWeight))
         content
             .font(resolved.font)
             .lineSpacing(resolved.lineSpacing)

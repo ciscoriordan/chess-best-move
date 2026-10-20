@@ -103,15 +103,24 @@ private struct SettingsRootContent: View {
 
                 GroupedSectionLabel(String(localized: "Board appearance"))
                 GroupedCard {
-                    Picker("Board Style", selection: $settings.boardAppearance) {
-                        ForEach(BoardAppearance.allCases) { appearance in
-                            Text(appearance.label).tag(appearance)
+                    Menu {
+                        Picker("Board Style", selection: $settings.boardAppearance) {
+                            ForEach(BoardAppearance.allCases) { appearance in
+                                Text(appearance.label).tag(appearance)
+                            }
                         }
+                    } label: {
+                        // The native menu picker's selected-value label clips vertically at
+                        // accessibility sizes. Our row gives the title and value room to wrap.
+                        ListRow(String(localized: "Board Style"), value: settings.boardAppearance.label,
+                                showsChevron: true)
+                            .groupedRow(verticalPadding: Spacing.s3)
                     }
-                    .typography(.body)
+                    .buttonStyle(.listRow)
                     .tint(Palette.ink)
-                    .pickerStyle(.menu)
-                    .groupedRow(verticalPadding: Spacing.s3)
+                    .accessibilityLabel("Board Style")
+                    .accessibilityValue(settings.boardAppearance.label)
+                    .accessibilityInputLabels([Text("Board Style")])
                     .accessibilityIdentifier("settings.boardAppearance")
                 }
                 GroupedFooter(String(localized: "By default, the board and pieces match each screenshot. Without a screenshot, they use the Classic Green style. Choose Classic Green or Standard Board to always use that style instead."))

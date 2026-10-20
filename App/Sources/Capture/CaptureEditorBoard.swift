@@ -236,6 +236,7 @@ struct CapturePieceTray: View {
     let model: CaptureEditorModel
 
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.legibilityWeight) private var legibilityWeight
     @State private var width: CGFloat = 0
 
     static let maximumCell: CGFloat = 52
@@ -298,7 +299,8 @@ struct CapturePieceTray: View {
                     PieceGlyph(piece: piece, scale: 0.7)
                         .padding(5)
                 case .empty:
-                    if Self.emptyTitleFits(cellWidth: side, sizeCategory: UIContentSizeCategory(dynamicTypeSize)) {
+                    if Self.emptyTitleFits(cellWidth: side, sizeCategory: UIContentSizeCategory(dynamicTypeSize),
+                                           boldText: Typography.boldTextEnabled(legibilityWeight)) {
                         Text(Self.emptyTitle)
                             .typography(.caption)
                             .foregroundStyle(Palette.ink)
@@ -347,8 +349,8 @@ struct CapturePieceTray: View {
     /// Whether "Empty" fits on one line in a cell `cellWidth` wide at the `caption` size for
     /// `sizeCategory`, scaled down as far as `emptyTitleMinimumScale`. The `caption` token has
     /// no maximum size, so from about AX1 it no longer fits a 40 to 52 pt cell.
-    static func emptyTitleFits(cellWidth: CGFloat, sizeCategory: UIContentSizeCategory) -> Bool {
-        let resolved = Typography.resolve(.caption, sizeCategory: sizeCategory)
+    static func emptyTitleFits(cellWidth: CGFloat, sizeCategory: UIContentSizeCategory, boldText: Bool = false) -> Bool {
+        let resolved = Typography.resolve(.caption, sizeCategory: sizeCategory, boldText: boldText)
         let attributes: [NSAttributedString.Key: Any] = [.font: resolved.uiFont, .kern: resolved.tracking]
         let width = (emptyTitle as NSString).size(withAttributes: attributes).width
         return width * emptyTitleMinimumScale <= cellWidth - 2 * emptyTitlePadding

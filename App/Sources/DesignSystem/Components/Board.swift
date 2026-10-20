@@ -139,14 +139,24 @@ struct DiagramBoard: View {
     var whiteAtBottom = true
     var showsCoordinates = true
     var usesGreenPalette = false
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.legibilityWeight) private var legibilityWeight
 
     var body: some View {
-        let labels = showsCoordinates ? DiagramBoardLabels(font: Typography.resolve(.dataSmall).uiFont) : nil
+        let coordinateFont = showsCoordinates
+            ? Typography.resolve(.dataSmall, sizeCategory: UIContentSizeCategory(dynamicTypeSize),
+                                 boldText: Typography.boldTextEnabled(legibilityWeight)).uiFont
+            : nil
         let board = board
         let whiteAtBottom = whiteAtBottom
         Canvas { context, size in
             let side = min(size.width, size.height)
             let cellSize = side / 8
+            // The sticky board becomes smaller at accessibility sizes. Leave room for both
+            // coordinates in its bottom-leading square instead of making their glyphs overlap.
+            let labels = coordinateFont.map {
+                DiagramBoardLabels(font: $0.withSize(min($0.pointSize, cellSize / 2)))
+            }
             for row in 0..<8 {
                 for column in 0..<8 {
                     guard let square = BoardGeometry.square(row: row, column: column, whiteAtBottom: whiteAtBottom) else { continue }
