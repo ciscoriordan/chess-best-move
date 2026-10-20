@@ -45,20 +45,16 @@ struct AnalysisResultReadout: View {
                 }
                 if let title = content.checkBannerTitle {
                     Text(title)
-                        .typography(.headline)
-                        .multilineTextAlignment(.center)
+                        .typography(content.move == nil ? .title : .callout)
+                        .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, Spacing.s4)
-                        .padding(.vertical, Spacing.s3)
-                        .foregroundStyle(Palette.canvas)
-                        .background(Palette.ink, in: RoundedRectangle(cornerRadius: Radius.r2))
+                        .foregroundStyle(content.move == nil ? Palette.ink : Palette.ink2)
                         .accessibilityAddTraits(.isHeader)
                         // The hero already speaks the move's check or checkmate, including
                         // its condition when it is a reply. Read it only once.
                         .accessibilityHidden(content.move != nil)
                 }
-                // On a finished, checkmated board the banner is the result itself.
+                // On a finished, checkmated board the status heading is the result itself.
                 // There is no move or evaluation to repeat in another badge below it.
                 if content.move != nil || content.checkBannerTitle == nil {
                     header
