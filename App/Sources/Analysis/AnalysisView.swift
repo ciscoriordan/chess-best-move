@@ -246,6 +246,7 @@ private struct AnalysisScreen: View {
                     BoardScreenshot(image: image, snapshot: snapshot)
                 } else {
                     ScreenshotStyledBoard(snapshot: snapshot, appearance: app.settings.boardAppearance)
+                        .modifier(AnalysisBoardTint(status: model.resultReadout.checkStatus))
                 }
                 AnalysisArrowOverlay(
                     // The readout is what decides which moves are drawn and whose they are,

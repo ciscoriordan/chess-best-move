@@ -727,6 +727,13 @@
     "key": "depth %lld",
     "source": "depth %lld"
   },
+  "27fb6bdff5c34fc4de32": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "%lld free remaining",
+    "source": "%lld free remaining"
+  },
   "28710ad8ab38f2e871ba": {
     "catalog": "Localizable",
     "comment": "",
@@ -2714,13 +2721,6 @@
     "index": 0,
     "key": "Best reply",
     "source": "Best reply"
-  },
-  "9897b1f38af92e3c928c": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "%lld free",
-    "source": "%lld free"
   },
   "98b4e785361ece333132": {
     "catalog": "Localizable",

@@ -43,16 +43,13 @@ struct AnalysisResultReadout: View {
                 } else if content.guessedMoveIsPending {
                     pendingGuessedMoveBlock
                 }
-                if let title = content.checkBannerTitle {
+                if content.move == nil, let title = content.checkBannerTitle {
                     Text(title)
-                        .typography(content.move == nil ? .title : .callout)
+                        .typography(.display)
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
-                        .foregroundStyle(content.move == nil ? Palette.ink : Palette.ink2)
+                        .foregroundStyle(Palette.ink)
                         .accessibilityAddTraits(.isHeader)
-                        // The hero already speaks the move's check or checkmate, including
-                        // its condition when it is a reply. Read it only once.
-                        .accessibilityHidden(content.move != nil)
                 }
                 // On a finished, checkmated board the status heading is the result itself.
                 // There is no move or evaluation to repeat in another badge below it.
@@ -123,12 +120,20 @@ struct AnalysisResultReadout: View {
         .padding(.vertical, Spacing.s3)
         .background(
             RoundedRectangle(cornerRadius: Radius.r3, style: .continuous)
-                .fill(Palette.raised)
+                .fill(moveSurface)
         )
         .overlay(
             RoundedRectangle(cornerRadius: Radius.r3, style: .continuous)
                 .strokeBorder(Palette.rule2, lineWidth: LineWidth.control)
         )
+    }
+
+    private var moveSurface: Color {
+        switch content.checkStatus {
+        case .check: Palette.checkSurface
+        case .mate: Palette.mateSurface
+        case nil: Palette.raised
+        }
     }
 
     @ViewBuilder

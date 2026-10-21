@@ -1,6 +1,19 @@
 import Foundation
 import ChessCore
 
+/// Status of the displayed move, shared by the board tint and the move card.
+enum AnalysisCheckStatus: Sendable, Hashable {
+    case check, mate
+
+    var title: String {
+        switch self {
+        case .check: String(localized: "Check")
+        case .mate: String(localized: "Checkmate")
+        }
+    }
+
+}
+
 /// What the Analysis result readout shows (design.md 9.4), derived from the run state, the
 /// board and the engine's line and from nothing else, so it can be read and checked without
 /// building the view.
@@ -83,15 +96,17 @@ struct AnalysisReadoutContent: Sendable, Hashable {
 
     /// The consequence of the move actually shown, including a reply when there is one.
     /// A mate score alone does not mean this move is checkmate.
-    var checkBannerTitle: String? {
+    var checkStatus: AnalysisCheckStatus? {
         if let move {
-            if move.san.hasSuffix("#") { return String(localized: "Checkmate") }
-            if move.san.hasSuffix("+") { return String(localized: "Check") }
+            if move.san.hasSuffix("#") { return .mate }
+            if move.san.hasSuffix("+") { return .check }
         } else if placeholderIsResult, placeholder == String(localized: "Checkmate") {
-            return String(localized: "Checkmate")
+            return .mate
         }
         return nil
     }
+
+    var checkBannerTitle: String? { checkStatus?.title }
 
     /// The arrows the board draws, in the order the moves are played (design.md section 7).
     ///

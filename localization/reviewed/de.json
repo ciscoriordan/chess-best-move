@@ -300,6 +300,13 @@
     "source": "Apple doesn't cancel it for you. Cancel it in your subscriptions to stop the renewals.",
     "translation": "Apple kündigt es nicht für dich. Kündige es unter deinen Abonnements, um weitere Verlängerungen zu vermeiden."
   },
+  "0eb4fe588a2f1eaca309": {
+    "origin": "manual",
+    "reason": "Short conventional chess checkmate term for the uppercase board overlay; the spoken move retains the full term.",
+    "reviewedAt": "2026-10-20T21:17:47.601502+00:00",
+    "source": "Mate",
+    "translation": "Matt"
+  },
   "0ef34df19fe1d577969b": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -730,6 +737,17 @@
     "reviewedAt": "2026-10-15T02:37:25.851264+00:00",
     "source": "depth %lld",
     "translation": "Tiefe %1$lld"
+  },
+  "27fb6bdff5c34fc4de32": {
+    "origin": "manual",
+    "plural": {
+      "one": "Noch %1$lld gratis",
+      "other": "Noch %1$lld gratis"
+    },
+    "reason": "Owner requested an explicit remaining free-analysis balance; reviewed concise interface grammar and numeric plural agreement.",
+    "reviewedAt": "2026-10-20T21:17:47.601502+00:00",
+    "source": "%lld free remaining",
+    "translation": "Noch %1$lld gratis"
   },
   "28710ad8ab38f2e871ba": {
     "origin": "manual",

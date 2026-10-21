@@ -300,6 +300,13 @@
     "source": "Apple doesn't cancel it for you. Cancel it in your subscriptions to stop the renewals.",
     "translation": "Apple bunu sizin yerinize iptal etmez. Yenilenmesini durdurmak için aboneliklerinizden iptal edin."
   },
+  "0eb4fe588a2f1eaca309": {
+    "origin": "manual",
+    "reason": "Short conventional chess checkmate term for the uppercase board overlay; the spoken move retains the full term.",
+    "reviewedAt": "2026-10-20T21:17:47.604704+00:00",
+    "source": "Mate",
+    "translation": "Mat"
+  },
   "0ef34df19fe1d577969b": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -726,6 +733,17 @@
     "reviewedAt": "2026-10-15T02:35:05.637417+00:00",
     "source": "depth %lld",
     "translation": "derinlik %1$lld"
+  },
+  "27fb6bdff5c34fc4de32": {
+    "origin": "manual",
+    "plural": {
+      "one": "%1$lld ücretsiz kaldı",
+      "other": "%1$lld ücretsiz kaldı"
+    },
+    "reason": "Owner requested an explicit remaining free-analysis balance; reviewed concise interface grammar and numeric plural agreement.",
+    "reviewedAt": "2026-10-20T21:17:47.604704+00:00",
+    "source": "%lld free remaining",
+    "translation": "%1$lld ücretsiz kaldı"
   },
   "28710ad8ab38f2e871ba": {
     "origin": "manual",

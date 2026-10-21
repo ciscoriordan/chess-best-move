@@ -3,7 +3,7 @@ import SwiftUI
 
 /// CreditsIndicator (design.md section 6, monetization.md section 3).
 ///
-/// Remaining free analyses as a tally of small squares followed by text. At zero free
+/// Remaining free analyses as a tally of small squares followed by "2 free remaining". At zero free
 /// analyses the squares are all outlined and the text reads "No free analyses" in `accent`.
 /// Purchased credits (a separate balance) show in text ("12 analyses left") once the free ones
 /// are used up. Hidden entirely for Pro.
@@ -57,7 +57,7 @@ struct CreditsIndicator: View {
     }
 
     private var text: String {
-        if freeRemaining > 0 { return String(localized: "\(freeRemaining) free") }
+        if freeRemaining > 0 { return String(localized: "\(freeRemaining) free remaining") }
         if purchasedRemaining > 0 { return purchasedRemaining == 1 ? String(localized: "1 analysis left") : String(localized: "\(purchasedRemaining) analyses left") }
         return String(localized: "No free analyses")
     }

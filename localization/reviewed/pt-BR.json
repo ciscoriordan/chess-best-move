@@ -259,6 +259,13 @@
     "source": "Apple doesn't cancel it for you. Cancel it in your subscriptions to stop the renewals.",
     "translation": "A Apple não cancela isso para você. Cancele em suas assinaturas para interromper as renovações."
   },
+  "0eb4fe588a2f1eaca309": {
+    "origin": "manual",
+    "reason": "Short conventional chess checkmate term for the uppercase board overlay; the spoken move retains the full term.",
+    "reviewedAt": "2026-10-20T21:17:47.598216+00:00",
+    "source": "Mate",
+    "translation": "Mate"
+  },
   "0ef34df19fe1d577969b": {
     "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
     "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
@@ -635,6 +642,17 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "depth %lld",
     "translation": "profundidade %1$lld"
+  },
+  "27fb6bdff5c34fc4de32": {
+    "origin": "manual",
+    "plural": {
+      "one": "Resta %1$lld grátis",
+      "other": "Restam %1$lld grátis"
+    },
+    "reason": "Owner requested an explicit remaining free-analysis balance; reviewed concise interface grammar and numeric plural agreement.",
+    "reviewedAt": "2026-10-20T21:17:47.598216+00:00",
+    "source": "%lld free remaining",
+    "translation": "Restam %1$lld grátis"
   },
   "28710ad8ab38f2e871ba": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",

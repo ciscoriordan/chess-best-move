@@ -9,7 +9,7 @@ out which way the board is turned and whose turn it is, and searches the positio
 Stockfish 19 compiled into the app. It draws the best move as an arrow over your own board
 image and shows a prominent plain-language move with smaller algebraic notation and the evaluation.
 Captures name and show symbols for both pieces. Check and Checkmate appear as plain status
-labels above the move; an already checkmated position uses a larger heading. Everything runs on
+headings in bold text above the move; an already checkmated position uses a larger heading. Everything runs on
 the device and no image is sent anywhere.
 
 Automatic screenshot analysis is on by default in Settings. With Full Access to Photos,

@@ -40,8 +40,15 @@ enum Palette {
     static let caution = dynamic(light: 0x94560A, dark: 0xE3A54A)
     /// Blocking editor issues, recognition failure title accent.
     static let danger = dynamic(light: 0xB3261E, dark: 0xFF7B6B)
+    /// The displayed move gives check or mate. Words carry the same status independently.
+    static let checkSurface = dynamic(light: 0xFFF0BE, dark: 0x3A2B0D)
+    static let mateSurface = dynamic(light: 0xFCE0DB, dark: 0x3E1E1B)
 
     // MARK: Theme-invariant tokens (drawn over the screenshot or the diagram)
+
+    /// Board status hues, blended below the arrows without covering the pieces.
+    static let boardCheckTint = fixed(0xF4C542)
+    static let boardMateTint = fixed(0xE66B61)
 
     /// The answer arrow's fill, both themes: the move the app is telling the user to play.
     static let arrowFill = fixed(0x2350E6)
