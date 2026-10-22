@@ -66,18 +66,17 @@ final class WatchModel: NSObject, WCSessionDelegate {
             do { try await Task.sleep(for: .seconds(25)) } catch { return }
             self?.fail(.timedOut, id: request.id)
         }
-        WCSession.default.sendMessageData(data, replyHandler: { [weak self] data in
-            Task { @MainActor in
-                guard let self, self.pending == request.id else { return }
-                guard let reply = WatchWire.reply(from: data, for: request.id) else {
-                    self.fail(.unavailable, id: request.id)
-                    return
-                }
-                self.finish(reply)
+        let callbacks = WatchMessageCallbacks(onReply: { [weak self] data in
+            guard let self, self.pending == request.id else { return }
+            guard let reply = WatchWire.reply(from: data, for: request.id) else {
+                self.fail(.unavailable, id: request.id)
+                return
             }
-        }, errorHandler: { [weak self] _ in
-            Task { @MainActor in self?.fail(.unavailable, id: request.id) }
+            self.finish(reply)
+        }, onError: { [weak self] in
+            self?.fail(.unavailable, id: request.id)
         })
+        WCSession.default.sendMessageData(data, replyHandler: callbacks.reply, errorHandler: callbacks.error)
     }
 
     private func finish(_ reply: WatchAnalysisReply) {

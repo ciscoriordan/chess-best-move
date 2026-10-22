@@ -3,6 +3,7 @@ import SwiftUI
 
 struct WatchContentView: View {
     let model: WatchModel
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     private let ink = Color(red: 238 / 255, green: 234 / 255, blue: 224 / 255)
     private let accent = Color(red: 124 / 255, green: 148 / 255, blue: 1)
 
@@ -19,9 +20,13 @@ struct WatchContentView: View {
                 } else {
                     if let error = model.error { Text(message(error)).font(.body) }
                     Button(action: model.analyze) {
-                        Label("Analyze latest screenshot", systemImage: "viewfinder")
+                        HStack(alignment: .center, spacing: 8) {
+                            Image(systemName: "viewfinder")
+                                .accessibilityHidden(true)
+                            Text("Analyze latest screenshot")
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                             .font(.headline)
-                            .fixedSize(horizontal: false, vertical: true)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     .tint(accent)
@@ -42,7 +47,7 @@ struct WatchContentView: View {
         .foregroundStyle(ink)
         .containerBackground(Color(red: 18 / 255, green: 17 / 255, blue: 14 / 255), for: .navigation)
         .navigationTitle(title)
-        .toolbarTitleDisplayMode(model.reply == nil ? .automatic : .inline)
+        .toolbarTitleDisplayMode(model.reply == nil && dynamicTypeSize <= .large ? .automatic : .inline)
     }
 
     private var title: LocalizedStringKey {
