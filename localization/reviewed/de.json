@@ -1456,6 +1456,13 @@
     "source": "No legal moves: checkmate or stalemate.",
     "translation": "Keine legalen Züge: Schachmatt oder Patt."
   },
+  "42aac1e10880972ccede": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.523474+00:00",
+    "source": "Words",
+    "translation": "Ausgeschrieben"
+  },
   "42d647f647364baa0089": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -1630,6 +1637,13 @@
     "reviewedAt": "2026-10-15T02:37:25.851238+00:00",
     "source": "With Pro",
     "translation": "Mit Pro"
+  },
+  "4f56f1ce8bd4efe2ef5a": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.523480+00:00",
+    "source": "Chess Notation",
+    "translation": "Schachnotation"
   },
   "4f6f8d95ddfee8b27edd": {
     "origin": "manual",
@@ -1977,6 +1991,13 @@
     "reviewedAt": "2026-10-15T02:37:25.851199+00:00",
     "source": "Thinking",
     "translation": "Wird analysiert"
+  },
+  "5e07f1f30c77cc99d02d": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.523484+00:00",
+    "source": "Move Format",
+    "translation": "Zugformat"
   },
   "5fea4386604ca48e0509": {
     "origin": "manual",
@@ -2495,6 +2516,13 @@
     "reviewedAt": "2026-10-15T02:35:54.905301+00:00",
     "source": "Only for the Control Center path: add Wait (3 seconds) before Take Screenshot. Do not add this delay for Siri, the Action button, or Back Tap. If you use both paths, duplicate the shortcut, name the copy Chess Screenshot Control, and add Wait only to that copy. A Wait action runs every time its shortcut runs.",
     "translation": "Nur für die Nutzung über das Kontrollzentrum: Füge vor „Bildschirmfoto aufnehmen“ die Aktion „Warten“ mit 3 Sekunden hinzu. Für Siri, die Aktionstaste oder „Auf Rückseite tippen“ ist diese Wartezeit nicht nötig. Wenn du beide Varianten nutzt, dupliziere den Kurzbefehl, nenne die Kopie „Schach-Screenshot im Kontrollzentrum“ und füge „Warten“ nur dort hinzu. Eine Warteaktion läuft bei jeder Ausführung ihres Kurzbefehls."
+  },
+  "7ad510ef25a7364907bc": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.523489+00:00",
+    "source": "Chess Notation",
+    "translation": "Schachnotation"
   },
   "7bae0c65e93e04699b70": {
     "origin": "manual",
@@ -3533,6 +3561,13 @@
     "source": "Castles kingside",
     "translation": "Kurze Rochade"
   },
+  "b155a28ac6f029fb6e7c": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.523498+00:00",
+    "source": "No Screenshot Found",
+    "translation": "Kein Screenshot gefunden"
+  },
   "b166d382e19c6badd884": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -4034,6 +4069,13 @@
     "source": "%@ are kept, and you can spend them if Pro ends.",
     "translation": "%1$@ bleiben erhalten und können genutzt werden, wenn Pro endet."
   },
+  "ce0e23b6ec1c52d32846": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.523503+00:00",
+    "source": "No screenshot was found in your iPhone photo library. Take a screenshot, then tap Analyze again.",
+    "translation": "In deiner iPhone-Fotomediathek wurde kein Screenshot gefunden. Erstelle einen Screenshot und tippe erneut auf Analysieren."
+  },
   "ce9976b2455cdbbf1b4b": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -4496,6 +4538,13 @@
     "source": "Pro Weekly",
     "translation": "Pro wöchentlich"
   },
+  "e4b563aaf09601e1d061": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.523508+00:00",
+    "source": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.",
+    "translation": "Das iPhone wurde nicht rechtzeitig fertig. Öffne Chess Best Move einmal auf dem iPhone und versuche es erneut."
+  },
   "e58646d13a80d165c919": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -4824,6 +4873,13 @@
     "reviewedAt": "2026-10-15T02:35:54.905325+00:00",
     "source": "Pieces",
     "translation": "Figuren"
+  },
+  "fe806933a05728e48292": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.523511+00:00",
+    "source": "Words",
+    "translation": "Ausgeschrieben"
   },
   "ff58679170268d0c0c5f": {
     "origin": "manual",

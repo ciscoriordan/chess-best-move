@@ -1456,6 +1456,13 @@
     "source": "No legal moves: checkmate or stalemate.",
     "translation": "Nessuna mossa legale: scacco matto o stallo."
   },
+  "42aac1e10880972ccede": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.525065+00:00",
+    "source": "Words",
+    "translation": "In parole"
+  },
   "42d647f647364baa0089": {
     "origin": "manual",
     "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
@@ -1630,6 +1637,13 @@
     "reviewedAt": "2026-10-15T02:36:19.279447+00:00",
     "source": "With Pro",
     "translation": "Con Pro"
+  },
+  "4f56f1ce8bd4efe2ef5a": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.525069+00:00",
+    "source": "Chess Notation",
+    "translation": "Notazione scacchistica"
   },
   "4f6f8d95ddfee8b27edd": {
     "origin": "manual",
@@ -1977,6 +1991,13 @@
     "reviewedAt": "2026-10-15T02:36:19.280004+00:00",
     "source": "Thinking",
     "translation": "Analisi in corso"
+  },
+  "5e07f1f30c77cc99d02d": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.525073+00:00",
+    "source": "Move Format",
+    "translation": "Formato delle mosse"
   },
   "5fea4386604ca48e0509": {
     "origin": "manual",
@@ -2495,6 +2516,13 @@
     "reviewedAt": "2026-10-15T02:37:04.283501+00:00",
     "source": "Only for the Control Center path: add Wait (3 seconds) before Take Screenshot. Do not add this delay for Siri, the Action button, or Back Tap. If you use both paths, duplicate the shortcut, name the copy Chess Screenshot Control, and add Wait only to that copy. A Wait action runs every time its shortcut runs.",
     "translation": "Solo per Centro di Controllo: aggiungi Attendi (3 secondi) prima di Scatta screenshot. Non aggiungere questa attesa per Siri, il pulsante Azione o Tocco posteriore. Se usi entrambi i metodi, duplica il comando rapido, chiama la copia Controllo screenshot scacchi e aggiungi Attendi solo a quella copia. L’azione Attendi viene eseguita ogni volta che parte il comando rapido."
+  },
+  "7ad510ef25a7364907bc": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.525079+00:00",
+    "source": "Chess Notation",
+    "translation": "Notazione scacchistica"
   },
   "7bae0c65e93e04699b70": {
     "origin": "manual",
@@ -3533,6 +3561,13 @@
     "source": "Castles kingside",
     "translation": "Arrocco corto"
   },
+  "b155a28ac6f029fb6e7c": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.525087+00:00",
+    "source": "No Screenshot Found",
+    "translation": "Nessuno screenshot trovato"
+  },
   "b166d382e19c6badd884": {
     "origin": "manual",
     "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
@@ -4034,6 +4069,13 @@
     "source": "%@ are kept, and you can spend them if Pro ends.",
     "translation": "%1$@ restano disponibili e potrai usarle se Pro termina."
   },
+  "ce0e23b6ec1c52d32846": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.525092+00:00",
+    "source": "No screenshot was found in your iPhone photo library. Take a screenshot, then tap Analyze again.",
+    "translation": "Nessuno screenshot trovato nella libreria foto dell’iPhone. Fai uno screenshot, poi tocca di nuovo Analizza."
+  },
   "ce9976b2455cdbbf1b4b": {
     "origin": "manual",
     "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
@@ -4496,6 +4538,13 @@
     "source": "Pro Weekly",
     "translation": "Pro settimanale"
   },
+  "e4b563aaf09601e1d061": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.525096+00:00",
+    "source": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.",
+    "translation": "L’iPhone non ha terminato in tempo. Apri Chess Best Move una volta su iPhone, poi riprova."
+  },
   "e58646d13a80d165c919": {
     "origin": "manual",
     "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
@@ -4824,6 +4873,13 @@
     "reviewedAt": "2026-10-15T02:38:34.737961+00:00",
     "source": "Pieces",
     "translation": "Pezzi"
+  },
+  "fe806933a05728e48292": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.525100+00:00",
+    "source": "Words",
+    "translation": "In parole"
   },
   "ff58679170268d0c0c5f": {
     "origin": "manual",

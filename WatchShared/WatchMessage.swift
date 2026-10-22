@@ -6,7 +6,6 @@ enum WatchWire {
     static let maximumRequestBytes = 1_024
     static let maximumReplyBytes = 64_000
     static let maximumThumbnailBytes = 40_000
-    static let screenshotMaximumAge: TimeInterval = 30
 
     static func request(from data: Data, now: Date = .now) -> WatchAnalysisRequest? {
         guard data.count <= maximumRequestBytes,
@@ -35,7 +34,9 @@ struct WatchAnalysisRequest: Codable, Sendable {
 struct WatchAnalysisReply: Codable, Sendable {
     enum Status: String, Codable, Sendable {
         case result, checkmate, stalemate
-        case setupRequired, noFreshScreenshot, needsCorrection, noBoard, noCredits
+        case setupRequired, needsCorrection, noBoard, noCredits
+        /// Preserve the version-one wire value; this now means no screenshot exists.
+        case noScreenshot = "noFreshScreenshot"
         case busy, unavailable, timedOut, invalidRequest
     }
 
@@ -49,4 +50,5 @@ struct WatchAnalysisReply: Codable, Sendable {
     var moveDescription: String?
     var thumbnail: Data?
     var playback: BoardMovePlayback?
+    var moveDisplayFormat: MoveDisplayFormat?
 }

@@ -1427,6 +1427,13 @@
     "key": "No legal moves: checkmate or stalemate.",
     "source": "No legal moves: checkmate or stalemate."
   },
+  "42aac1e10880972ccede": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Words",
+    "source": "Words"
+  },
   "42d647f647364baa0089": {
     "catalog": "Localizable",
     "comment": "",
@@ -1601,6 +1608,13 @@
     "index": 0,
     "key": "With Pro",
     "source": "With Pro"
+  },
+  "4f56f1ce8bd4efe2ef5a": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Chess Notation",
+    "source": "Chess Notation"
   },
   "4f6f8d95ddfee8b27edd": {
     "catalog": "Localizable",
@@ -1944,6 +1958,13 @@
     "index": 0,
     "key": "Thinking",
     "source": "Thinking"
+  },
+  "5e07f1f30c77cc99d02d": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Move Format",
+    "source": "Move Format"
   },
   "5fea4386604ca48e0509": {
     "catalog": "Localizable",
@@ -2462,6 +2483,13 @@
     "index": 0,
     "key": "Only for the Control Center path: add Wait (3 seconds) before Take Screenshot. Do not add this delay for Siri, the Action button, or Back Tap. If you use both paths, duplicate the shortcut, name the copy Chess Screenshot Control, and add Wait only to that copy. A Wait action runs every time its shortcut runs.",
     "source": "Only for the Control Center path: add Wait (3 seconds) before Take Screenshot. Do not add this delay for Siri, the Action button, or Back Tap. If you use both paths, duplicate the shortcut, name the copy Chess Screenshot Control, and add Wait only to that copy. A Wait action runs every time its shortcut runs."
+  },
+  "7ad510ef25a7364907bc": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Chess Notation",
+    "source": "Chess Notation"
   },
   "7bae0c65e93e04699b70": {
     "catalog": "Localizable",
@@ -3002,13 +3030,6 @@
     "key": "Purchases restored.",
     "source": "Purchases restored."
   },
-  "979109a9e1db6f74db4b": {
-    "catalog": "WatchLocalizable",
-    "comment": "",
-    "index": 0,
-    "key": "No Recent Screenshot",
-    "source": "No Recent Screenshot"
-  },
   "97be1605c9ca6064e0ff": {
     "catalog": "Localizable",
     "comment": "",
@@ -3470,6 +3491,13 @@
     "index": 0,
     "key": "Castles kingside",
     "source": "Castles kingside"
+  },
+  "b155a28ac6f029fb6e7c": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "No Screenshot Found",
+    "source": "No Screenshot Found"
   },
   "b166d382e19c6badd884": {
     "catalog": "Localizable",
@@ -3968,6 +3996,13 @@
     "key": "%@ are kept, and you can spend them if Pro ends.",
     "source": "%@ are kept, and you can spend them if Pro ends."
   },
+  "ce0e23b6ec1c52d32846": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "No screenshot was found in your iPhone photo library. Take a screenshot, then tap Analyze again.",
+    "source": "No screenshot was found in your iPhone photo library. Take a screenshot, then tap Analyze again."
+  },
   "ce9976b2455cdbbf1b4b": {
     "catalog": "Localizable",
     "comment": "",
@@ -4423,6 +4458,13 @@
     "key": "Pro Weekly",
     "source": "Pro Weekly"
   },
+  "e4b563aaf09601e1d061": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.",
+    "source": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again."
+  },
   "e58646d13a80d165c919": {
     "catalog": "Localizable",
     "comment": "",
@@ -4751,6 +4793,13 @@
     "index": 0,
     "key": "Pieces",
     "source": "Pieces"
+  },
+  "fe806933a05728e48292": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Words",
+    "source": "Words"
   },
   "ff58679170268d0c0c5f": {
     "catalog": "Localizable",

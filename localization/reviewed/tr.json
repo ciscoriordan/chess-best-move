@@ -1458,6 +1458,13 @@
     "source": "No legal moves: checkmate or stalemate.",
     "translation": "Yasal hamle yok: mat veya pat."
   },
+  "42aac1e10880972ccede": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.526635+00:00",
+    "source": "Words",
+    "translation": "Sözcüklerle"
+  },
   "42d647f647364baa0089": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -1632,6 +1639,13 @@
     "reviewedAt": "2026-10-15T02:35:54.897267+00:00",
     "source": "With Pro",
     "translation": "Pro ile"
+  },
+  "4f56f1ce8bd4efe2ef5a": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.526639+00:00",
+    "source": "Chess Notation",
+    "translation": "Satranç Notasyonu"
   },
   "4f6f8d95ddfee8b27edd": {
     "origin": "manual",
@@ -1979,6 +1993,13 @@
     "reviewedAt": "2026-10-15T02:35:54.897304+00:00",
     "source": "Thinking",
     "translation": "Analiz ediliyor"
+  },
+  "5e07f1f30c77cc99d02d": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.526642+00:00",
+    "source": "Move Format",
+    "translation": "Hamle Biçimi"
   },
   "5fea4386604ca48e0509": {
     "origin": "manual",
@@ -2497,6 +2518,13 @@
     "reviewedAt": "2026-10-15T02:36:48.351904+00:00",
     "source": "Only for the Control Center path: add Wait (3 seconds) before Take Screenshot. Do not add this delay for Siri, the Action button, or Back Tap. If you use both paths, duplicate the shortcut, name the copy Chess Screenshot Control, and add Wait only to that copy. A Wait action runs every time its shortcut runs.",
     "translation": "Yalnızca Denetim Merkezi’nden çalıştıracaksanız: Ekran Görüntüsü Al’dan önce Bekle (3 saniye) eylemini ekleyin. Siri, Eylem düğmesi veya Arkaya Dokunma için bu gecikmeyi eklemeyin. Her iki yolu da kullanıyorsanız kestirmeyi çoğaltın, kopyasına Satranç Ekran Görüntüsü Denetimi adını verin ve Bekle eylemini yalnızca bu kopyaya ekleyin. Bekle eylemi, bulunduğu kestirme her çalıştırıldığında çalışır."
+  },
+  "7ad510ef25a7364907bc": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.526647+00:00",
+    "source": "Chess Notation",
+    "translation": "Satranç Notasyonu"
   },
   "7bae0c65e93e04699b70": {
     "origin": "manual",
@@ -3537,6 +3565,13 @@
     "source": "Castles kingside",
     "translation": "Kısa rok yapar"
   },
+  "b155a28ac6f029fb6e7c": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.526656+00:00",
+    "source": "No Screenshot Found",
+    "translation": "Ekran Görüntüsü Bulunamadı"
+  },
   "b166d382e19c6badd884": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -4034,6 +4069,13 @@
     "source": "%@ are kept, and you can spend them if Pro ends.",
     "translation": "Korunan analizleriniz: %1$@. Pro sona ererse bunları kullanabilirsiniz."
   },
+  "ce0e23b6ec1c52d32846": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.526661+00:00",
+    "source": "No screenshot was found in your iPhone photo library. Take a screenshot, then tap Analyze again.",
+    "translation": "iPhone fotoğraf arşivinde ekran görüntüsü bulunamadı. Bir ekran görüntüsü alıp Analiz Et’e yeniden dokun."
+  },
   "ce9976b2455cdbbf1b4b": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -4496,6 +4538,13 @@
     "source": "Pro Weekly",
     "translation": "Pro haftalık"
   },
+  "e4b563aaf09601e1d061": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.526665+00:00",
+    "source": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.",
+    "translation": "iPhone zamanında bitiremedi. iPhone’da Chess Best Move’u bir kez açıp yeniden dene."
+  },
   "e58646d13a80d165c919": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -4824,6 +4873,13 @@
     "reviewedAt": "2026-10-15T02:38:08.607304+00:00",
     "source": "Pieces",
     "translation": "Taşlar"
+  },
+  "fe806933a05728e48292": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.526669+00:00",
+    "source": "Words",
+    "translation": "Sözcüklerle"
   },
   "ff58679170268d0c0c5f": {
     "origin": "manual",

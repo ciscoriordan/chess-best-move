@@ -4,8 +4,8 @@ import SwiftUI
 
 /// The Analysis result readout (design.md 9.4), shown unchanged while the engine thinks (9.3).
 ///
-/// The move sits in a badge centered across the card, with the same move in words at the
-/// bottom of the badge. The pill and the evaluation are to the right of the badge, right-
+/// The move sits in a badge centered across the card, in the selected Words or Chess Notation
+/// format. The pill and the evaluation are to the right of the badge, right-
 /// aligned to the card's trailing edge and vertically centered against it; at the largest text
 /// sizes `AnalysisReadoutHeaderLayout` stacks them under the badge instead of letting anything
 /// collide, clip or shrink.
@@ -29,6 +29,7 @@ struct AnalysisResultReadout: View {
     var detailIsCaution = false
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.moveDisplayFormat) private var moveDisplayFormat
 
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.s2) {
@@ -102,14 +103,14 @@ struct AnalysisResultReadout: View {
 
     private var badge: some View {
         VStack(spacing: Spacing.s1) {
-            move
+            if content.move == nil { movePlaceholder }
             if let move = content.move {
                 AnalysisGlyphLine(
-                    piece: move.piece, text: move.words,
+                    piece: move.piece, text: moveDisplayFormat.text(words: move.words, notation: move.san) ?? move.words,
                     spoken: content.spokenMove ?? move.words,
-                    capturedPiece: move.capture?.piece, glyphToken: .title
+                    capturedPiece: moveDisplayFormat == .words ? move.capture?.piece : nil, glyphToken: .title
                 )
-                    .typography(.title)
+                    .typography(moveDisplayFormat == .words ? .title : .dataLarge)
                     .foregroundStyle(isFinal ? (content.moveIsReply ? Palette.accent : Palette.ink) : Palette.ink2)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityIdentifier(AccessibilityID.analysisBestMove)
@@ -137,16 +138,8 @@ struct AnalysisResultReadout: View {
     }
 
     @ViewBuilder
-    private var move: some View {
-        if let move = content.move {
-            Text(move.san)
-                .typography(.data)
-                .foregroundStyle(Palette.ink2)
-                .fixedSize(horizontal: false, vertical: true)
-                .accessibilityHidden(true)
-                .id(move.san)
-                .transition(.opacity.animation(reduceMotion ? nil : .easeOut(duration: Motion.valueChange)))
-        } else if content.placeholderIsResult {
+    private var movePlaceholder: some View {
+        if content.placeholderIsResult {
             // Checkmate and Stalemate are the result itself: full ink, and read out.
             Text(content.placeholder)
                 .typography(.moveHero, width: 75)
@@ -185,13 +178,10 @@ struct AnalysisResultReadout: View {
     private func guessedMoveBlock(_ guessed: AnalysisReadoutContent.MoveText) -> some View {
         VStack(alignment: .leading, spacing: Spacing.s2) {
             guessedMoveTitle
-            Text(guessed.san)
-                .typography(.data)
-                .foregroundStyle(Palette.ink2)
             AnalysisGlyphLine(
-                piece: guessed.piece, text: guessed.words,
+                piece: guessed.piece, text: moveDisplayFormat.text(words: guessed.words, notation: guessed.san) ?? guessed.words,
                 spoken: AnalysisReadoutContent.spokenGuessedMove(guessed),
-                capturedPiece: guessed.capture?.piece, glyphToken: .headline
+                capturedPiece: moveDisplayFormat == .words ? guessed.capture?.piece : nil, glyphToken: .headline
             )
             .typography(.headline)
             .foregroundStyle(Palette.ink2)
@@ -217,13 +207,13 @@ struct AnalysisResultReadout: View {
             guessedMoveTitle
             ZStack(alignment: .topLeading) {
                 // Holds the height the move's own line is about to take, laid out the same way
-                // with a typical move: small notation above larger words. Longer moves may
+                // with a typical move in the selected format. Longer moves may
                 // wrap to additional lines, including at accessibility text sizes.
                 VStack(alignment: .leading, spacing: Spacing.s2) {
-                    Text("Nf6").typography(.data)
                     AnalysisGlyphLine(
                         piece: Piece(color: .black, kind: .knight),
-                        text: String(localized: "Knight to f6"), spoken: "", glyphToken: .headline
+                        text: moveDisplayFormat.text(words: String(localized: "Knight to f6"), notation: "Nf6") ?? "Nf6",
+                        spoken: "", glyphToken: .headline
                     )
                     .typography(.headline)
                 }

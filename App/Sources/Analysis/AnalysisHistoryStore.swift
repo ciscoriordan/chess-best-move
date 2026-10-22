@@ -88,17 +88,22 @@ struct AnalysisHistoryEntry: Codable, Identifiable, Sendable {
             assumedCastlingRights: source?.assumedCastlingRights ?? assumedCastlingRights)
     }
 
-    var moveDescription: String {
-        guard let snapshot else { return String(localized: "Saved analysis") }
+    private var readoutContent: AnalysisReadoutContent? {
+        guard let snapshot else { return nil }
         let position = snapshot.position
         let best = result?.bestMove.flatMap { Move(uci: $0) }.flatMap { move in
             position.san(for: move).map { (move: move, san: $0) }
         }
-        let content = AnalysisReadoutContent.make(status: .done, position: position,
+        return AnalysisReadoutContent.make(status: .done, position: position,
             whiteAtBottom: whiteAtBottom, sideToMoveOrigin: sideToMoveOrigin,
             bestMove: best, principalVariation: result?.principalVariation ?? [],
             noLegalMoves: checkmate, quickAnswerIsBeaten: false)
-        if let words = content.move?.words { return words }
+    }
+
+    var moveNotation: String? { readoutContent?.move?.san }
+
+    var moveDescription: String {
+        if let words = readoutContent?.move?.words { return words }
         if let checkmate { return checkmate ? String(localized: "Checkmate") : String(localized: "Stalemate") }
         return String(localized: "Saved analysis")
     }

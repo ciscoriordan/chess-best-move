@@ -9,6 +9,7 @@ struct AnalysisHistoryView: View {
     private var visibleEntries: [AnalysisHistoryEntry] {
         let query = query.trimmingCharacters(in: .whitespacesAndNewlines)
         return app.history.entries.filter { query.isEmpty || $0.moveDescription.localizedCaseInsensitiveContains(query)
+            || ($0.moveNotation ?? "").localizedCaseInsensitiveContains(query)
             || $0.fen.localizedCaseInsensitiveContains(query) || ($0.result?.bestMove ?? "").localizedCaseInsensitiveContains(query) }
     }
 
@@ -74,7 +75,8 @@ struct AnalysisHistoryView: View {
                     .accessibilityHidden(true)
             }
             VStack(alignment: .leading, spacing: Spacing.s1) {
-                Text(entry.moveDescription).typography(.body).bold().foregroundStyle(Palette.ink)
+                Text(app.settings.moveDisplayFormat.text(words: entry.moveDescription, notation: entry.moveNotation) ?? entry.moveDescription)
+                    .typography(.body).bold().foregroundStyle(Palette.ink)
                     .fixedSize(horizontal: false, vertical: true)
                 Text(entry.analyzedAt, format: .dateTime.month(.abbreviated).day().hour().minute())
                     .typography(.caption).foregroundStyle(Palette.ink2)

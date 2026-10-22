@@ -10,6 +10,7 @@ final class AppSettings {
         static let automaticallyAnalyzesScreenshots = "automaticallyAnalyzesScreenshots"
         static let explicitScreenshotSelectionDate = "explicitScreenshotSelectionDate"
         static let boardAppearance = "boardAppearance"
+        static let moveDisplayFormat = "moveDisplayFormat"
         static let thinkTime = "thinkTimeSeconds"
         static let hasCompletedAnalysis = "hasCompletedAnalysis"
         static let pendingApprovalBoard = "pendingApprovalBoard"
@@ -31,6 +32,10 @@ final class AppSettings {
     /// Match each imported screenshot unless the user explicitly saves a fixed style.
     var boardAppearance: BoardAppearance {
         didSet { defaults.set(boardAppearance.rawValue, forKey: Key.boardAppearance) }
+    }
+
+    var moveDisplayFormat: MoveDisplayFormat {
+        didSet { defaults.set(moveDisplayFormat.rawValue, forKey: Key.moveDisplayFormat) }
     }
 
     /// The saved think time (default 3 s). Tapping a THINK segment on the result screen also
@@ -76,6 +81,7 @@ final class AppSettings {
         automaticallyAnalyzesScreenshots = defaults.object(forKey: Key.automaticallyAnalyzesScreenshots) as? Bool ?? true
         explicitScreenshotSelectionDate = defaults.object(forKey: Key.explicitScreenshotSelectionDate) as? Date
         boardAppearance = BoardAppearance(rawValue: defaults.string(forKey: Key.boardAppearance) ?? "") ?? .screenshot
+        moveDisplayFormat = MoveDisplayFormat(rawValue: defaults.string(forKey: Key.moveDisplayFormat) ?? "") ?? .words
         thinkTime = ThinkTime(rawValue: defaults.integer(forKey: Key.thinkTime)) ?? .defaultValue
         longerSearchCeiling = LongerSearchCeiling(rawValue: defaults.integer(forKey: Key.longerSearchCeiling)) ?? .defaultValue
         switchesToBetterMoveAutomatically = defaults.bool(forKey: Key.switchesToBetterMoveAutomatically)

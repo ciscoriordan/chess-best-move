@@ -96,6 +96,18 @@ struct BoardMovePlaybackView: View {
     }
 }
 
+/// A bundled-font chess symbol, shared with the Watch move label. It is never an emoji.
+struct ChessPieceSymbol: View {
+    let piece: String
+    var body: some View {
+        Canvas { context, size in
+            PlaybackPieceOutlines.draw(piece, in: CGRect(origin: .zero, size: size), context: &context, monochrome: .primary)
+        }
+        .aspectRatio(1, contentMode: .fit)
+        .accessibilityHidden(true)
+    }
+}
+
 private enum PlaybackPieceOutlines {
     /// CTFont is immutable; this wrapper only exposes concurrent read-only glyph queries.
     private struct FontReference: @unchecked Sendable { let value: CTFont }
@@ -106,7 +118,7 @@ private enum PlaybackPieceOutlines {
         return FontReference(value: CTFontCreateWithName("NotoSansSymbols2-Regular" as CFString, 100, nil))
     }()
 
-    static func draw(_ piece: String, in rect: CGRect, context: inout GraphicsContext) {
+    static func draw(_ piece: String, in rect: CGRect, context: inout GraphicsContext, monochrome: Color? = nil) {
         guard let letter = piece.first,
               let index = ["K": 0, "Q": 1, "R": 2, "B": 3, "N": 4, "P": 5][String(letter).uppercased()] else { return }
         let white = letter.isUppercase
@@ -117,12 +129,12 @@ private enum PlaybackPieceOutlines {
             return CTFontCreatePathForGlyph(font.value, glyph, nil)
         }
         guard let solid = path(true), let outline = path(false) else { return }
-        let reference = white ? outline : solid
+        let reference = monochrome != nil ? solid : white ? outline : solid
         let bounds = reference.boundingBoxOfPath
         let factor = min(rect.width, rect.height) * 0.82 / max(bounds.width, bounds.height)
         var transform = CGAffineTransform(translationX: rect.midX, y: rect.midY)
             .scaledBy(x: factor, y: -factor).translatedBy(x: -bounds.midX, y: -bounds.midY)
-        if white, let filled = solid.copy(using: &transform) { context.fill(Path(filled), with: .color(.white)) }
-        if let ink = reference.copy(using: &transform) { context.fill(Path(ink), with: .color(Color(white: 0.08))) }
+        if monochrome == nil, white, let filled = solid.copy(using: &transform) { context.fill(Path(filled), with: .color(.white)) }
+        if let ink = reference.copy(using: &transform) { context.fill(Path(ink), with: .color(monochrome ?? Color(white: 0.08))) }
     }
 }

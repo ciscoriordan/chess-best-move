@@ -1,4 +1,5 @@
 import Foundation
+import Observation
 import UIKit
 import WatchConnectivity
 
@@ -17,9 +18,12 @@ final class WatchPhoneBridge: NSObject, WCSessionDelegate {
     private var pendingReply: WatchReplyHandler?
     private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     private var foregroundObserver: NSObjectProtocol?
+    private var settings: AppSettings?
 
     func start(app: AppModel) {
         guard WCSession.isSupported(), service == nil else { return }
+        settings = app.settings
+        observePreferences()
         service = .live(app: app, phoneIsActive: { UIApplication.shared.applicationState == .active })
         foregroundObserver = NotificationCenter.default.addObserver(
             forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main
@@ -34,7 +38,9 @@ final class WatchPhoneBridge: NSObject, WCSessionDelegate {
     }
 
     nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState,
-                             error: (any Error)?) {}
+                             error: (any Error)?) {
+        Task { @MainActor [weak self] in self?.sendPreferences() }
+    }
     nonisolated func sessionDidBecomeInactive(_ session: WCSession) {}
     nonisolated func sessionDidDeactivate(_ session: WCSession) { session.activate() }
 
@@ -97,6 +103,8 @@ final class WatchPhoneBridge: NSObject, WCSessionDelegate {
     }
 
     private func send(_ reply: WatchAnalysisReply, to callback: WatchReplyHandler) {
+        var reply = reply
+        reply.moveDisplayFormat = settings?.moveDisplayFormat
         if let data = try? JSONEncoder().encode(reply), data.count <= WatchWire.maximumReplyBytes {
             callback.send(data)
         } else {
@@ -104,5 +112,20 @@ final class WatchPhoneBridge: NSObject, WCSessionDelegate {
             let fallback = WatchAnalysisReply(requestID: reply.requestID, status: .unavailable)
             callback.send((try? JSONEncoder().encode(fallback)) ?? Data())
         }
+    }
+
+    private func observePreferences() {
+        guard let settings else { return }
+        withObservationTracking { _ = settings.moveDisplayFormat } onChange: {
+            Task { @MainActor [weak self] in
+                self?.observePreferences()
+                self?.sendPreferences()
+            }
+        }
+    }
+
+    private func sendPreferences() {
+        guard let settings, WCSession.default.activationState == .activated else { return }
+        try? WCSession.default.updateApplicationContext(["moveDisplayFormat": settings.moveDisplayFormat.rawValue])
     }
 }

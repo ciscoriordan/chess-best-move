@@ -6,26 +6,54 @@ import Observation
 @MainActor
 @Observable
 final class WatchRequestState {
+    struct Failure: Identifiable, Equatable {
+        let id = UUID()
+        let status: WatchAnalysisReply.Status
+    }
     private(set) var isAnalyzing = false
     private(set) var isActivated = false
     private(set) var reply: WatchAnalysisReply?
-    private(set) var error: WatchAnalysisReply.Status?
+    private(set) var failure: Failure?
+    var error: WatchAnalysisReply.Status? { failure?.status }
+    private(set) var isWaitingForActivation = false
     private(set) var pendingID: UUID?
 
-    func activate(_ activated: Bool) {
+    @discardableResult
+    func activate(_ activated: Bool) -> WatchAnalysisRequest? {
         isActivated = activated
-        if !activated { error = .unavailable }
+        if !activated {
+            isWaitingForActivation = false
+            isAnalyzing = false
+            pendingID = nil
+            failure = Failure(status: .unavailable)
+        } else if isWaitingForActivation {
+            isWaitingForActivation = false
+            isAnalyzing = false
+            return begin()
+        }
+        return nil
     }
 
     func begin() -> WatchAnalysisRequest? {
         guard !isAnalyzing else { return nil }
-        guard isActivated else { error = .unavailable; return nil }
+        guard isActivated else { failure = Failure(status: .unavailable); return nil }
         let request = WatchAnalysisRequest()
         pendingID = request.id
         isAnalyzing = true
-        reply = nil
-        error = nil
+        failure = nil
         return request
+    }
+
+    /// A disconnected retry queues the analysis itself, rather than only reconnecting.
+    func retry() -> WatchAnalysisRequest? {
+        guard !isAnalyzing else { return nil }
+        failure = nil
+        if !isActivated {
+            isWaitingForActivation = true
+            isAnalyzing = true
+            return nil
+        }
+        return begin()
     }
 
     @discardableResult
@@ -36,10 +64,9 @@ final class WatchRequestState {
         switch reply.status {
         case .result, .checkmate, .stalemate:
             self.reply = reply
-            error = nil
+            failure = nil
         default:
-            self.reply = nil
-            error = reply.status
+            failure = Failure(status: reply.status)
         }
         return true
     }
@@ -56,7 +83,10 @@ final class WatchRequestState {
         finish(WatchAnalysisReply(requestID: id, status: status))
     }
 
-    func dismissError() { error = nil }
+    func dismissError(id: UUID? = nil) {
+        guard id == nil || failure?.id == id else { return }
+        failure = nil
+    }
 
     #if DEBUG
     func preview(_ reply: WatchAnalysisReply) {

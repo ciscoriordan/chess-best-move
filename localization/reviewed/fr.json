@@ -1335,6 +1335,13 @@
     "source": "No legal moves: checkmate or stalemate.",
     "translation": "Aucun coup légal : échec et mat ou pat."
   },
+  "42aac1e10880972ccede": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.521738+00:00",
+    "source": "Words",
+    "translation": "En toutes lettres"
+  },
   "42d647f647364baa0089": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -1503,6 +1510,13 @@
     "reviewedAt": "2026-10-15T02:37:29.712989+00:00",
     "source": "With Pro",
     "translation": "Avec Pro"
+  },
+  "4f56f1ce8bd4efe2ef5a": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.521743+00:00",
+    "source": "Chess Notation",
+    "translation": "Notation échiquéenne"
   },
   "4f6f8d95ddfee8b27edd": {
     "origin": "deepl-reviewed",
@@ -1841,6 +1855,13 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "Thinking",
     "translation": "Analyse en cours"
+  },
+  "5e07f1f30c77cc99d02d": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.521747+00:00",
+    "source": "Move Format",
+    "translation": "Format des coups"
   },
   "5fea4386604ca48e0509": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -2346,6 +2367,13 @@
     "reviewedAt": "2026-10-15T02:43:20.829104+00:00",
     "source": "Only for the Control Center path: add Wait (3 seconds) before Take Screenshot. Do not add this delay for Siri, the Action button, or Back Tap. If you use both paths, duplicate the shortcut, name the copy Chess Screenshot Control, and add Wait only to that copy. A Wait action runs every time its shortcut runs.",
     "translation": "Uniquement pour le chemin d’accès au Centre de contrôle : ajoutez « Attendre (3 secondes) » avant « Prendre une capture d’écran ». N’ajoutez pas ce délai pour Siri, le bouton Action ou Toucher le dos de l’appareil. Si vous utilisez les deux chemins d’accès, dupliquez le raccourci, nommez la copie « Contrôle de capture d’écran d’échecs » et ajoutez « Attendre » uniquement à cette copie. Une action « Attendre » s’exécute à chaque fois que son raccourci est lancé."
+  },
+  "7ad510ef25a7364907bc": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.521753+00:00",
+    "source": "Chess Notation",
+    "translation": "Notation échiquéenne"
   },
   "7bae0c65e93e04699b70": {
     "origin": "deepl-reviewed",
@@ -3351,6 +3379,13 @@
     "source": "Castles kingside",
     "translation": "Petit roque"
   },
+  "b155a28ac6f029fb6e7c": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.521762+00:00",
+    "source": "No Screenshot Found",
+    "translation": "Aucune capture trouvée"
+  },
   "b166d382e19c6badd884": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -3836,6 +3871,13 @@
     "source": "%@ are kept, and you can spend them if Pro ends.",
     "translation": "%1$@ sont conservés, et vous pouvez les dépenser si l’abonnement Pro prend fin."
   },
+  "ce0e23b6ec1c52d32846": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.521767+00:00",
+    "source": "No screenshot was found in your iPhone photo library. Take a screenshot, then tap Analyze again.",
+    "translation": "Aucune capture d’écran n’a été trouvée dans la photothèque de votre iPhone. Prenez une capture, puis touchez à nouveau Analyser."
+  },
   "ce9976b2455cdbbf1b4b": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -4282,6 +4324,13 @@
     "source": "Pro Weekly",
     "translation": "Pro hebdomadaire"
   },
+  "e4b563aaf09601e1d061": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.521772+00:00",
+    "source": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.",
+    "translation": "L’iPhone n’a pas terminé à temps. Ouvrez une fois Chess Best Move sur l’iPhone, puis réessayez."
+  },
   "e58646d13a80d165c919": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -4598,6 +4647,13 @@
     "reviewedAt": "2026-10-15T02:39:58.433746+00:00",
     "source": "Pieces",
     "translation": "Pièces"
+  },
+  "fe806933a05728e48292": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.521775+00:00",
+    "source": "Words",
+    "translation": "En toutes lettres"
   },
   "ff58679170268d0c0c5f": {
     "origin": "deepl-reviewed",

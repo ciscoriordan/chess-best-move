@@ -95,6 +95,22 @@ private struct SettingsRootContent: View {
                     }
                     .groupedRow(verticalPadding: Spacing.s3)
                     GroupedRowSeparator(start: .content)
+                    Menu {
+                        Picker("Move Format", selection: $settings.moveDisplayFormat) {
+                            ForEach(MoveDisplayFormat.allCases) { format in
+                                Text(format.label).tag(format)
+                            }
+                        }
+                    } label: {
+                        ListRow(String(localized: "Move Format"), value: settings.moveDisplayFormat.label,
+                                showsChevron: true).groupedRow(verticalPadding: Spacing.s3)
+                    }
+                    .buttonStyle(.listRow)
+                    .tint(Palette.ink)
+                    .accessibilityLabel("Move Format")
+                    .accessibilityValue(settings.moveDisplayFormat.label)
+                    .accessibilityIdentifier("settings.moveDisplayFormat")
+                    GroupedRowSeparator(start: .content)
                     // The two Pro settings of the longer background search (design.md 16).
                     // Shown to free users too, disabled, each carrying a Pro tag.
                     SettingsLongerSearchSection()

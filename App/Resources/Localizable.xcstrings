@@ -8238,6 +8238,46 @@
         }
       }
     },
+    "Chess Notation": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schachnotation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notación de ajedrez"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notation échiquéenne"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notazione scacchistica"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notação de xadrez"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satranç Notasyonu"
+          }
+        }
+      }
+    },
     "Chess engine": {
       "localizations": {
         "de": {
@@ -12739,6 +12779,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Çoğu satranç sitesi, oynadığınız oyunlarda motor yardımı kullanmanıza izin vermez."
+          }
+        }
+      }
+    },
+    "Move Format": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zugformat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Formato de jugada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Format des coups"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Formato delle mosse"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Formato da jogada"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hamle Biçimi"
           }
         }
       }
@@ -24336,6 +24416,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pro olmadan da uzun arama çalışır, %1$@ sonunda durur ve daha iyi hamle bulduğunda haber verir. Buradaki seçiminiz Pro aldığınızda kullanılmak üzere kaydedilir."
+          }
+        }
+      }
+    },
+    "Words": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgeschrieben"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palabras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En toutes lettres"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In parole"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por extenso"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sözcüklerle"
           }
         }
       }

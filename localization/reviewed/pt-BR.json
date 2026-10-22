@@ -1335,6 +1335,13 @@
     "source": "No legal moves: checkmate or stalemate.",
     "translation": "Não há lances legais: xeque-mate ou empate por afogamento."
   },
+  "42aac1e10880972ccede": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.519933+00:00",
+    "source": "Words",
+    "translation": "Por extenso"
+  },
   "42d647f647364baa0089": {
     "origin": "deepl-reviewed",
     "reason": "Final grammar audit against callers, chess rules, and Apple control terminology.",
@@ -1503,6 +1510,13 @@
     "reviewedAt": "2026-10-15T02:37:29.711662+00:00",
     "source": "With Pro",
     "translation": "Com o Pro"
+  },
+  "4f56f1ce8bd4efe2ef5a": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.519940+00:00",
+    "source": "Chess Notation",
+    "translation": "Notação de xadrez"
   },
   "4f6f8d95ddfee8b27edd": {
     "origin": "deepl-reviewed",
@@ -1841,6 +1855,13 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "Thinking",
     "translation": "Analisando"
+  },
+  "5e07f1f30c77cc99d02d": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.519944+00:00",
+    "source": "Move Format",
+    "translation": "Formato da jogada"
   },
   "5fea4386604ca48e0509": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -2346,6 +2367,13 @@
     "reviewedAt": "2026-10-15T02:43:20.826105+00:00",
     "source": "Only for the Control Center path: add Wait (3 seconds) before Take Screenshot. Do not add this delay for Siri, the Action button, or Back Tap. If you use both paths, duplicate the shortcut, name the copy Chess Screenshot Control, and add Wait only to that copy. A Wait action runs every time its shortcut runs.",
     "translation": "Apenas para o caminho da Central de Controle: adicione “Esperar (3 segundos)” antes de “Capturar tela”. Não adicione esse atraso para a Siri, o botão de ação ou o Tocar Atrás. Se você usar ambos os caminhos, duplique o atalho, nomeie a cópia como “Controle de Captura de Tela de Xadrez” e adicione “Esperar” apenas a essa cópia. Uma ação “Esperar” é executada toda vez que seu atalho é acionado."
+  },
+  "7ad510ef25a7364907bc": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.519950+00:00",
+    "source": "Chess Notation",
+    "translation": "Notação de xadrez"
   },
   "7bae0c65e93e04699b70": {
     "origin": "deepl-reviewed",
@@ -3351,6 +3379,13 @@
     "source": "Castles kingside",
     "translation": "Roque pequeno"
   },
+  "b155a28ac6f029fb6e7c": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.519959+00:00",
+    "source": "No Screenshot Found",
+    "translation": "Nenhuma captura encontrada"
+  },
   "b166d382e19c6badd884": {
     "origin": "deepl-reviewed",
     "reason": "Editorial consistency pass: Apple control labels and exact spoken shortcut names match setup instructions.",
@@ -3836,6 +3871,13 @@
     "source": "%@ are kept, and you can spend them if Pro ends.",
     "translation": "As análises restantes ficam guardadas para quando o Pro terminar: %1$@."
   },
+  "ce0e23b6ec1c52d32846": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.519963+00:00",
+    "source": "No screenshot was found in your iPhone photo library. Take a screenshot, then tap Analyze again.",
+    "translation": "Nenhuma captura de tela foi encontrada na fototeca do iPhone. Faça uma captura e toque em Analisar novamente."
+  },
   "ce9976b2455cdbbf1b4b": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -4282,6 +4324,13 @@
     "source": "Pro Weekly",
     "translation": "Pro semanal"
   },
+  "e4b563aaf09601e1d061": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.519968+00:00",
+    "source": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.",
+    "translation": "O iPhone não terminou a tempo. Abra Chess Best Move no iPhone uma vez e tente novamente."
+  },
   "e58646d13a80d165c919": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -4598,6 +4647,13 @@
     "reviewedAt": "2026-10-15T02:39:58.431968+00:00",
     "source": "Pieces",
     "translation": "Peças"
+  },
+  "fe806933a05728e48292": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.519972+00:00",
+    "source": "Words",
+    "translation": "Por extenso"
   },
   "ff58679170268d0c0c5f": {
     "origin": "deepl-reviewed",

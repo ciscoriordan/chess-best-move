@@ -378,6 +378,52 @@
         }
       }
     },
+    "Chess Notation": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schachnotation"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chess Notation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notación de ajedrez"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notation échiquéenne"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notazione scacchistica"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notação de xadrez"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satranç Notasyonu"
+          }
+        }
+      }
+    },
     "Close": {
       "localizations": {
         "de": {
@@ -842,6 +888,7 @@
       }
     },
     "No Recent Screenshot": {
+      "extractionState": "stale",
       "localizations": {
         "de": {
           "stringUnit": {
@@ -883,6 +930,52 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yakın tarihli ekran görüntüsü yok"
+          }
+        }
+      }
+    },
+    "No Screenshot Found": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Screenshot gefunden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Screenshot Found"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró ninguna captura"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune capture trouvée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuno screenshot trovato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma captura encontrada"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran Görüntüsü Bulunamadı"
           }
         }
       }
@@ -977,6 +1070,52 @@
           "stringUnit": {
             "state": "translated",
             "value": "Net bir satranç tahtası bulunamadı. Tahtanın tamamını gösteren ekran görüntüsü alın."
+          }
+        }
+      }
+    },
+    "No screenshot was found in your iPhone photo library. Take a screenshot, then tap Analyze again.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In deiner iPhone-Fotomediathek wurde kein Screenshot gefunden. Erstelle einen Screenshot und tippe erneut auf Analysieren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No screenshot was found in your iPhone photo library. Take a screenshot, then tap Analyze again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró ninguna captura en la fototeca del iPhone. Haz una captura y toca Analizar de nuevo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune capture d’écran n’a été trouvée dans la photothèque de votre iPhone. Prenez une capture, puis touchez à nouveau Analyser."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuno screenshot trovato nella libreria foto dell’iPhone. Fai uno screenshot, poi tocca di nuovo Analizza."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma captura de tela foi encontrada na fototeca do iPhone. Faça uma captura e toque em Analisar novamente."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone fotoğraf arşivinde ekran görüntüsü bulunamadı. Bir ekran görüntüsü alıp Analiz Et’e yeniden dokun."
           }
         }
       }
@@ -1589,6 +1728,52 @@
         }
       }
     },
+    "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das iPhone wurde nicht rechtzeitig fertig. Öffne Chess Best Move einmal auf dem iPhone und versuche es erneut."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El iPhone no terminó a tiempo. Abre Chess Best Move en el iPhone una vez y vuelve a intentarlo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’iPhone n’a pas terminé à temps. Ouvrez une fois Chess Best Move sur l’iPhone, puis réessayez."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’iPhone non ha terminato in tempo. Apri Chess Best Move una volta su iPhone, poi riprova."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O iPhone não terminou a tempo. Abra Chess Best Move no iPhone uma vez e tente novamente."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone zamanında bitiremedi. iPhone’da Chess Best Move’u bir kez açıp yeniden dene."
+          }
+        }
+      }
+    },
     "The iPhone did not finish in time. Open it once, then try again with a new screenshot.": {
       "extractionState": "manual",
       "localizations": {
@@ -1819,6 +2004,52 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sıra beyazda"
+          }
+        }
+      }
+    },
+    "Words": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgeschrieben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Words"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palabras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En toutes lettres"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In parole"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por extenso"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sözcüklerle"
           }
         }
       }

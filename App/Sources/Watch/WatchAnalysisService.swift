@@ -4,7 +4,7 @@ import CoreGraphics
 import Foundation
 
 struct WatchScreenshot: Sendable {
-    let date: Date
+    let date: Date?
     let image: ImportedImage
 }
 
@@ -52,13 +52,12 @@ final class WatchAnalysisService {
             recognition: CaptureRecognitionService(makeRecognizer: { try BoardRecognizer(computeUnits: .cpuOnly) }),
             loadScreenshot: {
                 guard CapturePhotoLibrary.currentAccess() == .authorized else { throw WatchScreenshotError.permission }
-                guard let asset = CapturePhotoLibrary.newestScreenshot(), let date = asset.creationDate,
-                      (-5...WatchWire.screenshotMaximumAge).contains(Date.now.timeIntervalSince(date)) else {
+                guard let asset = CapturePhotoLibrary.newestScreenshot() else {
                     throw WatchScreenshotError.missing
                 }
                 let loaded = try await CapturePhotoLibrary.imageData(for: asset.localIdentifier, allowNetwork: false)
                 let image = try CaptureImageDecoder.decode(data: loaded.data, orientation: loaded.orientation)
-                return WatchScreenshot(date: date, image: ImportedImage(image: image, source: .latestScreenshot))
+                return WatchScreenshot(date: asset.creationDate, image: ImportedImage(image: image, source: .latestScreenshot))
             }, phoneIsActive: phoneIsActive, foregroundEngine: app.engine, history: app.history)
     }
 
@@ -76,8 +75,6 @@ final class WatchAnalysisService {
         guard request.version == WatchWire.version,
               (-5...30).contains(now().timeIntervalSince(request.createdAt)) else { return failure(.invalidRequest) }
         if let cached = completed.first(where: { $0.requestID == request.id }) {
-            guard let date = cached.screenshotDate,
-                  now().timeIntervalSince(date) <= WatchWire.screenshotMaximumAge else { return failure(.noFreshScreenshot) }
             return cached
         }
         guard activeID == nil, !phoneIsActive(), !foregroundIsSearching else { return failure(.busy) }
@@ -100,12 +97,9 @@ final class WatchAnalysisService {
         let screenshot: WatchScreenshot
         do { screenshot = try await loadScreenshot() }
         catch WatchScreenshotError.permission { return failure(.setupRequired) }
-        catch WatchScreenshotError.missing { return failure(.noFreshScreenshot) }
+        catch WatchScreenshotError.missing { return failure(.noScreenshot) }
         catch { return failure(.unavailable) }
         guard isCurrent() else { return failure(.timedOut) }
-        guard (-5...WatchWire.screenshotMaximumAge).contains(now().timeIntervalSince(screenshot.date)) else {
-            return failure(.noFreshScreenshot)
-        }
         if let cached = history.entry(for: screenshot.image, engineVersion: engine.engineVersion),
            let snapshot = cached.snapshot(importing: screenshot.image) {
             return await savedReply(cached, snapshot: snapshot, screenshot: screenshot, request: request)

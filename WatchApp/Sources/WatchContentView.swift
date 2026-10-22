@@ -4,29 +4,42 @@ import SwiftUI
 struct WatchContentView: View {
     let model: WatchModel
     @State private var showsFullBoard = false
+    @ScaledMetric(relativeTo: .title3) private var moveSymbolSize = 24
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     private let ink = Color(red: 238 / 255, green: 234 / 255, blue: 224 / 255)
     private let accent = Color(red: 124 / 255, green: 148 / 255, blue: 1)
 
     var body: some View {
+        let failure = model.failure
         ScrollView {
             VStack(alignment: .leading, spacing: model.reply == nil ? 12 : 8) {
                 Button(action: model.analyze) {
                     HStack(alignment: .center, spacing: 8) {
-                        Image(systemName: "viewfinder")
-                            .accessibilityHidden(true)
+                        if dynamicTypeSize < .xxLarge {
+                            Image(systemName: "viewfinder")
+                                .accessibilityHidden(true)
+                        }
                         Text("Analyze latest screenshot")
                             .fixedSize(horizontal: false, vertical: true)
                             .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity)
+                        // Balance the decorative symbol so the words share the button's center.
+                        if dynamicTypeSize < .xxLarge {
+                            Image(systemName: "viewfinder")
+                                .hidden()
+                                .accessibilityHidden(true)
+                        }
                     }
                     .font(.headline)
                     .frame(maxWidth: .infinity, alignment: .center)
                 }
                 .tint(accent)
+                .frame(maxWidth: .infinity, alignment: .center)
                 .disabled(model.isAnalyzing || !model.isActivated)
                 .accessibilityIdentifier("watch.analyze")
                 if model.isAnalyzing {
-                    ProgressView("Analyzing on iPhone…")
-                        .accessibilityLabel(Text("Analyzing on iPhone…"))
+                    ProgressView(model.isWaitingForActivation
+                        ? LocalizedStringKey("Connecting to iPhone…") : LocalizedStringKey("Analyzing on iPhone…"))
                         .frame(maxWidth: .infinity, alignment: .center)
                 } else if !model.isActivated {
                     Text("Connecting to iPhone…")
@@ -82,16 +95,16 @@ struct WatchContentView: View {
                 .ignoresSafeArea()
             }
         }
-        .alert(errorTitle(model.error), isPresented: Binding(
-            get: { model.error != nil },
-            set: { if !$0 { model.dismissError() } }
-        )) {
+        .alert(errorTitle(failure?.status), isPresented: Binding(
+            get: { model.failure != nil },
+            set: { if !$0, let id = failure?.id { model.dismissError(id: id) } }
+        ), presenting: failure) { failure in
             Button("Try again") {
-                if model.isActivated { model.analyze() } else { model.activate() }
+                model.retry(dismissing: failure.id)
             }
-            Button("Close", role: .cancel) { model.dismissError() }
-        } message: {
-            Text(message(model.error ?? .unavailable))
+            Button("Close", role: .cancel) { model.dismissError(id: failure.id) }
+        } message: { failure in
+            Text(message(failure.status))
         }
     }
 
@@ -104,15 +117,18 @@ struct WatchContentView: View {
 
     @ViewBuilder private func result(_ reply: WatchAnalysisReply) -> some View {
         if reply.status == .result {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
-                if let description = reply.moveDescription {
-                    Text(verbatim: description).font(.title3.bold()).layoutPriority(1)
+            HStack(alignment: .center, spacing: 6) {
+                if let piece = reply.playback?.steps.first?.moving.first?.piece {
+                    ChessPieceSymbol(piece: piece).frame(width: moveSymbolSize, height: moveSymbolSize)
                 }
-                if let san = reply.san {
-                    Text(verbatim: san).font(.system(.footnote, design: .monospaced))
-                        .accessibilityHidden(reply.moveDescription != nil)
+                if let text = model.moveDisplayFormat.text(words: reply.moveDescription, notation: reply.san) {
+                    Text(verbatim: text)
+                        .font(model.moveDisplayFormat == .words ? .title3.bold() : .system(.title3, design: .monospaced))
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text(verbatim: reply.moveDescription ?? reply.san ?? ""))
             if let image = boardImage {
                 Button { showsFullBoard = true } label: {
                     Image(decorative: image, scale: 1).resizable().aspectRatio(contentMode: .fit)
@@ -149,12 +165,12 @@ struct WatchContentView: View {
     private func message(_ status: WatchAnalysisReply.Status) -> LocalizedStringKey {
         switch status {
         case .setupRequired: "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots."
-        case .noFreshScreenshot: "Take a new iPhone screenshot, then tap Analyze within 30 seconds."
+        case .noScreenshot: "No screenshot was found in your iPhone photo library. Take a screenshot, then tap Analyze again."
         case .needsCorrection: "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone."
         case .noBoard: "No clear chessboard found. Take a screenshot showing the whole board."
         case .noCredits: "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses."
         case .busy: "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again."
-        case .timedOut: "The iPhone did not finish in time. Open it once, then try again with a new screenshot."
+        case .timedOut: "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again."
         default: "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once."
         }
     }
@@ -162,7 +178,7 @@ struct WatchContentView: View {
     private func errorTitle(_ status: WatchAnalysisReply.Status?) -> LocalizedStringKey {
         switch status {
         case .noBoard: "No Chessboard Found"
-        case .noFreshScreenshot: "No Recent Screenshot"
+        case .noScreenshot: "No Screenshot Found"
         case .setupRequired: "iPhone Setup Needed"
         case .needsCorrection: "Check the Position on iPhone"
         case .noCredits: "No Analyses Remaining"
