@@ -284,14 +284,14 @@ struct AnalysisLongerSearchNoticeContent: Sendable, Hashable {
 /// None of it frames the app as help during a game in progress (`AppCopyTests`), and none of it
 /// names the tier anything but Pro.
 enum AnalysisLongerSearchCopy {
-    static let prefersPrefix = String(localized: "A longer search prefers ")
+    static let prefersPrefix = String(localized: "More thinking found a better move: ")
     static let prefersSuffix = "."
-    static let shownPrefix = String(localized: "A longer search preferred ")
+    static let shownPrefix = String(localized: "Updated after more thinking: ")
     static let shownSuffix = String(localized: ", now shown.")
     static let confirmed = String(localized: "A longer search still prefers this move.")
-    static let proOffer = String(localized: "A longer search found a different move. Pro shows it.")
+    static let proOffer = String(localized: "More thinking found a better move. The quick result is still shown. Pro unlocks the improvement.")
 
-    static let showIt = String(localized: "Show it")
+    static let showIt = String(localized: "Show better move")
     static let showItHint = String(localized: "Puts that move in the badge. Nothing is spent.")
     static let seePro = String(localized: "See Pro")
     static let seeProHint = String(localized: "Opens purchase options.")

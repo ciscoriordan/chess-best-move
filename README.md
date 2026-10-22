@@ -10,7 +10,7 @@ Stockfish 19 compiled into the app. It draws the best move as an arrow over your
 image and shows a prominent plain-language move with smaller algebraic notation and the evaluation.
 Captures name and show symbols for both pieces. Check and Checkmate appear as plain status
 headings in bold text above the move; an already checkmated position uses a larger heading. Recognition and search run on
-the device; a Watch request sends only its cropped result to the paired Watch.
+the device; a Watch request sends its cropped result and playback board states to the paired Watch.
 
 Automatic screenshot analysis is on by default in Settings. With Full Access to Photos,
 opening the app recognizes a new chess screenshot taken within two minutes. Unlimited users
@@ -19,11 +19,20 @@ Unrelated, previously handled and in-app screenshots are ignored, and explicit i
 and editing take priority. You can turn this behavior off and continue importing manually.
 
 The Apple Watch companion requests a three-second analysis from the paired iPhone and shows the
-move, board arrow, side to move, and screenshot time. It uses a recent screenshot already in the
+move and board arrow, with Analyze centered above the result. Tap its board to expand it and
+play the move; tap again to close. It uses a recent screenshot already in the
 phone's Photos library after Full Access was granted. Existing analyses or Pro access apply.
 Uncertain positions need confirmation on iPhone. Watch-face complications launch the companion
 without requesting a search. Watch Connectivity transfers only a bounded local result to the
 paired Watch; no server is involved. Background execution depends on iOS and connectivity.
+
+History keeps the last 500 completed positions and visible engine answers on this device,
+without original screenshots or cloud synchronization. It is excluded from device backups.
+Saved positions and exact matching screenshots reopen the answer without another search or
+credit charge. History supports search, per-entry deletion and clearing. Deletion never resets
+spent analyses. Tap the phone board to play the shown move, then return to the original board.
+Both apps respect Reduce Motion. Additional thinking clearly identifies an improved move while
+preserving the existing Pro access requirement.
 
 New users receive three free analyses before optional purchases. The October launch offer
 has ended; existing production customers keep earned unlimited access and paid purchases.

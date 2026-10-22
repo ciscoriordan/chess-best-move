@@ -356,6 +356,13 @@
     "key": "1 board",
     "source": "1 board"
   },
+  "10deaa84b331ee980dd9": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Analyze screenshot",
+    "source": "Analyze screenshot"
+  },
   "11947776992fd53831f3": {
     "catalog": "Localizable",
     "comment": "",
@@ -391,6 +398,20 @@
     "key": "Switch side to move",
     "source": "Switch side to move"
   },
+  "13f64ede233d78bcaf52": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Expanded chessboard",
+    "source": "Expanded chessboard"
+  },
+  "14639c911d27a09a6459": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Reconnect",
+    "source": "Reconnect"
+  },
   "146661ba8a518347b3df": {
     "catalog": "Localizable",
     "comment": "",
@@ -412,12 +433,12 @@
     "key": "queen",
     "source": "queen"
   },
-  "14fe9c3a42e647f3cc31": {
+  "1580aaef1ca173a0b74b": {
     "catalog": "Localizable",
     "comment": "",
     "index": 0,
-    "key": "Show it",
-    "source": "Show it"
+    "key": "Clear History",
+    "source": "Clear History"
   },
   "15b1e164872f801468d5": {
     "catalog": "Localizable",
@@ -482,6 +503,13 @@
     "key": "%lld%@s ago",
     "source": "%1$lld%2$@s ago"
   },
+  "1a422bcdad2d0aaf7a6e": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Take a new iPhone screenshot, then tap Analyze within 30 seconds.",
+    "source": "Take a new iPhone screenshot, then tap Analyze within 30 seconds."
+  },
   "1abdcf413b6aa956817b": {
     "catalog": "Localizable",
     "comment": "",
@@ -496,6 +524,13 @@
     "key": "Best value",
     "source": "Best value"
   },
+  "1b96ad3e5c5f393a8572": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "More thinking found a better move: ",
+    "source": "More thinking found a better move: "
+  },
   "1be398e115ff7bfb69a2": {
     "catalog": "Localizable",
     "comment": "Standalone chess piece name in a board description; no article.",
@@ -509,6 +544,20 @@
     "index": 0,
     "key": "The chess engine can't analyze this position. Use Edit to check the pieces.",
     "source": "The chess engine can't analyze this position. Use Edit to check the pieces."
+  },
+  "1cab76b1d361166d2bd4": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "History could not be saved. Your current results are still available while the app is open.",
+    "source": "History could not be saved. Your current results are still available while the app is open."
+  },
+  "1d9c01efb003924f425a": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Connecting to iPhone…",
+    "source": "Connecting to iPhone…"
   },
   "1dcb2a12854f0e750611": {
     "catalog": "AppShortcuts",
@@ -551,6 +600,13 @@
     "index": 0,
     "key": "Black O-O",
     "source": "Black O-O"
+  },
+  "1f982027eb8954fce4a0": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "No clear chessboard found. Take a screenshot showing the whole board.",
+    "source": "No clear chessboard found. Take a screenshot showing the whole board."
   },
   "1f99c6c4d889c2f64017": {
     "catalog": "Localizable",
@@ -704,7 +760,14 @@
     "comment": "",
     "index": 0,
     "key": "NSPhotoLibraryUsageDescription",
-    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Your photos stay on your device."
+    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch."
+  },
+  "261a382bd2ca0ea10bfb": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Previous result",
+    "source": "Previous result"
   },
   "26336eb38bf024047a48": {
     "catalog": "Localizable",
@@ -754,6 +817,13 @@
     "index": 0,
     "key": "Pro Lifetime",
     "source": "Pro Lifetime"
+  },
+  "2910133281bab79b32de": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Analysis Timed Out",
+    "source": "Analysis Timed Out"
   },
   "291cfbdc85c10d3c9545": {
     "catalog": "Localizable",
@@ -845,6 +915,13 @@
     "index": 0,
     "key": "1 second",
     "source": "1 second"
+  },
+  "2c62caca8fddb27bab57": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Preview",
+    "source": "Preview"
   },
   "2ca92ea6fc826b79bd73": {
     "catalog": "Localizable",
@@ -986,12 +1063,33 @@
     "key": "White knight",
     "source": "White knight"
   },
+  "32e8183686cc90e55b3a": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "The iPhone did not finish in time. Open it once, then try again with a new screenshot.",
+    "source": "The iPhone did not finish in time. Open it once, then try again with a new screenshot."
+  },
   "33698b9ed1e411a48093": {
     "catalog": "Localizable",
     "comment": "",
     "index": 0,
     "key": "Find Best Move",
     "source": "Find Best Move"
+  },
+  "339039870fce22c89b05": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "For puzzles, study, and reviewing games.",
+    "source": "For puzzles, study, and reviewing games."
+  },
+  "339dfc6e239d77bac8cd": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once.",
+    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once."
   },
   "33aa9217c69148ce87b3": {
     "catalog": "Localizable",
@@ -1063,13 +1161,6 @@
     "key": "Board themes with textures may not be recognized yet.",
     "source": "Board themes with textures may not be recognized yet."
   },
-  "385b2291125e7cc703b6": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "A longer search prefers ",
-    "source": "A longer search prefers "
-  },
   "38b52056774d59d7a63f": {
     "catalog": "Localizable",
     "comment": "",
@@ -1140,6 +1231,13 @@
     "key": "%@ to %@",
     "source": "%1$@ to %2$@"
   },
+  "3cb7995d982cddcd11f5": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "White to move",
+    "source": "White to move"
+  },
   "3d1d4bc28319adea88c9": {
     "catalog": "Localizable",
     "comment": "",
@@ -1153,6 +1251,13 @@
     "index": 0,
     "key": "With the position on screen, press the side button and the volume up button at the same time.",
     "source": "With the position on screen, press the side button and the volume up button at the same time."
+  },
+  "3d3dabafab4bba34d619": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Analyze latest screenshot",
+    "source": "Analyze latest screenshot"
   },
   "3d9b2632efac1ceb17cc": {
     "catalog": "Localizable",
@@ -1224,6 +1329,13 @@
     "key": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it.",
     "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it."
   },
+  "3f960063d371f12ae689": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses.",
+    "source": "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses."
+  },
   "3fa20c3bb030ed094bad": {
     "catalog": "Localizable",
     "comment": "",
@@ -1252,6 +1364,13 @@
     "key": "Buy %lld analyses: %@",
     "source": "Buy %1$lld analyses: %2$@"
   },
+  "4057ebf26e77bd54e825": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Saved analysis",
+    "source": "Saved analysis"
+  },
   "40c1ba017a653b81f275": {
     "catalog": "Localizable",
     "comment": "",
@@ -1279,6 +1398,13 @@
     "index": 0,
     "key": "White castles kingside",
     "source": "White castles kingside"
+  },
+  "4225e39d48c0f9555aed": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Screenshot",
+    "source": "Screenshot"
   },
   "423b8ea192c86cc81134": {
     "catalog": "Localizable",
@@ -1342,6 +1468,13 @@
     "index": 0,
     "key": "%lld analyses for %@. One-time purchase, not a subscription. They never expire.",
     "source": "%1$lld analyses for %2$@. One-time purchase, not a subscription. They never expire."
+  },
+  "46ea13be918e93565ceb": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "No Analyses Remaining",
+    "source": "No Analyses Remaining"
   },
   "473117d968771f650279": {
     "catalog": "Localizable",
@@ -1511,6 +1644,13 @@
     "key": "No free analyses left",
     "source": "No free analyses left"
   },
+  "50b88b7d24cd26ff36b2": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Could Not Reach iPhone",
+    "source": "Could Not Reach iPhone"
+  },
   "50cb2104f5e6ab9a119b": {
     "catalog": "Localizable",
     "comment": "",
@@ -1518,12 +1658,40 @@
     "key": "Stopped",
     "source": "Stopped"
   },
+  "510a9b8e04417f86183d": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Updated after more thinking: ",
+    "source": "Updated after more thinking: "
+  },
   "52a8cad2e968eab8877f": {
     "catalog": "Localizable",
     "comment": "",
     "index": 0,
     "key": "Side to move",
     "source": "Side to move"
+  },
+  "52cf195b4cfbd0ddd891": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Best Move",
+    "source": "Best Move"
+  },
+  "534e6486895ac02d1ea8": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Clear History?",
+    "source": "Clear History?"
+  },
+  "542a9756840cf6573c30": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone.",
+    "source": "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone."
   },
   "549342cc819bac01d613": {
     "catalog": "Localizable",
@@ -1545,6 +1713,13 @@
     "index": 0,
     "key": "Payment is charged to your Apple Account when you confirm. The subscription renews automatically at the same price %@ unless you cancel at least 24 hours before the current period ends. Manage or cancel in Settings > Apple Account > Subscriptions.",
     "source": "Payment is charged to your Apple Account when you confirm. The subscription renews automatically at the same price %@ unless you cancel at least 24 hours before the current period ends. Manage or cancel in Settings > Apple Account > Subscriptions."
+  },
+  "5500cc5a7d89d26c4065": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "History",
+    "source": "History"
   },
   "554a70b65bb954910299": {
     "catalog": "Localizable",
@@ -1580,6 +1755,13 @@
     "index": 0,
     "key": "assumed: you are at the bottom",
     "source": "assumed: you are at the bottom"
+  },
+  "5682dfc843181d3f26e7": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Originally: %@",
+    "source": "Originally: %@"
   },
   "575af5d5ce253bbe2e3b": {
     "catalog": "Localizable",
@@ -1672,6 +1854,13 @@
     "key": "The Change in the Published Source",
     "source": "The Change in the Published Source"
   },
+  "5ba4fbbe84be617cc251": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "iPhone Setup Needed",
+    "source": "iPhone Setup Needed"
+  },
   "5bacd811417f205a5ef3": {
     "catalog": "Localizable",
     "comment": "",
@@ -1699,6 +1888,13 @@
     "index": 0,
     "key": "Swaps which side is at the bottom",
     "source": "Swaps which side is at the bottom"
+  },
+  "5c5275547801b67b8388": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Showing the Better Move",
+    "source": "Showing the Better Move"
   },
   "5c5fc224db6811288bcc": {
     "catalog": "Localizable",
@@ -1833,12 +2029,26 @@
     "key": "piece.king",
     "source": "king"
   },
+  "63e2d541f4386c18b94e": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Delete",
+    "source": "Delete"
+  },
   "640e656d6c901c2a0a28": {
     "catalog": "Localizable",
     "comment": "",
     "index": 0,
     "key": "Stockfish Authors",
     "source": "Stockfish Authors"
+  },
+  "6411e8805c708baa1173": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "No Chessboard Found",
+    "source": "No Chessboard Found"
   },
   "64e585029e8501952659": {
     "catalog": "Localizable",
@@ -1881,6 +2091,13 @@
     "index": 0,
     "key": "Open Chess Best Move to see the best move.",
     "source": "Open Chess Best Move to see the best move."
+  },
+  "663db260526dac9b16f8": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Check the Position on iPhone",
+    "source": "Check the Position on iPhone"
   },
   "6733e7cb1f741b9c0bf5": {
     "catalog": "Localizable",
@@ -1931,6 +2148,13 @@
     "key": "New chess screenshots are recognized automatically. Tap Analyze if asked.",
     "source": "New chess screenshots are recognized automatically. Tap Analyze if asked."
   },
+  "696d240e9b497feee049": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "iPhone Is Busy",
+    "source": "iPhone Is Busy"
+  },
   "69c15e9d2e3542c71551": {
     "catalog": "Localizable",
     "comment": "",
@@ -1979,6 +2203,13 @@
     "index": 0,
     "key": "Taken ",
     "source": "Taken "
+  },
+  "6b2121a9ddff472f7193": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Completed analyses appear here. Reopen a saved result without using another analysis.",
+    "source": "Completed analyses appear here. Reopen a saved result without using another analysis."
   },
   "6b38e2d9c0ac9816c3a6": {
     "catalog": "Localizable",
@@ -2064,6 +2295,13 @@
     "key": "A longer search that keeps running after the answer, up to 2 minutes.",
     "source": "A longer search that keeps running after the answer, up to 2 minutes."
   },
+  "70be6dcce5ca9fab1453": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again.",
+    "source": "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again."
+  },
   "7126cbfe690ae7fcd3bc": {
     "catalog": "Localizable",
     "comment": "",
@@ -2077,6 +2315,13 @@
     "index": 0,
     "key": "%@, check",
     "source": "%@, check"
+  },
+  "7213480c268ebe0bbbb5": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Shows the board full screen and plays the move. Tap again to return.",
+    "source": "Shows the board full screen and plays the move. Tap again to return."
   },
   "727e45b78149119cd649": {
     "catalog": "Localizable",
@@ -2197,6 +2442,13 @@
     "key": "1 hour ago",
     "source": "1 hour ago"
   },
+  "793d04740f95955874b6": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Tap to return to the result.",
+    "source": "Tap to return to the result."
+  },
   "79439b9e21d6d4f66096": {
     "catalog": "Localizable",
     "comment": "",
@@ -2281,6 +2533,13 @@
     "key": "Waiting for approval",
     "source": "Waiting for approval"
   },
+  "7e78fe1b484430d6c26d": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Uses one analysis or Pro access. Reanalysis may be free.",
+    "source": "Uses one analysis or Pro access. Reanalysis may be free."
+  },
   "7e7d1ed1100c4ead2d29": {
     "catalog": "Localizable",
     "comment": "",
@@ -2308,6 +2567,20 @@
     "index": 0,
     "key": "White O-O",
     "source": "White O-O"
+  },
+  "8043a6e43f92709522c0": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Saved analysis. No analysis used.",
+    "source": "Saved analysis. No analysis used."
+  },
+  "80b9afb974b45fe0a9eb": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "This removes saved positions and results from this device. It does not restore spent analyses.",
+    "source": "This removes saved positions and results from this device. It does not restore spent analyses."
   },
   "81298ba6b748cae97c27": {
     "catalog": "Localizable",
@@ -2350,6 +2623,13 @@
     "index": 0,
     "key": "No free analyses",
     "source": "No free analyses"
+  },
+  "83255acd3979ce312e51": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Show better move",
+    "source": "Show better move"
   },
   "832bd01668310a53e09a": {
     "catalog": "Localizable",
@@ -2407,6 +2687,13 @@
     "key": "Lifetime Is Unlocked",
     "source": "Lifetime Is Unlocked"
   },
+  "859059436ba9e962f747": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Better Move Found",
+    "source": "Better Move Found"
+  },
   "85a656cee46268df0615": {
     "catalog": "Localizable",
     "comment": "",
@@ -2462,13 +2749,6 @@
     "index": 0,
     "key": "Steps",
     "source": "Steps"
-  },
-  "878d44ec4f76a2a29707": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "A longer search preferred ",
-    "source": "A longer search preferred "
   },
   "87cbb7f2c7804a8fe49d": {
     "catalog": "Localizable",
@@ -2567,6 +2847,13 @@
     "index": 0,
     "key": "No chessboard found in that image. This didn't use a free analysis.",
     "source": "No chessboard found in that image. This didn't use a free analysis."
+  },
+  "8ff8022759c2586908b5": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Close",
+    "source": "Close"
   },
   "903a4800c31fe1193ae8": {
     "catalog": "Localizable",
@@ -2715,12 +3002,26 @@
     "key": "Purchases restored.",
     "source": "Purchases restored."
   },
+  "979109a9e1db6f74db4b": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "No Recent Screenshot",
+    "source": "No Recent Screenshot"
+  },
   "97be1605c9ca6064e0ff": {
     "catalog": "Localizable",
     "comment": "",
     "index": 0,
     "key": "Best reply",
     "source": "Best reply"
+  },
+  "981b6537d90062639b33": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "More thinking found a better move. The quick result is still shown. Pro unlocks the improvement.",
+    "source": "More thinking found a better move. The quick result is still shown. Pro unlocks the improvement."
   },
   "98b4e785361ece333132": {
     "catalog": "Localizable",
@@ -2911,6 +3212,13 @@
     "key": "Your subscriptions opened in the App Store.",
     "source": "Your subscriptions opened in the App Store."
   },
+  "a265db5838f08c669aa4": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Opens the saved result without starting a new search.",
+    "source": "Opens the saved result without starting a new search."
+  },
   "a2960b9ff94d3fe45185": {
     "catalog": "Localizable",
     "comment": "",
@@ -2960,6 +3268,13 @@
     "key": "Edited",
     "source": "Edited"
   },
+  "a73e187a0f797cb5423b": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Search moves or positions",
+    "source": "Search moves or positions"
+  },
   "a745d75f624a87d78e2a": {
     "catalog": "Localizable",
     "comment": "",
@@ -2995,12 +3310,12 @@
     "key": "Shows fewer moves",
     "source": "Shows fewer moves"
   },
-  "a99f29c74cc6a77fee6e": {
-    "catalog": "Localizable",
+  "a9e1e0f5322889310fe7": {
+    "catalog": "WatchLocalizable",
     "comment": "",
     "index": 0,
-    "key": "A longer search found a different move. Pro shows it.",
-    "source": "A longer search found a different move. Pro shows it."
+    "key": "Open screenshot analysis on your Watch.",
+    "source": "Open screenshot analysis on your Watch."
   },
   "aa8e4d22a630fafd9a7a": {
     "catalog": "Localizable",
@@ -3113,6 +3428,13 @@
     "index": 0,
     "key": "Rook",
     "source": "Rook"
+  },
+  "ae4aadc6ad2c0e168da6": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Try again",
+    "source": "Try again"
   },
   "af0a2f11226d747cbacf": {
     "catalog": "Localizable",
@@ -3478,12 +3800,26 @@
     "key": "%@, %lld left",
     "source": "%1$@, %2$lld left"
   },
+  "c1950fdb3fbb4ebe2024": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots.",
+    "source": "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots."
+  },
   "c1ae1274933d7443b024": {
     "catalog": "Localizable",
     "comment": "",
     "index": 0,
     "key": "These controls are in TestFlight builds and never in an App Store build. They grant analyses, never Pro: Pro comes from a purchase, which costs nothing in the TestFlight sandbox.",
     "source": "These controls are in TestFlight builds and never in an App Store build. They grant analyses, never Pro: Pro comes from a purchase, which costs nothing in the TestFlight sandbox."
+  },
+  "c1ce37fd19571d60c7ae": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Analyzing on iPhone…",
+    "source": "Analyzing on iPhone…"
   },
   "c35f12c4a2f33312cb50": {
     "catalog": "Localizable",
@@ -3611,6 +3947,13 @@
     "key": "Switches the side to move",
     "source": "Switches the side to move"
   },
+  "cc314477ef7a5132fb19": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Tap to animate the move. The original position returns afterward.",
+    "source": "Tap to animate the move. The original position returns afterward."
+  },
   "cc62bddd9cda7794eec7": {
     "catalog": "Localizable",
     "comment": "",
@@ -3639,6 +3982,13 @@
     "key": "Best move: ",
     "source": "Best move: "
   },
+  "cf0998b5f5f4c68ffcbc": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Take a new screenshot on iPhone first.",
+    "source": "Take a new screenshot on iPhone first."
+  },
   "cf119788804288753a44": {
     "catalog": "Localizable",
     "comment": "",
@@ -3652,6 +4002,20 @@
     "index": 0,
     "key": "Their move",
     "source": "Their move"
+  },
+  "cf56d85cb6c1a8735408": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Black to move",
+    "source": "Black to move"
+  },
+  "d0527405a038825ab3d4": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "History could not be read. The saved file has been kept. Clear History to start again.",
+    "source": "History could not be read. The saved file has been kept. Clear History to start again."
   },
   "d0df18c25448324ffe56": {
     "catalog": "Localizable",
@@ -3779,6 +4143,13 @@
     "key": "One payment. Not a subscription.",
     "source": "One payment. Not a subscription."
   },
+  "d5f6095a4985398a57ad": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Your last 500 positions and results are saved only on this device. Original screenshots are not saved. Deleting history does not restore spent analyses.",
+    "source": "Your last 500 positions and results are saved only on this device. Original screenshots are not saved. Deleting history does not restore spent analyses."
+  },
   "d6083f8052ed2dac745a": {
     "catalog": "Localizable",
     "comment": "",
@@ -3842,6 +4213,13 @@
     "key": "Take a chess screenshot, then open this app. Analysis starts automatically with unlimited access; otherwise, tap Analyze when asked.",
     "source": "Take a chess screenshot, then open this app. Analysis starts automatically with unlimited access; otherwise, tap Analyze when asked."
   },
+  "d85037b742734e1a64a0": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Checkmate",
+    "source": "Checkmate"
+  },
   "d8922d6556481e6ec2fc": {
     "catalog": "Localizable",
     "comment": "",
@@ -3855,6 +4233,13 @@
     "index": 0,
     "key": "Home and Lock Screen widgets",
     "source": "Home and Lock Screen widgets"
+  },
+  "d9a43d005864ec0190ce": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Stalemate",
+    "source": "Stalemate"
   },
   "db1660a24ce7dafda93f": {
     "catalog": "Localizable",
@@ -3905,6 +4290,13 @@
     "key": "Ready to Analyze",
     "source": "Ready to Analyze"
   },
+  "ded9584866966b8e185a": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "No Saved Analyses",
+    "source": "No Saved Analyses"
+  },
   "dee3ca0f80485f21bb12": {
     "catalog": "Localizable",
     "comment": "Chess piece, subject of a move description.",
@@ -3939,6 +4331,13 @@
     "index": 0,
     "key": "Unlimited analyses, billed yearly",
     "source": "Unlimited analyses, billed yearly"
+  },
+  "e099114a73c997cdcc25": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Play move animation",
+    "source": "Play move animation"
   },
   "e0a41bca7bc6a1d87a52": {
     "catalog": "Localizable",
@@ -4143,6 +4542,13 @@
     "key": "Drop to analyze",
     "source": "Drop to analyze"
   },
+  "f0f0e633bd15a07013db": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Expand chessboard",
+    "source": "Expand chessboard"
+  },
   "f1ef1715d942f72e1abe": {
     "catalog": "Localizable",
     "comment": "",
@@ -4156,6 +4562,13 @@
     "index": 0,
     "key": "Step %lld: %@",
     "source": "Step %1$lld: %2$@"
+  },
+  "f2d1a1e8e9c4f06348a0": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Shows the board full screen. Tap again to return.",
+    "source": "Shows the board full screen. Tap again to return."
   },
   "f2dd0e37c1d1211e5b1d": {
     "catalog": "Localizable",
@@ -4324,6 +4737,13 @@
     "index": 0,
     "key": "Open Chess Best Move and analyze your latest saved screenshot.",
     "source": "Open Chess Best Move and analyze your latest saved screenshot."
+  },
+  "fdceecdbf50d36eabb35": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "New positions use one analysis or Pro access.",
+    "source": "New positions use one analysis or Pro access."
   },
   "fe5dec5d30fb5fe59c33": {
     "catalog": "Localizable",

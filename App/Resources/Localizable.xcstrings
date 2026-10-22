@@ -4660,6 +4660,7 @@
       }
     },
     "A longer search found a different move. Pro shows it.": {
+      "extractionState": "stale",
       "localizations": {
         "de": {
           "stringUnit": {
@@ -4700,6 +4701,7 @@
       }
     },
     "A longer search preferred ": {
+      "extractionState": "stale",
       "localizations": {
         "de": {
           "stringUnit": {
@@ -4740,6 +4742,7 @@
       }
     },
     "A longer search prefers ": {
+      "extractionState": "stale",
       "localizations": {
         "de": {
           "stringUnit": {
@@ -6501,6 +6504,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "En avantajlı, haftada yaklaşık %1$@"
+          }
+        }
+      }
+    },
+    "Better Move Found": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Besserer Zug gefunden"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se encontró una jugada mejor"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un meilleur coup a été trouvé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trovata una mossa migliore"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma jogada melhor foi encontrada"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha iyi bir hamle bulundu"
           }
         }
       }
@@ -8515,6 +8558,86 @@
         }
       }
     },
+    "Clear History": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verlauf löschen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borrar historial"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effacer l’historique"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancella cronologia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limpar histórico"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçmişi temizle"
+          }
+        }
+      }
+    },
+    "Clear History?": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verlauf löschen?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Borrar el historial?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effacer l’historique ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancellare la cronologia?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limpar o histórico?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçmiş temizlensin mi?"
+          }
+        }
+      }
+    },
     "Clear board": {
       "localizations": {
         "de": {
@@ -8711,6 +8834,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ekran görüntünüzle karşılaştırın"
+          }
+        }
+      }
+    },
+    "Completed analyses appear here. Reopen a saved result without using another analysis.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abgeschlossene Analysen erscheinen hier. Öffne ein gespeichertes Ergebnis, ohne eine weitere Analyse zu verbrauchen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los análisis completados aparecen aquí. Abre un resultado guardado sin gastar otro análisis."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les analyses terminées apparaissent ici. Rouvrez un résultat enregistré sans décompter une autre analyse."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le analisi completate appaiono qui. Riapri un risultato salvato senza utilizzare un’altra analisi."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As análises concluídas aparecem aqui. Abra um resultado salvo sem usar outra análise."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamamlanan analizler burada görünür. Kaydedilmiş bir sonucu başka bir analiz hakkı kullanmadan yeniden açın."
           }
         }
       }
@@ -9277,6 +9440,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Varsayılan düşünme süresi"
+          }
+        }
+      }
+    },
+    "Delete": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Löschen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sil"
           }
         }
       }
@@ -10726,6 +10929,126 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yardım"
+          }
+        }
+      }
+    },
+    "History": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verlauf"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historial"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historique"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cronologia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Histórico"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçmiş"
+          }
+        }
+      }
+    },
+    "History could not be read. The saved file has been kept. Clear History to start again.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Verlauf konnte nicht gelesen werden. Die gespeicherte Datei wurde beibehalten. Lösche den Verlauf, um neu zu beginnen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo leer el historial. Se ha conservado el archivo guardado. Borra el historial para empezar de nuevo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lire l’historique. Le fichier enregistré a été conservé. Effacez l’historique pour recommencer."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile leggere la cronologia. Il file salvato è stato conservato. Cancella la cronologia per ricominciare."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível ler o histórico. O arquivo salvo foi preservado. Limpe o histórico para começar novamente."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçmiş okunamadı. Kaydedilmiş dosya korundu. Yeniden başlamak için geçmişi temizleyin."
+          }
+        }
+      }
+    },
+    "History could not be saved. Your current results are still available while the app is open.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Verlauf konnte nicht gespeichert werden. Deine aktuellen Ergebnisse bleiben verfügbar, solange die App geöffnet ist."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo guardar el historial. Tus resultados actuales siguen disponibles mientras la app está abierta."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible d’enregistrer l’historique. Vos résultats actuels restent disponibles tant que l’app est ouverte."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile salvare la cronologia. I risultati attuali restano disponibili finché l’app è aperta."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível salvar o histórico. Seus resultados atuais continuam disponíveis enquanto o app estiver aberto."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçmiş kaydedilemedi. Uygulama açıkken mevcut sonuçlarınız kullanılabilir."
           }
         }
       }
@@ -12300,6 +12623,86 @@
         }
       }
     },
+    "More thinking found a better move. The quick result is still shown. Pro unlocks the improvement.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Längeres Rechnen hat einen besseren Zug gefunden. Das schnelle Ergebnis wird noch angezeigt. Pro schaltet die Verbesserung frei."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al pensar más, se encontró una jugada mejor. Se sigue mostrando el resultado rápido. Pro desbloquea la mejora."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une réflexion plus longue a trouvé un meilleur coup. Le résultat rapide est toujours affiché. Pro donne accès à l’amélioration."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un’analisi più lunga ha trovato una mossa migliore. È ancora mostrato il risultato rapido. Pro sblocca il miglioramento."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pensando por mais tempo, foi encontrada uma jogada melhor. O resultado rápido ainda está sendo exibido. O Pro libera a melhoria."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha uzun düşünme sonucunda daha iyi bir hamle bulundu. Hızlı sonuç hâlâ gösteriliyor. Pro ile iyileştirilmiş sonuca erişebilirsiniz."
+          }
+        }
+      }
+    },
+    "More thinking found a better move: ": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Längeres Rechnen hat einen besseren Zug gefunden: "
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al pensar más, se encontró una jugada mejor: "
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une réflexion plus longue a trouvé un meilleur coup : "
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un’analisi più lunga ha trovato una mossa migliore: "
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pensando por mais tempo, foi encontrada uma jogada melhor: "
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha uzun düşünme sonucunda daha iyi bir hamle bulundu: "
+          }
+        }
+      }
+    },
     "Most chess sites do not allow engine help in games you are playing.": {
       "localizations": {
         "de": {
@@ -12825,6 +13228,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Satranç tahtası bulunamadı"
+          }
+        }
+      }
+    },
+    "No Saved Analyses": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine gespeicherten Analysen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay análisis guardados"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune analyse enregistrée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna analisi salvata"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma análise salva"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaydedilmiş analiz yok"
           }
         }
       }
@@ -14549,6 +14992,46 @@
         }
       }
     },
+    "Opens the saved result without starting a new search.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffnet das gespeicherte Ergebnis, ohne eine neue Suche zu starten."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre el resultado guardado sin iniciar una nueva búsqueda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvre le résultat enregistré sans lancer une nouvelle recherche."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apre il risultato salvato senza avviare una nuova ricerca."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre o resultado salvo sem iniciar uma nova busca."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni bir arama başlatmadan kaydedilmiş sonucu açar."
+          }
+        }
+      }
+    },
     "Opens the start screen to choose a screenshot.": {
       "localizations": {
         "de": {
@@ -14625,6 +15108,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "İsteğe bağlı: Satranç Eylem Düğmesi adlı ayrı bir kestirme oluşturun. Şu Anki Uygulamayı Al eylemini ekleyin, ardından geçerli uygulamanın Ad değerini tahta uygulamanızın adıyla karşılaştıran bir Eğer eylemi ekleyin. Eğer bölümüne Kestirmeyi Çalıştır eylemini ekleyip Bekle eylemi içermeyen Satranç ekran görüntümü analiz et kestirmesini seçin. Aksi Takdirde bölümünü boş bırakın. Satranç Eylem Düğmesi kestirmesini Eylem düğmesine atayın. Diğer uygulamalarda düğmenin önceki işlevine dönmek yerine hiçbir şey yapmaz."
+          }
+        }
+      }
+    },
+    "Originally: %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ursprünglich: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resultado inicial: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Résultat initial : %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Risultato iniziale: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resultado inicial: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk sonuç: %@"
           }
         }
       }
@@ -15026,6 +15549,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plan"
+          }
+        }
+      }
+    },
+    "Play move animation": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zug animieren"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animar la jugada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animer le coup"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anima la mossa"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animar a jogada"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hamleyi canlandır"
           }
         }
       }
@@ -16672,6 +17235,86 @@
         }
       }
     },
+    "Saved analysis": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gespeicherte Analyse"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Análisis guardado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyse enregistrée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analisi salvata"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Análise salva"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaydedilmiş analiz"
+          }
+        }
+      }
+    },
+    "Saved analysis. No analysis used.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gespeicherte Analyse. Keine Analyse verbraucht."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Análisis guardado. No se ha gastado ningún análisis."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyse enregistrée. Aucune analyse décomptée."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analisi salvata. Nessuna analisi utilizzata."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Análise salva. Nenhuma análise foi usada."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaydedilmiş analiz. Analiz hakkı kullanılmadı."
+          }
+        }
+      }
+    },
     "Screenshot": {
       "localizations": {
         "de": {
@@ -16828,6 +17471,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fotoğraflar’a kaydedilmiş ekran görüntüleri en iyi sonucu verir."
+          }
+        }
+      }
+    },
+    "Search moves or positions": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Züge oder Stellungen suchen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar jugadas o posiciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher des coups ou des positions"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca mosse o posizioni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar jogadas ou posições"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hamle veya konum ara"
           }
         }
       }
@@ -17112,7 +17795,48 @@
         }
       }
     },
+    "Show better move": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Besseren Zug anzeigen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar la jugada mejor"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher le meilleur coup"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostra la mossa migliore"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar a jogada melhor"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha iyi hamleyi göster"
+          }
+        }
+      }
+    },
     "Show it": {
+      "extractionState": "stale",
       "localizations": {
         "de": {
           "stringUnit": {
@@ -17188,6 +17912,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tanınan tahtayı göster"
+          }
+        }
+      }
+    },
+    "Showing the Better Move": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der bessere Zug wird angezeigt"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se muestra la jugada mejor"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meilleur coup affiché"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "È mostrata la mossa migliore"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrando a jogada melhor"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha iyi hamle gösteriliyor"
           }
         }
       }
@@ -19398,6 +20162,46 @@
         }
       }
     },
+    "Tap to animate the move. The original position returns afterward.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe, um den Zug zu animieren. Danach erscheint wieder die ursprüngliche Stellung."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca para animar la jugada. Después se restaura la posición original."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez pour animer le coup. La position d’origine sera ensuite rétablie."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocca per animare la mossa. La posizione originale verrà poi ripristinata."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque para animar a jogada. A posição original volta em seguida."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hamleyi canlandırmak için dokunun. Ardından ilk konum geri gelir."
+          }
+        }
+      }
+    },
     "Terms of Use": {
       "localizations": {
         "de": {
@@ -21484,6 +22288,46 @@
         }
       }
     },
+    "This removes saved positions and results from this device. It does not restore spent analyses.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gespeicherte Stellungen und Ergebnisse werden von diesem Gerät entfernt. Verbrauchte Analysen werden nicht erstattet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esto elimina las posiciones y los resultados guardados de este dispositivo. No recupera los análisis gastados."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cela supprime les positions et résultats enregistrés sur cet appareil. Les analyses utilisées ne sont pas recréditées."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questa azione rimuove le posizioni e i risultati salvati da questo dispositivo. Le analisi utilizzate non vengono ripristinate."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isso remove as posições e os resultados salvos deste dispositivo. As análises usadas não são devolvidas."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaydedilmiş konumlar ve sonuçlar bu aygıttan kaldırılır. Kullanılan analiz hakları geri verilmez."
+          }
+        }
+      }
+    },
     "This text is missing from the app. It is available at %@.": {
       "localizations": {
         "de": {
@@ -21615,7 +22459,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Inténtalo de nuevo"
+            "value": "Reintentar"
           }
         },
         "fr": {
@@ -21633,13 +22477,13 @@
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tente novamente"
+            "value": "Tentar novamente"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Yeniden dene"
+            "value": "Tekrar dene"
           }
         }
       }
@@ -22252,6 +23096,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aygıtınızın kilidini açın ve istenen izinleri verin. Siri kestirmeyi çalıştırdığında ekran görüntüsünü alır, Son Kullanılanlar’a kaydeder ve analiz etmek için Chess Best Move’u açar."
+          }
+        }
+      }
+    },
+    "Updated after more thinking: ": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach längerem Rechnen aktualisiert: "
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizado tras pensar más: "
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis à jour après une réflexion plus longue : "
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiornato dopo un’analisi più lunga: "
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizado após pensar por mais tempo: "
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha uzun düşünmenin ardından güncellendi: "
           }
         }
       }
@@ -23852,6 +24736,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mevcut planınız."
+          }
+        }
+      }
+    },
+    "Your last 500 positions and results are saved only on this device. Original screenshots are not saved. Deleting history does not restore spent analyses.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine letzten 500 Stellungen und Ergebnisse werden nur auf diesem Gerät gespeichert. Original-Screenshots werden nicht gespeichert. Das Löschen des Verlaufs erstattet keine verbrauchten Analysen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus últimas 500 posiciones y sus resultados se guardan solo en este dispositivo. No se guardan las capturas originales. Borrar el historial no recupera los análisis gastados."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos 500 dernières positions et leurs résultats sont enregistrés uniquement sur cet appareil. Les captures d’écran d’origine ne sont pas enregistrées. Effacer l’historique ne recrédite pas les analyses utilisées."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le ultime 500 posizioni e i relativi risultati vengono salvati solo su questo dispositivo. Gli screenshot originali non vengono salvati. Cancellare la cronologia non ripristina le analisi utilizzate."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas últimas 500 posições e resultados são salvos apenas neste dispositivo. As capturas originais não são salvas. Excluir o histórico não devolve as análises usadas."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son 500 konumunuz ve sonuçları yalnızca bu aygıtta kaydedilir. Orijinal ekran görüntüleri kaydedilmez. Geçmişi silmek, kullanılan analiz haklarını geri vermez."
           }
         }
       }

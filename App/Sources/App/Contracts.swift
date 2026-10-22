@@ -755,7 +755,7 @@ enum DownsellOutcome: Sendable, Hashable {
 // MARK: - Engine (implemented by Analysis)
 
 /// An evaluation from White's point of view (converted from the engine's side-to-move POV).
-enum WhiteScore: Sendable, Hashable {
+enum WhiteScore: Sendable, Hashable, Codable {
     case centipawns(Int)
     /// Positive: White mates in n. Negative: Black mates in n.
     case mate(Int)

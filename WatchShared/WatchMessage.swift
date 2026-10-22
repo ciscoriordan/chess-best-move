@@ -20,7 +20,8 @@ enum WatchWire {
         guard data.count <= maximumReplyBytes,
               let reply = try? JSONDecoder().decode(WatchAnalysisReply.self, from: data),
               reply.version == version, reply.requestID == id,
-              (reply.thumbnail?.count ?? 0) <= maximumThumbnailBytes else { return nil }
+              (reply.thumbnail?.count ?? 0) <= maximumThumbnailBytes,
+              reply.playback?.isValid != false else { return nil }
         return reply
     }
 }
@@ -47,4 +48,5 @@ struct WatchAnalysisReply: Codable, Sendable {
     var san: String?
     var moveDescription: String?
     var thumbnail: Data?
+    var playback: BoardMovePlayback?
 }

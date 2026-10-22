@@ -42,7 +42,7 @@ settings:
     # Declarations are nonisolated unless annotated; the app's contracts spell out
     # @MainActor explicitly.
     SWIFT_DEFAULT_ACTOR_ISOLATION: nonisolated
-    MARKETING_VERSION: "1.0.25"
+    MARKETING_VERSION: "1.0.26"
     CURRENT_PROJECT_VERSION: "1"
     ENABLE_USER_SCRIPT_SANDBOXING: YES
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
@@ -180,6 +180,10 @@ targets:
       - path: WatchApp/Sources
       - path: WatchShared
       - path: WatchApp/Resources
+      - path: App/Resources/Fonts/NotoSansSymbols2-Regular.ttf
+        buildPhase: resources
+      - path: App/Resources/Fonts/NotoSansSymbols2-OFL.txt
+        buildPhase: resources
     dependencies:
       - target: ChessBestMoveWatchWidgets
     info:

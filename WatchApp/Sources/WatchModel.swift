@@ -6,15 +6,16 @@ import WatchKit
 @MainActor
 @Observable
 final class WatchModel: NSObject, WCSessionDelegate {
-    private(set) var isAnalyzing = false
-    private(set) var isActivated = false
-    private(set) var reply: WatchAnalysisReply?
-    private(set) var error: WatchAnalysisReply.Status?
+    let state = WatchRequestState()
+    var isAnalyzing: Bool { state.isAnalyzing }
+    var isActivated: Bool { state.isActivated }
+    var reply: WatchAnalysisReply? { state.reply }
+    var error: WatchAnalysisReply.Status? { state.error }
     #if DEBUG
     private(set) var isPreview = false
     #endif
-    @ObservationIgnored private var pending: UUID?
     @ObservationIgnored private var timeout: Task<Void, Never>?
+    @ObservationIgnored private var activationTimeout: Task<Void, Never>?
 
     override init() {
         super.init()
@@ -27,82 +28,76 @@ final class WatchModel: NSObject, WCSessionDelegate {
            data.count <= WatchWire.maximumReplyBytes,
            let preview = try? JSONDecoder().decode(WatchAnalysisReply.self, from: data),
            preview.version == WatchWire.version {
-            reply = preview
-            isActivated = true
+            state.preview(preview)
             isPreview = true
             return
         }
         #endif
-        guard WCSession.isSupported() else { return }
+        guard WCSession.isSupported() else { state.activate(false); return }
         WCSession.default.delegate = self
         activate()
     }
 
     func activate() {
-        guard WCSession.isSupported() else { return }
+        state.dismissError()
+        guard WCSession.isSupported() else { state.activate(false); return }
+        if WCSession.default.activationState == .activated { state.activate(true) }
         WCSession.default.activate()
+        activationTimeout?.cancel()
+        activationTimeout = Task { [weak self] in
+            do { try await Task.sleep(for: .seconds(10)) } catch { return }
+            guard let self, !self.isActivated else { return }
+            self.state.activate(false)
+            WKInterfaceDevice.current().play(.failure)
+        }
     }
 
     func analyze() {
         #if DEBUG
         if isPreview {
             isPreview = false
-            reply = nil
-            isActivated = false
             WCSession.default.delegate = self
             activate()
-            return
         }
         #endif
-        guard !isAnalyzing, isActivated else { return }
-        let request = WatchAnalysisRequest()
-        guard let data = try? JSONEncoder().encode(request) else { return }
+        guard let request = state.begin() else { return }
+        guard let data = try? JSONEncoder().encode(request) else {
+            fail(.unavailable, id: request.id)
+            return
+        }
         // Do not gate this on isReachable: a foreground Watch message can wake the iPhone app.
-        pending = request.id
-        isAnalyzing = true
-        reply = nil
-        error = nil
+        WKInterfaceDevice.current().play(.click)
         timeout = Task { [weak self] in
             do { try await Task.sleep(for: .seconds(25)) } catch { return }
             self?.fail(.timedOut, id: request.id)
         }
         let callbacks = WatchMessageCallbacks(onReply: { [weak self] data in
-            guard let self, self.pending == request.id else { return }
-            guard let reply = WatchWire.reply(from: data, for: request.id) else {
-                self.fail(.unavailable, id: request.id)
-                return
-            }
-            self.finish(reply)
+            guard let self, self.state.receive(data, for: request.id) else { return }
+            self.didFinish()
         }, onError: { [weak self] in
             self?.fail(.unavailable, id: request.id)
         })
         WCSession.default.sendMessageData(data, replyHandler: callbacks.reply, errorHandler: callbacks.error)
     }
 
-    private func finish(_ reply: WatchAnalysisReply) {
-        guard pending == reply.requestID else { return }
-        pending = nil
+    private func didFinish() {
         timeout?.cancel()
         timeout = nil
-        isAnalyzing = false
-        switch reply.status {
-        case .result, .checkmate, .stalemate:
-            self.reply = reply
-            error = nil
-            WKInterfaceDevice.current().play(.success)
-        default:
-            self.reply = nil
-            error = reply.status
-        }
+        WKInterfaceDevice.current().play(state.error == nil ? .success : .failure)
     }
 
     private func fail(_ status: WatchAnalysisReply.Status, id: UUID) {
-        finish(WatchAnalysisReply(requestID: id, status: status))
+        if state.fail(status, id: id) { didFinish() }
     }
+
+    func dismissError() { state.dismissError() }
 
     nonisolated func session(_ session: WCSession, activationDidCompleteWith state: WCSessionActivationState,
                              error: (any Error)?) {
         let activated = state == .activated
-        Task { @MainActor [weak self] in self?.isActivated = activated }
+        Task { @MainActor [weak self] in
+            self?.activationTimeout?.cancel()
+            self?.state.activate(activated)
+        }
     }
 }

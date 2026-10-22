@@ -363,6 +363,13 @@
     "source": "1 board",
     "translation": "1 tahta"
   },
+  "10deaa84b331ee980dd9": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Analyze screenshot",
+    "translation": "Ekran görüntüsünü analiz et"
+  },
   "11947776992fd53831f3": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -398,6 +405,20 @@
     "source": "Switch side to move",
     "translation": "Hamle sırasını değiştir"
   },
+  "13f64ede233d78bcaf52": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187762+00:00",
+    "source": "Expanded chessboard",
+    "translation": "Büyütülmüş satranç tahtası"
+  },
+  "14639c911d27a09a6459": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Reconnect",
+    "translation": "Yeniden bağlan"
+  },
   "146661ba8a518347b3df": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -425,6 +446,13 @@
     "reviewedAt": "2026-10-15T02:35:05.637361+00:00",
     "source": "Show it",
     "translation": "Göster"
+  },
+  "1580aaef1ca173a0b74b": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187552+00:00",
+    "source": "Clear History",
+    "translation": "Geçmişi temizle"
   },
   "15b1e164872f801468d5": {
     "origin": "manual",
@@ -489,6 +517,13 @@
     "source": "%1$lld%2$@s ago",
     "translation": "%1$lld%2$@sn önce"
   },
+  "1a422bcdad2d0aaf7a6e": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Take a new iPhone screenshot, then tap Analyze within 30 seconds.",
+    "translation": "iPhone’da yeni ekran görüntüsü alın ve 30 saniye içinde Analiz et’e dokunun."
+  },
   "1abdcf413b6aa956817b": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -503,6 +538,13 @@
     "source": "Best value",
     "translation": "En avantajlı"
   },
+  "1b96ad3e5c5f393a8572": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187634+00:00",
+    "source": "More thinking found a better move: ",
+    "translation": "Daha uzun düşünme sonucunda daha iyi bir hamle bulundu: "
+  },
   "1be398e115ff7bfb69a2": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -516,6 +558,20 @@
     "reviewedAt": "2026-10-15T02:35:05.637377+00:00",
     "source": "The chess engine can't analyze this position. Use Edit to check the pieces.",
     "translation": "Satranç motoru bu konumu analiz edemiyor. Taşları kontrol etmek için Düzenle seçeneğini kullanın."
+  },
+  "1cab76b1d361166d2bd4": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187618+00:00",
+    "source": "History could not be saved. Your current results are still available while the app is open.",
+    "translation": "Geçmiş kaydedilemedi. Uygulama açıkken mevcut sonuçlarınız kullanılabilir."
+  },
+  "1d9c01efb003924f425a": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Connecting to iPhone…",
+    "translation": "iPhone’a bağlanılıyor…"
   },
   "1dcb2a12854f0e750611": {
     "origin": "manual",
@@ -558,6 +614,13 @@
     "reviewedAt": "2026-10-15T02:35:05.637384+00:00",
     "source": "Black O-O",
     "translation": "Siyah O-O"
+  },
+  "1f982027eb8954fce4a0": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "No clear chessboard found. Take a screenshot showing the whole board.",
+    "translation": "Net bir satranç tahtası bulunamadı. Tahtanın tamamını gösteren ekran görüntüsü alın."
   },
   "1f99c6c4d889c2f64017": {
     "origin": "manual",
@@ -707,11 +770,18 @@
     "translation": "Vezir"
   },
   "25acdbba03e74422a3c3": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:05.637413+00:00",
-    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Your photos stay on your device.",
-    "translation": "Chess Best Move, içindeki satranç tahtasını bulmak için en son ekran görüntünüzü okur. Fotoğraflarınız aygıtınızda kalır."
+    "origin": "manual-reviewed",
+    "reason": "Preserved the reviewed, shipped Watch-aware Photos permission text and synchronized its stale editorial record.",
+    "reviewedAt": "2026-10-22",
+    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch.",
+    "translation": "Chess Best Move, satranç tahtasını bulmak için son ekran görüntünüzü okur. Analiz cihazınızda yapılır. Apple Watch’unuzdan isterseniz kırpılmış sonuç eşlenmiş Watch’unuza gönderilir."
+  },
+  "261a382bd2ca0ea10bfb": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Previous result",
+    "translation": "Önceki sonuç"
   },
   "26336eb38bf024047a48": {
     "origin": "manual",
@@ -765,6 +835,13 @@
     "reviewedAt": "2026-10-15T02:35:05.637421+00:00",
     "source": "Pro Lifetime",
     "translation": "Pro ömür boyu"
+  },
+  "2910133281bab79b32de": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187743+00:00",
+    "source": "Analysis Timed Out",
+    "translation": "Analiz zaman aşımına uğradı"
   },
   "291cfbdc85c10d3c9545": {
     "origin": "manual",
@@ -856,6 +933,13 @@
     "reviewedAt": "2026-10-15T02:35:05.637437+00:00",
     "source": "1 second",
     "translation": "1 saniye"
+  },
+  "2c62caca8fddb27bab57": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Preview",
+    "translation": "Önizleme"
   },
   "2ca92ea6fc826b79bd73": {
     "origin": "manual",
@@ -997,12 +1081,33 @@
     "source": "White knight",
     "translation": "Beyaz at"
   },
+  "32e8183686cc90e55b3a": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "The iPhone did not finish in time. Open it once, then try again with a new screenshot.",
+    "translation": "iPhone zamanında tamamlayamadı. Uygulamayı bir kez açın, sonra yeni ekran görüntüsüyle tekrar deneyin."
+  },
   "33698b9ed1e411a48093": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
     "reviewedAt": "2026-10-15T02:35:54.897197+00:00",
     "source": "Find Best Move",
     "translation": "En iyi hamleyi bul"
+  },
+  "339039870fce22c89b05": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "For puzzles, study, and reviewing games.",
+    "translation": "Bulmacalar, çalışma ve oyun incelemeleri için."
+  },
+  "339dfc6e239d77bac8cd": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once.",
+    "translation": "iPhone uygulamasına ulaşılamadı. Bağlantıyı kontrol edin ve iPhone’da Chess Best Move’u bir kez açın."
   },
   "33aa9217c69148ce87b3": {
     "origin": "manual",
@@ -1157,6 +1262,13 @@
     "source": "%1$@ to %2$@",
     "translation": "%1$@ %2$@ karesine gider"
   },
+  "3cb7995d982cddcd11f5": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "White to move",
+    "translation": "Sıra beyazda"
+  },
   "3d1d4bc28319adea88c9": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -1170,6 +1282,13 @@
     "reviewedAt": "2026-10-15T02:35:54.897220+00:00",
     "source": "With the position on screen, press the side button and the volume up button at the same time.",
     "translation": "Konum ekrandayken yan düğmeye ve sesi aç düğmesine aynı anda basın."
+  },
+  "3d3dabafab4bba34d619": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Analyze latest screenshot",
+    "translation": "Son ekran görüntüsünü analiz et"
   },
   "3d9b2632efac1ceb17cc": {
     "origin": "manual",
@@ -1241,6 +1360,13 @@
     "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it.",
     "translation": "Aygıtınızın kilidini açın ve istenen izinleri verin. Siri kestirmeyi çalıştırdığında ekran görüntüsünü alır, Son Kullanılanlar’a kaydeder ve analiz etmek için Chess Best Move’u açar."
   },
+  "3f960063d371f12ae689": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses.",
+    "translation": "Analiz kalmadı. Pro veya daha fazla analiz için iPhone’da Chess Best Move’u açın."
+  },
   "3fa20c3bb030ed094bad": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -1269,6 +1395,13 @@
     "source": "Buy %1$lld analyses: %2$@",
     "translation": "%1$lld analiz satın al: %2$@"
   },
+  "4057ebf26e77bd54e825": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187681+00:00",
+    "source": "Saved analysis",
+    "translation": "Kaydedilmiş analiz"
+  },
   "40c1ba017a653b81f275": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -1296,6 +1429,13 @@
     "reviewedAt": "2026-10-15T02:35:54.897240+00:00",
     "source": "White castles kingside",
     "translation": "Beyaz kısa rok yapar"
+  },
+  "4225e39d48c0f9555aed": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Screenshot",
+    "translation": "Ekran görüntüsü"
   },
   "423b8ea192c86cc81134": {
     "origin": "manual",
@@ -1359,6 +1499,13 @@
     "reviewedAt": "2026-10-15T02:35:54.897248+00:00",
     "source": "%1$lld analyses for %2$@. One-time purchase, not a subscription. They never expire.",
     "translation": "%2$@ karşılığında %1$lld analiz. Abonelik değil, tek seferlik satın alımdır. Süreleri dolmaz."
+  },
+  "46ea13be918e93565ceb": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187774+00:00",
+    "source": "No Analyses Remaining",
+    "translation": "Analiz hakkı kalmadı"
   },
   "473117d968771f650279": {
     "origin": "manual",
@@ -1532,6 +1679,13 @@
     "source": "No free analyses left",
     "translation": "Ücretsiz analiz hakkınız kalmadı"
   },
+  "50b88b7d24cd26ff36b2": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187755+00:00",
+    "source": "Could Not Reach iPhone",
+    "translation": "iPhone’a ulaşılamadı"
+  },
   "50cb2104f5e6ab9a119b": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -1539,12 +1693,40 @@
     "source": "Stopped",
     "translation": "Durduruldu"
   },
+  "510a9b8e04417f86183d": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187725+00:00",
+    "source": "Updated after more thinking: ",
+    "translation": "Daha uzun düşünmenin ardından güncellendi: "
+  },
   "52a8cad2e968eab8877f": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
     "reviewedAt": "2026-10-15T02:35:54.897274+00:00",
     "source": "Side to move",
     "translation": "Hamle sırası"
+  },
+  "52cf195b4cfbd0ddd891": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Best Move",
+    "translation": "En iyi hamle"
+  },
+  "534e6486895ac02d1ea8": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187558+00:00",
+    "source": "Clear History?",
+    "translation": "Geçmiş temizlensin mi?"
+  },
+  "542a9756840cf6573c30": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone.",
+    "translation": "Bu konumun doğrulanması gerekiyor. Ekran görüntüsünü iPhone’da Chess Best Move’da açın."
   },
   "549342cc819bac01d613": {
     "origin": "manual",
@@ -1566,6 +1748,13 @@
     "reviewedAt": "2026-10-15T02:35:54.897277+00:00",
     "source": "Payment is charged to your Apple Account when you confirm. The subscription renews automatically at the same price %@ unless you cancel at least 24 hours before the current period ends. Manage or cancel in Settings > Apple Account > Subscriptions.",
     "translation": "Onay verdiğinizde ödeme Apple Hesabınızdan alınır. Geçerli dönem sona ermeden en az 24 saat önce iptal etmediğiniz sürece abonelik aynı fiyatla %1$@ otomatik yenilenir. Yönetmek veya iptal etmek için Ayarlar > Apple Hesabı > Abonelikler yolunu izleyin."
+  },
+  "5500cc5a7d89d26c4065": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187609+00:00",
+    "source": "History",
+    "translation": "Geçmiş"
   },
   "554a70b65bb954910299": {
     "origin": "manual",
@@ -1601,6 +1790,13 @@
     "reviewedAt": "2026-10-15T02:35:54.897282+00:00",
     "source": "assumed: you are at the bottom",
     "translation": "varsayım: siz alttasınız"
+  },
+  "5682dfc843181d3f26e7": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187667+00:00",
+    "source": "Originally: %@",
+    "translation": "İlk sonuç: %@"
   },
   "575af5d5ce253bbe2e3b": {
     "origin": "manual",
@@ -1693,6 +1889,13 @@
     "source": "The Change in the Published Source",
     "translation": "Yayımlanan kaynak koddaki değişiklik"
   },
+  "5ba4fbbe84be617cc251": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187816+00:00",
+    "source": "iPhone Setup Needed",
+    "translation": "iPhone ayarı gerekiyor"
+  },
   "5bacd811417f205a5ef3": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -1720,6 +1923,13 @@
     "reviewedAt": "2026-10-15T02:35:54.897297+00:00",
     "source": "Swaps which side is at the bottom",
     "translation": "Altta hangi tarafın olduğunu değiştirir"
+  },
+  "5c5275547801b67b8388": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187697+00:00",
+    "source": "Showing the Better Move",
+    "translation": "Daha iyi hamle gösteriliyor"
   },
   "5c5fc224db6811288bcc": {
     "origin": "manual",
@@ -1854,12 +2064,26 @@
     "source": "king",
     "translation": "şah"
   },
+  "63e2d541f4386c18b94e": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187580+00:00",
+    "source": "Delete",
+    "translation": "Sil"
+  },
   "640e656d6c901c2a0a28": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
     "reviewedAt": "2026-10-15T02:35:54.897316+00:00",
     "source": "Stockfish Authors",
     "translation": "Stockfish yazarları"
+  },
+  "6411e8805c708baa1173": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187778+00:00",
+    "source": "No Chessboard Found",
+    "translation": "Satranç tahtası bulunamadı"
   },
   "64e585029e8501952659": {
     "origin": "manual",
@@ -1902,6 +2126,13 @@
     "reviewedAt": "2026-10-15T02:35:54.897323+00:00",
     "source": "Open Chess Best Move to see the best move.",
     "translation": "En iyi hamleyi görmek için Chess Best Move’u açın."
+  },
+  "663db260526dac9b16f8": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187747+00:00",
+    "source": "Check the Position on iPhone",
+    "translation": "Konumu iPhone’da kontrol edin"
   },
   "6733e7cb1f741b9c0bf5": {
     "origin": "manual",
@@ -1952,6 +2183,13 @@
     "source": "New chess screenshots are recognized automatically. Tap Analyze if asked.",
     "translation": "Yeni satranç ekran görüntüleri otomatik tanınır. İstenirse Analiz et’e dokunun."
   },
+  "696d240e9b497feee049": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187812+00:00",
+    "source": "iPhone Is Busy",
+    "translation": "iPhone meşgul"
+  },
   "69c15e9d2e3542c71551": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2000,6 +2238,13 @@
     "reviewedAt": "2026-10-15T02:36:48.351862+00:00",
     "source": "Taken ",
     "translation": "Alınma zamanı: "
+  },
+  "6b2121a9ddff472f7193": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187563+00:00",
+    "source": "Completed analyses appear here. Reopen a saved result without using another analysis.",
+    "translation": "Tamamlanan analizler burada görünür. Kaydedilmiş bir sonucu başka bir analiz hakkı kullanmadan yeniden açın."
   },
   "6b38e2d9c0ac9816c3a6": {
     "origin": "manual",
@@ -2085,6 +2330,13 @@
     "source": "A longer search that keeps running after the answer, up to 2 minutes.",
     "translation": "Yanıt geldikten sonra devam eden, en fazla 2 dakikalık daha uzun bir arama."
   },
+  "70be6dcce5ca9fab1453": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again.",
+    "translation": "iPhone uygulaması meşgul. iPhone’da Chess Best Move’dan çıkıp tekrar deneyin."
+  },
   "7126cbfe690ae7fcd3bc": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2098,6 +2350,13 @@
     "reviewedAt": "2026-10-15T02:36:48.351879+00:00",
     "source": "%@, check",
     "translation": "%1$@, şah"
+  },
+  "7213480c268ebe0bbbb5": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187790+00:00",
+    "source": "Shows the board full screen and plays the move. Tap again to return.",
+    "translation": "Tahtayı tam ekran gösterir ve hamleyi canlandırır. Geri dönmek için tekrar dokunun."
   },
   "727e45b78149119cd649": {
     "origin": "manual",
@@ -2218,6 +2477,13 @@
     "source": "1 hour ago",
     "translation": "1 saat önce"
   },
+  "793d04740f95955874b6": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187804+00:00",
+    "source": "Tap to return to the result.",
+    "translation": "Sonuca dönmek için dokunun."
+  },
   "79439b9e21d6d4f66096": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2302,6 +2568,13 @@
     "source": "Waiting for approval",
     "translation": "Onay bekleniyor"
   },
+  "7e78fe1b484430d6c26d": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Uses one analysis or Pro access. Reanalysis may be free.",
+    "translation": "Bir analiz veya Pro erişimi kullanır. Yeniden analiz ücretsiz olabilir."
+  },
   "7e7d1ed1100c4ead2d29": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2329,6 +2602,20 @@
     "reviewedAt": "2026-10-15T02:36:48.351920+00:00",
     "source": "White O-O",
     "translation": "Beyaz O-O"
+  },
+  "8043a6e43f92709522c0": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187684+00:00",
+    "source": "Saved analysis. No analysis used.",
+    "translation": "Kaydedilmiş analiz. Analiz hakkı kullanılmadı."
+  },
+  "80b9afb974b45fe0a9eb": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187716+00:00",
+    "source": "This removes saved positions and results from this device. It does not restore spent analyses.",
+    "translation": "Kaydedilmiş konumlar ve sonuçlar bu aygıttan kaldırılır. Kullanılan analiz hakları geri verilmez."
   },
   "81298ba6b748cae97c27": {
     "origin": "manual",
@@ -2371,6 +2658,13 @@
     "reviewedAt": "2026-10-15T02:36:48.351926+00:00",
     "source": "No free analyses",
     "translation": "Ücretsiz analiz yok"
+  },
+  "83255acd3979ce312e51": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187693+00:00",
+    "source": "Show better move",
+    "translation": "Daha iyi hamleyi göster"
   },
   "832bd01668310a53e09a": {
     "origin": "manual",
@@ -2427,6 +2721,13 @@
     "reviewedAt": "2026-10-15T02:36:48.351936+00:00",
     "source": "Lifetime Is Unlocked",
     "translation": "Ömür boyu erişim açık"
+  },
+  "859059436ba9e962f747": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187511+00:00",
+    "source": "Better Move Found",
+    "translation": "Daha iyi bir hamle bulundu"
   },
   "85a656cee46268df0615": {
     "origin": "manual",
@@ -2589,6 +2890,13 @@
     "source": "No chessboard found in that image. This didn't use a free analysis.",
     "translation": "Görüntüde satranç tahtası bulunamadı. Ücretsiz analiz hakkınız kullanılmadı."
   },
+  "8ff8022759c2586908b5": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187751+00:00",
+    "source": "Close",
+    "translation": "Kapat"
+  },
   "903a4800c31fe1193ae8": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2604,11 +2912,11 @@
     "translation": "Şah"
   },
   "90e63fb23a464450e98d": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:36:48.351969+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187720+00:00",
     "source": "Try again",
-    "translation": "Yeniden dene"
+    "translation": "Tekrar dene"
   },
   "90eabed501ac867eae87": {
     "origin": "manual",
@@ -2736,12 +3044,26 @@
     "source": "Purchases restored.",
     "translation": "Satın alımlar geri yüklendi."
   },
+  "979109a9e1db6f74db4b": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187784+00:00",
+    "source": "No Recent Screenshot",
+    "translation": "Yakın tarihli ekran görüntüsü yok"
+  },
   "97be1605c9ca6064e0ff": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
     "reviewedAt": "2026-10-15T02:36:48.351990+00:00",
     "source": "Best reply",
     "translation": "En iyi yanıt"
+  },
+  "981b6537d90062639b33": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187630+00:00",
+    "source": "More thinking found a better move. The quick result is still shown. Pro unlocks the improvement.",
+    "translation": "Daha uzun düşünme sonucunda daha iyi bir hamle bulundu. Hızlı sonuç hâlâ gösteriliyor. Pro ile iyileştirilmiş sonuca erişebilirsiniz."
   },
   "9897b1f38af92e3c928c": {
     "origin": "manual",
@@ -2943,6 +3265,13 @@
     "source": "Your subscriptions opened in the App Store.",
     "translation": "Abonelikleriniz App Store’da açıldı."
   },
+  "a265db5838f08c669aa4": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187648+00:00",
+    "source": "Opens the saved result without starting a new search.",
+    "translation": "Yeni bir arama başlatmadan kaydedilmiş sonucu açar."
+  },
   "a2960b9ff94d3fe45185": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2992,6 +3321,13 @@
     "source": "Edited",
     "translation": "Düzenlendi"
   },
+  "a73e187a0f797cb5423b": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187688+00:00",
+    "source": "Search moves or positions",
+    "translation": "Hamle veya konum ara"
+  },
   "a745d75f624a87d78e2a": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -3033,6 +3369,13 @@
     "reviewedAt": "2026-10-15T02:38:08.607078+00:00",
     "source": "A longer search found a different move. Pro shows it.",
     "translation": "Daha uzun aramada farklı bir hamle bulundu. Pro bu hamleyi gösterir."
+  },
+  "a9e1e0f5322889310fe7": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Open screenshot analysis on your Watch.",
+    "translation": "Watch’unuzda ekran görüntüsü analizini açın."
   },
   "aa8e4d22a630fafd9a7a": {
     "origin": "manual",
@@ -3151,6 +3494,13 @@
     "reviewedAt": "2026-10-15T02:38:08.607101+00:00",
     "source": "Rook",
     "translation": "Kale"
+  },
+  "ae4aadc6ad2c0e168da6": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187808+00:00",
+    "source": "Try again",
+    "translation": "Tekrar dene"
   },
   "af0a2f11226d747cbacf": {
     "origin": "manual",
@@ -3516,12 +3866,26 @@
     "source": "%1$@, %2$lld left",
     "translation": "%1$@, %2$lld kaldı"
   },
+  "c1950fdb3fbb4ebe2024": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots.",
+    "translation": "iPhone’da Chess Best Move’u açın ve yeni ekran görüntülerini okumak için Fotoğraflar’a tam erişim verin."
+  },
   "c1ae1274933d7443b024": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
     "reviewedAt": "2026-10-15T02:38:08.607163+00:00",
     "source": "These controls are in TestFlight builds and never in an App Store build. They grant analyses, never Pro: Pro comes from a purchase, which costs nothing in the TestFlight sandbox.",
     "translation": "Bu denetimler TestFlight derlemelerinde bulunur, App Store derlemelerinde bulunmaz. Analiz hakkı verirler, Pro vermezler. Pro, TestFlight test ortamında ücretsiz olan bir satın alma işlemiyle açılır."
+  },
+  "c1ce37fd19571d60c7ae": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Analyzing on iPhone…",
+    "translation": "iPhone’da analiz ediliyor…"
   },
   "c35f12c4a2f33312cb50": {
     "origin": "manual",
@@ -3649,6 +4013,13 @@
     "source": "Switches the side to move",
     "translation": "Hamle sırasını değiştirir"
   },
+  "cc314477ef7a5132fb19": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187706+00:00",
+    "source": "Tap to animate the move. The original position returns afterward.",
+    "translation": "Hamleyi canlandırmak için dokunun. Ardından ilk konum geri gelir."
+  },
   "cc62bddd9cda7794eec7": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -3677,6 +4048,13 @@
     "source": "Best move: ",
     "translation": "En iyi hamle: "
   },
+  "cf0998b5f5f4c68ffcbc": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Take a new screenshot on iPhone first.",
+    "translation": "Önce iPhone’da yeni ekran görüntüsü alın."
+  },
   "cf119788804288753a44": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -3690,6 +4068,20 @@
     "reviewedAt": "2026-10-15T02:38:08.607190+00:00",
     "source": "Their move",
     "translation": "Diğer oyuncunun hamlesi"
+  },
+  "cf56d85cb6c1a8735408": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Black to move",
+    "translation": "Sıra siyahta"
+  },
+  "d0527405a038825ab3d4": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187614+00:00",
+    "source": "History could not be read. The saved file has been kept. Clear History to start again.",
+    "translation": "Geçmiş okunamadı. Kaydedilmiş dosya korundu. Yeniden başlamak için geçmişi temizleyin."
   },
   "d0df18c25448324ffe56": {
     "origin": "manual",
@@ -3817,6 +4209,13 @@
     "source": "One payment. Not a subscription.",
     "translation": "Tek ödeme. Abonelik değil."
   },
+  "d5f6095a4985398a57ad": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187734+00:00",
+    "source": "Your last 500 positions and results are saved only on this device. Original screenshots are not saved. Deleting history does not restore spent analyses.",
+    "translation": "Son 500 konumunuz ve sonuçları yalnızca bu aygıtta kaydedilir. Orijinal ekran görüntüleri kaydedilmez. Geçmişi silmek, kullanılan analiz haklarını geri vermez."
+  },
   "d6083f8052ed2dac745a": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -3887,6 +4286,13 @@
     "source": "Take a chess screenshot, then open this app. Analysis starts automatically with unlimited access; otherwise, tap Analyze when asked.",
     "translation": "Bir satranç ekran görüntüsü alın, ardından bu uygulamayı açın. Sınırsız erişiminiz varsa analiz otomatik başlar; yoksa istendiğinde Analiz et’e dokunun."
   },
+  "d85037b742734e1a64a0": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Checkmate",
+    "translation": "Mat"
+  },
   "d8922d6556481e6ec2fc": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -3900,6 +4306,13 @@
     "reviewedAt": "2026-10-15T02:38:08.607227+00:00",
     "source": "Home and Lock Screen widgets",
     "translation": "Ana Ekran ve Kilitli Ekran araç takımları"
+  },
+  "d9a43d005864ec0190ce": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Stalemate",
+    "translation": "Pat"
   },
   "db1660a24ce7dafda93f": {
     "origin": "manual",
@@ -3950,6 +4363,13 @@
     "source": "Ready to Analyze",
     "translation": "Analize hazır"
   },
+  "ded9584866966b8e185a": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187639+00:00",
+    "source": "No Saved Analyses",
+    "translation": "Kaydedilmiş analiz yok"
+  },
   "dee3ca0f80485f21bb12": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -3984,6 +4404,13 @@
     "reviewedAt": "2026-10-15T02:38:08.607241+00:00",
     "source": "Unlimited analyses, billed yearly",
     "translation": "Sınırsız analiz, yıllık ödeme"
+  },
+  "e099114a73c997cdcc25": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187673+00:00",
+    "source": "Play move animation",
+    "translation": "Hamleyi canlandır"
   },
   "e0a41bca7bc6a1d87a52": {
     "origin": "manual",
@@ -4188,6 +4615,13 @@
     "source": "Drop to analyze",
     "translation": "Analiz etmek için bırakın"
   },
+  "f0f0e633bd15a07013db": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187759+00:00",
+    "source": "Expand chessboard",
+    "translation": "Satranç tahtasını büyüt"
+  },
   "f1ef1715d942f72e1abe": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -4201,6 +4635,13 @@
     "reviewedAt": "2026-10-15T02:38:08.607276+00:00",
     "source": "Step %1$lld: %2$@",
     "translation": "%1$lld. adım: %2$@"
+  },
+  "f2d1a1e8e9c4f06348a0": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187800+00:00",
+    "source": "Shows the board full screen. Tap again to return.",
+    "translation": "Tahtayı tam ekran gösterir. Geri dönmek için tekrar dokunun."
   },
   "f2dd0e37c1d1211e5b1d": {
     "origin": "manual",
@@ -4369,6 +4810,13 @@
     "reviewedAt": "2026-10-15T02:38:08.607303+00:00",
     "source": "Open Chess Best Move and analyze your latest saved screenshot.",
     "translation": "Chess Best Move’u açıp son kaydettiğiniz ekran görüntüsünü analiz edin."
+  },
+  "fdceecdbf50d36eabb35": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.187770+00:00",
+    "source": "New positions use one analysis or Pro access.",
+    "translation": "Yeni konumlar bir analiz hakkı veya Pro erişimi kullanır."
   },
   "fe5dec5d30fb5fe59c33": {
     "origin": "manual",

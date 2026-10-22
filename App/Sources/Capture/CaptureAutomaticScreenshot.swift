@@ -76,6 +76,10 @@ final class CaptureAutomaticScreenshotModel {
         else { return }
         guard let image = try? await CaptureScreenshotImport.importedImage(for: asset, library: library),
               isCurrent() else { return }
+        if app.restoreSavedImage(image) {
+            analyzed.markAnalyzed(asset.localIdentifier)
+            return
+        }
         let outcome = await app.recognition.recognize(image)
         guard isCurrent(), CaptureRecentScreenshotPolicy.isRecent(date, now: now()) else { return }
         // A newer screenshot may have arrived while recognition was running.
@@ -87,7 +91,9 @@ final class CaptureAutomaticScreenshotModel {
         switch outcome {
         case .confident(let snapshot):
             analyzed.markAnalyzed(asset.localIdentifier)
-            if app.store.isPro {
+            if app.restoreSavedAnalysis(of: snapshot, origin: .recognition) {
+                return
+            } else if app.store.isPro {
                 app.requestAnalysis(of: snapshot, origin: .recognition)
             } else {
                 app.automaticScreenshotConfirmationID = snapshot.id

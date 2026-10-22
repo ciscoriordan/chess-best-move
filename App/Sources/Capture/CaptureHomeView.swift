@@ -55,6 +55,13 @@ struct HomeView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) { SettingsToolbarButton() }
             ToolbarItem(placement: .principal) { AppWordmark() }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(String(localized: "History"), systemImage: "clock.arrow.circlepath") {
+                    app.showHistory()
+                }
+                .labelStyle(.iconOnly)
+                .accessibilityIdentifier("home.history")
+            }
         }
         .overlay {
             if isDropTargeted {

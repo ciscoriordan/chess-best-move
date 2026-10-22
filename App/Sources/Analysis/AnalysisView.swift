@@ -56,6 +56,8 @@ enum AnalysisLayout {
 }
 
 private struct AnalysisScreen: View {
+    @State private var playback: BoardMovePlayback?
+    @State private var playbackID = UUID()
     @State private var model: AnalysisScreenModel
     @State private var isPeeking = false
 
@@ -100,6 +102,14 @@ private struct AnalysisScreen: View {
         .onChange(of: scenePhase) { _, phase in model.scenePhaseChanged(to: phase) }
         .sensoryFeedback(.success, trigger: model.completionCount)
         .sensoryFeedback(.selection, trigger: model.adjustmentCount)
+        .sensoryFeedback(.success, trigger: model.improvementCount)
+        .onChange(of: model.position) { _, _ in playback = nil }
+        .onChange(of: model.bestMove?.move) { _, _ in playback = nil }
+        .task(id: playbackID) {
+            guard let playback else { return }
+            do { try await Task.sleep(for: .seconds(playback.duration)) } catch { return }
+            self.playback = nil
+        }
         #if DEBUG
         .onChange(of: model.bestMove?.san) { _, san in
             if san != nil { DebugTimeline.shared.mark("firstArrow") }
@@ -134,6 +144,7 @@ private struct AnalysisScreen: View {
             "whiteAtBottom=\(snapshot.whiteAtBottom ? 1 : 0)",
             "fen=\(model.position.fen)",
             "timeline=\(DebugTimeline.shared.summary)",
+            "playing=\(playback != nil ? 1 : 0)",
         ]
         return Text(fields.joined(separator: ";"))
             .font(.system(size: 1))
@@ -226,12 +237,9 @@ private struct AnalysisScreen: View {
     /// Shows the original crop under an edited diagram, or puts it away: what pressing and
     /// holding the board does, as something that is not a gesture.
     ///
-    /// Nothing on this board is tappable and it has no squares to move a cursor over, so it is
-    /// one focus stop whose **activation** is the comparison - which is the only thing the board
-    /// does. That is what Full Keyboard Access presses Space for, and what Switch Control taps.
-    /// Without it the comparison would be reachable by a finger and by VoiceOver's custom
-    /// action and by nothing else. (The boards with squares on them read their own keys
-    /// instead; design.md 12, "Keyboard".)
+    /// The board is one focus stop: activation plays the visible move when available,
+    /// otherwise it compares the crop. Comparison also remains a named custom action.
+    /// Full Keyboard Access and Switch Control can activate this same focus stop.
     private func togglePeek() {
         guard canPeek else { return }
         isPeeking.toggle()
@@ -242,7 +250,9 @@ private struct AnalysisScreen: View {
         let showsScreenshot = snapshot.boardImage != nil && isPeeking
         return BoardFrame {
             ZStack(alignment: .topTrailing) {
-                if showsScreenshot, let image = snapshot.boardImage {
+                if let playback {
+                    playbackBoard(playback).id(playbackID)
+                } else if showsScreenshot, let image = snapshot.boardImage {
                     BoardScreenshot(image: image, snapshot: snapshot)
                 } else {
                     ScreenshotStyledBoard(snapshot: snapshot, appearance: app.settings.boardAppearance)
@@ -251,7 +261,7 @@ private struct AnalysisScreen: View {
                 AnalysisArrowOverlay(
                     // The readout is what decides which moves are drawn and whose they are,
                     // so the board and the words under it can never disagree (design.md 9.4).
-                    arrows: isPeeking ? [] : model.resultReadout.boardArrows,
+                    arrows: isPeeking || playback != nil ? [] : model.resultReadout.boardArrows,
                     whiteAtBottom: snapshot.whiteAtBottom,
                     isFinal: isFinal
                 )
@@ -272,7 +282,8 @@ private struct AnalysisScreen: View {
         } onPressingChanged: { pressing in
             isPeeking = canPeek && pressing
         }
-        .focusable(canPeek, interactions: .activate)
+        .simultaneousGesture(TapGesture().onEnded { playMove() })
+        .focusable(canPeek || canPlayMove, interactions: .activate)
         .accessibilityElement(children: .ignore)
         .accessibilityIdentifier("analysis.board")
         .accessibilityLabel(Text(boardAccessibilityLabel))
@@ -280,12 +291,41 @@ private struct AnalysisScreen: View {
         .accessibilityCustomContent("Pieces", AnalysisSpeech.pieceList(snapshot.position.board))
         .accessibilityCustomContent("Side to move", sideToMoveAccessibilityText)
         .accessibilityCustomContent("FEN", snapshot.position.fen)
-        // The hold that reveals the original crop under an edited diagram is undocumented on
-        // screen and unreachable with VoiceOver running, so it is also the board's activation -
-        // which is what a keyboard and Switch Control can reach - and a named custom action,
-        // which is what says out loud what activating it will do.
-        .accessibilityAction { togglePeek() }
-        .accessibilityActions { peekAction }
+        // Playback and crop comparison both have named actions for assistive technologies.
+        .accessibilityHint(canPlayMove ? String(localized: "Tap to animate the move. The original position returns afterward.") : "")
+        .accessibilityAction { if canPlayMove { playMove() } else { togglePeek() } }
+        .accessibilityActions {
+            if canPlayMove { Button("Play move animation") { playMove() } }
+            peekAction
+        }
+    }
+
+    private var canPlayMove: Bool { isFinal && !model.resultReadout.boardArrows.isEmpty }
+
+    private func playMove() {
+        guard canPlayMove else { return }
+        isPeeking = false
+        playback = .make(position: model.position, moves: model.resultReadout.boardArrows.map(\.move),
+                         whiteAtBottom: snapshot.whiteAtBottom)
+        playbackID = UUID()
+    }
+
+    private func playbackBoard(_ playback: BoardMovePlayback) -> some View {
+        var sprites: [String: CGImage] = [:]
+        var light = Palette.greenBoardLight
+        var dark = Palette.greenBoardDark
+        if app.settings.boardAppearance == .screenshot, let image = snapshot.boardImage {
+            let artwork = ScreenshotBoardArtwork(snapshot: snapshot, image: image)
+            if let square = Square(index: 1) { light = artwork.background(for: square) }
+            if let square = Square(index: 0) { dark = artwork.background(for: square) }
+            for piece in snapshot.position.board.compactMap({ $0 }) {
+                if let sprite = artwork.sprite(for: piece) { sprites[String(piece.fenCharacter)] = sprite }
+            }
+        } else if app.settings.boardAppearance == .standard {
+            light = Palette.diagramLight
+            dark = Palette.diagramDark
+        }
+        return BoardMovePlaybackView(playback: playback, sprites: sprites, light: light, dark: dark)
     }
 
     /// The custom action that stands in for pressing and holding the board. Nothing to offer
@@ -443,6 +483,16 @@ private struct AnalysisScreen: View {
             .padding(.top, Spacing.s3)
         readout
             .padding(.vertical, Spacing.s3)
+        if let saved = model.savedResult {
+            VStack(alignment: .leading, spacing: Spacing.s1) {
+                Text("Saved analysis. No analysis used.").typography(.callout)
+                Text(saved.analyzedAt, format: .dateTime.month(.abbreviated).day().hour().minute())
+                    .typography(.caption)
+            }
+            .foregroundStyle(Palette.ink2)
+            .padding(.bottom, Spacing.s3)
+            .accessibilityIdentifier("analysis.savedResult")
+        }
         if let right = model.assumedCastlingRight {
             castlingCaution(right)
                 .padding(.bottom, Spacing.s3)

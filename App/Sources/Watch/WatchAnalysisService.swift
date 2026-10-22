@@ -23,6 +23,7 @@ final class WatchAnalysisService {
     private let phoneIsActive: @MainActor () -> Bool
     private let now: @Sendable () -> Date
     private let timeBudget: Duration
+    private let history: AnalysisHistoryStore
     private var activeID: UUID?
     private var ownsEngine = false
     private var completed: [WatchAnalysisReply] = []
@@ -31,7 +32,8 @@ final class WatchAnalysisService {
          recognition: any RecognitionService, loadScreenshot: @escaping ScreenshotLoader,
          phoneIsActive: @escaping @MainActor () -> Bool,
          now: @escaping @Sendable () -> Date = { .now }, timeBudget: Duration = .seconds(16),
-         foregroundEngine: (any EngineController)? = nil) {
+         foregroundEngine: (any EngineController)? = nil,
+         history: AnalysisHistoryStore = AnalysisHistoryStore()) {
         self.store = store
         self.credits = credits
         self.engine = engine
@@ -41,6 +43,7 @@ final class WatchAnalysisService {
         self.now = now
         self.timeBudget = timeBudget
         self.foregroundEngine = foregroundEngine
+        self.history = history
     }
 
     static func live(app: AppModel, phoneIsActive: @escaping @MainActor () -> Bool) -> WatchAnalysisService {
@@ -56,7 +59,7 @@ final class WatchAnalysisService {
                 let loaded = try await CapturePhotoLibrary.imageData(for: asset.localIdentifier, allowNetwork: false)
                 let image = try CaptureImageDecoder.decode(data: loaded.data, orientation: loaded.orientation)
                 return WatchScreenshot(date: date, image: ImportedImage(image: image, source: .latestScreenshot))
-            }, phoneIsActive: phoneIsActive, foregroundEngine: app.engine)
+            }, phoneIsActive: phoneIsActive, foregroundEngine: app.engine, history: app.history)
     }
 
     /// Called synchronously on activation/expiry before the foreground can take the engine.
@@ -103,6 +106,10 @@ final class WatchAnalysisService {
         guard (-5...WatchWire.screenshotMaximumAge).contains(now().timeIntervalSince(screenshot.date)) else {
             return failure(.noFreshScreenshot)
         }
+        if let cached = history.entry(for: screenshot.image, engineVersion: engine.engineVersion),
+           let snapshot = cached.snapshot(importing: screenshot.image) {
+            return await savedReply(cached, snapshot: snapshot, screenshot: screenshot, request: request)
+        }
         let outcome = await recognition.recognize(screenshot.image)
         guard isCurrent(), ContinuousClock.now < deadline else { return failure(.timedOut) }
         let snapshot: BoardSnapshot
@@ -114,7 +121,12 @@ final class WatchAnalysisService {
         let position = AnalysisPositionCheck.sanitized(snapshot.position)
         let issues = position.validate()
         guard issues.allSatisfy({ $0 == .noLegalMoves }) else { return failure(.needsCorrection) }
+        if let cached = history.entry(for: position, engineVersion: engine.engineVersion) {
+            return await savedReply(cached, snapshot: snapshot, screenshot: screenshot, request: request)
+        }
         if issues.contains(.noLegalMoves) {
+            history.record(snapshot: snapshot, origin: .recognition, readout: nil,
+                checkmate: position.isCheckmate, thinkTime: .threeSeconds, engineVersion: engine.engineVersion)
             return WatchAnalysisReply(requestID: request.id,
                 status: position.isCheckmate ? .checkmate : .stalemate,
                 screenshotDate: screenshot.date, whiteToMove: position.sideToMove == .white)
@@ -149,6 +161,8 @@ final class WatchAnalysisService {
         guard engine.phase == .finished, let uci = engine.readout?.bestMove,
               let move = Move(uci: uci), let san = position.san(for: move) else { return failure(.unavailable) }
         ownsEngine = false
+        history.record(snapshot: snapshot, origin: .recognition, readout: engine.readout,
+            thinkTime: .threeSeconds, engineVersion: engine.engineVersion)
         let thumbnail = await Task.detached {
             WatchBoardThumbnail.make(board: snapshot.boardImage, move: move, whiteAtBottom: snapshot.whiteAtBottom)
         }.value
@@ -156,10 +170,36 @@ final class WatchAnalysisService {
         let reply = WatchAnalysisReply(requestID: request.id, status: .result,
             screenshotDate: screenshot.date, whiteToMove: position.sideToMove == .white,
             san: san, moveDescription: AnalysisSpeech.moveDescription(san: san, move: move,
-                capture: AnalysisCapture.find(for: move, in: position)), thumbnail: thumbnail)
+                capture: AnalysisCapture.find(for: move, in: position)), thumbnail: thumbnail,
+            playback: .make(position: position, moves: [move], whiteAtBottom: snapshot.whiteAtBottom))
         completed.append(reply)
         completed = Array(completed.suffix(8))
         return reply
+    }
+
+    private func savedReply(_ cached: AnalysisHistoryEntry, snapshot: BoardSnapshot,
+                            screenshot: WatchScreenshot, request: WatchAnalysisRequest) async -> WatchAnalysisReply {
+        history.rememberScreenshot(snapshot, for: cached.id)
+        history.touch(cached.id)
+        if let checkmate = cached.checkmate {
+            return WatchAnalysisReply(requestID: request.id, status: checkmate ? .checkmate : .stalemate,
+                screenshotDate: screenshot.date, whiteToMove: snapshot.position.sideToMove == .white)
+        }
+        guard let uci = cached.result?.bestMove, let move = Move(uci: uci),
+              let san = snapshot.position.san(for: move) else {
+            return WatchAnalysisReply(requestID: request.id, status: .unavailable)
+        }
+        let thumbnail = await Task.detached {
+            WatchBoardThumbnail.make(board: snapshot.boardImage, move: move, whiteAtBottom: snapshot.whiteAtBottom)
+        }.value
+        guard activeID == request.id, !Task.isCancelled, !phoneIsActive() else {
+            return WatchAnalysisReply(requestID: request.id, status: .timedOut)
+        }
+        return WatchAnalysisReply(requestID: request.id, status: .result, screenshotDate: screenshot.date,
+            whiteToMove: snapshot.position.sideToMove == .white, san: san,
+            moveDescription: AnalysisSpeech.moveDescription(san: san, move: move,
+                capture: AnalysisCapture.find(for: move, in: snapshot.position)), thumbnail: thumbnail,
+            playback: .make(position: snapshot.position, moves: [move], whiteAtBottom: snapshot.whiteAtBottom))
     }
 
     private var foregroundIsSearching: Bool {

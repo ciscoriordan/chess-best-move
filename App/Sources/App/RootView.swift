@@ -58,6 +58,8 @@ struct RootView: View {
     @ViewBuilder
     private func destination(for route: Route) -> some View {
         switch route {
+        case .history:
+            AnalysisHistoryView()
         case .recognizing(let image):
             RecognizingView(image: image)
         case .boardNotFound(let image):

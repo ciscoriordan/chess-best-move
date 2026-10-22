@@ -5,8 +5,10 @@ import Observation
 // MARK: - Routes
 
 /// Pushed screens. The stack is always one of:
-/// `[]` (Home), `[.recognizing]`, `[.checkPosition]`, `[.boardNotFound]`, `[.analysis]`.
+/// `[]` (Home), `[.recognizing]`, `[.checkPosition]`, `[.boardNotFound]`, `[.analysis]`,
+/// `[.history]`, or `[.history, .analysis]`.
 enum Route: Hashable {
+    case history
     /// Recognizing (design.md 9.2). Capture's `RecognizingView` runs recognition and calls
     /// `AppModel.handleRecognition(_:for:)`.
     case recognizing(ImportedImage)
@@ -93,6 +95,7 @@ final class AnalysisSession: Identifiable, Hashable {
     var snapshot: BoardSnapshot
     fileprivate(set) var creditState: CreditState
     fileprivate(set) var isCreditCommitted = false
+    fileprivate(set) var savedResult: AnalysisHistoryEntry?
 
     init(id: UUID = UUID(), snapshot: BoardSnapshot, origin: AnalysisOrigin, creditState: CreditState = .waitingForPurchase) {
         self.id = id
@@ -131,6 +134,7 @@ final class AppModel {
     let credits: any CreditsService
     let recognition: any RecognitionService
     let engine: any EngineController
+    let history: AnalysisHistoryStore
 
     /// The navigation stack (see `Route`). Leaving a board's Analysis screen by any means
     /// (New, the back button or edge swipe, a new import) drops its pending analysis.
@@ -188,13 +192,15 @@ final class AppModel {
         store: any StoreService,
         credits: any CreditsService,
         recognition: any RecognitionService,
-        engine: any EngineController
+        engine: any EngineController,
+        history: AnalysisHistoryStore = AnalysisHistoryStore()
     ) {
         self.settings = settings
         self.store = store
         self.credits = credits
         self.recognition = recognition
         self.engine = engine
+        self.history = history
         store.addTransactionObserver { [weak self] event in
             self?.handleStoreEvent(event)
         }
@@ -209,7 +215,8 @@ final class AppModel {
             store: store,
             credits: MonetizationFeature.makeCreditsService(store: store),
             recognition: CaptureFeature.makeRecognitionService(),
-            engine: AnalysisFeature.makeEngineController()
+            engine: AnalysisFeature.makeEngineController(),
+            history: .live()
         )
     }
 
@@ -249,6 +256,14 @@ final class AppModel {
     /// downsell taken down this way reports nothing (no downsell follows, no decline is
     /// recorded).
     func importImage(_ image: ImportedImage) {
+        if let saved = history.entry(for: image, engineVersion: engine.engineVersion),
+           let snapshot = saved.snapshot(importing: image) {
+            beginExplicitScreenshotSelection()
+            editor = nil
+            replaceSheets()
+            showSavedAnalysis(saved, snapshot: snapshot, origin: image.source == .shortcut ? .shortcut : .recognition)
+            return
+        }
         beginExplicitScreenshotSelection()
         #if DEBUG
         DebugTimeline.shared.mark("imported")
@@ -335,9 +350,49 @@ final class AppModel {
     /// run. Without credit the board stays on screen, the session becomes the pending
     /// analysis, and the paywall opens (monetization.md 4.2).
     func requestAnalysis(of snapshot: BoardSnapshot, origin: AnalysisOrigin) {
+        if restoreSavedAnalysis(of: snapshot, origin: origin) { return }
         let session = AnalysisSession(snapshot: snapshot, origin: origin)
         path = [.analysis(session)]
         authorize(session, presentingPaywall: true)
+    }
+
+    @discardableResult
+    func restoreSavedAnalysis(of snapshot: BoardSnapshot, origin: AnalysisOrigin) -> Bool {
+        guard let saved = history.entry(for: snapshot.position, engineVersion: engine.engineVersion) else { return false }
+        showSavedAnalysis(saved, snapshot: snapshot, origin: origin)
+        return true
+    }
+
+    @discardableResult
+    func restoreSavedImage(_ image: ImportedImage) -> Bool {
+        guard let saved = history.entry(for: image, engineVersion: engine.engineVersion),
+              let snapshot = saved.snapshot(importing: image) else { return false }
+        showSavedAnalysis(saved, snapshot: snapshot, origin: .recognition)
+        return true
+    }
+
+    func showHistory() {
+        beginExplicitScreenshotSelection()
+        path = [.history]
+    }
+
+    func openHistory(_ saved: AnalysisHistoryEntry) {
+        guard let snapshot = saved.snapshot else { return }
+        showSavedAnalysis(saved, snapshot: snapshot, origin: saved.origin)
+    }
+
+    private func showSavedAnalysis(_ saved: AnalysisHistoryEntry, snapshot: BoardSnapshot, origin: AnalysisOrigin) {
+        pendingAnalysis = nil
+        settings.pendingApprovalBoard = nil
+        automaticScreenshotConfirmationID = nil
+        let authorization = CreditAuthorization(board: snapshot.position.board, origin: origin, decision: .allowedFreeReanalysis)
+        let session = AnalysisSession(snapshot: snapshot, origin: origin, creditState: .authorized(authorization))
+        session.savedResult = saved
+        session.isCreditCommitted = true
+        let wasInHistory: Bool = if case .history? = path.last { true } else { false }
+        path = wasInHistory ? [.history, .analysis(session)] : [.analysis(session)]
+        history.rememberScreenshot(snapshot, for: saved.id)
+        history.touch(saved.id)
     }
 
     /// "Analyze" on a board whose analysis was not run for lack of credit, or that waits for

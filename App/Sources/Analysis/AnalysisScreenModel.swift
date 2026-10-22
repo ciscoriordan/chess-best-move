@@ -87,7 +87,9 @@ final class AnalysisScreenModel {
     private(set) var completionCount = 0
     /// Incremented when the side to move is swapped or the board flipped (selection haptic).
     private(set) var adjustmentCount = 0
+    private(set) var improvementCount = 0
     var isLineExpanded = false
+    private(set) var savedResult: AnalysisHistoryEntry?
 
     @ObservationIgnored private let ledger: AnalysisRunLedger
     @ObservationIgnored private var runToken = 0
@@ -128,6 +130,7 @@ final class AnalysisScreenModel {
     /// readout is the one the whole screen reads: the badge, the arrow, the line, the
     /// evaluation and the depth all come from the answer that is actually shown.
     var readout: EngineReadout? {
+        if let savedResult { return savedResult.result?.value }
         guard ledger.activeSessionID == session.id, runState != .notStarted else { return nil }
         if case .failed = runState { return nil }
         if let adopted = longerSearch.adoptedReadout { return adopted }
@@ -143,6 +146,7 @@ final class AnalysisScreenModel {
 
     /// Checkmate or stalemate on the board shown, once the engine reported it.
     var noLegalMoves: Bool? {
+        if let savedResult { return savedResult.checkmate }
         guard ledger.activeSessionID == session.id, runState == .completed,
               case .noLegalMoves(let checkmate) = app.engine.phase
         else { return nil }
@@ -303,6 +307,10 @@ final class AnalysisScreenModel {
     // MARK: Lifecycle
 
     func appear() {
+        if runState == .notStarted, let saved = session.savedResult {
+            restore(saved)
+            return
+        }
         startObservingEngine()
         // Back from the editor after an interrupted run, the screen offers "Run again"
         // instead of starting by itself.
@@ -344,6 +352,7 @@ final class AnalysisScreenModel {
     /// the credit is committed through `AppModel.analysisDidStart` once the search runs.
     func run(thinkTime: ThinkTime) {
         guard session.canAnalyze else { return }
+        savedResult = nil
         let sanitized = position
         let blocking = AnalysisPositionCheck.blockingIssues(in: sanitized)
         guard blocking.isEmpty else {
@@ -472,6 +481,11 @@ final class AnalysisScreenModel {
         )
     }
 
+    var originalMoveDescription: String? {
+        guard longerSearch.preferredReadout != nil else { return nil }
+        return readoutContent(for: app.engine.readout, status: .done, quickAnswerIsBeaten: false).move?.words
+    }
+
     /// The move the notice names: the one the badge would hold if the deeper answer were
     /// taken, which is the reply where the screenshot caught the turn of the player at the top.
     private var longerSearchMove: AnalysisReadoutContent.MoveText? {
@@ -502,6 +516,7 @@ final class AnalysisScreenModel {
         if let best = bestMove {
             ledger.record(.bestMove(san: best.san, move: best.move, score: readout?.score), for: session.id)
         }
+        saveResult()
         if let notice = longerSearchNotice { announce(notice.spokenSentence) }
     }
 
@@ -522,6 +537,7 @@ final class AnalysisScreenModel {
     /// with automatic switching on, the move is taken first and the notice says it is shown.
     private func longerSearchDidFinish(_ state: AnalysisLongerSearch.State) {
         guard case .prefers = state else { return }
+        improvementCount += 1
         if app.settings.switchesToBetterMoveAutomatically(isPro: app.store.isPro) {
             showTheLongerSearchMove(userAsked: false)
             return
@@ -534,7 +550,35 @@ final class AnalysisScreenModel {
     private func rerunAfterAdjustment() {
         isLineExpanded = false
         guard session.canAnalyze else { return }
+        if let saved = app.history.entry(for: position, engineVersion: app.engine.engineVersion) {
+            if isThinking, ledger.activeSessionID == session.id { app.engine.stop() }
+            longerSearch.cancel()
+            restore(saved)
+            return
+        }
         run(thinkTime: runThinkTime)
+    }
+
+    private func restore(_ saved: AnalysisHistoryEntry) {
+        runToken += 1
+        savedResult = saved
+        runThinkTime = saved.thinkTime
+        runState = .completed
+        interruption = nil
+        awaitingRunPhase = false
+        ledger.markStarted(session.id)
+        if let checkmate = saved.checkmate {
+            ledger.record(.noLegalMoves(checkmate: checkmate), for: session.id)
+        } else if let best = bestMove {
+            ledger.record(.bestMove(san: best.san, move: best.move, score: readout?.score,
+                capture: AnalysisCapture.find(for: best.move, in: position)), for: session.id)
+        }
+        app.settings.hasCompletedAnalysis = true
+    }
+
+    private func saveResult(checkmate: Bool? = nil) {
+        app.history.record(snapshot: session.snapshot, origin: session.origin, readout: readout,
+            checkmate: checkmate, thinkTime: runThinkTime, engineVersion: app.engine.engineVersion)
     }
 
     private func startObservingEngine() {
@@ -579,6 +623,7 @@ final class AnalysisScreenModel {
         case .noLegalMoves(let checkmate):
             runState = .completed
             ledger.record(.noLegalMoves(checkmate: checkmate), for: session.id)
+            saveResult(checkmate: checkmate)
             completionCount += 1
             announce(checkmate ? String(localized: "Checkmate. There are no legal moves.") : String(localized: "Stalemate. There are no legal moves."))
         case .failed(let message):
@@ -612,6 +657,7 @@ final class AnalysisScreenModel {
         completionCount += 1
         app.settings.hasCompletedAnalysis = true
         ledger.record(.bestMove(san: best.san, move: best.move, score: score, capture: AnalysisCapture.find(for: best.move, in: position)), for: session.id)
+        if !didStopEarly { saveResult() }
         startLongerSearch()
         let content = resultReadout
         let description = content.move?.words ?? AnalysisSpeech.moveDescription(san: best.san, move: best.move)

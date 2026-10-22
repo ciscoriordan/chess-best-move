@@ -19,7 +19,8 @@ ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / 'localization'
 RESOURCES = ROOT / 'App/Resources'
 TARGETS = {'es':'ES','pt-BR':'PT-BR','fr':'FR','de':'DE','it':'IT','tr':'TR'}
-CATALOGS = ['Localizable','AppShortcuts','InfoPlist']
+CATALOGS = {name:RESOURCES/f'{name}.xcstrings' for name in ['Localizable','AppShortcuts','InfoPlist']}
+CATALOGS['WatchLocalizable'] = ROOT/'WatchApp/Resources/Localizable.xcstrings'
 PLACEHOLDER = re.compile(r'%(?:\d+\$)?[-+#0 ]*(?:\d+)?(?:\.\d+)?(?:ll|l|h|z)?[@diufgse]|\$\{[^}]+\}')
 CONTEXT = '''Chess Best Move is an iPhone and iPad chess screenshot analysis app. Keep the app name Chess Best Move, Pro, Stockfish, Siri, VoiceOver, TestFlight, App Store, iPhone, iPad, Mac, FEN and chess square coordinates unchanged. Use Apple's official localized names for Photos, Shortcuts, Settings, Control Center, Action button, Back Tap, Apple Account, and purchase controls. Use natural concise interface language, conventional chess terms, and normal capitalization in the target language. Capture means taking a chess piece; screenshot means an image of the screen. Preserve leading and trailing spaces in fragments. Placeholders are runtime values and may be reordered with the sentence.'''
 
@@ -45,6 +46,10 @@ def extract(sync=False):
             files.extend((base/f'{target}.build/Objects-normal/arm64').glob('*.stringsdata'))
         if not files: raise RuntimeError('Build Debug with scripts/dev/build.sh before extracting.')
         subprocess.run(['xcrun','xcstringstool','sync',str(RESOURCES/'Localizable.xcstrings'),str(RESOURCES/'AppShortcuts.xcstrings'),'--stringsdata',*[str(p) for p in files]],check=True)
+        watch_base=ROOT/'build/DD/Build/Intermediates.noindex/ChessBestMove.build/Debug-watchsimulator'
+        watch_files=list((watch_base/'ChessBestMoveWatch.build/Objects-normal/arm64').glob('*.stringsdata'))
+        if not watch_files: raise RuntimeError('Build the Watch app with scripts/dev/build-watch.sh Debug before syncing.')
+        subprocess.run(['xcrun','xcstringstool','sync',str(CATALOGS['WatchLocalizable']),'--stringsdata',*[str(p) for p in watch_files]],check=True)
     config=yaml.safe_load((ROOT/'project.yml').read_text())
     permission=config['targets']['ChessBestMove']['info']['properties']['NSPhotoLibraryUsageDescription']
     info=read(RESOURCES/'InfoPlist.xcstrings',{'sourceLanguage':'en','strings':{},'version':'1.0'})
@@ -53,13 +58,15 @@ def extract(sync=False):
     write(RESOURCES/'InfoPlist.xcstrings',info)
     source={}
     for catalog in CATALOGS:
-        path=RESOURCES/f'{catalog}.xcstrings'
+        path=CATALOGS[catalog]
         data=read(path)
         for key,item in data['strings'].items():
             # Technical notation and product names are deliberately invariant.
             if not re.search('[A-Za-z]',PLACEHOLDER.sub('',key)) or key in {'Chess Best Move','Pro','FEN','SAN','Stockfish','Stockfish 19','App Store','Nf6','e4','O-O','O-O-O'} or key.startswith('focusSystem='):
                 item['shouldTranslate']=False
             if item.get('shouldTranslate') is False or item.get('extractionState')=='stale': continue
+            if catalog=='WatchLocalizable':
+                item.setdefault('localizations',{}).setdefault('en',{'stringUnit':{'state':'translated','value':key}})
             en=item.get('localizations',{}).get('en',{})
             values=en.get('stringSet',{}).get('values') or [en.get('stringUnit',{}).get('value',key)]
             for index,value in enumerate(values):
@@ -122,7 +129,7 @@ def translate(source,locale):
 
 
 def build(source, draft=False):
-    catalogs={name:read(RESOURCES/f'{name}.xcstrings') for name in CATALOGS}
+    catalogs={name:read(path) for name,path in CATALOGS.items()}
     # Reset shortcut sets before filling them, independent of hash-key iteration order.
     for entry in catalogs['AppShortcuts']['strings'].values():
         for locale in TARGETS:
@@ -132,7 +139,8 @@ def build(source, draft=False):
         for key,item in source.items():
             review=reviewed.get(key)
             machine=raw.get(key)
-            if machine and protected(machine['source'])!=protected(item['source']):raise RuntimeError(f'Stale translation: {locale}, {key}')
+            if machine and protected(machine['source'])!=protected(item['source']) and not review:
+                raise RuntimeError(f'Stale translation: {locale}, {key}')
             if review and protected(review.get('source',''))!=protected(item['source']):
                 raise RuntimeError(f'Stale editorial review: {locale}, {key}')
             if not machine and not review:
@@ -163,7 +171,7 @@ def build(source, draft=False):
                     target['substitutions']={'count':{'argNum':1,'formatSpecifier':'lld','variations':{'plural':{name:{'stringUnit':{'state':'translated','value':form}} for name,form in forms.items()}}}}
                 else:
                     target['stringUnit']={'state':'translated' if review else 'needs_review','value':value}
-    for name,catalog in catalogs.items():write(RESOURCES/f'{name}.xcstrings',catalog)
+    for name,catalog in catalogs.items():write(CATALOGS[name],catalog)
 
 
 if __name__=='__main__':

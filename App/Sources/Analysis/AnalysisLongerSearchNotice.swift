@@ -37,6 +37,21 @@ struct AnalysisLongerSearchNotice: View {
     var body: some View {
         if let content = model.longerSearchNotice {
             VStack(alignment: .leading, spacing: 0) {
+                if !content.isSubtle {
+                    Label(content.kind == .movePreferredAndShown
+                        ? String(localized: "Showing the Better Move") : String(localized: "Better Move Found"),
+                          systemImage: "arrow.triangle.2.circlepath")
+                        .typography(.headline)
+                        .foregroundStyle(Palette.accent)
+                        .padding(.bottom, Spacing.s2)
+                    if let original = model.originalMoveDescription {
+                        Text("Originally: \(original)")
+                            .typography(.callout)
+                            .foregroundStyle(Palette.ink2)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.bottom, Spacing.s1)
+                    }
+                }
                 sentence(content)
                 if let title = content.actionTitle {
                     TextLink(title) {
@@ -45,6 +60,11 @@ struct AnalysisLongerSearchNotice: View {
                     .accessibilityHint(content.actionHint ?? "")
                     .accessibilityIdentifier(ID.action)
                 }
+            }
+            .padding(content.isSubtle ? 0 : Spacing.s3)
+            .background(content.isSubtle ? Color.clear : Palette.accentSubtle)
+            .overlay(alignment: .leading) {
+                if !content.isSubtle { Rectangle().fill(Palette.accent).frame(width: 3) }
             }
             .padding(.bottom, Spacing.s3)
             .accessibilityIdentifier(ID.notice)

@@ -314,6 +314,13 @@
     "source": "1 board",
     "translation": "1 échiquier"
   },
+  "10deaa84b331ee980dd9": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Analyze screenshot",
+    "translation": "Analyser une capture"
+  },
   "11947776992fd53831f3": {
     "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
     "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
@@ -344,6 +351,20 @@
     "source": "Switch side to move",
     "translation": "Changer le trait"
   },
+  "13f64ede233d78bcaf52": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168498+00:00",
+    "source": "Expanded chessboard",
+    "translation": "Échiquier agrandi"
+  },
+  "14639c911d27a09a6459": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Reconnect",
+    "translation": "Reconnecter"
+  },
   "146661ba8a518347b3df": {
     "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
     "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
@@ -367,6 +388,13 @@
     "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
     "source": "Show it",
     "translation": "Afficher"
+  },
+  "1580aaef1ca173a0b74b": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168339+00:00",
+    "source": "Clear History",
+    "translation": "Effacer l’historique"
   },
   "15b1e164872f801468d5": {
     "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
@@ -426,6 +454,13 @@
     "source": "%1$lld%2$@s ago",
     "translation": "il y a %1$lld%2$@s"
   },
+  "1a422bcdad2d0aaf7a6e": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Take a new iPhone screenshot, then tap Analyze within 30 seconds.",
+    "translation": "Prenez une nouvelle capture sur l’iPhone, puis touchez Analyser dans les 30 secondes."
+  },
   "1abdcf413b6aa956817b": {
     "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
     "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
@@ -438,6 +473,13 @@
     "source": "Best value",
     "translation": "Meilleur tarif"
   },
+  "1b96ad3e5c5f393a8572": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168381+00:00",
+    "source": "More thinking found a better move: ",
+    "translation": "Une réflexion plus longue a trouvé un meilleur coup : "
+  },
   "1be398e115ff7bfb69a2": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
@@ -449,6 +491,20 @@
     "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
     "source": "The chess engine can't analyze this position. Use Edit to check the pieces.",
     "translation": "Le moteur d’échecs ne peut pas analyser cette position. Utilisez « Modifier » pour vérifier les pièces."
+  },
+  "1cab76b1d361166d2bd4": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168368+00:00",
+    "source": "History could not be saved. Your current results are still available while the app is open.",
+    "translation": "Impossible d’enregistrer l’historique. Vos résultats actuels restent disponibles tant que l’app est ouverte."
+  },
+  "1d9c01efb003924f425a": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Connecting to iPhone…",
+    "translation": "Connexion à l’iPhone…"
   },
   "1dcb2a12854f0e750611": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -485,6 +541,13 @@
     "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
     "source": "Black O-O",
     "translation": "Noirs O-O"
+  },
+  "1f982027eb8954fce4a0": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "No clear chessboard found. Take a screenshot showing the whole board.",
+    "translation": "Aucun échiquier net trouvé. Prenez une capture de l’échiquier entier."
   },
   "1f99c6c4d889c2f64017": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -617,11 +680,18 @@
     "translation": "Dame"
   },
   "25acdbba03e74422a3c3": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:03.926371+00:00",
-    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Your photos stay on your device.",
-    "translation": "Chess Best Move lit votre dernière capture d’écran pour y repérer l’échiquier. Vos photos restent sur votre appareil."
+    "origin": "manual-reviewed",
+    "reason": "Preserved the reviewed, shipped Watch-aware Photos permission text and synchronized its stale editorial record.",
+    "reviewedAt": "2026-10-22",
+    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch.",
+    "translation": "Chess Best Move lit votre dernière capture pour y repérer l’échiquier. L’analyse s’effectue sur votre appareil. Si vous la demandez depuis votre Apple Watch, un résultat recadré est envoyé à votre Watch jumelée."
+  },
+  "261a382bd2ca0ea10bfb": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Previous result",
+    "translation": "Résultat précédent"
   },
   "26336eb38bf024047a48": {
     "origin": "deepl-reviewed",
@@ -673,6 +743,13 @@
     "reviewedAt": "2026-10-15T02:37:03.926377+00:00",
     "source": "Pro Lifetime",
     "translation": "Pro à vie"
+  },
+  "2910133281bab79b32de": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168481+00:00",
+    "source": "Analysis Timed Out",
+    "translation": "Délai d’analyse dépassé"
   },
   "291cfbdc85c10d3c9545": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -759,6 +836,13 @@
     "reviewedAt": "2026-10-15T02:37:03.926390+00:00",
     "source": "1 second",
     "translation": "1 seconde"
+  },
+  "2c62caca8fddb27bab57": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Preview",
+    "translation": "Aperçu"
   },
   "2ca92ea6fc826b79bd73": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -892,12 +976,33 @@
     "source": "White knight",
     "translation": "Cavalier blanc"
   },
+  "32e8183686cc90e55b3a": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "The iPhone did not finish in time. Open it once, then try again with a new screenshot.",
+    "translation": "L’iPhone n’a pas terminé à temps. Ouvrez l’app une fois, puis réessayez avec une nouvelle capture."
+  },
   "33698b9ed1e411a48093": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
     "reviewedAt": "2026-10-15T02:37:03.926409+00:00",
     "source": "Find Best Move",
     "translation": "Trouver le meilleur coup"
+  },
+  "339039870fce22c89b05": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "For puzzles, study, and reviewing games.",
+    "translation": "Pour les problèmes, l’étude et l’analyse de parties."
+  },
+  "339dfc6e239d77bac8cd": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once.",
+    "translation": "Impossible de joindre l’app iPhone. Vérifiez la connexion et ouvrez Chess Best Move une fois sur l’iPhone."
   },
   "33aa9217c69148ce87b3": {
     "origin": "deepl-reviewed",
@@ -1041,6 +1146,13 @@
     "source": "%1$@ to %2$@",
     "translation": "%1$@ en %2$@"
   },
+  "3cb7995d982cddcd11f5": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "White to move",
+    "translation": "Trait aux blancs"
+  },
   "3d1d4bc28319adea88c9": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -1054,6 +1166,13 @@
     "reviewedAt": "2026-10-15T02:37:03.926436+00:00",
     "source": "With the position on screen, press the side button and the volume up button at the same time.",
     "translation": "Une fois la position affichée à l’écran, appuyez simultanément sur le bouton latéral et le bouton d’augmentation du volume."
+  },
+  "3d3dabafab4bba34d619": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Analyze latest screenshot",
+    "translation": "Analyser la dernière capture"
   },
   "3d9b2632efac1ceb17cc": {
     "origin": "deepl-reviewed",
@@ -1122,6 +1241,13 @@
     "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it.",
     "translation": "Déverrouillez votre appareil et accordez toutes les autorisations demandées. Lorsque Siri exécute le raccourci, il réalise la capture d’écran, l’enregistre dans « Récents » et ouvre Chess Best Move pour l’analyser."
   },
+  "3f960063d371f12ae689": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses.",
+    "translation": "Aucune analyse restante. Ouvrez Chess Best Move sur l’iPhone pour Pro ou plus d’analyses."
+  },
   "3fa20c3bb030ed094bad": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -1147,6 +1273,13 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "Buy %1$lld analyses: %2$@",
     "translation": "Acheter %1$lld analyses : %2$@"
+  },
+  "4057ebf26e77bd54e825": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168423+00:00",
+    "source": "Saved analysis",
+    "translation": "Analyse enregistrée"
   },
   "40c1ba017a653b81f275": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -1174,6 +1307,13 @@
     "reviewedAt": "2026-10-15T02:37:03.926452+00:00",
     "source": "White castles kingside",
     "translation": "Les Blancs font le petit roque"
+  },
+  "4225e39d48c0f9555aed": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Screenshot",
+    "translation": "Capture d’écran"
   },
   "423b8ea192c86cc81134": {
     "origin": "deepl-reviewed",
@@ -1235,6 +1375,13 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "%1$lld analyses for %2$@. One-time purchase, not a subscription. They never expire.",
     "translation": "%1$lld analyses pour %2$@. Achat unique, sans abonnement. Elles n’expirent jamais."
+  },
+  "46ea13be918e93565ceb": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168504+00:00",
+    "source": "No Analyses Remaining",
+    "translation": "Aucune analyse restante"
   },
   "473117d968771f650279": {
     "origin": "deepl-reviewed",
@@ -1401,6 +1548,13 @@
     "source": "No free analyses left",
     "translation": "Plus aucune analyse gratuite disponible"
   },
+  "50b88b7d24cd26ff36b2": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168492+00:00",
+    "source": "Could Not Reach iPhone",
+    "translation": "Impossible de joindre l’iPhone"
+  },
   "50cb2104f5e6ab9a119b": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -1408,11 +1562,39 @@
     "source": "Stopped",
     "translation": "Arrêté"
   },
+  "510a9b8e04417f86183d": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168464+00:00",
+    "source": "Updated after more thinking: ",
+    "translation": "Mis à jour après une réflexion plus longue : "
+  },
   "52a8cad2e968eab8877f": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "Side to move",
     "translation": "Trait"
+  },
+  "52cf195b4cfbd0ddd891": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Best Move",
+    "translation": "Meilleur coup"
+  },
+  "534e6486895ac02d1ea8": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168343+00:00",
+    "source": "Clear History?",
+    "translation": "Effacer l’historique ?"
+  },
+  "542a9756840cf6573c30": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone.",
+    "translation": "Cette position doit être confirmée. Ouvrez la capture dans Chess Best Move sur l’iPhone."
   },
   "549342cc819bac01d613": {
     "origin": "deepl-reviewed",
@@ -1434,6 +1616,13 @@
     "reviewedAt": "2026-10-15T02:37:29.712999+00:00",
     "source": "Payment is charged to your Apple Account when you confirm. The subscription renews automatically at the same price %@ unless you cancel at least 24 hours before the current period ends. Manage or cancel in Settings > Apple Account > Subscriptions.",
     "translation": "Le paiement est débité de votre compte Apple lorsque vous confirmez. L’abonnement se renouvelle automatiquement au même prix %1$@, sauf si vous le résiliez au moins 24 heures avant la fin de la période en cours. Gérez ou résiliez votre abonnement dans Réglages > Compte Apple > Abonnements."
+  },
+  "5500cc5a7d89d26c4065": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168361+00:00",
+    "source": "History",
+    "translation": "Historique"
   },
   "554a70b65bb954910299": {
     "origin": "deepl-reviewed",
@@ -1468,6 +1657,13 @@
     "reviewedAt": "2026-10-15T02:37:29.713004+00:00",
     "source": "assumed: you are at the bottom",
     "translation": "hypothèse : vous jouez les pièces du bas"
+  },
+  "5682dfc843181d3f26e7": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168409+00:00",
+    "source": "Originally: %@",
+    "translation": "Résultat initial : %@"
   },
   "575af5d5ce253bbe2e3b": {
     "origin": "deepl-reviewed",
@@ -1556,6 +1752,13 @@
     "source": "The Change in the Published Source",
     "translation": "Modification apportée à la source publiée"
   },
+  "5ba4fbbe84be617cc251": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168538+00:00",
+    "source": "iPhone Setup Needed",
+    "translation": "Configuration de l’iPhone requise"
+  },
   "5bacd811417f205a5ef3": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -1583,6 +1786,13 @@
     "reviewedAt": "2026-10-15T02:37:29.713020+00:00",
     "source": "Swaps which side is at the bottom",
     "translation": "Inverser le côté qui se trouve en bas"
+  },
+  "5c5275547801b67b8388": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168437+00:00",
+    "source": "Showing the Better Move",
+    "translation": "Meilleur coup affiché"
   },
   "5c5fc224db6811288bcc": {
     "origin": "deepl-reviewed",
@@ -1713,12 +1923,26 @@
     "source": "king",
     "translation": "roi"
   },
+  "63e2d541f4386c18b94e": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168354+00:00",
+    "source": "Delete",
+    "translation": "Supprimer"
+  },
   "640e656d6c901c2a0a28": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
     "reviewedAt": "2026-10-15T02:37:29.713040+00:00",
     "source": "Stockfish Authors",
     "translation": "Auteurs de Stockfish"
+  },
+  "6411e8805c708baa1173": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168507+00:00",
+    "source": "No Chessboard Found",
+    "translation": "Aucun échiquier trouvé"
   },
   "64e585029e8501952659": {
     "origin": "deepl-reviewed",
@@ -1760,6 +1984,13 @@
     "reviewedAt": "2026-10-15T02:37:29.713046+00:00",
     "source": "Open Chess Best Move to see the best move.",
     "translation": "Ouvrez Chess Best Move pour voir le meilleur coup."
+  },
+  "663db260526dac9b16f8": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168486+00:00",
+    "source": "Check the Position on iPhone",
+    "translation": "Vérifiez la position sur l’iPhone"
   },
   "6733e7cb1f741b9c0bf5": {
     "origin": "deepl-reviewed",
@@ -1809,6 +2040,13 @@
     "source": "New chess screenshots are recognized automatically. Tap Analyze if asked.",
     "translation": "Les nouvelles captures d’écran d’échecs sont reconnues automatiquement. Appuyez sur « Analyser » si vous y êtes invité."
   },
+  "696d240e9b497feee049": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168534+00:00",
+    "source": "iPhone Is Busy",
+    "translation": "L’iPhone est occupé"
+  },
   "69c15e9d2e3542c71551": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
@@ -1856,6 +2094,13 @@
     "reviewedAt": "2026-10-15T02:37:29.713060+00:00",
     "source": "Taken ",
     "translation": "Prise "
+  },
+  "6b2121a9ddff472f7193": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168349+00:00",
+    "source": "Completed analyses appear here. Reopen a saved result without using another analysis.",
+    "translation": "Les analyses terminées apparaissent ici. Rouvrez un résultat enregistré sans décompter une autre analyse."
   },
   "6b38e2d9c0ac9816c3a6": {
     "origin": "deepl-reviewed",
@@ -1938,6 +2183,13 @@
     "source": "A longer search that keeps running after the answer, up to 2 minutes.",
     "translation": "Une recherche plus longue qui se poursuit après la réponse, jusqu’à 2 minutes."
   },
+  "70be6dcce5ca9fab1453": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again.",
+    "translation": "L’app iPhone est occupée. Quittez Chess Best Move sur l’iPhone, puis réessayez."
+  },
   "7126cbfe690ae7fcd3bc": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -1950,6 +2202,13 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "%@, check",
     "translation": "%1$@, échec"
+  },
+  "7213480c268ebe0bbbb5": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168516+00:00",
+    "source": "Shows the board full screen and plays the move. Tap again to return.",
+    "translation": "Affiche l’échiquier en plein écran et anime le coup. Touchez à nouveau pour revenir."
   },
   "727e45b78149119cd649": {
     "origin": "deepl-reviewed",
@@ -2067,6 +2326,13 @@
     "source": "1 hour ago",
     "translation": "il y a 1 heure"
   },
+  "793d04740f95955874b6": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168527+00:00",
+    "source": "Tap to return to the result.",
+    "translation": "Touchez pour revenir au résultat."
+  },
   "79439b9e21d6d4f66096": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -2148,6 +2414,13 @@
     "source": "Waiting for approval",
     "translation": "En attente de validation"
   },
+  "7e78fe1b484430d6c26d": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Uses one analysis or Pro access. Reanalysis may be free.",
+    "translation": "Utilise une analyse ou Pro. Une nouvelle analyse peut être gratuite."
+  },
   "7e7d1ed1100c4ead2d29": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -2175,6 +2448,20 @@
     "reviewedAt": "2026-10-15T02:37:51.570948+00:00",
     "source": "White O-O",
     "translation": "Blancs O-O"
+  },
+  "8043a6e43f92709522c0": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168426+00:00",
+    "source": "Saved analysis. No analysis used.",
+    "translation": "Analyse enregistrée. Aucune analyse décomptée."
+  },
+  "80b9afb974b45fe0a9eb": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168455+00:00",
+    "source": "This removes saved positions and results from this device. It does not restore spent analyses.",
+    "translation": "Cela supprime les positions et résultats enregistrés sur cet appareil. Les analyses utilisées ne sont pas recréditées."
   },
   "81298ba6b748cae97c27": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -2215,6 +2502,13 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "No free analyses",
     "translation": "Aucune analyse gratuite"
+  },
+  "83255acd3979ce312e51": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168434+00:00",
+    "source": "Show better move",
+    "translation": "Afficher le meilleur coup"
   },
   "832bd01668310a53e09a": {
     "origin": "deepl-reviewed",
@@ -2269,6 +2563,13 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "Lifetime Is Unlocked",
     "translation": "Accès à vie activé"
+  },
+  "859059436ba9e962f747": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168319+00:00",
+    "source": "Better Move Found",
+    "translation": "Un meilleur coup a été trouvé"
   },
   "85a656cee46268df0615": {
     "origin": "deepl-reviewed",
@@ -2425,6 +2726,13 @@
     "source": "No chessboard found in that image. This didn't use a free analysis.",
     "translation": "Aucun échiquier trouvé dans cette image. Aucune analyse gratuite n’a été utilisée."
   },
+  "8ff8022759c2586908b5": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168489+00:00",
+    "source": "Close",
+    "translation": "Fermer"
+  },
   "903a4800c31fe1193ae8": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -2439,9 +2747,9 @@
     "translation": "Échec"
   },
   "90e63fb23a464450e98d": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:51.570993+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168459+00:00",
     "source": "Try again",
     "translation": "Réessayer"
   },
@@ -2569,12 +2877,26 @@
     "source": "Purchases restored.",
     "translation": "Les achats ont été restaurés."
   },
+  "979109a9e1db6f74db4b": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168511+00:00",
+    "source": "No Recent Screenshot",
+    "translation": "Aucune capture d’écran récente"
+  },
   "97be1605c9ca6064e0ff": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
     "reviewedAt": "2026-10-15T02:38:36.147635+00:00",
     "source": "Best reply",
     "translation": "Meilleure réponse"
+  },
+  "981b6537d90062639b33": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168377+00:00",
+    "source": "More thinking found a better move. The quick result is still shown. Pro unlocks the improvement.",
+    "translation": "Une réflexion plus longue a trouvé un meilleur coup. Le résultat rapide est toujours affiché. Pro donne accès à l’amélioration."
   },
   "9897b1f38af92e3c928c": {
     "plural": {
@@ -2771,6 +3093,13 @@
     "source": "Your subscriptions opened in the App Store.",
     "translation": "Vos abonnements se sont ouverts dans l’App Store."
   },
+  "a265db5838f08c669aa4": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168393+00:00",
+    "source": "Opens the saved result without starting a new search.",
+    "translation": "Ouvre le résultat enregistré sans lancer une nouvelle recherche."
+  },
   "a2960b9ff94d3fe45185": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -2818,6 +3147,13 @@
     "source": "Edited",
     "translation": "Modifié"
   },
+  "a73e187a0f797cb5423b": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168430+00:00",
+    "source": "Search moves or positions",
+    "translation": "Rechercher des coups ou des positions"
+  },
   "a745d75f624a87d78e2a": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -2859,6 +3195,13 @@
     "reviewedAt": "2026-10-15T02:38:36.147685+00:00",
     "source": "A longer search found a different move. Pro shows it.",
     "translation": "Une recherche plus approfondie a permis de trouver un autre coup. Pro l’affiche."
+  },
+  "a9e1e0f5322889310fe7": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Open screenshot analysis on your Watch.",
+    "translation": "Ouvrez l’analyse de captures sur votre Watch."
   },
   "aa8e4d22a630fafd9a7a": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -2966,6 +3309,13 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "Rook",
     "translation": "Tour"
+  },
+  "ae4aadc6ad2c0e168da6": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168531+00:00",
+    "source": "Try again",
+    "translation": "Réessayer"
   },
   "af0a2f11226d747cbacf": {
     "origin": "deepl-reviewed",
@@ -3322,12 +3672,26 @@
     "source": "%1$@, %2$lld left",
     "translation": "%1$@, %2$lld restantes"
   },
+  "c1950fdb3fbb4ebe2024": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots.",
+    "translation": "Ouvrez Chess Best Move sur l’iPhone et autorisez l’accès complet aux photos pour lire les nouvelles captures."
+  },
   "c1ae1274933d7443b024": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
     "reviewedAt": "2026-10-15T02:38:56.541987+00:00",
     "source": "These controls are in TestFlight builds and never in an App Store build. They grant analyses, never Pro: Pro comes from a purchase, which costs nothing in the TestFlight sandbox.",
     "translation": "Ces commandes se trouvent dans les versions TestFlight et jamais dans une version de l’App Store. Elles donnent accès à des analyses, jamais à la version Pro : la version Pro est issue d’un achat, qui ne coûte rien dans l’environnement TestFlight."
+  },
+  "c1ce37fd19571d60c7ae": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Analyzing on iPhone…",
+    "translation": "Analyse sur l’iPhone…"
   },
   "c35f12c4a2f33312cb50": {
     "origin": "deepl-reviewed",
@@ -3451,6 +3815,13 @@
     "source": "Switches the side to move",
     "translation": "Change le camp dont c'est le tour de jouer"
   },
+  "cc314477ef7a5132fb19": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168446+00:00",
+    "source": "Tap to animate the move. The original position returns afterward.",
+    "translation": "Touchez pour animer le coup. La position d’origine sera ensuite rétablie."
+  },
   "cc62bddd9cda7794eec7": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -3479,6 +3850,13 @@
     "source": "Best move: ",
     "translation": "Meilleur coup : "
   },
+  "cf0998b5f5f4c68ffcbc": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Take a new screenshot on iPhone first.",
+    "translation": "Prenez d’abord une nouvelle capture sur l’iPhone."
+  },
   "cf119788804288753a44": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -3492,6 +3870,20 @@
     "reviewedAt": "2026-10-15T02:38:56.542017+00:00",
     "source": "Their move",
     "translation": "Leur coup"
+  },
+  "cf56d85cb6c1a8735408": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Black to move",
+    "translation": "Trait aux noirs"
+  },
+  "d0527405a038825ab3d4": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168365+00:00",
+    "source": "History could not be read. The saved file has been kept. Clear History to start again.",
+    "translation": "Impossible de lire l’historique. Le fichier enregistré a été conservé. Effacez l’historique pour recommencer."
   },
   "d0df18c25448324ffe56": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -3611,6 +4003,13 @@
     "source": "One payment. Not a subscription.",
     "translation": "Un paiement unique. Ce n’est pas un abonnement."
   },
+  "d5f6095a4985398a57ad": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168472+00:00",
+    "source": "Your last 500 positions and results are saved only on this device. Original screenshots are not saved. Deleting history does not restore spent analyses.",
+    "translation": "Vos 500 dernières positions et leurs résultats sont enregistrés uniquement sur cet appareil. Les captures d’écran d’origine ne sont pas enregistrées. Effacer l’historique ne recrédite pas les analyses utilisées."
+  },
   "d6083f8052ed2dac745a": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -3681,6 +4080,13 @@
     "source": "Take a chess screenshot, then open this app. Analysis starts automatically with unlimited access; otherwise, tap Analyze when asked.",
     "translation": "Faites une capture d’écran de l’échiquier, puis ouvrez cette application. L’analyse démarre automatiquement avec un accès illimité ; sinon, appuyez sur « Analyser » lorsque vous y êtes invité."
   },
+  "d85037b742734e1a64a0": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Checkmate",
+    "translation": "Échec et mat"
+  },
   "d8922d6556481e6ec2fc": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -3694,6 +4100,13 @@
     "reviewedAt": "2026-10-15T02:38:56.542057+00:00",
     "source": "Home and Lock Screen widgets",
     "translation": "Widgets de l’écran d’accueil et de l’écran verrouillé"
+  },
+  "d9a43d005864ec0190ce": {
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Stalemate",
+    "translation": "Pat"
   },
   "db1660a24ce7dafda93f": {
     "origin": "deepl-reviewed",
@@ -3742,6 +4155,13 @@
     "source": "Ready to Analyze",
     "translation": "Prêt à analyser"
   },
+  "ded9584866966b8e185a": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168385+00:00",
+    "source": "No Saved Analyses",
+    "translation": "Aucune analyse enregistrée"
+  },
   "dee3ca0f80485f21bb12": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
@@ -3773,6 +4193,13 @@
     "reviewedAt": "2026-10-15T02:38:56.542067+00:00",
     "source": "Unlimited analyses, billed yearly",
     "translation": "Analyses illimitées, facturées annuellement"
+  },
+  "e099114a73c997cdcc25": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168415+00:00",
+    "source": "Play move animation",
+    "translation": "Animer le coup"
   },
   "e0a41bca7bc6a1d87a52": {
     "origin": "deepl-reviewed",
@@ -3971,6 +4398,13 @@
     "source": "Drop to analyze",
     "translation": "Déposer pour analyser"
   },
+  "f0f0e633bd15a07013db": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168495+00:00",
+    "source": "Expand chessboard",
+    "translation": "Agrandir l’échiquier"
+  },
   "f1ef1715d942f72e1abe": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -3983,6 +4417,13 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "Step %1$lld: %2$@",
     "translation": "Étape %1$lld : %2$@"
+  },
+  "f2d1a1e8e9c4f06348a0": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168524+00:00",
+    "source": "Shows the board full screen. Tap again to return.",
+    "translation": "Affiche l’échiquier en plein écran. Touchez à nouveau pour revenir."
   },
   "f2dd0e37c1d1211e5b1d": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -4143,6 +4584,13 @@
     "reviewedAt": "2026-10-15T02:39:58.433745+00:00",
     "source": "Open Chess Best Move and analyze your latest saved screenshot.",
     "translation": "Ouvrez Chess Best Move et analysez votre dernière capture enregistrée."
+  },
+  "fdceecdbf50d36eabb35": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
+    "reviewedAt": "2026-10-22T19:31:21.168502+00:00",
+    "source": "New positions use one analysis or Pro access.",
+    "translation": "Une nouvelle position utilise une analyse ou l’accès Pro."
   },
   "fe5dec5d30fb5fe59c33": {
     "origin": "deepl-reviewed",
