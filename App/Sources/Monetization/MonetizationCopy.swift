@@ -126,7 +126,7 @@ enum MonetizationCopy {
         }
     }
 
-    /// "$5.99/week", "$39.99/year", "$59.99".
+    /// "$2.99/week", "$24.99/year", "$49.99".
     static func rowPrice(_ product: StoreProduct) -> String {
         guard let period = period(of: product) else { return product.displayPrice }
         return "\(product.displayPrice)/\(period)"
@@ -151,7 +151,7 @@ enum MonetizationCopy {
         }
     }
 
-    /// "Continue: $5.99 / week", "Continue: $59.99 once".
+    /// "Continue: $2.99 / week", "Continue: $49.99 once".
     static func continueButton(_ product: StoreProduct) -> String {
         guard let period = period(of: product) else { return String(localized: "Continue: \(product.displayPrice) once") }
         return String(localized: "Continue: \(product.displayPrice) / \(period)")
@@ -170,7 +170,7 @@ enum MonetizationCopy {
         return String(localized: "Payment is charged to your Apple Account when you confirm. The subscription renews automatically at the same price \(each) unless you cancel at least 24 hours before the current period ends. Manage or cancel in Settings > Apple Account > Subscriptions.")
     }
 
-    /// VoiceOver label of a paywall row: "Weekly, $5.99 per week. Renews every week. Cancel anytime."
+    /// VoiceOver label of a paywall row: "Weekly, $2.99 per week. Renews every week. Cancel anytime."
     static func rowAccessibilityLabel(title: String, product: StoreProduct, detail: String) -> String {
         if let period = period(of: product) {
             return String(localized: "\(title), \(product.displayPrice) per \(period). \(detail)")
@@ -190,7 +190,7 @@ enum MonetizationCopy {
         }
     }
 
-    /// The price per week of a subscription, formatted in the product's currency ("$0.77").
+    /// The price per week of a subscription, formatted in the product's currency ("$0.48").
     static func pricePerWeek(_ product: StoreProduct) -> String? {
         guard case .autoRenewable(let unit, let value) = product.kind, value > 0 else { return nil }
         let weeksPerUnit: Decimal

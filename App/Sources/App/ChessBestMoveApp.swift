@@ -6,6 +6,7 @@ import os
 @main
 struct ChessBestMoveApp: App {
     @State private var model: AppModel
+    @Environment(\.scenePhase) private var scenePhase
 
     init() {
         #if DEBUG
@@ -20,6 +21,7 @@ struct ChessBestMoveApp: App {
         // consume their test transactions.
         if AppLaunch.current.startsStore {
             model.store.start()
+            WatchPhoneBridge.shared.start(app: model)
         }
         #if DEBUG
         Logger(subsystem: "com.motomatic.chessbestmove", category: "launch")
@@ -40,10 +42,10 @@ struct ChessBestMoveApp: App {
                 // (App/Sources/App/ShareImport.swift). It enters the flow where a Photos
                 // import does.
                 .receivesSharedImages(app: model)
-                .task {
+                .task(id: scenePhase) {
                     // Loads the recognition model in the background shortly after the first
                     // frame, so the first import does not wait for it (AppModel).
-                    guard AppLaunch.current.warmsUpRecognition else { return }
+                    guard AppLaunch.current.warmsUpRecognition, scenePhase == .active else { return }
                     await model.warmUpRecognition(after: AppModel.recognitionWarmUpDelay)
                 }
                 #if DEBUG

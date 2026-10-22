@@ -46,6 +46,8 @@ final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunn
 
     @ObservationIgnored private let updateInterval: Duration
     @ObservationIgnored private var generation = 0
+    @ObservationIgnored private var searchID: UUID?
+    @ObservationIgnored private var longerSearchID: UUID?
     @ObservationIgnored private var consumer: Task<Void, Never>?
     @ObservationIgnored private var flushTask: Task<Void, Never>?
     @ObservationIgnored private var throttle: AnalysisUpdateThrottle
@@ -76,6 +78,8 @@ final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunn
         cancelLongerSearch()
         generation += 1
         let generation = generation
+        let requestID = UUID()
+        searchID = requestID
         cancelConsumption()
         stopRequested = false
         publicationTimes = []
@@ -116,13 +120,20 @@ final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunn
             }
             guard generation == self.generation else { return false }
         }
+        // A bounded Watch request may expire while the network is loading. Do not start
+        // a search after its owner has already stopped preparing it.
+        if stopRequested {
+            phase = .finished
+            return false
+        }
         phase = .searching
 
         let milliseconds = max(1, Int((movetime / .milliseconds(1)).rounded()))
-        let stream = await StockfishEngine.shared.analyze(fen: prepared.fen, limit: .movetime(milliseconds: milliseconds))
+        let stream = await StockfishEngine.shared.analyze(fen: prepared.fen,
+            limit: .movetime(milliseconds: milliseconds), requestID: requestID)
         guard generation == self.generation else { return false }
         if stopRequested {
-            await StockfishEngine.shared.stop()
+            await StockfishEngine.shared.stop(requestID: requestID)
         }
 
         let startedAt = ContinuousClock.now
@@ -170,7 +181,9 @@ final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunn
             stopRequested = true
         case .searching:
             stopRequested = true
-            Task { await StockfishEngine.shared.stop() }
+            if let searchID {
+                Task { await StockfishEngine.shared.stop(requestID: searchID) }
+            }
         case .idle, .finished, .noLegalMoves, .failed:
             break
         }
@@ -199,13 +212,20 @@ final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunn
         let fen = prepared.fen
         longerSearchGeneration += 1
         let generation = longerSearchGeneration
+        let requestID = UUID()
+        longerSearchID = requestID
         longerSearchOwnsEngine = true
         let (stream, continuation) = AsyncStream<EngineReadout>.makeStream()
         longerSearchTask = Task { [weak self] in
+            guard !Task.isCancelled, self?.longerSearchGeneration == generation else {
+                continuation.finish()
+                return
+            }
             var accumulator = AnalysisReadoutAccumulator(sideToMove: sideToMove)
             var reported: EngineReadout?
             let startedAt = ContinuousClock.now
-            let events = await StockfishEngine.shared.analyze(fen: fen, limit: .movetime(milliseconds: milliseconds))
+            let events = await StockfishEngine.shared.analyze(fen: fen,
+                limit: .movetime(milliseconds: milliseconds), requestID: requestID)
             do {
                 for try await event in events {
                     guard !Task.isCancelled else { break }
@@ -235,17 +255,19 @@ final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunn
 
     func stopLongerSearch() {
         let wasRunning = longerSearchOwnsEngine
+        let requestID = longerSearchID
         cancelLongerSearch()
         // Only when the quiet search is the one running: a search the user started since then
         // must not be stopped by this.
-        if wasRunning {
-            Task { await StockfishEngine.shared.stop() }
+        if wasRunning, let requestID {
+            Task { await StockfishEngine.shared.stop(requestID: requestID) }
         }
     }
 
     private func cancelLongerSearch() {
         longerSearchGeneration += 1
         longerSearchOwnsEngine = false
+        longerSearchID = nil
         longerSearchTask?.cancel()
         longerSearchTask = nil
     }

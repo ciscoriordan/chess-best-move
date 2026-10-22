@@ -98,15 +98,15 @@ enum CapturePhotoLibrary {
     }
 
     /// The asset's current image data (HEIC, PNG or JPEG) and its display orientation,
-    /// downloading it from iCloud if needed.
-    static func imageData(for localIdentifier: String) async throws -> (data: Data, orientation: CGImagePropertyOrientation) {
+    /// downloading it from iCloud if needed unless `allowNetwork` is false.
+    static func imageData(for localIdentifier: String, allowNetwork: Bool = true) async throws -> (data: Data, orientation: CGImagePropertyOrientation) {
         guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [localIdentifier], options: nil).firstObject else {
             throw LoadError.assetMissing
         }
         let options = PHImageRequestOptions()
         options.deliveryMode = .highQualityFormat
         options.version = .current
-        options.isNetworkAccessAllowed = true
+        options.isNetworkAccessAllowed = allowNetwork
         options.isSynchronous = false
         let result: (Data, CGImagePropertyOrientation)? = await withCheckedContinuation { continuation in
             PHImageManager.default().requestImageDataAndOrientation(for: asset, options: options) { data, _, orientation, _ in

@@ -30,6 +30,7 @@ public actor StockfishEngine {
     private var handle: EngineHandle?
     private var prepareTask: Task<EngineHandle, Error>?
     private var activeSearch: SearchRequest?
+    private var activeRequestID: UUID?
     /// The most recently queued search start; each start waits for the previous one.
     private var startChain: Task<Void, Never>?
 
@@ -58,7 +59,8 @@ public actor StockfishEngine {
     public func analyze(
         fen: String,
         limit: SearchLimit,
-        multiPV: Int = 1
+        multiPV: Int = 1,
+        requestID: UUID = UUID()
     ) -> AsyncThrowingStream<EngineEvent, Error> {
         let (stream, continuation) = AsyncThrowingStream<EngineEvent, Error>.makeStream(
             bufferingPolicy: .unbounded
@@ -78,6 +80,7 @@ public actor StockfishEngine {
 
         let request = SearchRequest(continuation: continuation)
         activeSearch = request
+        activeRequestID = requestID
         continuation.onTermination = { termination in
             if case .cancelled = termination {
                 request.markCancelled()
@@ -98,6 +101,13 @@ public actor StockfishEngine {
     /// before stopping, so the best move is a searched one even when the stop arrives
     /// before or while the search starts.
     public func stop() async {
+        activeSearch?.requestStop()
+    }
+
+    /// Stops only this caller's search. A delayed cancellation from a Watch or quiet
+    /// search must not stop a newer foreground request using the same engine.
+    public func stop(requestID: UUID) {
+        guard activeRequestID == requestID else { return }
         activeSearch?.requestStop()
     }
 

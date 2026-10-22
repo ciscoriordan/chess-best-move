@@ -7,43 +7,43 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move liest deinen neuesten Screenshot, um das Schachbrett darin zu finden. Deine Fotos bleiben auf deinem Gerät."
+            "value": "Chess Best Move liest deinen neuesten Screenshot, um das Schachbrett darin zu finden. Die Analyse erfolgt auf deinem Gerät. Wenn du sie von deiner Apple Watch aus anforderst, wird ein zugeschnittenes Ergebnis an deine gekoppelte Watch gesendet."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Your photos stay on your device."
+            "value": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move lee tu captura de pantalla más reciente para encontrar el tablero de ajedrez en ella. Tus fotos permanecen en tu dispositivo."
+            "value": "Chess Best Move lee tu captura más reciente para encontrar el tablero. El análisis se realiza en tu dispositivo. Si lo solicitas desde tu Apple Watch, se envía un resultado recortado al Watch enlazado."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move lit votre dernière capture d’écran pour y repérer l’échiquier. Vos photos restent sur votre appareil."
+            "value": "Chess Best Move lit votre dernière capture pour y repérer l’échiquier. L’analyse s’effectue sur votre appareil. Si vous la demandez depuis votre Apple Watch, un résultat recadré est envoyé à votre Watch jumelée."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move legge il tuo screenshot più recente per individuare la scacchiera. Le tue foto restano sul dispositivo."
+            "value": "Chess Best Move legge il tuo screenshot più recente per individuare la scacchiera. L’analisi avviene sul dispositivo. Se la richiedi da Apple Watch, un risultato ritagliato viene inviato al Watch abbinato."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O Chess Best Move lê sua captura de tela mais recente para localizar o tabuleiro de xadrez nela. Suas fotos permanecem no seu dispositivo."
+            "value": "Chess Best Move lê sua captura mais recente para encontrar o tabuleiro. A análise é feita no seu dispositivo. Se você a solicitar pelo Apple Watch, um resultado recortado será enviado ao Watch emparelhado."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, içindeki satranç tahtasını bulmak için en son ekran görüntünüzü okur. Fotoğraflarınız aygıtınızda kalır."
+            "value": "Chess Best Move, satranç tahtasını bulmak için son ekran görüntünüzü okur. Analiz cihazınızda yapılır. Apple Watch’unuzdan isterseniz kırpılmış sonuç eşlenmiş Watch’unuza gönderilir."
           }
         }
       }

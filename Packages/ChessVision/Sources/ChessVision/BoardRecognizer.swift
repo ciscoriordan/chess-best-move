@@ -1,5 +1,6 @@
 import ChessCore
 import CoreGraphics
+import CoreML
 import Foundation
 
 /// Recognizes a chess position from a screenshot: board detection, piece classification,
@@ -21,6 +22,15 @@ public final class BoardRecognizer: Sendable {
     /// `ModelLoadError.modelNotFound` when `Model/PieceClassifier.mlmodelc` has not been added.
     public convenience init() throws {
         try self.init(classifier: CoreMLSquareClassifier())
+    }
+
+    /// Selects the model's compute units explicitly for bounded background work.
+    /// Coordinate OCR stays enabled: disabling it would change orientation evidence.
+    public convenience init(computeUnits: MLComputeUnits) throws {
+        guard let url = CoreMLSquareClassifier.bundledModelURL else {
+            throw ModelLoadError.modelNotFound
+        }
+        try self.init(classifier: CoreMLSquareClassifier(modelURL: url, computeUnits: computeUnits))
     }
 
     /// Uses a custom classifier (tests, evaluation with ground-truth pieces).
