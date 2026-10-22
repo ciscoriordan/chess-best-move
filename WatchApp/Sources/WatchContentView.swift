@@ -59,24 +59,12 @@ struct WatchContentView: View {
 
     @ViewBuilder private func result(_ reply: WatchAnalysisReply) -> some View {
         if let date = reply.screenshotDate {
-            TimelineView(.periodic(from: .now, by: 1)) { context in
-                VStack(alignment: .leading, spacing: 2) {
-                    if context.date.timeIntervalSince(date) > WatchWire.screenshotMaximumAge {
-                        Text("Previous result")
-                    }
-                    HStack(alignment: .firstTextBaseline) {
-                        if let white = reply.whiteToMove {
-                            Text(white ? LocalizedStringKey("White to move") : LocalizedStringKey("Black to move"))
-                        }
-                        Spacer(minLength: 4)
-                        Text(date, style: .time)
-                            .accessibilityLabel(Text("Screenshot"))
-                            .accessibilityValue(Text(date, style: .time))
-                    }
-                }
-            }
-            .font(.caption2)
-            .foregroundStyle(ink.opacity(0.75))
+            Text(date, style: .time)
+                .font(.caption2)
+                .foregroundStyle(ink.opacity(0.75))
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .accessibilityLabel(Text("Screenshot"))
+                .accessibilityValue(Text(date, style: .time))
         }
         if reply.status == .result {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
