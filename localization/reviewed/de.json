@@ -1512,12 +1512,24 @@
     "source": "No Analyses Remaining",
     "translation": "Keine Analysen übrig"
   },
+  "470e089415ad7667c4b0": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.236160+00:00",
+    "source": "Moving…",
+    "translation": "Zug wird gespielt…"
+  },
   "473117d968771f650279": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
     "reviewedAt": "2026-10-15T02:36:33.723470+00:00",
     "source": "See options",
     "translation": "Optionen ansehen"
+  },
+  "47eb3f70e727e37a31e5": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.236164+00:00",
+    "source": "Stop move animation",
+    "translation": "Zuganimation beenden"
   },
   "4865cf2cfedfe285c1bd": {
     "origin": "manual",
@@ -1595,6 +1607,12 @@
     "reviewedAt": "2026-10-15T02:35:10.587947+00:00",
     "source": "Finding the board",
     "translation": "Brett wird gesucht"
+  },
+  "4cfc24130fc92115342e": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.236166+00:00",
+    "source": "After move",
+    "translation": "Nach dem Zug"
   },
   "4d78df0bd643416845a7": {
     "origin": "manual",
@@ -1760,6 +1778,12 @@
     "reviewedAt": "2026-10-15T02:35:54.905322+00:00",
     "source": "Payment is charged to your Apple Account when you confirm. The subscription renews automatically at the same price %@ unless you cancel at least 24 hours before the current period ends. Manage or cancel in Settings > Apple Account > Subscriptions.",
     "translation": "Die Zahlung wird deinem Apple Account bei der Bestätigung belastet. Das Abonnement verlängert sich automatisch zum gleichen Preis %1$@, sofern du es nicht mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums kündigst. Unter „Einstellungen“ > „Apple Account“ > „Abonnements“ kannst du es verwalten oder kündigen."
+  },
+  "54fe1741eaeda1464441": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.236168+00:00",
+    "source": "After move",
+    "translation": "Nach dem Zug"
   },
   "5500cc5a7d89d26c4065": {
     "origin": "manual-reviewed",
@@ -2467,6 +2491,12 @@
     "reviewedAt": "2026-10-15T02:37:25.851261+00:00",
     "source": "billing period",
     "translation": "Abrechnungszeitraum"
+  },
+  "76c1062c6cd17c6a92c5": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.236175+00:00",
+    "source": "Start position",
+    "translation": "Ausgangsstellung"
   },
   "77120fc6b5f4f2db783b": {
     "origin": "manual",
@@ -3498,6 +3528,12 @@
     "source": "%lld days ago",
     "translation": "vor %1$lld Tagen"
   },
+  "ad3c3e9b53e744260661": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.236183+00:00",
+    "source": "Tap to start or stop the repeating move animation.",
+    "translation": "Tippe, um die wiederholte Zuganimation zu starten oder zu beenden."
+  },
   "adc598f9e585613296c1": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -3546,6 +3582,12 @@
     "reviewedAt": "2026-10-15T02:35:54.905313+00:00",
     "source": "Opens purchase options",
     "translation": "Öffnet die Kaufoptionen"
+  },
+  "b00af019473cdb95c123": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.236184+00:00",
+    "source": "The move repeats. Tap to return to the result.",
+    "translation": "Der Zug wiederholt sich. Tippe, um zum Ergebnis zurückzukehren."
   },
   "b0195811fc38ee9f929e": {
     "origin": "manual",
@@ -4530,6 +4572,12 @@
     "reviewedAt": "2026-10-15T02:34:35.323394+00:00",
     "source": "%lld boards",
     "translation": "%1$lld Stellungen"
+  },
+  "e445c6f18a49f84eab6d": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.236193+00:00",
+    "source": "Moving…",
+    "translation": "Zug wird gespielt…"
   },
   "e4555aa78fc29ac842bd": {
     "origin": "manual",

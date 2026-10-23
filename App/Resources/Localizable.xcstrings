@@ -5268,6 +5268,46 @@
         }
       }
     },
+    "After move": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach dem Zug"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Después del movimiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après le coup"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dopo la mossa"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Após a jogada"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hamle sonrası"
+          }
+        }
+      }
+    },
     "Allow access in Settings": {
       "localizations": {
         "de": {
@@ -12983,6 +13023,46 @@
         }
       }
     },
+    "Moving…": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zug wird gespielt…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moviendo…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déplacement…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mossa in corso…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movendo…"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hamle yapılıyor…"
+          }
+        }
+      }
+    },
     "Needs a look: ": {
       "localizations": {
         "de": {
@@ -13268,9 +13348,6 @@
           }
         }
       }
-    },
-    "Nf6": {
-      "shouldTranslate": false
     },
     "No Board Found": {
       "localizations": {
@@ -18962,6 +19039,46 @@
         }
       }
     },
+    "Stop move animation": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zuganimation beenden"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detener animación del movimiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêter l’animation du coup"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interrompi animazione della mossa"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parar animação da jogada"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hamle animasyonunu durdur"
+          }
+        }
+      }
+    },
     "Stopped": {
       "localizations": {
         "de": {
@@ -20243,6 +20360,7 @@
       }
     },
     "Tap to animate the move. The original position returns afterward.": {
+      "extractionState": "stale",
       "localizations": {
         "de": {
           "stringUnit": {
@@ -20278,6 +20396,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hamleyi canlandırmak için dokunun. Ardından ilk konum geri gelir."
+          }
+        }
+      }
+    },
+    "Tap to start or stop the repeating move animation.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe, um die wiederholte Zuganimation zu starten oder zu beenden."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca para iniciar o detener la animación en bucle del movimiento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez pour lancer ou arrêter l’animation du coup en boucle."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocca per avviare o fermare l’animazione ripetuta della mossa."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque para iniciar ou parar a animação da jogada em repetição."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tekrarlanan hamle animasyonunu başlatmak veya durdurmak için dokunun."
           }
         }
       }

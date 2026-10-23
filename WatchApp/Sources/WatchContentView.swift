@@ -69,6 +69,7 @@ struct WatchContentView: View {
             if let playback = model.reply?.playback {
                 Button { showsFullBoard = false } label: {
                     BoardMovePlaybackView(playback: playback)
+                        .padding(.bottom, 32)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Color.black)
                         .contentShape(Rectangle())
@@ -76,7 +77,7 @@ struct WatchContentView: View {
                 .buttonStyle(.plain)
                 .ignoresSafeArea()
                 .accessibilityLabel("Expanded chessboard")
-                .accessibilityHint("Tap to return to the result.")
+                .accessibilityHint("The move repeats. Tap to return to the result.")
                 .accessibilityAction(.escape) { showsFullBoard = false }
             } else if let image = boardImage {
                 GeometryReader { proxy in

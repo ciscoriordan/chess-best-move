@@ -97,7 +97,7 @@ private struct AnalysisScreen: View {
         }
         .offersNewScreenshot()
         .onAppear { model.appear() }
-        .onDisappear { model.disappear() }
+        .onDisappear { model.disappear(); playback = nil }
         .onChange(of: session.canAnalyze) { _, _ in model.creditStateChanged() }
         .onChange(of: scenePhase) { _, phase in model.scenePhaseChanged(to: phase) }
         .sensoryFeedback(.success, trigger: model.completionCount)
@@ -105,11 +105,6 @@ private struct AnalysisScreen: View {
         .sensoryFeedback(.success, trigger: model.improvementCount)
         .onChange(of: model.position) { _, _ in playback = nil }
         .onChange(of: model.bestMove?.move) { _, _ in playback = nil }
-        .task(id: playbackID) {
-            guard let playback else { return }
-            do { try await Task.sleep(for: .seconds(playback.duration)) } catch { return }
-            self.playback = nil
-        }
         #if DEBUG
         .onChange(of: model.bestMove?.san) { _, san in
             if san != nil { DebugTimeline.shared.mark("firstArrow") }
@@ -222,6 +217,10 @@ private struct AnalysisScreen: View {
                 board
                     .frame(width: side, height: side)
             }
+            if playback != nil {
+                Color.clear.frame(height: 32)
+                    .accessibilityHidden(true)
+            }
             AnalysisThinkProgress(
                 startedAt: model.searchStartedAt,
                 thinkTime: model.runThinkTime,
@@ -242,43 +241,49 @@ private struct AnalysisScreen: View {
     /// Full Keyboard Access and Switch Control can activate this same focus stop.
     private func togglePeek() {
         guard canPeek else { return }
+        playback = nil
         isPeeking.toggle()
     }
 
     private var board: some View {
         let canPeek = canPeek
         let showsScreenshot = snapshot.boardImage != nil && isPeeking
-        return BoardFrame {
-            ZStack(alignment: .topTrailing) {
-                if let playback {
-                    playbackBoard(playback).id(playbackID)
-                } else if showsScreenshot, let image = snapshot.boardImage {
-                    BoardScreenshot(image: image, snapshot: snapshot)
-                } else {
-                    ScreenshotStyledBoard(snapshot: snapshot, appearance: app.settings.boardAppearance)
-                        .modifier(AnalysisBoardTint(status: model.resultReadout.checkStatus))
-                }
-                AnalysisArrowOverlay(
-                    // The readout is what decides which moves are drawn and whose they are,
-                    // so the board and the words under it can never disagree (design.md 9.4).
-                    arrows: isPeeking || playback != nil ? [] : model.resultReadout.boardArrows,
-                    whiteAtBottom: snapshot.whiteAtBottom,
-                    isFinal: isFinal
-                )
-                if snapshot.showsDiagram, snapshot.boardImage != nil, !isPeeking {
-                    Text("Edited")
-                        .typography(.label)
-                        .foregroundStyle(Palette.ink2)
-                        .padding(.horizontal, Spacing.s1 + 2)
-                        .padding(.vertical, 2)
-                        .background(Palette.raised, in: RoundedRectangle(cornerRadius: Radius.r1, style: .continuous))
-                        .overlay(RoundedRectangle(cornerRadius: Radius.r1, style: .continuous).strokeBorder(Palette.rule2, lineWidth: LineWidth.control))
-                        .padding(Spacing.s2)
-                        .accessibilityHidden(true)
+        return Group {
+            if let playback {
+                playbackBoard(playback).id(playbackID)
+            } else {
+                BoardFrame {
+                    ZStack(alignment: .topTrailing) {
+                        if showsScreenshot, let image = snapshot.boardImage {
+                            BoardScreenshot(image: image, snapshot: snapshot)
+                        } else {
+                            ScreenshotStyledBoard(snapshot: snapshot, appearance: app.settings.boardAppearance)
+                                .modifier(AnalysisBoardTint(status: model.resultReadout.checkStatus))
+                        }
+                        AnalysisArrowOverlay(
+                            // The readout decides which moves are drawn and whose they are,
+                            // so the board and the words under it cannot disagree (design.md 9.4).
+                            arrows: isPeeking ? [] : model.resultReadout.boardArrows,
+                            whiteAtBottom: snapshot.whiteAtBottom,
+                            isFinal: isFinal
+                        )
+                        if snapshot.showsDiagram, snapshot.boardImage != nil, !isPeeking {
+                            Text("Edited")
+                                .typography(.label)
+                                .foregroundStyle(Palette.ink2)
+                                .padding(.horizontal, Spacing.s1 + 2)
+                                .padding(.vertical, 2)
+                                .background(Palette.raised, in: RoundedRectangle(cornerRadius: Radius.r1, style: .continuous))
+                                .overlay(RoundedRectangle(cornerRadius: Radius.r1, style: .continuous).strokeBorder(Palette.rule2, lineWidth: LineWidth.control))
+                                .padding(Spacing.s2)
+                                .accessibilityHidden(true)
+                        }
+                    }
                 }
             }
         }
         .onLongPressGesture(minimumDuration: 0.25, maximumDistance: 40) {
+            if canPeek { playback = nil }
         } onPressingChanged: { pressing in
             isPeeking = canPeek && pressing
         }
@@ -292,10 +297,13 @@ private struct AnalysisScreen: View {
         .accessibilityCustomContent("Side to move", sideToMoveAccessibilityText)
         .accessibilityCustomContent("FEN", snapshot.position.fen)
         // Playback and crop comparison both have named actions for assistive technologies.
-        .accessibilityHint(canPlayMove ? String(localized: "Tap to animate the move. The original position returns afterward.") : "")
+        .accessibilityHint(canPlayMove ? String(localized: "Tap to start or stop the repeating move animation.") : "")
         .accessibilityAction { if canPlayMove { playMove() } else { togglePeek() } }
         .accessibilityActions {
-            if canPlayMove { Button("Play move animation") { playMove() } }
+            if canPlayMove {
+                if playback == nil { Button("Play move animation") { playMove() } }
+                else { Button("Stop move animation") { playMove() } }
+            }
             peekAction
         }
     }
@@ -304,6 +312,7 @@ private struct AnalysisScreen: View {
 
     private func playMove() {
         guard canPlayMove else { return }
+        if playback != nil { playback = nil; return }
         isPeeking = false
         playback = .make(position: model.position, moves: model.resultReadout.boardArrows.map(\.move),
                          whiteAtBottom: snapshot.whiteAtBottom)
@@ -325,7 +334,9 @@ private struct AnalysisScreen: View {
             light = Palette.diagramLight
             dark = Palette.diagramDark
         }
-        return BoardMovePlaybackView(playback: playback, sprites: sprites, light: light, dark: dark)
+        return BoardMovePlaybackView(playback: playback, sprites: sprites, light: light, dark: dark,
+                                     cornerRadius: Radius.r1)
+            .accessibilityIgnoresInvertColors()
     }
 
     /// The custom action that stands in for pressing and holding the board. Nothing to offer
@@ -334,6 +345,7 @@ private struct AnalysisScreen: View {
     private var peekAction: some View {
         if snapshot.showsDiagram, snapshot.boardImage != nil {
             Button(isPeeking ? CaptureBoardSpeech.hideScreenshotAction : CaptureBoardSpeech.compareAction) {
+                playback = nil
                 isPeeking.toggle()
             }
         }

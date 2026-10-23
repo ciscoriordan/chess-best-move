@@ -1514,12 +1514,24 @@
     "source": "No Analyses Remaining",
     "translation": "Analiz hakkı kalmadı"
   },
+  "470e089415ad7667c4b0": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.240400+00:00",
+    "source": "Moving…",
+    "translation": "Hamle yapılıyor…"
+  },
   "473117d968771f650279": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
     "reviewedAt": "2026-10-15T02:35:54.897249+00:00",
     "source": "See options",
     "translation": "Seçenekleri gör"
+  },
+  "47eb3f70e727e37a31e5": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.240406+00:00",
+    "source": "Stop move animation",
+    "translation": "Hamle animasyonunu durdur"
   },
   "4865cf2cfedfe285c1bd": {
     "origin": "manual",
@@ -1597,6 +1609,12 @@
     "reviewedAt": "2026-10-15T02:35:54.897261+00:00",
     "source": "Finding the board",
     "translation": "Tahta bulunuyor"
+  },
+  "4cfc24130fc92115342e": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.240408+00:00",
+    "source": "After move",
+    "translation": "Hamle sonrası"
   },
   "4d78df0bd643416845a7": {
     "origin": "manual",
@@ -1762,6 +1780,12 @@
     "reviewedAt": "2026-10-15T02:35:54.897277+00:00",
     "source": "Payment is charged to your Apple Account when you confirm. The subscription renews automatically at the same price %@ unless you cancel at least 24 hours before the current period ends. Manage or cancel in Settings > Apple Account > Subscriptions.",
     "translation": "Onay verdiğinizde ödeme Apple Hesabınızdan alınır. Geçerli dönem sona ermeden en az 24 saat önce iptal etmediğiniz sürece abonelik aynı fiyatla %1$@ otomatik yenilenir. Yönetmek veya iptal etmek için Ayarlar > Apple Hesabı > Abonelikler yolunu izleyin."
+  },
+  "54fe1741eaeda1464441": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.240410+00:00",
+    "source": "After move",
+    "translation": "Hamle sonrası"
   },
   "5500cc5a7d89d26c4065": {
     "origin": "manual-reviewed",
@@ -2469,6 +2493,12 @@
     "reviewedAt": "2026-10-15T02:36:48.351894+00:00",
     "source": "billing period",
     "translation": "faturalandırma dönemi"
+  },
+  "76c1062c6cd17c6a92c5": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.240417+00:00",
+    "source": "Start position",
+    "translation": "Başlangıç konumu"
   },
   "77120fc6b5f4f2db783b": {
     "origin": "manual",
@@ -3502,6 +3532,12 @@
     "source": "%lld days ago",
     "translation": "%1$lld gün önce"
   },
+  "ad3c3e9b53e744260661": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.240426+00:00",
+    "source": "Tap to start or stop the repeating move animation.",
+    "translation": "Tekrarlanan hamle animasyonunu başlatmak veya durdurmak için dokunun."
+  },
   "adc598f9e585613296c1": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -3550,6 +3586,12 @@
     "reviewedAt": "2026-10-15T02:38:08.607104+00:00",
     "source": "Opens purchase options",
     "translation": "Satın alma seçeneklerini açar"
+  },
+  "b00af019473cdb95c123": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.240427+00:00",
+    "source": "The move repeats. Tap to return to the result.",
+    "translation": "Hamle tekrarlanır. Sonuca dönmek için dokunun."
   },
   "b0195811fc38ee9f929e": {
     "origin": "manual",
@@ -4530,6 +4572,12 @@
     "reviewedAt": "2026-10-15T02:38:08.607253+00:00",
     "source": "%lld boards",
     "translation": "%1$lld tahta"
+  },
+  "e445c6f18a49f84eab6d": {
+    "reason": "Authored and reviewed for repeating chess move playback: distinguish the initial position, movement and resulting position; preserve concise interface wording and the tap-to-stop action.",
+    "reviewedAt": "2026-10-23T06:07:06.240435+00:00",
+    "source": "Moving…",
+    "translation": "Hamle yapılıyor…"
   },
   "e4555aa78fc29ac842bd": {
     "origin": "manual",

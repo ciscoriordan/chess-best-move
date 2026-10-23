@@ -20,7 +20,8 @@ and editing take priority. You can turn this behavior off and continue importing
 
 The Apple Watch companion requests a three-second analysis from the paired iPhone and shows the
 move and board arrow, with Analyze centered above the result. Tap its board to expand it and
-play the move; tap again to close. It uses the latest screenshot, without an age cutoff, already in the
+loop the move; tap again to close. The expanded board uses the full display, including behind
+the system clock and close control. It uses the latest screenshot, without an age cutoff, already in the
 phone's Photos library after Full Access was granted. Existing analyses or Pro access apply.
 Uncertain positions need confirmation on iPhone. Watch-face complications launch the companion
 without requesting a search. Watch Connectivity transfers only a bounded local result to the
@@ -32,8 +33,9 @@ History keeps the last 500 completed positions and visible engine answers on thi
 without original screenshots or cloud synchronization. It is excluded from device backups.
 Saved positions and exact matching screenshots reopen the answer without another search or
 credit charge. History supports search, per-entry deletion and clearing. Deletion never resets
-spent analyses. Tap the phone board to play the shown move, then return to the original board.
-Both apps respect Reduce Motion. Additional thinking clearly identifies an improved move while
+spent analyses. Tap the phone board to loop the shown move; tap again to stop. Both apps pause
+at the original and resulting positions, labeled Start position and After move below the board,
+then reset without animating backward. Both apps respect Reduce Motion with static changes. Additional thinking clearly identifies an improved move while
 preserving the existing Pro access requirement.
 
 New users receive three free analyses before optional purchases. The October launch offer

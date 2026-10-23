@@ -17,7 +17,54 @@ struct BoardMovePlayback: Codable, Sendable, Equatable {
     }
     var steps: [Step]
     var whiteAtBottom: Bool
-    var duration: TimeInterval { Double(steps.count) + 1 }
+
+    enum Phase: Equatable {
+        case start, moving, afterMove
+
+        var label: LocalizedStringKey {
+            switch self {
+            case .start: "Start position"
+            case .moving: "Moving…"
+            case .afterMove: "After move"
+            }
+        }
+    }
+
+    struct Frame: Equatable {
+        var step: Int
+        var progress: Double
+        var phase: Phase
+    }
+
+    // Hold both ends so a repeating move cannot be mistaken for a move played backward.
+    private static let startHold: TimeInterval = 1.2
+    private static let moveDuration: TimeInterval = 0.75
+    private static let betweenMovesHold: TimeInterval = 0.65
+    private static let endHold: TimeInterval = 1.5
+    var duration: TimeInterval {
+        Self.startHold + Double(steps.count) * Self.moveDuration
+            + Double(max(0, steps.count - 1)) * Self.betweenMovesHold + Self.endHold
+    }
+
+    func frame(at elapsed: TimeInterval, reduceMotion: Bool = false, isPlaying: Bool = true) -> Frame {
+        let start = Frame(step: 0, progress: 0, phase: .start)
+        guard isPlaying, !steps.isEmpty else { return start }
+        var time = (elapsed.isFinite ? max(0, elapsed) : 0).truncatingRemainder(dividingBy: duration)
+        guard time >= Self.startHold else { return start }
+        time -= Self.startHold
+        for index in steps.indices {
+            if time < Self.moveDuration {
+                return Frame(step: index, progress: reduceMotion ? 1 : time / Self.moveDuration,
+                             phase: reduceMotion && index == steps.count - 1 ? .afterMove : .moving)
+            }
+            time -= Self.moveDuration
+            if index < steps.count - 1 {
+                if time < Self.betweenMovesHold { return Frame(step: index, progress: 1, phase: .moving) }
+                time -= Self.betweenMovesHold
+            }
+        }
+        return Frame(step: steps.count - 1, progress: 1, phase: .afterMove)
+    }
 
     var isValid: Bool {
         let pieces = Set("KQRBNPkqrbnp".map(String.init))
@@ -35,19 +82,19 @@ struct BoardMovePlaybackView: View {
     var sprites: [String: CGImage] = [:]
     var light: Color = Color(red: 0.90, green: 0.90, blue: 0.78)
     var dark: Color = Color(red: 0.48, green: 0.60, blue: 0.32)
+    var cornerRadius: CGFloat = 0
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var startedAt = Date.now
-    @State private var hasFinished = false
 
     var body: some View {
-        TimelineView(.animation(minimumInterval: 1.0 / 30, paused: !isPlaying || hasFinished)) { timeline in
-            let elapsed = !isPlaying ? 0 : hasFinished ? Double(playback.steps.count) : max(0, timeline.date.timeIntervalSince(startedAt))
-            let index = min(Int(elapsed), max(0, playback.steps.count - 1))
-            let progress: Double = !isPlaying ? 0 : reduceMotion ? 1 : min(1, max(0, (elapsed - Double(index)) / 0.75))
+        TimelineView(.animation(minimumInterval: reduceMotion ? 0.1 : 1.0 / 30, paused: !isPlaying)) { timeline in
+            let frame = playback.frame(at: timeline.date.timeIntervalSince(startedAt),
+                                       reduceMotion: reduceMotion, isPlaying: isPlaying)
+            let progress = frame.progress
             Canvas { context, size in
-                guard playback.isValid, playback.steps.indices.contains(index) else { return }
+                guard playback.isValid, playback.steps.indices.contains(frame.step) else { return }
                 let side = min(size.width, size.height)
-                let step = playback.steps[index]
+                let step = playback.steps[frame.step]
                 func rect(_ index: Int) -> CGRect {
                     let file = index % 8, rank = index / 8
                     let column = playback.whiteAtBottom ? file : 7 - file
@@ -77,14 +124,29 @@ struct BoardMovePlaybackView: View {
                     }
                 }
             }
+            .aspectRatio(1, contentMode: .fit)
+            .clipShape(.rect(cornerRadius: cornerRadius))
+            // Callers reserve 32 points below the square, keeping labels off the pieces.
+            .overlay(alignment: .bottom) {
+                if isPlaying {
+                    Text(frame.phase.label)
+                        #if os(watchOS)
+                        .font(.caption.weight(.semibold))
+                        #else
+                        .typography(.caption)
+                        .fontWeight(.semibold)
+                        #endif
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 28)
+                        .offset(y: 32)
+                }
+            }
         }
         .aspectRatio(1, contentMode: .fit)
         .accessibilityHidden(true)
-        .task {
-            guard isPlaying else { return }
-            do { try await Task.sleep(for: .seconds(Double(playback.steps.count))) } catch { return }
-            hasFinished = true
-        }
+        .onChange(of: playback) { _, _ in startedAt = .now }
     }
 
     private func draw(_ piece: String, in rect: CGRect, context: inout GraphicsContext) {

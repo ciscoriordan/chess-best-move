@@ -1483,12 +1483,26 @@
     "key": "No Analyses Remaining",
     "source": "No Analyses Remaining"
   },
+  "470e089415ad7667c4b0": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Moving…",
+    "source": "Moving…"
+  },
   "473117d968771f650279": {
     "catalog": "Localizable",
     "comment": "",
     "index": 0,
     "key": "See options",
     "source": "See options"
+  },
+  "47eb3f70e727e37a31e5": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Stop move animation",
+    "source": "Stop move animation"
   },
   "4865cf2cfedfe285c1bd": {
     "catalog": "Localizable",
@@ -1566,6 +1580,13 @@
     "index": 0,
     "key": "Finding the board",
     "source": "Finding the board"
+  },
+  "4cfc24130fc92115342e": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "After move",
+    "source": "After move"
   },
   "4d78df0bd643416845a7": {
     "catalog": "Localizable",
@@ -1727,6 +1748,13 @@
     "index": 0,
     "key": "Payment is charged to your Apple Account when you confirm. The subscription renews automatically at the same price %@ unless you cancel at least 24 hours before the current period ends. Manage or cancel in Settings > Apple Account > Subscriptions.",
     "source": "Payment is charged to your Apple Account when you confirm. The subscription renews automatically at the same price %@ unless you cancel at least 24 hours before the current period ends. Manage or cancel in Settings > Apple Account > Subscriptions."
+  },
+  "54fe1741eaeda1464441": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "After move",
+    "source": "After move"
   },
   "5500cc5a7d89d26c4065": {
     "catalog": "Localizable",
@@ -2434,6 +2462,13 @@
     "index": 0,
     "key": "billing period",
     "source": "billing period"
+  },
+  "76c1062c6cd17c6a92c5": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Start position",
+    "source": "Start position"
   },
   "77120fc6b5f4f2db783b": {
     "catalog": "Localizable",
@@ -3429,6 +3464,13 @@
     "key": "%lld days ago",
     "source": "%lld days ago"
   },
+  "ad3c3e9b53e744260661": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Tap to start or stop the repeating move animation.",
+    "source": "Tap to start or stop the repeating move animation."
+  },
   "adc598f9e585613296c1": {
     "catalog": "Localizable",
     "comment": "",
@@ -3477,6 +3519,13 @@
     "index": 0,
     "key": "Opens purchase options",
     "source": "Opens purchase options"
+  },
+  "b00af019473cdb95c123": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "The move repeats. Tap to return to the result.",
+    "source": "The move repeats. Tap to return to the result."
   },
   "b0195811fc38ee9f929e": {
     "catalog": "Localizable",
@@ -3975,13 +4024,6 @@
     "key": "Switches the side to move",
     "source": "Switches the side to move"
   },
-  "cc314477ef7a5132fb19": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Tap to animate the move. The original position returns afterward.",
-    "source": "Tap to animate the move. The original position returns afterward."
-  },
   "cc62bddd9cda7794eec7": {
     "catalog": "Localizable",
     "comment": "",
@@ -4450,6 +4492,13 @@
     "index": 0,
     "key": "%lld boards",
     "source": "%lld boards"
+  },
+  "e445c6f18a49f84eab6d": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Moving…",
+    "source": "Moving…"
   },
   "e4555aa78fc29ac842bd": {
     "catalog": "Localizable",
