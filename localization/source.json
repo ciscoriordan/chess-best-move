@@ -783,6 +783,13 @@
     "key": "Testing",
     "source": "Testing"
   },
+  "27341b226accc0e0e4bf": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Start Position",
+    "source": "Start Position"
+  },
   "273a5d99c600ab4c0fa6": {
     "catalog": "Localizable",
     "comment": "",
@@ -1581,13 +1588,6 @@
     "key": "Finding the board",
     "source": "Finding the board"
   },
-  "4cfc24130fc92115342e": {
-    "catalog": "WatchLocalizable",
-    "comment": "",
-    "index": 0,
-    "key": "After move",
-    "source": "After move"
-  },
   "4d78df0bd643416845a7": {
     "catalog": "Localizable",
     "comment": "Chess piece after promotes to. Use the grammatical form after the translated promotion verb.",
@@ -1748,13 +1748,6 @@
     "index": 0,
     "key": "Payment is charged to your Apple Account when you confirm. The subscription renews automatically at the same price %@ unless you cancel at least 24 hours before the current period ends. Manage or cancel in Settings > Apple Account > Subscriptions.",
     "source": "Payment is charged to your Apple Account when you confirm. The subscription renews automatically at the same price %@ unless you cancel at least 24 hours before the current period ends. Manage or cancel in Settings > Apple Account > Subscriptions."
-  },
-  "54fe1741eaeda1464441": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "After move",
-    "source": "After move"
   },
   "5500cc5a7d89d26c4065": {
     "catalog": "Localizable",
@@ -2462,13 +2455,6 @@
     "index": 0,
     "key": "billing period",
     "source": "billing period"
-  },
-  "76c1062c6cd17c6a92c5": {
-    "catalog": "WatchLocalizable",
-    "comment": "",
-    "index": 0,
-    "key": "Start position",
-    "source": "Start position"
   },
   "77120fc6b5f4f2db783b": {
     "catalog": "Localizable",
@@ -4087,6 +4073,13 @@
     "key": "Black to move",
     "source": "Black to move"
   },
+  "d025bf04c27d7b110648": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Start Position",
+    "source": "Start Position"
+  },
   "d0527405a038825ab3d4": {
     "catalog": "Localizable",
     "comment": "",
@@ -4556,6 +4549,13 @@
     "key": "%@ added. %lld purchased now.",
     "source": "%1$@ added. %2$lld purchased now."
   },
+  "e9883fc5680190638e5f": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "After Move",
+    "source": "After Move"
+  },
   "e99c4aa63377d0d59d54": {
     "catalog": "Localizable",
     "comment": "",
@@ -4569,6 +4569,13 @@
     "index": 0,
     "key": "You're offline. Connect to the internet to see purchase options.",
     "source": "You're offline. Connect to the internet to see purchase options."
+  },
+  "eb96926e0610bc0638ae": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "After Move",
+    "source": "After Move"
   },
   "ec4eebe8803eed5f87bf": {
     "catalog": "Localizable",

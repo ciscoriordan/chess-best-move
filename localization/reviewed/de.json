@@ -801,6 +801,12 @@
     "source": "Testing",
     "translation": "Testen"
   },
+  "27341b226accc0e0e4bf": {
+    "reason": "Reviewed after the owner requested English title case for playback labels. The translation preserves the established capitalization convention of this language.",
+    "reviewedAt": "2026-10-23T14:07:00.181101+00:00",
+    "source": "Start Position",
+    "translation": "Grundstellung"
+  },
   "273a5d99c600ab4c0fa6": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -4160,6 +4166,12 @@
     "source": "Black to move",
     "translation": "Schwarz am Zug"
   },
+  "d025bf04c27d7b110648": {
+    "reason": "Reviewed after the owner requested English title case for playback labels. The translation preserves the established capitalization convention of this language.",
+    "reviewedAt": "2026-10-23T14:07:00.181134+00:00",
+    "source": "Start Position",
+    "translation": "Grundstellung"
+  },
   "d0527405a038825ab3d4": {
     "origin": "manual-reviewed",
     "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
@@ -4635,6 +4647,12 @@
     "source": "%1$@ added. %2$lld purchased now.",
     "translation": "%1$@ hinzugefügt. Jetzt %2$lld gekaufte Analysen verfügbar."
   },
+  "e9883fc5680190638e5f": {
+    "reason": "Reviewed after the owner requested English title case for playback labels. The translation preserves the established capitalization convention of this language.",
+    "reviewedAt": "2026-10-23T14:07:00.181144+00:00",
+    "source": "After Move",
+    "translation": "Nach dem Zug"
+  },
   "e99c4aa63377d0d59d54": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -4648,6 +4666,12 @@
     "reviewedAt": "2026-10-15T02:37:25.851251+00:00",
     "source": "You're offline. Connect to the internet to see purchase options.",
     "translation": "Du bist offline. Stelle eine Internetverbindung her, um die Kaufoptionen anzuzeigen."
+  },
+  "eb96926e0610bc0638ae": {
+    "reason": "Reviewed after the owner requested English title case for playback labels. The translation preserves the established capitalization convention of this language.",
+    "reviewedAt": "2026-10-23T14:07:00.181153+00:00",
+    "source": "After Move",
+    "translation": "Nach dem Zug"
   },
   "ec4eebe8803eed5f87bf": {
     "origin": "manual",

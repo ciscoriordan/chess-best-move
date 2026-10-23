@@ -34,7 +34,7 @@ without original screenshots or cloud synchronization. It is excluded from devic
 Saved positions and exact matching screenshots reopen the answer without another search or
 credit charge. History supports search, per-entry deletion and clearing. Deletion never resets
 spent analyses. Tap the phone board to loop the shown move; tap again to stop. Both apps pause
-at the original and resulting positions, labeled Start position and After move below the board,
+at the original and resulting positions, labeled Start Position and After Move above the board,
 then reset without animating backward. Both apps respect Reduce Motion with static changes. Additional thinking clearly identifies an improved move while
 preserving the existing Pro access requirement.
 

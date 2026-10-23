@@ -67,18 +67,20 @@ struct WatchContentView: View {
         }
         .fullScreenCover(isPresented: $showsFullBoard) {
             if let playback = model.reply?.playback {
-                Button { showsFullBoard = false } label: {
-                    BoardMovePlaybackView(playback: playback)
-                        .padding(.bottom, 32)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.black)
-                        .contentShape(Rectangle())
+                GeometryReader { proxy in
+                    Button { showsFullBoard = false } label: {
+                        BoardMovePlaybackView(playback: playback)
+                            .padding(.top, 32)
+                            .frame(width: proxy.size.width, height: proxy.size.height)
+                            .background(Color.black)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Expanded chessboard")
+                    .accessibilityHint("The move repeats. Tap to return to the result.")
+                    .accessibilityAction(.escape) { showsFullBoard = false }
                 }
-                .buttonStyle(.plain)
                 .ignoresSafeArea()
-                .accessibilityLabel("Expanded chessboard")
-                .accessibilityHint("The move repeats. Tap to return to the result.")
-                .accessibilityAction(.escape) { showsFullBoard = false }
             } else if let image = boardImage {
                 GeometryReader { proxy in
                     Button { showsFullBoard = false } label: {

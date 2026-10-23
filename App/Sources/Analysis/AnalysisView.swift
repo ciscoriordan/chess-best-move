@@ -206,6 +206,10 @@ private struct AnalysisScreen: View {
 
     private func boardGroup(side: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: Spacing.s2) {
+            if playback != nil {
+                Color.clear.frame(height: 32)
+                    .accessibilityHidden(true)
+            }
             HStack(alignment: .top, spacing: AnalysisEvalBar.spacing) {
                 AnalysisEvalBar(
                     whiteShare: evalShare,
@@ -216,10 +220,6 @@ private struct AnalysisScreen: View {
                 .frame(height: side)
                 board
                     .frame(width: side, height: side)
-            }
-            if playback != nil {
-                Color.clear.frame(height: 32)
-                    .accessibilityHidden(true)
             }
             AnalysisThinkProgress(
                 startedAt: model.searchStartedAt,

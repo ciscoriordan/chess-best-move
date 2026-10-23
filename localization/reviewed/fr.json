@@ -707,6 +707,12 @@
     "source": "Testing",
     "translation": "Tests"
   },
+  "27341b226accc0e0e4bf": {
+    "reason": "Reviewed after the owner requested English title case for playback labels. The translation preserves the established capitalization convention of this language.",
+    "reviewedAt": "2026-10-23T14:07:00.178843+00:00",
+    "source": "Start Position",
+    "translation": "Position de départ"
+  },
   "273a5d99c600ab4c0fa6": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
@@ -3962,6 +3968,12 @@
     "source": "Black to move",
     "translation": "Trait aux noirs"
   },
+  "d025bf04c27d7b110648": {
+    "reason": "Reviewed after the owner requested English title case for playback labels. The translation preserves the established capitalization convention of this language.",
+    "reviewedAt": "2026-10-23T14:07:00.178868+00:00",
+    "source": "Start Position",
+    "translation": "Position de départ"
+  },
   "d0527405a038825ab3d4": {
     "origin": "manual-reviewed",
     "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
@@ -4420,6 +4432,12 @@
     "source": "%1$@ added. %2$lld purchased now.",
     "translation": "%1$@ ajoutées. Il y a maintenant %2$lld analyses achetées."
   },
+  "e9883fc5680190638e5f": {
+    "reason": "Reviewed after the owner requested English title case for playback labels. The translation preserves the established capitalization convention of this language.",
+    "reviewedAt": "2026-10-23T14:07:00.178878+00:00",
+    "source": "After Move",
+    "translation": "Après le coup"
+  },
   "e99c4aa63377d0d59d54": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -4433,6 +4451,12 @@
     "reviewedAt": "2026-10-15T02:39:58.433707+00:00",
     "source": "You're offline. Connect to the internet to see purchase options.",
     "translation": "Vous êtes hors ligne. Connectez-vous à Internet pour voir les options d’achat."
+  },
+  "eb96926e0610bc0638ae": {
+    "reason": "Reviewed after the owner requested English title case for playback labels. The translation preserves the established capitalization convention of this language.",
+    "reviewedAt": "2026-10-23T14:07:00.178884+00:00",
+    "source": "After Move",
+    "translation": "Après le coup"
   },
   "ec4eebe8803eed5f87bf": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",

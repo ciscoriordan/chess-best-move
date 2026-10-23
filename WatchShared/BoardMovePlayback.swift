@@ -23,9 +23,9 @@ struct BoardMovePlayback: Codable, Sendable, Equatable {
 
         var label: LocalizedStringKey {
             switch self {
-            case .start: "Start position"
+            case .start: "Start Position"
             case .moving: "Moving…"
-            case .afterMove: "After move"
+            case .afterMove: "After Move"
             }
         }
     }
@@ -126,8 +126,8 @@ struct BoardMovePlaybackView: View {
             }
             .aspectRatio(1, contentMode: .fit)
             .clipShape(.rect(cornerRadius: cornerRadius))
-            // Callers reserve 32 points below the square, keeping labels off the pieces.
-            .overlay(alignment: .bottom) {
+            // Callers reserve 32 points above the square, keeping labels off the pieces.
+            .overlay(alignment: .top) {
                 if isPlaying {
                     Text(frame.phase.label)
                         #if os(watchOS)
@@ -138,9 +138,19 @@ struct BoardMovePlaybackView: View {
                         #endif
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
+                        #if os(watchOS)
+                        // Keep the top caption within the Watch's rounded upper edge,
+                        // above the native clock and close control.
+                        .frame(maxWidth: 100)
+                        #else
                         .frame(maxWidth: .infinity)
+                        #endif
                         .frame(height: 28)
-                        .offset(y: 32)
+                        #if os(watchOS)
+                        .offset(y: -38)
+                        #else
+                        .offset(y: -32)
+                        #endif
                 }
             }
         }
