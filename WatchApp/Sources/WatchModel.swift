@@ -44,6 +44,7 @@ final class WatchModel: NSObject, WCSessionDelegate {
                 moveDisplayFormat = format
             }
             isPreview = true
+            if arguments.contains("-watchPreviewAnalyzing") { _ = state.begin() }
             return
         }
         #endif
@@ -84,6 +85,9 @@ final class WatchModel: NSObject, WCSessionDelegate {
     }
 
     func setAppActive(_ active: Bool) {
+        #if DEBUG
+        if isPreview { return }
+        #endif
         if let request = state.setAppActive(active) { sendAttempt(request) }
     }
 

@@ -15,19 +15,28 @@ struct WatchContentView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: model.reply == nil ? 12 : 8) {
                 Button(action: model.analyze) {
-                    HStack(alignment: .center, spacing: 8) {
-                        if dynamicTypeSize < .xxLarge {
-                            Image(systemName: "viewfinder")
-                                .accessibilityHidden(true)
+                    ZStack {
+                        HStack(alignment: .center, spacing: 8) {
+                            if dynamicTypeSize < .xxLarge {
+                                Image(systemName: "viewfinder")
+                                    .accessibilityHidden(true)
+                            }
+                            Text("Analyze latest screenshot")
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity)
+                            // Balance the decorative symbol so the words share the button's center.
+                            if dynamicTypeSize < .xxLarge {
+                                Image(systemName: "viewfinder")
+                                    .hidden()
+                                    .accessibilityHidden(true)
+                            }
                         }
-                        Text("Analyze latest screenshot")
-                            .fixedSize(horizontal: false, vertical: true)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth: .infinity)
-                        // Balance the decorative symbol so the words share the button's center.
-                        if dynamicTypeSize < .xxLarge {
-                            Image(systemName: "viewfinder")
-                                .hidden()
+                        // Preserve the full label's dimensions while the spinner replaces it.
+                        .opacity(model.isAnalyzing ? 0 : 1)
+                        if model.isAnalyzing {
+                            ProgressView()
+                                .tint(ink)
                                 .accessibilityHidden(true)
                         }
                     }
@@ -37,15 +46,15 @@ struct WatchContentView: View {
                 .tint(accent)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .disabled(model.isAnalyzing)
+                .accessibilityLabel("Analyze latest screenshot")
+                .accessibilityValue(model.isAnalyzing
+                    ? (model.isReconnecting ? Text("Connecting to iPhone…") : Text("Analyzing on iPhone…"))
+                    : Text(""))
                 .accessibilityIdentifier("watch.analyze")
-                if model.isAnalyzing {
-                    ProgressView(model.isReconnecting
-                        ? LocalizedStringKey("Connecting to iPhone…") : LocalizedStringKey("Analyzing on iPhone…"))
-                        .frame(maxWidth: .infinity, alignment: .center)
-                } else if !model.isActivated {
+                if !model.isAnalyzing && !model.isActivated {
                     Text("Connecting to iPhone…")
                     Button("Reconnect", action: model.activate)
-                } else if model.reply == nil {
+                } else if !model.isAnalyzing && model.reply == nil {
                     Text("New positions use one analysis or Pro access.")
                         .font(.footnote)
                         .foregroundStyle(ink.opacity(0.75))
