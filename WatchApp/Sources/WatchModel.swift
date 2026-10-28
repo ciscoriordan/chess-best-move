@@ -83,16 +83,20 @@ final class WatchModel: NSObject, WCSessionDelegate {
         send(request)
     }
 
+    func setAppActive(_ active: Bool) {
+        if let request = state.setAppActive(active) { sendAttempt(request) }
+    }
+
     func retry(dismissing id: UUID) {
         guard state.failure?.id == id else { return }
         state.dismissError(id: id)
         if let request = state.retry() { send(request) }
-        else if state.isWaitingForActivation { activate() }
     }
 
     private func send(_ request: WatchAnalysisRequest) {
         guard state.pendingID == request.id else { return }
-        // Retries share one deadline and one initial haptic with the original user request.
+        // Start the deadline and feedback on the first tap, including time spent waiting
+        // for app/session activation. Retries never restart this deadline.
         if timeout == nil {
             WKInterfaceDevice.current().play(.click)
             timeout = Task { [weak self] in
@@ -100,10 +104,27 @@ final class WatchModel: NSObject, WCSessionDelegate {
                 self?.fail(.timedOut, id: request.id)
             }
         }
-        sendAttempt(request)
+        if WCSession.default.activationState != .activated {
+            guard state.waitForReactivation(for: request.id) else { return }
+            activate()
+        } else {
+            completeActivation(true)
+        }
     }
 
     private func sendAttempt(_ request: WatchAnalysisRequest) {
+        guard state.pendingID == request.id else { return }
+        // Always On controls run their action before transitioning the app to active.
+        // Only an active Watch app can wake a suspended iPhone with an interactive message.
+        guard WKApplication.shared().applicationState == .active else {
+            state.setAppActive(false)
+            return
+        }
+        guard WCSession.default.activationState == .activated else {
+            guard state.waitForReactivation(for: request.id) else { return }
+            activate()
+            return
+        }
         guard let attempt = state.beginAttempt(for: request.id) else { return }
         guard let data = try? JSONEncoder().encode(request) else {
             fail(.unavailable, id: request.id)
@@ -133,11 +154,12 @@ final class WatchModel: NSObject, WCSessionDelegate {
             do { try await Task.sleep(for: delay) } catch { return }
             guard let self, self.state.pendingID == request.id else { return }
             self.retryTask = nil
+            let resumed = self.state.completeTransportRetry(for: request.id)
             if WCSession.default.activationState != .activated {
                 guard self.state.waitForReactivation(for: request.id) else { return }
                 self.activate()
-            } else {
-                self.sendAttempt(request)
+            } else if let resumed {
+                self.sendAttempt(resumed)
             }
         }
     }
@@ -172,7 +194,7 @@ final class WatchModel: NSObject, WCSessionDelegate {
         activationTimeout?.cancel()
         activationTimeout = nil
         activationID = nil
-        if let request = state.activate(activated) { send(request) }
+        if let request = state.activate(activated) { sendAttempt(request) }
         else if !activated { didFinish() }
     }
 

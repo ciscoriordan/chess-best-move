@@ -6,6 +6,7 @@ struct WatchContentView: View {
     @State private var showsFullBoard = false
     @ScaledMetric(relativeTo: .title3) private var moveSymbolSize = 24
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.scenePhase) private var scenePhase
     private let ink = Color(red: 238 / 255, green: 234 / 255, blue: 224 / 255)
     private let accent = Color(red: 124 / 255, green: 148 / 255, blue: 1)
 
@@ -35,7 +36,7 @@ struct WatchContentView: View {
                 }
                 .tint(accent)
                 .frame(maxWidth: .infinity, alignment: .center)
-                .disabled(model.isAnalyzing || !model.isActivated)
+                .disabled(model.isAnalyzing)
                 .accessibilityIdentifier("watch.analyze")
                 if model.isAnalyzing {
                     ProgressView(model.isReconnecting
@@ -48,6 +49,7 @@ struct WatchContentView: View {
                     Text("New positions use one analysis or Pro access.")
                         .font(.footnote)
                         .foregroundStyle(ink.opacity(0.75))
+                        .accessibilityIdentifier("watch.ready")
                 }
                 if let reply = model.reply { result(reply) }
             }
@@ -58,6 +60,9 @@ struct WatchContentView: View {
         .containerBackground(Color(red: 18 / 255, green: 17 / 255, blue: 14 / 255), for: .navigation)
         .navigationTitle(title)
         .toolbarTitleDisplayMode(.inline)
+        .onChange(of: scenePhase, initial: true) { _, phase in
+            model.setAppActive(phase == .active)
+        }
         .onAppear {
             #if DEBUG
             if model.isPreview && ProcessInfo.processInfo.arguments.contains("-watchPreviewExpanded") {

@@ -14,6 +14,7 @@ final class WatchRequestState {
     }
     private(set) var isAnalyzing = false
     private(set) var isActivated = false
+    private(set) var isAppActive = false
     private(set) var reply: WatchAnalysisReply?
     private(set) var failure: Failure?
     var error: WatchAnalysisReply.Status? { failure?.status }
@@ -23,7 +24,21 @@ final class WatchRequestState {
     private(set) var attemptID: UUID?
     private(set) var transportRetries = 0
     private(set) var isWaitingToRetry = false
-    var isReconnecting: Bool { isWaitingForActivation || isWaitingToRetry }
+    var isReconnecting: Bool { isWaitingForActivation || isWaitingToRetry || (isAnalyzing && !isAppActive) }
+
+    /// A tap can arrive in Always On before watchOS makes the app active. Keep that
+    /// intent, but send only after both the app and Watch Connectivity are active.
+    private var readyRequest: WatchAnalysisRequest? {
+        guard isAnalyzing, isAppActive, isActivated, !isWaitingToRetry,
+              !isWaitingForActivation, attemptID == nil else { return nil }
+        return pendingRequest
+    }
+
+    @discardableResult
+    func setAppActive(_ active: Bool) -> WatchAnalysisRequest? {
+        isAppActive = active
+        return readyRequest
+    }
 
     @discardableResult
     func activate(_ activated: Bool) -> WatchAnalysisRequest? {
@@ -33,40 +48,31 @@ final class WatchRequestState {
             isAnalyzing = false
             clearDelivery()
             failure = Failure(status: .unavailable, origin: .connection)
-        } else if isWaitingForActivation {
+        } else {
             isWaitingForActivation = false
-            if let pendingRequest { return pendingRequest }
-            isAnalyzing = false
-            return begin()
+            return readyRequest
         }
         return nil
     }
 
     func begin() -> WatchAnalysisRequest? {
         guard !isAnalyzing else { return nil }
-        guard isActivated else { failure = Failure(status: .unavailable, origin: .connection); return nil }
         let request = WatchAnalysisRequest()
         clearDelivery()
         pendingRequest = request
         isAnalyzing = true
+        isWaitingForActivation = !isActivated
         failure = nil
         return request
     }
 
-    /// A disconnected retry queues the analysis itself, rather than only reconnecting.
+    /// Analyze and Try Again retain the same intent while the connection activates.
     func retry() -> WatchAnalysisRequest? {
-        guard !isAnalyzing else { return nil }
-        failure = nil
-        if !isActivated {
-            isWaitingForActivation = true
-            isAnalyzing = true
-            return nil
-        }
-        return begin()
+        begin()
     }
 
     func beginAttempt(for id: UUID) -> UUID? {
-        guard pendingID == id, attemptID == nil, !isWaitingForActivation else { return nil }
+        guard readyRequest?.id == id else { return nil }
         let attempt = UUID()
         attemptID = attempt
         isWaitingToRetry = false
@@ -84,6 +90,13 @@ final class WatchRequestState {
         transportRetries += 1
         isWaitingToRetry = true
         return transportRetries == 1 ? .milliseconds(500) : .milliseconds(1_500)
+    }
+
+    /// Foreground or session callbacks must not skip the scheduled retry delay.
+    func completeTransportRetry(for id: UUID) -> WatchAnalysisRequest? {
+        guard pendingID == id, isWaitingToRetry else { return nil }
+        isWaitingToRetry = false
+        return readyRequest
     }
 
     func waitForReactivation(for id: UUID) -> Bool {
