@@ -5,7 +5,6 @@ struct WatchContentView: View {
     let model: WatchModel
     @State private var showsFullBoard = false
     @ScaledMetric(relativeTo: .title3) private var moveSymbolSize = 24
-    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.scenePhase) private var scenePhase
     private let ink = Color(red: 238 / 255, green: 234 / 255, blue: 224 / 255)
     private let accent = Color(red: 124 / 255, green: 148 / 255, blue: 1)
@@ -98,22 +97,10 @@ struct WatchContentView: View {
     private var analyzeButton: some View {
         Button(action: model.analyze) {
             ZStack {
-                HStack(alignment: .center, spacing: 8) {
-                    if model.reply == nil && model.boardPreview == nil && dynamicTypeSize < .xxLarge {
-                        Image(systemName: "viewfinder")
-                            .accessibilityHidden(true)
-                    }
-                    Text("Analyze latest screenshot")
-                        .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity)
-                    // Balance the decorative symbol so the words share the button's center.
-                    if model.reply == nil && model.boardPreview == nil && dynamicTypeSize < .xxLarge {
-                        Image(systemName: "viewfinder")
-                            .hidden()
-                            .accessibilityHidden(true)
-                    }
-                }
+                Text("Analyze latest screenshot")
+                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
                 // Preserve the full label's dimensions while the spinner replaces it.
                 .opacity(model.isAnalyzing ? 0 : 1)
                 if model.isAnalyzing {
