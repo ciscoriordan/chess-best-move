@@ -1095,6 +1095,12 @@
     "source": "Use the square the board cursor is on",
     "translation": "Tahta imlecinin bulunduğu kareyi kullan"
   },
+  "31e13ba25287077eeea1": {
+    "reason": "Reviewed Watch analysis-error copy; distinguishes an iPhone analysis failure from an unavailable connection.",
+    "reviewedAt": "2026-10-28T14:38:49.245373+00:00",
+    "source": "Could Not Analyze",
+    "translation": "Analiz yapılamadı"
+  },
   "31fa484caf119329073e": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2185,6 +2191,12 @@
     "reviewedAt": "2026-10-15T02:35:54.897321+00:00",
     "source": "Engine line",
     "translation": "Motorun varyantı"
+  },
+  "65cf1e2cba02164e695a": {
+    "reason": "Reviewed Watch analysis-error copy; distinguishes an iPhone analysis failure from an unavailable connection.",
+    "reviewedAt": "2026-10-28T14:38:49.245391+00:00",
+    "source": "Your iPhone could not finish the analysis. Try again.",
+    "translation": "iPhone’unuz analizi tamamlayamadı. Tekrar deneyin."
   },
   "65cfb7d46f6e0bd0a6e5": {
     "origin": "manual",

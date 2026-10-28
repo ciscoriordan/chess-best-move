@@ -1063,6 +1063,13 @@
     "key": "Use the square the board cursor is on",
     "source": "Use the square the board cursor is on"
   },
+  "31e13ba25287077eeea1": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Could Not Analyze",
+    "source": "Could Not Analyze"
+  },
   "31fa484caf119329073e": {
     "catalog": "Localizable",
     "comment": "",
@@ -2119,6 +2126,13 @@
     "index": 0,
     "key": "Engine line",
     "source": "Engine line"
+  },
+  "65cf1e2cba02164e695a": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Your iPhone could not finish the analysis. Try again.",
+    "source": "Your iPhone could not finish the analysis. Try again."
   },
   "65cfb7d46f6e0bd0a6e5": {
     "catalog": "Localizable",

@@ -2,6 +2,7 @@ import Foundation
 import Observation
 import WatchConnectivity
 import WatchKit
+import os
 
 @MainActor
 @Observable
@@ -13,12 +14,16 @@ final class WatchModel: NSObject, WCSessionDelegate {
     var error: WatchAnalysisReply.Status? { state.error }
     var failure: WatchRequestState.Failure? { state.failure }
     var isWaitingForActivation: Bool { state.isWaitingForActivation }
+    var isReconnecting: Bool { state.isReconnecting }
     private(set) var moveDisplayFormat = MoveDisplayFormat.words
     #if DEBUG
     private(set) var isPreview = false
     #endif
     @ObservationIgnored private var timeout: Task<Void, Never>?
     @ObservationIgnored private var activationTimeout: Task<Void, Never>?
+    @ObservationIgnored private var activationID: UUID?
+    @ObservationIgnored private var retryTask: Task<Void, Never>?
+    private let logger = Logger(subsystem: "com.motomatic.chessbestmove", category: "watch-connectivity")
 
     override init() {
         super.init()
@@ -49,19 +54,20 @@ final class WatchModel: NSObject, WCSessionDelegate {
 
     func activate() {
         state.dismissError()
-        guard WCSession.isSupported() else { state.activate(false); return }
+        guard WCSession.isSupported() else { completeActivation(false); return }
         if WCSession.default.activationState == .activated {
             applyPreferences(WCSession.default.receivedApplicationContext["moveDisplayFormat"] as? String)
-            if let request = state.activate(true) { send(request) }
+            completeActivation(true)
             return
         }
+        let activation = UUID()
+        activationID = activation
         WCSession.default.activate()
         activationTimeout?.cancel()
         activationTimeout = Task { [weak self] in
             do { try await Task.sleep(for: .seconds(10)) } catch { return }
-            guard let self, !self.isActivated else { return }
-            self.state.activate(false)
-            WKInterfaceDevice.current().play(.failure)
+            guard let self, self.activationID == activation, !self.isActivated else { return }
+            self.completeActivation(false)
         }
     }
 
@@ -85,29 +91,65 @@ final class WatchModel: NSObject, WCSessionDelegate {
     }
 
     private func send(_ request: WatchAnalysisRequest) {
+        guard state.pendingID == request.id else { return }
+        // Retries share one deadline and one initial haptic with the original user request.
+        if timeout == nil {
+            WKInterfaceDevice.current().play(.click)
+            timeout = Task { [weak self] in
+                do { try await Task.sleep(for: .seconds(25)) } catch { return }
+                self?.fail(.timedOut, id: request.id)
+            }
+        }
+        sendAttempt(request)
+    }
+
+    private func sendAttempt(_ request: WatchAnalysisRequest) {
+        guard let attempt = state.beginAttempt(for: request.id) else { return }
         guard let data = try? JSONEncoder().encode(request) else {
             fail(.unavailable, id: request.id)
             return
         }
         // Do not gate this on isReachable: a foreground Watch message can wake the iPhone app.
-        WKInterfaceDevice.current().play(.click)
-        timeout = Task { [weak self] in
-            do { try await Task.sleep(for: .seconds(25)) } catch { return }
-            self?.fail(.timedOut, id: request.id)
-        }
         let callbacks = WatchMessageCallbacks(onReply: { [weak self] data in
             guard let self, self.state.receive(data, for: request.id) else { return }
             if let format = self.reply?.moveDisplayFormat { self.moveDisplayFormat = format }
             self.didFinish()
-        }, onError: { [weak self] in
-            self?.fail(.unavailable, id: request.id)
+        }, onError: { [weak self] failure in
+            self?.deliveryFailed(failure, request: request, attempt: attempt)
         })
         WCSession.default.sendMessageData(data, replyHandler: callbacks.reply, errorHandler: callbacks.error)
+    }
+
+    private func deliveryFailed(_ failure: WatchTransportFailure,
+                                request: WatchAnalysisRequest, attempt: UUID) {
+        guard state.matchesAttempt(attempt, for: request.id) else { return }
+        logger.error("Message failed: domain=\(failure.domain, privacy: .public) code=\(failure.code, privacy: .public)")
+        guard failure.canRetry, let delay = state.retryTransport(for: request.id, attempt: attempt) else {
+            fail(.unavailable, id: request.id)
+            return
+        }
+        retryTask?.cancel()
+        retryTask = Task { [weak self] in
+            do { try await Task.sleep(for: delay) } catch { return }
+            guard let self, self.state.pendingID == request.id else { return }
+            self.retryTask = nil
+            if WCSession.default.activationState != .activated {
+                guard self.state.waitForReactivation(for: request.id) else { return }
+                self.activate()
+            } else {
+                self.sendAttempt(request)
+            }
+        }
     }
 
     private func didFinish() {
         timeout?.cancel()
         timeout = nil
+        retryTask?.cancel()
+        retryTask = nil
+        activationTimeout?.cancel()
+        activationTimeout = nil
+        activationID = nil
         WKInterfaceDevice.current().play(state.error == nil ? .success : .failure)
     }
 
@@ -119,13 +161,19 @@ final class WatchModel: NSObject, WCSessionDelegate {
 
     nonisolated func session(_ session: WCSession, activationDidCompleteWith state: WCSessionActivationState,
                              error: (any Error)?) {
-        let activated = state == .activated
         Task { @MainActor [weak self] in
-            self?.activationTimeout?.cancel()
             guard let self else { return }
             self.applyPreferences(WCSession.default.receivedApplicationContext["moveDisplayFormat"] as? String)
-            if let request = self.state.activate(activated) { self.send(request) }
+            self.completeActivation(WCSession.default.activationState == .activated)
         }
+    }
+
+    private func completeActivation(_ activated: Bool) {
+        activationTimeout?.cancel()
+        activationTimeout = nil
+        activationID = nil
+        if let request = state.activate(activated) { send(request) }
+        else if !activated { didFinish() }
     }
 
     private func applyPreferences(_ rawValue: String?) {

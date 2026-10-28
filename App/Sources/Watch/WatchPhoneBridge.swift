@@ -8,14 +8,41 @@ private struct WatchReplyHandler: @unchecked Sendable {
     let send: (Data) -> Void
 }
 
+/// Repeated delivery of one request shares its running analysis and eventual reply.
+@MainActor
+final class WatchReplyGroup<Handler> {
+    enum Admission: Equatable { case start, joined, busy }
+    private(set) var requestID: UUID?
+    private var handlers: [Handler] = []
+
+    func accept(_ id: UUID, handler: Handler) -> Admission {
+        if requestID == id {
+            handlers.append(handler)
+            return .joined
+        }
+        guard requestID == nil else { return .busy }
+        requestID = id
+        handlers = [handler]
+        return .start
+    }
+
+    func finish(_ id: UUID) -> [Handler]? {
+        guard requestID == id else { return nil }
+        let completed = handlers
+        requestID = nil
+        handlers = []
+        return completed
+    }
+}
+
 @MainActor
 final class WatchPhoneBridge: NSObject, WCSessionDelegate {
     static let shared = WatchPhoneBridge()
     private var service: WatchAnalysisService?
     private var operation: Task<Void, Never>?
     private var timeout: Task<Void, Never>?
-    private var pendingID: UUID?
-    private var pendingReply: WatchReplyHandler?
+    private let replies = WatchReplyGroup<WatchReplyHandler>()
+    private var pendingID: UUID? { replies.requestID }
     private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     private var foregroundObserver: NSObjectProtocol?
     private var settings: AppSettings?
@@ -58,12 +85,17 @@ final class WatchPhoneBridge: NSObject, WCSessionDelegate {
             send(WatchAnalysisReply(requestID: UUID(), status: .invalidRequest), to: callback)
             return
         }
-        guard pendingID == nil, let service else {
+        guard let service else {
             send(WatchAnalysisReply(requestID: request.id, status: .busy), to: callback)
             return
         }
-        pendingID = request.id
-        pendingReply = callback
+        switch replies.accept(request.id, handler: callback) {
+        case .joined: return
+        case .busy:
+            send(WatchAnalysisReply(requestID: request.id, status: .busy), to: callback)
+            return
+        case .start: break
+        }
         backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "Watch screenshot analysis") { [weak self] in
             Task { @MainActor in self?.cancel(id: request.id, status: .timedOut) }
         }
@@ -89,13 +121,11 @@ final class WatchPhoneBridge: NSObject, WCSessionDelegate {
     }
 
     private func finish(_ reply: WatchAnalysisReply) {
-        guard pendingID == reply.requestID, let callback = pendingReply else { return }
-        pendingID = nil
-        pendingReply = nil
+        guard let callbacks = replies.finish(reply.requestID) else { return }
         operation = nil
         timeout?.cancel()
         timeout = nil
-        send(reply, to: callback)
+        for callback in callbacks { send(reply, to: callback) }
         if backgroundTask != .invalid {
             UIApplication.shared.endBackgroundTask(backgroundTask)
             backgroundTask = .invalid

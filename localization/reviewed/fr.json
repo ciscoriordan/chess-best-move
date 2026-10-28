@@ -990,6 +990,12 @@
     "source": "Use the square the board cursor is on",
     "translation": "Utilisez la case sur laquelle se trouve le curseur sur l’échiquier"
   },
+  "31e13ba25287077eeea1": {
+    "reason": "Reviewed Watch analysis-error copy; distinguishes an iPhone analysis failure from an unavailable connection.",
+    "reviewedAt": "2026-10-28T14:38:49.239404+00:00",
+    "source": "Could Not Analyze",
+    "translation": "Analyse impossible"
+  },
   "31fa484caf119329073e": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
@@ -2042,6 +2048,12 @@
     "reviewedAt": "2026-10-15T02:37:29.713043+00:00",
     "source": "Engine line",
     "translation": "Ligne du moteur"
+  },
+  "65cf1e2cba02164e695a": {
+    "reason": "Reviewed Watch analysis-error copy; distinguishes an iPhone analysis failure from an unavailable connection.",
+    "reviewedAt": "2026-10-28T14:38:49.239429+00:00",
+    "source": "Your iPhone could not finish the analysis. Try again.",
+    "translation": "L’iPhone n’a pas pu terminer l’analyse. Réessayez."
   },
   "65cfb7d46f6e0bd0a6e5": {
     "origin": "deepl-reviewed",

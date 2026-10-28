@@ -38,7 +38,7 @@ struct WatchContentView: View {
                 .disabled(model.isAnalyzing || !model.isActivated)
                 .accessibilityIdentifier("watch.analyze")
                 if model.isAnalyzing {
-                    ProgressView(model.isWaitingForActivation
+                    ProgressView(model.isReconnecting
                         ? LocalizedStringKey("Connecting to iPhone…") : LocalizedStringKey("Analyzing on iPhone…"))
                         .frame(maxWidth: .infinity, alignment: .center)
                 } else if !model.isActivated {
@@ -98,7 +98,7 @@ struct WatchContentView: View {
                 .ignoresSafeArea()
             }
         }
-        .alert(errorTitle(failure?.status), isPresented: Binding(
+        .alert(errorTitle(failure), isPresented: Binding(
             get: { model.failure != nil },
             set: { if !$0, let id = failure?.id { model.dismissError(id: id) } }
         ), presenting: failure) { failure in
@@ -107,7 +107,7 @@ struct WatchContentView: View {
             }
             Button("Close", role: .cancel) { model.dismissError(id: failure.id) }
         } message: { failure in
-            Text(message(failure.status))
+            Text(message(failure))
         }
     }
 
@@ -165,8 +165,11 @@ struct WatchContentView: View {
         return CGImageSourceCreateImageAtIndex(source, 0, nil)
     }
 
-    private func message(_ status: WatchAnalysisReply.Status) -> LocalizedStringKey {
-        switch status {
+    private func message(_ failure: WatchRequestState.Failure) -> LocalizedStringKey {
+        if failure.status == .unavailable, failure.origin == .phone {
+            return "Your iPhone could not finish the analysis. Try again."
+        }
+        return switch failure.status {
         case .setupRequired: "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots."
         case .noScreenshot: "No screenshot was found in your iPhone photo library. Take a screenshot, then tap Analyze again."
         case .needsCorrection: "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone."
@@ -178,8 +181,11 @@ struct WatchContentView: View {
         }
     }
 
-    private func errorTitle(_ status: WatchAnalysisReply.Status?) -> LocalizedStringKey {
-        switch status {
+    private func errorTitle(_ failure: WatchRequestState.Failure?) -> LocalizedStringKey {
+        if failure?.status == .unavailable, failure?.origin == .phone {
+            return "Could Not Analyze"
+        }
+        return switch failure?.status {
         case .noBoard: "No Chessboard Found"
         case .noScreenshot: "No Screenshot Found"
         case .setupRequired: "iPhone Setup Needed"

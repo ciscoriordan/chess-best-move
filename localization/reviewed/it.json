@@ -1099,6 +1099,12 @@
     "source": "Use the square the board cursor is on",
     "translation": "Usa la casa su cui si trova il cursore"
   },
+  "31e13ba25287077eeea1": {
+    "reason": "Reviewed Watch analysis-error copy; distinguishes an iPhone analysis failure from an unavailable connection.",
+    "reviewedAt": "2026-10-28T14:38:49.243723+00:00",
+    "source": "Could Not Analyze",
+    "translation": "Analisi non riuscita"
+  },
   "31fa484caf119329073e": {
     "origin": "manual",
     "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
@@ -2183,6 +2189,12 @@
     "reviewedAt": "2026-10-15T02:36:19.280236+00:00",
     "source": "Engine line",
     "translation": "Variante del motore"
+  },
+  "65cf1e2cba02164e695a": {
+    "reason": "Reviewed Watch analysis-error copy; distinguishes an iPhone analysis failure from an unavailable connection.",
+    "reviewedAt": "2026-10-28T14:38:49.243742+00:00",
+    "source": "Your iPhone could not finish the analysis. Try again.",
+    "translation": "L’iPhone non è riuscito a completare l’analisi. Riprova."
   },
   "65cfb7d46f6e0bd0a6e5": {
     "origin": "manual",
