@@ -110,8 +110,6 @@ struct RootView: View {
         switch DebugLaunchOptions.sheet {
         case "paywall":
             app.present(.paywall(PaywallContext(trigger: .creditsExhausted, board: BoardSnapshot(position: .start))))
-        case "downsell":
-            app.present(.downsell(DownsellContext(board: BoardSnapshot(position: .start))))
         case "settings":
             app.presentSettings()
         case "shortcutSetup":

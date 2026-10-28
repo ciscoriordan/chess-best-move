@@ -20,7 +20,7 @@ struct CaptureScreenshotAsset: Sendable, Hashable {
 }
 
 /// Remembers which photo library screenshots were already imported, so Home's promotion
-/// ("Analyze new screenshot") and the new-screenshot row on the Analysis result and Check
+/// ("Analyze New Screenshot") and the new-screenshot row on the Analysis result and Check
 /// position (design.md 9.4) never offer the same screenshot twice. Stored in `UserDefaults`;
 /// only the most recent `limit` identifiers are kept.
 struct CaptureAnalyzedScreenshots {
@@ -66,7 +66,7 @@ enum CaptureRecentScreenshotPolicy {
         return age >= -futureTolerance && age < window
     }
 
-    /// Promote the primary button to "Analyze new screenshot": full photo access was
+    /// Promote the primary button to "Analyze New Screenshot": full photo access was
     /// already granted (Home never prompts for it on its own), the newest screenshot is
     /// recent, and it was not imported before.
     static func shouldPromote(
@@ -115,7 +115,7 @@ enum CaptureLatestScreenshotButton: Hashable {
     /// Never asked: "Allow access to your screenshots".
     case requestAccess
     /// Full access and a screenshot: "Use latest screenshot, Taken 12 s ago", or promoted to
-    /// "Analyze new screenshot, Taken 8 s ago".
+    /// "Analyze New Screenshot, Taken 8 s ago".
     case latest(CaptureScreenshotAsset, promoted: Bool)
     /// Full access but no screenshot in the library.
     case noScreenshots
@@ -151,7 +151,7 @@ enum CaptureLatestScreenshotButton: Hashable {
         case .latest(_, let promoted):
             // The promotion names what is new, not how fast it was: the app is for studying
             // positions, not for help during a game (AppCopy).
-            return promoted ? String(localized: "Analyze new screenshot") : String(localized: "Use latest screenshot")
+            return promoted ? String(localized: "Analyze New Screenshot") : String(localized: "Use latest screenshot")
         case .noScreenshots: return String(localized: "Use latest screenshot")
         case .limited: return String(localized: "Choose your screenshot")
         case .denied: return String(localized: "Allow access in Settings")

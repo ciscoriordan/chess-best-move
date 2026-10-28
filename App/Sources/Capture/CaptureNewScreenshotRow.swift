@@ -4,7 +4,7 @@ import SwiftUI
 /// screenshot the user took while away from the app, offered on the Analysis result and on Check
 /// position. A GroupedCard holding one row: the thumbnail, "New screenshot" over its age, and a
 /// button that imports it in place of the board on screen. Analysis places a full-width
-/// "Analyze new screenshot" button below the thumbnail and age; Check position keeps a dense
+/// "Analyze New Screenshot" button below the thumbnail and age; Check position keeps a dense
 /// secondary "Analyze" button beside them.
 ///
 /// A screen places it twice and applies `offersNewScreenshot()` to its root. `.pinnedBar` goes

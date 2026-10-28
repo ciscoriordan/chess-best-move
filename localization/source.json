@@ -328,6 +328,13 @@
     "key": "Their likely move: %@. Best reply: %@.",
     "source": "Their likely move: %1$@. Best reply: %2$@."
   },
+  "0fe851a09430612d485d": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Analyze New Screenshot",
+    "source": "Analyze New Screenshot"
+  },
   "0ffbb7b15649bbf3aa9a": {
     "catalog": "Localizable",
     "comment": "",
@@ -341,13 +348,6 @@
     "index": 0,
     "key": "1 day ago",
     "source": "1 day ago"
-  },
-  "1047429c0c0319aa162b": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Analyze new screenshot",
-    "source": "Analyze new screenshot"
   },
   "10d1b6824baebe2ff02e": {
     "catalog": "Localizable",
@@ -1147,13 +1147,6 @@
     "key": "15 seconds",
     "source": "15 seconds"
   },
-  "375caca84e951b3b6939": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "%@, from last-move highlight",
-    "source": "%@, from last-move highlight"
-  },
   "379903159723d70e240b": {
     "catalog": "Localizable",
     "comment": "",
@@ -1650,6 +1643,13 @@
     "index": 0,
     "key": "%@ pieces",
     "source": "%@ pieces"
+  },
+  "4fce6c3916cd644d1250": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Can’t Castle That Way",
+    "source": "Can’t Castle That Way"
   },
   "4feb854ed01ae2bb98ca": {
     "catalog": "Localizable",
@@ -2757,13 +2757,6 @@
     "key": "%lld%@min ago",
     "source": "%1$lld%2$@min ago"
   },
-  "8672a79e15c7ced57f64": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "%@, from check",
-    "source": "%@, from check"
-  },
   "86a5c013902bd91b7872": {
     "catalog": "Localizable",
     "comment": "",
@@ -3211,13 +3204,6 @@
     "index": 0,
     "key": "15 analyses that never expire",
     "source": "15 analyses that never expire"
-  },
-  "a019f51db708546428c3": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "%@, from the clock",
-    "source": "%@, from the clock"
   },
   "a094f3ba8e223226d6ed": {
     "catalog": "Localizable",
@@ -3799,13 +3785,6 @@
     "index": 0,
     "key": "Best move so far: ",
     "source": "Best move so far: "
-  },
-  "bf38ef2c0068c3c7bde3": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "%@, the game has not started",
-    "source": "%@, the game has not started"
   },
   "bf4cf391452ff391634f": {
     "catalog": "Localizable",

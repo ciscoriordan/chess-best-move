@@ -245,10 +245,8 @@ final class MonetizationCreditsService: CreditsService, MonetizationPackLedger, 
     }
 
     func shouldOfferDownsell(after trigger: PaywallTrigger) -> Bool {
-        guard trigger == .creditsExhausted, !store.isPro else { return false }
-        loadLocalIfNeeded()
-        guard localLoaded else { return false }
-        return local.offersDownsell(now: now())
+        // The pack is retired. Preserve its ledger and saved credits without offering more.
+        false
     }
 
     func recordDownsellDeclined() {

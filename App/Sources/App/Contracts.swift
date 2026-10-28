@@ -31,7 +31,7 @@ enum ThinkTime: Int, CaseIterable, Identifiable, Sendable, Codable, Hashable {
     /// "3 seconds" for VoiceOver.
     var spokenLabel: String { rawValue == 1 ? String(localized: "1 second") : String(localized: "\(rawValue) seconds") }
 
-    /// The next preset up, for "Think longer"; nil at 30 s ("Run again: 30 s").
+    /// The next preset up, for "Think longer"; nil at 30 s, where the longer-search action is hidden.
     var next: ThinkTime? {
         let all = Self.allCases
         guard let index = all.firstIndex(of: self), index + 1 < all.count else { return nil }
@@ -523,9 +523,7 @@ protocol CreditsService: AnyObject, Observable, Sendable {
     /// the balance (spend purchased if free ran out in between; spend nothing if Pro).
     func commit(_ authorization: CreditAuthorization)
 
-    /// Whether closing the paywall should show the pack downsell (monetization.md 4.6):
-    /// the paywall came from the credit trigger, and no downsell was closed without buying
-    /// in the last 24 hours.
+    /// Legacy compatibility query. Always false since the pack was retired on October 27, 2026.
     func shouldOfferDownsell(after trigger: PaywallTrigger) -> Bool
     /// Records that the downsell sheet was closed without buying.
     func recordDownsellDeclined()
@@ -538,10 +536,14 @@ enum ProductID {
     static let proWeekly = "com.motomatic.chessbestmove.pro.weekly"
     static let proAnnual = "com.motomatic.chessbestmove.pro.annual"
     static let proLifetime = "com.motomatic.chessbestmove.pro.lifetime"
+    /// Retired from sale on October 27, 2026. Keep recognizing historical transactions.
     static let credits15 = "com.motomatic.chessbestmove.credits.15"
 
-    /// Paywall rows in order: Weekly (preselected), Yearly, Lifetime.
+    /// Pro product identifiers; PaywallRows controls their display order and selection.
     static let paywall = [proWeekly, proAnnual, proLifetime]
+    /// Products offered for a new purchase. Historical pack credits remain valid.
+    static let offered = paywall
+    /// All recognized products, including the retired consumable.
     static let all = [proWeekly, proAnnual, proLifetime, credits15]
     /// Credits granted per pack transaction.
     static let creditsPerPack = 15
@@ -622,7 +624,7 @@ enum StoreEvent: Sendable, Hashable {
 @MainActor
 protocol StoreService: AnyObject, Observable, Sendable {
     var loadState: StoreLoadState { get }
-    /// Loaded products, in `ProductID.all` order.
+    /// Sale products, in `ProductID.offered` order.
     var products: [StoreProduct] { get }
     /// **Unlimited analyses and no commercial surface.** True for a purchase and for a member
     /// of the free launch cohort (monetization.md section 11), which grants the same thing

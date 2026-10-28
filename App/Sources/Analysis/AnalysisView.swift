@@ -22,8 +22,8 @@ enum AnalysisLayout {
     /// Two columns (board, readout) from this content width, on iPad and in landscape
     /// (design.md section 5).
     static let twoColumnMinimumWidth: CGFloat = 700
-    /// Space between the navigation bar and the board group.
-    static let topPadding: CGFloat = Spacing.s2
+    /// Start directly below the native navigation controls.
+    static let topPadding: CGFloat = 0
     /// Space between the two columns.
     static let columnSpacing: CGFloat = Spacing.s5
     /// The evaluation bar column on the board's leading side.
@@ -50,7 +50,9 @@ enum AnalysisLayout {
         } else {
             isAccessibilitySize ? 1 / 3 : 0.5
         }
-        let heightBound = max(0, containerHeight * fraction - topPadding - Spacing.s2 - 2)
+        // Keep the board's height limit stable when reclaiming the top gutter, so the
+        // saved space goes to the result rather than making the board taller.
+        let heightBound = max(0, containerHeight * fraction - 2 * Spacing.s2 - 2)
         return min(widthBound, heightBound)
     }
 }
@@ -88,7 +90,7 @@ private struct AnalysisScreen: View {
             }
         }
         .background(Palette.canvas)
-        .navigationTitle("Analysis")
+        .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -384,8 +386,7 @@ private struct AnalysisScreen: View {
             + AnalysisSpeech.lowercasingFirstLetter(spoken(shown)) + "."
     }
 
-    /// "White, the player at the top, from last-move highlight": the chip's VoiceOver value and
-    /// the board's "Side to move" custom content.
+    /// The side to move, with an uncertainty warning only when it was assumed.
     private var sideToMoveAccessibilityText: String {
         SideToMoveCopy.spoken(
             side: snapshot.position.sideToMove,
@@ -396,11 +397,8 @@ private struct AnalysisScreen: View {
 
     // MARK: Chips
 
-    /// "the player at the top, from last-move highlight" (design.md 9.4): where the player whose
-    /// move it is sits, then where the side to move came from. With the chip above it the two
-    /// read as one statement, so a user whose own pieces are at the bottom sees at once whether
-    /// the result answers for them or for the player across the board.
-    private var sideToMoveCaption: String {
+    /// Only an assumed side needs an explanatory caption.
+    private var sideToMoveCaption: String? {
         SideToMoveCopy.caption(
             side: snapshot.position.sideToMove,
             whiteAtBottom: snapshot.whiteAtBottom,
@@ -424,16 +422,6 @@ private struct AnalysisScreen: View {
             ViewThatFits(in: .horizontal) {
                 HStack(alignment: .top, spacing: Spacing.s2) { chipItems }
                 VStack(alignment: .leading, spacing: Spacing.s2) { chipItems }
-            }
-            // The assumed case says the same sentence in `caution` under its own chip
-            // (`Chip.attentionCaption`), so it is not repeated here.
-            if snapshot.sideToMoveOrigin != .assumedBottomPlayer {
-                Text(sideToMoveCaption)
-                    .typography(.caption)
-                    .foregroundStyle(Palette.ink2)
-                    .fixedSize(horizontal: false, vertical: true)
-                    // The chip's VoiceOver value already says it (`sideToMoveAccessibilityText`).
-                    .accessibilityHidden(true)
             }
             if offersSwitchToBottomPlayer {
                 TextLink(SideToMoveCopy.switchToBottomPlayerTitle) {
@@ -459,7 +447,7 @@ private struct AnalysisScreen: View {
         }
         .accessibilityElement(children: .combine)
         // The label is the text on the chip, so "Tap White to move" addresses it; where that
-        // side came from is the value. Voice Control matches the name, not the value.
+        // side is assumed is the value. Voice Control matches the name, not the value.
         .accessibilityLabel("\(AnalysisSpeech.colorName(side)) to move")
         .accessibilityValue(sideToMoveAccessibilityText)
         .accessibilityInputLabels(["\(AnalysisSpeech.colorName(side)) to move", "Side to move"])
@@ -546,18 +534,19 @@ private struct AnalysisScreen: View {
     }
 
     /// The best move castles with a right that was only inferred from the screenshot
-    /// (design.md 9.4): a `caution` line and a link that turns the right off and re-runs.
+    /// (design.md 9.4): a caution and a bordered button that turns the right off and re-runs.
     private func castlingCaution(_ right: CastlingRights) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: Spacing.s2) {
             Text("Assumes castling is still allowed.")
                 .typography(.callout)
                 .foregroundStyle(Palette.caution)
                 .fixedSize(horizontal: false, vertical: true)
-            TextLink(AnalysisScreenModel.turnOffTitle(right)) {
+            SecondaryButton(String(localized: "Can’t Castle That Way"), dense: true) {
                 model.turnOffAssumedCastling()
             }
-            .accessibilityLabel(String(localized: "Turn off \(AnalysisScreenModel.spokenCastlingName(right))"))
+            .accessibilityValue(String(localized: "Turn off \(AnalysisScreenModel.spokenCastlingName(right))"))
             .accessibilityInputLabels([
+                String(localized: "Can’t Castle That Way"),
                 AnalysisScreenModel.turnOffTitle(right),
                 String(localized: "Turn off \(AnalysisScreenModel.spokenCastlingName(right))"),
             ])
@@ -778,14 +767,14 @@ private struct AnalysisActionBar: View {
                 SecondaryButton(String(localized: "Stop"), systemImage: "stop.fill") { model.stop() }
             case .completed, .interrupted, .failed:
                 if !showsScreenshotOffer {
-                    PrimaryButton(String(localized: "Analyze new screenshot")) { model.newAnalysis() }
+                    PrimaryButton(String(localized: "Analyze New Screenshot")) { model.newAnalysis() }
                         .accessibilityHint("Opens the start screen to choose a screenshot.")
                         .accessibilityIdentifier("analysis.newScreenshot")
                 }
                 switch model.runState {
                 case .completed:
-                    if model.noLegalMoves == nil, model.bestMove != nil {
-                        Button(model.thinkLongerTitle) { model.thinkLonger() }
+                    if model.noLegalMoves == nil, model.bestMove != nil, let title = model.thinkLongerTitle {
+                        Button(title) { model.thinkLonger() }
                             .buttonStyle(.textLink)
                     }
                 case .interrupted:

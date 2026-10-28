@@ -193,9 +193,7 @@ struct CheckPositionView: View {
     /// already the screen where the user settles the side to move, and the chip is the control.
     private func chips(_ summary: CaptureCheckPositionSummary) -> some View {
         let side = snapshot.position.sideToMove
-        // "the player at the top, from the clock" (design.md 9.5): where the player whose move
-        // it is sits, then where the side to move came from. The same line as on the Analysis
-        // result (`SideToMoveCopy`), so the board says the same thing on both screens.
+        // Only the assumed side retains an uncertainty caption.
         let caption = SideToMoveCopy.caption(side: side, whiteAtBottom: snapshot.whiteAtBottom, origin: snapshot.sideToMoveOrigin)
         let emphasized = summary.emphasizesSideToMove
         return VStack(alignment: .leading, spacing: Spacing.s1) {
@@ -222,12 +220,14 @@ struct CheckPositionView: View {
                 .accessibilityLabel("Flip board")
                 .accessibilityHint("Swaps which side is at the bottom")
             }
-            Text(caption)
-                .typography(.caption)
-                .foregroundStyle(emphasized ? Palette.caution : Palette.ink2)
-                .fixedSize(horizontal: false, vertical: true)
-                // The chip's VoiceOver value already says it.
-                .accessibilityHidden(true)
+            if let caption {
+                Text(caption)
+                    .typography(.caption)
+                    .foregroundStyle(emphasized ? Palette.caution : Palette.ink2)
+                    .fixedSize(horizontal: false, vertical: true)
+                    // The chip's VoiceOver value already says it.
+                    .accessibilityHidden(true)
+            }
             if let note = summary.chipNote {
                 Text(note)
                     .typography(.body)

@@ -272,6 +272,13 @@
     "source": "Stockfish is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.",
     "translation": "Stockfish è software libero: puoi ridistribuirlo e/o modificarlo secondo i termini della GNU General Public License pubblicata dalla Free Software Foundation, nella versione 3 della licenza o, a tua scelta, in una versione successiva."
   },
+  "0cb33bfed63663e2a477": {
+    "origin": "manual-reviewed",
+    "reason": "Clear button label for correcting an assumed castling right and analyzing the same position again.",
+    "reviewedAt": "2026-10-24T16:34:31.254429+00:00",
+    "source": "Can’t Castle",
+    "translation": "Non posso arroccare"
+  },
   "0cdb35f6b90c84ee81ba": {
     "origin": "manual",
     "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
@@ -334,6 +341,14 @@
     "reviewedAt": "2026-10-15T02:34:44.121755+00:00",
     "source": "Their likely move: %1$@. Best reply: %2$@.",
     "translation": "Mossa probabile dell’altro giocatore: %1$@. Migliore risposta: %2$@."
+  },
+  "0fe851a09430612d485d": {
+    "origin": "manual",
+    "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
+    "reviewNote": "English title capitalization changed; retained the previously reviewed translation and native capitalization.",
+    "reviewedAt": "2026-10-27",
+    "source": "Analyze New Screenshot",
+    "translation": "Analizza nuovo screenshot"
   },
   "0ffbb7b15649bbf3aa9a": {
     "origin": "manual",
@@ -1686,6 +1701,13 @@
     "reviewedAt": "2026-10-15T02:36:19.279475+00:00",
     "source": "%@ pieces",
     "translation": "Pezzi del %1$@"
+  },
+  "4fce6c3916cd644d1250": {
+    "origin": "manual-reviewed",
+    "reason": "Castling correction affects only the suggested side; the other castling right remains available if legal.",
+    "reviewedAt": "2026-10-24T18:35:27.259541+00:00",
+    "source": "Can’t Castle That Way",
+    "translation": "Non posso arroccare da quel lato"
   },
   "4feb854ed01ae2bb98ca": {
     "origin": "manual",

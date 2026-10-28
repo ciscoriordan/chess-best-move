@@ -272,6 +272,13 @@
     "source": "Stockfish is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.",
     "translation": "Stockfish ist freie Software: Du darfst es unter den Bedingungen der GNU General Public License, veröffentlicht von der Free Software Foundation, weitergeben und/oder verändern – entweder gemäß Version 3 der Lizenz oder, nach deiner Wahl, einer späteren Version."
   },
+  "0cb33bfed63663e2a477": {
+    "origin": "manual-reviewed",
+    "reason": "Clear button label for correcting an assumed castling right and analyzing the same position again.",
+    "reviewedAt": "2026-10-24T16:34:31.252732+00:00",
+    "source": "Can’t Castle",
+    "translation": "Rochade nicht möglich"
+  },
   "0cdb35f6b90c84ee81ba": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -334,6 +341,14 @@
     "reviewedAt": "2026-10-15T02:37:25.851192+00:00",
     "source": "Their likely move: %1$@. Best reply: %2$@.",
     "translation": "Voraussichtlicher gegnerischer Zug: %1$@. Beste Antwort: %2$@."
+  },
+  "0fe851a09430612d485d": {
+    "origin": "manual",
+    "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
+    "reviewNote": "English title capitalization changed; retained the previously reviewed translation and native capitalization.",
+    "reviewedAt": "2026-10-27",
+    "source": "Analyze New Screenshot",
+    "translation": "Neuen Screenshot analysieren"
   },
   "0ffbb7b15649bbf3aa9a": {
     "origin": "manual",
@@ -1686,6 +1701,13 @@
     "reviewedAt": "2026-10-15T02:34:35.323380+00:00",
     "source": "%@ pieces",
     "translation": "%1$@ Figuren"
+  },
+  "4fce6c3916cd644d1250": {
+    "origin": "manual-reviewed",
+    "reason": "Castling correction affects only the suggested side; the other castling right remains available if legal.",
+    "reviewedAt": "2026-10-24T18:35:27.257480+00:00",
+    "source": "Can’t Castle That Way",
+    "translation": "Diese Rochade geht nicht"
   },
   "4feb854ed01ae2bb98ca": {
     "origin": "manual",

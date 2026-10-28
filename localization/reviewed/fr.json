@@ -235,6 +235,13 @@
     "source": "Stockfish is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.",
     "translation": "Stockfish est un logiciel libre : vous pouvez le redistribuer et/ou le modifier selon les termes de la Licence publique générale GNU telle que publiée par la Free Software Foundation, soit la version 3 de la licence, soit (à votre choix) toute version ultérieure."
   },
+  "0cb33bfed63663e2a477": {
+    "origin": "manual-reviewed",
+    "reason": "Clear button label for correcting an assumed castling right and analyzing the same position again.",
+    "reviewedAt": "2026-10-24T16:34:31.250816+00:00",
+    "source": "Can’t Castle",
+    "translation": "Roque impossible"
+  },
   "0cdb35f6b90c84ee81ba": {
     "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
     "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
@@ -289,6 +296,13 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "Their likely move: %1$@. Best reply: %2$@.",
     "translation": "Coup probable de l’adversaire : %1$@. Meilleure réponse : %2$@."
+  },
+  "0fe851a09430612d485d": {
+    "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
+    "reviewNote": "English title capitalization changed; retained the previously reviewed translation and native capitalization.",
+    "reviewedAt": "2026-10-27",
+    "source": "Analyze New Screenshot",
+    "translation": "Analyser une nouvelle capture"
   },
   "0ffbb7b15649bbf3aa9a": {
     "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
@@ -1558,6 +1572,13 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "%@ pieces",
     "translation": "Pièces : %1$@"
+  },
+  "4fce6c3916cd644d1250": {
+    "origin": "manual-reviewed",
+    "reason": "Castling correction affects only the suggested side; the other castling right remains available if legal.",
+    "reviewedAt": "2026-10-24T18:35:27.255339+00:00",
+    "source": "Can’t Castle That Way",
+    "translation": "Impossible de roquer de ce côté"
   },
   "4feb854ed01ae2bb98ca": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",

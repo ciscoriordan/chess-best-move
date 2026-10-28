@@ -238,7 +238,7 @@ struct HomeView: View {
             .accessibilityLabel(state.title(now: now))
             .accessibilityValue(spokenDetail(state, now: now))
             // The steps above name a fixed string ("Tap Use latest screenshot") while the
-            // title changes to "Analyze new screenshot" for a fresh screenshot, which is
+            // title changes to "Analyze New Screenshot" for a fresh screenshot, which is
             // exactly the state a first-time reader following the steps is in. Voice Control
             // matches either name.
             .accessibilityInputLabels([state.title(now: now), String(localized: "Use latest screenshot")])

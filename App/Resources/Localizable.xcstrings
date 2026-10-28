@@ -1607,6 +1607,7 @@
       }
     },
     "%@, from check": {
+      "extractionState": "stale",
       "localizations": {
         "de": {
           "stringUnit": {
@@ -1647,6 +1648,7 @@
       }
     },
     "%@, from last-move highlight": {
+      "extractionState": "stale",
       "localizations": {
         "de": {
           "stringUnit": {
@@ -1687,6 +1689,7 @@
       }
     },
     "%@, from the clock": {
+      "extractionState": "stale",
       "localizations": {
         "de": {
           "stringUnit": {
@@ -1813,6 +1816,7 @@
       }
     },
     "%@, the game has not started": {
+      "extractionState": "stale",
       "localizations": {
         "de": {
           "stringUnit": {
@@ -5709,6 +5713,46 @@
         }
       }
     },
+    "Analyze New Screenshot": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neuen Screenshot analysieren"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analizar nueva captura"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyser une nouvelle capture"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analizza nuovo screenshot"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analisar nova captura"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni ekran görüntüsünü analiz et"
+          }
+        }
+      }
+    },
     "Analyze any position from a screenshot: a game you are reviewing, a puzzle or a study.": {
       "localizations": {
         "de": {
@@ -5830,6 +5874,7 @@
       }
     },
     "Analyze new screenshot": {
+      "extractionState": "stale",
       "localizations": {
         "de": {
           "stringUnit": {
@@ -7512,6 +7557,87 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vazgeç"
+          }
+        }
+      }
+    },
+    "Can’t Castle": {
+      "extractionState": "stale",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rochade nicht möglich"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No puedo enrocar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roque impossible"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non posso arroccare"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não posso rocar"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rok yapamıyorum"
+          }
+        }
+      }
+    },
+    "Can’t Castle That Way": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Rochade geht nicht"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No puedo enrocar por ese lado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de roquer de ce côté"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non posso arroccare da quel lato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não posso rocar desse lado"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O tarafa rok yapamıyorum"
           }
         }
       }

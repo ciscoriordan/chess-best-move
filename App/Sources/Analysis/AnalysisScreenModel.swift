@@ -298,10 +298,10 @@ final class AnalysisScreenModel {
         }
     }
 
-    /// "Think longer: 10 s", or "Run again: 30 s" at the longest preset.
-    var thinkLongerTitle: String {
-        if let next = runThinkTime.next { return String(localized: "Think longer: \(next.label)") }
-        return String(localized: "Run again: \(runThinkTime.label)")
+    /// The next longer search, with no redundant rerun action at the 30-second maximum.
+    var thinkLongerTitle: String? {
+        guard let next = runThinkTime.next else { return nil }
+        return String(localized: "Think longer: \(next.label)")
     }
 
     // MARK: Lifecycle
@@ -411,9 +411,10 @@ final class AnalysisScreenModel {
         run(thinkTime: thinkTime)
     }
 
-    /// "Think longer": the next preset up, or the same 30 s again.
+    /// "Think longer": the next preset up. At the maximum there is no longer search.
     func thinkLonger() {
-        run(thinkTime: runThinkTime.next ?? runThinkTime)
+        guard let next = runThinkTime.next else { return }
+        run(thinkTime: next)
     }
 
     /// Runs again with the current think time (after an interruption or a failure).

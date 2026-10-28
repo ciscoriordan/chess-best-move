@@ -352,24 +352,24 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
         launchCohort.setLeavesCohortForTesting(leaves, for: channel)
     }
 
-    /// Loads the products. Loads again when any product of `ProductID.all` is missing, for
+    /// Loads the products. Loads again when any product of `ProductID.offered` is missing, for
     /// example when App Store Connect served only some of them.
     func loadProducts() async {
         guard !isLoadingProducts else { return }
-        if loadState == .loaded, Set(products.map(\.id)).isSuperset(of: ProductID.all) { return }
+        if loadState == .loaded, Set(products.map(\.id)).isSuperset(of: ProductID.offered) { return }
         isLoadingProducts = true
         loadState = .loading
         defer { isLoadingProducts = false }
         do {
-            let loaded = try await client.loadProducts(ProductID.all)
+            let loaded = try await client.loadProducts(ProductID.offered)
             let byID = Dictionary(loaded.map { ($0.product.id, $0) }, uniquingKeysWith: { first, _ in first })
-            products = ProductID.all.compactMap { byID[$0]?.product }
+            products = ProductID.offered.compactMap { byID[$0]?.product }
             if let groupID = loaded.first(where: { $0.subscriptionGroupID != nil })?.subscriptionGroupID,
                groupID != proSubscriptionGroupID {
                 defaults.set(groupID, forKey: DefaultsKey.proSubscriptionGroupID)
             }
-            if products.count < ProductID.all.count {
-                let missing = ProductID.all.filter { byID[$0] == nil }
+            if products.count < ProductID.offered.count {
+                let missing = ProductID.offered.filter { byID[$0] == nil }
                 MonetizationLog.store.error("products not served: \(missing.joined(separator: ", "), privacy: .public)")
             }
             loadState = products.isEmpty ? .failed(MonetizationCopy.loadFailed) : .loaded
@@ -380,6 +380,8 @@ final class MonetizationStoreService: StoreService, MonetizationPackHistorySourc
     }
 
     func purchase(_ productID: String) async -> PurchaseOutcome {
+        // Retirement blocks new purchases, not transaction history, approvals, or refunds.
+        guard ProductID.offered.contains(productID) else { return .failed(MonetizationCopy.purchaseFailed) }
         do {
             switch try await client.purchase(productID) {
             case .verified(let transaction):

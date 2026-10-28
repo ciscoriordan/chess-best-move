@@ -566,12 +566,10 @@ final class AppModel {
     }
 
     /// `PaywallView` reports how it ended. Safe to call from a paywall that is no longer the
-    /// presented sheet: the root sheet is only dismissed, and the downsell only offered, for
-    /// the presented paywall.
+    /// presented sheet: only the matching presented paywall is dismissed. Closing never
+    /// presents another purchase offer.
     func paywallFinished(_ context: PaywallContext, outcome: PaywallOutcome) {
-        var isPresented = false
         if case .paywall(let presented)? = presentedSheet, presented.id == context.id {
-            isPresented = !presentedSheetFinished
             presentedSheetFinished = true
         }
         if case .paywall(let shown)? = sheet, shown.id == context.id {
@@ -583,10 +581,7 @@ final class AppModel {
         case .pendingApproval:
             pendingAnalysisAwaitsApproval()
         case .closed:
-            if isPresented, context.trigger == .creditsExhausted, queuedSheet == nil, let pending = pendingAnalysis,
-               credits.shouldOfferDownsell(after: context.trigger) {
-                queuedSheet = .downsell(DownsellContext(board: pending.snapshot))
-            }
+            break // Closing purchase options returns to the board; the pack offer is retired.
         }
     }
 
@@ -631,6 +626,7 @@ final class AppModel {
             presentedSheetFinished = true
         }
         presentedSheet = nil
+        resumePendingAnalysisIfItMayRun()
         if case .downsell? = queuedSheet, pendingAnalysis?.canAnalyze != false || store.isPro {
             // The pack offer has nothing left to offer: the board it was for is gone or may run
             // (Pro arrived while the paywall was going away).

@@ -272,6 +272,13 @@
     "source": "Stockfish is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.",
     "translation": "Stockfish özgür yazılımdır. Free Software Foundation tarafından yayımlanan GNU Genel Kamu Lisansı’nın 3. sürümü veya tercihinize göre daha sonraki bir sürümü kapsamında yeniden dağıtabilir ve/veya değiştirebilirsiniz."
   },
+  "0cb33bfed63663e2a477": {
+    "origin": "manual-reviewed",
+    "reason": "Clear button label for correcting an assumed castling right and analyzing the same position again.",
+    "reviewedAt": "2026-10-24T16:34:31.256226+00:00",
+    "source": "Can’t Castle",
+    "translation": "Rok yapamıyorum"
+  },
   "0cdb35f6b90c84ee81ba": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -334,6 +341,14 @@
     "reviewedAt": "2026-10-15T02:35:05.637343+00:00",
     "source": "Their likely move: %1$@. Best reply: %2$@.",
     "translation": "Beklenen hamle: %1$@. En iyi yanıt: %2$@."
+  },
+  "0fe851a09430612d485d": {
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewNote": "English title capitalization changed; retained the previously reviewed translation and native capitalization.",
+    "reviewedAt": "2026-10-27",
+    "source": "Analyze New Screenshot",
+    "translation": "Yeni ekran görüntüsünü analiz et"
   },
   "0ffbb7b15649bbf3aa9a": {
     "origin": "manual",
@@ -1688,6 +1703,13 @@
     "reviewedAt": "2026-10-15T02:35:54.897268+00:00",
     "source": "%@ pieces",
     "translation": "%1$@ taşlar"
+  },
+  "4fce6c3916cd644d1250": {
+    "origin": "manual-reviewed",
+    "reason": "Castling correction affects only the suggested side; the other castling right remains available if legal.",
+    "reviewedAt": "2026-10-24T18:35:27.261587+00:00",
+    "source": "Can’t Castle That Way",
+    "translation": "O tarafa rok yapamıyorum"
   },
   "4feb854ed01ae2bb98ca": {
     "origin": "manual",

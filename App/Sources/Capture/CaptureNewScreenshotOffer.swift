@@ -182,7 +182,7 @@ enum CaptureNewScreenshotCopy {
     static let title = String(localized: "New screenshot")
     static let button = String(localized: "Analyze")
     /// Home's promoted title, on purpose: one screenshot is spoken the same way on every screen.
-    static let accessibilityLabel = String(localized: "Analyze new screenshot")
+    static let accessibilityLabel = String(localized: "Analyze New Screenshot")
     static let hint = String(localized: "Replaces the board on this screen.")
     static let importing = String(localized: "Importing")
     /// Home's own message names a Photos row these screens do not have.
@@ -200,7 +200,7 @@ enum CaptureNewScreenshotCopy {
         String(localized: "Taken \(CaptureRecentScreenshotPolicy.spokenAgeText(since: date, now: now))")
     }
 
-    /// "New screenshot, taken 8 seconds ago. Analyze new screenshot is at the bottom of the
+    /// "New screenshot, taken 8 seconds ago. Analyze New Screenshot is at the bottom of the
     /// screen.", or "at the top" where the row is at the top of the scrolling content.
     static func announcement(since date: Date, now: Date, placement: NewScreenshotRow.Placement) -> String {
         let spoken = CaptureRecentScreenshotPolicy.spokenAgeText(since: date, now: now)
