@@ -14,6 +14,7 @@ enum WatchScreenshotError: Error { case permission, missing }
 @MainActor
 final class WatchAnalysisService {
     typealias ScreenshotLoader = @Sendable () async throws -> WatchScreenshot
+    typealias PreviewHandler = @MainActor @Sendable (WatchBoardPreview) -> Void
     private let loadScreenshot: ScreenshotLoader
     private let recognition: any RecognitionService
     private let store: any StoreService
@@ -68,7 +69,7 @@ final class WatchAnalysisService {
         ownsEngine = false
     }
 
-    func analyze(_ request: WatchAnalysisRequest) async -> WatchAnalysisReply {
+    func analyze(_ request: WatchAnalysisRequest, onPreview: PreviewHandler? = nil) async -> WatchAnalysisReply {
         func failure(_ status: WatchAnalysisReply.Status) -> WatchAnalysisReply {
             WatchAnalysisReply(requestID: request.id, status: status)
         }
@@ -125,6 +126,20 @@ final class WatchAnalysisService {
                 status: position.isCheckmate ? .checkmate : .stalemate,
                 screenshotDate: screenshot.date, whiteToMove: position.sideToMove == .white)
         }
+        // Send only the selected board crop, without an old arrow, before waiting for
+        // entitlements or starting Stockfish. The final reply remains the reliable result.
+        if request.supportsBoardPreview == true, let onPreview {
+            let image = snapshot.boardImage
+            let thumbnail = await Task.detached(priority: .utility) {
+                WatchBoardThumbnail.make(board: image)
+            }.value
+            guard isCurrent(), ContinuousClock.now < deadline else { return failure(.timedOut) }
+            if let thumbnail {
+                onPreview(WatchBoardPreview(requestID: request.id, screenshotDate: screenshot.date,
+                                            thumbnail: thumbnail))
+            }
+        }
+        guard isCurrent(), ContinuousClock.now < deadline else { return failure(.timedOut) }
         // A background launch must not spend a subscriber's free credits before StoreKit loads.
         let entitlementDeadline = min(deadline, ContinuousClock.now + .seconds(5))
         while !store.hasLoadedEntitlements, isCurrent(), ContinuousClock.now < entitlementDeadline {

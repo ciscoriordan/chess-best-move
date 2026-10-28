@@ -12,62 +12,27 @@ struct WatchContentView: View {
 
     var body: some View {
         let failure = model.failure
-        ScrollView {
-            VStack(alignment: .leading, spacing: model.reply == nil ? 12 : 8) {
-                Button(action: model.analyze) {
-                    ZStack {
-                        HStack(alignment: .center, spacing: 8) {
-                            if dynamicTypeSize < .xxLarge {
-                                Image(systemName: "viewfinder")
-                                    .accessibilityHidden(true)
-                            }
-                            Text("Analyze latest screenshot")
-                                .fixedSize(horizontal: false, vertical: true)
-                                .multilineTextAlignment(.center)
-                                .frame(maxWidth: .infinity)
-                            // Balance the decorative symbol so the words share the button's center.
-                            if dynamicTypeSize < .xxLarge {
-                                Image(systemName: "viewfinder")
-                                    .hidden()
-                                    .accessibilityHidden(true)
-                            }
-                        }
-                        // Preserve the full label's dimensions while the spinner replaces it.
-                        .opacity(model.isAnalyzing ? 0 : 1)
-                        if model.isAnalyzing {
-                            ProgressView()
-                                .tint(ink)
-                                .accessibilityHidden(true)
-                        }
+        GeometryReader { proxy in
+            if model.hasBoard, model.isActivated || model.isAnalyzing {
+                ViewThatFits(in: .vertical) {
+                    WatchResultLayout(viewport: CGSize(width: max(0, proxy.size.width - 8),
+                                                     height: proxy.size.height)) {
+                        analyzeButton
+                        moveLabel
+                        boardButton
                     }
-                    .font(.headline)
-                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.horizontal, 4)
+                    ScrollView { content(boardSide: 88) }
                 }
-                .tint(accent)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .disabled(model.isAnalyzing)
-                .accessibilityLabel("Analyze latest screenshot")
-                .accessibilityValue(model.isAnalyzing
-                    ? (model.isReconnecting ? Text("Connecting to iPhone…") : Text("Analyzing on iPhone…"))
-                    : Text(""))
-                .accessibilityIdentifier("watch.analyze")
-                if !model.isAnalyzing && !model.isActivated {
-                    Text("Connecting to iPhone…")
-                    Button("Reconnect", action: model.activate)
-                } else if !model.isAnalyzing && model.reply == nil {
-                    Text("New positions use one analysis or Pro access.")
-                        .font(.footnote)
-                        .foregroundStyle(ink.opacity(0.75))
-                        .accessibilityIdentifier("watch.ready")
-                }
-                if let reply = model.reply { result(reply) }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            } else {
+                ScrollView { content(boardSide: 88) }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 4)
         }
+        .overlay(alignment: .topLeading) { previewMarker.offset(y: -20) }
         .foregroundStyle(ink)
         .containerBackground(Color(red: 18 / 255, green: 17 / 255, blue: 14 / 255), for: .navigation)
-        .navigationTitle(title)
+        .navigationTitle("")
         .toolbarTitleDisplayMode(.inline)
         .onChange(of: scenePhase, initial: true) { _, phase in
             model.setAppActive(phase == .active)
@@ -80,11 +45,14 @@ struct WatchContentView: View {
             #endif
         }
         .fullScreenCover(isPresented: $showsFullBoard) {
-            if let playback = model.reply?.playback {
+            if let playback = model.displayedPlayback {
                 GeometryReader { proxy in
                     Button { showsFullBoard = false } label: {
-                        BoardMovePlaybackView(playback: playback)
+                        BoardMovePlaybackView(playback: playback, isPlaying: !model.isAnalyzing)
+                            .opacity(model.isAnalyzing ? 0.35 : 1)
                             .padding(.top, 32)
+                            .padding(.horizontal, 4)
+                            .padding(.bottom, 8)
                             .frame(width: proxy.size.width, height: proxy.size.height)
                             .background(Color.black)
                             .contentShape(Rectangle())
@@ -100,6 +68,8 @@ struct WatchContentView: View {
                     Button { showsFullBoard = false } label: {
                         Image(decorative: image, scale: 1)
                             .resizable().aspectRatio(contentMode: .fit)
+                            .opacity(model.isAnalyzing && !model.hasCurrentBoardPreview ? 0.35 : 1)
+                            .padding(8)
                             .frame(width: proxy.size.width, height: proxy.size.height)
                             .background(Color.black)
                             .contentShape(Rectangle())
@@ -125,56 +95,136 @@ struct WatchContentView: View {
         }
     }
 
-    private var title: LocalizedStringKey {
-        #if DEBUG
-        if model.isPreview { return "Preview" }
-        #endif
-        return ""
+    private var analyzeButton: some View {
+        Button(action: model.analyze) {
+            ZStack {
+                HStack(alignment: .center, spacing: 8) {
+                    if model.reply == nil && model.boardPreview == nil && dynamicTypeSize < .xxLarge {
+                        Image(systemName: "viewfinder")
+                            .accessibilityHidden(true)
+                    }
+                    Text("Analyze latest screenshot")
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity)
+                    // Balance the decorative symbol so the words share the button's center.
+                    if model.reply == nil && model.boardPreview == nil && dynamicTypeSize < .xxLarge {
+                        Image(systemName: "viewfinder")
+                            .hidden()
+                            .accessibilityHidden(true)
+                    }
+                }
+                // Preserve the full label's dimensions while the spinner replaces it.
+                .opacity(model.isAnalyzing ? 0 : 1)
+                if model.isAnalyzing {
+                    ProgressView()
+                        .tint(ink)
+                        .accessibilityHidden(true)
+                }
+            }
+            .font(.headline)
+            .frame(maxWidth: .infinity, alignment: .center)
+        }
+        .tint(accent)
+        .frame(maxWidth: .infinity, alignment: .center)
+        .disabled(model.isAnalyzing)
+        .accessibilityLabel("Analyze latest screenshot")
+        .accessibilityValue(model.isAnalyzing
+            ? (model.isReconnecting ? Text("Connecting to iPhone…") : Text("Analyzing on iPhone…"))
+            : Text(""))
+        .accessibilityIdentifier("watch.analyze")
     }
 
-    @ViewBuilder private func result(_ reply: WatchAnalysisReply) -> some View {
-        if reply.status == .result {
-            HStack(alignment: .center, spacing: 6) {
-                if let piece = reply.playback?.steps.first?.moving.first?.piece {
-                    ChessPieceSymbol(piece: piece).frame(width: moveSymbolSize, height: moveSymbolSize)
-                }
-                if let text = model.moveDisplayFormat.text(words: reply.moveDescription, notation: reply.san) {
-                    Text(verbatim: text)
-                        .font(model.moveDisplayFormat == .words ? .title3.bold() : .system(.title3, design: .monospaced))
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+    private func content(boardSide: CGFloat) -> some View {
+        VStack(alignment: .leading, spacing: model.reply == nil && model.boardPreview == nil ? 12 : 8) {
+            analyzeButton
+            if !model.isAnalyzing && !model.isActivated {
+                Text("Connecting to iPhone…")
+                Button("Reconnect", action: model.activate)
+            } else if !model.isAnalyzing && model.reply == nil && model.boardPreview == nil {
+                Text("New positions use one analysis or Pro access.")
+                    .font(.footnote)
+                    .foregroundStyle(ink.opacity(0.75))
+                    .accessibilityIdentifier("watch.ready")
             }
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel(Text(verbatim: reply.moveDescription ?? reply.san ?? ""))
-            if let image = boardImage {
-                Button { showsFullBoard = true } label: {
-                    Image(decorative: image, scale: 1).resizable().aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 88)
-                }
-                    .buttonStyle(.plain)
-                    .frame(maxWidth: .infinity)
-                    .accessibilityLabel("Expand chessboard")
-                    .accessibilityHint(reply.playback == nil
-                        ? LocalizedStringKey("Shows the board full screen. Tap again to return.")
-                        : LocalizedStringKey("Shows the board full screen and plays the move. Tap again to return."))
-                    .accessibilityIdentifier("watch.board")
-            } else if let playback = reply.playback {
-                Button { showsFullBoard = true } label: {
-                    BoardMovePlaybackView(playback: playback, isPlaying: false).frame(width: 88, height: 88)
-                }
-                .buttonStyle(.plain)
+            if model.reply != nil || model.hasBoard { result(boardSide: boardSide) }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 4)
+    }
+
+    @ViewBuilder private var previewMarker: some View {
+        #if DEBUG
+        if model.isPreview {
+            Text("Preview")
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+                .padding(.leading, 12)
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+        }
+        #endif
+    }
+
+    @ViewBuilder private func result(boardSide: CGFloat) -> some View {
+        if model.hasBoard {
+            moveLabel
+            boardButton
+                .frame(width: boardSide, height: boardSide)
                 .frame(maxWidth: .infinity)
-                .accessibilityLabel("Expand chessboard")
-                .accessibilityHint("Shows the board full screen and plays the move. Tap again to return.")
-                .accessibilityIdentifier("watch.board")
-            }
-        } else {
+        } else if let reply = model.reply {
             Text(reply.status == .checkmate ? LocalizedStringKey("Checkmate") : LocalizedStringKey("Stalemate")).font(.headline)
         }
     }
 
+    private var moveLabel: some View {
+        HStack(alignment: .center, spacing: 6) {
+            if let piece = model.reply?.playback?.steps.first?.moving.first?.piece {
+                ChessPieceSymbol(piece: piece).frame(width: moveSymbolSize, height: moveSymbolSize)
+            }
+            if let text = model.moveDisplayFormat.text(words: model.reply?.moveDescription, notation: model.reply?.san) {
+                Text(verbatim: text)
+                    .font(model.moveDisplayFormat == .words ? .title3.bold() : .system(.title3, design: .monospaced))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        // Keep the last readout's space while a new crop replaces its board. Its old
+        // move must not be shown or announced as an answer for that new image.
+        .frame(minHeight: moveSymbolSize)
+        .opacity(model.showsCompletedMove ? 1 : 0)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(verbatim: model.reply?.moveDescription ?? model.reply?.san ?? ""))
+        .accessibilityHidden(!model.showsCompletedMove)
+    }
+
+    @ViewBuilder private var boardButton: some View {
+        if let image = boardImage {
+            Button { showsFullBoard = true } label: {
+                Image(decorative: image, scale: 1).resizable().aspectRatio(contentMode: .fit)
+                    .opacity(model.isAnalyzing && !model.hasCurrentBoardPreview ? 0.35 : 1)
+            }
+                .buttonStyle(.plain)
+                .frame(maxWidth: .infinity)
+                .accessibilityLabel("Expand chessboard")
+                .accessibilityHint(model.displayedPlayback == nil || model.isAnalyzing
+                    ? LocalizedStringKey("Shows the board full screen. Tap again to return.")
+                    : LocalizedStringKey("Shows the board full screen and plays the move. Tap again to return."))
+                .accessibilityIdentifier("watch.board")
+        } else if let playback = model.displayedPlayback {
+            Button { showsFullBoard = true } label: {
+                BoardMovePlaybackView(playback: playback, isPlaying: false)
+                    .opacity(model.isAnalyzing ? 0.35 : 1)
+            }
+            .buttonStyle(.plain)
+            .frame(maxWidth: .infinity)
+            .accessibilityLabel("Expand chessboard")
+            .accessibilityHint("Shows the board full screen and plays the move. Tap again to return.")
+            .accessibilityIdentifier("watch.board")
+        }
+    }
+
     private var boardImage: CGImage? {
-        guard let data = model.reply?.thumbnail,
+        guard let data = model.displayedThumbnail,
               let source = CGImageSourceCreateWithData(data as CFData, nil) else { return nil }
         return CGImageSourceCreateImageAtIndex(source, 0, nil)
     }

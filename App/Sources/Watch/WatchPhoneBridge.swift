@@ -104,7 +104,9 @@ final class WatchPhoneBridge: NSObject, WCSessionDelegate {
             return
         }
         operation = Task { [weak self] in
-            let reply = await service.analyze(request)
+            let reply = await service.analyze(request, onPreview: { [weak self] preview in
+                self?.send(preview)
+            })
             self?.finish(reply)
         }
         timeout = Task { [weak self] in
@@ -142,6 +144,16 @@ final class WatchPhoneBridge: NSObject, WCSessionDelegate {
             let fallback = WatchAnalysisReply(requestID: reply.requestID, status: .unavailable)
             callback.send((try? JSONEncoder().encode(fallback)) ?? Data())
         }
+    }
+
+    private func send(_ preview: WatchBoardPreview) {
+        guard pendingID == preview.requestID, WCSession.default.activationState == .activated,
+              WCSession.default.isReachable,
+              let data = try? JSONEncoder().encode(preview), data.count <= WatchWire.maximumReplyBytes else { return }
+        // Preview delivery is best effort. A failure must not end or repeat the search.
+        // The Sendable adapter also prevents a Swift 6 actor trap on the framework queue.
+        let callbacks = WatchMessageCallbacks(onReply: { _ in }, onError: { _ in })
+        WCSession.default.sendMessageData(data, replyHandler: nil, errorHandler: callbacks.error)
     }
 
     private func observePreferences() {

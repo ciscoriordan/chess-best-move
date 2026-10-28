@@ -11,6 +11,12 @@ final class WatchModel: NSObject, WCSessionDelegate {
     var isAnalyzing: Bool { state.isAnalyzing }
     var isActivated: Bool { state.isActivated }
     var reply: WatchAnalysisReply? { state.reply }
+    var boardPreview: WatchBoardPreview? { state.boardPreview }
+    var hasBoard: Bool { state.hasBoard }
+    var hasCurrentBoardPreview: Bool { state.hasCurrentBoardPreview }
+    var displayedThumbnail: Data? { state.displayedThumbnail }
+    var displayedPlayback: BoardMovePlayback? { state.displayedPlayback }
+    var showsCompletedMove: Bool { state.showsCompletedMove }
     var error: WatchAnalysisReply.Status? { state.error }
     var failure: WatchRequestState.Failure? { state.failure }
     var isWaitingForActivation: Bool { state.isWaitingForActivation }
@@ -45,6 +51,12 @@ final class WatchModel: NSObject, WCSessionDelegate {
             }
             isPreview = true
             if arguments.contains("-watchPreviewAnalyzing") { _ = state.begin() }
+            if let boardIndex = arguments.firstIndex(of: "-watchPreviewBoardFile"),
+               arguments.indices.contains(boardIndex + 1),
+               let bytes = try? Data(contentsOf: URL(fileURLWithPath: arguments[boardIndex + 1])),
+               let board = WatchWire.boardPreview(from: bytes) {
+                state.preview(board)
+            }
             return
         }
         #endif
@@ -209,5 +221,9 @@ final class WatchModel: NSObject, WCSessionDelegate {
     nonisolated func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
         let rawValue = applicationContext["moveDisplayFormat"] as? String
         Task { @MainActor [weak self] in self?.applyPreferences(rawValue) }
+    }
+
+    nonisolated func session(_ session: WCSession, didReceiveMessageData data: Data) {
+        Task { @MainActor [weak self] in self?.state.receiveBoardPreview(data) }
     }
 }

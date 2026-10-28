@@ -16,6 +16,7 @@ final class WatchRequestState {
     private(set) var isActivated = false
     private(set) var isAppActive = false
     private(set) var reply: WatchAnalysisReply?
+    private(set) var boardPreview: WatchBoardPreview?
     private(set) var failure: Failure?
     var error: WatchAnalysisReply.Status? { failure?.status }
     private(set) var isWaitingForActivation = false
@@ -25,6 +26,11 @@ final class WatchRequestState {
     private(set) var transportRetries = 0
     private(set) var isWaitingToRetry = false
     var isReconnecting: Bool { isWaitingForActivation || isWaitingToRetry || (isAnalyzing && !isAppActive) }
+    var hasBoard: Bool { boardPreview != nil || reply?.status == .result }
+    var hasCurrentBoardPreview: Bool { pendingID != nil && boardPreview?.requestID == pendingID }
+    var displayedThumbnail: Data? { boardPreview?.thumbnail ?? reply?.thumbnail }
+    var displayedPlayback: BoardMovePlayback? { boardPreview == nil ? reply?.playback : nil }
+    var showsCompletedMove: Bool { !isAnalyzing && boardPreview == nil }
 
     /// A tap can arrive in Always On before watchOS makes the app active. Keep that
     /// intent, but send only after both the app and Watch Connectivity are active.
@@ -115,6 +121,7 @@ final class WatchRequestState {
         switch reply.status {
         case .result, .checkmate, .stalemate:
             self.reply = reply
+            boardPreview = nil
             failure = nil
         default:
             failure = Failure(status: reply.status, origin: origin)
@@ -127,6 +134,14 @@ final class WatchRequestState {
         guard pendingID == id else { return false }
         guard let reply = WatchWire.reply(from: data, for: id) else { return fail(.unavailable, id: id) }
         return finish(reply)
+    }
+
+    @discardableResult
+    func receiveBoardPreview(_ data: Data) -> Bool {
+        guard let pendingID, let preview = WatchWire.boardPreview(from: data),
+              preview.requestID == pendingID else { return false }
+        boardPreview = preview
+        return true
     }
 
     @discardableResult
@@ -151,6 +166,13 @@ final class WatchRequestState {
         isActivated = true
         pendingRequest = WatchAnalysisRequest(id: reply.requestID)
         finish(reply)
+    }
+
+    func preview(_ board: WatchBoardPreview) {
+        isActivated = true
+        _ = begin()
+        pendingRequest = WatchAnalysisRequest(id: board.requestID)
+        boardPreview = board
     }
     #endif
 }
