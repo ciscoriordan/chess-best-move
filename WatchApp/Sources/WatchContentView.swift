@@ -136,7 +136,7 @@ struct WatchContentView: View {
     }
 
     private func content(boardSide: CGFloat) -> some View {
-        VStack(alignment: .leading, spacing: model.reply == nil && model.boardPreview == nil ? 12 : 8) {
+        VStack(alignment: .center, spacing: model.reply == nil && model.boardPreview == nil ? 12 : 8) {
             analyzeButton
             if !model.isAnalyzing && !model.isActivated {
                 Text("Connecting to iPhone…")
@@ -149,7 +149,8 @@ struct WatchContentView: View {
             }
             if model.reply != nil || model.hasBoard { result(boardSide: boardSide) }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, alignment: .center)
+        .multilineTextAlignment(.center)
         .padding(.horizontal, 4)
     }
 
@@ -186,11 +187,12 @@ struct WatchContentView: View {
                 Text(verbatim: text)
                     .font(model.moveDisplayFormat == .words ? .title3.bold() : .system(.title3, design: .monospaced))
                     .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(.center)
             }
         }
         // Keep the last readout's space while a new crop replaces its board. Its old
         // move must not be shown or announced as an answer for that new image.
-        .frame(minHeight: moveSymbolSize)
+        .frame(maxWidth: .infinity, minHeight: moveSymbolSize, alignment: .center)
         .opacity(model.showsCompletedMove ? 1 : 0)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(verbatim: model.reply?.moveDescription ?? model.reply?.san ?? ""))
