@@ -11,23 +11,14 @@ struct WatchContentView: View {
 
     var body: some View {
         let failure = model.failure
-        GeometryReader { proxy in
-            if model.hasBoard, model.isActivated || model.isAnalyzing {
-                ViewThatFits(in: .vertical) {
-                    WatchResultLayout(viewport: CGSize(width: max(0, proxy.size.width - 8),
-                                                     height: proxy.size.height)) {
-                        analyzeButton
-                        moveLabel
-                        boardButton
-                    }
-                    .padding(.horizontal, 4)
-                    ScrollView { content(boardSide: 88) }
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            } else {
-                ScrollView { content(boardSide: 88) }
-            }
+        VStack(spacing: 8) {
+            // Keep the action outside scrolling content on every screen.
+            analyzeButton
+                .layoutPriority(1)
+            ScrollView { content }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .padding(.horizontal, 4)
         .overlay(alignment: .topLeading) { previewMarker.offset(y: -20) }
         .foregroundStyle(ink)
         .containerBackground(Color(red: 18 / 255, green: 17 / 255, blue: 14 / 255), for: .navigation)
@@ -105,13 +96,17 @@ struct WatchContentView: View {
                 .opacity(model.isAnalyzing ? 0 : 1)
                 if model.isAnalyzing {
                     ProgressView()
+                        .fixedSize()
                         .tint(ink)
                         .accessibilityHidden(true)
                 }
             }
             .font(.headline)
-            .frame(maxWidth: .infinity, alignment: .center)
+            .frame(maxWidth: .infinity, minHeight: 44, alignment: .center)
+            .fixedSize(horizontal: false, vertical: true)
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.bordered)
         .tint(accent)
         .frame(maxWidth: .infinity, alignment: .center)
         .disabled(model.isAnalyzing)
@@ -122,9 +117,8 @@ struct WatchContentView: View {
         .accessibilityIdentifier("watch.analyze")
     }
 
-    private func content(boardSide: CGFloat) -> some View {
+    private var content: some View {
         VStack(alignment: .center, spacing: model.reply == nil && model.boardPreview == nil ? 12 : 8) {
-            analyzeButton
             if !model.isAnalyzing && !model.isActivated {
                 Text("Connecting to iPhone…")
                 Button("Reconnect", action: model.activate)
@@ -134,11 +128,10 @@ struct WatchContentView: View {
                     .foregroundStyle(ink.opacity(0.75))
                     .accessibilityIdentifier("watch.ready")
             }
-            if model.reply != nil || model.hasBoard { result(boardSide: boardSide) }
+            if model.reply != nil || model.hasBoard { result }
         }
         .frame(maxWidth: .infinity, alignment: .center)
         .multilineTextAlignment(.center)
-        .padding(.horizontal, 4)
     }
 
     @ViewBuilder private var previewMarker: some View {
@@ -154,12 +147,13 @@ struct WatchContentView: View {
         #endif
     }
 
-    @ViewBuilder private func result(boardSide: CGFloat) -> some View {
+    @ViewBuilder private var result: some View {
         if model.hasBoard {
-            moveLabel
+            // A move's wrapping must never resize or reposition the board.
             boardButton
-                .frame(width: boardSide, height: boardSide)
+                .frame(width: 88, height: 88)
                 .frame(maxWidth: .infinity)
+            moveLabel
         } else if let reply = model.reply {
             Text(reply.status == .checkmate ? LocalizedStringKey("Checkmate") : LocalizedStringKey("Stalemate")).font(.headline)
         }
