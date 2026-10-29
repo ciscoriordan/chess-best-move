@@ -3975,6 +3975,13 @@
     "key": "The chess engine's neural network is missing from the app.",
     "source": "The chess engine's neural network is missing from the app."
   },
+  "c8bafafafe14b04a87de": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Analyze Latest Screenshot",
+    "source": "Analyze Latest Screenshot"
+  },
   "c9659dffbae58ec49868": {
     "catalog": "Localizable",
     "comment": "",

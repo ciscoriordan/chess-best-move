@@ -19,6 +19,8 @@ struct WatchContentView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(.horizontal, 4)
+        // Use more of the gap below the clock without covering the system controls.
+        .padding(.top, -8)
         .overlay(alignment: .topLeading) { previewMarker.offset(y: -20) }
         .foregroundStyle(ink)
         .containerBackground(Color(red: 18 / 255, green: 17 / 255, blue: 14 / 255), for: .navigation)
@@ -88,7 +90,7 @@ struct WatchContentView: View {
     private var analyzeButton: some View {
         Button(action: model.analyze) {
             ZStack {
-                Text("Analyze latest screenshot")
+                Text("Analyze Latest Screenshot")
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity)
@@ -110,7 +112,7 @@ struct WatchContentView: View {
         .tint(accent)
         .frame(maxWidth: .infinity, alignment: .center)
         .disabled(model.isAnalyzing)
-        .accessibilityLabel("Analyze latest screenshot")
+        .accessibilityLabel("Analyze Latest Screenshot")
         .accessibilityValue(model.isAnalyzing
             ? (model.isReconnecting ? Text("Connecting to iPhone…") : Text("Analyzing on iPhone…"))
             : Text(""))

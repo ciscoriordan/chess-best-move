@@ -4102,6 +4102,13 @@
     "source": "The chess engine's neural network is missing from the app.",
     "translation": "Satranç motorunun sinir ağı uygulamada eksik."
   },
+  "c8bafafafe14b04a87de": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested title case for the English Watch action. Retained the reviewed translation and native capitalization.",
+    "reviewedAt": "2026-10-29",
+    "source": "Analyze Latest Screenshot",
+    "translation": "Son ekran görüntüsünü analiz et"
+  },
   "c9659dffbae58ec49868": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",

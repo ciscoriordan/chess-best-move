@@ -3904,6 +3904,13 @@
     "source": "The chess engine's neural network is missing from the app.",
     "translation": "La red neuronal del motor de ajedrez no está incluida en la aplicación."
   },
+  "c8bafafafe14b04a87de": {
+    "origin": "manual-reviewed",
+    "reason": "Owner requested title case for the English Watch action. Retained the reviewed translation and native capitalization.",
+    "reviewedAt": "2026-10-29",
+    "source": "Analyze Latest Screenshot",
+    "translation": "Analizar última captura"
+  },
   "c9659dffbae58ec49868": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
