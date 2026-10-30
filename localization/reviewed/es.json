@@ -983,6 +983,13 @@
     "source": "Bishop",
     "translation": "Alfil"
   },
+  "315a5e30427b741ec2f2": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "Apple Watch",
+    "translation": "Apple Watch"
+  },
   "316ba0c132f86044c59a": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -3169,6 +3176,13 @@
     "source": "Edit position",
     "translation": "Editar posición"
   },
+  "a105ea1685297b8088e3": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "Analyze on Open",
+    "translation": "Analizar al abrir"
+  },
   "a15ecb28c2864404d4cf": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -3236,6 +3250,13 @@
     "reviewedAt": "2026-10-15T02:54:10.075024+00:00",
     "source": "Two arrows. Their likely move first: %1$@. Then your best reply, which holds only if they play it: %2$@.",
     "translation": "Dos flechas. Primero, la jugada probable del rival: %1$@. Después, tu mejor respuesta, válida solo si el rival hace esa jugada: %2$@."
+  },
+  "a66fdafdb4af4ecad163": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "When you open the Watch app, analyze your latest iPhone screenshot. New positions use one analysis or Pro access. Saved results are reused without another analysis.",
+    "translation": "Al abrir la app en el Apple Watch, se analiza la última captura de pantalla del iPhone. Las posiciones nuevas consumen un análisis, salvo con acceso Pro. Los resultados guardados se reutilizan sin gastar otro análisis."
   },
   "a72331674cc7698afc46": {
     "origin": "deepl-reviewed",

@@ -5914,6 +5914,46 @@
         }
       }
     },
+    "Analyze on Open": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beim Öffnen analysieren"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analizar al abrir"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyser à l’ouverture"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analizza all’apertura"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analisar ao abrir"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açılışta analiz et"
+          }
+        }
+      }
+    },
     "Analyze sample screenshot": {
       "localizations": {
         "de": {
@@ -6030,6 +6070,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu seçenek olmadan yeniden analiz eder. Yeniden analiz ücretsizdir."
+          }
+        }
+      }
+    },
+    "Apple Watch": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Watch"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Watch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Watch"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Watch"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Watch"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Watch"
           }
         }
       }
@@ -23941,6 +24021,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Haftalık"
+          }
+        }
+      }
+    },
+    "When you open the Watch app, analyze your latest iPhone screenshot. New positions use one analysis or Pro access. Saved results are reused without another analysis.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beim Öffnen der Watch-App wird der neueste iPhone-Screenshot analysiert. Neue Stellungen benötigen eine Analyse oder Pro-Zugang. Gespeicherte Ergebnisse werden ohne eine weitere Analyse wiederverwendet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al abrir la app en el Apple Watch, se analiza la última captura de pantalla del iPhone. Las posiciones nuevas consumen un análisis, salvo con acceso Pro. Los resultados guardados se reutilizan sin gastar otro análisis."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La dernière capture d’écran de l’iPhone est analysée à l’ouverture de l’app sur Apple Watch. Les nouvelles positions nécessitent une analyse ou l’accès Pro. Les résultats enregistrés sont réutilisés sans analyse supplémentaire."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando apri l’app su Apple Watch, viene analizzato l’ultimo screenshot dell’iPhone. Le nuove posizioni richiedono un’analisi o l’accesso Pro. I risultati salvati vengono riutilizzati senza consumare un’altra analisi."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ao abrir o app no Apple Watch, a última captura de tela do iPhone é analisada. Novas posições usam uma análise ou o acesso Pro. Os resultados salvos são reutilizados sem gastar outra análise."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watch uygulamasını açtığınızda iPhone’unuzdaki son ekran görüntüsü analiz edilir. Yeni konumlar için bir analiz veya Pro erişimi gerekir. Kaydedilen sonuçlar başka bir analiz harcanmadan yeniden kullanılır."
           }
         }
       }

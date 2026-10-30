@@ -46,6 +46,8 @@ struct WatchAnalysisRequest: Codable, Sendable {
     var createdAt = Date.now
     /// Missing in older Watch builds; only opted-in peers receive intermediate images.
     var supportsBoardPreview: Bool? = true
+    /// Missing in older peers and in manual requests.
+    var automaticallyTriggered: Bool?
 }
 
 struct WatchBoardPreview: Codable, Sendable {
@@ -63,6 +65,8 @@ struct WatchAnalysisReply: Codable, Sendable {
         /// Preserve the version-one wire value; this now means no screenshot exists.
         case noScreenshot = "noFreshScreenshot"
         case busy, unavailable, timedOut, invalidRequest
+        /// Only returned to an opted-in automatic request when the phone setting is off.
+        case automaticAnalysisSkipped
     }
 
     var version = WatchWire.version

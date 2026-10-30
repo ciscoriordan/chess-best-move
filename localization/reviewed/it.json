@@ -1092,6 +1092,13 @@
     "source": "Bishop",
     "translation": "Alfiere"
   },
+  "315a5e30427b741ec2f2": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "Apple Watch",
+    "translation": "Apple Watch"
+  },
   "316ba0c132f86044c59a": {
     "origin": "manual",
     "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
@@ -3344,6 +3351,13 @@
     "source": "Edit position",
     "translation": "Modifica posizione"
   },
+  "a105ea1685297b8088e3": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "Analyze on Open",
+    "translation": "Analizza all’apertura"
+  },
   "a15ecb28c2864404d4cf": {
     "origin": "manual",
     "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
@@ -3413,6 +3427,13 @@
     "reviewedAt": "2026-10-15T02:37:48.635363+00:00",
     "source": "Two arrows. Their likely move first: %1$@. Then your best reply, which holds only if they play it: %2$@.",
     "translation": "Due frecce. Prima la mossa probabile dell’altro giocatore: %1$@. Poi la tua migliore risposta, valida solo se viene giocata quella mossa: %2$@."
+  },
+  "a66fdafdb4af4ecad163": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "When you open the Watch app, analyze your latest iPhone screenshot. New positions use one analysis or Pro access. Saved results are reused without another analysis.",
+    "translation": "Quando apri l’app su Apple Watch, viene analizzato l’ultimo screenshot dell’iPhone. Le nuove posizioni richiedono un’analisi o l’accesso Pro. I risultati salvati vengono riutilizzati senza consumare un’altra analisi."
   },
   "a72331674cc7698afc46": {
     "origin": "manual",

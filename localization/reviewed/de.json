@@ -1092,6 +1092,13 @@
     "source": "Bishop",
     "translation": "Läufer"
   },
+  "315a5e30427b741ec2f2": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "Apple Watch",
+    "translation": "Apple Watch"
+  },
   "316ba0c132f86044c59a": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -3344,6 +3351,13 @@
     "source": "Edit position",
     "translation": "Stellung bearbeiten"
   },
+  "a105ea1685297b8088e3": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "Analyze on Open",
+    "translation": "Beim Öffnen analysieren"
+  },
   "a15ecb28c2864404d4cf": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -3413,6 +3427,13 @@
     "reviewedAt": "2026-10-15T02:37:25.851211+00:00",
     "source": "Two arrows. Their likely move first: %1$@. Then your best reply, which holds only if they play it: %2$@.",
     "translation": "Zwei Pfeile. Zuerst der voraussichtliche gegnerische Zug: %1$@. Danach deine beste Antwort, die nur gilt, wenn dieser Zug gespielt wird: %2$@."
+  },
+  "a66fdafdb4af4ecad163": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "When you open the Watch app, analyze your latest iPhone screenshot. New positions use one analysis or Pro access. Saved results are reused without another analysis.",
+    "translation": "Beim Öffnen der Watch-App wird der neueste iPhone-Screenshot analysiert. Neue Stellungen benötigen eine Analyse oder Pro-Zugang. Gespeicherte Ergebnisse werden ohne eine weitere Analyse wiederverwendet."
   },
   "a72331674cc7698afc46": {
     "origin": "manual",

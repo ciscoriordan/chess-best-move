@@ -75,10 +75,21 @@ private struct SettingsRootContent: View {
             VStack(alignment: .leading, spacing: 0) {
                 GroupedSectionLabel(String(localized: "Screenshots"))
                 GroupedCard {
-                    SettingsAutomaticScreenshotRow(isOn: $settings.automaticallyAnalyzesScreenshots)
+                    SettingsAutomaticAnalysisRow(isOn: $settings.automaticallyAnalyzesScreenshots,
+                        title: String(localized: "Automatically Analyze New Screenshots"),
+                        identifier: "settings.automaticallyAnalyzeScreenshots")
                         .groupedRow(verticalPadding: Spacing.s3)
                 }
                 GroupedFooter(String(localized: "When you open the app, look for a new chess screenshot and analyze it automatically. Requires Full Access to Photos. Individual analyses are used only after you tap Analyze."))
+
+                GroupedSectionLabel(String(localized: "Apple Watch"))
+                GroupedCard {
+                    SettingsAutomaticAnalysisRow(isOn: $settings.automaticallyAnalyzesOnWatchOpen,
+                        title: String(localized: "Analyze on Open"),
+                        identifier: "settings.automaticallyAnalyzeOnWatchOpen")
+                        .groupedRow(verticalPadding: Spacing.s3)
+                }
+                GroupedFooter(String(localized: "When you open the Watch app, analyze your latest iPhone screenshot. New positions use one analysis or Pro access. Saved results are reused without another analysis."))
 
                 GroupedSectionLabel(String(localized: "Analysis"))
                 GroupedCard {
@@ -421,10 +432,11 @@ struct SettingsNumberedStep: View {
 }
 
 /// Stack the long setting title above its switch at accessibility text sizes.
-private struct SettingsAutomaticScreenshotRow: View {
+private struct SettingsAutomaticAnalysisRow: View {
     @Binding var isOn: Bool
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    private let title = String(localized: "Automatically Analyze New Screenshots")
+    let title: String
+    let identifier: String
 
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.s2) {
@@ -446,6 +458,6 @@ private struct SettingsAutomaticScreenshotRow: View {
         }
         .tint(Palette.accent)
         .frame(minHeight: Layout.minimumHitTarget)
-        .accessibilityIdentifier("settings.automaticallyAnalyzeScreenshots")
+        .accessibilityIdentifier(identifier)
     }
 }

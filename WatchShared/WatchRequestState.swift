@@ -61,9 +61,9 @@ final class WatchRequestState {
         return nil
     }
 
-    func begin() -> WatchAnalysisRequest? {
+    func begin(automatically: Bool = false) -> WatchAnalysisRequest? {
         guard !isAnalyzing else { return nil }
-        let request = WatchAnalysisRequest()
+        let request = WatchAnalysisRequest(automaticallyTriggered: automatically ? true : nil)
         clearDelivery()
         pendingRequest = request
         isAnalyzing = true
@@ -115,10 +115,13 @@ final class WatchRequestState {
     @discardableResult
     func finish(_ reply: WatchAnalysisReply, origin: Failure.Origin = .phone) -> Bool {
         guard pendingID == reply.requestID else { return false }
+        let wasAutomatic = pendingRequest?.automaticallyTriggered == true
         clearDelivery()
         isAnalyzing = false
         isWaitingForActivation = false
         switch reply.status {
+        case .automaticAnalysisSkipped:
+            failure = wasAutomatic ? nil : Failure(status: .unavailable, origin: origin)
         case .result, .checkmate, .stalemate:
             self.reply = reply
             boardPreview = nil

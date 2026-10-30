@@ -1056,6 +1056,13 @@
     "key": "Bishop",
     "source": "Bishop"
   },
+  "315a5e30427b741ec2f2": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Apple Watch",
+    "source": "Apple Watch"
+  },
   "316ba0c132f86044c59a": {
     "catalog": "Localizable",
     "comment": "",
@@ -3233,6 +3240,13 @@
     "key": "Edit position",
     "source": "Edit position"
   },
+  "a105ea1685297b8088e3": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Analyze on Open",
+    "source": "Analyze on Open"
+  },
   "a15ecb28c2864404d4cf": {
     "catalog": "Localizable",
     "comment": "",
@@ -3302,6 +3316,13 @@
     "index": 0,
     "key": "Two arrows. Their likely move first: %@. Then your best reply, which holds only if they play it: %@.",
     "source": "Two arrows. Their likely move first: %1$@. Then your best reply, which holds only if they play it: %2$@."
+  },
+  "a66fdafdb4af4ecad163": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "When you open the Watch app, analyze your latest iPhone screenshot. New positions use one analysis or Pro access. Saved results are reused without another analysis.",
+    "source": "When you open the Watch app, analyze your latest iPhone screenshot. New positions use one analysis or Pro access. Saved results are reused without another analysis."
   },
   "a72331674cc7698afc46": {
     "catalog": "Localizable",

@@ -158,7 +158,7 @@ final class WatchPhoneBridge: NSObject, WCSessionDelegate {
 
     private func observePreferences() {
         guard let settings else { return }
-        withObservationTracking { _ = settings.moveDisplayFormat } onChange: {
+        withObservationTracking { _ = settings.watchPreferences } onChange: {
             Task { @MainActor [weak self] in
                 self?.observePreferences()
                 self?.sendPreferences()
@@ -168,6 +168,6 @@ final class WatchPhoneBridge: NSObject, WCSessionDelegate {
 
     private func sendPreferences() {
         guard let settings, WCSession.default.activationState == .activated else { return }
-        try? WCSession.default.updateApplicationContext(["moveDisplayFormat": settings.moveDisplayFormat.rawValue])
+        try? WCSession.default.updateApplicationContext(settings.watchPreferences.applicationContext)
     }
 }

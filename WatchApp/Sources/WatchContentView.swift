@@ -27,7 +27,7 @@ struct WatchContentView: View {
         .navigationTitle("")
         .toolbarTitleDisplayMode(.inline)
         .onChange(of: scenePhase, initial: true) { _, phase in
-            model.setAppActive(phase == .active)
+            model.setScenePhase(phase)
         }
         .onAppear {
             #if DEBUG

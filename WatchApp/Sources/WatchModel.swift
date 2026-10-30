@@ -2,6 +2,7 @@ import Foundation
 import Observation
 import WatchConnectivity
 import WatchKit
+import SwiftUI
 import os
 
 @MainActor
@@ -29,10 +30,14 @@ final class WatchModel: NSObject, WCSessionDelegate {
     @ObservationIgnored private var activationTimeout: Task<Void, Never>?
     @ObservationIgnored private var activationID: UUID?
     @ObservationIgnored private var retryTask: Task<Void, Never>?
+    @ObservationIgnored private var openAnalysis = WatchOpenAnalysisState()
+    @ObservationIgnored private var preferences = WatchPreferences()
     private let logger = Logger(subsystem: "com.motomatic.chessbestmove", category: "watch-connectivity")
 
     override init() {
         super.init()
+        preferences = WatchPreferences(defaults: .standard)
+        moveDisplayFormat = preferences.moveDisplayFormat
         #if DEBUG
         // Read a real pipeline test attachment for repeatable layout review. This path is
         // absent from Release and does not establish Watch Connectivity verification.
@@ -69,7 +74,7 @@ final class WatchModel: NSObject, WCSessionDelegate {
         state.dismissError()
         guard WCSession.isSupported() else { completeActivation(false); return }
         if WCSession.default.activationState == .activated {
-            applyPreferences(WCSession.default.receivedApplicationContext["moveDisplayFormat"] as? String)
+            applyCurrentPreferences()
             completeActivation(true)
             return
         }
@@ -85,6 +90,11 @@ final class WatchModel: NSObject, WCSessionDelegate {
     }
 
     func analyze() {
+        openAnalysis.consumeManualIntent()
+        beginAnalysis()
+    }
+
+    private func beginAnalysis(automatically: Bool = false) {
         #if DEBUG
         if isPreview {
             isPreview = false
@@ -92,26 +102,34 @@ final class WatchModel: NSObject, WCSessionDelegate {
             activate()
         }
         #endif
-        guard let request = state.begin() else { return }
+        guard let request = state.begin(automatically: automatically) else { return }
         send(request)
     }
 
-    func setAppActive(_ active: Bool) {
+    func setScenePhase(_ phase: ScenePhase) {
         #if DEBUG
         if isPreview { return }
         #endif
-        if let request = state.setAppActive(active) { sendAttempt(request) }
+        switch phase {
+        case .active: openAnalysis.setPhase(.active)
+        case .inactive: openAnalysis.setPhase(.inactive)
+        case .background: openAnalysis.setPhase(.background)
+        @unknown default: openAnalysis.setPhase(.inactive)
+        }
+        if let request = state.setAppActive(phase == .active) { sendAttempt(request) }
+        startAutomaticAnalysisIfNeeded()
     }
 
     func retry(dismissing id: UUID) {
         guard state.failure?.id == id else { return }
+        openAnalysis.consumeManualIntent()
         state.dismissError(id: id)
         if let request = state.retry() { send(request) }
     }
 
     private func send(_ request: WatchAnalysisRequest) {
         guard state.pendingID == request.id else { return }
-        // Start the deadline and feedback on the first tap, including time spent waiting
+        // Start the deadline and feedback on the first request, including time spent waiting
         // for app/session activation. Retries never restart this deadline.
         if timeout == nil {
             WKInterfaceDevice.current().play(.click)
@@ -148,9 +166,17 @@ final class WatchModel: NSObject, WCSessionDelegate {
         }
         // Do not gate this on isReachable: a foreground Watch message can wake the iPhone app.
         let callbacks = WatchMessageCallbacks(onReply: { [weak self] data in
+            let received = WatchWire.reply(from: data, for: request.id)
+            let skipped = request.automaticallyTriggered == true
+                && received?.status == .automaticAnalysisSkipped
             guard let self, self.state.receive(data, for: request.id) else { return }
-            if let format = self.reply?.moveDisplayFormat { self.moveDisplayFormat = format }
-            self.didFinish()
+            if let format = received?.moveDisplayFormat {
+                self.moveDisplayFormat = format
+                self.preferences.moveDisplayFormat = format
+                self.preferences.save(to: .standard)
+            }
+            if skipped { self.applyPreferences(nil, automaticallyAnalyzesOnOpen: false) }
+            self.didFinish(playsHaptic: !skipped)
         }, onError: { [weak self] failure in
             self?.deliveryFailed(failure, request: request, attempt: attempt)
         })
@@ -180,7 +206,7 @@ final class WatchModel: NSObject, WCSessionDelegate {
         }
     }
 
-    private func didFinish() {
+    private func didFinish(playsHaptic: Bool = true) {
         timeout?.cancel()
         timeout = nil
         retryTask?.cancel()
@@ -188,7 +214,7 @@ final class WatchModel: NSObject, WCSessionDelegate {
         activationTimeout?.cancel()
         activationTimeout = nil
         activationID = nil
-        WKInterfaceDevice.current().play(state.error == nil ? .success : .failure)
+        if playsHaptic { WKInterfaceDevice.current().play(state.error == nil ? .success : .failure) }
     }
 
     private func fail(_ status: WatchAnalysisReply.Status, id: UUID) {
@@ -201,7 +227,7 @@ final class WatchModel: NSObject, WCSessionDelegate {
                              error: (any Error)?) {
         Task { @MainActor [weak self] in
             guard let self else { return }
-            self.applyPreferences(WCSession.default.receivedApplicationContext["moveDisplayFormat"] as? String)
+            self.applyCurrentPreferences()
             self.completeActivation(WCSession.default.activationState == .activated)
         }
     }
@@ -212,15 +238,32 @@ final class WatchModel: NSObject, WCSessionDelegate {
         activationID = nil
         if let request = state.activate(activated) { sendAttempt(request) }
         else if !activated { didFinish() }
+        if activated { startAutomaticAnalysisIfNeeded() }
     }
 
-    private func applyPreferences(_ rawValue: String?) {
-        if let rawValue, let format = MoveDisplayFormat(rawValue: rawValue) { moveDisplayFormat = format }
+    private func applyCurrentPreferences() {
+        let context = WCSession.default.receivedApplicationContext
+        applyPreferences(context[WatchPreferences.Key.moveDisplayFormat] as? String,
+                         automaticallyAnalyzesOnOpen: context[WatchPreferences.Key.automaticallyAnalyzesOnOpen] as? Bool)
+    }
+
+    private func applyPreferences(_ rawValue: String?, automaticallyAnalyzesOnOpen: Bool?) {
+        preferences = preferences.merging(moveDisplayFormat: rawValue, automaticallyAnalyzesOnOpen: automaticallyAnalyzesOnOpen)
+        preferences.save(to: .standard)
+        moveDisplayFormat = preferences.moveDisplayFormat
+        openAnalysis.applyPreference(enabled: preferences.automaticallyAnalyzesOnOpen)
+        startAutomaticAnalysisIfNeeded()
+    }
+
+    private func startAutomaticAnalysisIfNeeded() {
+        guard openAnalysis.shouldAnalyze(sessionIsReady: state.isActivated, isAnalyzing: state.isAnalyzing) else { return }
+        beginAnalysis(automatically: true)
     }
 
     nonisolated func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        let rawValue = applicationContext["moveDisplayFormat"] as? String
-        Task { @MainActor [weak self] in self?.applyPreferences(rawValue) }
+        let rawValue = applicationContext[WatchPreferences.Key.moveDisplayFormat] as? String
+        let automatic = applicationContext[WatchPreferences.Key.automaticallyAnalyzesOnOpen] as? Bool
+        Task { @MainActor [weak self] in self?.applyPreferences(rawValue, automaticallyAnalyzesOnOpen: automatic) }
     }
 
     nonisolated func session(_ session: WCSession, didReceiveMessageData data: Data) {

@@ -1088,6 +1088,13 @@
     "source": "Bishop",
     "translation": "Fil"
   },
+  "315a5e30427b741ec2f2": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "Apple Watch",
+    "translation": "Apple Watch"
+  },
   "316ba0c132f86044c59a": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -3342,6 +3349,13 @@
     "source": "Edit position",
     "translation": "Konumu düzenle"
   },
+  "a105ea1685297b8088e3": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "Analyze on Open",
+    "translation": "Açılışta analiz et"
+  },
   "a15ecb28c2864404d4cf": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -3411,6 +3425,13 @@
     "reviewedAt": "2026-10-15T02:36:48.352029+00:00",
     "source": "Two arrows. Their likely move first: %1$@. Then your best reply, which holds only if they play it: %2$@.",
     "translation": "İki ok. Önce beklenen hamle: %1$@. Ardından, yalnızca o hamle oynanırsa geçerli olan en iyi yanıtınız: %2$@."
+  },
+  "a66fdafdb4af4ecad163": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "When you open the Watch app, analyze your latest iPhone screenshot. New positions use one analysis or Pro access. Saved results are reused without another analysis.",
+    "translation": "Watch uygulamasını açtığınızda iPhone’unuzdaki son ekran görüntüsü analiz edilir. Yeni konumlar için bir analiz veya Pro erişimi gerekir. Kaydedilen sonuçlar başka bir analiz harcanmadan yeniden kullanılır."
   },
   "a72331674cc7698afc46": {
     "origin": "manual",

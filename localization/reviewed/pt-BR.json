@@ -983,6 +983,13 @@
     "source": "Bishop",
     "translation": "Bispo"
   },
+  "315a5e30427b741ec2f2": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "Apple Watch",
+    "translation": "Apple Watch"
+  },
   "316ba0c132f86044c59a": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -3169,6 +3176,13 @@
     "source": "Edit position",
     "translation": "Editar posição"
   },
+  "a105ea1685297b8088e3": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "Analyze on Open",
+    "translation": "Analisar ao abrir"
+  },
   "a15ecb28c2864404d4cf": {
     "origin": "deepl-reviewed",
     "reason": "Final grammar audit against callers, chess rules, and Apple control terminology.",
@@ -3236,6 +3250,13 @@
     "reviewedAt": "2026-10-15T02:54:10.077403+00:00",
     "source": "Two arrows. Their likely move first: %1$@. Then your best reply, which holds only if they play it: %2$@.",
     "translation": "Duas setas. Primeiro, o lance provável do adversário: %1$@. Depois, sua melhor resposta, válida apenas se o adversário fizer esse lance: %2$@."
+  },
+  "a66fdafdb4af4ecad163": {
+    "origin": "manual-reviewed",
+    "reason": "Reviewed Watch automatic-opening setting, native capitalization, saved-result reuse, and analysis-credit wording.",
+    "reviewedAt": "2026-10-29",
+    "source": "When you open the Watch app, analyze your latest iPhone screenshot. New positions use one analysis or Pro access. Saved results are reused without another analysis.",
+    "translation": "Ao abrir o app no Apple Watch, a última captura de tela do iPhone é analisada. Novas posições usam uma análise ou o acesso Pro. Os resultados salvos são reutilizados sem gastar outra análise."
   },
   "a72331674cc7698afc46": {
     "origin": "deepl-reviewed",

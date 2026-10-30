@@ -25,6 +25,7 @@ final class WatchAnalysisService {
     private let now: @Sendable () -> Date
     private let timeBudget: Duration
     private let history: AnalysisHistoryStore
+    private let automaticAnalysisEnabled: @MainActor () -> Bool
     private var activeID: UUID?
     private var ownsEngine = false
     private var completed: [WatchAnalysisReply] = []
@@ -34,7 +35,8 @@ final class WatchAnalysisService {
          phoneIsActive: @escaping @MainActor () -> Bool,
          now: @escaping @Sendable () -> Date = { .now }, timeBudget: Duration = .seconds(16),
          foregroundEngine: (any EngineController)? = nil,
-         history: AnalysisHistoryStore = AnalysisHistoryStore()) {
+         history: AnalysisHistoryStore = AnalysisHistoryStore(),
+         automaticAnalysisEnabled: @escaping @MainActor () -> Bool = { true }) {
         self.store = store
         self.credits = credits
         self.engine = engine
@@ -45,10 +47,12 @@ final class WatchAnalysisService {
         self.timeBudget = timeBudget
         self.foregroundEngine = foregroundEngine
         self.history = history
+        self.automaticAnalysisEnabled = automaticAnalysisEnabled
     }
 
     static func live(app: AppModel, phoneIsActive: @escaping @MainActor () -> Bool) -> WatchAnalysisService {
-        WatchAnalysisService(
+        let settings = app.settings
+        return WatchAnalysisService(
             store: app.store, credits: app.credits, engine: AnalysisFeature.makeEngineController(),
             recognition: CaptureRecognitionService(makeRecognizer: { try BoardRecognizer(computeUnits: .cpuOnly) }),
             loadScreenshot: {
@@ -59,7 +63,8 @@ final class WatchAnalysisService {
                 let loaded = try await CapturePhotoLibrary.imageData(for: asset.localIdentifier, allowNetwork: false)
                 let image = try CaptureImageDecoder.decode(data: loaded.data, orientation: loaded.orientation)
                 return WatchScreenshot(date: asset.creationDate, image: ImportedImage(image: image, source: .latestScreenshot))
-            }, phoneIsActive: phoneIsActive, foregroundEngine: app.engine, history: app.history)
+            }, phoneIsActive: phoneIsActive, foregroundEngine: app.engine, history: app.history,
+            automaticAnalysisEnabled: { settings.automaticallyAnalyzesOnWatchOpen })
     }
 
     /// Called synchronously on activation/expiry before the foreground can take the engine.
@@ -77,6 +82,10 @@ final class WatchAnalysisService {
               (-5...30).contains(now().timeIntervalSince(request.createdAt)) else { return failure(.invalidRequest) }
         if let cached = completed.first(where: { $0.requestID == request.id }) {
             return cached
+        }
+        // The phone is authoritative even if a Watch still has an older cached preference.
+        if request.automaticallyTriggered == true, !automaticAnalysisEnabled() {
+            return failure(.automaticAnalysisSkipped)
         }
         guard activeID == nil, !phoneIsActive(), !foregroundIsSearching else { return failure(.busy) }
         switch engine.phase {

@@ -8,6 +8,7 @@ import Observation
 final class AppSettings {
     enum Key {
         static let automaticallyAnalyzesScreenshots = "automaticallyAnalyzesScreenshots"
+        static let automaticallyAnalyzesOnWatchOpen = "automaticallyAnalyzesOnWatchOpen"
         static let explicitScreenshotSelectionDate = "explicitScreenshotSelectionDate"
         static let boardAppearance = "boardAppearance"
         static let moveDisplayFormat = "moveDisplayFormat"
@@ -27,6 +28,15 @@ final class AppSettings {
 
     var automaticallyAnalyzesScreenshots: Bool {
         didSet { defaults.set(automaticallyAnalyzesScreenshots, forKey: Key.automaticallyAnalyzesScreenshots) }
+    }
+
+    var automaticallyAnalyzesOnWatchOpen: Bool {
+        didSet { defaults.set(automaticallyAnalyzesOnWatchOpen, forKey: Key.automaticallyAnalyzesOnWatchOpen) }
+    }
+
+    var watchPreferences: WatchPreferences {
+        WatchPreferences(moveDisplayFormat: moveDisplayFormat,
+                         automaticallyAnalyzesOnOpen: automaticallyAnalyzesOnWatchOpen)
     }
 
     /// Match each imported screenshot unless the user explicitly saves a fixed style.
@@ -79,6 +89,8 @@ final class AppSettings {
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         automaticallyAnalyzesScreenshots = defaults.object(forKey: Key.automaticallyAnalyzesScreenshots) as? Bool ?? true
+        automaticallyAnalyzesOnWatchOpen = defaults.object(forKey: Key.automaticallyAnalyzesOnWatchOpen) == nil
+            ? true : defaults.bool(forKey: Key.automaticallyAnalyzesOnWatchOpen)
         explicitScreenshotSelectionDate = defaults.object(forKey: Key.explicitScreenshotSelectionDate) as? Date
         boardAppearance = BoardAppearance(rawValue: defaults.string(forKey: Key.boardAppearance) ?? "") ?? .screenshot
         moveDisplayFormat = MoveDisplayFormat(rawValue: defaults.string(forKey: Key.moveDisplayFormat) ?? "") ?? .words
