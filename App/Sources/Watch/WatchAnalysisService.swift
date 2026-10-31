@@ -21,7 +21,7 @@ final class WatchAnalysisService {
     private let credits: any CreditsService
     private let engine: any EngineController
     private let foregroundEngine: (any EngineController)?
-    private let phoneIsActive: @MainActor () -> Bool
+    private let phoneIsBusy: @MainActor () -> Bool
     private let now: @Sendable () -> Date
     private let timeBudget: Duration
     private let history: AnalysisHistoryStore
@@ -34,7 +34,7 @@ final class WatchAnalysisService {
 
     init(store: any StoreService, credits: any CreditsService, engine: any EngineController,
          recognition: any RecognitionService, loadScreenshot: @escaping ScreenshotLoader,
-         phoneIsActive: @escaping @MainActor () -> Bool,
+         phoneIsBusy: @escaping @MainActor () -> Bool,
          now: @escaping @Sendable () -> Date = { .now }, timeBudget: Duration = .seconds(16),
          foregroundEngine: (any EngineController)? = nil,
          history: AnalysisHistoryStore = AnalysisHistoryStore(),
@@ -46,7 +46,7 @@ final class WatchAnalysisService {
         self.engine = engine
         self.recognition = recognition
         self.loadScreenshot = loadScreenshot
-        self.phoneIsActive = phoneIsActive
+        self.phoneIsBusy = phoneIsBusy
         self.now = now
         self.timeBudget = timeBudget
         self.foregroundEngine = foregroundEngine
@@ -69,9 +69,23 @@ final class WatchAnalysisService {
                 let loaded = try await CapturePhotoLibrary.imageData(for: asset.localIdentifier, allowNetwork: false)
                 let image = try CaptureImageDecoder.decode(data: loaded.data, orientation: loaded.orientation)
                 return WatchScreenshot(date: asset.creationDate, image: ImportedImage(image: image, source: .latestScreenshot))
-            }, phoneIsActive: phoneIsActive, foregroundEngine: app.engine, history: app.history,
+            }, phoneIsBusy: { foregroundWorkHasPriority(app: app, phoneIsActive: phoneIsActive()) },
+            foregroundEngine: app.engine, history: app.history,
             automaticAnalysisEnabled: { settings.automaticallyAnalyzesOnWatchOpen },
             thinkTime: { settings.thinkTime }, recommendationMode: { settings.recommendationMode })
+    }
+
+    /// Visibility alone is not work: an idle Home or completed result can serve the Watch.
+    /// The phone retains priority while recognizing, editing, buying, or using its engine.
+    static func foregroundWorkHasPriority(app: AppModel, phoneIsActive: Bool) -> Bool {
+        switch app.engine.phase {
+        case .preparing, .searching: return true
+        default: break
+        }
+        guard phoneIsActive else { return false }
+        if app.editor != nil || app.sheet?.offersAPurchase == true { return true }
+        if case .recognizing? = app.path.last { return true }
+        return false
     }
 
     /// Called synchronously on activation/expiry before the foreground can take the engine.
@@ -94,7 +108,7 @@ final class WatchAnalysisService {
         if request.automaticallyTriggered == true, !automaticAnalysisEnabled() {
             return failure(.automaticAnalysisSkipped)
         }
-        guard activeID == nil, !phoneIsActive(), !foregroundIsSearching else { return failure(.busy) }
+        guard activeID == nil, !phoneIsBusy(), !foregroundIsSearching else { return failure(.busy) }
         switch engine.phase {
         case .preparing, .searching: return failure(.busy)
         default: break
@@ -108,7 +122,7 @@ final class WatchAnalysisService {
             }
         }
         func isCurrent() -> Bool {
-            activeID == request.id && !Task.isCancelled && !phoneIsActive() && !foregroundIsSearching
+            activeID == request.id && !Task.isCancelled && !phoneIsBusy() && !foregroundIsSearching
         }
         let deadline = ContinuousClock.now + timeBudget
         let thinkTime = requestedThinkTime().watchValue
@@ -220,7 +234,7 @@ final class WatchAnalysisService {
         let thumbnail = await Task.detached {
             WatchBoardThumbnail.make(board: snapshot.boardImage, move: move, whiteAtBottom: snapshot.whiteAtBottom)
         }.value
-        guard activeID == request.id, !Task.isCancelled, !phoneIsActive() else {
+        guard activeID == request.id, !Task.isCancelled, !phoneIsBusy() else {
             return WatchAnalysisReply(requestID: request.id, status: .timedOut)
         }
         return WatchAnalysisReply(requestID: request.id, status: .result, screenshotDate: screenshot.date,
