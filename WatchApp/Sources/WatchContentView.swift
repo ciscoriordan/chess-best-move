@@ -4,18 +4,27 @@ import SwiftUI
 struct WatchContentView: View {
     let model: WatchModel
     @State private var showsFullBoard = false
+    @State private var analyzeButtonHeight: CGFloat = 44
     @ScaledMetric(relativeTo: .title3) private var moveSymbolSize = 24
     @Environment(\.scenePhase) private var scenePhase
     private let ink = Color(red: 238 / 255, green: 234 / 255, blue: 224 / 255)
-    private let accent = Color(red: 124 / 255, green: 148 / 255, blue: 1)
+    private let buttonFill = Color(red: 43 / 255, green: 48 / 255, blue: 71 / 255)
 
     var body: some View {
         let failure = model.failure
-        VStack(spacing: 8) {
-            // Keep the action outside scrolling content on every screen.
+        ZStack(alignment: .top) {
+            ScrollView {
+                content
+                    .padding(.top, analyzeButtonHeight + 8)
+                    .padding(.bottom, analyzeButtonHeight)
+            }
+            .scrollEdgeEffectHidden(true, for: .top)
+            // Only the filled button covers the result. The board can scroll
+            // behind its rounded edges without an opaque surrounding strip.
             analyzeButton
-                .layoutPriority(1)
-            ScrollView { content }
+                .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { height in
+                    if height > 0 { analyzeButtonHeight = height }
+                }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(.horizontal, 4)
@@ -106,10 +115,12 @@ struct WatchContentView: View {
             .font(.headline)
             .frame(maxWidth: .infinity, minHeight: 44, alignment: .center)
             .fixedSize(horizontal: false, vertical: true)
+            .padding(.vertical, 4)
+            .background(buttonFill, in: Capsule())
+            .padding(.horizontal, 9)
             .contentShape(Rectangle())
         }
-        .buttonStyle(.bordered)
-        .tint(accent)
+        .buttonStyle(.plain)
         .frame(maxWidth: .infinity, alignment: .center)
         .disabled(model.isAnalyzing)
         .accessibilityLabel("Analyze Latest Screenshot")
