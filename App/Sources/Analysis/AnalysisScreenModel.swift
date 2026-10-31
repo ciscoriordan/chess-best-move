@@ -81,6 +81,7 @@ final class AnalysisScreenModel {
     private(set) var interruption: Interruption?
     /// The think time of the current or last run.
     private(set) var runThinkTime: ThinkTime
+    private(set) var runRecommendationMode: RecommendationMode
     /// When the current run's engine search began, for the think-time progress rule.
     private(set) var searchStartedAt: Date?
     /// Incremented when an analysis completes (success haptic).
@@ -108,6 +109,7 @@ final class AnalysisScreenModel {
         self.session = session
         self.ledger = ledger
         runThinkTime = app.settings.thinkTime
+        runRecommendationMode = app.settings.recommendationMode
         // A stub engine (tests, previews) cannot take a quiet search; the feature then never
         // runs and the screen behaves exactly as it did before.
         longerSearch = AnalysisLongerSearch(runner: app.engine as? any AnalysisLongerSearchRunner)
@@ -348,6 +350,19 @@ final class AnalysisScreenModel {
 
     // MARK: Actions
 
+    func recommendationModeChanged() {
+        guard session.canAnalyze, runState != .notStarted, ledger.activeSessionID == session.id,
+              runRecommendationMode != app.settings.recommendationMode else { return }
+        longerSearch.cancel()
+        if let saved = app.history.entry(for: position, engineVersion: app.engine.engineVersion,
+                                         mode: app.settings.recommendationMode) {
+            app.engine.stop()
+            restore(saved)
+        } else {
+            run(thinkTime: app.settings.thinkTime)
+        }
+    }
+
     /// Runs the engine on the session's board. Does nothing without credit authorization;
     /// the credit is committed through `AppModel.analysisDidStart` once the search runs.
     func run(thinkTime: ThinkTime) {
@@ -366,6 +381,7 @@ final class AnalysisScreenModel {
         runToken += 1
         let token = runToken
         runThinkTime = thinkTime
+        runRecommendationMode = app.settings.recommendationMode
         interruption = nil
         searchStartedAt = nil
         runState = .starting
@@ -375,11 +391,12 @@ final class AnalysisScreenModel {
 
         let engine = app.engine
         let snapshotPosition = session.snapshot.position
+        let recommendationMode = runRecommendationMode
         Task { [weak self] in
             // A newer run, or a return to Check position, may have replaced this one before
             // the task ran: never start a search for a board that is no longer shown.
             guard self?.runToken == token else { return }
-            let started = await engine.start(snapshotPosition, thinkTime: thinkTime)
+            let started = await engine.start(snapshotPosition, thinkTime: thinkTime, mode: recommendationMode)
             guard let self, token == self.runToken else { return }
             self.awaitingRunPhase = false
             if started {
@@ -524,7 +541,7 @@ final class AnalysisScreenModel {
     /// Starts the quiet search once an answer is on screen. It does not start behind a Stop
     /// the user pressed: they asked the engine to stop thinking about this board.
     private func startLongerSearch() {
-        guard !didStopEarly, interruption == nil, noLegalMoves == nil,
+        guard runRecommendationMode == .bestMove, !didStopEarly, interruption == nil, noLegalMoves == nil,
               let quickAnswer = app.engine.readout, quickAnswer.bestMove != nil
         else { return }
         longerSearch.start(
@@ -551,7 +568,7 @@ final class AnalysisScreenModel {
     private func rerunAfterAdjustment() {
         isLineExpanded = false
         guard session.canAnalyze else { return }
-        if let saved = app.history.entry(for: position, engineVersion: app.engine.engineVersion) {
+        if let saved = app.history.entry(for: position, engineVersion: app.engine.engineVersion, mode: app.settings.recommendationMode) {
             if isThinking, ledger.activeSessionID == session.id { app.engine.stop() }
             longerSearch.cancel()
             restore(saved)
@@ -564,6 +581,7 @@ final class AnalysisScreenModel {
         runToken += 1
         savedResult = saved
         runThinkTime = saved.thinkTime
+        runRecommendationMode = saved.effectiveRecommendationMode
         runState = .completed
         interruption = nil
         awaitingRunPhase = false
@@ -579,7 +597,8 @@ final class AnalysisScreenModel {
 
     private func saveResult(checkmate: Bool? = nil) {
         app.history.record(snapshot: session.snapshot, origin: session.origin, readout: readout,
-            checkmate: checkmate, thinkTime: runThinkTime, engineVersion: app.engine.engineVersion)
+            checkmate: checkmate, thinkTime: runThinkTime, engineVersion: app.engine.engineVersion,
+            mode: runRecommendationMode)
     }
 
     private func startObservingEngine() {
@@ -665,7 +684,9 @@ final class AnalysisScreenModel {
         // With the turn of the player at the top on the board, the screen shows the move the
         // engine expects above the answer to it, so the announcement says both, in that order
         // (design.md 9.4).
-        if let guessed = content.guessedMove {
+        if runRecommendationMode == .stealth {
+            announce(String(localized: "Suggested move: ") + description)
+        } else if let guessed = content.guessedMove {
             announce(AnalysisSpeech.replyAnnouncement(guessedMove: guessed.words, reply: description, score: score))
         } else {
             announce(AnalysisSpeech.completionAnnouncement(moveDescription: description, score: score))

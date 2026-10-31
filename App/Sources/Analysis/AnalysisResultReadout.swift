@@ -27,6 +27,7 @@ struct AnalysisResultReadout: View {
     /// moves, or the engine still loading. Nil while the badge's move says the same thing.
     var detail: String?
     var detailIsCaution = false
+    var isVaried = false
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.moveDisplayFormat) private var moveDisplayFormat
@@ -88,7 +89,8 @@ struct AnalysisResultReadout: View {
                 // focusable, so the trait never reaches the move or the evaluation and
                 // VoiceOver re-reads them at every depth (design.md 12).
                 .accessibilityAddTraits(isFinal ? [] : .updatesFrequently)
-            AnalysisStatusPill(title: content.pill.title, isAccent: content.pill.isAccent)
+            AnalysisStatusPill(title: isVaried && content.move != nil ? String(localized: "Stealth Mode") : content.pill.title,
+                               isAccent: content.pill.isAccent)
                 .accessibilitySortPriority(3)
             if let score {
                 evaluation(score)

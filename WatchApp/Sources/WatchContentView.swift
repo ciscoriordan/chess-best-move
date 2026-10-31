@@ -156,6 +156,10 @@ struct WatchContentView: View {
                 .frame(width: 88, height: 88)
                 .frame(maxWidth: .infinity)
             moveLabel
+            if model.showsCompletedMove, model.reply?.stealthMode == true {
+                Text("Stealth Mode").font(.caption2).foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity)
+            }
         } else if let reply = model.reply {
             Text(reply.status == .checkmate ? LocalizedStringKey("Checkmate") : LocalizedStringKey("Stalemate")).font(.headline)
         }

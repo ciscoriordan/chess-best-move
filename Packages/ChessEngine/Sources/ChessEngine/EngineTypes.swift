@@ -6,6 +6,13 @@ public enum SearchLimit: Sendable, Hashable {
     case depth(Int)
 }
 
+/// Whether to return the principal move or a searched alternative. Variation is not a
+/// prediction about any external fair-play system.
+public enum EngineMoveSelection: Sendable, Hashable {
+    case strongest
+    case varied
+}
+
 /// An evaluation from the point of view of the side to move.
 public enum EngineScore: Sendable, Hashable {
     /// Centipawns; positive means the side to move is better.
@@ -52,7 +59,8 @@ public struct EngineResult: Sendable, Hashable {
     public var bestMove: String
     /// The expected reply, when the engine has one.
     public var ponder: String?
-    /// The last complete report for the principal line (`multiPV == 1`).
+    /// The searched report for the returned move. With varied selection this can be an
+    /// alternative line; it must never carry the principal move's score for another move.
     public var lastInfo: EngineInfo?
 
     public init(bestMove: String, ponder: String? = nil, lastInfo: EngineInfo? = nil) {

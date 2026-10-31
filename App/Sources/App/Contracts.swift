@@ -12,24 +12,31 @@ import StoreKit
 // MARK: - Shared value types
 
 /// Think-time presets (ARCHITECTURE.md "App"). The saved default is `AppSettings.thinkTime`.
-enum ThinkTime: Int, CaseIterable, Identifiable, Sendable, Codable, Hashable {
+enum ThinkTime: Double, CaseIterable, Identifiable, Sendable, Codable, Hashable {
+    case halfSecond = 0.5
     case oneSecond = 1
     case threeSeconds = 3
     case fiveSeconds = 5
     case tenSeconds = 10
     case thirtySeconds = 30
 
-    static let defaultValue: ThinkTime = .threeSeconds
+    static let defaultValue: ThinkTime = .oneSecond
 
-    var id: Int { rawValue }
-    var seconds: Int { rawValue }
-    var milliseconds: Int { rawValue * 1000 }
+    var id: Double { rawValue }
+    var seconds: Double { rawValue }
+    var milliseconds: Int { Int(rawValue * 1000) }
     var duration: Duration { .seconds(rawValue) }
 
     /// "3 s" with a no-break space before the unit (design.md section 4).
-    var label: String { "\(rawValue)\u{00A0}s" }
+    var label: String { "\(rawValue.formatted(.number.precision(.fractionLength(0...1))))\u{00A0}s" }
     /// "3 seconds" for VoiceOver.
-    var spokenLabel: String { rawValue == 1 ? String(localized: "1 second") : String(localized: "\(rawValue) seconds") }
+    var spokenLabel: String {
+        if self == .halfSecond { return String(localized: "Half a second") }
+        return self == .oneSecond ? String(localized: "1 second") : String(localized: "\(Int(rawValue)) seconds")
+    }
+
+    /// A Watch request has a bounded background-execution window, including recognition.
+    var watchValue: ThinkTime { rawValue > 3 ? .threeSeconds : self }
 
     /// The next preset up, for "Think longer"; nil at 30 s, where the longer-search action is hidden.
     var next: ThinkTime? {
@@ -37,6 +44,11 @@ enum ThinkTime: Int, CaseIterable, Identifiable, Sendable, Codable, Hashable {
         guard let index = all.firstIndex(of: self), index + 1 < all.count else { return nil }
         return all[index + 1]
     }
+}
+
+enum RecommendationMode: String, Codable, Sendable {
+    case bestMove
+    case stealth
 }
 
 /// Where an imported image came from.
@@ -818,8 +830,16 @@ protocol EngineController: AnyObject, Observable, Sendable {
     /// true once the search has started (the caller then commits the credit), false if the
     /// position was rejected, has no legal moves, or the engine failed.
     func start(_ position: Position, thinkTime: ThinkTime) async -> Bool
+    func start(_ position: Position, thinkTime: ThinkTime, mode: RecommendationMode) async -> Bool
     /// Ends the search early; `phase` becomes `.finished` with the best move so far.
     func stop()
+}
+
+extension EngineController {
+    /// Existing test and preview controllers can keep their single-line implementation.
+    func start(_ position: Position, thinkTime: ThinkTime, mode: RecommendationMode) async -> Bool {
+        await start(position, thinkTime: thinkTime)
+    }
 }
 
 // MARK: - UI test hooks

@@ -124,6 +124,53 @@
         }
       }
     },
+    "%.1f of %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%.1f von %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%.1f of %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%.1f de %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%.1f sur %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%.1f di %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%.1f de %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%.1f / %@"
+          }
+        }
+      }
+    },
     "%.1f of %lld seconds": {
       "localizations": {
         "de": {
@@ -6114,6 +6161,53 @@
         }
       }
     },
+    "Apple Watch uses up to 3 seconds of think time.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Apple Watch nutzt bis zu 3 Sekunden Bedenkzeit."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Watch uses up to 3 seconds of think time."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El Apple Watch usa hasta 3 segundos de análisis."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’Apple Watch utilise jusqu’à 3 secondes de réflexion."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Watch usa fino a 3 secondi di riflessione."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Apple Watch usa até 3 segundos de análise."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Watch en fazla 3 saniye düşünür."
+          }
+        }
+      }
+    },
     "Apple doesn't cancel it for you. Cancel it in your subscriptions to stop the renewals.": {
       "localizations": {
         "de": {
@@ -11216,6 +11310,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "GNU Genel Kamu Lisansı v3 (tam metin)"
+          }
+        }
+      }
+    },
+    "Half a second": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine halbe Sekunde"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Half a second"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Medio segundo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une demi-seconde"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mezzo secondo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meio segundo"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yarım saniye"
           }
         }
       }
@@ -18960,6 +19101,53 @@
         }
       }
     },
+    "Stealth Mode": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarnmodus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stealth Mode"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo discreto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode furtif"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modalità discreta"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo discreto"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizli Mod"
+          }
+        }
+      }
+    },
     "Step %lld: %@": {
       "localizations": {
         "de": {
@@ -19482,6 +19670,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uygulama arka plana geçtiğinde durduruldu. Düşünme süresinin tamamını kullanmak için yeniden çalıştırın."
+          }
+        }
+      }
+    },
+    "Suggested move: ": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorgeschlagener Zug: "
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggested move: "
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jugada sugerida: "
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coup suggéré : "
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mossa suggerita: "
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lance sugerido: "
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önerilen hamle: "
+          }
+        }
+      }
+    },
+    "Suggestions may be weaker. Turn off for Stockfish’s strongest choice. Stealth Mode does not guarantee avoiding detection.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Vorschläge können schwächer sein. Deaktiviere den Modus für die stärkste Wahl von Stockfish. Der Tarnmodus garantiert nicht, eine Erkennung zu vermeiden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggestions may be weaker. Turn off for Stockfish’s strongest choice. Stealth Mode does not guarantee avoiding detection."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las sugerencias pueden ser más débiles. Desactívalo para obtener la mejor opción de Stockfish. El modo discreto no garantiza evitar la detección."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les suggestions peuvent être moins fortes. Désactivez ce mode pour obtenir le meilleur choix de Stockfish. Le mode furtif ne garantit pas d’éviter la détection."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I suggerimenti possono essere più deboli. Disattiva per ottenere la scelta migliore di Stockfish. La modalità discreta non garantisce di evitare il rilevamento."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As sugestões podem ser mais fracas. Desative para obter a melhor opção do Stockfish. O modo discreto não garante evitar a detecção."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öneriler daha zayıf olabilir. Stockfish’in en güçlü seçimi için kapatın. Gizli Mod, tespit edilmekten kaçınmayı garanti etmez."
           }
         }
       }

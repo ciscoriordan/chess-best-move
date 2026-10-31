@@ -99,6 +99,9 @@ private struct SettingsRootContent: View {
                             .foregroundStyle(Palette.ink)
                             .fixedSize(horizontal: false, vertical: true)
                         ThinkTimeControl(selection: $settings.thinkTime)
+                        Text("Apple Watch uses up to 3 seconds of think time.")
+                            .typography(.caption)
+                            .foregroundStyle(Palette.ink2)
                         Text("Longer think times find deeper moves. Re-running a board with another think time is free.")
                             .typography(.caption)
                             .foregroundStyle(Palette.ink2)
@@ -122,11 +125,21 @@ private struct SettingsRootContent: View {
                     .accessibilityValue(settings.moveDisplayFormat.label)
                     .accessibilityIdentifier("settings.moveDisplayFormat")
                     GroupedRowSeparator(start: .content)
-                    // The two Pro settings of the longer background search (design.md 16).
-                    // Shown to free users too, disabled, each carrying a Pro tag.
-                    SettingsLongerSearchSection()
+                    VStack(alignment: .leading, spacing: Spacing.s2) {
+                        Toggle("Stealth Mode", isOn: $settings.stealthModeEnabled)
+                            .accessibilityIdentifier("settings.stealthMode")
+                        Text("Suggestions may be weaker. Turn off for Stockfish’s strongest choice. Stealth Mode does not guarantee avoiding detection.")
+                            .typography(.caption)
+                            .foregroundStyle(Palette.ink2)
+                    }
+                    .groupedRow(verticalPadding: Spacing.s3)
+                    if !settings.stealthModeEnabled {
+                        GroupedRowSeparator(start: .content)
+                        // A varied answer must not be replaced by the quiet strongest search.
+                        SettingsLongerSearchSection()
+                    }
                 }
-                SettingsLongerSearchFooter()
+                if !settings.stealthModeEnabled { SettingsLongerSearchFooter() }
 
                 GroupedSectionLabel(String(localized: "Board appearance"))
                 GroupedCard {

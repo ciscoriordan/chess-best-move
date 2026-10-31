@@ -377,6 +377,13 @@
     "key": "the player at the bottom",
     "source": "the player at the bottom"
   },
+  "129d5b8591cda5a1d3fd": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Apple Watch uses up to 3 seconds of think time.",
+    "source": "Apple Watch uses up to 3 seconds of think time."
+  },
   "129e71a42eae5c12fb18": {
     "catalog": "Localizable",
     "comment": "Captured chess piece: object of takes. Include the appropriate definite article and accusative case where required.",
@@ -888,6 +895,13 @@
     "key": "Only used to find your newest screenshot.",
     "source": "Only used to find your newest screenshot."
   },
+  "2b99aabc04b50c7d5355": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Suggested move: ",
+    "source": "Suggested move: "
+  },
   "2ba49e535edce8b78cd1": {
     "catalog": "Localizable",
     "comment": "",
@@ -1398,6 +1412,13 @@
     "index": 0,
     "key": ", now shown.",
     "source": ", now shown."
+  },
+  "41dff48ce8c94d9b3fb4": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Half a second",
+    "source": "Half a second"
   },
   "41ffb8c66795d8e3abc0": {
     "catalog": "Localizable",
@@ -2848,6 +2869,13 @@
     "key": "Stalemate. There are no legal moves.",
     "source": "Stalemate. There are no legal moves."
   },
+  "89c41428fcdb4ebdce7a": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Stealth Mode",
+    "source": "Stealth Mode"
+  },
   "8a6d71a3398988ca9a87": {
     "catalog": "Localizable",
     "comment": "",
@@ -2980,6 +3008,13 @@
     "index": 0,
     "key": "Black queen",
     "source": "Black queen"
+  },
+  "92ba91841f0db6444af8": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "%.1f of %@",
+    "source": "%.1f of %@"
   },
   "934c1900fec600cad798": {
     "catalog": "Localizable",
@@ -4626,6 +4661,13 @@
     "key": " The other marked squares were hard to read.",
     "source": " The other marked squares were hard to read."
   },
+  "ee319dc3b330501b374a": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Stealth Mode",
+    "source": "Stealth Mode"
+  },
   "eef8340673b1d4365cc5": {
     "catalog": "Localizable",
     "comment": "",
@@ -4744,6 +4786,13 @@
     "index": 0,
     "key": "Weekly",
     "source": "Weekly"
+  },
+  "f6ef16f1bbe248dead93": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Suggestions may be weaker. Turn off for Stockfish’s strongest choice. Stealth Mode does not guarantee avoiding detection.",
+    "source": "Suggestions may be weaker. Turn off for Stockfish’s strongest choice. Stealth Mode does not guarantee avoiding detection."
   },
   "f776e7e8f0a46e46c3d2": {
     "catalog": "Localizable",

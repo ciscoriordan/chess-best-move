@@ -102,6 +102,10 @@ private struct AnalysisScreen: View {
         .onDisappear { model.disappear(); playback = nil }
         .onChange(of: session.canAnalyze) { _, _ in model.creditStateChanged() }
         .onChange(of: scenePhase) { _, phase in model.scenePhaseChanged(to: phase) }
+        .onChange(of: app.settings.stealthModeEnabled) { _, _ in
+            playback = nil
+            model.recommendationModeChanged()
+        }
         .sensoryFeedback(.success, trigger: model.completionCount)
         .sensoryFeedback(.selection, trigger: model.adjustmentCount)
         .sensoryFeedback(.success, trigger: model.improvementCount)
@@ -372,6 +376,9 @@ private struct AnalysisScreen: View {
         let spoken = { (move: AnalysisReadoutContent.MoveText) in
             AnalysisSpeech.moveDescription(san: move.san, move: move.move, capture: move.capture, alwaysIncludeFromSquare: true)
         }
+        if model.runRecommendationMode == .stealth {
+            return String(localized: "Suggested move: ") + AnalysisSpeech.lowercasingFirstLetter(spoken(shown)) + "."
+        }
         if let guessed = readout.guessedMove {
             return AnalysisSpeech.boardArrowPair(
                 theirMove: spoken(guessed),
@@ -382,7 +389,9 @@ private struct AnalysisScreen: View {
         if readout.answersForThePlayerAtTheTop {
             return AnalysisSpeech.boardTheirMoveOnly(theirMove: spoken(shown), isFinal: isFinal)
         }
-        return (isFinal ? String(localized: "Best move: ") : String(localized: "Best move so far: "))
+        let prefix = model.runRecommendationMode == .stealth ? String(localized: "Suggested move: ")
+            : (isFinal ? String(localized: "Best move: ") : String(localized: "Best move so far: "))
+        return prefix
             + AnalysisSpeech.lowercasingFirstLetter(spoken(shown)) + "."
     }
 
@@ -527,7 +536,8 @@ private struct AnalysisScreen: View {
             score: displayedScore,
             isFinal: isFinal,
             detail: model.detailRepeatsHero ? nil : model.detailLine,
-            detailIsCaution: detailIsCaution
+            detailIsCaution: detailIsCaution,
+            isVaried: model.runRecommendationMode == .stealth
         )
         .accessibilityElement(children: .contain)
         .accessibilityAddTraits(model.isThinking ? .updatesFrequently : [])

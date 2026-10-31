@@ -256,7 +256,7 @@ final class AppModel {
     /// downsell taken down this way reports nothing (no downsell follows, no decline is
     /// recorded).
     func importImage(_ image: ImportedImage) {
-        if let saved = history.entry(for: image, engineVersion: engine.engineVersion),
+        if let saved = history.entry(for: image, engineVersion: engine.engineVersion, mode: settings.recommendationMode),
            let snapshot = saved.snapshot(importing: image) {
             beginExplicitScreenshotSelection()
             editor = nil
@@ -358,14 +358,14 @@ final class AppModel {
 
     @discardableResult
     func restoreSavedAnalysis(of snapshot: BoardSnapshot, origin: AnalysisOrigin) -> Bool {
-        guard let saved = history.entry(for: snapshot.position, engineVersion: engine.engineVersion) else { return false }
+        guard let saved = history.entry(for: snapshot.position, engineVersion: engine.engineVersion, mode: settings.recommendationMode) else { return false }
         showSavedAnalysis(saved, snapshot: snapshot, origin: origin)
         return true
     }
 
     @discardableResult
     func restoreSavedImage(_ image: ImportedImage) -> Bool {
-        guard let saved = history.entry(for: image, engineVersion: engine.engineVersion),
+        guard let saved = history.entry(for: image, engineVersion: engine.engineVersion, mode: settings.recommendationMode),
               let snapshot = saved.snapshot(importing: image) else { return false }
         showSavedAnalysis(saved, snapshot: snapshot, origin: .recognition)
         return true

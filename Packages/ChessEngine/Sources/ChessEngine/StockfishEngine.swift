@@ -60,6 +60,7 @@ public actor StockfishEngine {
         fen: String,
         limit: SearchLimit,
         multiPV: Int = 1,
+        moveSelection: EngineMoveSelection = .strongest,
         requestID: UUID = UUID()
     ) -> AsyncThrowingStream<EngineEvent, Error> {
         let (stream, continuation) = AsyncThrowingStream<EngineEvent, Error>.makeStream(
@@ -88,10 +89,10 @@ public actor StockfishEngine {
         }
 
         let previous = startChain
-        let clampedMultiPV = max(1, min(multiPV, 256))
+        let clampedMultiPV = max(moveSelection == .varied ? 4 : 1, min(multiPV, 256))
         startChain = Task {
             await previous?.value
-            await self.start(request, fen: fen, limit: limit, multiPV: clampedMultiPV)
+            await self.start(request, fen: fen, limit: limit, multiPV: clampedMultiPV, moveSelection: moveSelection)
         }
         return stream
     }
@@ -142,7 +143,8 @@ public actor StockfishEngine {
         }
     }
 
-    private func start(_ request: SearchRequest, fen: String, limit: SearchLimit, multiPV: Int) async {
+    private func start(_ request: SearchRequest, fen: String, limit: SearchLimit, multiPV: Int,
+                       moveSelection: EngineMoveSelection) async {
         if request.isCancelled {
             return
         }
@@ -163,7 +165,7 @@ public actor StockfishEngine {
         // best move: depth 1 takes milliseconds, and SearchRequest does not stop a search
         // before it has completed its first depth.
         let effectiveLimit = request.isStopRequested ? .depth(1) : limit
-        let callbacks = SearchCallbacks(request: request)
+        let callbacks = SearchCallbacks(request: request, moveSelection: moveSelection)
         let queue = self.queue
 
         let outcome: Result<UInt64, EngineError> = await withCheckedContinuation { continuation in
@@ -364,9 +366,12 @@ final class SearchCallbacks: @unchecked Sendable {
     var continuation: AsyncThrowingStream<EngineEvent, Error>.Continuation { request.continuation }
     private var lastPrimaryInfo: EngineInfo?
     private var reportedFirstDepth = false
+    private let moveSelection: EngineMoveSelection
+    private var alternatives = EngineAlternativeMoves()
 
-    init(request: SearchRequest) {
+    init(request: SearchRequest, moveSelection: EngineMoveSelection = .strongest) {
         self.request = request
+        self.moveSelection = moveSelection
     }
 
     func receive(_ raw: sf_info) {
@@ -390,6 +395,9 @@ final class SearchCallbacks: @unchecked Sendable {
         if info.multiPV == 1 {
             lastPrimaryInfo = info
         }
+        if moveSelection == .varied {
+            alternatives.receive(info, exact: raw.bound == SF_BOUND_EXACT)
+        }
         continuation.yield(.info(info))
 
         // Stockfish's first report of line 1 with a non-empty PV comes at the end of the
@@ -412,7 +420,8 @@ final class SearchCallbacks: @unchecked Sendable {
             ponder: ponder.isEmpty ? nil : ponder,
             lastInfo: lastPrimaryInfo
         )
-        continuation.yield(.bestMove(result))
+        let selected = moveSelection == .varied ? alternatives.select(fallback: result) : result
+        continuation.yield(.bestMove(selected))
         continuation.finish()
     }
 }

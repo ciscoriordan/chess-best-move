@@ -168,9 +168,9 @@ enum AnalysisSpeech {
         parts.append(depth.map { String(localized: "depth \($0)") } ?? String(localized: "depth not reported yet"))
         if let elapsed {
             let seconds = AnalysisDataText.seconds(of: elapsed)
-            parts.append(String(localized: "\(seconds, specifier: "%.1f") of \(thinkTime.seconds) seconds"))
+            parts.append(String(localized: "\(seconds, specifier: "%.1f") of \(thinkTime.spokenLabel)"))
         } else {
-            parts.append(String(localized: "\(thinkTime.seconds) seconds"))
+            parts.append(thinkTime.spokenLabel)
         }
         if let nodesPerSecond {
             parts.append(String(localized: "\(nodesPerSecond.formatted()) positions a second"))

@@ -54,6 +54,7 @@ final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunn
     @ObservationIgnored private var pendingReadout: EngineReadout?
     @ObservationIgnored private var stopRequested = false
     @ObservationIgnored private var isPrepared = false
+    @ObservationIgnored private var recommendationMode = RecommendationMode.bestMove
     @ObservationIgnored private var longerSearchTask: Task<Void, Never>?
     @ObservationIgnored private var longerSearchGeneration = 0
     /// True while the quiet longer search is the one Stockfish is running, so stopping it can
@@ -69,9 +70,14 @@ final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunn
         await start(position, movetime: thinkTime.duration, thinkTime: thinkTime)
     }
 
+    func start(_ position: Position, thinkTime: ThinkTime, mode: RecommendationMode) async -> Bool {
+        await start(position, movetime: thinkTime.duration, thinkTime: thinkTime, mode: mode)
+    }
+
     /// Starts a search for `movetime`. `thinkTime` is what `thinkTime` reports (nil for a
     /// custom duration, used by tests).
-    func start(_ position: Position, movetime: Duration, thinkTime: ThinkTime?) async -> Bool {
+    func start(_ position: Position, movetime: Duration, thinkTime: ThinkTime?,
+               mode: RecommendationMode = .bestMove) async -> Bool {
         // One engine: anything the user starts takes it back from the quiet longer search.
         // `StockfishEngine.analyze` stops the search that is running, so nothing else is needed
         // to hand the engine over.
@@ -86,6 +92,8 @@ final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunn
 
         let prepared = AnalysisPositionCheck.sanitized(position)
         let previous = searchedPosition
+        let previousMode = recommendationMode
+        recommendationMode = mode
         searchedPosition = prepared
         self.thinkTime = thinkTime
 
@@ -104,7 +112,8 @@ final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunn
 
         // A re-run of the same board keeps the previous result on screen as provisional
         // until the new search has searched at least as deep (see the accumulator).
-        let seed = previous == prepared && (phase == .finished || phase == .searching) ? readout : nil
+        let seed = previous == prepared && previousMode == mode && mode == .bestMove
+            && (phase == .finished || phase == .searching) ? readout : nil
         if seed == nil { readout = nil }
 
         if !isPrepared {
@@ -130,7 +139,8 @@ final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunn
 
         let milliseconds = max(1, Int((movetime / .milliseconds(1)).rounded()))
         let stream = await StockfishEngine.shared.analyze(fen: prepared.fen,
-            limit: .movetime(milliseconds: milliseconds), requestID: requestID)
+            limit: .movetime(milliseconds: milliseconds),
+            moveSelection: mode == .stealth ? .varied : .strongest, requestID: requestID)
         guard generation == self.generation else { return false }
         if stopRequested {
             await StockfishEngine.shared.stop(requestID: requestID)
@@ -149,6 +159,9 @@ final class AnalysisEngineController: EngineController, AnalysisLongerSearchRunn
                             didReportStart = true
                             continuation.resume(returning: true)
                         }
+                        // A varied suggestion is selected when the search completes. Do not
+                        // show the principal move first and then silently replace it.
+                        if mode == .stealth, case .info = event { continue }
                         accumulator.apply(event, elapsed: ContinuousClock.now - startedAt)
                         if accumulator.isFinished {
                             self.publishFinal(accumulator.readout)

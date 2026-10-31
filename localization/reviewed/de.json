@@ -399,6 +399,12 @@
     "source": "the player at the bottom",
     "translation": "der Spieler am unteren Brettrand"
   },
+  "129d5b8591cda5a1d3fd": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Apple Watch uses up to 3 seconds of think time.",
+    "translation": "Die Apple Watch nutzt bis zu 3 Sekunden Bedenkzeit."
+  },
   "129e71a42eae5c12fb18": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -924,6 +930,12 @@
     "source": "Only used to find your newest screenshot.",
     "translation": "Wird nur verwendet, um deinen neuesten Screenshot zu finden."
   },
+  "2b99aabc04b50c7d5355": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Suggested move: ",
+    "translation": "Vorgeschlagener Zug: "
+  },
   "2ba49e535edce8b78cd1": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -1447,6 +1459,12 @@
     "reviewedAt": "2026-10-15T02:34:35.323409+00:00",
     "source": ", now shown.",
     "translation": ", jetzt angezeigt."
+  },
+  "41dff48ce8c94d9b3fb4": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Half a second",
+    "translation": "Eine halbe Sekunde"
   },
   "41ffb8c66795d8e3abc0": {
     "origin": "manual",
@@ -2930,6 +2948,12 @@
     "source": "Stalemate. There are no legal moves.",
     "translation": "Patt. Es gibt keine legalen Züge."
   },
+  "89c41428fcdb4ebdce7a": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Stealth Mode",
+    "translation": "Tarnmodus"
+  },
   "8a6d71a3398988ca9a87": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -3062,6 +3086,12 @@
     "reviewedAt": "2026-10-15T02:35:10.587876+00:00",
     "source": "Black queen",
     "translation": "Schwarze Dame"
+  },
+  "92ba91841f0db6444af8": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "%.1f of %@",
+    "translation": "%.1f von %@"
   },
   "934c1900fec600cad798": {
     "origin": "manual",
@@ -4763,6 +4793,12 @@
     "source": " The other marked squares were hard to read.",
     "translation": " Die übrigen markierten Felder waren schwer zu erkennen."
   },
+  "ee319dc3b330501b374a": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Stealth Mode",
+    "translation": "Tarnmodus"
+  },
   "eef8340673b1d4365cc5": {
     "origin": "manual",
     "reason": "Manually translated and reviewed for German interface wording, chess grammar, Apple terminology, and preserved format arguments.",
@@ -4881,6 +4917,12 @@
     "reviewedAt": "2026-10-15T02:37:25.851224+00:00",
     "source": "Weekly",
     "translation": "Wöchentlich"
+  },
+  "f6ef16f1bbe248dead93": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Suggestions may be weaker. Turn off for Stockfish’s strongest choice. Stealth Mode does not guarantee avoiding detection.",
+    "translation": "Die Vorschläge können schwächer sein. Deaktiviere den Modus für die stärkste Wahl von Stockfish. Der Tarnmodus garantiert nicht, eine Erkennung zu vermeiden."
   },
   "f776e7e8f0a46e46c3d2": {
     "origin": "manual",

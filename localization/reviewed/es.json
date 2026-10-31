@@ -347,6 +347,12 @@
     "source": "the player at the bottom",
     "translation": "el jugador de abajo"
   },
+  "129d5b8591cda5a1d3fd": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Apple Watch uses up to 3 seconds of think time.",
+    "translation": "El Apple Watch usa hasta 3 segundos de análisis."
+  },
   "129e71a42eae5c12fb18": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
@@ -823,6 +829,12 @@
     "reviewedAt": "2026-10-15T02:37:03.923331+00:00",
     "source": "Only used to find your newest screenshot.",
     "translation": "Se utiliza únicamente para encontrar tu captura de pantalla más reciente."
+  },
+  "2b99aabc04b50c7d5355": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Suggested move: ",
+    "translation": "Jugada sugerida: "
   },
   "2ba49e535edce8b78cd1": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -1326,6 +1338,12 @@
     "reviewedAt": "2026-10-15T02:37:03.923410+00:00",
     "source": ", now shown.",
     "translation": ", ahora visible."
+  },
+  "41dff48ce8c94d9b3fb4": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Half a second",
+    "translation": "Medio segundo"
   },
   "41ffb8c66795d8e3abc0": {
     "origin": "deepl-reviewed",
@@ -2770,6 +2788,12 @@
     "source": "Stalemate. There are no legal moves.",
     "translation": "Tablas por ahogado. No hay jugadas legales."
   },
+  "89c41428fcdb4ebdce7a": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Stealth Mode",
+    "translation": "Modo discreto"
+  },
   "8a6d71a3398988ca9a87": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
@@ -2897,6 +2921,12 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "Black queen",
     "translation": "Dama negra"
+  },
+  "92ba91841f0db6444af8": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "%.1f of %@",
+    "translation": "%.1f de %@"
   },
   "934c1900fec600cad798": {
     "origin": "deepl-reviewed",
@@ -4546,6 +4576,12 @@
     "source": " The other marked squares were hard to read.",
     "translation": " Las demás casillas marcadas resultaban difíciles de leer."
   },
+  "ee319dc3b330501b374a": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Stealth Mode",
+    "translation": "Modo discreto"
+  },
   "eef8340673b1d4365cc5": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -4658,6 +4694,12 @@
     "reviewedAt": "2026-10-15T02:39:58.429716+00:00",
     "source": "Weekly",
     "translation": "Semanal"
+  },
+  "f6ef16f1bbe248dead93": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Suggestions may be weaker. Turn off for Stockfish’s strongest choice. Stealth Mode does not guarantee avoiding detection.",
+    "translation": "Las sugerencias pueden ser más débiles. Desactívalo para obtener la mejor opción de Stockfish. El modo discreto no garantiza evitar la detección."
   },
   "f776e7e8f0a46e46c3d2": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",

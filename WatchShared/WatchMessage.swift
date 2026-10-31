@@ -80,4 +80,6 @@ struct WatchAnalysisReply: Codable, Sendable {
     var thumbnail: Data?
     var playback: BoardMovePlayback?
     var moveDisplayFormat: MoveDisplayFormat?
+    /// Optional for compatibility with earlier phone and Watch builds.
+    var stealthMode: Bool?
 }

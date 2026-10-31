@@ -11,8 +11,9 @@
 # that it is a released version and not a beta, run the tests, then put its build version here.
 # `xcodebuild -version` prints the two values.
 
-# Updated 2026-10-20 after verifying Apple's October 15 production release:
-# https://developer.apple.com/news/releases/?id=10152026a
-# App Store Connect accepted this toolchain starting October 15, 2026.
-version 27.1
-build 27A9275
+# Updated 2026-10-31 after verifying Apple's October 29 production release:
+# https://developer.apple.com/news/releases/?id=10292026a
+# App, engine, and native UI tests plus phone/Watch Release builds pass with this toolchain.
+# A new signed upload still runs the normal Apple validation and processing gates.
+version 27.2
+build 27B52

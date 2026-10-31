@@ -399,6 +399,12 @@
     "source": "the player at the bottom",
     "translation": "il giocatore in basso"
   },
+  "129d5b8591cda5a1d3fd": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Apple Watch uses up to 3 seconds of think time.",
+    "translation": "Apple Watch usa fino a 3 secondi di riflessione."
+  },
   "129e71a42eae5c12fb18": {
     "origin": "manual",
     "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
@@ -924,6 +930,12 @@
     "source": "Only used to find your newest screenshot.",
     "translation": "Serve solo a trovare lo screenshot più recente."
   },
+  "2b99aabc04b50c7d5355": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Suggested move: ",
+    "translation": "Mossa suggerita: "
+  },
   "2ba49e535edce8b78cd1": {
     "origin": "manual",
     "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
@@ -1447,6 +1459,12 @@
     "reviewedAt": "2026-10-15T02:35:31.468343+00:00",
     "source": ", now shown.",
     "translation": ", ora mostrata."
+  },
+  "41dff48ce8c94d9b3fb4": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Half a second",
+    "translation": "Mezzo secondo"
   },
   "41ffb8c66795d8e3abc0": {
     "origin": "manual",
@@ -2930,6 +2948,12 @@
     "source": "Stalemate. There are no legal moves.",
     "translation": "Stallo. Non ci sono mosse legali."
   },
+  "89c41428fcdb4ebdce7a": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Stealth Mode",
+    "translation": "Modalità discreta"
+  },
   "8a6d71a3398988ca9a87": {
     "origin": "manual",
     "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
@@ -3062,6 +3086,12 @@
     "reviewedAt": "2026-10-15T02:37:04.284311+00:00",
     "source": "Black queen",
     "translation": "Donna nera"
+  },
+  "92ba91841f0db6444af8": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "%.1f of %@",
+    "translation": "%.1f di %@"
   },
   "934c1900fec600cad798": {
     "origin": "manual",
@@ -4763,6 +4793,12 @@
     "source": " The other marked squares were hard to read.",
     "translation": " Le altre case evidenziate erano difficili da leggere."
   },
+  "ee319dc3b330501b374a": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Stealth Mode",
+    "translation": "Modalità discreta"
+  },
   "eef8340673b1d4365cc5": {
     "origin": "manual",
     "reason": "Manual Italian translation; reviewed chess grammar, Apple terminology, and format arguments.",
@@ -4881,6 +4917,12 @@
     "reviewedAt": "2026-10-15T02:38:34.737766+00:00",
     "source": "Weekly",
     "translation": "Settimanale"
+  },
+  "f6ef16f1bbe248dead93": {
+    "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
+    "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
+    "source": "Suggestions may be weaker. Turn off for Stockfish’s strongest choice. Stealth Mode does not guarantee avoiding detection.",
+    "translation": "I suggerimenti possono essere più deboli. Disattiva per ottenere la scelta migliore di Stockfish. La modalità discreta non garantisce di evitare il rilevamento."
   },
   "f776e7e8f0a46e46c3d2": {
     "origin": "manual",

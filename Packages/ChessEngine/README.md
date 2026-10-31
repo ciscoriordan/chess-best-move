@@ -214,6 +214,20 @@ measurements, so the numbers below are lower bounds and vary between runs.
 
 ## Tests
 
+`StockfishEngine.analyze` accepts `moveSelection: .varied`; the default remains `.strongest`.
+Varied selection searches at least four principal variations. It chooses a different root
+move from a completed iteration when its evaluated concession is at most 150 centipawns,
+without crossing from a nonnegative evaluation to a negative one. Forced-mate results and
+positions without a suitable alternative keep the principal move. The returned move, score,
+depth, and continuation all come from the selected line. This is variation, not a claim about
+external fair-play detection. Saved answers and display policy belong to the app.
+
+`bash scripts/dev/benchmark-think-time.sh`, from the repository root, runs an opt-in Mac
+comparison at 500 ms, 1 s, 3 s, and a 10 s reference, plus varied selection at 1 s. It writes
+the positions, vendored-source provenance, and raw observations to `build/think-time/`.
+Each observation starts a fresh two-thread, 128 MB engine, so the reference does not warm
+the short search. Move agreement is not an accuracy score or a physical iPhone measurement.
+
 ```
 swift test                                        # macOS, Debug
 swift test -c release -Xswiftc -enable-testing    # macOS, Release flags

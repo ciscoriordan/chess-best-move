@@ -13,6 +13,7 @@ final class AppSettings {
         static let boardAppearance = "boardAppearance"
         static let moveDisplayFormat = "moveDisplayFormat"
         static let thinkTime = "thinkTimeSeconds"
+        static let stealthModeEnabled = "stealthModeEnabled"
         static let hasCompletedAnalysis = "hasCompletedAnalysis"
         static let pendingApprovalBoard = "pendingApprovalBoard"
         static let longerSearchCeiling = "longerSearchCeilingSeconds"
@@ -48,11 +49,17 @@ final class AppSettings {
         didSet { defaults.set(moveDisplayFormat.rawValue, forKey: Key.moveDisplayFormat) }
     }
 
-    /// The saved think time (default 3 s). Tapping a THINK segment on the result screen also
+    /// The saved think time (default 1 s). Tapping a THINK segment on the result screen also
     /// makes it the saved default (design.md 9.4).
     var thinkTime: ThinkTime {
         didSet { defaults.set(thinkTime.rawValue, forKey: Key.thinkTime) }
     }
+
+    var stealthModeEnabled: Bool {
+        didSet { defaults.set(stealthModeEnabled, forKey: Key.stealthModeEnabled) }
+    }
+
+    var recommendationMode: RecommendationMode { stealthModeEnabled ? .stealth : .bestMove }
 
     /// How long the search that keeps running after the first answer may go on
     /// (design.md section 16). A Pro setting: read it through
@@ -94,7 +101,8 @@ final class AppSettings {
         explicitScreenshotSelectionDate = defaults.object(forKey: Key.explicitScreenshotSelectionDate) as? Date
         boardAppearance = BoardAppearance(rawValue: defaults.string(forKey: Key.boardAppearance) ?? "") ?? .screenshot
         moveDisplayFormat = MoveDisplayFormat(rawValue: defaults.string(forKey: Key.moveDisplayFormat) ?? "") ?? .words
-        thinkTime = ThinkTime(rawValue: defaults.integer(forKey: Key.thinkTime)) ?? .defaultValue
+        thinkTime = ThinkTime(rawValue: defaults.double(forKey: Key.thinkTime)) ?? .defaultValue
+        stealthModeEnabled = defaults.object(forKey: Key.stealthModeEnabled) as? Bool ?? true
         longerSearchCeiling = LongerSearchCeiling(rawValue: defaults.integer(forKey: Key.longerSearchCeiling)) ?? .defaultValue
         switchesToBetterMoveAutomatically = defaults.bool(forKey: Key.switchesToBetterMoveAutomatically)
         hasCompletedAnalysis = defaults.bool(forKey: Key.hasCompletedAnalysis)

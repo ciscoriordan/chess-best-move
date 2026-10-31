@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// ThinkTimeControl (design.md section 6): a custom segmented control on a `sunken` track
-/// with five segments in the `data` token. The selected segment is `ink` with `canvas`
+/// with six segments in the `data` token. The selected segment is `ink` with `canvas`
 /// text (never cobalt). At accessibility text sizes it becomes a `Menu` showing the value.
 struct ThinkTimeControl: View {
     @Binding var selection: ThinkTime
@@ -9,7 +9,7 @@ struct ThinkTimeControl: View {
 
     var body: some View {
         Group {
-            if dynamicTypeSize.isAccessibilitySize {
+            if dynamicTypeSize >= .xxxLarge {
                 menu
                     .accessibilityLabel("Think time")
                     .accessibilityValue(selection.spokenLabel)

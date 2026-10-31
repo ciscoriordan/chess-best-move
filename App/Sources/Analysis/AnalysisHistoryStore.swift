@@ -61,6 +61,8 @@ struct AnalysisHistoryEntry: Codable, Identifiable, Sendable {
     var origin: AnalysisOrigin
     var engineVersion: String
     var thinkTime: ThinkTime
+    var recommendationMode: RecommendationMode? = nil
+    var effectiveRecommendationMode: RecommendationMode { recommendationMode ?? .bestMove }
     var analyzedAt: Date
     var lastOpenedAt: Date
     var result: SavedEngineReadout?
@@ -145,7 +147,7 @@ final class AnalysisHistoryStore {
             guard archive.version == 1 else { throw CocoaError(.coderReadCorrupt) }
             var seen = Set<String>()
             entries = archive.entries.filter { entry in
-                entry.isValid && seen.insert(Self.key(for: entry.snapshot!.position)).inserted
+                entry.isValid && seen.insert(entry.effectiveRecommendationMode.rawValue + "|" + Self.key(for: entry.snapshot!.position)).inserted
             }.prefix(self.limit).map { $0 }
         } catch {
             unreadableFile = true
@@ -172,22 +174,28 @@ final class AnalysisHistoryStore {
         return hash.finalize().map { String(format: "%02x", $0) }.joined()
     }
 
-    func entry(for position: Position, engineVersion: String) -> AnalysisHistoryEntry? {
+    func entry(for position: Position, engineVersion: String,
+               mode: RecommendationMode = .bestMove) -> AnalysisHistoryEntry? {
         let key = Self.key(for: position)
-        return entries.first { $0.engineVersion == engineVersion && $0.snapshot.map { Self.key(for: $0.position) == key } == true }
+        return entries.first { $0.effectiveRecommendationMode == mode && $0.engineVersion == engineVersion
+            && $0.snapshot.map { Self.key(for: $0.position) == key } == true }
     }
 
-    func entry(for image: ImportedImage, engineVersion: String) -> AnalysisHistoryEntry? {
+    func entry(for image: ImportedImage, engineVersion: String,
+               mode: RecommendationMode = .bestMove) -> AnalysisHistoryEntry? {
         guard let hash = Self.fingerprint(image.image) else { return nil }
-        return entries.first { $0.engineVersion == engineVersion && $0.screenshots.contains { $0.fingerprint == hash } }
+        return entries.first { $0.effectiveRecommendationMode == mode && $0.engineVersion == engineVersion
+            && $0.screenshots.contains { $0.fingerprint == hash } }
     }
 
     @discardableResult
     func record(snapshot: BoardSnapshot, origin: AnalysisOrigin, readout: EngineReadout?,
                 checkmate: Bool? = nil, thinkTime: ThinkTime, engineVersion: String,
+                mode: RecommendationMode = .bestMove,
                 at date: Date = .now) -> AnalysisHistoryEntry? {
         let position = AnalysisPositionCheck.sanitized(snapshot.position)
-        let previous = entries.first { $0.snapshot.map { Self.key(for: $0.position) == Self.key(for: position) } == true }
+        let previous = entries.first { $0.effectiveRecommendationMode == mode
+            && $0.snapshot.map { Self.key(for: $0.position) == Self.key(for: position) } == true }
         var screenshots = previous?.screenshots ?? []
         if let source = SavedAnalysisScreenshot(snapshot: snapshot) {
             screenshots.removeAll { $0.fingerprint == source.fingerprint }
@@ -196,11 +204,11 @@ final class AnalysisHistoryStore {
         var entry = AnalysisHistoryEntry(id: previous?.id ?? UUID(), fen: position.fen,
             whiteAtBottom: snapshot.whiteAtBottom, sideToMoveOrigin: snapshot.sideToMoveOrigin,
             assumedCastlingRights: snapshot.assumedCastlingRights, lastMove: snapshot.lastMove?.uci,
-            origin: origin, engineVersion: engineVersion, thinkTime: thinkTime,
+            origin: origin, engineVersion: engineVersion, thinkTime: thinkTime, recommendationMode: mode,
             analyzedAt: date, lastOpenedAt: date, result: readout.map(SavedEngineReadout.init),
             checkmate: checkmate, screenshots: Array(screenshots.prefix(8)))
         // A short explicit rerun must not discard the stronger answer already saved.
-        if let previous, previous.engineVersion == engineVersion,
+        if mode == .bestMove, let previous, previous.engineVersion == engineVersion,
            let old = previous.result, let new = entry.result, old.depth > new.depth {
             entry.result = old
             entry.thinkTime = previous.thinkTime
