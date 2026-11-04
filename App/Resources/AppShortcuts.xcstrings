@@ -37,6 +37,28 @@
             ]
           }
         },
+        "es-419": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "Busca la mejor jugada con ${applicationName}",
+              "Busca la mejor jugada en ${applicationName}",
+              "Dime la mejor jugada con ${applicationName}",
+              "${applicationName}, busca la mejor jugada"
+            ]
+          }
+        },
+        "fil": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "Hanapin ang pinakamahusay na tira gamit ang ${applicationName}",
+              "Hanapin ang pinakamahusay na tira sa ${applicationName}",
+              "Kunin ang pinakamahusay na tira mula sa ${applicationName}",
+              "${applicationName}, hanapin ang pinakamahusay na tira"
+            ]
+          }
+        },
         "fr": {
           "stringSet": {
             "state": "translated",
@@ -45,6 +67,17 @@
               "Trouve le meilleur coup dans ${applicationName}",
               "Donne-moi le meilleur coup avec ${applicationName}",
               "${applicationName}, trouve le meilleur coup"
+            ]
+          }
+        },
+        "hi": {
+          "stringSet": {
+            "state": "translated",
+            "values": [
+              "${applicationName} से सबसे अच्छी चाल ढूँढें",
+              "${applicationName} में सबसे अच्छी चाल ढूँढें",
+              "${applicationName} से सबसे अच्छी चाल पाएँ",
+              "${applicationName} से सबसे अच्छी चाल ढूँढो"
             ]
           }
         },

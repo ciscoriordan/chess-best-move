@@ -24,10 +24,28 @@
             "value": "Después del movimiento"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Después de la jugada"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pagkatapos ng Tira"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Après le coup"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चाल के बाद"
           }
         },
         "it": {
@@ -117,10 +135,28 @@
             "value": "Se agotó el tiempo del análisis"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se agotó el tiempo del análisis"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naubos ang Oras ng Pagsusuri"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Délai d’analyse dépassé"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "विश्लेषण की समय-सीमा पूरी हुई"
           }
         },
         "it": {
@@ -163,10 +199,28 @@
             "value": "Analizar última captura"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analizar última captura"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suriin ang Pinakabagong Screenshot"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Analyser la dernière capture"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नवीनतम स्क्रीनशॉट का विश्लेषण करें"
           }
         },
         "it": {
@@ -210,10 +264,28 @@
             "value": "Analizar última captura"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analizar última captura"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suriin ang pinakabagong screenshot"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Analyser la dernière capture"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नवीनतम स्क्रीनशॉट का विश्लेषण करें"
           }
         },
         "it": {
@@ -257,10 +329,28 @@
             "value": "Analizar captura"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analizar captura"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suriin ang screenshot"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Analyser une capture"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्क्रीनशॉट का विश्लेषण करें"
           }
         },
         "it": {
@@ -304,10 +394,28 @@
             "value": "Analizando en el iPhone…"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analizando en el iPhone…"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sinusuri sa iPhone…"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Analyse sur l’iPhone…"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone पर विश्लेषण हो रहा है…"
           }
         },
         "it": {
@@ -351,10 +459,28 @@
             "value": "Mejor jugada"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mejor jugada"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pinakamahusay na Tira"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Meilleur coup"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सबसे अच्छी चाल"
           }
         },
         "it": {
@@ -398,10 +524,28 @@
             "value": "Juegan negras"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juegan negras"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tira ng Itim"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Trait aux noirs"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "काले की चाल"
           }
         },
         "it": {
@@ -444,10 +588,28 @@
             "value": "Revisa la posición en el iPhone"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisa la posición en el iPhone"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tingnan ang Posisyon sa iPhone"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Vérifiez la position sur l’iPhone"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone पर स्थिति जाँचें"
           }
         },
         "it": {
@@ -491,10 +653,28 @@
             "value": "Jaque mate"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaque mate"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mate Na"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Échec et mat"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शह और मात"
           }
         },
         "it": {
@@ -537,10 +717,28 @@
             "value": "Notación de ajedrez"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notación de ajedrez"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notasyon sa Chess"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Notation échiquéenne"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शतरंज संकेतन"
           }
         },
         "it": {
@@ -583,10 +781,28 @@
             "value": "Cerrar"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isara"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Fermer"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बंद करें"
           }
         },
         "it": {
@@ -630,10 +846,28 @@
             "value": "Conectando al iPhone…"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectando al iPhone…"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kumokonekta sa iPhone…"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Connexion à l’iPhone…"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone से जुड़ रहा है…"
           }
         },
         "it": {
@@ -676,10 +910,28 @@
             "value": "No se pudo analizar"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo analizar"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hindi Masuri"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Analyse impossible"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "विश्लेषण नहीं हो सका"
           }
         },
         "it": {
@@ -722,10 +974,28 @@
             "value": "No se pudo conectar con el iPhone"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo conectar con el iPhone"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hindi Makontak ang iPhone"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Impossible de joindre l’iPhone"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone से संपर्क नहीं हुआ"
           }
         },
         "it": {
@@ -769,10 +1039,28 @@
             "value": "No se pudo conectar con la app del iPhone. Revisa la conexión y abre Chess Best Move una vez en el iPhone."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo conectar con la app del iPhone. Revisa la conexión y abre Chess Best Move una vez en el iPhone."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hindi makontak ang app sa iPhone. Suriin ang koneksyon at buksan ang Chess Best Move sa iPhone nang isang beses."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Impossible de joindre l’app iPhone. Vérifiez la connexion et ouvrez Chess Best Move une fois sur l’iPhone."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone ऐप से संपर्क नहीं हुआ। कनेक्शन जाँचें और iPhone पर Chess Best Move एक बार खोलें।"
           }
         },
         "it": {
@@ -815,10 +1103,28 @@
             "value": "Ampliar el tablero"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ampliar el tablero"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palakihin ang chessboard"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Agrandir l’échiquier"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शतरंज बोर्ड बड़ा करें"
           }
         },
         "it": {
@@ -861,10 +1167,28 @@
             "value": "Tablero ampliado"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tablero ampliado"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pinalaking chessboard"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Échiquier agrandi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बड़ा शतरंज बोर्ड"
           }
         },
         "it": {
@@ -908,10 +1232,28 @@
             "value": "Para problemas, estudio y revisión de partidas."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para problemas, estudio y revisión de partidas."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para sa mga puzzle, pag-aaral, at pagrepaso ng laro."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Pour les problèmes, l’étude et l’analyse de parties."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पहेलियों, अभ्यास और बाज़ियों की समीक्षा के लिए।"
           }
         },
         "it": {
@@ -954,10 +1296,28 @@
             "value": "Moviendo…"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moviendo…"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tumitira…"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Déplacement…"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चाल चल रहा है…"
           }
         },
         "it": {
@@ -1000,10 +1360,28 @@
             "value": "Las posiciones nuevas usan un análisis o acceso Pro."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las posiciones nuevas usan un análisis o acceso Pro."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gumagamit ang bagong posisyon ng isang pagsusuri o ng Pro access."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Une nouvelle position utilise une analyse ou l’accès Pro."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नई स्थिति के लिए एक विश्लेषण या Pro ऐक्सेस चाहिए।"
           }
         },
         "it": {
@@ -1046,10 +1424,28 @@
             "value": "No quedan análisis"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No quedan análisis"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wala Nang Natitirang Pagsusuri"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Aucune analyse restante"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई विश्लेषण बाकी नहीं"
           }
         },
         "it": {
@@ -1092,10 +1488,28 @@
             "value": "No se encontró ningún tablero"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró ningún tablero"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Walang Nakitang Chessboard"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Aucun échiquier trouvé"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शतरंज का बोर्ड नहीं मिला"
           }
         },
         "it": {
@@ -1185,10 +1599,28 @@
             "value": "No se encontró ninguna captura"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró ninguna captura"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Walang Nakitang Screenshot"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Aucune capture trouvée"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्क्रीनशॉट नहीं मिला"
           }
         },
         "it": {
@@ -1232,10 +1664,28 @@
             "value": "No quedan análisis. Abre Chess Best Move en el iPhone para obtener Pro o más análisis."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No quedan análisis. Abre Chess Best Move en el iPhone para obtener Pro o más análisis."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wala nang natitirang pagsusuri. Buksan ang Chess Best Move sa iPhone para sa Pro o karagdagang pagsusuri."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Aucune analyse restante. Ouvrez Chess Best Move sur l’iPhone pour Pro ou plus d’analyses."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई विश्लेषण बाकी नहीं है। Pro या और विश्लेषण के लिए iPhone पर Chess Best Move खोलें।"
           }
         },
         "it": {
@@ -1279,10 +1729,28 @@
             "value": "No se encontró un tablero claro. Haz una captura que muestre el tablero entero."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró un tablero claro. Toma una captura que muestre el tablero entero."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Walang makitang malinaw na chessboard. Kumuha ng screenshot na kita ang buong board."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Aucun échiquier net trouvé. Prenez une capture de l’échiquier entier."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साफ़ शतरंज बोर्ड नहीं मिला। ऐसा स्क्रीनशॉट लें जिसमें पूरा बोर्ड दिखे।"
           }
         },
         "it": {
@@ -1325,10 +1793,28 @@
             "value": "No se encontró ninguna captura en la fototeca del iPhone. Haz una captura y toca Analizar de nuevo."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró ninguna captura en la fototeca del iPhone. Toma una captura y toca Analizar de nuevo."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Walang nakitang screenshot sa library ng iPhone. Kumuha ng screenshot at i-tap ulit ang Suriin."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Aucune capture d’écran n’a été trouvée dans la photothèque de votre iPhone. Prenez une capture, puis touchez à nouveau Analyser."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone की फ़ोटो लाइब्रेरी में कोई स्क्रीनशॉट नहीं मिला। स्क्रीनशॉट लें, फिर “विश्लेषण करें” पर टैप करें।"
           }
         },
         "it": {
@@ -1372,10 +1858,28 @@
             "value": "Abre Chess Best Move en el iPhone y permite acceso completo a Fotos para leer nuevas capturas."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre Chess Best Move en el iPhone y permite acceso completo a Fotos para leer nuevas capturas."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buksan ang Chess Best Move sa iPhone at bigyan ito ng Full Access sa Photos para mabasa ang mga bagong screenshot."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Ouvrez Chess Best Move sur l’iPhone et autorisez l’accès complet aux photos pour lire les nouvelles captures."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone पर Chess Best Move खोलें और नए स्क्रीनशॉट पढ़ने के लिए Photos का पूरा ऐक्सेस दें।"
           }
         },
         "it": {
@@ -1419,10 +1923,28 @@
             "value": "Abre el análisis de capturas en el Watch."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre el análisis de capturas en el Watch."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buksan ang pagsusuri ng screenshot sa Watch."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Ouvrez l’analyse de captures sur votre Watch."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watch पर स्क्रीनशॉट का विश्लेषण खोलें।"
           }
         },
         "it": {
@@ -1466,10 +1988,28 @@
             "value": "Vista previa"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vista previa"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silipin"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Aperçu"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रीव्यू"
           }
         },
         "it": {
@@ -1513,10 +2053,28 @@
             "value": "Resultado anterior"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resultado anterior"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naunang resulta"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Résultat précédent"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पिछला नतीजा"
           }
         },
         "it": {
@@ -1560,10 +2118,28 @@
             "value": "Reconectar"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconectar"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kumonekta Ulit"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Reconnecter"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फिर कनेक्ट करें"
           }
         },
         "it": {
@@ -1607,10 +2183,28 @@
             "value": "Captura"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Captura"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Screenshot"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Capture d’écran"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्क्रीनशॉट"
           }
         },
         "it": {
@@ -1653,10 +2247,28 @@
             "value": "Muestra el tablero a pantalla completa y anima la jugada. Toca de nuevo para volver."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muestra el tablero a pantalla completa y anima la jugada. Toca de nuevo para volver."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pinalalaki ang board sa buong screen at ipinapakita ang tira. I-tap ulit para bumalik."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Affiche l’échiquier en plein écran et anime le coup. Touchez à nouveau pour revenir."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बोर्ड पूरी स्क्रीन पर दिखाकर चाल चलाता है। लौटने के लिए फिर टैप करें।"
           }
         },
         "it": {
@@ -1699,10 +2311,28 @@
             "value": "Muestra el tablero a pantalla completa. Toca de nuevo para volver."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muestra el tablero a pantalla completa. Toca de nuevo para volver."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pinalalaki ang board sa buong screen. I-tap ulit para bumalik."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Affiche l’échiquier en plein écran. Touchez à nouveau pour revenir."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बोर्ड पूरी स्क्रीन पर दिखाता है। लौटने के लिए फिर टैप करें।"
           }
         },
         "it": {
@@ -1746,10 +2376,28 @@
             "value": "Ahogado"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahogado"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tabla sa Stalemate"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Pat"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गतिरोध"
           }
         },
         "it": {
@@ -1792,10 +2440,28 @@
             "value": "Posición inicial"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posición inicial"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panimulang Posisyon"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Position de départ"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शुरुआती स्थिति"
           }
         },
         "it": {
@@ -1886,10 +2552,28 @@
             "value": "Modo discreto"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo discreto"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tagong Mode"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Mode furtif"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्टेल्थ मोड"
           }
         },
         "it": {
@@ -1933,10 +2617,28 @@
             "value": "Haz una nueva captura en el iPhone y toca Analizar antes de 30 segundos."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toma una nueva captura en el iPhone y toca Analizar antes de 30 segundos."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kumuha ng bagong screenshot sa iPhone at i-tap ang Suriin sa loob ng 30 segundo."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Prenez une nouvelle capture sur l’iPhone, puis touchez Analyser dans les 30 secondes."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone पर नया स्क्रीनशॉट लें, फिर 30 सेकंड के भीतर “विश्लेषण करें” पर टैप करें।"
           }
         },
         "it": {
@@ -1980,10 +2682,28 @@
             "value": "Primero haz una nueva captura en el iPhone."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primero toma una nueva captura en el iPhone."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kumuha muna ng bagong screenshot sa iPhone."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Prenez d’abord une nouvelle capture sur l’iPhone."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पहले iPhone पर नया स्क्रीनशॉट लें।"
           }
         },
         "it": {
@@ -2026,10 +2746,28 @@
             "value": "Toca para volver al resultado."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca para volver al resultado."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I-tap para bumalik sa resulta."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Touchez pour revenir au résultat."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नतीजे पर लौटने के लिए टैप करें।"
           }
         },
         "it": {
@@ -2073,10 +2811,28 @@
             "value": "La app del iPhone está ocupada. Sal de Chess Best Move en el iPhone e inténtalo de nuevo."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La app del iPhone está ocupada. Sal de Chess Best Move en el iPhone e inténtalo de nuevo."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abala ang app sa iPhone. Iwang bukas ang Chess Best Move sa iPhone at subukan ulit."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "L’app iPhone est occupée. Quittez Chess Best Move sur l’iPhone, puis réessayez."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone ऐप व्यस्त है। iPhone पर Chess Best Move खुला रहने दें और फिर कोशिश करें।"
           }
         },
         "it": {
@@ -2119,10 +2875,28 @@
             "value": "El iPhone no terminó a tiempo. Abre Chess Best Move en el iPhone una vez y vuelve a intentarlo."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El iPhone no terminó a tiempo. Abre Chess Best Move en el iPhone una vez y vuelve a intentarlo."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hindi natapos sa oras ang iPhone. Buksan ang Chess Best Move sa iPhone nang isang beses at subukan ulit."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "L’iPhone n’a pas terminé à temps. Ouvrez une fois Chess Best Move sur l’iPhone, puis réessayez."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone समय पर पूरा नहीं कर सका। iPhone पर Chess Best Move एक बार खोलें, फिर कोशिश करें।"
           }
         },
         "it": {
@@ -2166,10 +2940,28 @@
             "value": "El iPhone no terminó a tiempo. Abre la app una vez y vuelve a intentarlo con una nueva captura."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El iPhone no terminó a tiempo. Abre la app una vez y vuelve a intentarlo con una nueva captura."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hindi natapos sa oras ang iPhone. Buksan ang app nang isang beses at subukan ulit gamit ang bagong screenshot."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "L’iPhone n’a pas terminé à temps. Ouvrez l’app une fois, puis réessayez avec une nouvelle capture."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone समय पर पूरा नहीं कर सका। ऐप एक बार खोलें, फिर नए स्क्रीनशॉट से कोशिश करें।"
           }
         },
         "it": {
@@ -2212,10 +3004,28 @@
             "value": "El movimiento se repite. Toca para volver al resultado."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El movimiento se repite. Toca para volver al resultado."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umuulit ang tira. I-tap para bumalik sa resulta."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Le coup se répète. Touchez pour revenir au résultat."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चाल बार-बार चलती है। नतीजे पर लौटने के लिए टैप करें।"
           }
         },
         "it": {
@@ -2259,10 +3069,28 @@
             "value": "Esta posición necesita confirmación. Abre la captura en Chess Best Move en el iPhone."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta posición necesita confirmación. Abre la captura en Chess Best Move en el iPhone."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kailangang kumpirmahin ang posisyong ito. Buksan ang screenshot sa Chess Best Move sa iPhone."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Cette position doit être confirmée. Ouvrez la capture dans Chess Best Move sur l’iPhone."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस स्थिति की पुष्टि ज़रूरी है। iPhone पर Chess Best Move में स्क्रीनशॉट खोलें।"
           }
         },
         "it": {
@@ -2305,10 +3133,28 @@
             "value": "Reintentar"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reintentar"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subukan Ulit"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Réessayer"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फिर कोशिश करें"
           }
         },
         "it": {
@@ -2352,10 +3198,28 @@
             "value": "Usa un análisis o Pro. El nuevo análisis puede ser gratis."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usa un análisis o Pro. El nuevo análisis puede ser gratis."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gumagamit ng isang pagsusuri o Pro access. Maaaring libre ang pag-ulit."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Utilise une analyse ou Pro. Une nouvelle analyse peut être gratuite."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक विश्लेषण या Pro ऐक्सेस इस्तेमाल होता है। दोबारा विश्लेषण मुफ़्त हो सकता है।"
           }
         },
         "it": {
@@ -2399,10 +3263,28 @@
             "value": "Juegan blancas"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juegan blancas"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tira ng Puti"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Trait aux blancs"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सफ़ेद की चाल"
           }
         },
         "it": {
@@ -2445,10 +3327,28 @@
             "value": "Palabras"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palabras"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mga Salita"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "En toutes lettres"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शब्द"
           }
         },
         "it": {
@@ -2491,10 +3391,28 @@
             "value": "El iPhone no ha podido completar el análisis. Inténtalo de nuevo."
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El iPhone no pudo completar el análisis. Inténtalo de nuevo."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hindi natapos ng iPhone ang pagsusuri. Subukan ulit."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "L’iPhone n’a pas pu terminer l’analyse. Réessayez."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone विश्लेषण पूरा नहीं कर सका। फिर कोशिश करें।"
           }
         },
         "it": {
@@ -2537,10 +3455,28 @@
             "value": "El iPhone está ocupado"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El iPhone está ocupado"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abala ang iPhone"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "L’iPhone est occupé"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone व्यस्त है"
           }
         },
         "it": {
@@ -2583,10 +3519,28 @@
             "value": "Configura el iPhone"
           }
         },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Configura el iPhone"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kailangang I-set Up ang iPhone"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Configuration de l’iPhone requise"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone पर सेटअप ज़रूरी है"
           }
         },
         "it": {

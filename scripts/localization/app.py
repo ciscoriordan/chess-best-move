@@ -18,7 +18,8 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / 'localization'
 RESOURCES = ROOT / 'App/Resources'
-TARGETS = {'es':'ES','pt-BR':'PT-BR','fr':'FR','de':'DE','it':'IT','tr':'TR'}
+DEEPL_TARGETS = {'es':'ES','pt-BR':'PT-BR','fr':'FR','de':'DE','it':'IT','tr':'TR','es-419':'ES'}
+TARGETS = (*DEEPL_TARGETS, 'hi', 'fil')
 CATALOGS = {name:RESOURCES/f'{name}.xcstrings' for name in ['Localizable','AppShortcuts','InfoPlist']}
 CATALOGS['WatchLocalizable'] = ROOT/'WatchApp/Resources/Localizable.xcstrings'
 PLACEHOLDER = re.compile(r'%(?:\d+\$)?[-+#0 ]*(?:\d+)?(?:\.\d+)?(?:ll|l|h|z)?[@diufgse]|\$\{[^}]+\}')
@@ -36,6 +37,12 @@ def write(path, data):
 
 def identity(catalog,key,index=0):
     return hashlib.sha256(f'{catalog}\0{key}\0{index}'.encode()).hexdigest()[:20]
+
+
+def review_fingerprint(review):
+    """Regional adaptations must be reviewed again if their parent wording changes."""
+    copy = {key: review[key] for key in ('source', 'translation', 'plural') if key in review}
+    return hashlib.sha256(json.dumps(copy, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
 
 
 def extract(sync=False):
@@ -112,7 +119,7 @@ def translate(source,locale):
     token=os.environ.get('DEEPL_API_KEY') or (Path.home()/'.config/chessbestmove/deepl-api-key').read_text().strip()
     for offset in range(0,len(pending),40):
         batch=pending[offset:offset+40]
-        payload={'text':[protected(v['source']) for _,v in batch],'source_lang':'EN','target_lang':TARGETS[locale],'tag_handling':'xml','ignore_tags':['x'],'preserve_formatting':True,'context':CONTEXT}
+        payload={'text':[protected(v['source']) for _,v in batch],'source_lang':'EN','target_lang':DEEPL_TARGETS[locale],'tag_handling':'xml','ignore_tags':['x'],'preserve_formatting':True,'context':CONTEXT}
         for attempt in range(4):
             response=requests.post('https://api-free.deepl.com/v2/translate',headers={'Authorization':'DeepL-Auth-Key '+token},json=payload,timeout=90)
             if response.status_code not in {429,500,502,503,504}:break
@@ -130,12 +137,13 @@ def translate(source,locale):
 
 def build(source, draft=False):
     catalogs={name:read(path) for name,path in CATALOGS.items()}
+    reviews={locale:read(DATA/'reviewed'/f'{locale}.json') for locale in TARGETS}
     # Reset shortcut sets before filling them, independent of hash-key iteration order.
     for entry in catalogs['AppShortcuts']['strings'].values():
         for locale in TARGETS:
             entry.get('localizations',{}).pop(locale,None)
     for locale in TARGETS:
-        raw=read(DATA/'deepl'/f'{locale}.json');reviewed=read(DATA/'reviewed'/f'{locale}.json')
+        raw=read(DATA/'deepl'/f'{locale}.json');reviewed=reviews[locale]
         for key,item in source.items():
             review=reviewed.get(key)
             machine=raw.get(key)
@@ -143,6 +151,10 @@ def build(source, draft=False):
                 raise RuntimeError(f'Stale translation: {locale}, {key}')
             if review and protected(review.get('source',''))!=protected(item['source']):
                 raise RuntimeError(f'Stale editorial review: {locale}, {key}')
+            if review and review.get('baseLocale'):
+                parent=reviews.get(review['baseLocale'],{}).get(key)
+                if not parent or review.get('baseReviewSHA256')!=review_fingerprint(parent):
+                    raise RuntimeError(f'Stale regional review: {locale}, {key}. Review the adaptation and run scripts/localization/seed_spanish_latam.py.')
             if not machine and not review:
                 raise RuntimeError(f'Missing translation: {locale}, {key}')
             if not draft and not review:
@@ -180,8 +192,10 @@ if __name__=='__main__':
     parser.add_argument('--locale',choices=list(TARGETS))
     parser.add_argument('--draft',action='store_true',help='Allow unreviewed translations for local previews.')
     args=parser.parse_args()
+    if args.action == 'translate' and args.locale and args.locale not in DEEPL_TARGETS:
+        parser.error(f'{args.locale} uses direct editorial translations')
     source=extract(sync=args.action=='sync')
     print(f'{len(source)} strings, {sum(len(v["source"]) for v in source.values())} source characters',flush=True)
     if args.action=='translate':
-        for locale in ([args.locale] if args.locale else TARGETS):translate(source,locale)
+        for locale in ([args.locale] if args.locale else DEEPL_TARGETS):translate(source,locale)
     if args.action=='build':build(source,draft=args.draft)
