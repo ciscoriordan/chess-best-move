@@ -42,7 +42,7 @@ settings:
     # Declarations are nonisolated unless annotated; the app's contracts spell out
     # @MainActor explicitly.
     SWIFT_DEFAULT_ACTOR_ISOLATION: nonisolated
-    MARKETING_VERSION: "1.0.43"
+    MARKETING_VERSION: "1.0.44"
     CURRENT_PROJECT_VERSION: "1"
     ENABLE_USER_SCRIPT_SANDBOXING: YES
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
@@ -112,15 +112,15 @@ targets:
       properties:
         # The name under the icon. The built product stays "Chess Best Move.app".
         # Preserve word boundaries in compact system labels. Keep the spoken name ordinary.
-        CFBundleDisplayName: "Chess\u00A0Best\u00A0Move"
-        CFBundleSpokenName: Chess Best Move
+        CFBundleDisplayName: "Chess\u00A0Best\u00A0Next\u00A0Move"
+        CFBundleSpokenName: Chess Best Next Move
         CFBundleName: $(PRODUCT_NAME)
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSRequiresIPhoneOS: true
         ITSAppUsesNonExemptEncryption: false
         SKIncludeConsumableInAppPurchaseHistory: true
-        NSPhotoLibraryUsageDescription: "Chess Best Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch."
+        NSPhotoLibraryUsageDescription: "Chess Best Next Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch."
         # The share extension writes the shared image into the app group container and opens the
         # app at chessbestmove://shared-image?id=<uuid> (ShareExtension/Shared/ShareInbox.swift).
         # A custom URL scheme is registered nowhere but here.
@@ -189,7 +189,7 @@ targets:
     info:
       path: WatchApp/Info.plist
       properties:
-        CFBundleDisplayName: Chess Best Move
+        CFBundleDisplayName: Chess Best Next Move
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         WKApplication: true
@@ -222,7 +222,7 @@ targets:
     info:
       path: WatchWidget/Info.plist
       properties:
-        CFBundleDisplayName: Best Move
+        CFBundleDisplayName: Chess Best Next Move
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSExtension:
@@ -254,7 +254,7 @@ targets:
     info:
       path: WidgetExtension/Info.plist
       properties:
-        CFBundleDisplayName: Chess Best Move
+        CFBundleDisplayName: Chess Best Next Move
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSExtension:
@@ -306,7 +306,7 @@ targets:
       properties:
         # The share sheet reads this. It matches the app's own springboard label above, so the
         # two places the user sees the app's name agree.
-        CFBundleDisplayName: Chess Best Move
+        CFBundleDisplayName: Chess Best Next Move
         CFBundleName: $(PRODUCT_NAME)
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)

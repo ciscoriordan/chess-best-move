@@ -34,13 +34,6 @@
     "key": "Off",
     "source": "Off"
   },
-  "012d240e132919177bc3": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Chess Best Move couldn't analyze this position.",
-    "source": "Chess Best Move couldn't analyze this position."
-  },
   "0187a339e5ca6ddd774c": {
     "catalog": "Localizable",
     "comment": "",
@@ -68,13 +61,6 @@
     "index": 0,
     "key": "No analyses left.",
     "source": "No analyses left."
-  },
-  "0355de754655c496fb6b": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Chess Best Move, Copyright (C) 2026 Motomatic LLC",
-    "source": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
   },
   "03b0f6bbda9b26e2d5ee": {
     "catalog": "Localizable",
@@ -195,13 +181,6 @@
     "key": "Switch to a Better Move Automatically",
     "source": "Switch to a Better Move Automatically"
   },
-  "08ac348e22ee77ecfad6": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "You've used your free analyses. Open Chess Best Move to continue.",
-    "source": "You've used your free analyses. Open Chess Best Move to continue."
-  },
   "09779c722155ed14295b": {
     "catalog": "Localizable",
     "comment": "",
@@ -215,6 +194,13 @@
     "index": 0,
     "key": "More",
     "source": "More"
+  },
+  "0a92bbd282da82546251": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Next Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
+    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Next Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted."
   },
   "0acc1ec9328d9d08b986": {
     "catalog": "Localizable",
@@ -390,6 +376,13 @@
     "index": 0,
     "key": "bishop",
     "source": "bishop"
+  },
+  "12b23b0ffc1ba0ad7662": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "You've used your free analyses. Open Chess Best Next Move to continue.",
+    "source": "You've used your free analyses. Open Chess Best Next Move to continue."
   },
   "13645bf6138ae0040355": {
     "catalog": "Localizable",
@@ -767,7 +760,7 @@
     "comment": "",
     "index": 0,
     "key": "NSPhotoLibraryUsageDescription",
-    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch."
+    "source": "Chess Best Next Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch."
   },
   "261a382bd2ca0ea10bfb": {
     "catalog": "WatchLocalizable",
@@ -803,6 +796,13 @@
     "index": 0,
     "key": "depth %lld",
     "source": "depth %lld"
+  },
+  "27da7b0048ff3dc508e3": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Chess Best Next Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
+    "source": "Chess Best Next Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it."
   },
   "27fb6bdff5c34fc4de32": {
     "catalog": "Localizable",
@@ -880,13 +880,6 @@
     "index": 0,
     "key": "Free analyses go back to 3, the boards already paid for are forgotten, and analyses added here are taken back. Bought analyses and Pro are not touched.",
     "source": "Free analyses go back to 3, the boards already paid for are forgotten, and analyses added here are taken back. Bought analyses and Pro are not touched."
-  },
-  "2ae2cc278eb86d50fc20": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Add “Find Best Move” from Chess Best Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
-    "source": "Add “Find Best Move” from Chess Best Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos."
   },
   "2b2055913ff4f2294155": {
     "catalog": "Localizable",
@@ -1007,6 +1000,13 @@
     "key": "White O-O-O",
     "source": "White O-O-O"
   },
+  "2ed7924c9766abc3d727": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Plain English",
+    "source": "Plain English"
+  },
   "2f1ba14a0b52a16ce1a4": {
     "catalog": "Localizable",
     "comment": "",
@@ -1119,20 +1119,6 @@
     "key": "For puzzles, study, and reviewing games.",
     "source": "For puzzles, study, and reviewing games."
   },
-  "339dfc6e239d77bac8cd": {
-    "catalog": "WatchLocalizable",
-    "comment": "",
-    "index": 0,
-    "key": "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once.",
-    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once."
-  },
-  "33aa9217c69148ce87b3": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Chess Best Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
-    "source": "Chess Best Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it."
-  },
   "3428bcc46141d84ee515": {
     "catalog": "Localizable",
     "comment": "",
@@ -1161,12 +1147,26 @@
     "key": "Recognition wasn't sure it read the right board. Press and hold the board to compare it with your screenshot, then analyze.",
     "source": "Recognition wasn't sure it read the right board. Press and hold the board to compare it with your screenshot, then analyze."
   },
+  "3506dfd2c29dbb66a96d": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Both",
+    "source": "Both"
+  },
   "354a9df0257659c20a7e": {
     "catalog": "Localizable",
     "comment": "",
     "index": 0,
     "key": "The move on screen switches to a better one by itself, if you ask it to.",
     "source": "The move on screen switches to a better one by itself, if you ask it to."
+  },
+  "372edd9bb965f3f5f81b": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Open Chess Best Next Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
+    "source": "Open Chess Best Next Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot."
   },
   "3743137866cea1acab93": {
     "catalog": "Localizable",
@@ -1202,13 +1202,6 @@
     "index": 0,
     "key": "Optional: create a separate shortcut named Chess Action Button. Add Get Current App, then an If action that compares the current app’s Name with the name of your board app. Inside If, add Run Shortcut and choose Analyze my chess screenshot without the Wait action. Leave Otherwise empty. Assign Chess Action Button to the Action button. It will do nothing in other apps, rather than return to the button’s previous function.",
     "source": "Optional: create a separate shortcut named Chess Action Button. Add Get Current App, then an If action that compares the current app’s Name with the name of your board app. Inside If, add Run Shortcut and choose Analyze my chess screenshot without the Wait action. Leave Otherwise empty. Assign Chess Action Button to the Action button. It will do nothing in other apps, rather than return to the button’s previous function."
-  },
-  "3a7a45fb3c5639cf30e0": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Chess Best Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
-    "source": "Chess Best Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded."
   },
   "3b74d45b4ec6d3cea58e": {
     "catalog": "Localizable",
@@ -1349,20 +1342,6 @@
     "index": 0,
     "key": "Analyzes %@ to move instead. Re-running is free.",
     "source": "Analyzes %@ to move instead. Re-running is free."
-  },
-  "3f780709f4f80ae6ea0b": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it.",
-    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it."
-  },
-  "3f960063d371f12ae689": {
-    "catalog": "WatchLocalizable",
-    "comment": "",
-    "index": 0,
-    "key": "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses.",
-    "source": "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses."
   },
   "3fa20c3bb030ed094bad": {
     "catalog": "Localizable",
@@ -1560,13 +1539,6 @@
     "key": "Needs a look: ",
     "source": "Needs a look: "
   },
-  "4a040553d42d7508d75e": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Move opens.",
-    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Move opens."
-  },
   "4aba6710fac685f9b5ad": {
     "catalog": "Localizable",
     "comment": "",
@@ -1756,13 +1728,6 @@
     "key": "Clear History?",
     "source": "Clear History?"
   },
-  "542a9756840cf6573c30": {
-    "catalog": "WatchLocalizable",
-    "comment": "",
-    "index": 0,
-    "key": "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone.",
-    "source": "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone."
-  },
   "549342cc819bac01d613": {
     "catalog": "Localizable",
     "comment": "",
@@ -1833,12 +1798,12 @@
     "key": "Originally: %@",
     "source": "Originally: %@"
   },
-  "575af5d5ce253bbe2e3b": {
+  "57a7324faf715c561929": {
     "catalog": "Localizable",
     "comment": "",
     "index": 0,
-    "key": "The analysis is still running in Chess Best Move.",
-    "source": "The analysis is still running in Chess Best Move."
+    "key": "Some squares need a look. Check the position in Chess Best Next Move.",
+    "source": "Some squares need a look. Check the position in Chess Best Next Move."
   },
   "57b1a1b6aad0a13ead0f": {
     "catalog": "Localizable",
@@ -1910,13 +1875,6 @@
     "key": "Allow full access in Settings",
     "source": "Allow full access in Settings"
   },
-  "5b13490a1f22e0229cc5": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Chess Best Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
-    "source": "Chess Best Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details."
-  },
   "5b4d0c120adf8cbd2262": {
     "catalog": "Localizable",
     "comment": "",
@@ -1972,13 +1930,6 @@
     "index": 0,
     "key": "week",
     "source": "week"
-  },
-  "5caf3cb39cbc98371a90": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Some squares need a look. Check the position in Chess Best Move.",
-    "source": "Some squares need a look. Check the position in Chess Best Move."
   },
   "5d483a2a98693c68626a": {
     "catalog": "Localizable",
@@ -2063,6 +2014,13 @@
     "index": 0,
     "key": "Move the board cursor up",
     "source": "Move the board cursor up"
+  },
+  "619c93441f7bdaa8ffc1": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "The iPhone did not finish in time. Open Chess Best Next Move on iPhone once, then try again.",
+    "source": "The iPhone did not finish in time. Open Chess Best Next Move on iPhone once, then try again."
   },
   "6264d5b9f1930a60a77a": {
     "catalog": "Localizable",
@@ -2168,13 +2126,6 @@
     "index": 0,
     "key": "In the Shortcuts app, create a shortcut named “Analyze my chess screenshot”. Add “Take Screenshot” as its first action.",
     "source": "In the Shortcuts app, create a shortcut named “Analyze my chess screenshot”. Add “Take Screenshot” as its first action."
-  },
-  "6624dc2fbca091a5464d": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Open Chess Best Move to see the best move.",
-    "source": "Open Chess Best Move to see the best move."
   },
   "663db260526dac9b16f8": {
     "catalog": "WatchLocalizable",
@@ -2379,13 +2330,6 @@
     "key": "A longer search that keeps running after the answer, up to 2 minutes.",
     "source": "A longer search that keeps running after the answer, up to 2 minutes."
   },
-  "70be6dcce5ca9fab1453": {
-    "catalog": "WatchLocalizable",
-    "comment": "",
-    "index": 0,
-    "key": "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again.",
-    "source": "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again."
-  },
   "7126cbfe690ae7fcd3bc": {
     "catalog": "Localizable",
     "comment": "",
@@ -2435,6 +2379,13 @@
     "key": "Flip",
     "source": "Flip"
   },
+  "73ad9327a36656ffcf9d": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "No analyses remaining. Open Chess Best Next Move on iPhone for Pro or more analyses.",
+    "source": "No analyses remaining. Open Chess Best Next Move on iPhone for Pro or more analyses."
+  },
   "73b1e853726b33712d03": {
     "catalog": "Localizable",
     "comment": "",
@@ -2470,12 +2421,12 @@
     "key": "Version",
     "source": "Version"
   },
-  "75ea5bc260f0ff122deb": {
+  "75d8d2a5dfa765faf1bc": {
     "catalog": "Localizable",
     "comment": "",
     "index": 0,
-    "key": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
-    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted."
+    "key": "Chess Best Next Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
+    "source": "Chess Best Next Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details."
   },
   "760c54035e53d1958f63": {
     "catalog": "Localizable",
@@ -2512,6 +2463,13 @@
     "key": "Move the board cursor right",
     "source": "Move the board cursor right"
   },
+  "77cdda461ea3e09357a8": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Open Chess Best Next Move on iPhone and allow full Photos access to read new screenshots.",
+    "source": "Open Chess Best Next Move on iPhone and allow full Photos access to read new screenshots."
+  },
   "78356393817438eac772": {
     "catalog": "Localizable",
     "comment": "",
@@ -2532,13 +2490,6 @@
     "index": 0,
     "key": "Tap to return to the result.",
     "source": "Tap to return to the result."
-  },
-  "79439b9e21d6d4f66096": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Opens Chess Best Move to analyze it",
-    "source": "Opens Chess Best Move to analyze it"
   },
   "798e5b9d329da41834be": {
     "catalog": "Localizable",
@@ -2589,6 +2540,13 @@
     "key": "An analysis is spent on a position you have not analyzed before. Re-running the same board, at any think time, is free.",
     "source": "An analysis is spent on a position you have not analyzed before. Re-running the same board, at any think time, is free."
   },
+  "7c877a90aa52826e9497": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Open Chess Best Next Move and import the screenshot from Photos.",
+    "source": "Open Chess Best Next Move and import the screenshot from Photos."
+  },
   "7c8bceb6d0d55aad7cfc": {
     "catalog": "Localizable",
     "comment": "",
@@ -2602,6 +2560,13 @@
     "index": 0,
     "key": "Choose another screenshot",
     "source": "Choose another screenshot"
+  },
+  "7cbf387c84cfcbdfe369": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Chess Best Next Move isn't ready. Open the app, then run the shortcut again.",
+    "source": "Chess Best Next Move isn't ready. Open the app, then run the shortcut again."
   },
   "7d67ddb8ae65f954b980": {
     "catalog": "Localizable",
@@ -2645,13 +2610,6 @@
     "key": "Check the pieces, then analyze.",
     "source": "Check the pieces, then analyze."
   },
-  "7fa59d1dcb14a0c87628": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Opening Chess Best Move",
-    "source": "Opening Chess Best Move"
-  },
   "7faa7019894d7b773f99": {
     "catalog": "Localizable",
     "comment": "",
@@ -2680,6 +2638,13 @@
     "key": "%@ is in check but it's %@'s move.",
     "source": "%1$@ is in check but it's %2$@'s move."
   },
+  "8153c63fc00b1a27b9ba": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Both",
+    "source": "Both"
+  },
   "8194473d181df1f094b1": {
     "catalog": "Localizable",
     "comment": "",
@@ -2701,6 +2666,13 @@
     "key": "Clear board",
     "source": "Clear board"
   },
+  "8232b373b9abe3c061d7": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Opens Chess Best Next Move to analyze it",
+    "source": "Opens Chess Best Next Move to analyze it"
+  },
   "82bae0ce69dffb1e093b": {
     "catalog": "Localizable",
     "comment": "",
@@ -2715,6 +2687,13 @@
     "key": "No free analyses",
     "source": "No free analyses"
   },
+  "83145e8acb57c967964b": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Next Move opens.",
+    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Next Move opens."
+  },
   "83255acd3979ce312e51": {
     "catalog": "Localizable",
     "comment": "",
@@ -2728,6 +2707,13 @@
     "index": 0,
     "key": "Screenshot",
     "source": "Screenshot"
+  },
+  "83be255c0607833366c6": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Chess Best Next Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
+    "source": "Chess Best Next Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded."
   },
   "83c681f5761337efd935": {
     "catalog": "Localizable",
@@ -2883,6 +2869,13 @@
     "key": "%@ is in check from more than two pieces.",
     "source": "%@ is in check from more than two pieces."
   },
+  "8adab263a1ae1c73e880": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Chess Best Next Move couldn't analyze this position.",
+    "source": "Chess Best Next Move couldn't analyze this position."
+  },
   "8b6207c3be40244768b9": {
     "catalog": "Localizable",
     "comment": "",
@@ -2903,6 +2896,13 @@
     "index": 0,
     "key": "Neural Network",
     "source": "Neural Network"
+  },
+  "8ca1cab617c915346c6a": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Plain English",
+    "source": "Plain English"
   },
   "8d9709a97c374dc375f8": {
     "catalog": "Localizable",
@@ -2932,6 +2932,20 @@
     "key": "Open Settings > Action Button. Swipe to Shortcut, tap Choose a Shortcut, and select Analyze my chess screenshot without the Wait action.",
     "source": "Open Settings > Action Button. Swipe to Shortcut, tap Choose a Shortcut, and select Analyze my chess screenshot without the Wait action."
   },
+  "8ed29140af7c8240ec11": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Next Move to analyze it.",
+    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Next Move to analyze it."
+  },
+  "8eed1aaf22da724a1929": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "This position needs confirmation. Open the screenshot in Chess Best Next Move on iPhone.",
+    "source": "This position needs confirmation. Open the screenshot in Chess Best Next Move on iPhone."
+  },
   "8f95380e7baa068f365e": {
     "catalog": "Localizable",
     "comment": "",
@@ -2953,6 +2967,13 @@
     "key": "Open Shortcuts",
     "source": "Open Shortcuts"
   },
+  "907fe985378fbd6c5fb6": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Chess Best Next Move couldn't read that image. Pass a screenshot to the shortcut.",
+    "source": "Chess Best Next Move couldn't read that image. Pass a screenshot to the shortcut."
+  },
   "909fae6f5b46b2f3ac41": {
     "catalog": "Localizable",
     "comment": "",
@@ -2966,13 +2987,6 @@
     "index": 0,
     "key": "Try again",
     "source": "Try again"
-  },
-  "90eabed501ac867eae87": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Chess Best Move couldn't read that image. Pass a screenshot to the shortcut.",
-    "source": "Chess Best Move couldn't read that image. Pass a screenshot to the shortcut."
   },
   "912113e1b96740a5a48d": {
     "catalog": "Localizable",
@@ -3043,6 +3057,13 @@
     "index": 0,
     "key": "Unlimited Best Moves",
     "source": "Unlimited Best Moves"
+  },
+  "947c52f09359a8f7cc17": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "Could not reach the iPhone app. Check the connection and open Chess Best Next Move on iPhone once.",
+    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Next Move on iPhone once."
   },
   "954a58172de86aba72f8": {
     "catalog": "Localizable",
@@ -3135,6 +3156,13 @@
     "key": "Free Analyses",
     "source": "Free Analyses"
   },
+  "9b1a3c68e73fd4b17192": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "The analysis is still running in Chess Best Next Move.",
+    "source": "The analysis is still running in Chess Best Next Move."
+  },
   "9b362ab8b1ca3fc9f8f6": {
     "catalog": "Localizable",
     "comment": "A chess piece with its origin square; this becomes the subject of a move description.",
@@ -3197,13 +3225,6 @@
     "index": 0,
     "key": "Waiting for purchase approval. The analysis starts when it is approved.",
     "source": "Waiting for purchase approval. The analysis starts when it is approved."
-  },
-  "9ccb83072a05cc2a7fe9": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
-    "source": "Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot."
   },
   "9d70cda159108bfc4849": {
     "catalog": "Localizable",
@@ -3541,6 +3562,13 @@
     "key": "Try again",
     "source": "Try again"
   },
+  "aec9c15441247fed8fd6": {
+    "catalog": "WatchLocalizable",
+    "comment": "",
+    "index": 0,
+    "key": "The iPhone app is busy. Leave Chess Best Next Move on iPhone, then try again.",
+    "source": "The iPhone app is busy. Leave Chess Best Next Move on iPhone, then try again."
+  },
   "af0a2f11226d747cbacf": {
     "catalog": "Localizable",
     "comment": "",
@@ -3660,26 +3688,12 @@
     "key": "Pro, yearly",
     "source": "Pro, yearly"
   },
-  "b5e64080447fcb9eb166": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Chess Best Move isn't ready. Open the app, then run the shortcut again.",
-    "source": "Chess Best Move isn't ready. Open the app, then run the shortcut again."
-  },
   "b5f6556910a08b38ac41": {
     "catalog": "Localizable",
     "comment": "",
     "index": 0,
     "key": "Stopped when the app went to the background. Run it again for the full think time.",
     "source": "Stopped when the app went to the background. Run it again for the full think time."
-  },
-  "b6092eb6e2f17b475331": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Open Chess Best Move and import the screenshot from Photos.",
-    "source": "Open Chess Best Move and import the screenshot from Photos."
   },
   "b61106566308373f8ec3": {
     "catalog": "Localizable",
@@ -3835,6 +3849,13 @@
     "key": "Runs on your %@: works offline, nothing is uploaded",
     "source": "Runs on your %@: works offline, nothing is uploaded"
   },
+  "bddf56c6be7dbafbbacd": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Add “Find Best Move” from Chess Best Next Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
+    "source": "Add “Find Best Move” from Chess Best Next Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos."
+  },
   "bdeb37d13704a9213f4b": {
     "catalog": "Localizable",
     "comment": "",
@@ -3912,13 +3933,6 @@
     "key": "%@, %lld left",
     "source": "%1$@, %2$lld left"
   },
-  "c1950fdb3fbb4ebe2024": {
-    "catalog": "WatchLocalizable",
-    "comment": "",
-    "index": 0,
-    "key": "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots.",
-    "source": "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots."
-  },
   "c1ae1274933d7443b024": {
     "catalog": "Localizable",
     "comment": "",
@@ -3939,6 +3953,13 @@
     "index": 0,
     "key": "Your yearly subscription is still active",
     "source": "Your yearly subscription is still active"
+  },
+  "c387cfce614b01daab24": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Open Chess Best Next Move to see the best move.",
+    "source": "Open Chess Best Next Move to see the best move."
   },
   "c3f254b58f195e20f9cf": {
     "catalog": "Localizable",
@@ -4058,6 +4079,20 @@
     "index": 0,
     "key": "Stalemate",
     "source": "Stalemate"
+  },
+  "cb24b0c9a7102d9d8235": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Open Chess Best Next Move and analyze your latest saved screenshot.",
+    "source": "Open Chess Best Next Move and analyze your latest saved screenshot."
+  },
+  "cb818ec90b391252d98c": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC",
+    "source": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
   },
   "cbf240dce89ba6223c75": {
     "catalog": "Localizable",
@@ -4556,13 +4591,6 @@
     "key": "Pro Weekly",
     "source": "Pro Weekly"
   },
-  "e4b563aaf09601e1d061": {
-    "catalog": "WatchLocalizable",
-    "comment": "",
-    "index": 0,
-    "key": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.",
-    "source": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again."
-  },
   "e58646d13a80d165c919": {
     "catalog": "Localizable",
     "comment": "",
@@ -4626,6 +4654,13 @@
     "key": "You're offline. Connect to the internet to see purchase options.",
     "source": "You're offline. Connect to the internet to see purchase options."
   },
+  "eb416a033d2c639d2de1": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "The purchase is waiting for approval. The analysis starts in Chess Best Next Move when it is approved.",
+    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Next Move when it is approved."
+  },
   "eb96926e0610bc0638ae": {
     "catalog": "WatchLocalizable",
     "comment": "",
@@ -4661,6 +4696,13 @@
     "key": " The other marked squares were hard to read.",
     "source": " The other marked squares were hard to read."
   },
+  "ee087cba71b09594f6bf": {
+    "catalog": "Localizable",
+    "comment": "",
+    "index": 0,
+    "key": "Opening Chess Best Next Move",
+    "source": "Opening Chess Best Next Move"
+  },
   "ee319dc3b330501b374a": {
     "catalog": "WatchLocalizable",
     "comment": "",
@@ -4688,13 +4730,6 @@
     "index": 0,
     "key": "Unlock Unlimited",
     "source": "Unlock Unlimited"
-  },
-  "efcbdc7ff2aeea4e80d6": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "The purchase is waiting for approval. The analysis starts in Chess Best Move when it is approved.",
-    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Move when it is approved."
   },
   "f0826ec96d9e44a761a2": {
     "catalog": "Localizable",
@@ -4898,13 +4933,6 @@
     "index": 0,
     "key": "%@ is ahead by 1 pawn",
     "source": "%@ is ahead by 1 pawn"
-  },
-  "fd5e5666f3ff4af56c06": {
-    "catalog": "Localizable",
-    "comment": "",
-    "index": 0,
-    "key": "Open Chess Best Move and analyze your latest saved screenshot.",
-    "source": "Open Chess Best Move and analyze your latest saved screenshot."
   },
   "fdceecdbf50d36eabb35": {
     "catalog": "WatchLocalizable",

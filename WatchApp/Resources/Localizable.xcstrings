@@ -568,6 +568,71 @@
         }
       }
     },
+    "Both": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beides"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Both"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ambos"
+          }
+        },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ambos"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pareho"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दोनों"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrambi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ambos"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İkisi de"
+          }
+        }
+      }
+    },
     "Check the Position on iPhone": {
       "localizations": {
         "de": {
@@ -1018,67 +1083,67 @@
         }
       }
     },
-    "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once.": {
+    "Could not reach the iPhone app. Check the connection and open Chess Best Next Move on iPhone once.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die iPhone-App ist nicht erreichbar. Prüfe die Verbindung und öffne Chess Best Move einmal auf dem iPhone."
+            "value": "Die iPhone-App ist nicht erreichbar. Prüfe die Verbindung und öffne Chess Best Next Move einmal auf dem iPhone."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once."
+            "value": "Could not reach the iPhone app. Check the connection and open Chess Best Next Move on iPhone once."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "No se pudo conectar con la app del iPhone. Revisa la conexión y abre Chess Best Move una vez en el iPhone."
+            "value": "No se pudo conectar con la app del iPhone. Revisa la conexión y abre Chess Best Next Move una vez en el iPhone."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "No se pudo conectar con la app del iPhone. Revisa la conexión y abre Chess Best Move una vez en el iPhone."
+            "value": "No se pudo conectar con la app del iPhone. Revisa la conexión y abre Chess Best Next Move una vez en el iPhone."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hindi makontak ang app sa iPhone. Suriin ang koneksyon at buksan ang Chess Best Move sa iPhone nang isang beses."
+            "value": "Hindi makontak ang app sa iPhone. Suriin ang koneksyon at buksan ang Chess Best Next Move sa iPhone nang isang beses."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Impossible de joindre l’app iPhone. Vérifiez la connexion et ouvrez Chess Best Move une fois sur l’iPhone."
+            "value": "Impossible de joindre l’app iPhone. Vérifiez la connexion et ouvrez Chess Best Next Move une fois sur l’iPhone."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "iPhone ऐप से संपर्क नहीं हुआ। कनेक्शन जाँचें और iPhone पर Chess Best Move एक बार खोलें।"
+            "value": "iPhone ऐप से संपर्क नहीं हुआ। कनेक्शन जाँचें और iPhone पर Chess Best Next Move एक बार खोलें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Impossibile raggiungere l’app iPhone. Controlla la connessione e apri Chess Best Move una volta su iPhone."
+            "value": "Impossibile raggiungere l’app iPhone. Controlla la connessione e apri Chess Best Next Move una volta su iPhone."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Não foi possível acessar o app do iPhone. Verifique a conexão e abra Chess Best Move uma vez no iPhone."
+            "value": "Não foi possível acessar o app do iPhone. Verifique a conexão e abra Chess Best Next Move uma vez no iPhone."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "iPhone uygulamasına ulaşılamadı. Bağlantıyı kontrol edin ve iPhone’da Chess Best Move’u bir kez açın."
+            "value": "iPhone uygulamasına ulaşılamadı. Bağlantıyı kontrol edin ve iPhone’da Chess Best Next Move’u bir kez açın."
           }
         }
       }
@@ -1643,67 +1708,67 @@
         }
       }
     },
-    "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses.": {
+    "No analyses remaining. Open Chess Best Next Move on iPhone for Pro or more analyses.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Keine Analysen übrig. Öffne Chess Best Move auf dem iPhone für Pro oder weitere Analysen."
+            "value": "Keine Analysen übrig. Öffne Chess Best Next Move auf dem iPhone für Pro oder weitere Analysen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses."
+            "value": "No analyses remaining. Open Chess Best Next Move on iPhone for Pro or more analyses."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "No quedan análisis. Abre Chess Best Move en el iPhone para obtener Pro o más análisis."
+            "value": "No quedan análisis. Abre Chess Best Next Move en el iPhone para obtener Pro o más análisis."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "No quedan análisis. Abre Chess Best Move en el iPhone para obtener Pro o más análisis."
+            "value": "No quedan análisis. Abre Chess Best Next Move en el iPhone para obtener Pro o más análisis."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wala nang natitirang pagsusuri. Buksan ang Chess Best Move sa iPhone para sa Pro o karagdagang pagsusuri."
+            "value": "Wala nang natitirang pagsusuri. Buksan ang Chess Best Next Move sa iPhone para sa Pro o karagdagang pagsusuri."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aucune analyse restante. Ouvrez Chess Best Move sur l’iPhone pour Pro ou plus d’analyses."
+            "value": "Aucune analyse restante. Ouvrez Chess Best Next Move sur l’iPhone pour Pro ou plus d’analyses."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "कोई विश्लेषण बाकी नहीं है। Pro या और विश्लेषण के लिए iPhone पर Chess Best Move खोलें।"
+            "value": "कोई विश्लेषण बाकी नहीं है। Pro या और विश्लेषण के लिए iPhone पर Chess Best Next Move खोलें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nessuna analisi rimasta. Apri Chess Best Move su iPhone per Pro o altre analisi."
+            "value": "Nessuna analisi rimasta. Apri Chess Best Next Move su iPhone per Pro o altre analisi."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nenhuma análise restante. Abra Chess Best Move no iPhone para obter Pro ou mais análises."
+            "value": "Nenhuma análise restante. Abra Chess Best Next Move no iPhone para obter Pro ou mais análises."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Analiz kalmadı. Pro veya daha fazla analiz için iPhone’da Chess Best Move’u açın."
+            "value": "Analiz kalmadı. Pro veya daha fazla analiz için iPhone’da Chess Best Next Move’u açın."
           }
         }
       }
@@ -1837,67 +1902,67 @@
         }
       }
     },
-    "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots.": {
+    "Open Chess Best Next Move on iPhone and allow full Photos access to read new screenshots.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Öffne Chess Best Move auf dem iPhone und erlaube vollen Fotozugriff, um neue Screenshots zu lesen."
+            "value": "Öffne Chess Best Next Move auf dem iPhone und erlaube vollen Fotozugriff, um neue Screenshots zu lesen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots."
+            "value": "Open Chess Best Next Move on iPhone and allow full Photos access to read new screenshots."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Chess Best Move en el iPhone y permite acceso completo a Fotos para leer nuevas capturas."
+            "value": "Abre Chess Best Next Move en el iPhone y permite acceso completo a Fotos para leer nuevas capturas."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Chess Best Move en el iPhone y permite acceso completo a Fotos para leer nuevas capturas."
+            "value": "Abre Chess Best Next Move en el iPhone y permite acceso completo a Fotos para leer nuevas capturas."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Buksan ang Chess Best Move sa iPhone at bigyan ito ng Full Access sa Photos para mabasa ang mga bagong screenshot."
+            "value": "Buksan ang Chess Best Next Move sa iPhone at bigyan ito ng Full Access sa Photos para mabasa ang mga bagong screenshot."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ouvrez Chess Best Move sur l’iPhone et autorisez l’accès complet aux photos pour lire les nouvelles captures."
+            "value": "Ouvrez Chess Best Next Move sur l’iPhone et autorisez l’accès complet aux photos pour lire les nouvelles captures."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "iPhone पर Chess Best Move खोलें और नए स्क्रीनशॉट पढ़ने के लिए Photos का पूरा ऐक्सेस दें।"
+            "value": "iPhone पर Chess Best Next Move खोलें और नए स्क्रीनशॉट पढ़ने के लिए Photos का पूरा ऐक्सेस दें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apri Chess Best Move su iPhone e consenti l’accesso completo a Foto per leggere i nuovi screenshot."
+            "value": "Apri Chess Best Next Move su iPhone e consenti l’accesso completo a Foto per leggere i nuovi screenshot."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abra Chess Best Move no iPhone e permita acesso completo às Fotos para ler novas capturas."
+            "value": "Abra Chess Best Next Move no iPhone e permita acesso completo às Fotos para ler novas capturas."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "iPhone’da Chess Best Move’u açın ve yeni ekran görüntülerini okumak için Fotoğraflar’a tam erişim verin."
+            "value": "iPhone’da Chess Best Next Move’u açın ve yeni ekran görüntülerini okumak için Fotoğraflar’a tam erişim verin."
           }
         }
       }
@@ -1963,6 +2028,71 @@
           "stringUnit": {
             "state": "translated",
             "value": "Watch’unuzda ekran görüntüsü analizini açın."
+          }
+        }
+      }
+    },
+    "Plain English": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einfache Sprache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plain English"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lenguaje sencillo"
+          }
+        },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lenguaje sencillo"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simpleng pananalita"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langage courant"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सरल भाषा"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linguaggio semplice"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linguagem simples"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sade dil"
           }
         }
       }
@@ -2790,131 +2920,131 @@
         }
       }
     },
-    "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again.": {
+    "The iPhone app is busy. Leave Chess Best Next Move on iPhone, then try again.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die iPhone-App ist beschäftigt. Verlasse Chess Best Move auf dem iPhone und versuche es erneut."
+            "value": "Die iPhone-App ist beschäftigt. Verlasse Chess Best Next Move auf dem iPhone und versuche es erneut."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again."
+            "value": "The iPhone app is busy. Leave Chess Best Next Move on iPhone, then try again."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La app del iPhone está ocupada. Sal de Chess Best Move en el iPhone e inténtalo de nuevo."
+            "value": "La app del iPhone está ocupada. Sal de Chess Best Next Move en el iPhone e inténtalo de nuevo."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "La app del iPhone está ocupada. Sal de Chess Best Move en el iPhone e inténtalo de nuevo."
+            "value": "La app del iPhone está ocupada. Sal de Chess Best Next Move en el iPhone e inténtalo de nuevo."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abala ang app sa iPhone. Iwang bukas ang Chess Best Move sa iPhone at subukan ulit."
+            "value": "Abala ang app sa iPhone. Iwang bukas ang Chess Best Next Move sa iPhone at subukan ulit."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "L’app iPhone est occupée. Quittez Chess Best Move sur l’iPhone, puis réessayez."
+            "value": "L’app iPhone est occupée. Quittez Chess Best Next Move sur l’iPhone, puis réessayez."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "iPhone ऐप व्यस्त है। iPhone पर Chess Best Move खुला रहने दें और फिर कोशिश करें।"
+            "value": "iPhone ऐप व्यस्त है। iPhone पर Chess Best Next Move खुला रहने दें और फिर कोशिश करें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "L’app iPhone è occupata. Esci da Chess Best Move su iPhone, poi riprova."
+            "value": "L’app iPhone è occupata. Esci da Chess Best Next Move su iPhone, poi riprova."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O app do iPhone está ocupado. Saia do Chess Best Move no iPhone e tente novamente."
+            "value": "O app do iPhone está ocupado. Saia do Chess Best Next Move no iPhone e tente novamente."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "iPhone uygulaması meşgul. iPhone’da Chess Best Move’dan çıkıp tekrar deneyin."
+            "value": "iPhone uygulaması meşgul. iPhone’da Chess Best Next Move’dan çıkıp tekrar deneyin."
           }
         }
       }
     },
-    "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.": {
+    "The iPhone did not finish in time. Open Chess Best Next Move on iPhone once, then try again.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Das iPhone wurde nicht rechtzeitig fertig. Öffne Chess Best Move einmal auf dem iPhone und versuche es erneut."
+            "value": "Das iPhone wurde nicht rechtzeitig fertig. Öffne Chess Best Next Move einmal auf dem iPhone und versuche es erneut."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again."
+            "value": "The iPhone did not finish in time. Open Chess Best Next Move on iPhone once, then try again."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "El iPhone no terminó a tiempo. Abre Chess Best Move en el iPhone una vez y vuelve a intentarlo."
+            "value": "El iPhone no terminó a tiempo. Abre Chess Best Next Move en el iPhone una vez y vuelve a intentarlo."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "El iPhone no terminó a tiempo. Abre Chess Best Move en el iPhone una vez y vuelve a intentarlo."
+            "value": "El iPhone no terminó a tiempo. Abre Chess Best Next Move en el iPhone una vez y vuelve a intentarlo."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hindi natapos sa oras ang iPhone. Buksan ang Chess Best Move sa iPhone nang isang beses at subukan ulit."
+            "value": "Hindi natapos sa oras ang iPhone. Buksan ang Chess Best Next Move sa iPhone nang isang beses at subukan ulit."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "L’iPhone n’a pas terminé à temps. Ouvrez une fois Chess Best Move sur l’iPhone, puis réessayez."
+            "value": "L’iPhone n’a pas terminé à temps. Ouvrez une fois Chess Best Next Move sur l’iPhone, puis réessayez."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "iPhone समय पर पूरा नहीं कर सका। iPhone पर Chess Best Move एक बार खोलें, फिर कोशिश करें।"
+            "value": "iPhone समय पर पूरा नहीं कर सका। iPhone पर Chess Best Next Move एक बार खोलें, फिर कोशिश करें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "L’iPhone non ha terminato in tempo. Apri Chess Best Move una volta su iPhone, poi riprova."
+            "value": "L’iPhone non ha terminato in tempo. Apri Chess Best Next Move una volta su iPhone, poi riprova."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O iPhone não terminou a tempo. Abra Chess Best Move no iPhone uma vez e tente novamente."
+            "value": "O iPhone não terminou a tempo. Abra Chess Best Next Move no iPhone uma vez e tente novamente."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "iPhone zamanında bitiremedi. iPhone’da Chess Best Move’u bir kez açıp yeniden dene."
+            "value": "iPhone zamanında bitiremedi. iPhone’da Chess Best Next Move’u bir kez açıp yeniden dene."
           }
         }
       }
@@ -3048,67 +3178,67 @@
         }
       }
     },
-    "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone.": {
+    "This position needs confirmation. Open the screenshot in Chess Best Next Move on iPhone.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Diese Stellung muss bestätigt werden. Öffne den Screenshot in Chess Best Move auf dem iPhone."
+            "value": "Diese Stellung muss bestätigt werden. Öffne den Screenshot in Chess Best Next Move auf dem iPhone."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone."
+            "value": "This position needs confirmation. Open the screenshot in Chess Best Next Move on iPhone."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Esta posición necesita confirmación. Abre la captura en Chess Best Move en el iPhone."
+            "value": "Esta posición necesita confirmación. Abre la captura en Chess Best Next Move en el iPhone."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Esta posición necesita confirmación. Abre la captura en Chess Best Move en el iPhone."
+            "value": "Esta posición necesita confirmación. Abre la captura en Chess Best Next Move en el iPhone."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kailangang kumpirmahin ang posisyong ito. Buksan ang screenshot sa Chess Best Move sa iPhone."
+            "value": "Kailangang kumpirmahin ang posisyong ito. Buksan ang screenshot sa Chess Best Next Move sa iPhone."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cette position doit être confirmée. Ouvrez la capture dans Chess Best Move sur l’iPhone."
+            "value": "Cette position doit être confirmée. Ouvrez la capture dans Chess Best Next Move sur l’iPhone."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "इस स्थिति की पुष्टि ज़रूरी है। iPhone पर Chess Best Move में स्क्रीनशॉट खोलें।"
+            "value": "इस स्थिति की पुष्टि ज़रूरी है। iPhone पर Chess Best Next Move में स्क्रीनशॉट खोलें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Questa posizione richiede una conferma. Apri lo screenshot in Chess Best Move su iPhone."
+            "value": "Questa posizione richiede una conferma. Apri lo screenshot in Chess Best Next Move su iPhone."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Esta posição precisa de confirmação. Abra a captura no Chess Best Move no iPhone."
+            "value": "Esta posição precisa de confirmação. Abra a captura no Chess Best Next Move no iPhone."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bu konumun doğrulanması gerekiyor. Ekran görüntüsünü iPhone’da Chess Best Move’da açın."
+            "value": "Bu konumun doğrulanması gerekiyor. Ekran görüntüsünü iPhone’da Chess Best Next Move’da açın."
           }
         }
       }

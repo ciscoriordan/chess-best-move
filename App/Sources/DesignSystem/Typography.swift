@@ -329,7 +329,7 @@ extension View {
         VStack(alignment: .leading, spacing: Spacing.s3) {
             Text("Nxf7+").typography(.moveHero)
             Text("exd8=Q#").typography(.moveHero, width: 75)
-            Text("Chess Best Move").typography(.display)
+            Text("Chess Best Next Move").typography(.display)
             Text("No Board Found").typography(.title)
             Text("Yearly").typography(.headline)
             Text(AppCopy.homeIntro).typography(.body)

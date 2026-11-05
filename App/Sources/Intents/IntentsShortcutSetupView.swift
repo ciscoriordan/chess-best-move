@@ -53,12 +53,12 @@ struct IntentsShortcutSetupContent: View {
             .padding(.bottom, Spacing.s4)
             IntentsSetupStep(number: 2, text: String(localized: "Add \u{201C}Save to Photo Album\u{201D}. Choose Recents as the album. For its input, select the Screenshot variable produced by Take Screenshot. This saves a copy to Photos; Take Screenshot alone does not save one."))
                 .padding(.bottom, Spacing.s4)
-            IntentsSetupStep(number: 3, text: String(localized: "Add \u{201C}Find Best Move\u{201D} from Chess Best Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read \u{201C}Find the best move in Screenshot\u{201D}, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos."))
+            IntentsSetupStep(number: 3, text: String(localized: "Add \u{201C}Find Best Move\u{201D} from Chess Best Next Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read \u{201C}Find the best move in Screenshot\u{201D}, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos."))
                 .padding(.bottom, Spacing.s4)
             SectionLabel(String(localized: "Run with Siri"))
             IntentsSetupStep(number: 1, text: String(localized: "Keep the chess position you want to analyze on screen. Say \u{201C}Siri, analyze my chess screenshot\u{201D}, using the exact name of the shortcut you created."))
                 .padding(.bottom, Spacing.s4)
-            IntentsSetupStep(number: 2, text: String(localized: "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it."))
+            IntentsSetupStep(number: 2, text: String(localized: "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Next Move to analyze it."))
                 .padding(.bottom, Spacing.s4)
 
             SectionLabel(String(localized: "Run from Control Center"))
@@ -109,7 +109,7 @@ struct IntentsShortcutSetupContent: View {
                 .padding(.bottom, Spacing.s4)
 
             SectionLabel(String(localized: "Home and Lock Screen widgets"))
-            Text("Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.")
+            Text("Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Next Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.")
                 .typography(.body)
                 .foregroundStyle(Palette.ink2)
                 .fixedSize(horizontal: false, vertical: true)

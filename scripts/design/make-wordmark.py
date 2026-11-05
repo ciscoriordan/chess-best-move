@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 FONT = ROOT / "App/Resources/Fonts/OleoScript-Bold.ttf"
 MASTER = ROOT / "design/wordmark.svg"
 ASSET = ROOT / "App/Resources/Assets.xcassets/HomeWordmark.imageset"
-WORDS = ("Chess", "Best", "Move")
+WORDS = ("Chess", "Best", "Next", "Move")
 # Preserve the font's pair kerning, then tighten letters within each word by 0.045 em.
 TRACKING_EM = -0.045
 WORD_SPACE_EM = 0.19
@@ -63,7 +63,7 @@ def main():
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{height}" '
         f'viewBox="{left - padding:.6f} {top:.6f} {view_width:.6f} {view_height:.6f}">\n'
-        '  <title>Chess Best Move</title>\n'
+        '  <title>Chess Best Next Move</title>\n'
         '  <!-- Oleo Script Bold, SIL OFL 1.1. Outlines: scripts/design/make-wordmark.py. -->\n'
         f'  <path fill="#000000" d="{outlines.getCommands()}"/>\n'
         '</svg>\n'

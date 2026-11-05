@@ -11,7 +11,7 @@ struct AppWordmark: View {
             .scaledToFit()
             .frame(maxWidth: 224, maxHeight: 40)
             .foregroundStyle(Palette.ink)
-            .accessibilityLabel("Chess Best Move")
+            .accessibilityLabel("Chess Best Next Move")
             .accessibilityAddTraits(.isHeader)
             .accessibilityIdentifier("home.wordmark")
     }

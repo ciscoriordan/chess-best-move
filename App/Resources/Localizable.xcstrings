@@ -7067,60 +7067,60 @@
         }
       }
     },
-    "Add “Find Best Move” from Chess Best Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.": {
+    "Add “Find Best Move” from Chess Best Next Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Füge „Besten Zug finden“ von Chess Best Move hinzu. Tippe auf die Eingabe „Bildschirmfoto“, wähle „Variable auswählen“ und dann die Ausgabe von „Bildschirmfoto aufnehmen“. Dort sollte „Finde den besten Zug in Bildschirmfoto“ stehen. „Bildschirmfoto“ muss als Variable mit dem Bildschirmfoto-Symbol erscheinen, wie bei der Eingabe von „In Fotoalbum sichern“. Ein blasser Platzhalter „Bildschirmfoto“ ist kein verbundenes Bild. Tippe das Wort nicht selbst ein und verwende nicht „Jedes Mal fragen“. Die App erhält das Bild direkt und muss es nicht in Fotos suchen."
+            "value": "Füge „Besten Zug finden“ von Chess Best Next Move hinzu. Tippe auf die Eingabe „Bildschirmfoto“, wähle „Variable auswählen“ und dann die Ausgabe von „Bildschirmfoto aufnehmen“. Dort sollte „Finde den besten Zug in Bildschirmfoto“ stehen. „Bildschirmfoto“ muss als Variable mit dem Bildschirmfoto-Symbol erscheinen, wie bei der Eingabe von „In Fotoalbum sichern“. Ein blasser Platzhalter „Bildschirmfoto“ ist kein verbundenes Bild. Tippe das Wort nicht selbst ein und verwende nicht „Jedes Mal fragen“. Die App erhält das Bild direkt und muss es nicht in Fotos suchen."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Añade «Encontrar la mejor jugada» de Chess Best Move. Pulsa su entrada «Captura de pantalla», elige «Seleccionar variable» y selecciona la salida de «Hacer captura de pantalla». Debería decir «Encontrar la mejor jugada en Captura de pantalla», con «Captura de pantalla» mostrada como un token variable con el icono de captura de pantalla, igual que la entrada en «Guardar en álbum de fotos». Un marcador de posición de «Captura de pantalla» de color pálido no es una imagen conectada. No escribas la palabra «Captura de pantalla» ni dejes la entrada configurada en «Preguntar cada vez». La aplicación recibe esta imagen directamente, sin buscarla en «Fotos»."
+            "value": "Añade «Encontrar la mejor jugada» de Chess Best Next Move. Pulsa su entrada «Captura de pantalla», elige «Seleccionar variable» y selecciona la salida de «Hacer captura de pantalla». Debería decir «Encontrar la mejor jugada en Captura de pantalla», con «Captura de pantalla» mostrada como un token variable con el icono de captura de pantalla, igual que la entrada en «Guardar en álbum de fotos». Un marcador de posición de «Captura de pantalla» de color pálido no es una imagen conectada. No escribas la palabra «Captura de pantalla» ni dejes la entrada configurada en «Preguntar cada vez». La aplicación recibe esta imagen directamente, sin buscarla en «Fotos»."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Agrega «Encontrar la mejor jugada» de Chess Best Move. Toca su entrada «Captura de pantalla», elige «Seleccionar variable» y selecciona la salida de «Tomar captura de pantalla». Debería decir «Encontrar la mejor jugada en Captura de pantalla», con «Captura de pantalla» mostrada como un token variable con el ícono de captura de pantalla, igual que la entrada en «Guardar en álbum de fotos». Un marcador de posición de «Captura de pantalla» de color pálido no es una imagen conectada. No escribas la palabra «Captura de pantalla» ni dejes la entrada configurada en «Preguntar cada vez». La aplicación recibe esta imagen directamente, sin buscarla en «Fotos»."
+            "value": "Agrega «Encontrar la mejor jugada» de Chess Best Next Move. Toca su entrada «Captura de pantalla», elige «Seleccionar variable» y selecciona la salida de «Tomar captura de pantalla». Debería decir «Encontrar la mejor jugada en Captura de pantalla», con «Captura de pantalla» mostrada como un token variable con el ícono de captura de pantalla, igual que la entrada en «Guardar en álbum de fotos». Un marcador de posición de «Captura de pantalla» de color pálido no es una imagen conectada. No escribas la palabra «Captura de pantalla» ni dejes la entrada configurada en «Preguntar cada vez». La aplicación recibe esta imagen directamente, sin buscarla en «Fotos»."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Idagdag ang “Hanapin ang Pinakamahusay na Tira” mula sa Chess Best Move. I-tap ang Screenshot input nito, piliin ang Select Variable, at piliin ang output ng Take Screenshot. Dapat lumabas ang “Hanapin ang pinakamahusay na tira sa Screenshot,” na may Screenshot bilang variable na may icon, gaya ng input sa Save to Photo Album. Kung maputla lang na placeholder ang Screenshot, walang nakaugnay na larawan. Huwag i-type ang Screenshot o iwan ang input sa Ask Each Time. Direktang matatanggap ng app ang larawan nang hindi ito hinahanap sa Photos."
+            "value": "Idagdag ang “Hanapin ang Pinakamahusay na Tira” mula sa Chess Best Next Move. I-tap ang Screenshot input nito, piliin ang Select Variable, at piliin ang output ng Take Screenshot. Dapat lumabas ang “Hanapin ang pinakamahusay na tira sa Screenshot,” na may Screenshot bilang variable na may icon, gaya ng input sa Save to Photo Album. Kung maputla lang na placeholder ang Screenshot, walang nakaugnay na larawan. Huwag i-type ang Screenshot o iwan ang input sa Ask Each Time. Direktang matatanggap ng app ang larawan nang hindi ito hinahanap sa Photos."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajoutez « Trouver le meilleur coup » à partir de « Chess Best Move ». Appuyez sur son champ de saisie « Capture d’écran », choisissez « Sélectionner une variable », puis sélectionnez la sortie de « Prendre une capture d’écran ». La phrase doit se lire « Trouver le meilleur coup dans la capture d’écran », « Capture d’écran » apparaissant sous forme de jeton variable accompagné de l’icône de capture d’écran, comme dans le champ de saisie de « Enregistrer dans l’album photo ». Un espace réservé « Capture d’écran » de couleur pâle n’est pas une image connectée. Ne saisissez pas le mot « Capture d’écran » et ne laissez pas l’entrée réglée sur « Demander à chaque fois ». L’application reçoit cette image directement, sans la rechercher dans « Photos »."
+            "value": "Ajoutez « Trouver le meilleur coup » à partir de « Chess Best Next Move ». Appuyez sur son champ de saisie « Capture d’écran », choisissez « Sélectionner une variable », puis sélectionnez la sortie de « Prendre une capture d’écran ». La phrase doit se lire « Trouver le meilleur coup dans la capture d’écran », « Capture d’écran » apparaissant sous forme de jeton variable accompagné de l’icône de capture d’écran, comme dans le champ de saisie de « Enregistrer dans l’album photo ». Un espace réservé « Capture d’écran » de couleur pâle n’est pas une image connectée. Ne saisissez pas le mot « Capture d’écran » et ne laissez pas l’entrée réglée sur « Demander à chaque fois ». L’application reçoit cette image directement, sans la rechercher dans « Photos »."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move से “सबसे अच्छी चाल ढूँढें” जोड़ें। उसके स्क्रीनशॉट इनपुट पर टैप करें, “वैरिएबल चुनें” चुनें और “स्क्रीनशॉट लें” का आउटपुट चुनें। अब “स्क्रीनशॉट में सबसे अच्छी चाल ढूँढें” दिखना चाहिए। स्क्रीनशॉट, आइकन वाले वैरिएबल के रूप में दिखेगा, जैसे “फ़ोटो ऐल्बम में सहेजें” में। हल्के रंग का स्क्रीनशॉट प्लेसहोल्डर जुड़ी हुई इमेज नहीं है। स्क्रीनशॉट शब्द टाइप न करें और इनपुट को “हर बार पूछें” पर न छोड़ें। ऐप इमेज सीधे लेता है, Photos में नहीं ढूँढता।"
+            "value": "Chess Best Next Move से “सबसे अच्छी चाल ढूँढें” जोड़ें। उसके स्क्रीनशॉट इनपुट पर टैप करें, “वैरिएबल चुनें” चुनें और “स्क्रीनशॉट लें” का आउटपुट चुनें। अब “स्क्रीनशॉट में सबसे अच्छी चाल ढूँढें” दिखना चाहिए। स्क्रीनशॉट, आइकन वाले वैरिएबल के रूप में दिखेगा, जैसे “फ़ोटो ऐल्बम में सहेजें” में। हल्के रंग का स्क्रीनशॉट प्लेसहोल्डर जुड़ी हुई इमेज नहीं है। स्क्रीनशॉट शब्द टाइप न करें और इनपुट को “हर बार पूछें” पर न छोड़ें। ऐप इमेज सीधे लेता है, Photos में नहीं ढूँढता।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aggiungi “Trova mossa migliore” di Chess Best Move. Tocca il campo Screenshot, scegli Seleziona variabile e seleziona il risultato di Scatta screenshot. Dovrebbe apparire “Trova la mossa migliore in Screenshot”, con Screenshot come variabile e l’icona dello screenshot, come nel campo di Salva nell’album di foto. La scritta Screenshot sbiadita è solo un segnaposto: non indica un’immagine collegata. Non scrivere la parola Screenshot e non lasciare il campo su Chiedi ogni volta. L’app riceve direttamente questa immagine, senza cercarla in Foto."
+            "value": "Aggiungi “Trova mossa migliore” di Chess Best Next Move. Tocca il campo Screenshot, scegli Seleziona variabile e seleziona il risultato di Scatta screenshot. Dovrebbe apparire “Trova la mossa migliore in Screenshot”, con Screenshot come variabile e l’icona dello screenshot, come nel campo di Salva nell’album di foto. La scritta Screenshot sbiadita è solo un segnaposto: non indica un’immagine collegata. Non scrivere la parola Screenshot e non lasciare il campo su Chiedi ogni volta. L’app riceve direttamente questa immagine, senza cercarla in Foto."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Adicione “Encontrar o melhor lance” a partir do Chess Best Move. Toque na entrada “Captura de tela”, escolha “Selecionar variável” e selecione a saída de “Fazer captura de tela”. Deve aparecer “Encontrar o melhor lance em Captura de tela”, com “Captura de tela” exibida como um variável com o ícone de captura de tela, como a entrada em “Salvar em Álbum de Fotos”. Um campo vazio “Captura de tela” esmaecido não é uma imagem conectada. Não digite a palavra “Captura de tela” nem deixe a entrada definida como “Perguntar Sempre”. O aplicativo recebe essa imagem diretamente, sem procurá-la no aplicativo Fotos."
+            "value": "Adicione “Encontrar o melhor lance” a partir do Chess Best Next Move. Toque na entrada “Captura de tela”, escolha “Selecionar variável” e selecione a saída de “Fazer captura de tela”. Deve aparecer “Encontrar o melhor lance em Captura de tela”, com “Captura de tela” exibida como um variável com o ícone de captura de tela, como a entrada em “Salvar em Álbum de Fotos”. Um campo vazio “Captura de tela” esmaecido não é uma imagem conectada. Não digite a palavra “Captura de tela” nem deixe a entrada definida como “Perguntar Sempre”. O aplicativo recebe essa imagem diretamente, sem procurá-la no aplicativo Fotos."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move’dan “En iyi hamleyi bul” eylemini ekleyin. Ekran Görüntüsü girdisine dokunup Değişken Seç’i seçin ve Ekran Görüntüsü Al eyleminin çıktısını seçin. Eylemde “Ekran Görüntüsü içindeki en iyi hamleyi bul” yazmalı. Ekran Görüntüsü, Fotoğraf Albümüne Kaydet eylemindeki gibi ekran görüntüsü simgeli bir değişken olarak görünmeli. Soluk bir Ekran Görüntüsü yer tutucusu, bir görüntünün bağlı olduğu anlamına gelmez. Ekran Görüntüsü sözcüklerini elle yazmayın ve girdiyi Her Seferinde Sor olarak bırakmayın. Uygulama bu görüntüyü Fotoğraflar’da aramadan doğrudan alır."
+            "value": "Chess Best Next Move’dan “En iyi hamleyi bul” eylemini ekleyin. Ekran Görüntüsü girdisine dokunup Değişken Seç’i seçin ve Ekran Görüntüsü Al eyleminin çıktısını seçin. Eylemde “Ekran Görüntüsü içindeki en iyi hamleyi bul” yazmalı. Ekran Görüntüsü, Fotoğraf Albümüne Kaydet eylemindeki gibi ekran görüntüsü simgeli bir değişken olarak görünmeli. Soluk bir Ekran Görüntüsü yer tutucusu, bir görüntünün bağlı olduğu anlamına gelmez. Ekran Görüntüsü sözcüklerini elle yazmayın ve girdiyi Her Seferinde Sor olarak bırakmayın. Uygulama bu görüntüyü Fotoğraflar’da aramadan doğrudan alır."
           }
         }
       }
@@ -10527,6 +10527,71 @@
         }
       }
     },
+    "Both": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beides"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Both"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ambos"
+          }
+        },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ambos"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pareho"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दोनों"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrambi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ambos"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İkisi de"
+          }
+        }
+      }
+    },
     "Buy %lld analyses: %@": {
       "localizations": {
         "de": {
@@ -11502,411 +11567,411 @@
         }
       }
     },
-    "Chess Best Move": {
+    "Chess Best Next Move": {
       "shouldTranslate": false
     },
-    "Chess Best Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.": {
+    "Chess Best Next Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move analysiert Stellungen mit Stockfish, einer freien, quelloffenen Schachengine des Stockfish-Entwicklerteams. Sie läuft auf deinem %1$@; nichts wird hochgeladen."
+            "value": "Chess Best Next Move analysiert Stellungen mit Stockfish, einer freien, quelloffenen Schachengine des Stockfish-Entwicklerteams. Sie läuft auf deinem %1$@; nichts wird hochgeladen."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move analiza las posiciones con Stockfish, un motor de ajedrez libre y de código abierto creado por los desarrolladores de Stockfish. Se ejecuta en tu %1$@; no se sube nada."
+            "value": "Chess Best Next Move analiza las posiciones con Stockfish, un motor de ajedrez libre y de código abierto creado por los desarrolladores de Stockfish. Se ejecuta en tu %1$@; no se sube nada."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move analiza las posiciones con Stockfish, un motor de ajedrez libre y de código abierto creado por los desarrolladores de Stockfish. Se ejecuta en tu %1$@; no se sube nada."
+            "value": "Chess Best Next Move analiza las posiciones con Stockfish, un motor de ajedrez libre y de código abierto creado por los desarrolladores de Stockfish. Se ejecuta en tu %1$@; no se sube nada."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gamit ng Chess Best Move ang Stockfish, isang libre at open-source na chess engine mula sa mga developer nito. Tumatakbo ito sa %@ mo at walang ina-upload."
+            "value": "Gamit ng Chess Best Next Move ang Stockfish, isang libre at open-source na chess engine mula sa mga developer nito. Tumatakbo ito sa %@ mo at walang ina-upload."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move analyse les positions à l’aide de Stockfish, un moteur d’échecs libre et open source développé par l’équipe Stockfish. Il fonctionne sur votre %1$@ ; aucune donnée n’est envoyée."
+            "value": "Chess Best Next Move analyse les positions à l’aide de Stockfish, un moteur d’échecs libre et open source développé par l’équipe Stockfish. Il fonctionne sur votre %1$@ ; aucune donnée n’est envoyée."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, Stockfish डेवलपरों के मुफ़्त और ओपन सोर्स शतरंज इंजन Stockfish से स्थितियों का विश्लेषण करता है। यह आपके %@ पर चलता है। कुछ भी अपलोड नहीं होता।"
+            "value": "Chess Best Next Move, Stockfish डेवलपरों के मुफ़्त और ओपन सोर्स शतरंज इंजन Stockfish से स्थितियों का विश्लेषण करता है। यह आपके %@ पर चलता है। कुछ भी अपलोड नहीं होता।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move analizza le posizioni con Stockfish, un motore scacchistico libero e open source realizzato dagli sviluppatori di Stockfish. Funziona sul tuo %1$@; non viene caricato nulla online."
+            "value": "Chess Best Next Move analizza le posizioni con Stockfish, un motore scacchistico libero e open source realizzato dagli sviluppatori di Stockfish. Funziona sul tuo %1$@; non viene caricato nulla online."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O Chess Best Move analisa posições com o Stockfish, um motor de xadrez gratuito e de código aberto desenvolvido pela equipe do Stockfish. Ele é executado no seu %1$@; nada é enviado para a nuvem."
+            "value": "O Chess Best Next Move analisa posições com o Stockfish, um motor de xadrez gratuito e de código aberto desenvolvido pela equipe do Stockfish. Ele é executado no seu %1$@; nada é enviado para a nuvem."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, konumları Stockfish geliştiricilerinin özgür ve açık kaynaklı satranç motoru Stockfish ile analiz eder. Analiz %1$@ aygıtınızda çalışır; hiçbir şey yüklenmez."
+            "value": "Chess Best Next Move, konumları Stockfish geliştiricilerinin özgür ve açık kaynaklı satranç motoru Stockfish ile analiz eder. Analiz %1$@ aygıtınızda çalışır; hiçbir şey yüklenmez."
           }
         }
       }
     },
-    "Chess Best Move couldn't analyze this position.": {
+    "Chess Best Next Move couldn't analyze this position.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move konnte diese Stellung nicht analysieren."
+            "value": "Chess Best Next Move konnte diese Stellung nicht analysieren."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move no ha podido analizar esta posición."
+            "value": "Chess Best Next Move no ha podido analizar esta posición."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move no pudo analizar esta posición."
+            "value": "Chess Best Next Move no pudo analizar esta posición."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hindi nasuri ng Chess Best Move ang posisyong ito."
+            "value": "Hindi nasuri ng Chess Best Next Move ang posisyong ito."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move n’a pas pu analyser cette position."
+            "value": "Chess Best Next Move n’a pas pu analyser cette position."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move इस स्थिति का विश्लेषण नहीं कर सका।"
+            "value": "Chess Best Next Move इस स्थिति का विश्लेषण नहीं कर सका।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move non ha potuto analizzare questa posizione."
+            "value": "Chess Best Next Move non ha potuto analizzare questa posizione."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O Chess Best Move não conseguiu analisar esta posição."
+            "value": "O Chess Best Next Move não conseguiu analisar esta posição."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move bu konumu analiz edemedi."
+            "value": "Chess Best Next Move bu konumu analiz edemedi."
           }
         }
       }
     },
-    "Chess Best Move couldn't read that image. Pass a screenshot to the shortcut.": {
+    "Chess Best Next Move couldn't read that image. Pass a screenshot to the shortcut.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move konnte das Bild nicht lesen. Übergib dem Kurzbefehl einen Screenshot."
+            "value": "Chess Best Next Move konnte das Bild nicht lesen. Übergib dem Kurzbefehl einen Screenshot."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move no ha podido leer esa imagen. Envía una captura de pantalla al atajo."
+            "value": "Chess Best Next Move no ha podido leer esa imagen. Envía una captura de pantalla al atajo."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move no pudo leer esa imagen. Envía una captura de pantalla al atajo."
+            "value": "Chess Best Next Move no pudo leer esa imagen. Envía una captura de pantalla al atajo."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hindi mabasa ng Chess Best Move ang larawan. Magbigay ng screenshot sa shortcut."
+            "value": "Hindi mabasa ng Chess Best Next Move ang larawan. Magbigay ng screenshot sa shortcut."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move n’a pas pu lire cette image. Transférez une capture d’écran vers le raccourci."
+            "value": "Chess Best Next Move n’a pas pu lire cette image. Transférez une capture d’écran vers le raccourci."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move इस इमेज को पढ़ नहीं सका। शॉर्टकट को स्क्रीनशॉट दें।"
+            "value": "Chess Best Next Move इस इमेज को पढ़ नहीं सका। शॉर्टकट को स्क्रीनशॉट दें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move non ha potuto leggere l’immagine. Passa uno screenshot al comando rapido."
+            "value": "Chess Best Next Move non ha potuto leggere l’immagine. Passa uno screenshot al comando rapido."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O Chess Best Move não conseguiu ler essa imagem. Envie uma captura de tela para o atalho."
+            "value": "O Chess Best Next Move não conseguiu ler essa imagem. Envie uma captura de tela para o atalho."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move bu görüntüyü okuyamadı. Kestirmeye bir ekran görüntüsü iletin."
+            "value": "Chess Best Next Move bu görüntüyü okuyamadı. Kestirmeye bir ekran görüntüsü iletin."
           }
         }
       }
     },
-    "Chess Best Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.": {
+    "Chess Best Next Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move wird in der Hoffnung verbreitet, dass es nützlich sein wird, jedoch OHNE JEDE GEWÄHRLEISTUNG; sogar ohne die implizite Gewährleistung der MARKTGÄNGIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK. Weitere Einzelheiten findest du in der GNU General Public License."
+            "value": "Chess Best Next Move wird in der Hoffnung verbreitet, dass es nützlich sein wird, jedoch OHNE JEDE GEWÄHRLEISTUNG; sogar ohne die implizite Gewährleistung der MARKTGÄNGIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK. Weitere Einzelheiten findest du in der GNU General Public License."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Chess Best Move» se distribuye con la esperanza de que resulte útil, pero SIN NINGÚN TIPO DE GARANTÍA; ni siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN FIN DETERMINADO. Consulta la Licencia Pública General de GNU para obtener más detalles."
+            "value": "«Chess Best Next Move» se distribuye con la esperanza de que resulte útil, pero SIN NINGÚN TIPO DE GARANTÍA; ni siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN FIN DETERMINADO. Consulta la Licencia Pública General de GNU para obtener más detalles."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Chess Best Move» se distribuye con la esperanza de que resulte útil, pero SIN NINGÚN TIPO DE GARANTÍA; ni siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN FIN DETERMINADO. Consulta la Licencia Pública General de GNU para obtener más detalles."
+            "value": "«Chess Best Next Move» se distribuye con la esperanza de que resulte útil, pero SIN NINGÚN TIPO DE GARANTÍA; ni siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN FIN DETERMINADO. Consulta la Licencia Pública General de GNU para obtener más detalles."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ipinamamahagi ang Chess Best Move sa pag-asang magiging kapaki-pakinabang ito, ngunit WALANG ANUMANG WARRANTY, maging ang ipinahihiwatig na warranty ng kakayahang maibenta o kaangkupan sa isang partikular na layunin. Tingnan ang GNU General Public License para sa mga detalye."
+            "value": "Ipinamamahagi ang Chess Best Next Move sa pag-asang magiging kapaki-pakinabang ito, ngunit WALANG ANUMANG WARRANTY, maging ang ipinahihiwatig na warranty ng kakayahang maibenta o kaangkupan sa isang partikular na layunin. Tingnan ang GNU General Public License para sa mga detalye."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move est distribué dans l’espoir qu’il sera utile, mais SANS AUCUNE GARANTIE, pas même la garantie implicite de COMMERCIALISABILITÉ ou d’ADÉQUATION À UN USAGE PARTICULIER. Consultez la Licence publique générale GNU pour plus de détails."
+            "value": "Chess Best Next Move est distribué dans l’espoir qu’il sera utile, mais SANS AUCUNE GARANTIE, pas même la garantie implicite de COMMERCIALISABILITÉ ou d’ADÉQUATION À UN USAGE PARTICULIER. Consultez la Licence publique générale GNU pour plus de détails."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move इस उम्मीद से वितरित किया जाता है कि यह उपयोगी होगा, लेकिन इसकी कोई वारंटी नहीं है, जिसमें बिक्री-योग्यता या किसी खास उद्देश्य के लिए उपयुक्तता की निहित वारंटी भी शामिल है। अधिक जानकारी के लिए GNU General Public License देखें।"
+            "value": "Chess Best Next Move इस उम्मीद से वितरित किया जाता है कि यह उपयोगी होगा, लेकिन इसकी कोई वारंटी नहीं है, जिसमें बिक्री-योग्यता या किसी खास उद्देश्य के लिए उपयुक्तता की निहित वारंटी भी शामिल है। अधिक जानकारी के लिए GNU General Public License देखें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move è distribuito nella speranza che sia utile, ma SENZA ALCUNA GARANZIA; senza neppure la garanzia implicita di COMMERCIABILITÀ o IDONEITÀ A UNO SCOPO PARTICOLARE. Per maggiori dettagli, consulta la GNU General Public License."
+            "value": "Chess Best Next Move è distribuito nella speranza che sia utile, ma SENZA ALCUNA GARANZIA; senza neppure la garanzia implicita di COMMERCIABILITÀ o IDONEITÀ A UNO SCOPO PARTICOLARE. Per maggiori dettagli, consulta la GNU General Public License."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O Chess Best Move é distribuído na esperança de que seja útil, mas SEM QUALQUER GARANTIA; sem sequer a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM FIM ESPECÍFICO. Consulte a Licença Pública Geral GNU para mais detalhes."
+            "value": "O Chess Best Next Move é distribuído na esperança de que seja útil, mas SEM QUALQUER GARANTIA; sem sequer a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM FIM ESPECÍFICO. Consulte a Licença Pública Geral GNU para mais detalhes."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, yararlı olacağı umuduyla, ancak HİÇBİR GARANTİ OLMAKSIZIN; hatta zımni SATILABİLİRLİK veya BELİRLİ BİR AMACA UYGUNLUK garantisi bile olmadan dağıtılır. Ayrıntılar için GNU Genel Kamu Lisansı’na bakın."
+            "value": "Chess Best Next Move, yararlı olacağı umuduyla, ancak HİÇBİR GARANTİ OLMAKSIZIN; hatta zımni SATILABİLİRLİK veya BELİRLİ BİR AMACA UYGUNLUK garantisi bile olmadan dağıtılır. Ayrıntılar için GNU Genel Kamu Lisansı’na bakın."
           }
         }
       }
     },
-    "Chess Best Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.": {
+    "Chess Best Next Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move ist freie Software: Du darfst die App nutzen, ihre Funktionsweise untersuchen, sie verändern und unverändert oder verändert weitergeben. Es gelten die Bedingungen der GNU General Public License, Version 3, veröffentlicht von der Free Software Foundation. Die App enthält Stockfish, das derselben Lizenz unterliegt. Deshalb wird die gesamte App unter dieser Lizenz verbreitet."
+            "value": "Chess Best Next Move ist freie Software: Du darfst die App nutzen, ihre Funktionsweise untersuchen, sie verändern und unverändert oder verändert weitergeben. Es gelten die Bedingungen der GNU General Public License, Version 3, veröffentlicht von der Free Software Foundation. Die App enthält Stockfish, das derselben Lizenz unterliegt. Deshalb wird die gesamte App unter dieser Lizenz verbreitet."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move es software libre: puedes utilizarlo, estudiar cómo funciona, modificarlo y compartirlo, ya sea modificado o sin modificar, bajo los términos de la versión 3 de la Licencia Pública General de GNU, tal y como la ha publicado la Free Software Foundation. La aplicación incluye Stockfish, que está bajo la misma licencia, por lo que la aplicación en su conjunto se distribuye bajo dicha licencia."
+            "value": "Chess Best Next Move es software libre: puedes utilizarlo, estudiar cómo funciona, modificarlo y compartirlo, ya sea modificado o sin modificar, bajo los términos de la versión 3 de la Licencia Pública General de GNU, tal y como la ha publicado la Free Software Foundation. La aplicación incluye Stockfish, que está bajo la misma licencia, por lo que la aplicación en su conjunto se distribuye bajo dicha licencia."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move es software libre: puedes utilizarlo, estudiar cómo funciona, modificarlo y compartirlo, ya sea modificado o sin modificar, bajo los términos de la versión 3 de la Licencia Pública General de GNU, tal y como la ha publicado la Free Software Foundation. La aplicación incluye Stockfish, que está bajo la misma licencia, por lo que la aplicación en su conjunto se distribuye bajo dicha licencia."
+            "value": "Chess Best Next Move es software libre: puedes utilizarlo, estudiar cómo funciona, modificarlo y compartirlo, ya sea modificado o sin modificar, bajo los términos de la versión 3 de la Licencia Pública General de GNU, tal y como la ha publicado la Free Software Foundation. La aplicación incluye Stockfish, que está bajo la misma licencia, por lo que la aplicación en su conjunto se distribuye bajo dicha licencia."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Malayang software ang Chess Best Move. Puwede mo itong gamitin, pag-aralan, baguhin, at ibahagi, binago man o hindi, sa ilalim ng GNU General Public License bersyon 3 na inilathala ng Free Software Foundation. Kasama ang Stockfish na nasa parehong lisensya, kaya saklaw nito ang buong app."
+            "value": "Malayang software ang Chess Best Next Move. Puwede mo itong gamitin, pag-aralan, baguhin, at ibahagi, binago man o hindi, sa ilalim ng GNU General Public License bersyon 3 na inilathala ng Free Software Foundation. Kasama ang Stockfish na nasa parehong lisensya, kaya saklaw nito ang buong app."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move est un logiciel libre : vous pouvez l’utiliser, étudier son fonctionnement, le modifier et le partager, tel quel ou modifié, selon les termes de la version 3 de la Licence publique générale GNU telle que publiée par la Free Software Foundation. L’application inclut Stockfish, qui est sous la même licence ; l’application dans son ensemble est donc distribuée sous cette licence."
+            "value": "Chess Best Next Move est un logiciel libre : vous pouvez l’utiliser, étudier son fonctionnement, le modifier et le partager, tel quel ou modifié, selon les termes de la version 3 de la Licence publique générale GNU telle que publiée par la Free Software Foundation. L’application inclut Stockfish, qui est sous la même licence ; l’application dans son ensemble est donc distribuée sous cette licence."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move स्वतंत्र सॉफ़्टवेयर है। Free Software Foundation द्वारा प्रकाशित GNU General Public License संस्करण 3 की शर्तों के तहत इसे इस्तेमाल कर सकते हैं, इसका काम समझ सकते हैं, इसे बदल सकते हैं और बदली या मूल स्थिति में साझा कर सकते हैं। Stockfish भी इसी लाइसेंस के तहत है, इसलिए पूरा ऐप इसी लाइसेंस पर वितरित होता है।"
+            "value": "Chess Best Next Move स्वतंत्र सॉफ़्टवेयर है। Free Software Foundation द्वारा प्रकाशित GNU General Public License संस्करण 3 की शर्तों के तहत इसे इस्तेमाल कर सकते हैं, इसका काम समझ सकते हैं, इसे बदल सकते हैं और बदली या मूल स्थिति में साझा कर सकते हैं। Stockfish भी इसी लाइसेंस के तहत है, इसलिए पूरा ऐप इसी लाइसेंस पर वितरित होता है।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move è software libero: puoi usarlo, studiarne il funzionamento, modificarlo e condividerlo, con o senza modifiche, secondo i termini della versione 3 della GNU General Public License pubblicata dalla Free Software Foundation. L’app include Stockfish, distribuito con la stessa licenza, quindi la licenza si applica all’intera app."
+            "value": "Chess Best Next Move è software libero: puoi usarlo, studiarne il funzionamento, modificarlo e condividerlo, con o senza modifiche, secondo i termini della versione 3 della GNU General Public License pubblicata dalla Free Software Foundation. L’app include Stockfish, distribuito con la stessa licenza, quindi la licenza si applica all’intera app."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O Chess Best Move é um software livre: você pode usá-lo, estudar como ele funciona, modificá-lo e compartilhá-lo, com ou sem alterações, de acordo com os termos da versão 3 da Licença Pública Geral GNU, conforme publicada pela Free Software Foundation. O aplicativo inclui o Stockfish, que está sob a mesma licença; portanto, o aplicativo como um todo é distribuído sob essa licença."
+            "value": "O Chess Best Next Move é um software livre: você pode usá-lo, estudar como ele funciona, modificá-lo e compartilhá-lo, com ou sem alterações, de acordo com os termos da versão 3 da Licença Pública Geral GNU, conforme publicada pela Free Software Foundation. O aplicativo inclui o Stockfish, que está sob a mesma licença; portanto, o aplicativo como um todo é distribuído sob essa licença."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move özgür yazılımdır. Free Software Foundation tarafından yayımlanan GNU Genel Kamu Lisansı’nın 3. sürümü kapsamında uygulamayı kullanabilir, nasıl çalıştığını inceleyebilir, değiştirebilir ve değiştirilmiş veya değiştirilmemiş haliyle paylaşabilirsiniz. Uygulama, aynı lisans kapsamındaki Stockfish’i içerir. Bu nedenle uygulamanın tamamı bu lisans altında dağıtılır."
+            "value": "Chess Best Next Move özgür yazılımdır. Free Software Foundation tarafından yayımlanan GNU Genel Kamu Lisansı’nın 3. sürümü kapsamında uygulamayı kullanabilir, nasıl çalıştığını inceleyebilir, değiştirebilir ve değiştirilmiş veya değiştirilmemiş haliyle paylaşabilirsiniz. Uygulama, aynı lisans kapsamındaki Stockfish’i içerir. Bu nedenle uygulamanın tamamı bu lisans altında dağıtılır."
           }
         }
       }
     },
-    "Chess Best Move isn't ready. Open the app, then run the shortcut again.": {
+    "Chess Best Next Move isn't ready. Open the app, then run the shortcut again.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move ist noch nicht bereit. Öffne die App und führe den Kurzbefehl erneut aus."
+            "value": "Chess Best Next Move ist noch nicht bereit. Öffne die App und führe den Kurzbefehl erneut aus."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Chess Best Move» no está listo. Abre la aplicación y vuelve a ejecutar el atajo."
+            "value": "«Chess Best Next Move» no está listo. Abre la aplicación y vuelve a ejecutar el atajo."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Chess Best Move» no está listo. Abre la aplicación y vuelve a ejecutar el atajo."
+            "value": "«Chess Best Next Move» no está listo. Abre la aplicación y vuelve a ejecutar el atajo."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hindi pa handa ang Chess Best Move. Buksan ang app at patakbuhin ulit ang shortcut."
+            "value": "Hindi pa handa ang Chess Best Next Move. Buksan ang app at patakbuhin ulit ang shortcut."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "« Chess Best Move » n’est pas prêt. Ouvrez l’application, puis relancez le raccourci."
+            "value": "« Chess Best Next Move » n’est pas prêt. Ouvrez l’application, puis relancez le raccourci."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move तैयार नहीं है। ऐप खोलें, फिर शॉर्टकट चलाएँ।"
+            "value": "Chess Best Next Move तैयार नहीं है। ऐप खोलें, फिर शॉर्टकट चलाएँ।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move non è pronto. Apri l’app, poi esegui di nuovo il comando rapido."
+            "value": "Chess Best Next Move non è pronto. Apri l’app, poi esegui di nuovo il comando rapido."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O Chess Best Move não está pronto. Abra o aplicativo e execute o atalho novamente."
+            "value": "O Chess Best Next Move não está pronto. Abra o aplicativo e execute o atalho novamente."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move hazır değil. Uygulamayı açıp kestirmeyi yeniden çalıştırın."
+            "value": "Chess Best Next Move hazır değil. Uygulamayı açıp kestirmeyi yeniden çalıştırın."
           }
         }
       }
     },
-    "Chess Best Move, Copyright (C) 2026 Motomatic LLC": {
+    "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
+            "value": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
+            "value": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
+            "value": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
+            "value": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
+            "value": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
+            "value": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
+            "value": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
+            "value": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move, Telif Hakkı (C) 2026 Motomatic LLC"
+            "value": "Chess Best Next Move, Telif Hakkı (C) 2026 Motomatic LLC"
           }
         }
       }
@@ -15110,60 +15175,60 @@
         }
       }
     },
-    "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Move opens.": {
+    "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Next Move opens.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Findet den besten Zug in einem Screenshot einer Schachstellung. Übergib einen Screenshot oder wähle einen aus Fotos, wenn Chess Best Move geöffnet wird."
+            "value": "Findet den besten Zug in einem Screenshot einer Schachstellung. Übergib einen Screenshot oder wähle einen aus Fotos, wenn Chess Best Next Move geöffnet wird."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Busca la mejor jugada en una captura de pantalla de una posición de ajedrez. Pasa una captura de pantalla o elige una de «Fotos» cuando se abra «Chess Best Move»."
+            "value": "Busca la mejor jugada en una captura de pantalla de una posición de ajedrez. Pasa una captura de pantalla o elige una de «Fotos» cuando se abra «Chess Best Next Move»."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Busca la mejor jugada en una captura de pantalla de una posición de ajedrez. Pasa una captura de pantalla o elige una de «Fotos» cuando se abra «Chess Best Move»."
+            "value": "Busca la mejor jugada en una captura de pantalla de una posición de ajedrez. Pasa una captura de pantalla o elige una de «Fotos» cuando se abra «Chess Best Next Move»."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hinahanap ang pinakamahusay na tira sa screenshot ng posisyon sa chess. Magbigay ng screenshot o pumili sa Photos kapag bumukas ang Chess Best Move."
+            "value": "Hinahanap ang pinakamahusay na tira sa screenshot ng posisyon sa chess. Magbigay ng screenshot o pumili sa Photos kapag bumukas ang Chess Best Next Move."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Recherche le meilleur coup dans une capture d’écran d’une position d’échecs. Transmettez une capture d’écran ou choisissez-en une dans « Photos » lorsque l’application « Chess Best Move » s’ouvre."
+            "value": "Recherche le meilleur coup dans une capture d’écran d’une position d’échecs. Transmettez une capture d’écran ou choisissez-en une dans « Photos » lorsque l’application « Chess Best Next Move » s’ouvre."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "शतरंज की स्थिति के स्क्रीनशॉट में सबसे अच्छी चाल ढूँढता है। स्क्रीनशॉट दें या Chess Best Move खुलने पर Photos से चुनें।"
+            "value": "शतरंज की स्थिति के स्क्रीनशॉट में सबसे अच्छी चाल ढूँढता है। स्क्रीनशॉट दें या Chess Best Next Move खुलने पर Photos से चुनें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Trova la mossa migliore nello screenshot di una posizione scacchistica. Passa uno screenshot oppure scegline uno da Foto quando si apre Chess Best Move."
+            "value": "Trova la mossa migliore nello screenshot di una posizione scacchistica. Passa uno screenshot oppure scegline uno da Foto quando si apre Chess Best Next Move."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Encontra o melhor lance em uma captura de tela de uma posição de xadrez. Passe uma captura de tela ou escolha uma no aplicativo Fotos quando o Chess Best Move for aberto."
+            "value": "Encontra o melhor lance em uma captura de tela de uma posição de xadrez. Passe uma captura de tela ou escolha uma no aplicativo Fotos quando o Chess Best Next Move for aberto."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bir satranç konumunun ekran görüntüsünde en iyi hamleyi bulur. Bir ekran görüntüsü iletin veya Chess Best Move açıldığında Fotoğraflar’dan bir görüntü seçin."
+            "value": "Bir satranç konumunun ekran görüntüsünde en iyi hamleyi bulur. Bir ekran görüntüsü iletin veya Chess Best Next Move açıldığında Fotoğraflar’dan bir görüntü seçin."
           }
         }
       }
@@ -21153,234 +21218,234 @@
         }
       }
     },
-    "Open Chess Best Move and analyze your latest saved screenshot.": {
+    "Open Chess Best Next Move and analyze your latest saved screenshot.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Öffne Chess Best Move und analysiere deinen neuesten gespeicherten Screenshot."
+            "value": "Öffne Chess Best Next Move und analysiere deinen neuesten gespeicherten Screenshot."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Chess Best Move y analiza tu última captura guardada."
+            "value": "Abre Chess Best Next Move y analiza tu última captura guardada."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Chess Best Move y analiza tu última captura guardada."
+            "value": "Abre Chess Best Next Move y analiza tu última captura guardada."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Buksan ang Chess Best Move at suriin ang pinakabagong naka-save na screenshot."
+            "value": "Buksan ang Chess Best Next Move at suriin ang pinakabagong naka-save na screenshot."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ouvrez Chess Best Move et analysez votre dernière capture enregistrée."
+            "value": "Ouvrez Chess Best Next Move et analysez votre dernière capture enregistrée."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move खोलें और सबसे नए सहेजे गए स्क्रीनशॉट का विश्लेषण करें।"
+            "value": "Chess Best Next Move खोलें और सबसे नए सहेजे गए स्क्रीनशॉट का विश्लेषण करें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apri Chess Best Move e analizza l’ultimo screenshot salvato."
+            "value": "Apri Chess Best Next Move e analizza l’ultimo screenshot salvato."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abra o Chess Best Move e analise sua captura salva mais recente."
+            "value": "Abra o Chess Best Next Move e analise sua captura salva mais recente."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move’u açıp son kaydettiğiniz ekran görüntüsünü analiz edin."
+            "value": "Chess Best Next Move’u açıp son kaydettiğiniz ekran görüntüsünü analiz edin."
           }
         }
       }
     },
-    "Open Chess Best Move and import the screenshot from Photos.": {
+    "Open Chess Best Next Move and import the screenshot from Photos.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Öffne Chess Best Move und importiere den Screenshot aus Fotos."
+            "value": "Öffne Chess Best Next Move und importiere den Screenshot aus Fotos."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Chess Best Move e importa la captura de pantalla desde «Fotos»."
+            "value": "Abre Chess Best Next Move e importa la captura de pantalla desde «Fotos»."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Chess Best Move e importa la captura de pantalla desde «Fotos»."
+            "value": "Abre Chess Best Next Move e importa la captura de pantalla desde «Fotos»."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Buksan ang Chess Best Move at i-import ang screenshot mula sa Photos."
+            "value": "Buksan ang Chess Best Next Move at i-import ang screenshot mula sa Photos."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ouvrez Chess Best Move et importez la capture d’écran depuis « Photos »."
+            "value": "Ouvrez Chess Best Next Move et importez la capture d’écran depuis « Photos »."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move खोलें और Photos से स्क्रीनशॉट इंपोर्ट करें।"
+            "value": "Chess Best Next Move खोलें और Photos से स्क्रीनशॉट इंपोर्ट करें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apri Chess Best Move e importa lo screenshot da Foto."
+            "value": "Apri Chess Best Next Move e importa lo screenshot da Foto."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abra o Chess Best Move e importe a captura de tela do aplicativo Fotos."
+            "value": "Abra o Chess Best Next Move e importe a captura de tela do aplicativo Fotos."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move’u açıp ekran görüntüsünü Fotoğraflar’dan içe aktarın."
+            "value": "Chess Best Next Move’u açıp ekran görüntüsünü Fotoğraflar’dan içe aktarın."
           }
         }
       }
     },
-    "Open Chess Best Move to see the best move.": {
+    "Open Chess Best Next Move to see the best move.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Öffne Chess Best Move, um den besten Zug zu sehen."
+            "value": "Öffne Chess Best Next Move, um den besten Zug zu sehen."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Chess Best Move para ver la mejor jugada."
+            "value": "Abre Chess Best Next Move para ver la mejor jugada."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Chess Best Move para ver la mejor jugada."
+            "value": "Abre Chess Best Next Move para ver la mejor jugada."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Buksan ang Chess Best Move para makita ang pinakamahusay na tira."
+            "value": "Buksan ang Chess Best Next Move para makita ang pinakamahusay na tira."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ouvrez Chess Best Move pour voir le meilleur coup."
+            "value": "Ouvrez Chess Best Next Move pour voir le meilleur coup."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "सबसे अच्छी चाल देखने के लिए Chess Best Move खोलें।"
+            "value": "सबसे अच्छी चाल देखने के लिए Chess Best Next Move खोलें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apri Chess Best Move per vedere la mossa migliore."
+            "value": "Apri Chess Best Next Move per vedere la mossa migliore."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abra o Chess Best Move para ver o melhor lance."
+            "value": "Abra o Chess Best Next Move para ver o melhor lance."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "En iyi hamleyi görmek için Chess Best Move’u açın."
+            "value": "En iyi hamleyi görmek için Chess Best Next Move’u açın."
           }
         }
       }
     },
-    "Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.": {
+    "Open Chess Best Next Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Öffne Chess Best Move. Wenn die automatische Analyse und der Vollzugriff auf Fotos aktiviert sind, erkennt die App deinen neuen Schach-Screenshot. Tippe auf „Analysieren“, wenn du dazu aufgefordert wirst. Andernfalls tippe auf „Neuesten Screenshot verwenden“."
+            "value": "Öffne Chess Best Next Move. Wenn die automatische Analyse und der Vollzugriff auf Fotos aktiviert sind, erkennt die App deinen neuen Schach-Screenshot. Tippe auf „Analysieren“, wenn du dazu aufgefordert wirst. Andernfalls tippe auf „Neuesten Screenshot verwenden“."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Chess Best Move. Con el análisis automático y el «Acceso completo a Fotos» activados, la aplicación reconoce tu nueva captura de ajedrez. Pulsa «Analizar» si se te solicita. Si no, pulsa «Usar última captura»."
+            "value": "Abre Chess Best Next Move. Con el análisis automático y el «Acceso completo a Fotos» activados, la aplicación reconoce tu nueva captura de ajedrez. Pulsa «Analizar» si se te solicita. Si no, pulsa «Usar última captura»."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Chess Best Move. Con el análisis automático y el «Acceso completo a Fotos» activados, la aplicación reconoce tu nueva captura de ajedrez. Toca «Analizar» si se te solicita. Si no, toca «Usar última captura»."
+            "value": "Abre Chess Best Next Move. Con el análisis automático y el «Acceso completo a Fotos» activados, la aplicación reconoce tu nueva captura de ajedrez. Toca «Analizar» si se te solicita. Si no, toca «Usar última captura»."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Buksan ang Chess Best Move. Kung naka-on ang awtomatikong pagsusuri at Full Access sa Photos, makikilala ng app ang bagong chess screenshot. I-tap ang Suriin kung hihilingin. Kung hindi, i-tap ang Gamitin ang pinakabagong screenshot."
+            "value": "Buksan ang Chess Best Next Move. Kung naka-on ang awtomatikong pagsusuri at Full Access sa Photos, makikilala ng app ang bagong chess screenshot. I-tap ang Suriin kung hihilingin. Kung hindi, i-tap ang Gamitin ang pinakabagong screenshot."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ouvrez Chess Best Move. Lorsque l’analyse automatique et l’accès complet à Photos sont activés, l’application reconnaît votre nouvelle capture d’écran d’échecs. Appuyez sur « Analyser » si vous y êtes invité. Sinon, appuyez sur « Utiliser la dernière capture »."
+            "value": "Ouvrez Chess Best Next Move. Lorsque l’analyse automatique et l’accès complet à Photos sont activés, l’application reconnaît votre nouvelle capture d’écran d’échecs. Appuyez sur « Analyser » si vous y êtes invité. Sinon, appuyez sur « Utiliser la dernière capture »."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move खोलें। अपने आप विश्लेषण और Photos का पूरा ऐक्सेस चालू होने पर ऐप नया शतरंज स्क्रीनशॉट पहचानता है। पूछे जाने पर “विश्लेषण करें” पर टैप करें। वरना “नवीनतम स्क्रीनशॉट इस्तेमाल करें” चुनें।"
+            "value": "Chess Best Next Move खोलें। अपने आप विश्लेषण और Photos का पूरा ऐक्सेस चालू होने पर ऐप नया शतरंज स्क्रीनशॉट पहचानता है। पूछे जाने पर “विश्लेषण करें” पर टैप करें। वरना “नवीनतम स्क्रीनशॉट इस्तेमाल करें” चुनें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apri Chess Best Move. Con l’analisi automatica e l’accesso completo a Foto attivati, l’app riconosce il nuovo screenshot di scacchi. Tocca Analizza se richiesto. Altrimenti, tocca Usa ultimo screenshot."
+            "value": "Apri Chess Best Next Move. Con l’analisi automatica e l’accesso completo a Foto attivati, l’app riconosce il nuovo screenshot di scacchi. Tocca Analizza se richiesto. Altrimenti, tocca Usa ultimo screenshot."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abra o Chess Best Move. Com a análise automática e o Acesso Total às Fotos ativados, o aplicativo reconhece sua nova captura de xadrez. Toque em “Analisar” se solicitado. Caso contrário, toque em “Usar captura mais recente”."
+            "value": "Abra o Chess Best Next Move. Com a análise automática e o Acesso Total às Fotos ativados, o aplicativo reconhece sua nova captura de xadrez. Toque em “Analisar” se solicitado. Caso contrário, toque em “Usar captura mais recente”."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move’u açın. Otomatik analiz açıkken ve Fotoğraflar’a Tam Erişim verildiğinde uygulama yeni satranç ekran görüntünüzü tanır. İstenirse Analiz et’e dokunun. Aksi takdirde Son ekran görüntüsünü kullan’a dokunun."
+            "value": "Chess Best Next Move’u açın. Otomatik analiz açıkken ve Fotoğraflar’a Tam Erişim verildiğinde uygulama yeni satranç ekran görüntünüzü tanır. İstenirse Analiz et’e dokunun. Aksi takdirde Son ekran görüntüsünü kullan’a dokunun."
           }
         }
       }
@@ -21617,118 +21682,118 @@
         }
       }
     },
-    "Opening Chess Best Move": {
+    "Opening Chess Best Next Move": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move wird geöffnet"
+            "value": "Chess Best Next Move wird geöffnet"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abriendo Chess Best Move"
+            "value": "Abriendo Chess Best Next Move"
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abriendo Chess Best Move"
+            "value": "Abriendo Chess Best Next Move"
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Binubuksan ang Chess Best Move"
+            "value": "Binubuksan ang Chess Best Next Move"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ouverture de Chess Best Move"
+            "value": "Ouverture de Chess Best Next Move"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move खुल रहा है"
+            "value": "Chess Best Next Move खुल रहा है"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apertura di Chess Best Move"
+            "value": "Apertura di Chess Best Next Move"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abrindo o Chess Best Move"
+            "value": "Abrindo o Chess Best Next Move"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move açılıyor"
+            "value": "Chess Best Next Move açılıyor"
           }
         }
       }
     },
-    "Opens Chess Best Move to analyze it": {
+    "Opens Chess Best Next Move to analyze it": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Öffnet Chess Best Move zur Analyse"
+            "value": "Öffnet Chess Best Next Move zur Analyse"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Chess Best Move para analizarlo"
+            "value": "Abre Chess Best Next Move para analizarlo"
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Chess Best Move para analizarlo"
+            "value": "Abre Chess Best Next Move para analizarlo"
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Binubuksan ang Chess Best Move para suriin ito"
+            "value": "Binubuksan ang Chess Best Next Move para suriin ito"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ouvre Chess Best Move pour l’analyser"
+            "value": "Ouvre Chess Best Next Move pour l’analyser"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "विश्लेषण के लिए Chess Best Move खोलता है"
+            "value": "विश्लेषण के लिए Chess Best Next Move खोलता है"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apre Chess Best Move per analizzarlo"
+            "value": "Apre Chess Best Next Move per analizzarlo"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre o Chess Best Move para analisá-la"
+            "value": "Abre o Chess Best Next Move para analisá-la"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Analiz etmek için Chess Best Move’u açar"
+            "value": "Analiz etmek için Chess Best Next Move’u açar"
           }
         }
       }
@@ -22716,6 +22781,71 @@
           "stringUnit": {
             "state": "translated",
             "value": "Taşı %1$@ karesine yerleştirir"
+          }
+        }
+      }
+    },
+    "Plain English": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einfache Sprache"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plain English"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lenguaje sencillo"
+          }
+        },
+        "es-419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lenguaje sencillo"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simpleng pananalita"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langage courant"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सरल भाषा"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linguaggio semplice"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linguagem simples"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sade dil"
           }
         }
       }
@@ -25158,60 +25288,60 @@
         }
       }
     },
-    "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.": {
+    "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Next Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Speichere zuerst einen Screenshot. Halte den Home-Bildschirm gedrückt und wähle „Bearbeiten“ > „Widget hinzufügen“ > „Chess Best Move“. Halte auf dem Sperrbildschirm den Hintergrund gedrückt, wähle „Anpassen“ und dann „Widgets hinzufügen“. Tippe auf das Widget, um die App zu öffnen und deinen neuesten gespeicherten Screenshot zu analysieren. Bei eingeschränktem Fotozugriff wählst du den Screenshot aus, wenn du dazu aufgefordert wirst."
+            "value": "Speichere zuerst einen Screenshot. Halte den Home-Bildschirm gedrückt und wähle „Bearbeiten“ > „Widget hinzufügen“ > „Chess Best Next Move“. Halte auf dem Sperrbildschirm den Hintergrund gedrückt, wähle „Anpassen“ und dann „Widgets hinzufügen“. Tippe auf das Widget, um die App zu öffnen und deinen neuesten gespeicherten Screenshot zu analysieren. Bei eingeschränktem Fotozugriff wählst du den Screenshot aus, wenn du dazu aufgefordert wirst."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Guarda primero una captura de pantalla. Mantén pulsada la pantalla de inicio y, a continuación, selecciona Editar > Añadir widget > Chess Best Move. En la pantalla de bloqueo, mantén pulsada, selecciona Personalizar y, a continuación, Añadir widgets. Pulsa el widget para abrir la aplicación y analizar tu última captura de pantalla guardada. Si el acceso a Fotos está limitado, selecciona la captura de pantalla cuando se te solicite."
+            "value": "Guarda primero una captura de pantalla. Mantén pulsada la pantalla de inicio y, a continuación, selecciona Editar > Añadir widget > Chess Best Next Move. En la pantalla de bloqueo, mantén pulsada, selecciona Personalizar y, a continuación, Añadir widgets. Pulsa el widget para abrir la aplicación y analizar tu última captura de pantalla guardada. Si el acceso a Fotos está limitado, selecciona la captura de pantalla cuando se te solicite."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Guarda primero una captura de pantalla. Mantén presionada la pantalla de inicio y, a continuación, selecciona Editar > Agregar widget > Chess Best Move. En la pantalla de bloqueo, mantén presionada, selecciona Personalizar y, a continuación, Agregar widgets. Toca el widget para abrir la aplicación y analizar tu última captura de pantalla guardada. Si el acceso a Fotos está limitado, selecciona la captura de pantalla cuando se te solicite."
+            "value": "Guarda primero una captura de pantalla. Mantén presionada la pantalla de inicio y, a continuación, selecciona Editar > Agregar widget > Chess Best Next Move. En la pantalla de bloqueo, mantén presionada, selecciona Personalizar y, a continuación, Agregar widgets. Toca el widget para abrir la aplicación y analizar tu última captura de pantalla guardada. Si el acceso a Fotos está limitado, selecciona la captura de pantalla cuando se te solicite."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mag-save muna ng screenshot. Pindutin nang matagal ang Home Screen at piliin ang Edit > Add Widget > Chess Best Move. Sa Lock Screen, pindutin nang matagal, piliin ang Customize, at pagkatapos ay Add Widgets. I-tap ang widget para buksan ang app at suriin ang pinakabagong naka-save na screenshot. Kung limitado ang access sa Photos, piliin ang screenshot kapag hiningi."
+            "value": "Mag-save muna ng screenshot. Pindutin nang matagal ang Home Screen at piliin ang Edit > Add Widget > Chess Best Next Move. Sa Lock Screen, pindutin nang matagal, piliin ang Customize, at pagkatapos ay Add Widgets. I-tap ang widget para buksan ang app at suriin ang pinakabagong naka-save na screenshot. Kung limitado ang access sa Photos, piliin ang screenshot kapag hiningi."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Commencez par enregistrer une capture d’écran. Appuyez longuement sur l’écran d’accueil, puis sélectionnez Modifier > Ajouter un widget > Chess Best Move. Sur l’écran verrouillé, appuyez longuement, sélectionnez Personnaliser, puis Ajouter des widgets. Appuyez sur le widget pour ouvrir l’application et analyser votre dernière capture d’écran enregistrée. Si l’accès à Photos est limité, sélectionnez la capture d’écran lorsque vous y êtes invité."
+            "value": "Commencez par enregistrer une capture d’écran. Appuyez longuement sur l’écran d’accueil, puis sélectionnez Modifier > Ajouter un widget > Chess Best Next Move. Sur l’écran verrouillé, appuyez longuement, sélectionnez Personnaliser, puis Ajouter des widgets. Appuyez sur le widget pour ouvrir l’application et analyser votre dernière capture d’écran enregistrée. Si l’accès à Photos est limité, sélectionnez la capture d’écran lorsque vous y êtes invité."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "पहले स्क्रीनशॉट सहेजें। होम स्क्रीन को दबाकर रखें, फिर “बदलें” > “विजेट जोड़ें” > Chess Best Move चुनें। लॉक स्क्रीन को दबाकर रखें, “कस्टमाइज़ करें” और फिर “विजेट जोड़ें” चुनें। विजेट पर टैप करने से ऐप खुलता है और सबसे नया सहेजा गया स्क्रीनशॉट जाँचता है। Photos का सीमित ऐक्सेस होने पर पूछे जाने पर स्क्रीनशॉट चुनें।"
+            "value": "पहले स्क्रीनशॉट सहेजें। होम स्क्रीन को दबाकर रखें, फिर “बदलें” > “विजेट जोड़ें” > Chess Best Next Move चुनें। लॉक स्क्रीन को दबाकर रखें, “कस्टमाइज़ करें” और फिर “विजेट जोड़ें” चुनें। विजेट पर टैप करने से ऐप खुलता है और सबसे नया सहेजा गया स्क्रीनशॉट जाँचता है। Photos का सीमित ऐक्सेस होने पर पूछे जाने पर स्क्रीनशॉट चुनें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Salva prima uno screenshot. Tieni premuta la schermata Home, poi scegli Modifica > Aggiungi widget > Chess Best Move. Sulla schermata di blocco, tieni premuto, scegli Personalizza e poi Aggiungi widget. Tocca il widget per aprire l’app e analizzare l’ultimo screenshot salvato. Se l’accesso a Foto è limitato, scegli lo screenshot quando richiesto."
+            "value": "Salva prima uno screenshot. Tieni premuta la schermata Home, poi scegli Modifica > Aggiungi widget > Chess Best Next Move. Sulla schermata di blocco, tieni premuto, scegli Personalizza e poi Aggiungi widget. Tocca il widget per aprire l’app e analizzare l’ultimo screenshot salvato. Se l’accesso a Foto è limitato, scegli lo screenshot quando richiesto."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Primeiro, salve uma captura. Mantenha pressionada a Tela de Início e escolha Editar > Adicionar Widget > Chess Best Move. Na Tela Bloqueada, mantenha pressionado, escolha Personalizar e depois Adicionar Widgets. Toque no widget para abrir o app e analisar sua captura salva mais recente. Com acesso limitado ao Fotos, escolha a captura quando solicitado."
+            "value": "Primeiro, salve uma captura. Mantenha pressionada a Tela de Início e escolha Editar > Adicionar Widget > Chess Best Next Move. Na Tela Bloqueada, mantenha pressionado, escolha Personalizar e depois Adicionar Widgets. Toque no widget para abrir o app e analisar sua captura salva mais recente. Com acesso limitado ao Fotos, escolha a captura quando solicitado."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Önce bir ekran görüntüsü kaydedin. Ana Ekran’ı basılı tutup Düzenle > Araç Takımı Ekle > Chess Best Move yolunu izleyin. Kilitli Ekran’da basılı tutun, Özelleştir’i ve ardından Araç Takımı Ekle’yi seçin. Uygulamayı açıp son kaydettiğiniz ekran görüntüsünü analiz etmek için araç takımına dokunun. Fotoğraflar erişimi sınırlıysa istendiğinde ekran görüntüsünü seçin."
+            "value": "Önce bir ekran görüntüsü kaydedin. Ana Ekran’ı basılı tutup Düzenle > Araç Takımı Ekle > Chess Best Next Move yolunu izleyin. Kilitli Ekran’da basılı tutun, Özelleştir’i ve ardından Araç Takımı Ekle’yi seçin. Uygulamayı açıp son kaydettiğiniz ekran görüntüsünü analiz etmek için araç takımına dokunun. Fotoğraflar erişimi sınırlıysa istendiğinde ekran görüntüsünü seçin."
           }
         }
       }
@@ -26417,60 +26547,60 @@
         }
       }
     },
-    "Some squares need a look. Check the position in Chess Best Move.": {
+    "Some squares need a look. Check the position in Chess Best Next Move.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Einige Felder müssen überprüft werden. Prüfe die Stellung in Chess Best Move."
+            "value": "Einige Felder müssen überprüft werden. Prüfe die Stellung in Chess Best Next Move."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hay que revisar algunas casillas. Comprueba la posición en Chess Best Move."
+            "value": "Hay que revisar algunas casillas. Comprueba la posición en Chess Best Next Move."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hay que revisar algunas casillas. Revisa la posición en Chess Best Move."
+            "value": "Hay que revisar algunas casillas. Revisa la posición en Chess Best Next Move."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "May mga parisukat na kailangang suriin. Tingnan ang posisyon sa Chess Best Move."
+            "value": "May mga parisukat na kailangang suriin. Tingnan ang posisyon sa Chess Best Next Move."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Certaines cases nécessitent un examen. Vérifiez la position dans « Chess Best Move »."
+            "value": "Certaines cases nécessitent un examen. Vérifiez la position dans « Chess Best Next Move »."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "कुछ खाने जाँचने हैं। Chess Best Move में स्थिति जाँचें।"
+            "value": "कुछ खाने जाँचने हैं। Chess Best Next Move में स्थिति जाँचें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alcune case vanno controllate. Controlla la posizione in Chess Best Move."
+            "value": "Alcune case vanno controllate. Controlla la posizione in Chess Best Next Move."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Algumas casas precisam ser verificadas. Confira a posição no Chess Best Move."
+            "value": "Algumas casas precisam ser verificadas. Confira a posição no Chess Best Next Move."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bazı kareleri kontrol etmek gerekiyor. Konumu Chess Best Move’da kontrol edin."
+            "value": "Bazı kareleri kontrol etmek gerekiyor. Konumu Chess Best Next Move’da kontrol edin."
           }
         }
       }
@@ -30255,60 +30385,60 @@
         }
       }
     },
-    "The analysis is still running in Chess Best Move.": {
+    "The analysis is still running in Chess Best Next Move.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Analyse läuft noch in Chess Best Move."
+            "value": "Die Analyse läuft noch in Chess Best Next Move."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "El análisis sigue en curso en Chess Best Move."
+            "value": "El análisis sigue en curso en Chess Best Next Move."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "El análisis sigue en curso en Chess Best Move."
+            "value": "El análisis sigue en curso en Chess Best Next Move."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tumatakbo pa ang pagsusuri sa Chess Best Move."
+            "value": "Tumatakbo pa ang pagsusuri sa Chess Best Next Move."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "L’analyse est toujours en cours dans Chess Best Move."
+            "value": "L’analyse est toujours en cours dans Chess Best Next Move."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chess Best Move में विश्लेषण अभी चल रहा है।"
+            "value": "Chess Best Next Move में विश्लेषण अभी चल रहा है।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "L’analisi è ancora in corso in Chess Best Move."
+            "value": "L’analisi è ancora in corso in Chess Best Next Move."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "A análise ainda está em andamento no Chess Best Move."
+            "value": "A análise ainda está em andamento no Chess Best Next Move."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Analiz Chess Best Move’da devam ediyor."
+            "value": "Analiz Chess Best Next Move’da devam ediyor."
           }
         }
       }
@@ -31473,60 +31603,60 @@
         }
       }
     },
-    "The purchase is waiting for approval. The analysis starts in Chess Best Move when it is approved.": {
+    "The purchase is waiting for approval. The analysis starts in Chess Best Next Move when it is approved.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Der Kauf wartet auf Genehmigung. Sobald er genehmigt ist, startet die Analyse in Chess Best Move."
+            "value": "Der Kauf wartet auf Genehmigung. Sobald er genehmigt ist, startet die Analyse in Chess Best Next Move."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La compra está pendiente de aprobación. El análisis comienza en Chess Best Move cuando se apruebe."
+            "value": "La compra está pendiente de aprobación. El análisis comienza en Chess Best Next Move cuando se apruebe."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "La compra está pendiente de aprobación. El análisis comienza en Chess Best Move cuando se apruebe."
+            "value": "La compra está pendiente de aprobación. El análisis comienza en Chess Best Next Move cuando se apruebe."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hinihintay ang pag-apruba sa pagbili. Magsisimula ang pagsusuri sa Chess Best Move kapag naaprubahan."
+            "value": "Hinihintay ang pag-apruba sa pagbili. Magsisimula ang pagsusuri sa Chess Best Next Move kapag naaprubahan."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "L'achat est en attente de validation. L'analyse démarre dans Chess Best Move une fois qu'il est validé."
+            "value": "L'achat est en attente de validation. L'analyse démarre dans Chess Best Next Move une fois qu'il est validé."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "खरीदारी की मंज़ूरी बाकी है। मंज़ूरी मिलते ही Chess Best Move में विश्लेषण शुरू होगा।"
+            "value": "खरीदारी की मंज़ूरी बाकी है। मंज़ूरी मिलते ही Chess Best Next Move में विश्लेषण शुरू होगा।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "L’acquisto è in attesa di approvazione. L’analisi inizierà in Chess Best Move appena sarà approvato."
+            "value": "L’acquisto è in attesa di approvazione. L’analisi inizierà in Chess Best Next Move appena sarà approvato."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "A compra está aguardando aprovação. A análise começa no Chess Best Move assim que for aprovada."
+            "value": "A compra está aguardando aprovação. A análise começa no Chess Best Next Move assim que for aprovada."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Satın alma işlemi onay bekliyor. Onay verildiğinde analiz Chess Best Move’da başlar."
+            "value": "Satın alma işlemi onay bekliyor. Onay verildiğinde analiz Chess Best Next Move’da başlar."
           }
         }
       }
@@ -33985,60 +34115,60 @@
         }
       }
     },
-    "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it.": {
+    "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Next Move to analyze it.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Entsperre dein Gerät und erlaube die angeforderten Zugriffe. Wenn Siri den Kurzbefehl ausführt, nimmt er den Screenshot auf, speichert ihn in „Zuletzt“ und öffnet Chess Best Move zur Analyse."
+            "value": "Entsperre dein Gerät und erlaube die angeforderten Zugriffe. Wenn Siri den Kurzbefehl ausführt, nimmt er den Screenshot auf, speichert ihn in „Zuletzt“ und öffnet Chess Best Next Move zur Analyse."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Desbloquea tu dispositivo y concede los permisos que se te soliciten. Cuando Siri ejecuta el atajo, realiza la captura de pantalla, la guarda en «Recientes» y abre Chess Best Move para analizarla."
+            "value": "Desbloquea tu dispositivo y concede los permisos que se te soliciten. Cuando Siri ejecuta el atajo, realiza la captura de pantalla, la guarda en «Recientes» y abre Chess Best Next Move para analizarla."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Desbloquea tu dispositivo y concede los permisos que se te soliciten. Cuando Siri ejecuta el atajo, realiza la captura de pantalla, la guarda en «Recientes» y abre Chess Best Move para analizarla."
+            "value": "Desbloquea tu dispositivo y concede los permisos que se te soliciten. Cuando Siri ejecuta el atajo, realiza la captura de pantalla, la guarda en «Recientes» y abre Chess Best Next Move para analizarla."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "I-unlock ang device at ibigay ang hinihinging mga pahintulot. Kapag pinatakbo ni Siri ang shortcut, kukuha ito ng screenshot, ise-save sa Recents, at bubuksan ang Chess Best Move para suriin iyon."
+            "value": "I-unlock ang device at ibigay ang hinihinging mga pahintulot. Kapag pinatakbo ni Siri ang shortcut, kukuha ito ng screenshot, ise-save sa Recents, at bubuksan ang Chess Best Next Move para suriin iyon."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Déverrouillez votre appareil et accordez toutes les autorisations demandées. Lorsque Siri exécute le raccourci, il réalise la capture d’écran, l’enregistre dans « Récents » et ouvre Chess Best Move pour l’analyser."
+            "value": "Déverrouillez votre appareil et accordez toutes les autorisations demandées. Lorsque Siri exécute le raccourci, il réalise la capture d’écran, l’enregistre dans « Récents » et ouvre Chess Best Next Move pour l’analyser."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "डिवाइस अनलॉक करें और माँगी गई अनुमतियाँ दें। Siri शॉर्टकट चलाकर स्क्रीनशॉट लेता है, “हाल के” में सहेजता है और विश्लेषण के लिए Chess Best Move खोलता है।"
+            "value": "डिवाइस अनलॉक करें और माँगी गई अनुमतियाँ दें। Siri शॉर्टकट चलाकर स्क्रीनशॉट लेता है, “हाल के” में सहेजता है और विश्लेषण के लिए Chess Best Next Move खोलता है।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sblocca il dispositivo e concedi le autorizzazioni richieste. Quando Siri esegue il comando rapido, scatta lo screenshot, lo salva in Recenti e apre Chess Best Move per analizzarlo."
+            "value": "Sblocca il dispositivo e concedi le autorizzazioni richieste. Quando Siri esegue il comando rapido, scatta lo screenshot, lo salva in Recenti e apre Chess Best Next Move per analizzarlo."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Desbloqueie seu dispositivo e conceda todas as permissões solicitadas. Quando a Siri executa o atalho, ela captura a tela, salva a imagem em “Recentes” e abre o Chess Best Move para analisá-la."
+            "value": "Desbloqueie seu dispositivo e conceda todas as permissões solicitadas. Quando a Siri executa o atalho, ela captura a tela, salva a imagem em “Recentes” e abre o Chess Best Next Move para analisá-la."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aygıtınızın kilidini açın ve istenen izinleri verin. Siri kestirmeyi çalıştırdığında ekran görüntüsünü alır, Son Kullanılanlar’a kaydeder ve analiz etmek için Chess Best Move’u açar."
+            "value": "Aygıtınızın kilidini açın ve istenen izinleri verin. Siri kestirmeyi çalıştırdığında ekran görüntüsünü alır, Son Kullanılanlar’a kaydeder ve analiz etmek için Chess Best Next Move’u açar."
           }
         }
       }
@@ -36305,60 +36435,60 @@
         }
       }
     },
-    "You've used your free analyses. Open Chess Best Move to continue.": {
+    "You've used your free analyses. Open Chess Best Next Move to continue.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Du hast deine kostenlosen Analysen aufgebraucht. Öffne Chess Best Move, um fortzufahren."
+            "value": "Du hast deine kostenlosen Analysen aufgebraucht. Öffne Chess Best Next Move, um fortzufahren."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ya has agotado tus análisis gratuitos. Abre Chess Best Move para continuar."
+            "value": "Ya has agotado tus análisis gratuitos. Abre Chess Best Next Move para continuar."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ya agotaste tus análisis gratuitos. Abre Chess Best Move para continuar."
+            "value": "Ya agotaste tus análisis gratuitos. Abre Chess Best Next Move para continuar."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nagamit mo na ang libreng pagsusuri mo. Buksan ang Chess Best Move para magpatuloy."
+            "value": "Nagamit mo na ang libreng pagsusuri mo. Buksan ang Chess Best Next Move para magpatuloy."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vous avez utilisé toutes vos analyses gratuites. Ouvrez Chess Best Move pour continuer."
+            "value": "Vous avez utilisé toutes vos analyses gratuites. Ouvrez Chess Best Next Move pour continuer."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "आपके मुफ़्त विश्लेषण खत्म हो गए हैं। जारी रखने के लिए Chess Best Move खोलें।"
+            "value": "आपके मुफ़्त विश्लेषण खत्म हो गए हैं। जारी रखने के लिए Chess Best Next Move खोलें।"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hai esaurito le analisi gratuite. Apri Chess Best Move per continuare."
+            "value": "Hai esaurito le analisi gratuite. Apri Chess Best Next Move per continuare."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Você já utilizou suas análises gratuitas. Abra o Chess Best Move para continuar."
+            "value": "Você já utilizou suas análises gratuitas. Abra o Chess Best Next Move para continuar."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ücretsiz analizlerinizi kullandınız. Devam etmek için Chess Best Move’u açın."
+            "value": "Ücretsiz analizlerinizi kullandınız. Devam etmek için Chess Best Next Move’u açın."
           }
         }
       }

@@ -136,7 +136,9 @@ final class WatchPhoneBridge: NSObject, WCSessionDelegate {
 
     private func send(_ reply: WatchAnalysisReply, to callback: WatchReplyHandler) {
         var reply = reply
-        reply.moveDisplayFormat = settings?.moveDisplayFormat
+        let format = settings?.moveDisplayFormat
+        reply.moveDisplayFormat = format == .both ? .words : format
+        reply.preferredMoveDisplayFormat = format
         if let data = try? JSONEncoder().encode(reply), data.count <= WatchWire.maximumReplyBytes {
             callback.send(data)
         } else {

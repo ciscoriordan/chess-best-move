@@ -19,7 +19,7 @@ enum SharePhase: Sendable, Hashable {
 
     var title: String {
         switch self {
-        case .working: String(localized: "Opening Chess Best Move")
+        case .working: String(localized: "Opening Chess Best Next Move")
         case .appDidNotOpen: String(localized: "Ready to analyze")
         case .notAnImage: String(localized: "That isn't an image")
         case .cannotHandOver: String(localized: "Couldn't read that image")
@@ -29,9 +29,9 @@ enum SharePhase: Sendable, Hashable {
     var detail: String {
         switch self {
         case .working: String(localized: "The app reads the board and finds the best move.")
-        case .appDidNotOpen: String(localized: "Open Chess Best Move to see the best move.")
+        case .appDidNotOpen: String(localized: "Open Chess Best Next Move to see the best move.")
         case .notAnImage: String(localized: "Share a screenshot that shows a chessboard.")
-        case .cannotHandOver: String(localized: "Open Chess Best Move and import the screenshot from Photos.")
+        case .cannotHandOver: String(localized: "Open Chess Best Next Move and import the screenshot from Photos.")
         }
     }
 
@@ -39,7 +39,7 @@ enum SharePhase: Sendable, Hashable {
 
     /// What VoiceOver is told when the screen changes to this phase by itself. The extension's
     /// whole job is to report what happened, and the report used to arrive silently: a reader
-    /// heard "Opening Chess Best Move" and then nothing, while the screen already said
+    /// heard "Opening Chess Best Next Move" and then nothing, while the screen already said
     /// something else.
     var announcement: String {
         title + ". " + detail

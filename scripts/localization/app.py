@@ -23,7 +23,7 @@ TARGETS = (*DEEPL_TARGETS, 'hi', 'fil')
 CATALOGS = {name:RESOURCES/f'{name}.xcstrings' for name in ['Localizable','AppShortcuts','InfoPlist']}
 CATALOGS['WatchLocalizable'] = ROOT/'WatchApp/Resources/Localizable.xcstrings'
 PLACEHOLDER = re.compile(r'%(?:\d+\$)?[-+#0 ]*(?:\d+)?(?:\.\d+)?(?:ll|l|h|z)?[@diufgse]|\$\{[^}]+\}')
-CONTEXT = '''Chess Best Move is an iPhone and iPad chess screenshot analysis app. Keep the app name Chess Best Move, Pro, Stockfish, Siri, VoiceOver, TestFlight, App Store, iPhone, iPad, Mac, FEN and chess square coordinates unchanged. Use Apple's official localized names for Photos, Shortcuts, Settings, Control Center, Action button, Back Tap, Apple Account, and purchase controls. Use natural concise interface language, conventional chess terms, and normal capitalization in the target language. Capture means taking a chess piece; screenshot means an image of the screen. Preserve leading and trailing spaces in fragments. Placeholders are runtime values and may be reordered with the sentence.'''
+CONTEXT = '''Chess Best Next Move is an iPhone and iPad chess screenshot analysis app. Keep the app name Chess Best Next Move, Pro, Stockfish, Siri, VoiceOver, TestFlight, App Store, iPhone, iPad, Mac, FEN and chess square coordinates unchanged. Use Apple's official localized names for Photos, Shortcuts, Settings, Control Center, Action button, Back Tap, Apple Account, and purchase controls. Use natural concise interface language, conventional chess terms, and normal capitalization in the target language. Capture means taking a chess piece; screenshot means an image of the screen. Preserve leading and trailing spaces in fragments. Placeholders are runtime values and may be reordered with the sentence.'''
 
 
 def read(path, default=None):
@@ -69,7 +69,7 @@ def extract(sync=False):
         data=read(path)
         for key,item in data['strings'].items():
             # Technical notation and product names are deliberately invariant.
-            if not re.search('[A-Za-z]',PLACEHOLDER.sub('',key)) or key in {'Chess Best Move','Pro','FEN','SAN','Stockfish','Stockfish 19','App Store','Nf6','e4','O-O','O-O-O'} or key.startswith('focusSystem='):
+            if not re.search('[A-Za-z]',PLACEHOLDER.sub('',key)) or key in {'Chess Best Next Move','Pro','FEN','SAN','Stockfish','Stockfish 19','App Store','Nf6','e4','O-O','O-O-O'} or key.startswith('focusSystem='):
                 item['shouldTranslate']=False
             if item.get('shouldTranslate') is False or item.get('extractionState')=='stale': continue
             if catalog=='WatchLocalizable':

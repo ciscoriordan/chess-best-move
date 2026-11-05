@@ -29,12 +29,6 @@
     "source": "Off",
     "translation": "Desactivado"
   },
-  "012d240e132919177bc3": {
-    "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
-    "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
-    "source": "Chess Best Move couldn't analyze this position.",
-    "translation": "Chess Best Move no ha podido analizar esta posición."
-  },
   "0187a339e5ca6ddd774c": {
     "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
     "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
@@ -58,12 +52,6 @@
     "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
     "source": "No analyses left.",
     "translation": "No quedan análisis."
-  },
-  "0355de754655c496fb6b": {
-    "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
-    "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
-    "source": "Chess Best Move, Copyright (C) 2026 Motomatic LLC",
-    "translation": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
   },
   "03b0f6bbda9b26e2d5ee": {
     "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
@@ -168,12 +156,6 @@
     "source": "Switch to a Better Move Automatically",
     "translation": "Cambiar automáticamente a una jugada mejor"
   },
-  "08ac348e22ee77ecfad6": {
-    "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
-    "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
-    "source": "You've used your free analyses. Open Chess Best Move to continue.",
-    "translation": "Ya has agotado tus análisis gratuitos. Abre Chess Best Move para continuar."
-  },
   "09779c722155ed14295b": {
     "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
     "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
@@ -185,6 +167,14 @@
     "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
     "source": "More",
     "translation": "Más"
+  },
+  "0a92bbd282da82546251": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:37:51.567329+00:00",
+    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Next Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
+    "translation": "Guarda primero una captura de pantalla. Mantén pulsada la pantalla de inicio y, a continuación, selecciona Editar > Añadir widget > Chess Best Next Move. En la pantalla de bloqueo, mantén pulsada, selecciona Personalizar y, a continuación, Añadir widgets. Pulsa el widget para abrir la aplicación y analizar tu última captura de pantalla guardada. Si el acceso a Fotos está limitado, selecciona la captura de pantalla cuando se te solicite."
   },
   "0acc1ec9328d9d08b986": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -358,6 +348,13 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "bishop",
     "translation": "el alfil"
+  },
+  "12b23b0ffc1ba0ad7662": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
+    "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
+    "source": "You've used your free analyses. Open Chess Best Next Move to continue.",
+    "translation": "Ya has agotado tus análisis gratuitos. Abre Chess Best Next Move para continuar."
   },
   "13645bf6138ae0040355": {
     "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
@@ -700,11 +697,12 @@
     "translation": "Dama"
   },
   "25acdbba03e74422a3c3": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
     "origin": "manual-reviewed",
     "reason": "Preserved the reviewed, shipped Watch-aware Photos permission text and synchronized its stale editorial record.",
     "reviewedAt": "2026-10-22",
-    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch.",
-    "translation": "Chess Best Move lee tu captura más reciente para encontrar el tablero. El análisis se realiza en tu dispositivo. Si lo solicitas desde tu Apple Watch, se envía un resultado recortado al Watch enlazado."
+    "source": "Chess Best Next Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch.",
+    "translation": "Chess Best Next Move lee tu captura más reciente para encontrar el tablero. El análisis se realiza en tu dispositivo. Si lo solicitas desde tu Apple Watch, se envía un resultado recortado al Watch enlazado."
   },
   "261a382bd2ca0ea10bfb": {
     "origin": "manual-reviewed",
@@ -738,6 +736,14 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "depth %lld",
     "translation": "profundidad %1$lld"
+  },
+  "27da7b0048ff3dc508e3": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:37:03.923357+00:00",
+    "source": "Chess Best Next Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
+    "translation": "Chess Best Next Move es software libre: puedes utilizarlo, estudiar cómo funciona, modificarlo y compartirlo, ya sea modificado o sin modificar, bajo los términos de la versión 3 de la Licencia Pública General de GNU, tal y como la ha publicado la Free Software Foundation. La aplicación incluye Stockfish, que está bajo la misma licencia, por lo que la aplicación en su conjunto se distribuye bajo dicha licencia."
   },
   "27fb6bdff5c34fc4de32": {
     "origin": "manual",
@@ -815,13 +821,6 @@
     "reviewedAt": "2026-10-15T02:37:03.923325+00:00",
     "source": "Free analyses go back to 3, the boards already paid for are forgotten, and analyses added here are taken back. Bought analyses and Pro are not touched.",
     "translation": "Los análisis gratuitos se restablecen a 3, los tableros ya pagados se olvidan y los análisis añadidos aquí se retiran. Los análisis comprados y la versión Pro no se ven afectados."
-  },
-  "2ae2cc278eb86d50fc20": {
-    "origin": "deepl-reviewed",
-    "reason": "Final grammar audit against callers, chess rules, and Apple control terminology.",
-    "reviewedAt": "2026-10-15T02:54:10.074865+00:00",
-    "source": "Add “Find Best Move” from Chess Best Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
-    "translation": "Añade «Encontrar la mejor jugada» de Chess Best Move. Pulsa su entrada «Captura de pantalla», elige «Seleccionar variable» y selecciona la salida de «Hacer captura de pantalla». Debería decir «Encontrar la mejor jugada en Captura de pantalla», con «Captura de pantalla» mostrada como un token variable con el icono de captura de pantalla, igual que la entrada en «Guardar en álbum de fotos». Un marcador de posición de «Captura de pantalla» de color pálido no es una imagen conectada. No escribas la palabra «Captura de pantalla» ni dejes la entrada configurada en «Preguntar cada vez». La aplicación recibe esta imagen directamente, sin buscarla en «Fotos»."
   },
   "2b2055913ff4f2294155": {
     "origin": "deepl-reviewed",
@@ -935,6 +934,12 @@
     "source": "White O-O-O",
     "translation": "Blancas O-O-O"
   },
+  "2ed7924c9766abc3d727": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Plain English",
+    "translation": "Lenguaje sencillo"
+  },
   "2f1ba14a0b52a16ce1a4": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -1042,20 +1047,6 @@
     "source": "For puzzles, study, and reviewing games.",
     "translation": "Para problemas, estudio y revisión de partidas."
   },
-  "339dfc6e239d77bac8cd": {
-    "origin": "manual-reviewed",
-    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
-    "reviewedAt": "2026-10-22",
-    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once.",
-    "translation": "No se pudo conectar con la app del iPhone. Revisa la conexión y abre Chess Best Move una vez en el iPhone."
-  },
-  "33aa9217c69148ce87b3": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:03.923357+00:00",
-    "source": "Chess Best Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
-    "translation": "Chess Best Move es software libre: puedes utilizarlo, estudiar cómo funciona, modificarlo y compartirlo, ya sea modificado o sin modificar, bajo los términos de la versión 3 de la Licencia Pública General de GNU, tal y como la ha publicado la Free Software Foundation. La aplicación incluye Stockfish, que está bajo la misma licencia, por lo que la aplicación en su conjunto se distribuye bajo dicha licencia."
-  },
   "3428bcc46141d84ee515": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
@@ -1082,12 +1073,26 @@
     "source": "Recognition wasn't sure it read the right board. Press and hold the board to compare it with your screenshot, then analyze.",
     "translation": "El sistema de reconocimiento no estaba seguro de haber leído el tablero correcto. Mantén pulsado el tablero para compararlo con tu captura de pantalla y, a continuación, analiza el resultado."
   },
+  "3506dfd2c29dbb66a96d": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Both",
+    "translation": "Ambos"
+  },
   "354a9df0257659c20a7e": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
     "reviewedAt": "2026-10-15T02:37:03.923362+00:00",
     "source": "The move on screen switches to a better one by itself, if you ask it to.",
     "translation": "La jugada que aparece en pantalla cambia por sí sola a una mejor, si así se le indica."
+  },
+  "372edd9bb965f3f5f81b": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:38:36.144339+00:00",
+    "source": "Open Chess Best Next Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
+    "translation": "Abre Chess Best Next Move. Con el análisis automático y el «Acceso completo a Fotos» activados, la aplicación reconoce tu nueva captura de ajedrez. Pulsa «Analizar» si se te solicita. Si no, pulsa «Usar última captura»."
   },
   "3743137866cea1acab93": {
     "origin": "deepl-reviewed",
@@ -1136,13 +1141,6 @@
     "reviewedAt": "2026-10-15T02:43:20.822599+00:00",
     "source": "Optional: create a separate shortcut named Chess Action Button. Add Get Current App, then an If action that compares the current app’s Name with the name of your board app. Inside If, add Run Shortcut and choose Analyze my chess screenshot without the Wait action. Leave Otherwise empty. Assign Chess Action Button to the Action button. It will do nothing in other apps, rather than return to the button’s previous function.",
     "translation": "Opcional: crea un atajo independiente llamado «Botón de acción de ajedrez». Añade «Obtener app actual» y, a continuación, una acción «Si» que compare el nombre de la aplicación actual con el nombre de tu app de ajedrez. Dentro de «Si», añade «Ejecutar atajo» y selecciona «Analiza mi captura de ajedrez» sin la acción «Esperar». Deja «Si no» en blanco. Asigna «Botón de acción de ajedrez» al botón «Acción». No hará nada en otras apps; tampoco recuperará la función anterior del botón."
-  },
-  "3a7a45fb3c5639cf30e0": {
-    "origin": "deepl-reviewed",
-    "reason": "Final grammar audit against callers, chess rules, and Apple control terminology.",
-    "reviewedAt": "2026-10-15T02:54:10.074890+00:00",
-    "source": "Chess Best Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
-    "translation": "Chess Best Move analiza las posiciones con Stockfish, un motor de ajedrez libre y de código abierto creado por los desarrolladores de Stockfish. Se ejecuta en tu %1$@; no se sube nada."
   },
   "3b74d45b4ec6d3cea58e": {
     "origin": "deepl-reviewed",
@@ -1278,20 +1276,6 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "Analyzes %@ to move instead. Re-running is free.",
     "translation": "Analiza la posición con turno de las %1$@. Repetir el análisis es gratis."
-  },
-  "3f780709f4f80ae6ea0b": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:03.923405+00:00",
-    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it.",
-    "translation": "Desbloquea tu dispositivo y concede los permisos que se te soliciten. Cuando Siri ejecuta el atajo, realiza la captura de pantalla, la guarda en «Recientes» y abre Chess Best Move para analizarla."
-  },
-  "3f960063d371f12ae689": {
-    "origin": "manual-reviewed",
-    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
-    "reviewedAt": "2026-10-22",
-    "source": "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses.",
-    "translation": "No quedan análisis. Abre Chess Best Move en el iPhone para obtener Pro o más análisis."
   },
   "3fa20c3bb030ed094bad": {
     "origin": "deepl-reviewed",
@@ -1479,13 +1463,6 @@
     "reviewedAt": "2026-10-15T02:37:03.923427+00:00",
     "source": "Needs a look: ",
     "translation": "Hay que revisarlo: "
-  },
-  "4a040553d42d7508d75e": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:03.923428+00:00",
-    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Move opens.",
-    "translation": "Busca la mejor jugada en una captura de pantalla de una posición de ajedrez. Pasa una captura de pantalla o elige una de «Fotos» cuando se abra «Chess Best Move»."
   },
   "4aba6710fac685f9b5ad": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -1679,13 +1656,6 @@
     "source": "Clear History?",
     "translation": "¿Borrar el historial?"
   },
-  "542a9756840cf6573c30": {
-    "origin": "manual-reviewed",
-    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
-    "reviewedAt": "2026-10-22",
-    "source": "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone.",
-    "translation": "Esta posición necesita confirmación. Abre la captura en Chess Best Move en el iPhone."
-  },
   "549342cc819bac01d613": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -1761,12 +1731,13 @@
     "source": "Originally: %@",
     "translation": "Resultado inicial: %@"
   },
-  "575af5d5ce253bbe2e3b": {
+  "57a7324faf715c561929": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:29.710203+00:00",
-    "source": "The analysis is still running in Chess Best Move.",
-    "translation": "El análisis sigue en curso en Chess Best Move."
+    "reviewedAt": "2026-10-15T02:37:29.710222+00:00",
+    "source": "Some squares need a look. Check the position in Chess Best Next Move.",
+    "translation": "Hay que revisar algunas casillas. Comprueba la posición en Chess Best Next Move."
   },
   "57b1a1b6aad0a13ead0f": {
     "origin": "deepl-reviewed",
@@ -1834,13 +1805,6 @@
     "source": "Allow full access in Settings",
     "translation": "Permitir acceso completo en «Ajustes»"
   },
-  "5b13490a1f22e0229cc5": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:29.710213+00:00",
-    "source": "Chess Best Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
-    "translation": "«Chess Best Move» se distribuye con la esperanza de que resulte útil, pero SIN NINGÚN TIPO DE GARANTÍA; ni siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN FIN DETERMINADO. Consulta la Licencia Pública General de GNU para obtener más detalles."
-  },
   "5b4d0c120adf8cbd2262": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -1896,13 +1860,6 @@
     "reviewedAt": "2026-10-15T02:37:29.710221+00:00",
     "source": "week",
     "translation": "semana"
-  },
-  "5caf3cb39cbc98371a90": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:29.710222+00:00",
-    "source": "Some squares need a look. Check the position in Chess Best Move.",
-    "translation": "Hay que revisar algunas casillas. Comprueba la posición en Chess Best Move."
   },
   "5d483a2a98693c68626a": {
     "origin": "deepl-reviewed",
@@ -1984,6 +1941,14 @@
     "reviewedAt": "2026-10-15T02:37:29.710233+00:00",
     "source": "Move the board cursor up",
     "translation": "Mueve el cursor del tablero hacia arriba"
+  },
+  "619c93441f7bdaa8ffc1": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.517930+00:00",
+    "source": "The iPhone did not finish in time. Open Chess Best Next Move on iPhone once, then try again.",
+    "translation": "El iPhone no terminó a tiempo. Abre Chess Best Next Move en el iPhone una vez y vuelve a intentarlo."
   },
   "6264d5b9f1930a60a77a": {
     "origin": "deepl-reviewed",
@@ -2086,13 +2051,6 @@
     "reviewedAt": "2026-10-15T02:37:29.710250+00:00",
     "source": "In the Shortcuts app, create a shortcut named “Analyze my chess screenshot”. Add “Take Screenshot” as its first action.",
     "translation": "En la app Atajos, crea un atajo llamado «Analiza mi captura de ajedrez». Añade «Hacer captura de pantalla» como primera acción."
-  },
-  "6624dc2fbca091a5464d": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:29.710251+00:00",
-    "source": "Open Chess Best Move to see the best move.",
-    "translation": "Abre Chess Best Move para ver la mejor jugada."
   },
   "663db260526dac9b16f8": {
     "origin": "manual-reviewed",
@@ -2292,13 +2250,6 @@
     "source": "A longer search that keeps running after the answer, up to 2 minutes.",
     "translation": "Una búsqueda más larga que sigue ejecutándose tras la respuesta, hasta 2 minutos."
   },
-  "70be6dcce5ca9fab1453": {
-    "origin": "manual-reviewed",
-    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
-    "reviewedAt": "2026-10-22",
-    "source": "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again.",
-    "translation": "La app del iPhone está ocupada. Sal de Chess Best Move en el iPhone e inténtalo de nuevo."
-  },
   "7126cbfe690ae7fcd3bc": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -2346,6 +2297,14 @@
     "source": "Flip",
     "translation": "Invertir"
   },
+  "73ad9327a36656ffcf9d": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "No analyses remaining. Open Chess Best Next Move on iPhone for Pro or more analyses.",
+    "translation": "No quedan análisis. Abre Chess Best Next Move en el iPhone para obtener Pro o más análisis."
+  },
   "73b1e853726b33712d03": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -2380,12 +2339,13 @@
     "source": "Version",
     "translation": "Versión"
   },
-  "75ea5bc260f0ff122deb": {
+  "75d8d2a5dfa765faf1bc": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:51.567329+00:00",
-    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
-    "translation": "Guarda primero una captura de pantalla. Mantén pulsada la pantalla de inicio y, a continuación, selecciona Editar > Añadir widget > Chess Best Move. En la pantalla de bloqueo, mantén pulsada, selecciona Personalizar y, a continuación, Añadir widgets. Pulsa el widget para abrir la aplicación y analizar tu última captura de pantalla guardada. Si el acceso a Fotos está limitado, selecciona la captura de pantalla cuando se te solicite."
+    "reviewedAt": "2026-10-15T02:37:29.710213+00:00",
+    "source": "Chess Best Next Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
+    "translation": "«Chess Best Next Move» se distribuye con la esperanza de que resulte útil, pero SIN NINGÚN TIPO DE GARANTÍA; ni siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN FIN DETERMINADO. Consulta la Licencia Pública General de GNU para obtener más detalles."
   },
   "760c54035e53d1958f63": {
     "origin": "deepl-reviewed",
@@ -2428,6 +2388,14 @@
     "source": "Move the board cursor right",
     "translation": "Mueve el cursor del tablero hacia la derecha"
   },
+  "77cdda461ea3e09357a8": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Open Chess Best Next Move on iPhone and allow full Photos access to read new screenshots.",
+    "translation": "Abre Chess Best Next Move en el iPhone y permite acceso completo a Fotos para leer nuevas capturas."
+  },
   "78356393817438eac772": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
@@ -2447,13 +2415,6 @@
     "reviewedAt": "2026-10-22T19:31:21.157473+00:00",
     "source": "Tap to return to the result.",
     "translation": "Toca para volver al resultado."
-  },
-  "79439b9e21d6d4f66096": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:51.567343+00:00",
-    "source": "Opens Chess Best Move to analyze it",
-    "translation": "Abre Chess Best Move para analizarlo"
   },
   "798e5b9d329da41834be": {
     "origin": "deepl-reviewed",
@@ -2503,6 +2464,14 @@
     "source": "An analysis is spent on a position you have not analyzed before. Re-running the same board, at any think time, is free.",
     "translation": "Se descuenta un análisis al analizar una posición nueva. Repetir el análisis del mismo tablero es gratis, sea cual sea el tiempo de análisis."
   },
+  "7c877a90aa52826e9497": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:38:36.144425+00:00",
+    "source": "Open Chess Best Next Move and import the screenshot from Photos.",
+    "translation": "Abre Chess Best Next Move e importa la captura de pantalla desde «Fotos»."
+  },
   "7c8bceb6d0d55aad7cfc": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
@@ -2515,6 +2484,14 @@
     "reviewedAt": "2026-10-15T02:37:51.567356+00:00",
     "source": "Choose another screenshot",
     "translation": "Elige otra captura de pantalla"
+  },
+  "7cbf387c84cfcbdfe369": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:38:36.144421+00:00",
+    "source": "Chess Best Next Move isn't ready. Open the app, then run the shortcut again.",
+    "translation": "«Chess Best Next Move» no está listo. Abre la aplicación y vuelve a ejecutar el atajo."
   },
   "7d67ddb8ae65f954b980": {
     "origin": "deepl-reviewed",
@@ -2557,13 +2534,6 @@
     "source": "Check the pieces, then analyze.",
     "translation": "Comprueba las piezas y, a continuación, analiza."
   },
-  "7fa59d1dcb14a0c87628": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:51.567363+00:00",
-    "source": "Opening Chess Best Move",
-    "translation": "Abriendo Chess Best Move"
-  },
   "7faa7019894d7b773f99": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -2591,6 +2561,12 @@
     "source": "%1$@ is in check but it's %2$@'s move.",
     "translation": "Las %1$@ están en jaque, pero juegan las %2$@."
   },
+  "8153c63fc00b1a27b9ba": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Both",
+    "translation": "Ambos"
+  },
   "8194473d181df1f094b1": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -2612,6 +2588,14 @@
     "source": "Clear board",
     "translation": "Borrar tablero"
   },
+  "8232b373b9abe3c061d7": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:37:51.567343+00:00",
+    "source": "Opens Chess Best Next Move to analyze it",
+    "translation": "Abre Chess Best Next Move para analizarlo"
+  },
   "82bae0ce69dffb1e093b": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -2624,6 +2608,14 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "No free analyses",
     "translation": "Sin análisis gratuitos"
+  },
+  "83145e8acb57c967964b": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:37:03.923428+00:00",
+    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Next Move opens.",
+    "translation": "Busca la mejor jugada en una captura de pantalla de una posición de ajedrez. Pasa una captura de pantalla o elige una de «Fotos» cuando se abra «Chess Best Next Move»."
   },
   "83255acd3979ce312e51": {
     "origin": "manual-reviewed",
@@ -2638,6 +2630,14 @@
     "reviewedAt": "2026-10-15T02:37:51.567372+00:00",
     "source": "Screenshot",
     "translation": "Captura de pantalla"
+  },
+  "83be255c0607833366c6": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Final grammar audit against callers, chess rules, and Apple control terminology.",
+    "reviewedAt": "2026-10-15T02:54:10.074890+00:00",
+    "source": "Chess Best Next Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
+    "translation": "Chess Best Next Move analiza las posiciones con Stockfish, un motor de ajedrez libre y de código abierto creado por los desarrolladores de Stockfish. Se ejecuta en tu %1$@; no se sube nada."
   },
   "83c681f5761337efd935": {
     "origin": "deepl-reviewed",
@@ -2800,6 +2800,13 @@
     "source": "%@ is in check from more than two pieces.",
     "translation": "Más de dos piezas dan jaque a las %1$@."
   },
+  "8adab263a1ae1c73e880": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
+    "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
+    "source": "Chess Best Next Move couldn't analyze this position.",
+    "translation": "Chess Best Next Move no ha podido analizar esta posición."
+  },
   "8b6207c3be40244768b9": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -2820,6 +2827,12 @@
     "reviewedAt": "2026-10-15T02:37:51.567404+00:00",
     "source": "Neural Network",
     "translation": "Red neuronal"
+  },
+  "8ca1cab617c915346c6a": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Plain English",
+    "translation": "Lenguaje sencillo"
   },
   "8d9709a97c374dc375f8": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -2847,6 +2860,22 @@
     "source": "Open Settings > Action Button. Swipe to Shortcut, tap Choose a Shortcut, and select Analyze my chess screenshot without the Wait action.",
     "translation": "Abre «Ajustes» > «Botón de acción». Desliza el dedo hasta «Atajo», pulsa «Elegir un atajo» y selecciona «Analiza mi captura de ajedrez» sin la acción «Esperar»."
   },
+  "8ed29140af7c8240ec11": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:37:03.923405+00:00",
+    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Next Move to analyze it.",
+    "translation": "Desbloquea tu dispositivo y concede los permisos que se te soliciten. Cuando Siri ejecuta el atajo, realiza la captura de pantalla, la guarda en «Recientes» y abre Chess Best Next Move para analizarla."
+  },
+  "8eed1aaf22da724a1929": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "This position needs confirmation. Open the screenshot in Chess Best Next Move on iPhone.",
+    "translation": "Esta posición necesita confirmación. Abre la captura en Chess Best Next Move en el iPhone."
+  },
   "8f95380e7baa068f365e": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -2868,6 +2897,14 @@
     "source": "Open Shortcuts",
     "translation": "Abrir Atajos"
   },
+  "907fe985378fbd6c5fb6": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:37:51.567414+00:00",
+    "source": "Chess Best Next Move couldn't read that image. Pass a screenshot to the shortcut.",
+    "translation": "Chess Best Next Move no ha podido leer esa imagen. Envía una captura de pantalla al atajo."
+  },
   "909fae6f5b46b2f3ac41": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
@@ -2880,13 +2917,6 @@
     "reviewedAt": "2026-10-22T19:31:21.157383+00:00",
     "source": "Try again",
     "translation": "Reintentar"
-  },
-  "90eabed501ac867eae87": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:37:51.567414+00:00",
-    "source": "Chess Best Move couldn't read that image. Pass a screenshot to the shortcut.",
-    "translation": "Chess Best Move no ha podido leer esa imagen. Envía una captura de pantalla al atajo."
   },
   "912113e1b96740a5a48d": {
     "origin": "deepl-reviewed",
@@ -2955,6 +2985,14 @@
     "reviewedAt": "2026-10-15T02:38:36.144302+00:00",
     "source": "Unlimited Best Moves",
     "translation": "Mejores jugadas ilimitadas"
+  },
+  "947c52f09359a8f7cc17": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Next Move on iPhone once.",
+    "translation": "No se pudo conectar con la app del iPhone. Revisa la conexión y abre Chess Best Next Move una vez en el iPhone."
   },
   "954a58172de86aba72f8": {
     "origin": "deepl-reviewed",
@@ -3062,6 +3100,14 @@
     "source": "Free Analyses",
     "translation": "Análisis gratuitos"
   },
+  "9b1a3c68e73fd4b17192": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:37:29.710203+00:00",
+    "source": "The analysis is still running in Chess Best Next Move.",
+    "translation": "El análisis sigue en curso en Chess Best Next Move."
+  },
   "9b362ab8b1ca3fc9f8f6": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
@@ -3125,13 +3171,6 @@
     "reviewedAt": "2026-10-15T02:38:36.144335+00:00",
     "source": "Waiting for purchase approval. The analysis starts when it is approved.",
     "translation": "A la espera de la aprobación de la compra. El análisis comienza cuando se apruebe."
-  },
-  "9ccb83072a05cc2a7fe9": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:38:36.144339+00:00",
-    "source": "Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
-    "translation": "Abre Chess Best Move. Con el análisis automático y el «Acceso completo a Fotos» activados, la aplicación reconoce tu nueva captura de ajedrez. Pulsa «Analizar» si se te solicita. Si no, pulsa «Usar última captura»."
   },
   "9d70cda159108bfc4849": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -3471,6 +3510,14 @@
     "source": "Try again",
     "translation": "Reintentar"
   },
+  "aec9c15441247fed8fd6": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "The iPhone app is busy. Leave Chess Best Next Move on iPhone, then try again.",
+    "translation": "La app del iPhone está ocupada. Sal de Chess Best Next Move en el iPhone e inténtalo de nuevo."
+  },
   "af0a2f11226d747cbacf": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -3587,26 +3634,12 @@
     "source": "Pro, yearly",
     "translation": "Pro, anual"
   },
-  "b5e64080447fcb9eb166": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:38:36.144421+00:00",
-    "source": "Chess Best Move isn't ready. Open the app, then run the shortcut again.",
-    "translation": "«Chess Best Move» no está listo. Abre la aplicación y vuelve a ejecutar el atajo."
-  },
   "b5f6556910a08b38ac41": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
     "reviewedAt": "2026-10-15T02:38:36.144423+00:00",
     "source": "Stopped when the app went to the background. Run it again for the full think time.",
     "translation": "El análisis se detuvo al pasar la app a segundo plano. Repítelo para usar todo el tiempo de análisis."
-  },
-  "b6092eb6e2f17b475331": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:38:36.144425+00:00",
-    "source": "Open Chess Best Move and import the screenshot from Photos.",
-    "translation": "Abre Chess Best Move e importa la captura de pantalla desde «Fotos»."
   },
   "b61106566308373f8ec3": {
     "origin": "deepl-reviewed",
@@ -3758,6 +3791,14 @@
     "source": "Runs on your %@: works offline, nothing is uploaded",
     "translation": "Funciona en tu %1$@, sin conexión. No se sube nada"
   },
+  "bddf56c6be7dbafbbacd": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Final grammar audit against callers, chess rules, and Apple control terminology.",
+    "reviewedAt": "2026-10-15T02:54:10.074865+00:00",
+    "source": "Add “Find Best Move” from Chess Best Next Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
+    "translation": "Añade «Encontrar la mejor jugada» de Chess Best Next Move. Pulsa su entrada «Captura de pantalla», elige «Seleccionar variable» y selecciona la salida de «Hacer captura de pantalla». Debería decir «Encontrar la mejor jugada en Captura de pantalla», con «Captura de pantalla» mostrada como un token variable con el icono de captura de pantalla, igual que la entrada en «Guardar en álbum de fotos». Un marcador de posición de «Captura de pantalla» de color pálido no es una imagen conectada. No escribas la palabra «Captura de pantalla» ni dejes la entrada configurada en «Preguntar cada vez». La aplicación recibe esta imagen directamente, sin buscarla en «Fotos»."
+  },
   "bdeb37d13704a9213f4b": {
     "origin": "deepl-reviewed",
     "reason": "Final grammar audit against callers, chess rules, and Apple control terminology.",
@@ -3839,13 +3880,6 @@
     "source": "%1$@, %2$lld left",
     "translation": "%1$@, quedan %2$lld"
   },
-  "c1950fdb3fbb4ebe2024": {
-    "origin": "manual-reviewed",
-    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
-    "reviewedAt": "2026-10-22",
-    "source": "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots.",
-    "translation": "Abre Chess Best Move en el iPhone y permite acceso completo a Fotos para leer nuevas capturas."
-  },
   "c1ae1274933d7443b024": {
     "origin": "deepl-reviewed",
     "reason": "Final grammar audit against callers, chess rules, and Apple control terminology.",
@@ -3866,6 +3900,14 @@
     "reviewedAt": "2026-10-15T02:38:56.537797+00:00",
     "source": "Your yearly subscription is still active",
     "translation": "Tu suscripción anual sigue activa"
+  },
+  "c387cfce614b01daab24": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:37:29.710251+00:00",
+    "source": "Open Chess Best Next Move to see the best move.",
+    "translation": "Abre Chess Best Next Move para ver la mejor jugada."
   },
   "c3f254b58f195e20f9cf": {
     "origin": "deepl-reviewed",
@@ -3981,6 +4023,21 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "Stalemate",
     "translation": "Tablas por ahogado"
+  },
+  "cb24b0c9a7102d9d8235": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:39:58.429738+00:00",
+    "source": "Open Chess Best Next Move and analyze your latest saved screenshot.",
+    "translation": "Abre Chess Best Next Move y analiza tu última captura guardada."
+  },
+  "cb818ec90b391252d98c": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Read against the English source; corrected chess, Apple, and analysis wording where needed.",
+    "reviewedAt": "2026-10-15T02:25:47.494669+00:00",
+    "source": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC",
+    "translation": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
   },
   "cbf240dce89ba6223c75": {
     "origin": "deepl-reviewed",
@@ -4475,13 +4532,6 @@
     "source": "Pro Weekly",
     "translation": "Pro semanal"
   },
-  "e4b563aaf09601e1d061": {
-    "origin": "manual-reviewed",
-    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
-    "reviewedAt": "2026-10-22T20:47:06.517930+00:00",
-    "source": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.",
-    "translation": "El iPhone no terminó a tiempo. Abre Chess Best Move en el iPhone una vez y vuelve a intentarlo."
-  },
   "e58646d13a80d165c919": {
     "origin": "deepl-reviewed",
     "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
@@ -4543,6 +4593,14 @@
     "source": "You're offline. Connect to the internet to see purchase options.",
     "translation": "Estás sin conexión. Conéctate a Internet para ver las opciones de compra."
   },
+  "eb416a033d2c639d2de1": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:39:58.429707+00:00",
+    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Next Move when it is approved.",
+    "translation": "La compra está pendiente de aprobación. El análisis comienza en Chess Best Next Move cuando se apruebe."
+  },
   "eb96926e0610bc0638ae": {
     "reason": "Reviewed after the owner requested English title case for playback labels. The translation preserves the established capitalization convention of this language.",
     "reviewedAt": "2026-10-23T14:07:00.174877+00:00",
@@ -4576,6 +4634,14 @@
     "source": " The other marked squares were hard to read.",
     "translation": " Las demás casillas marcadas resultaban difíciles de leer."
   },
+  "ee087cba71b09594f6bf": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "deepl-reviewed",
+    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
+    "reviewedAt": "2026-10-15T02:37:51.567363+00:00",
+    "source": "Opening Chess Best Next Move",
+    "translation": "Abriendo Chess Best Next Move"
+  },
   "ee319dc3b330501b374a": {
     "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
     "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
@@ -4602,13 +4668,6 @@
     "reviewedAt": "2026-10-15T02:39:58.429705+00:00",
     "source": "Unlock Unlimited",
     "translation": "Desbloquea sin límites"
-  },
-  "efcbdc7ff2aeea4e80d6": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:39:58.429707+00:00",
-    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Move when it is approved.",
-    "translation": "La compra está pendiente de aprobación. El análisis comienza en Chess Best Move cuando se apruebe."
   },
   "f0826ec96d9e44a761a2": {
     "reason": "Editorial review of the DeepL draft: chess terminology, Apple interface language, or runtime-value grammar.",
@@ -4801,13 +4860,6 @@
     "reviewedAt": "2026-10-15T02:24:17.435531+00:00",
     "source": "%@ is ahead by 1 pawn",
     "translation": "Las %1$@ tienen una ventaja de un peón"
-  },
-  "fd5e5666f3ff4af56c06": {
-    "origin": "deepl-reviewed",
-    "reason": "Read against the English source; corrected chess, Apple terminology, preserved access, and action descriptions.",
-    "reviewedAt": "2026-10-15T02:39:58.429738+00:00",
-    "source": "Open Chess Best Move and analyze your latest saved screenshot.",
-    "translation": "Abre Chess Best Move y analiza tu última captura guardada."
   },
   "fdceecdbf50d36eabb35": {
     "origin": "manual-reviewed",

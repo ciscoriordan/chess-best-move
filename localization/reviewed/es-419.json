@@ -69,20 +69,6 @@
     "source": "Off",
     "translation": "Desactivado"
   },
-  "012d240e132919177bc3": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "07e4109368fdcaa0066873b395a176856f76284dadcdffaecd9d1bd91d09b64c",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Chess Best Move couldn't analyze this position.",
-    "translation": "Chess Best Move no pudo analizar esta posición."
-  },
   "0187a339e5ca6ddd774c": {
     "baseLocale": "es",
     "baseReviewSHA256": "ac9d5a954ef8859de7dee8a5aa344eebe7d7be156c2364cec8973f92073fd787",
@@ -138,20 +124,6 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "No analyses left.",
     "translation": "No quedan análisis."
-  },
-  "0355de754655c496fb6b": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "92812b0230864e62254320bbbc277082fb2aaa3ff7ba0b4937884659a83d804e",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Chess Best Move, Copyright (C) 2026 Motomatic LLC",
-    "translation": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
   },
   "03b0f6bbda9b26e2d5ee": {
     "baseLocale": "es",
@@ -391,20 +363,6 @@
     "source": "Switch to a Better Move Automatically",
     "translation": "Cambiar automáticamente a una jugada mejor"
   },
-  "08ac348e22ee77ecfad6": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "07e08fdb2156adeb777b8779b7bfbb94bfab9aa0153dcdf9db19085720da2def",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "You've used your free analyses. Open Chess Best Move to continue.",
-    "translation": "Ya agotaste tus análisis gratuitos. Abre Chess Best Move para continuar."
-  },
   "09779c722155ed14295b": {
     "baseLocale": "es",
     "baseReviewSHA256": "85d8b340763b50038241512ec6bfc340fe7cbfadbea732caa9342b750b9095ff",
@@ -432,6 +390,20 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "More",
     "translation": "Más"
+  },
+  "0a92bbd282da82546251": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "79b69fa2827dbad1fdd1909e764665d2d362e56338c1d3ea6bbee1d5fa3456a4",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Next Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
+    "translation": "Guarda primero una captura de pantalla. Mantén presionada la pantalla de inicio y, a continuación, selecciona Editar > Agregar widget > Chess Best Next Move. En la pantalla de bloqueo, mantén presionada, selecciona Personalizar y, a continuación, Agregar widgets. Toca el widget para abrir la aplicación y analizar tu última captura de pantalla guardada. Si el acceso a Fotos está limitado, selecciona la captura de pantalla cuando se te solicite."
   },
   "0acc1ec9328d9d08b986": {
     "baseLocale": "es",
@@ -782,6 +754,20 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "bishop",
     "translation": "el alfil"
+  },
+  "12b23b0ffc1ba0ad7662": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "b8cb8a7c809d4317f81de49b17cba234b2103080123f4593a68e5065a7e95125",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "You've used your free analyses. Open Chess Best Next Move to continue.",
+    "translation": "Ya agotaste tus análisis gratuitos. Abre Chess Best Next Move para continuar."
   },
   "13645bf6138ae0040355": {
     "baseLocale": "es",
@@ -1531,7 +1517,7 @@
   },
   "25acdbba03e74422a3c3": {
     "baseLocale": "es",
-    "baseReviewSHA256": "d75d40c2f5cc4ab1fcde5e3e9f6f310620af2d0b61f2286be5c657d01953d310",
+    "baseReviewSHA256": "ac25cbb9eaa4f483f82722a4e6c4ffd43cf0238de2e9837ee82aa559b9dbc71f",
     "evidence": [
       "https://support.apple.com/es-mx/HT209055",
       "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
@@ -1539,9 +1525,9 @@
     ],
     "generatedBy": "scripts/localization/seed_spanish_latam.py",
     "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch.",
-    "translation": "Chess Best Move lee tu captura más reciente para encontrar el tablero. El análisis se realiza en tu dispositivo. Si lo solicitas desde tu Apple Watch, se envía un resultado recortado al Watch enlazado."
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Chess Best Next Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch.",
+    "translation": "Chess Best Next Move lee tu captura más reciente para encontrar el tablero. El análisis se realiza en tu dispositivo. Si lo solicitas desde tu Apple Watch, se envía un resultado recortado al Watch enlazado."
   },
   "261a382bd2ca0ea10bfb": {
     "baseLocale": "es",
@@ -1612,6 +1598,20 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "depth %lld",
     "translation": "profundidad %1$lld"
+  },
+  "27da7b0048ff3dc508e3": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "845b3ef481eacb230d2f6786ebdbfb12ea0dbb424b246121494a1bd1f6c71206",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Chess Best Next Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
+    "translation": "Chess Best Next Move es software libre: puedes utilizarlo, estudiar cómo funciona, modificarlo y compartirlo, ya sea modificado o sin modificar, bajo los términos de la versión 3 de la Licencia Pública General de GNU, tal y como la ha publicado la Free Software Foundation. La aplicación incluye Stockfish, que está bajo la misma licencia, por lo que la aplicación en su conjunto se distribuye bajo dicha licencia."
   },
   "27fb6bdff5c34fc4de32": {
     "baseLocale": "es",
@@ -1770,20 +1770,6 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Free analyses go back to 3, the boards already paid for are forgotten, and analyses added here are taken back. Bought analyses and Pro are not touched.",
     "translation": "Los análisis gratuitos se restablecen a 3, los tableros ya pagados se olvidan y los análisis agregados aquí se retiran. Los análisis comprados y la versión Pro no se ven afectados."
-  },
-  "2ae2cc278eb86d50fc20": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "60ae3a8a4d99379c0509fed17e3fe9ec7b701e5448713bf0b1c46cefde9e5a6b",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Add “Find Best Move” from Chess Best Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
-    "translation": "Agrega «Encontrar la mejor jugada» de Chess Best Move. Toca su entrada «Captura de pantalla», elige «Seleccionar variable» y selecciona la salida de «Tomar captura de pantalla». Debería decir «Encontrar la mejor jugada en Captura de pantalla», con «Captura de pantalla» mostrada como un token variable con el ícono de captura de pantalla, igual que la entrada en «Guardar en álbum de fotos». Un marcador de posición de «Captura de pantalla» de color pálido no es una imagen conectada. No escribas la palabra «Captura de pantalla» ni dejes la entrada configurada en «Preguntar cada vez». La aplicación recibe esta imagen directamente, sin buscarla en «Fotos»."
   },
   "2b2055913ff4f2294155": {
     "baseLocale": "es",
@@ -2023,6 +2009,20 @@
     "source": "White O-O-O",
     "translation": "Blancas O-O-O"
   },
+  "2ed7924c9766abc3d727": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "148f5f3b0c868b4e66473fbfcb2d20380e9052dc58119cdddb86cccd78a48ce8",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:25:55.306664+00:00",
+    "source": "Plain English",
+    "translation": "Lenguaje sencillo"
+  },
   "2f1ba14a0b52a16ce1a4": {
     "baseLocale": "es",
     "baseReviewSHA256": "8f7520765885c1f7322bc876e121444391b26f7b3fd215112e55f1674107922d",
@@ -2247,34 +2247,6 @@
     "source": "For puzzles, study, and reviewing games.",
     "translation": "Para problemas, estudio y revisión de partidas."
   },
-  "339dfc6e239d77bac8cd": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "383013bb454eca16dee4a1765a8901a67569c3460a4b2b1d80546f8b0fd5efbb",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once.",
-    "translation": "No se pudo conectar con la app del iPhone. Revisa la conexión y abre Chess Best Move una vez en el iPhone."
-  },
-  "33aa9217c69148ce87b3": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "030d672859bf2fca9cb4e99739b7cf2492b364431545399020b123d6bf675e75",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Chess Best Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
-    "translation": "Chess Best Move es software libre: puedes utilizarlo, estudiar cómo funciona, modificarlo y compartirlo, ya sea modificado o sin modificar, bajo los términos de la versión 3 de la Licencia Pública General de GNU, tal y como la ha publicado la Free Software Foundation. La aplicación incluye Stockfish, que está bajo la misma licencia, por lo que la aplicación en su conjunto se distribuye bajo dicha licencia."
-  },
   "3428bcc46141d84ee515": {
     "baseLocale": "es",
     "baseReviewSHA256": "67d419c25e4f591c97ba61c27ce6b355dea554ff4fd335ad8ca50647e8cb3d84",
@@ -2331,6 +2303,20 @@
     "source": "Recognition wasn't sure it read the right board. Press and hold the board to compare it with your screenshot, then analyze.",
     "translation": "El sistema de reconocimiento no estaba seguro de haber leído el tablero correcto. Mantén presionado el tablero para compararlo con tu captura de pantalla y, a continuación, analiza el resultado."
   },
+  "3506dfd2c29dbb66a96d": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "442c9e42a482f7cbcac8c7cb8fa0dceb12417b5c1bb08f71341d8b0ecb58d71d",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:25:55.306664+00:00",
+    "source": "Both",
+    "translation": "Ambos"
+  },
   "354a9df0257659c20a7e": {
     "baseLocale": "es",
     "baseReviewSHA256": "7535baed50bc49a2fee6a5fba55f32ad2a5511ebcd1422142ead807c24333f26",
@@ -2344,6 +2330,20 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "The move on screen switches to a better one by itself, if you ask it to.",
     "translation": "La jugada que aparece en pantalla cambia por sí sola a una mejor, si así se le indica."
+  },
+  "372edd9bb965f3f5f81b": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "ce63ec3ec781c112903e9ab4d54327a29c3284b9014a1ef633a64379dee30756",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Open Chess Best Next Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
+    "translation": "Abre Chess Best Next Move. Con el análisis automático y el «Acceso completo a Fotos» activados, la aplicación reconoce tu nueva captura de ajedrez. Toca «Analizar» si se te solicita. Si no, toca «Usar última captura»."
   },
   "3743137866cea1acab93": {
     "baseLocale": "es",
@@ -2414,20 +2414,6 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Optional: create a separate shortcut named Chess Action Button. Add Get Current App, then an If action that compares the current app’s Name with the name of your board app. Inside If, add Run Shortcut and choose Analyze my chess screenshot without the Wait action. Leave Otherwise empty. Assign Chess Action Button to the Action button. It will do nothing in other apps, rather than return to the button’s previous function.",
     "translation": "Opcional: crea un atajo independiente llamado «Botón de acción de ajedrez». Agrega «Obtener app actual» y, a continuación, una acción «Si» que compare el nombre de la aplicación actual con el nombre de tu app de ajedrez. Dentro de «Si», agrega «Ejecutar atajo» y selecciona «Analiza mi captura de ajedrez» sin la acción «Esperar». Deja «Si no» en blanco. Asigna «Botón de acción de ajedrez» al botón «Acción». No hará nada en otras apps; tampoco recuperará la función anterior del botón."
-  },
-  "3a7a45fb3c5639cf30e0": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "8ebeeada6de3e9ff2157042b091e6ef57812200b977682e5bb21aae700c5943a",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Chess Best Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
-    "translation": "Chess Best Move analiza las posiciones con Stockfish, un motor de ajedrez libre y de código abierto creado por los desarrolladores de Stockfish. Se ejecuta en tu %1$@; no se sube nada."
   },
   "3b74d45b4ec6d3cea58e": {
     "baseLocale": "es",
@@ -2708,34 +2694,6 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Analyzes %@ to move instead. Re-running is free.",
     "translation": "Analiza la posición con turno de las %1$@. Repetir el análisis es gratis."
-  },
-  "3f780709f4f80ae6ea0b": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "079ca5a91b7af4667b06877f6281db3127f87104d42397064a0a6a239a411573",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it.",
-    "translation": "Desbloquea tu dispositivo y concede los permisos que se te soliciten. Cuando Siri ejecuta el atajo, realiza la captura de pantalla, la guarda en «Recientes» y abre Chess Best Move para analizarla."
-  },
-  "3f960063d371f12ae689": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "d14c93c0de3cc2777bce21ba03c5d27c97f142f1ad9934df64d2b2a595da33d4",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses.",
-    "translation": "No quedan análisis. Abre Chess Best Move en el iPhone para obtener Pro o más análisis."
   },
   "3fa20c3bb030ed094bad": {
     "baseLocale": "es",
@@ -3129,20 +3087,6 @@
     "source": "Needs a look: ",
     "translation": "Hay que revisarlo: "
   },
-  "4a040553d42d7508d75e": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "9cb356ebd0211cda29b5bcc3341230d21d3332d7c27b03ae682bf96efbda1b5c",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Move opens.",
-    "translation": "Busca la mejor jugada en una captura de pantalla de una posición de ajedrez. Pasa una captura de pantalla o elige una de «Fotos» cuando se abra «Chess Best Move»."
-  },
   "4aba6710fac685f9b5ad": {
     "baseLocale": "es",
     "baseReviewSHA256": "55646964d863910131a4d5acb82e520777c5c03663d259008466cb148bb2ca6e",
@@ -3525,20 +3469,6 @@
     "source": "Clear History?",
     "translation": "¿Borrar el historial?"
   },
-  "542a9756840cf6573c30": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "1398d4a5bfcf74b39f1934d64179bed00dc1ca5b14f4db2e318a0099f684b6bd",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone.",
-    "translation": "Esta posición necesita confirmación. Abre la captura en Chess Best Move en el iPhone."
-  },
   "549342cc819bac01d613": {
     "baseLocale": "es",
     "baseReviewSHA256": "73ff66fcbfc49f2c3de3e549d0389dd2f127b57a3d54b7f807c439102e88258e",
@@ -3679,9 +3609,9 @@
     "source": "Originally: %@",
     "translation": "Resultado inicial: %@"
   },
-  "575af5d5ce253bbe2e3b": {
+  "57a7324faf715c561929": {
     "baseLocale": "es",
-    "baseReviewSHA256": "1444a861d748f172a171a061bdd54d1d61f1013ae4834f85e81f7ea0e2b1356c",
+    "baseReviewSHA256": "de5ac652c423e1f1e83f7192c9ef60daf51b6ddeac5acbfe3bad2e3df176ecef",
     "evidence": [
       "https://support.apple.com/es-mx/HT209055",
       "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
@@ -3689,9 +3619,9 @@
     ],
     "generatedBy": "scripts/localization/seed_spanish_latam.py",
     "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "The analysis is still running in Chess Best Move.",
-    "translation": "El análisis sigue en curso en Chess Best Move."
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Some squares need a look. Check the position in Chess Best Next Move.",
+    "translation": "Hay que revisar algunas casillas. Revisa la posición en Chess Best Next Move."
   },
   "57b1a1b6aad0a13ead0f": {
     "baseLocale": "es",
@@ -3833,20 +3763,6 @@
     "source": "Allow full access in Settings",
     "translation": "Permitir acceso completo en Configuración"
   },
-  "5b13490a1f22e0229cc5": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "00301d7c6cb6aab51310e3b45a10aff2c127a20108cd1006e6de142b6d3bd63e",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Chess Best Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
-    "translation": "«Chess Best Move» se distribuye con la esperanza de que resulte útil, pero SIN NINGÚN TIPO DE GARANTÍA; ni siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN FIN DETERMINADO. Consulta la Licencia Pública General de GNU para obtener más detalles."
-  },
   "5b4d0c120adf8cbd2262": {
     "baseLocale": "es",
     "baseReviewSHA256": "fdbb3ed6aa5da5e812cba90ef7265ae8923a19f369cd6a273d717e97d6218fca",
@@ -3958,20 +3874,6 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "week",
     "translation": "semana"
-  },
-  "5caf3cb39cbc98371a90": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "0bc861de0960fcaf3c41c36f1a0eb39d339b2b7dd070664c6a88ccd91e97fdbe",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Some squares need a look. Check the position in Chess Best Move.",
-    "translation": "Hay que revisar algunas casillas. Revisa la posición en Chess Best Move."
   },
   "5d483a2a98693c68626a": {
     "baseLocale": "es",
@@ -4140,6 +4042,20 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Move the board cursor up",
     "translation": "Mueve el cursor del tablero hacia arriba"
+  },
+  "619c93441f7bdaa8ffc1": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "2a9491bf725818faf6b64f7b3507576c74ee0a65e65f5e6938d02c4804e01f59",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "The iPhone did not finish in time. Open Chess Best Next Move on iPhone once, then try again.",
+    "translation": "El iPhone no terminó a tiempo. Abre Chess Best Next Move en el iPhone una vez y vuelve a intentarlo."
   },
   "6264d5b9f1930a60a77a": {
     "baseLocale": "es",
@@ -4350,20 +4266,6 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "In the Shortcuts app, create a shortcut named “Analyze my chess screenshot”. Add “Take Screenshot” as its first action.",
     "translation": "En la app Atajos, crea un atajo llamado «Analiza mi captura de ajedrez». Agrega «Tomar captura de pantalla» como primera acción."
-  },
-  "6624dc2fbca091a5464d": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "3c692b91c07587b099cd598736b43e1b97d4512a296d40e6825b440a7516c9c8",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Open Chess Best Move to see the best move.",
-    "translation": "Abre Chess Best Move para ver la mejor jugada."
   },
   "663db260526dac9b16f8": {
     "baseLocale": "es",
@@ -4771,20 +4673,6 @@
     "source": "A longer search that keeps running after the answer, up to 2 minutes.",
     "translation": "Una búsqueda más larga que sigue ejecutándose tras la respuesta, hasta 2 minutos."
   },
-  "70be6dcce5ca9fab1453": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "e2419fc7c8ca1935f289ea34293868d8af6ae498374b1572c84967bfa7294122",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again.",
-    "translation": "La app del iPhone está ocupada. Sal de Chess Best Move en el iPhone e inténtalo de nuevo."
-  },
   "7126cbfe690ae7fcd3bc": {
     "baseLocale": "es",
     "baseReviewSHA256": "9adc875fe7974a54514be59b31f5d643e54615f1a8596451bb708616128fa0c6",
@@ -4883,6 +4771,20 @@
     "source": "Flip",
     "translation": "Invertir"
   },
+  "73ad9327a36656ffcf9d": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "260ddb5d3190d980a9bc928e1233148ffa2db1eed5c59f394c6ef17a65a99fdb",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "No analyses remaining. Open Chess Best Next Move on iPhone for Pro or more analyses.",
+    "translation": "No quedan análisis. Abre Chess Best Next Move en el iPhone para obtener Pro o más análisis."
+  },
   "73b1e853726b33712d03": {
     "baseLocale": "es",
     "baseReviewSHA256": "e4e71a29ab1c2763de8d84e817a74e1e6df40eba027b715f81c8fd67f9754542",
@@ -4953,9 +4855,9 @@
     "source": "Version",
     "translation": "Versión"
   },
-  "75ea5bc260f0ff122deb": {
+  "75d8d2a5dfa765faf1bc": {
     "baseLocale": "es",
-    "baseReviewSHA256": "5549a44f512b68d8fe868fe97ed544c26acfbd5aaefbb172b32c342648476981",
+    "baseReviewSHA256": "9a8b796f7546e5dd8a6c6253f7ebe54adb67db2c17ec30821d466a65c7b52358",
     "evidence": [
       "https://support.apple.com/es-mx/HT209055",
       "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
@@ -4963,9 +4865,9 @@
     ],
     "generatedBy": "scripts/localization/seed_spanish_latam.py",
     "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
-    "translation": "Guarda primero una captura de pantalla. Mantén presionada la pantalla de inicio y, a continuación, selecciona Editar > Agregar widget > Chess Best Move. En la pantalla de bloqueo, mantén presionada, selecciona Personalizar y, a continuación, Agregar widgets. Toca el widget para abrir la aplicación y analizar tu última captura de pantalla guardada. Si el acceso a Fotos está limitado, selecciona la captura de pantalla cuando se te solicite."
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Chess Best Next Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
+    "translation": "«Chess Best Next Move» se distribuye con la esperanza de que resulte útil, pero SIN NINGÚN TIPO DE GARANTÍA; ni siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN FIN DETERMINADO. Consulta la Licencia Pública General de GNU para obtener más detalles."
   },
   "760c54035e53d1958f63": {
     "baseLocale": "es",
@@ -5037,6 +4939,20 @@
     "source": "Move the board cursor right",
     "translation": "Mueve el cursor del tablero hacia la derecha"
   },
+  "77cdda461ea3e09357a8": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "f4885a77676f798a94da809e2b15ae717fffd725d3c426dd949ef902dd506a6e",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Open Chess Best Next Move on iPhone and allow full Photos access to read new screenshots.",
+    "translation": "Abre Chess Best Next Move en el iPhone y permite acceso completo a Fotos para leer nuevas capturas."
+  },
   "78356393817438eac772": {
     "baseLocale": "es",
     "baseReviewSHA256": "97d9d4534e5e3a6c7ffc9b6cfd44d6d3b3f303840df663831705c1eab0202b6c",
@@ -5078,20 +4994,6 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Tap to return to the result.",
     "translation": "Toca para volver al resultado."
-  },
-  "79439b9e21d6d4f66096": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "e2d9e576a10624cc1d3718b47a2808c77a38feea90efea3b50dc09ec37d5b4e9",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Opens Chess Best Move to analyze it",
-    "translation": "Abre Chess Best Move para analizarlo"
   },
   "798e5b9d329da41834be": {
     "baseLocale": "es",
@@ -5191,6 +5093,20 @@
     "source": "An analysis is spent on a position you have not analyzed before. Re-running the same board, at any think time, is free.",
     "translation": "Se descuenta un análisis al analizar una posición nueva. Repetir el análisis del mismo tablero es gratis, sea cual sea el tiempo de análisis."
   },
+  "7c877a90aa52826e9497": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "0cc90043e3dacfc2883603b031c1dddc382a464f09607244dd1a43ceb6b50554",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Open Chess Best Next Move and import the screenshot from Photos.",
+    "translation": "Abre Chess Best Next Move e importa la captura de pantalla desde «Fotos»."
+  },
   "7c8bceb6d0d55aad7cfc": {
     "baseLocale": "es",
     "baseReviewSHA256": "f9f4115c35194366dd2426780f932627ff1d0757b090aeee3a90366a1cbb5415",
@@ -5218,6 +5134,20 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Choose another screenshot",
     "translation": "Elige otra captura de pantalla"
+  },
+  "7cbf387c84cfcbdfe369": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "3d58701207ff0a226549ef32ecc5e6dd316b0f7393c959edaeb048197b912348",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Chess Best Next Move isn't ready. Open the app, then run the shortcut again.",
+    "translation": "«Chess Best Next Move» no está listo. Abre la aplicación y vuelve a ejecutar el atajo."
   },
   "7d67ddb8ae65f954b980": {
     "baseLocale": "es",
@@ -5303,20 +5233,6 @@
     "source": "Check the pieces, then analyze.",
     "translation": "Revisa las piezas y, a continuación, analiza."
   },
-  "7fa59d1dcb14a0c87628": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "2f5e383224c4ffd5e412808acdada50a9984a2f15248f72555c294f4932e30e8",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Opening Chess Best Move",
-    "translation": "Abriendo Chess Best Move"
-  },
   "7faa7019894d7b773f99": {
     "baseLocale": "es",
     "baseReviewSHA256": "8a006b49e62cf91abc33d1fdcea2a248e63384e344c6ab9459055636cf3f3e1e",
@@ -5373,6 +5289,20 @@
     "source": "%1$@ is in check but it's %2$@'s move.",
     "translation": "Las %1$@ están en jaque, pero juegan las %2$@."
   },
+  "8153c63fc00b1a27b9ba": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "442c9e42a482f7cbcac8c7cb8fa0dceb12417b5c1bb08f71341d8b0ecb58d71d",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:25:55.306664+00:00",
+    "source": "Both",
+    "translation": "Ambos"
+  },
   "8194473d181df1f094b1": {
     "baseLocale": "es",
     "baseReviewSHA256": "54186654f6bb70530e6f0b9c223170795300be3b22773d1e9caa3d8a41bf9dcc",
@@ -5415,6 +5345,20 @@
     "source": "Clear board",
     "translation": "Borrar tablero"
   },
+  "8232b373b9abe3c061d7": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "2739f54e39b425bf0135d94bd6a07a8331eed0934ca8bfc5036f2ae12c04ebb9",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Opens Chess Best Next Move to analyze it",
+    "translation": "Abre Chess Best Next Move para analizarlo"
+  },
   "82bae0ce69dffb1e093b": {
     "baseLocale": "es",
     "baseReviewSHA256": "ba9f1de0e5e34a7a72f01a5fe1ad0007948a779300e17779debcf3fbea7e15e2",
@@ -5443,6 +5387,20 @@
     "source": "No free analyses",
     "translation": "Sin análisis gratuitos"
   },
+  "83145e8acb57c967964b": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "cc03adb30c578eaa116cd25f1fe891abcddba796d519b9b699d33e8233fd4500",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Next Move opens.",
+    "translation": "Busca la mejor jugada en una captura de pantalla de una posición de ajedrez. Pasa una captura de pantalla o elige una de «Fotos» cuando se abra «Chess Best Next Move»."
+  },
   "83255acd3979ce312e51": {
     "baseLocale": "es",
     "baseReviewSHA256": "bfa37955a18f79483bba72dc4a372e5ea0a26bd9f47294c5ced89ca55ce14c9d",
@@ -5470,6 +5428,20 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Screenshot",
     "translation": "Captura de pantalla"
+  },
+  "83be255c0607833366c6": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "e5474f0ed74759b2473bf8f3cb9e74bbb0d008fdec62d56c471527963a50eea8",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Chess Best Next Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
+    "translation": "Chess Best Next Move analiza las posiciones con Stockfish, un motor de ajedrez libre y de código abierto creado por los desarrolladores de Stockfish. Se ejecuta en tu %1$@; no se sube nada."
   },
   "83c681f5761337efd935": {
     "baseLocale": "es",
@@ -5779,6 +5751,20 @@
     "source": "%@ is in check from more than two pieces.",
     "translation": "Más de dos piezas dan jaque a las %1$@."
   },
+  "8adab263a1ae1c73e880": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "7ab89b1516effa95ed8c2e0df91ea2a3482fbb743874354a10bbcd1c6f37e305",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Chess Best Next Move couldn't analyze this position.",
+    "translation": "Chess Best Next Move no pudo analizar esta posición."
+  },
   "8b6207c3be40244768b9": {
     "baseLocale": "es",
     "baseReviewSHA256": "5e51f8511eeb0ff38ec33180d1b315326932c102cc69a37fbc251b7677ca9a9f",
@@ -5820,6 +5806,20 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Neural Network",
     "translation": "Red neuronal"
+  },
+  "8ca1cab617c915346c6a": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "148f5f3b0c868b4e66473fbfcb2d20380e9052dc58119cdddb86cccd78a48ce8",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:25:55.306664+00:00",
+    "source": "Plain English",
+    "translation": "Lenguaje sencillo"
   },
   "8d9709a97c374dc375f8": {
     "baseLocale": "es",
@@ -5877,6 +5877,34 @@
     "source": "Open Settings > Action Button. Swipe to Shortcut, tap Choose a Shortcut, and select Analyze my chess screenshot without the Wait action.",
     "translation": "Abre «Configuración» > «Botón de acción». Desliza el dedo hasta «Atajo», toca «Elegir un atajo» y selecciona «Analiza mi captura de ajedrez» sin la acción «Esperar»."
   },
+  "8ed29140af7c8240ec11": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "237f66e7ec559cb64370da5b47d4c37cbc6ba3b150807611e2e52aa27c14db25",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Next Move to analyze it.",
+    "translation": "Desbloquea tu dispositivo y concede los permisos que se te soliciten. Cuando Siri ejecuta el atajo, realiza la captura de pantalla, la guarda en «Recientes» y abre Chess Best Next Move para analizarla."
+  },
+  "8eed1aaf22da724a1929": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "a4f06e1ebed6cbe02dc7b4cbf110478f702cfabd6f74f06443db97f70eeb8c77",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "This position needs confirmation. Open the screenshot in Chess Best Next Move on iPhone.",
+    "translation": "Esta posición necesita confirmación. Abre la captura en Chess Best Next Move en el iPhone."
+  },
   "8f95380e7baa068f365e": {
     "baseLocale": "es",
     "baseReviewSHA256": "c22b1111a56da136403dafabbf79f23a2cad00bd0b67f3a2d78a13f02dc648f5",
@@ -5919,6 +5947,20 @@
     "source": "Open Shortcuts",
     "translation": "Abrir Atajos"
   },
+  "907fe985378fbd6c5fb6": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "3a1e4cb4e2db96a12a633da6e62d1b3b4c8cdfa117c263e6a70cdb7cf10db06b",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Chess Best Next Move couldn't read that image. Pass a screenshot to the shortcut.",
+    "translation": "Chess Best Next Move no pudo leer esa imagen. Envía una captura de pantalla al atajo."
+  },
   "909fae6f5b46b2f3ac41": {
     "baseLocale": "es",
     "baseReviewSHA256": "1bdc97b9203b54e7dd6ec571f199a67c7307b9bf209f01ccceaeb2f0f4208af3",
@@ -5946,20 +5988,6 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Try again",
     "translation": "Reintentar"
-  },
-  "90eabed501ac867eae87": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "b6d464814dd057638eace9e66d4feb9a77c44fd7d1705f7cc85c5b5957735b40",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Chess Best Move couldn't read that image. Pass a screenshot to the shortcut.",
-    "translation": "Chess Best Move no pudo leer esa imagen. Envía una captura de pantalla al atajo."
   },
   "912113e1b96740a5a48d": {
     "baseLocale": "es",
@@ -6100,6 +6128,20 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Unlimited Best Moves",
     "translation": "Mejores jugadas ilimitadas"
+  },
+  "947c52f09359a8f7cc17": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "e8b86a585cdd79a63db928e443d8b281846dbadd4ce4b773e4074a7a0b491e8c",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Next Move on iPhone once.",
+    "translation": "No se pudo conectar con la app del iPhone. Revisa la conexión y abre Chess Best Next Move una vez en el iPhone."
   },
   "954a58172de86aba72f8": {
     "baseLocale": "es",
@@ -6283,6 +6325,20 @@
     "source": "Free Analyses",
     "translation": "Análisis gratuitos"
   },
+  "9b1a3c68e73fd4b17192": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "248eaedda5447f6613059449b076cd22a13739426ac3d1af8ecbf736b8410de0",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "The analysis is still running in Chess Best Next Move.",
+    "translation": "El análisis sigue en curso en Chess Best Next Move."
+  },
   "9b362ab8b1ca3fc9f8f6": {
     "baseLocale": "es",
     "baseReviewSHA256": "65766cf74129d65d311367d4bc76e82554c1e6c9e52fd6127bd6b3971e811129",
@@ -6412,20 +6468,6 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Waiting for purchase approval. The analysis starts when it is approved.",
     "translation": "A la espera de la aprobación de la compra. El análisis comienza cuando se apruebe."
-  },
-  "9ccb83072a05cc2a7fe9": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "8fc18be651da786c9de98c52f29ef109e247a6fe042a2643de1b255b196ddd64",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
-    "translation": "Abre Chess Best Move. Con el análisis automático y el «Acceso completo a Fotos» activados, la aplicación reconoce tu nueva captura de ajedrez. Toca «Analizar» si se te solicita. Si no, toca «Usar última captura»."
   },
   "9d70cda159108bfc4849": {
     "baseLocale": "es",
@@ -7099,6 +7141,20 @@
     "source": "Try again",
     "translation": "Reintentar"
   },
+  "aec9c15441247fed8fd6": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "39256c56095c42250439039b2c44971c21dcda17dd492f70a7142de4101394f7",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "The iPhone app is busy. Leave Chess Best Next Move on iPhone, then try again.",
+    "translation": "La app del iPhone está ocupada. Sal de Chess Best Next Move en el iPhone e inténtalo de nuevo."
+  },
   "af0a2f11226d747cbacf": {
     "baseLocale": "es",
     "baseReviewSHA256": "90a7bc65af1f0296b7266e82b112e3c881ec3d6d6cea5af6fbaf7935f361415b",
@@ -7337,20 +7393,6 @@
     "source": "Pro, yearly",
     "translation": "Pro, anual"
   },
-  "b5e64080447fcb9eb166": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "0bdb8ad54855f2d648afd2a926ac184cf9dbba6c0357ffbf045b0587fea9f2a6",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Chess Best Move isn't ready. Open the app, then run the shortcut again.",
-    "translation": "«Chess Best Move» no está listo. Abre la aplicación y vuelve a ejecutar el atajo."
-  },
   "b5f6556910a08b38ac41": {
     "baseLocale": "es",
     "baseReviewSHA256": "5ac750219aaad4a3fd612c65d30c4e3efc9be44062f2fe57321bc94c0b207181",
@@ -7364,20 +7406,6 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Stopped when the app went to the background. Run it again for the full think time.",
     "translation": "El análisis se detuvo al pasar la app a segundo plano. Repítelo para usar todo el tiempo de análisis."
-  },
-  "b6092eb6e2f17b475331": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "51c35f0ceff477c7786c92f482067e8a650530d424945f00b3457fb411a99fb5",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Open Chess Best Move and import the screenshot from Photos.",
-    "translation": "Abre Chess Best Move e importa la captura de pantalla desde «Fotos»."
   },
   "b61106566308373f8ec3": {
     "baseLocale": "es",
@@ -7691,6 +7719,20 @@
     "source": "Runs on your %@: works offline, nothing is uploaded",
     "translation": "Funciona en tu %1$@, sin conexión. No se sube nada"
   },
+  "bddf56c6be7dbafbbacd": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "721fe2260a7323a84e138f0fdc966c245aa6e12397fe0df90e5672c5cd64fb7c",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Add “Find Best Move” from Chess Best Next Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
+    "translation": "Agrega «Encontrar la mejor jugada» de Chess Best Next Move. Toca su entrada «Captura de pantalla», elige «Seleccionar variable» y selecciona la salida de «Tomar captura de pantalla». Debería decir «Encontrar la mejor jugada en Captura de pantalla», con «Captura de pantalla» mostrada como un token variable con el ícono de captura de pantalla, igual que la entrada en «Guardar en álbum de fotos». Un marcador de posición de «Captura de pantalla» de color pálido no es una imagen conectada. No escribas la palabra «Captura de pantalla» ni dejes la entrada configurada en «Preguntar cada vez». La aplicación recibe esta imagen directamente, sin buscarla en «Fotos»."
+  },
   "bdeb37d13704a9213f4b": {
     "baseLocale": "es",
     "baseReviewSHA256": "6044c54c32e7a6238059007a9979d56e9b311b9c8cc5958badbc9a68db22730a",
@@ -7845,20 +7887,6 @@
     "source": "%1$@, %2$lld left",
     "translation": "%1$@, quedan %2$lld"
   },
-  "c1950fdb3fbb4ebe2024": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "9ab5e42bb81bfd6a684a5cbac27dfb47836f98f1aaed7eff8772eef3e88daacd",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots.",
-    "translation": "Abre Chess Best Move en el iPhone y permite acceso completo a Fotos para leer nuevas capturas."
-  },
   "c1ae1274933d7443b024": {
     "baseLocale": "es",
     "baseReviewSHA256": "1cd3146d6a5b34bf6c625b843aece1470742b9ae56d231e55b1aad4332344d4f",
@@ -7900,6 +7928,20 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Your yearly subscription is still active",
     "translation": "Tu suscripción anual sigue activa"
+  },
+  "c387cfce614b01daab24": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "523672ff765d054365632819c6018b659f9b578a4c58fde8a2335be08f3f1110",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Open Chess Best Next Move to see the best move.",
+    "translation": "Abre Chess Best Next Move para ver la mejor jugada."
   },
   "c3f254b58f195e20f9cf": {
     "baseLocale": "es",
@@ -8138,6 +8180,34 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Stalemate",
     "translation": "Tablas por ahogado"
+  },
+  "cb24b0c9a7102d9d8235": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "ee66014332e2a6795fefcfd6a4e63139b3ab676cf01ad7c1d2445d3f8112821f",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Open Chess Best Next Move and analyze your latest saved screenshot.",
+    "translation": "Abre Chess Best Next Move y analiza tu última captura guardada."
+  },
+  "cb818ec90b391252d98c": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "c83d84244e0b28b4246e5cb745c8398f73e678ca200e88ec0f79495ace4a6f7d",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC",
+    "translation": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
   },
   "cbf240dce89ba6223c75": {
     "baseLocale": "es",
@@ -9133,20 +9203,6 @@
     "source": "Pro Weekly",
     "translation": "Pro semanal"
   },
-  "e4b563aaf09601e1d061": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "8501faec2dd1d702695eda632370ec47fe6e2fb5ad1dd027c8d2201626be76bf",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.",
-    "translation": "El iPhone no terminó a tiempo. Abre Chess Best Move en el iPhone una vez y vuelve a intentarlo."
-  },
   "e58646d13a80d165c919": {
     "baseLocale": "es",
     "baseReviewSHA256": "836e4f7355ea2175399df0c8f8342e8ef818517dae128b623cf2e2e63ed7e7f1",
@@ -9273,6 +9329,20 @@
     "source": "You're offline. Connect to the internet to see purchase options.",
     "translation": "Estás sin conexión. Conéctate a Internet para ver las opciones de compra."
   },
+  "eb416a033d2c639d2de1": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "8f6b12b87f5a5c23b57a7dc5014f4b36819d3f2d063fbe7633703630003de4d9",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Next Move when it is approved.",
+    "translation": "La compra está pendiente de aprobación. El análisis comienza en Chess Best Next Move cuando se apruebe."
+  },
   "eb96926e0610bc0638ae": {
     "baseLocale": "es",
     "baseReviewSHA256": "62b254ea547c0c2cb238730ccd5b5228e3ce6e01675669fc3b48995c1171e5ee",
@@ -9343,6 +9413,20 @@
     "source": " The other marked squares were hard to read.",
     "translation": " Las demás casillas marcadas resultaban difíciles de leer."
   },
+  "ee087cba71b09594f6bf": {
+    "baseLocale": "es",
+    "baseReviewSHA256": "725d47eb5f984e6f94aa5aa32842aca88a607236246bd14515197f98c5851b39",
+    "evidence": [
+      "https://support.apple.com/es-mx/HT209055",
+      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
+      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
+    ],
+    "generatedBy": "scripts/localization/seed_spanish_latam.py",
+    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
+    "reviewedAt": "2026-11-05T13:29:31.688226+00:00",
+    "source": "Opening Chess Best Next Move",
+    "translation": "Abriendo Chess Best Next Move"
+  },
   "ee319dc3b330501b374a": {
     "baseLocale": "es",
     "baseReviewSHA256": "b52917c2541e1bef4776e930fe3f244e6750ad87e988a284acb64edc7f75e3d8",
@@ -9398,20 +9482,6 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "Unlock Unlimited",
     "translation": "Desbloquea sin límites"
-  },
-  "efcbdc7ff2aeea4e80d6": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "99c35f19908468c33d2203b6040011d62d5c1fac3d8acdd7739621f9b47dc897",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Move when it is approved.",
-    "translation": "La compra está pendiente de aprobación. El análisis comienza en Chess Best Move cuando se apruebe."
   },
   "f0826ec96d9e44a761a2": {
     "baseLocale": "es",
@@ -9818,20 +9888,6 @@
     "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
     "source": "%@ is ahead by 1 pawn",
     "translation": "Las %1$@ tienen una ventaja de un peón"
-  },
-  "fd5e5666f3ff4af56c06": {
-    "baseLocale": "es",
-    "baseReviewSHA256": "4c8cf4080ea0839e7f5da785a7b7d6f35cb5892a4e65359e02aed387afe2292c",
-    "evidence": [
-      "https://support.apple.com/es-mx/HT209055",
-      "https://support.apple.com/es-mx/guide/shortcuts-mac/apd5888b0858/mac",
-      "https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations"
-    ],
-    "generatedBy": "scripts/localization/seed_spanish_latam.py",
-    "reason": "Reviewed adaptation of Spain Spanish for Latin America: regional Apple controls, neutral chess terms, concise errors, and unchanged runtime arguments.",
-    "reviewedAt": "2026-10-31T18:49:46.584940+00:00",
-    "source": "Open Chess Best Move and analyze your latest saved screenshot.",
-    "translation": "Abre Chess Best Move y analiza tu última captura guardada."
   },
   "fdceecdbf50d36eabb35": {
     "baseLocale": "es",

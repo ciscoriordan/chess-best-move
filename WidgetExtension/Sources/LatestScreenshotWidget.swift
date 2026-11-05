@@ -34,7 +34,7 @@ struct LatestScreenshotWidget: Widget {
             ScreenshotWidgetView()
         }
         .configurationDisplayName("Best Move from Screenshot")
-        .description("Open Chess Best Move and analyze your latest saved screenshot.")
+        .description("Open Chess Best Next Move and analyze your latest saved screenshot.")
         .supportedFamilies([.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular])
     }
 }

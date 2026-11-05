@@ -136,7 +136,7 @@ struct SettingsLicensesView: View {
                 // A plain SectionLabel, not a GroupedSectionLabel: what follows it is the
                 // paragraphs, not a card. Both start at the side gutter, as the card's row titles
                 // do, so the whole screen reads down one leading line.
-                SectionLabel("Chess Best Move")
+                SectionLabel("Chess Best Next Move")
                 VStack(alignment: .leading, spacing: Spacing.s3) {
                     LegalParagraph(SettingsLegal.appCopyright)
                     LegalParagraph(SettingsLegal.appFreeSoftware)

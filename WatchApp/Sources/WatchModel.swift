@@ -48,7 +48,7 @@ final class WatchModel: NSObject, WCSessionDelegate {
            let preview = try? JSONDecoder().decode(WatchAnalysisReply.self, from: data),
            preview.version == WatchWire.version {
             state.preview(preview)
-            moveDisplayFormat = preview.moveDisplayFormat ?? .words
+            moveDisplayFormat = preview.preferredMoveDisplayFormat ?? preview.moveDisplayFormat ?? .words
             if let formatIndex = arguments.firstIndex(of: "-watchPreviewMoveFormat"),
                arguments.indices.contains(formatIndex + 1),
                let format = MoveDisplayFormat(rawValue: arguments[formatIndex + 1]) {
@@ -170,7 +170,7 @@ final class WatchModel: NSObject, WCSessionDelegate {
             let skipped = request.automaticallyTriggered == true
                 && received?.status == .automaticAnalysisSkipped
             guard let self, self.state.receive(data, for: request.id) else { return }
-            if let format = received?.moveDisplayFormat {
+            if let format = received?.preferredMoveDisplayFormat ?? received?.moveDisplayFormat {
                 self.moveDisplayFormat = format
                 self.preferences.moveDisplayFormat = format
                 self.preferences.save(to: .standard)

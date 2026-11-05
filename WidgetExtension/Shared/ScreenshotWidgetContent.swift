@@ -46,7 +46,7 @@ struct ScreenshotWidgetContent: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Find the best move in your latest saved screenshot")
         .accessibilityInputLabels(["Best move", "Analyze latest screenshot"])
-        .accessibilityHint("Opens Chess Best Move to analyze it")
+        .accessibilityHint("Opens Chess Best Next Move to analyze it")
         .accessibilityAddTraits(.isButton)
     }
 

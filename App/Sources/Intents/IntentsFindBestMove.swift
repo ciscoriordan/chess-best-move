@@ -16,11 +16,11 @@ import UniformTypeIdentifiers
 /// the full result.
 ///
 /// Without credit the app shows the paywall with the board kept as the pending analysis, and
-/// the dialog says "You've used your free analyses. Open Chess Best Move to continue."
+/// the dialog says "You've used your free analyses. Open Chess Best Next Move to continue."
 struct FindBestMoveIntent: AppIntent {
     static let title: LocalizedStringResource = "Find Best Move"
     static let description = IntentDescription(
-        "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Move opens."
+        "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Next Move opens."
     )
     static let openAppWhenRun = true
 
@@ -125,21 +125,21 @@ enum IntentsShortcutOutcome: Sendable, Hashable {
         case .boardNotFound:
             String(localized: "No chessboard found in that image. This didn't use a free analysis.")
         case .needsCheck:
-            String(localized: "Some squares need a look. Check the position in Chess Best Move.")
+            String(localized: "Some squares need a look. Check the position in Chess Best Next Move.")
         case .needsPurchase:
-            String(localized: "You've used your free analyses. Open Chess Best Move to continue.")
+            String(localized: "You've used your free analyses. Open Chess Best Next Move to continue.")
         case .waitingForApproval:
-            String(localized: "The purchase is waiting for approval. The analysis starts in Chess Best Move when it is approved.")
+            String(localized: "The purchase is waiting for approval. The analysis starts in Chess Best Next Move when it is approved.")
         case .failed:
-            String(localized: "Chess Best Move couldn't analyze this position.")
+            String(localized: "Chess Best Next Move couldn't analyze this position.")
         case .canceled:
             String(localized: "The analysis was canceled.")
         case .stillRunning:
-            String(localized: "The analysis is still running in Chess Best Move.")
+            String(localized: "The analysis is still running in Chess Best Next Move.")
         case .appNotReady:
-            String(localized: "Chess Best Move isn't ready. Open the app, then run the shortcut again.")
+            String(localized: "Chess Best Next Move isn't ready. Open the app, then run the shortcut again.")
         case .unreadableImage:
-            String(localized: "Chess Best Move couldn't read that image. Pass a screenshot to the shortcut.")
+            String(localized: "Chess Best Next Move couldn't read that image. Pass a screenshot to the shortcut.")
         }
     }
 }

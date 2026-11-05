@@ -29,12 +29,6 @@
     "source": "Off",
     "translation": "Naka-off"
   },
-  "012d240e132919177bc3": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move couldn't analyze this position.",
-    "translation": "Hindi nasuri ng Chess Best Move ang posisyong ito."
-  },
   "0187a339e5ca6ddd774c": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -58,12 +52,6 @@
     "reviewedAt": "2026-11-04",
     "source": "No analyses left.",
     "translation": "Wala nang natitirang pagsusuri."
-  },
-  "0355de754655c496fb6b": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move, Copyright (C) 2026 Motomatic LLC",
-    "translation": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
   },
   "03b0f6bbda9b26e2d5ee": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -167,12 +155,6 @@
     "source": "Switch to a Better Move Automatically",
     "translation": "Awtomatikong Lumipat sa Mas Magandang Tira"
   },
-  "08ac348e22ee77ecfad6": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "You've used your free analyses. Open Chess Best Move to continue.",
-    "translation": "Nagamit mo na ang libreng pagsusuri mo. Buksan ang Chess Best Move para magpatuloy."
-  },
   "09779c722155ed14295b": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -184,6 +166,13 @@
     "reviewedAt": "2026-11-04",
     "source": "More",
     "translation": "Higit pa"
+  },
+  "0a92bbd282da82546251": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Next Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
+    "translation": "Mag-save muna ng screenshot. Pindutin nang matagal ang Home Screen at piliin ang Edit > Add Widget > Chess Best Next Move. Sa Lock Screen, pindutin nang matagal, piliin ang Customize, at pagkatapos ay Add Widgets. I-tap ang widget para buksan ang app at suriin ang pinakabagong naka-save na screenshot. Kung limitado ang access sa Photos, piliin ang screenshot kapag hiningi."
   },
   "0acc1ec9328d9d08b986": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -334,6 +323,13 @@
     "reviewedAt": "2026-11-04",
     "source": "bishop",
     "translation": "bishop"
+  },
+  "12b23b0ffc1ba0ad7662": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "You've used your free analyses. Open Chess Best Next Move to continue.",
+    "translation": "Nagamit mo na ang libreng pagsusuri mo. Buksan ang Chess Best Next Move para magpatuloy."
   },
   "13645bf6138ae0040355": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -654,10 +650,11 @@
     "translation": "Queen"
   },
   "25acdbba03e74422a3c3": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch.",
-    "translation": "Binabasa ng Chess Best Move ang pinakabagong screenshot mo para hanapin ang chessboard. Sa device mo mismo ginagawa ang pagsusuri. Kapag humiling ka sa Apple Watch, ipinapadala ang naka-crop na resulta sa nakapares mong Watch."
+    "source": "Chess Best Next Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch.",
+    "translation": "Binabasa ng Chess Best Next Move ang pinakabagong screenshot mo para hanapin ang chessboard. Sa device mo mismo ginagawa ang pagsusuri. Kapag humiling ka sa Apple Watch, ipinapadala ang naka-crop na resulta sa nakapares mong Watch."
   },
   "261a382bd2ca0ea10bfb": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -688,6 +685,13 @@
     "reviewedAt": "2026-11-04",
     "source": "depth %lld",
     "translation": "lalim %lld"
+  },
+  "27da7b0048ff3dc508e3": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Chess Best Next Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
+    "translation": "Malayang software ang Chess Best Next Move. Puwede mo itong gamitin, pag-aralan, baguhin, at ibahagi, binago man o hindi, sa ilalim ng GNU General Public License bersyon 3 na inilathala ng Free Software Foundation. Kasama ang Stockfish na nasa parehong lisensya, kaya saklaw nito ang buong app."
   },
   "27fb6bdff5c34fc4de32": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -754,12 +758,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Free analyses go back to 3, the boards already paid for are forgotten, and analyses added here are taken back. Bought analyses and Pro are not touched.",
     "translation": "Babalik sa 3 ang libreng pagsusuri. Kalilimutan ang mga board na nagamitan na nito at babawiin ang idinagdag dito. Mananatili ang biniling pagsusuri at Pro."
-  },
-  "2ae2cc278eb86d50fc20": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Add “Find Best Move” from Chess Best Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
-    "translation": "Idagdag ang “Hanapin ang Pinakamahusay na Tira” mula sa Chess Best Move. I-tap ang Screenshot input nito, piliin ang Select Variable, at piliin ang output ng Take Screenshot. Dapat lumabas ang “Hanapin ang pinakamahusay na tira sa Screenshot,” na may Screenshot bilang variable na may icon, gaya ng input sa Save to Photo Album. Kung maputla lang na placeholder ang Screenshot, walang nakaugnay na larawan. Huwag i-type ang Screenshot o iwan ang input sa Ask Each Time. Direktang matatanggap ng app ang larawan nang hindi ito hinahanap sa Photos."
   },
   "2b2055913ff4f2294155": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -863,6 +861,12 @@
     "source": "White O-O-O",
     "translation": "Puti O-O-O"
   },
+  "2ed7924c9766abc3d727": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Plain English",
+    "translation": "Simpleng pananalita"
+  },
   "2f1ba14a0b52a16ce1a4": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -959,18 +963,6 @@
     "source": "For puzzles, study, and reviewing games.",
     "translation": "Para sa mga puzzle, pag-aaral, at pagrepaso ng laro."
   },
-  "339dfc6e239d77bac8cd": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once.",
-    "translation": "Hindi makontak ang app sa iPhone. Suriin ang koneksyon at buksan ang Chess Best Move sa iPhone nang isang beses."
-  },
-  "33aa9217c69148ce87b3": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
-    "translation": "Malayang software ang Chess Best Move. Puwede mo itong gamitin, pag-aralan, baguhin, at ibahagi, binago man o hindi, sa ilalim ng GNU General Public License bersyon 3 na inilathala ng Free Software Foundation. Kasama ang Stockfish na nasa parehong lisensya, kaya saklaw nito ang buong app."
-  },
   "3428bcc46141d84ee515": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -995,11 +987,24 @@
     "source": "Recognition wasn't sure it read the right board. Press and hold the board to compare it with your screenshot, then analyze.",
     "translation": "Hindi tiyak kung tama ang pagkakabasa sa board. Pindutin nang matagal ang board para ihambing sa screenshot bago suriin."
   },
+  "3506dfd2c29dbb66a96d": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Both",
+    "translation": "Pareho"
+  },
   "354a9df0257659c20a7e": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
     "source": "The move on screen switches to a better one by itself, if you ask it to.",
     "translation": "Kapag pinili mo ito, awtomatikong papalitan ang tira sa screen kung may mas maganda."
+  },
+  "372edd9bb965f3f5f81b": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Open Chess Best Next Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
+    "translation": "Buksan ang Chess Best Next Move. Kung naka-on ang awtomatikong pagsusuri at Full Access sa Photos, makikilala ng app ang bagong chess screenshot. I-tap ang Suriin kung hihilingin. Kung hindi, i-tap ang Gamitin ang pinakabagong screenshot."
   },
   "3743137866cea1acab93": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -1030,12 +1035,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Optional: create a separate shortcut named Chess Action Button. Add Get Current App, then an If action that compares the current app’s Name with the name of your board app. Inside If, add Run Shortcut and choose Analyze my chess screenshot without the Wait action. Leave Otherwise empty. Assign Chess Action Button to the Action button. It will do nothing in other apps, rather than return to the button’s previous function.",
     "translation": "Opsyonal: gumawa ng hiwalay na shortcut na Chess Action Button. Idagdag ang Get Current App, tapos ang If na naghahambing sa Name ng kasalukuyang app at sa pangalan ng chess app mo. Sa loob ng If, idagdag ang Run Shortcut at piliin ang Suriin ang chess screenshot ko na walang Wait. Iwang blangko ang Otherwise. Italaga ang Chess Action Button sa Action button. Wala itong gagawin sa ibang app at hindi babalik ang dating action ng button."
-  },
-  "3a7a45fb3c5639cf30e0": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
-    "translation": "Gamit ng Chess Best Move ang Stockfish, isang libre at open-source na chess engine mula sa mga developer nito. Tumatakbo ito sa %@ mo at walang ina-upload."
   },
   "3b74d45b4ec6d3cea58e": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -1156,18 +1155,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Analyzes %@ to move instead. Re-running is free.",
     "translation": "Susuriin na parang tira ng %@. Libreng ulitin."
-  },
-  "3f780709f4f80ae6ea0b": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it.",
-    "translation": "I-unlock ang device at ibigay ang hinihinging mga pahintulot. Kapag pinatakbo ni Siri ang shortcut, kukuha ito ng screenshot, ise-save sa Recents, at bubuksan ang Chess Best Move para suriin iyon."
-  },
-  "3f960063d371f12ae689": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses.",
-    "translation": "Wala nang natitirang pagsusuri. Buksan ang Chess Best Move sa iPhone para sa Pro o karagdagang pagsusuri."
   },
   "3fa20c3bb030ed094bad": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -1337,12 +1324,6 @@
     "source": "Needs a look: ",
     "translation": "Kailangang suriin: "
   },
-  "4a040553d42d7508d75e": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Move opens.",
-    "translation": "Hinahanap ang pinakamahusay na tira sa screenshot ng posisyon sa chess. Magbigay ng screenshot o pumili sa Photos kapag bumukas ang Chess Best Move."
-  },
   "4aba6710fac685f9b5ad": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -1505,12 +1486,6 @@
     "source": "Clear History?",
     "translation": "Burahin ang History?"
   },
-  "542a9756840cf6573c30": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone.",
-    "translation": "Kailangang kumpirmahin ang posisyong ito. Buksan ang screenshot sa Chess Best Move sa iPhone."
-  },
   "549342cc819bac01d613": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -1571,11 +1546,12 @@
     "source": "Originally: %@",
     "translation": "Orihinal: %@"
   },
-  "575af5d5ce253bbe2e3b": {
+  "57a7324faf715c561929": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
-    "source": "The analysis is still running in Chess Best Move.",
-    "translation": "Tumatakbo pa ang pagsusuri sa Chess Best Move."
+    "source": "Some squares need a look. Check the position in Chess Best Next Move.",
+    "translation": "May mga parisukat na kailangang suriin. Tingnan ang posisyon sa Chess Best Next Move."
   },
   "57b1a1b6aad0a13ead0f": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -1637,12 +1613,6 @@
     "source": "Allow full access in Settings",
     "translation": "Magbigay ng Full Access sa Settings"
   },
-  "5b13490a1f22e0229cc5": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
-    "translation": "Ipinamamahagi ang Chess Best Move sa pag-asang magiging kapaki-pakinabang ito, ngunit WALANG ANUMANG WARRANTY, maging ang ipinahihiwatig na warranty ng kakayahang maibenta o kaangkupan sa isang partikular na layunin. Tingnan ang GNU General Public License para sa mga detalye."
-  },
   "5b4d0c120adf8cbd2262": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -1690,12 +1660,6 @@
     "reviewedAt": "2026-11-04",
     "source": "week",
     "translation": "linggo"
-  },
-  "5caf3cb39cbc98371a90": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Some squares need a look. Check the position in Chess Best Move.",
-    "translation": "May mga parisukat na kailangang suriin. Tingnan ang posisyon sa Chess Best Move."
   },
   "5d483a2a98693c68626a": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -1768,6 +1732,13 @@
     "reviewedAt": "2026-11-04",
     "source": "Move the board cursor up",
     "translation": "Ilipat pataas ang cursor sa board"
+  },
+  "619c93441f7bdaa8ffc1": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "The iPhone did not finish in time. Open Chess Best Next Move on iPhone once, then try again.",
+    "translation": "Hindi natapos sa oras ang iPhone. Buksan ang Chess Best Next Move sa iPhone nang isang beses at subukan ulit."
   },
   "6264d5b9f1930a60a77a": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -1858,12 +1829,6 @@
     "reviewedAt": "2026-11-04",
     "source": "In the Shortcuts app, create a shortcut named “Analyze my chess screenshot”. Add “Take Screenshot” as its first action.",
     "translation": "Sa Shortcuts, gumawa ng shortcut na “Suriin ang chess screenshot ko.” Idagdag ang Take Screenshot bilang unang action."
-  },
-  "6624dc2fbca091a5464d": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Open Chess Best Move to see the best move.",
-    "translation": "Buksan ang Chess Best Move para makita ang pinakamahusay na tira."
   },
   "663db260526dac9b16f8": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2039,12 +2004,6 @@
     "source": "A longer search that keeps running after the answer, up to 2 minutes.",
     "translation": "Tuloy ang paghahanap pagkatapos ng sagot, hanggang 2 minuto."
   },
-  "70be6dcce5ca9fab1453": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again.",
-    "translation": "Abala ang app sa iPhone. Iwang bukas ang Chess Best Move sa iPhone at subukan ulit."
-  },
   "7126cbfe690ae7fcd3bc": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2087,6 +2046,13 @@
     "source": "Flip",
     "translation": "Baligtarin"
   },
+  "73ad9327a36656ffcf9d": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "No analyses remaining. Open Chess Best Next Move on iPhone for Pro or more analyses.",
+    "translation": "Wala nang natitirang pagsusuri. Buksan ang Chess Best Next Move sa iPhone para sa Pro o karagdagang pagsusuri."
+  },
   "73b1e853726b33712d03": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2117,11 +2083,12 @@
     "source": "Version",
     "translation": "Bersyon"
   },
-  "75ea5bc260f0ff122deb": {
+  "75d8d2a5dfa765faf1bc": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
-    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
-    "translation": "Mag-save muna ng screenshot. Pindutin nang matagal ang Home Screen at piliin ang Edit > Add Widget > Chess Best Move. Sa Lock Screen, pindutin nang matagal, piliin ang Customize, at pagkatapos ay Add Widgets. I-tap ang widget para buksan ang app at suriin ang pinakabagong naka-save na screenshot. Kung limitado ang access sa Photos, piliin ang screenshot kapag hiningi."
+    "source": "Chess Best Next Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
+    "translation": "Ipinamamahagi ang Chess Best Next Move sa pag-asang magiging kapaki-pakinabang ito, ngunit WALANG ANUMANG WARRANTY, maging ang ipinahihiwatig na warranty ng kakayahang maibenta o kaangkupan sa isang partikular na layunin. Tingnan ang GNU General Public License para sa mga detalye."
   },
   "760c54035e53d1958f63": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2153,6 +2120,13 @@
     "source": "Move the board cursor right",
     "translation": "Ilipat pakanan ang cursor sa board"
   },
+  "77cdda461ea3e09357a8": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Open Chess Best Next Move on iPhone and allow full Photos access to read new screenshots.",
+    "translation": "Buksan ang Chess Best Next Move sa iPhone at bigyan ito ng Full Access sa Photos para mabasa ang mga bagong screenshot."
+  },
   "78356393817438eac772": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2170,12 +2144,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Tap to return to the result.",
     "translation": "I-tap para bumalik sa resulta."
-  },
-  "79439b9e21d6d4f66096": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Opens Chess Best Move to analyze it",
-    "translation": "Binubuksan ang Chess Best Move para suriin ito"
   },
   "798e5b9d329da41834be": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2219,6 +2187,13 @@
     "source": "An analysis is spent on a position you have not analyzed before. Re-running the same board, at any think time, is free.",
     "translation": "Isang pagsusuri ang ginagamit sa bawat bagong posisyon. Libreng suriin ulit ang parehong board sa anumang tagal."
   },
+  "7c877a90aa52826e9497": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Open Chess Best Next Move and import the screenshot from Photos.",
+    "translation": "Buksan ang Chess Best Next Move at i-import ang screenshot mula sa Photos."
+  },
   "7c8bceb6d0d55aad7cfc": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2230,6 +2205,13 @@
     "reviewedAt": "2026-11-04",
     "source": "Choose another screenshot",
     "translation": "Pumili ng ibang screenshot"
+  },
+  "7cbf387c84cfcbdfe369": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Chess Best Next Move isn't ready. Open the app, then run the shortcut again.",
+    "translation": "Hindi pa handa ang Chess Best Next Move. Buksan ang app at patakbuhin ulit ang shortcut."
   },
   "7d67ddb8ae65f954b980": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2267,12 +2249,6 @@
     "source": "Check the pieces, then analyze.",
     "translation": "Suriin ang mga piyesa bago magpatakbo ng pagsusuri."
   },
-  "7fa59d1dcb14a0c87628": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Opening Chess Best Move",
-    "translation": "Binubuksan ang Chess Best Move"
-  },
   "7faa7019894d7b773f99": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2297,6 +2273,12 @@
     "source": "%1$@ is in check but it's %2$@'s move.",
     "translation": "Naka-check ang %1$@ pero tira ng %2$@."
   },
+  "8153c63fc00b1a27b9ba": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Both",
+    "translation": "Pareho"
+  },
   "8194473d181df1f094b1": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2315,6 +2297,13 @@
     "source": "Clear board",
     "translation": "Alisan ng laman ang board"
   },
+  "8232b373b9abe3c061d7": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Opens Chess Best Next Move to analyze it",
+    "translation": "Binubuksan ang Chess Best Next Move para suriin ito"
+  },
   "82bae0ce69dffb1e093b": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2327,6 +2316,13 @@
     "source": "No free analyses",
     "translation": "Walang Libreng Pagsusuri"
   },
+  "83145e8acb57c967964b": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Next Move opens.",
+    "translation": "Hinahanap ang pinakamahusay na tira sa screenshot ng posisyon sa chess. Magbigay ng screenshot o pumili sa Photos kapag bumukas ang Chess Best Next Move."
+  },
   "83255acd3979ce312e51": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2338,6 +2334,13 @@
     "reviewedAt": "2026-11-04",
     "source": "Screenshot",
     "translation": "Screenshot"
+  },
+  "83be255c0607833366c6": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Chess Best Next Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
+    "translation": "Gamit ng Chess Best Next Move ang Stockfish, isang libre at open-source na chess engine mula sa mga developer nito. Tumatakbo ito sa %@ mo at walang ina-upload."
   },
   "83c681f5761337efd935": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2471,6 +2474,13 @@
     "source": "%@ is in check from more than two pieces.",
     "translation": "Naka-check ang %@ mula sa higit sa dalawang piyesa."
   },
+  "8adab263a1ae1c73e880": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Chess Best Next Move couldn't analyze this position.",
+    "translation": "Hindi nasuri ng Chess Best Next Move ang posisyong ito."
+  },
   "8b6207c3be40244768b9": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2488,6 +2498,12 @@
     "reviewedAt": "2026-11-04",
     "source": "Neural Network",
     "translation": "Neural Network"
+  },
+  "8ca1cab617c915346c6a": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Plain English",
+    "translation": "Simpleng pananalita"
   },
   "8d9709a97c374dc375f8": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2513,6 +2529,20 @@
     "source": "Open Settings > Action Button. Swipe to Shortcut, tap Choose a Shortcut, and select Analyze my chess screenshot without the Wait action.",
     "translation": "Buksan ang Settings > Action Button. Mag-swipe sa Shortcut, i-tap ang Choose a Shortcut, at piliin ang Suriin ang chess screenshot ko na walang Wait."
   },
+  "8ed29140af7c8240ec11": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Next Move to analyze it.",
+    "translation": "I-unlock ang device at ibigay ang hinihinging mga pahintulot. Kapag pinatakbo ni Siri ang shortcut, kukuha ito ng screenshot, ise-save sa Recents, at bubuksan ang Chess Best Next Move para suriin iyon."
+  },
+  "8eed1aaf22da724a1929": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "This position needs confirmation. Open the screenshot in Chess Best Next Move on iPhone.",
+    "translation": "Kailangang kumpirmahin ang posisyong ito. Buksan ang screenshot sa Chess Best Next Move sa iPhone."
+  },
   "8f95380e7baa068f365e": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2531,6 +2561,13 @@
     "source": "Open Shortcuts",
     "translation": "Buksan ang Shortcuts"
   },
+  "907fe985378fbd6c5fb6": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Chess Best Next Move couldn't read that image. Pass a screenshot to the shortcut.",
+    "translation": "Hindi mabasa ng Chess Best Next Move ang larawan. Magbigay ng screenshot sa shortcut."
+  },
   "909fae6f5b46b2f3ac41": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2542,12 +2579,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Try again",
     "translation": "Subukan Ulit"
-  },
-  "90eabed501ac867eae87": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move couldn't read that image. Pass a screenshot to the shortcut.",
-    "translation": "Hindi mabasa ng Chess Best Move ang larawan. Magbigay ng screenshot sa shortcut."
   },
   "912113e1b96740a5a48d": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2608,6 +2639,13 @@
     "reviewedAt": "2026-11-04",
     "source": "Unlimited Best Moves",
     "translation": "Walang Limitasyong Mungkahi"
+  },
+  "947c52f09359a8f7cc17": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Next Move on iPhone once.",
+    "translation": "Hindi makontak ang app sa iPhone. Suriin ang koneksyon at buksan ang Chess Best Next Move sa iPhone nang isang beses."
   },
   "954a58172de86aba72f8": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2687,6 +2725,13 @@
     "source": "Free Analyses",
     "translation": "Mga Libreng Pagsusuri"
   },
+  "9b1a3c68e73fd4b17192": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "The analysis is still running in Chess Best Next Move.",
+    "translation": "Tumatakbo pa ang pagsusuri sa Chess Best Next Move."
+  },
   "9b362ab8b1ca3fc9f8f6": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2740,12 +2785,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Waiting for purchase approval. The analysis starts when it is approved.",
     "translation": "Hinihintay ang pag-apruba sa pagbili. Magsisimula ang pagsusuri kapag naaprubahan."
-  },
-  "9ccb83072a05cc2a7fe9": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
-    "translation": "Buksan ang Chess Best Move. Kung naka-on ang awtomatikong pagsusuri at Full Access sa Photos, makikilala ng app ang bagong chess screenshot. I-tap ang Suriin kung hihilingin. Kung hindi, i-tap ang Gamitin ang pinakabagong screenshot."
   },
   "9d70cda159108bfc4849": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -3035,6 +3074,13 @@
     "source": "Try again",
     "translation": "Subukan Ulit"
   },
+  "aec9c15441247fed8fd6": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "The iPhone app is busy. Leave Chess Best Next Move on iPhone, then try again.",
+    "translation": "Abala ang app sa iPhone. Iwang bukas ang Chess Best Next Move sa iPhone at subukan ulit."
+  },
   "af0a2f11226d747cbacf": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -3137,23 +3183,11 @@
     "source": "Pro, yearly",
     "translation": "Pro, taunan"
   },
-  "b5e64080447fcb9eb166": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move isn't ready. Open the app, then run the shortcut again.",
-    "translation": "Hindi pa handa ang Chess Best Move. Buksan ang app at patakbuhin ulit ang shortcut."
-  },
   "b5f6556910a08b38ac41": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
     "source": "Stopped when the app went to the background. Run it again for the full think time.",
     "translation": "Huminto nang mapunta sa background ang app. Ulitin para masuri sa buong takdang oras."
-  },
-  "b6092eb6e2f17b475331": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Open Chess Best Move and import the screenshot from Photos.",
-    "translation": "Buksan ang Chess Best Move at i-import ang screenshot mula sa Photos."
   },
   "b61106566308373f8ec3": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -3287,6 +3321,13 @@
     "source": "Runs on your %@: works offline, nothing is uploaded",
     "translation": "Tumatakbo sa %@ mo: gumagana offline at walang ina-upload"
   },
+  "bddf56c6be7dbafbbacd": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Add “Find Best Move” from Chess Best Next Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
+    "translation": "Idagdag ang “Hanapin ang Pinakamahusay na Tira” mula sa Chess Best Next Move. I-tap ang Screenshot input nito, piliin ang Select Variable, at piliin ang output ng Take Screenshot. Dapat lumabas ang “Hanapin ang pinakamahusay na tira sa Screenshot,” na may Screenshot bilang variable na may icon, gaya ng input sa Save to Photo Album. Kung maputla lang na placeholder ang Screenshot, walang nakaugnay na larawan. Huwag i-type ang Screenshot o iwan ang input sa Ask Each Time. Direktang matatanggap ng app ang larawan nang hindi ito hinahanap sa Photos."
+  },
   "bdeb37d13704a9213f4b": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -3353,12 +3394,6 @@
     "source": "%1$@, %2$lld left",
     "translation": "%1$@, %2$lld ang natitira"
   },
-  "c1950fdb3fbb4ebe2024": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots.",
-    "translation": "Buksan ang Chess Best Move sa iPhone at bigyan ito ng Full Access sa Photos para mabasa ang mga bagong screenshot."
-  },
   "c1ae1274933d7443b024": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -3376,6 +3411,13 @@
     "reviewedAt": "2026-11-04",
     "source": "Your yearly subscription is still active",
     "translation": "Aktibo pa ang taunan mong subscription"
+  },
+  "c387cfce614b01daab24": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Open Chess Best Next Move to see the best move.",
+    "translation": "Buksan ang Chess Best Next Move para makita ang pinakamahusay na tira."
   },
   "c3f254b58f195e20f9cf": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -3478,6 +3520,20 @@
     "reviewedAt": "2026-11-04",
     "source": "Stalemate",
     "translation": "Tabla sa Stalemate"
+  },
+  "cb24b0c9a7102d9d8235": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Open Chess Best Next Move and analyze your latest saved screenshot.",
+    "translation": "Buksan ang Chess Best Next Move at suriin ang pinakabagong naka-save na screenshot."
+  },
+  "cb818ec90b391252d98c": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC",
+    "translation": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
   },
   "cbf240dce89ba6223c75": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -3905,12 +3961,6 @@
     "source": "Pro Weekly",
     "translation": "Pro Lingguhan"
   },
-  "e4b563aaf09601e1d061": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.",
-    "translation": "Hindi natapos sa oras ang iPhone. Buksan ang Chess Best Move sa iPhone nang isang beses at subukan ulit."
-  },
   "e58646d13a80d165c919": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -3965,6 +4015,13 @@
     "source": "You're offline. Connect to the internet to see purchase options.",
     "translation": "Offline ka. Kumonekta sa internet para makita ang mga opsyon sa pagbili."
   },
+  "eb416a033d2c639d2de1": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Next Move when it is approved.",
+    "translation": "Hinihintay ang pag-apruba sa pagbili. Magsisimula ang pagsusuri sa Chess Best Next Move kapag naaprubahan."
+  },
   "eb96926e0610bc0638ae": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -3995,6 +4052,13 @@
     "source": " The other marked squares were hard to read.",
     "translation": " Mahirap basahin ang iba pang minarkahang parisukat."
   },
+  "ee087cba71b09594f6bf": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Opening Chess Best Next Move",
+    "translation": "Binubuksan ang Chess Best Next Move"
+  },
   "ee319dc3b330501b374a": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -4018,12 +4082,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Unlock Unlimited",
     "translation": "Kunin ang Walang Limitasyong Access"
-  },
-  "efcbdc7ff2aeea4e80d6": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Move when it is approved.",
-    "translation": "Hinihintay ang pag-apruba sa pagbili. Magsisimula ang pagsusuri sa Chess Best Move kapag naaprubahan."
   },
   "f0826ec96d9e44a761a2": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -4198,12 +4256,6 @@
     "reviewedAt": "2026-11-04",
     "source": "%@ is ahead by 1 pawn",
     "translation": "Lamang ang %@ ng 1 pawn"
-  },
-  "fd5e5666f3ff4af56c06": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Open Chess Best Move and analyze your latest saved screenshot.",
-    "translation": "Buksan ang Chess Best Move at suriin ang pinakabagong naka-save na screenshot."
   },
   "fdceecdbf50d36eabb35": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",

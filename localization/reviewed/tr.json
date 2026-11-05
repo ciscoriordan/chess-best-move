@@ -34,13 +34,6 @@
     "source": "Off",
     "translation": "Kapalı"
   },
-  "012d240e132919177bc3": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:05.637291+00:00",
-    "source": "Chess Best Move couldn't analyze this position.",
-    "translation": "Chess Best Move bu konumu analiz edemedi."
-  },
   "0187a339e5ca6ddd774c": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -68,13 +61,6 @@
     "reviewedAt": "2026-10-15T02:35:05.637297+00:00",
     "source": "No analyses left.",
     "translation": "Analiz hakkınız kalmadı."
-  },
-  "0355de754655c496fb6b": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:05.637298+00:00",
-    "source": "Chess Best Move, Copyright (C) 2026 Motomatic LLC",
-    "translation": "Chess Best Move, Telif Hakkı (C) 2026 Motomatic LLC"
   },
   "03b0f6bbda9b26e2d5ee": {
     "origin": "manual",
@@ -195,13 +181,6 @@
     "source": "Switch to a Better Move Automatically",
     "translation": "Daha iyi hamleye otomatik geç"
   },
-  "08ac348e22ee77ecfad6": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:05.637321+00:00",
-    "source": "You've used your free analyses. Open Chess Best Move to continue.",
-    "translation": "Ücretsiz analizlerinizi kullandınız. Devam etmek için Chess Best Move’u açın."
-  },
   "09779c722155ed14295b": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -215,6 +194,14 @@
     "reviewedAt": "2026-10-15T02:35:05.637324+00:00",
     "source": "More",
     "translation": "Diğer"
+  },
+  "0a92bbd282da82546251": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:36:48.351890+00:00",
+    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Next Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
+    "translation": "Önce bir ekran görüntüsü kaydedin. Ana Ekran’ı basılı tutup Düzenle > Araç Takımı Ekle > Chess Best Next Move yolunu izleyin. Kilitli Ekran’da basılı tutun, Özelleştir’i ve ardından Araç Takımı Ekle’yi seçin. Uygulamayı açıp son kaydettiğiniz ekran görüntüsünü analiz etmek için araç takımına dokunun. Fotoğraflar erişimi sınırlıysa istendiğinde ekran görüntüsünü seçin."
   },
   "0acc1ec9328d9d08b986": {
     "origin": "manual",
@@ -411,6 +398,14 @@
     "reviewedAt": "2026-10-15T02:35:05.637353+00:00",
     "source": "bishop",
     "translation": "fili"
+  },
+  "12b23b0ffc1ba0ad7662": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:35:05.637321+00:00",
+    "source": "You've used your free analyses. Open Chess Best Next Move to continue.",
+    "translation": "Ücretsiz analizlerinizi kullandınız. Devam etmek için Chess Best Next Move’u açın."
   },
   "13645bf6138ae0040355": {
     "origin": "manual",
@@ -791,11 +786,12 @@
     "translation": "Vezir"
   },
   "25acdbba03e74422a3c3": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
     "origin": "manual-reviewed",
     "reason": "Preserved the reviewed, shipped Watch-aware Photos permission text and synchronized its stale editorial record.",
     "reviewedAt": "2026-10-22",
-    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch.",
-    "translation": "Chess Best Move, satranç tahtasını bulmak için son ekran görüntünüzü okur. Analiz cihazınızda yapılır. Apple Watch’unuzdan isterseniz kırpılmış sonuç eşlenmiş Watch’unuza gönderilir."
+    "source": "Chess Best Next Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch.",
+    "translation": "Chess Best Next Move, satranç tahtasını bulmak için son ekran görüntünüzü okur. Analiz cihazınızda yapılır. Apple Watch’unuzdan isterseniz kırpılmış sonuç eşlenmiş Watch’unuza gönderilir."
   },
   "261a382bd2ca0ea10bfb": {
     "origin": "manual-reviewed",
@@ -830,6 +826,14 @@
     "reviewedAt": "2026-10-15T02:35:05.637417+00:00",
     "source": "depth %lld",
     "translation": "derinlik %1$lld"
+  },
+  "27da7b0048ff3dc508e3": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:35:54.897198+00:00",
+    "source": "Chess Best Next Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
+    "translation": "Chess Best Next Move özgür yazılımdır. Free Software Foundation tarafından yayımlanan GNU Genel Kamu Lisansı’nın 3. sürümü kapsamında uygulamayı kullanabilir, nasıl çalıştığını inceleyebilir, değiştirebilir ve değiştirilmiş veya değiştirilmemiş haliyle paylaşabilirsiniz. Uygulama, aynı lisans kapsamındaki Stockfish’i içerir. Bu nedenle uygulamanın tamamı bu lisans altında dağıtılır."
   },
   "27fb6bdff5c34fc4de32": {
     "origin": "manual",
@@ -911,13 +915,6 @@
     "reviewedAt": "2026-10-15T02:35:05.637428+00:00",
     "source": "Free analyses go back to 3, the boards already paid for are forgotten, and analyses added here are taken back. Bought analyses and Pro are not touched.",
     "translation": "Ücretsiz analiz sayısı yeniden 3 olur, daha önce analiz hakkı kullanılarak açılan tahtalar unutulur ve burada eklenen analizler geri alınır. Satın alınan analizler ve Pro erişimi değişmez."
-  },
-  "2ae2cc278eb86d50fc20": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:05.637429+00:00",
-    "source": "Add “Find Best Move” from Chess Best Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
-    "translation": "Chess Best Move’dan “En iyi hamleyi bul” eylemini ekleyin. Ekran Görüntüsü girdisine dokunup Değişken Seç’i seçin ve Ekran Görüntüsü Al eyleminin çıktısını seçin. Eylemde “Ekran Görüntüsü içindeki en iyi hamleyi bul” yazmalı. Ekran Görüntüsü, Fotoğraf Albümüne Kaydet eylemindeki gibi ekran görüntüsü simgeli bir değişken olarak görünmeli. Soluk bir Ekran Görüntüsü yer tutucusu, bir görüntünün bağlı olduğu anlamına gelmez. Ekran Görüntüsü sözcüklerini elle yazmayın ve girdiyi Her Seferinde Sor olarak bırakmayın. Uygulama bu görüntüyü Fotoğraflar’da aramadan doğrudan alır."
   },
   "2b2055913ff4f2294155": {
     "origin": "manual",
@@ -1037,6 +1034,12 @@
     "source": "White O-O-O",
     "translation": "Beyaz O-O-O"
   },
+  "2ed7924c9766abc3d727": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Plain English",
+    "translation": "Sade dil"
+  },
   "2f1ba14a0b52a16ce1a4": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -1148,20 +1151,6 @@
     "source": "For puzzles, study, and reviewing games.",
     "translation": "Bulmacalar, çalışma ve oyun incelemeleri için."
   },
-  "339dfc6e239d77bac8cd": {
-    "origin": "manual-reviewed",
-    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
-    "reviewedAt": "2026-10-22",
-    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once.",
-    "translation": "iPhone uygulamasına ulaşılamadı. Bağlantıyı kontrol edin ve iPhone’da Chess Best Move’u bir kez açın."
-  },
-  "33aa9217c69148ce87b3": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:54.897198+00:00",
-    "source": "Chess Best Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
-    "translation": "Chess Best Move özgür yazılımdır. Free Software Foundation tarafından yayımlanan GNU Genel Kamu Lisansı’nın 3. sürümü kapsamında uygulamayı kullanabilir, nasıl çalıştığını inceleyebilir, değiştirebilir ve değiştirilmiş veya değiştirilmemiş haliyle paylaşabilirsiniz. Uygulama, aynı lisans kapsamındaki Stockfish’i içerir. Bu nedenle uygulamanın tamamı bu lisans altında dağıtılır."
-  },
   "3428bcc46141d84ee515": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -1190,12 +1179,26 @@
     "source": "Recognition wasn't sure it read the right board. Press and hold the board to compare it with your screenshot, then analyze.",
     "translation": "Doğru tahtanın okunduğundan emin olunamadı. Ekran görüntünüzle karşılaştırmak için tahtayı basılı tutun, ardından analiz edin."
   },
+  "3506dfd2c29dbb66a96d": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Both",
+    "translation": "İkisi de"
+  },
   "354a9df0257659c20a7e": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
     "reviewedAt": "2026-10-15T02:35:54.897203+00:00",
     "source": "The move on screen switches to a better one by itself, if you ask it to.",
     "translation": "İsterseniz ekrandaki hamle, daha iyi bir hamle bulunduğunda kendiliğinden değişir."
+  },
+  "372edd9bb965f3f5f81b": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:36:48.352008+00:00",
+    "source": "Open Chess Best Next Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
+    "translation": "Chess Best Next Move’u açın. Otomatik analiz açıkken ve Fotoğraflar’a Tam Erişim verildiğinde uygulama yeni satranç ekran görüntünüzü tanır. İstenirse Analiz et’e dokunun. Aksi takdirde Son ekran görüntüsünü kullan’a dokunun."
   },
   "3743137866cea1acab93": {
     "origin": "manual",
@@ -1251,13 +1254,6 @@
     "reviewedAt": "2026-10-15T02:46:05.251093+00:00",
     "source": "Optional: create a separate shortcut named Chess Action Button. Add Get Current App, then an If action that compares the current app’s Name with the name of your board app. Inside If, add Run Shortcut and choose Analyze my chess screenshot without the Wait action. Leave Otherwise empty. Assign Chess Action Button to the Action button. It will do nothing in other apps, rather than return to the button’s previous function.",
     "translation": "İsteğe bağlı: Satranç Eylem Düğmesi adlı ayrı bir kestirme oluşturun. Şu Anki Uygulamayı Al eylemini ekleyin, ardından geçerli uygulamanın Ad değerini tahta uygulamanızın adıyla karşılaştıran bir Eğer eylemi ekleyin. Eğer bölümüne Kestirmeyi Çalıştır eylemini ekleyip Bekle eylemi içermeyen Satranç ekran görüntümü analiz et kestirmesini seçin. Aksi Takdirde bölümünü boş bırakın. Satranç Eylem Düğmesi kestirmesini Eylem düğmesine atayın. Diğer uygulamalarda düğmenin önceki işlevine dönmek yerine hiçbir şey yapmaz."
-  },
-  "3a7a45fb3c5639cf30e0": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:54.897212+00:00",
-    "source": "Chess Best Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
-    "translation": "Chess Best Move, konumları Stockfish geliştiricilerinin özgür ve açık kaynaklı satranç motoru Stockfish ile analiz eder. Analiz %1$@ aygıtınızda çalışır; hiçbir şey yüklenmez."
   },
   "3b74d45b4ec6d3cea58e": {
     "origin": "manual",
@@ -1398,20 +1394,6 @@
     "reviewedAt": "2026-10-15T02:35:54.897230+00:00",
     "source": "Analyzes %@ to move instead. Re-running is free.",
     "translation": "Bunun yerine hamle sırası %1$@ tarafındayken analiz eder. Yeniden analiz ücretsizdir."
-  },
-  "3f780709f4f80ae6ea0b": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:54.897231+00:00",
-    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it.",
-    "translation": "Aygıtınızın kilidini açın ve istenen izinleri verin. Siri kestirmeyi çalıştırdığında ekran görüntüsünü alır, Son Kullanılanlar’a kaydeder ve analiz etmek için Chess Best Move’u açar."
-  },
-  "3f960063d371f12ae689": {
-    "origin": "manual-reviewed",
-    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
-    "reviewedAt": "2026-10-22",
-    "source": "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses.",
-    "translation": "Analiz kalmadı. Pro veya daha fazla analiz için iPhone’da Chess Best Move’u açın."
   },
   "3fa20c3bb030ed094bad": {
     "origin": "manual",
@@ -1605,13 +1587,6 @@
     "reviewedAt": "2026-10-15T02:35:54.897252+00:00",
     "source": "Needs a look: ",
     "translation": "Kontrol gerekiyor: "
-  },
-  "4a040553d42d7508d75e": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:54.897253+00:00",
-    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Move opens.",
-    "translation": "Bir satranç konumunun ekran görüntüsünde en iyi hamleyi bulur. Bir ekran görüntüsü iletin veya Chess Best Move açıldığında Fotoğraflar’dan bir görüntü seçin."
   },
   "4aba6710fac685f9b5ad": {
     "origin": "manual",
@@ -1812,13 +1787,6 @@
     "source": "Clear History?",
     "translation": "Geçmiş temizlensin mi?"
   },
-  "542a9756840cf6573c30": {
-    "origin": "manual-reviewed",
-    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
-    "reviewedAt": "2026-10-22",
-    "source": "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone.",
-    "translation": "Bu konumun doğrulanması gerekiyor. Ekran görüntüsünü iPhone’da Chess Best Move’da açın."
-  },
   "549342cc819bac01d613": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -1895,12 +1863,13 @@
     "source": "Originally: %@",
     "translation": "İlk sonuç: %@"
   },
-  "575af5d5ce253bbe2e3b": {
+  "57a7324faf715c561929": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:54.897283+00:00",
-    "source": "The analysis is still running in Chess Best Move.",
-    "translation": "Analiz Chess Best Move’da devam ediyor."
+    "reviewedAt": "2026-10-15T02:35:54.897299+00:00",
+    "source": "Some squares need a look. Check the position in Chess Best Next Move.",
+    "translation": "Bazı kareleri kontrol etmek gerekiyor. Konumu Chess Best Next Move’da kontrol edin."
   },
   "57b1a1b6aad0a13ead0f": {
     "origin": "manual",
@@ -1972,13 +1941,6 @@
     "source": "Allow full access in Settings",
     "translation": "Ayarlar’dan tam erişime izin ver"
   },
-  "5b13490a1f22e0229cc5": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:54.897293+00:00",
-    "source": "Chess Best Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
-    "translation": "Chess Best Move, yararlı olacağı umuduyla, ancak HİÇBİR GARANTİ OLMAKSIZIN; hatta zımni SATILABİLİRLİK veya BELİRLİ BİR AMACA UYGUNLUK garantisi bile olmadan dağıtılır. Ayrıntılar için GNU Genel Kamu Lisansı’na bakın."
-  },
   "5b4d0c120adf8cbd2262": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2034,13 +1996,6 @@
     "reviewedAt": "2026-10-15T02:35:54.897298+00:00",
     "source": "week",
     "translation": "hafta"
-  },
-  "5caf3cb39cbc98371a90": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:54.897299+00:00",
-    "source": "Some squares need a look. Check the position in Chess Best Move.",
-    "translation": "Bazı kareleri kontrol etmek gerekiyor. Konumu Chess Best Move’da kontrol edin."
   },
   "5d483a2a98693c68626a": {
     "origin": "manual",
@@ -2125,6 +2080,14 @@
     "reviewedAt": "2026-10-15T02:35:54.897309+00:00",
     "source": "Move the board cursor up",
     "translation": "Tahta imlecini yukarı taşı"
+  },
+  "619c93441f7bdaa8ffc1": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
+    "reviewedAt": "2026-10-22T20:47:06.526665+00:00",
+    "source": "The iPhone did not finish in time. Open Chess Best Next Move on iPhone once, then try again.",
+    "translation": "iPhone zamanında bitiremedi. iPhone’da Chess Best Next Move’u bir kez açıp yeniden dene."
   },
   "6264d5b9f1930a60a77a": {
     "origin": "manual",
@@ -2229,13 +2192,6 @@
     "reviewedAt": "2026-10-15T02:35:54.897322+00:00",
     "source": "In the Shortcuts app, create a shortcut named “Analyze my chess screenshot”. Add “Take Screenshot” as its first action.",
     "translation": "Kestirmeler uygulamasında “Satranç ekran görüntümü analiz et” adlı bir kestirme oluşturun. İlk eylem olarak “Ekran Görüntüsü Al” eylemini ekleyin."
-  },
-  "6624dc2fbca091a5464d": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:35:54.897323+00:00",
-    "source": "Open Chess Best Move to see the best move.",
-    "translation": "En iyi hamleyi görmek için Chess Best Move’u açın."
   },
   "663db260526dac9b16f8": {
     "origin": "manual-reviewed",
@@ -2440,13 +2396,6 @@
     "source": "A longer search that keeps running after the answer, up to 2 minutes.",
     "translation": "Yanıt geldikten sonra devam eden, en fazla 2 dakikalık daha uzun bir arama."
   },
-  "70be6dcce5ca9fab1453": {
-    "origin": "manual-reviewed",
-    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
-    "reviewedAt": "2026-10-22",
-    "source": "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again.",
-    "translation": "iPhone uygulaması meşgul. iPhone’da Chess Best Move’dan çıkıp tekrar deneyin."
-  },
   "7126cbfe690ae7fcd3bc": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2496,6 +2445,14 @@
     "source": "Flip",
     "translation": "Çevir"
   },
+  "73ad9327a36656ffcf9d": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "No analyses remaining. Open Chess Best Next Move on iPhone for Pro or more analyses.",
+    "translation": "Analiz kalmadı. Pro veya daha fazla analiz için iPhone’da Chess Best Next Move’u açın."
+  },
   "73b1e853726b33712d03": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2531,12 +2488,13 @@
     "source": "Version",
     "translation": "Sürüm"
   },
-  "75ea5bc260f0ff122deb": {
+  "75d8d2a5dfa765faf1bc": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:36:48.351890+00:00",
-    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
-    "translation": "Önce bir ekran görüntüsü kaydedin. Ana Ekran’ı basılı tutup Düzenle > Araç Takımı Ekle > Chess Best Move yolunu izleyin. Kilitli Ekran’da basılı tutun, Özelleştir’i ve ardından Araç Takımı Ekle’yi seçin. Uygulamayı açıp son kaydettiğiniz ekran görüntüsünü analiz etmek için araç takımına dokunun. Fotoğraflar erişimi sınırlıysa istendiğinde ekran görüntüsünü seçin."
+    "reviewedAt": "2026-10-15T02:35:54.897293+00:00",
+    "source": "Chess Best Next Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
+    "translation": "Chess Best Next Move, yararlı olacağı umuduyla, ancak HİÇBİR GARANTİ OLMAKSIZIN; hatta zımni SATILABİLİRLİK veya BELİRLİ BİR AMACA UYGUNLUK garantisi bile olmadan dağıtılır. Ayrıntılar için GNU Genel Kamu Lisansı’na bakın."
   },
   "760c54035e53d1958f63": {
     "origin": "manual",
@@ -2579,6 +2537,14 @@
     "source": "Move the board cursor right",
     "translation": "Tahta imlecini sağa taşı"
   },
+  "77cdda461ea3e09357a8": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Open Chess Best Next Move on iPhone and allow full Photos access to read new screenshots.",
+    "translation": "iPhone’da Chess Best Next Move’u açın ve yeni ekran görüntülerini okumak için Fotoğraflar’a tam erişim verin."
+  },
   "78356393817438eac772": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2599,13 +2565,6 @@
     "reviewedAt": "2026-10-22T19:31:21.187804+00:00",
     "source": "Tap to return to the result.",
     "translation": "Sonuca dönmek için dokunun."
-  },
-  "79439b9e21d6d4f66096": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:36:48.351903+00:00",
-    "source": "Opens Chess Best Move to analyze it",
-    "translation": "Analiz etmek için Chess Best Move’u açar"
   },
   "798e5b9d329da41834be": {
     "origin": "manual",
@@ -2656,6 +2615,14 @@
     "source": "An analysis is spent on a position you have not analyzed before. Re-running the same board, at any think time, is free.",
     "translation": "Daha önce analiz etmediğiniz bir konum için bir analiz hakkı kullanılır. Aynı tahtayı herhangi bir düşünme süresinde yeniden analiz etmek ücretsizdir."
   },
+  "7c877a90aa52826e9497": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:38:08.607121+00:00",
+    "source": "Open Chess Best Next Move and import the screenshot from Photos.",
+    "translation": "Chess Best Next Move’u açıp ekran görüntüsünü Fotoğraflar’dan içe aktarın."
+  },
   "7c8bceb6d0d55aad7cfc": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2669,6 +2636,14 @@
     "reviewedAt": "2026-10-15T02:36:48.351912+00:00",
     "source": "Choose another screenshot",
     "translation": "Başka ekran görüntüsü seç"
+  },
+  "7cbf387c84cfcbdfe369": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:38:08.607119+00:00",
+    "source": "Chess Best Next Move isn't ready. Open the app, then run the shortcut again.",
+    "translation": "Chess Best Next Move hazır değil. Uygulamayı açıp kestirmeyi yeniden çalıştırın."
   },
   "7d67ddb8ae65f954b980": {
     "origin": "manual",
@@ -2712,13 +2687,6 @@
     "source": "Check the pieces, then analyze.",
     "translation": "Taşları kontrol edin, ardından analiz edin."
   },
-  "7fa59d1dcb14a0c87628": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:36:48.351918+00:00",
-    "source": "Opening Chess Best Move",
-    "translation": "Chess Best Move açılıyor"
-  },
   "7faa7019894d7b773f99": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2747,6 +2715,12 @@
     "source": "%1$@ is in check but it's %2$@'s move.",
     "translation": "%1$@ şah altında ama hamle sırası %2$@ tarafında."
   },
+  "8153c63fc00b1a27b9ba": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Both",
+    "translation": "İkisi de"
+  },
   "8194473d181df1f094b1": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2768,6 +2742,14 @@
     "source": "Clear board",
     "translation": "Tahtayı temizle"
   },
+  "8232b373b9abe3c061d7": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:36:48.351903+00:00",
+    "source": "Opens Chess Best Next Move to analyze it",
+    "translation": "Analiz etmek için Chess Best Next Move’u açar"
+  },
   "82bae0ce69dffb1e093b": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2782,6 +2764,14 @@
     "source": "No free analyses",
     "translation": "Ücretsiz analiz yok"
   },
+  "83145e8acb57c967964b": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:35:54.897253+00:00",
+    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Next Move opens.",
+    "translation": "Bir satranç konumunun ekran görüntüsünde en iyi hamleyi bulur. Bir ekran görüntüsü iletin veya Chess Best Next Move açıldığında Fotoğraflar’dan bir görüntü seçin."
+  },
   "83255acd3979ce312e51": {
     "origin": "manual-reviewed",
     "reason": "Reviewed history, saved-result reuse, clearer deeper-search feedback, Watch errors, and move-playback copy for meaning, chess terminology, target-language capitalization, placeholders, and compact layout.",
@@ -2795,6 +2785,14 @@
     "reviewedAt": "2026-10-15T02:36:48.351927+00:00",
     "source": "Screenshot",
     "translation": "Ekran Görüntüsü"
+  },
+  "83be255c0607833366c6": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:35:54.897212+00:00",
+    "source": "Chess Best Next Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
+    "translation": "Chess Best Next Move, konumları Stockfish geliştiricilerinin özgür ve açık kaynaklı satranç motoru Stockfish ile analiz eder. Analiz %1$@ aygıtınızda çalışır; hiçbir şey yüklenmez."
   },
   "83c681f5761337efd935": {
     "origin": "manual",
@@ -2963,6 +2961,14 @@
     "source": "%@ is in check from more than two pieces.",
     "translation": "%1$@ şahına ikiden fazla taş şah çekiyor."
   },
+  "8adab263a1ae1c73e880": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:35:05.637291+00:00",
+    "source": "Chess Best Next Move couldn't analyze this position.",
+    "translation": "Chess Best Next Move bu konumu analiz edemedi."
+  },
   "8b6207c3be40244768b9": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -2983,6 +2989,12 @@
     "reviewedAt": "2026-10-15T02:36:48.351961+00:00",
     "source": "Neural Network",
     "translation": "Sinir ağı"
+  },
+  "8ca1cab617c915346c6a": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Plain English",
+    "translation": "Sade dil"
   },
   "8d9709a97c374dc375f8": {
     "origin": "manual",
@@ -3012,6 +3024,22 @@
     "source": "Open Settings > Action Button. Swipe to Shortcut, tap Choose a Shortcut, and select Analyze my chess screenshot without the Wait action.",
     "translation": "Ayarlar > Eylem Düğmesi yolunu izleyin. Kestirme’ye kaydırın, Kestirme Seç’e dokunun ve Bekle eylemi içermeyen Satranç ekran görüntümü analiz et kestirmesini seçin."
   },
+  "8ed29140af7c8240ec11": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:35:54.897231+00:00",
+    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Next Move to analyze it.",
+    "translation": "Aygıtınızın kilidini açın ve istenen izinleri verin. Siri kestirmeyi çalıştırdığında ekran görüntüsünü alır, Son Kullanılanlar’a kaydeder ve analiz etmek için Chess Best Next Move’u açar."
+  },
+  "8eed1aaf22da724a1929": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "This position needs confirmation. Open the screenshot in Chess Best Next Move on iPhone.",
+    "translation": "Bu konumun doğrulanması gerekiyor. Ekran görüntüsünü iPhone’da Chess Best Next Move’da açın."
+  },
   "8f95380e7baa068f365e": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -3033,6 +3061,14 @@
     "source": "Open Shortcuts",
     "translation": "Kestirmeler’i aç"
   },
+  "907fe985378fbd6c5fb6": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:36:48.351970+00:00",
+    "source": "Chess Best Next Move couldn't read that image. Pass a screenshot to the shortcut.",
+    "translation": "Chess Best Next Move bu görüntüyü okuyamadı. Kestirmeye bir ekran görüntüsü iletin."
+  },
   "909fae6f5b46b2f3ac41": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -3046,13 +3082,6 @@
     "reviewedAt": "2026-10-22T19:31:21.187720+00:00",
     "source": "Try again",
     "translation": "Tekrar dene"
-  },
-  "90eabed501ac867eae87": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:36:48.351970+00:00",
-    "source": "Chess Best Move couldn't read that image. Pass a screenshot to the shortcut.",
-    "translation": "Chess Best Move bu görüntüyü okuyamadı. Kestirmeye bir ekran görüntüsü iletin."
   },
   "912113e1b96740a5a48d": {
     "origin": "manual",
@@ -3122,6 +3151,14 @@
     "reviewedAt": "2026-10-15T02:36:48.351981+00:00",
     "source": "Unlimited Best Moves",
     "translation": "Sınırsız en iyi hamle analizi"
+  },
+  "947c52f09359a8f7cc17": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Next Move on iPhone once.",
+    "translation": "iPhone uygulamasına ulaşılamadı. Bağlantıyı kontrol edin ve iPhone’da Chess Best Next Move’u bir kez açın."
   },
   "954a58172de86aba72f8": {
     "origin": "manual",
@@ -3232,6 +3269,14 @@
     "source": "Free Analyses",
     "translation": "Ücretsiz analizler"
   },
+  "9b1a3c68e73fd4b17192": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:35:54.897283+00:00",
+    "source": "The analysis is still running in Chess Best Next Move.",
+    "translation": "Analiz Chess Best Next Move’da devam ediyor."
+  },
   "9b362ab8b1ca3fc9f8f6": {
     "origin": "manual",
     "reason": "Grammar audit against callers: origin disambiguation may be a file or rank; balance sentence needs a final verb.",
@@ -3294,13 +3339,6 @@
     "reviewedAt": "2026-10-15T02:36:48.352006+00:00",
     "source": "Waiting for purchase approval. The analysis starts when it is approved.",
     "translation": "Satın alma onayı bekleniyor. Onay verildiğinde analiz başlar."
-  },
-  "9ccb83072a05cc2a7fe9": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:36:48.352008+00:00",
-    "source": "Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
-    "translation": "Chess Best Move’u açın. Otomatik analiz açıkken ve Fotoğraflar’a Tam Erişim verildiğinde uygulama yeni satranç ekran görüntünüzü tanır. İstenirse Analiz et’e dokunun. Aksi takdirde Son ekran görüntüsünü kullan’a dokunun."
   },
   "9d70cda159108bfc4849": {
     "origin": "manual",
@@ -3657,6 +3695,14 @@
     "source": "Try again",
     "translation": "Tekrar dene"
   },
+  "aec9c15441247fed8fd6": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual-reviewed",
+    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
+    "reviewedAt": "2026-10-22",
+    "source": "The iPhone app is busy. Leave Chess Best Next Move on iPhone, then try again.",
+    "translation": "iPhone uygulaması meşgul. iPhone’da Chess Best Next Move’dan çıkıp tekrar deneyin."
+  },
   "af0a2f11226d747cbacf": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -3775,26 +3821,12 @@
     "source": "Pro, yearly",
     "translation": "Pro, yıllık"
   },
-  "b5e64080447fcb9eb166": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:38:08.607119+00:00",
-    "source": "Chess Best Move isn't ready. Open the app, then run the shortcut again.",
-    "translation": "Chess Best Move hazır değil. Uygulamayı açıp kestirmeyi yeniden çalıştırın."
-  },
   "b5f6556910a08b38ac41": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
     "reviewedAt": "2026-10-15T02:38:08.607120+00:00",
     "source": "Stopped when the app went to the background. Run it again for the full think time.",
     "translation": "Uygulama arka plana geçtiğinde durduruldu. Düşünme süresinin tamamını kullanmak için yeniden çalıştırın."
-  },
-  "b6092eb6e2f17b475331": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:38:08.607121+00:00",
-    "source": "Open Chess Best Move and import the screenshot from Photos.",
-    "translation": "Chess Best Move’u açıp ekran görüntüsünü Fotoğraflar’dan içe aktarın."
   },
   "b61106566308373f8ec3": {
     "origin": "manual",
@@ -3950,6 +3982,14 @@
     "source": "Runs on your %@: works offline, nothing is uploaded",
     "translation": "%1$@ aygıtınızda çalışır: çevrimdışı kullanılabilir, hiçbir şey yüklenmez"
   },
+  "bddf56c6be7dbafbbacd": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:35:05.637429+00:00",
+    "source": "Add “Find Best Move” from Chess Best Next Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
+    "translation": "Chess Best Next Move’dan “En iyi hamleyi bul” eylemini ekleyin. Ekran Görüntüsü girdisine dokunup Değişken Seç’i seçin ve Ekran Görüntüsü Al eyleminin çıktısını seçin. Eylemde “Ekran Görüntüsü içindeki en iyi hamleyi bul” yazmalı. Ekran Görüntüsü, Fotoğraf Albümüne Kaydet eylemindeki gibi ekran görüntüsü simgeli bir değişken olarak görünmeli. Soluk bir Ekran Görüntüsü yer tutucusu, bir görüntünün bağlı olduğu anlamına gelmez. Ekran Görüntüsü sözcüklerini elle yazmayın ve girdiyi Her Seferinde Sor olarak bırakmayın. Uygulama bu görüntüyü Fotoğraflar’da aramadan doğrudan alır."
+  },
   "bdeb37d13704a9213f4b": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -4034,13 +4074,6 @@
     "source": "%1$@, %2$lld left",
     "translation": "%1$@, %2$lld kaldı"
   },
-  "c1950fdb3fbb4ebe2024": {
-    "origin": "manual-reviewed",
-    "reason": "Migrated the previously reviewed Watch catalog into the shared localization workflow without changing its translation.",
-    "reviewedAt": "2026-10-22",
-    "source": "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots.",
-    "translation": "iPhone’da Chess Best Move’u açın ve yeni ekran görüntülerini okumak için Fotoğraflar’a tam erişim verin."
-  },
   "c1ae1274933d7443b024": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -4061,6 +4094,14 @@
     "reviewedAt": "2026-10-15T02:38:08.607164+00:00",
     "source": "Your yearly subscription is still active",
     "translation": "Yıllık aboneliğiniz hâlâ etkin"
+  },
+  "c387cfce614b01daab24": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:35:54.897323+00:00",
+    "source": "Open Chess Best Next Move to see the best move.",
+    "translation": "En iyi hamleyi görmek için Chess Best Next Move’u açın."
   },
   "c3f254b58f195e20f9cf": {
     "origin": "manual",
@@ -4180,6 +4221,22 @@
     "reviewedAt": "2026-10-15T02:38:08.607183+00:00",
     "source": "Stalemate",
     "translation": "Pat"
+  },
+  "cb24b0c9a7102d9d8235": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:38:08.607303+00:00",
+    "source": "Open Chess Best Next Move and analyze your latest saved screenshot.",
+    "translation": "Chess Best Next Move’u açıp son kaydettiğiniz ekran görüntüsünü analiz edin."
+  },
+  "cb818ec90b391252d98c": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:35:05.637298+00:00",
+    "source": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC",
+    "translation": "Chess Best Next Move, Telif Hakkı (C) 2026 Motomatic LLC"
   },
   "cbf240dce89ba6223c75": {
     "origin": "manual",
@@ -4690,13 +4747,6 @@
     "source": "Pro Weekly",
     "translation": "Pro haftalık"
   },
-  "e4b563aaf09601e1d061": {
-    "origin": "manual-reviewed",
-    "reason": "Owner requested one selected move format and no screenshot-age restriction. Reviewed phone/Watch setting names and actionable missing-screenshot and retry copy.",
-    "reviewedAt": "2026-10-22T20:47:06.526665+00:00",
-    "source": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.",
-    "translation": "iPhone zamanında bitiremedi. iPhone’da Chess Best Move’u bir kez açıp yeniden dene."
-  },
   "e58646d13a80d165c919": {
     "origin": "manual",
     "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
@@ -4759,6 +4809,14 @@
     "source": "You're offline. Connect to the internet to see purchase options.",
     "translation": "İnternet bağlantınız yok. Satın alma seçeneklerini görmek için internete bağlanın."
   },
+  "eb416a033d2c639d2de1": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:38:08.607273+00:00",
+    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Next Move when it is approved.",
+    "translation": "Satın alma işlemi onay bekliyor. Onay verildiğinde analiz Chess Best Next Move’da başlar."
+  },
   "eb96926e0610bc0638ae": {
     "reason": "Reviewed after the owner requested English title case for playback labels. The translation preserves the established capitalization convention of this language.",
     "reviewedAt": "2026-10-23T14:07:00.185457+00:00",
@@ -4793,6 +4851,14 @@
     "source": " The other marked squares were hard to read.",
     "translation": " Diğer işaretli kareleri okumak zordu."
   },
+  "ee087cba71b09594f6bf": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "origin": "manual",
+    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
+    "reviewedAt": "2026-10-15T02:36:48.351918+00:00",
+    "source": "Opening Chess Best Next Move",
+    "translation": "Chess Best Next Move açılıyor"
+  },
   "ee319dc3b330501b374a": {
     "reason": "Reviewed short-search and varied-move interface wording; preserves the strength tradeoff and does not promise detection avoidance.",
     "reviewedAt": "2026-10-31T12:44:53.472171+00:00",
@@ -4819,13 +4885,6 @@
     "reviewedAt": "2026-10-15T02:38:08.607271+00:00",
     "source": "Unlock Unlimited",
     "translation": "Sınırsız erişimi aç"
-  },
-  "efcbdc7ff2aeea4e80d6": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:38:08.607273+00:00",
-    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Move when it is approved.",
-    "translation": "Satın alma işlemi onay bekliyor. Onay verildiğinde analiz Chess Best Move’da başlar."
   },
   "f0826ec96d9e44a761a2": {
     "origin": "manual",
@@ -5028,13 +5087,6 @@
     "reviewedAt": "2026-10-15T02:38:08.607302+00:00",
     "source": "%@ is ahead by 1 pawn",
     "translation": "%1$@ 1 piyon önde"
-  },
-  "fd5e5666f3ff4af56c06": {
-    "origin": "manual",
-    "reason": "Manual Turkish translation; reviewed for chess meaning, grammar, Apple terminology, and format arguments.",
-    "reviewedAt": "2026-10-15T02:38:08.607303+00:00",
-    "source": "Open Chess Best Move and analyze your latest saved screenshot.",
-    "translation": "Chess Best Move’u açıp son kaydettiğiniz ekran görüntüsünü analiz edin."
   },
   "fdceecdbf50d36eabb35": {
     "origin": "manual-reviewed",

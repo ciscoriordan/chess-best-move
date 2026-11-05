@@ -81,17 +81,17 @@ enum SettingsLegal {
     // shows all four, with the link to the source of this exact version.
 
     /// The copyright line for the app as a whole.
-    static let appCopyright = String(localized: "Chess Best Move, Copyright (C) 2026 Motomatic LLC")
+    static let appCopyright = String(localized: "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC")
 
     static let appFreeSoftware = String(localized: """
-        Chess Best Move is free software: you can use it, study how it works, change it and \
+        Chess Best Next Move is free software: you can use it, study how it works, change it and \
         share it, changed or unchanged, under the terms of version 3 of the GNU General Public \
         License as published by the Free Software Foundation. The app includes Stockfish, which \
         is under the same license, so the app as a whole is distributed under it.
         """)
 
     static let appNoWarranty = String(localized: """
-        Chess Best Move is distributed in the hope that it will be useful, but WITHOUT ANY \
+        Chess Best Next Move is distributed in the hope that it will be useful, but WITHOUT ANY \
         WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A \
         PARTICULAR PURPOSE. See the GNU General Public License for more details.
         """)
@@ -138,7 +138,7 @@ enum SettingsLegal {
     /// `deviceName` is "iPhone", "iPad" or "Mac" (`AppDevice.name`).
     static func engineIntroduction(deviceName: String) -> String {
         String(localized: """
-        Chess Best Move analyzes positions with Stockfish, a free and open-source chess engine by \
+        Chess Best Next Move analyzes positions with Stockfish, a free and open-source chess engine by \
         the Stockfish developers. It runs on your \(deviceName); nothing is uploaded.
         """)
     }

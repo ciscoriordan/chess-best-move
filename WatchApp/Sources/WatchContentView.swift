@@ -28,8 +28,8 @@ struct WatchContentView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(.horizontal, 4)
-        // Use more of the gap below the clock without covering the system controls.
-        .padding(.top, -8)
+        // The owner prefers the higher action even where it overlaps the clock.
+        .padding(.top, -26)
         .overlay(alignment: .topLeading) { previewMarker.offset(y: -20) }
         .foregroundStyle(ink)
         .containerBackground(Color(red: 18 / 255, green: 17 / 255, blue: 14 / 255), for: .navigation)
@@ -115,7 +115,9 @@ struct WatchContentView: View {
             .font(.headline)
             .frame(maxWidth: .infinity, minHeight: 44, alignment: .center)
             .fixedSize(horizontal: false, vertical: true)
-            .padding(.vertical, 4)
+            // The capsule can extend behind the clock while its label stays below it.
+            .padding(.top, 10)
+            .padding(.bottom, 4)
             .background(buttonFill, in: Capsule())
             .padding(.horizontal, 9)
             .contentShape(Rectangle())
@@ -183,7 +185,7 @@ struct WatchContentView: View {
             }
             if let text = model.moveDisplayFormat.text(words: model.reply?.moveDescription, notation: model.reply?.san) {
                 Text(verbatim: text)
-                    .font(model.moveDisplayFormat == .words ? .title3.bold() : .system(.title3, design: .monospaced))
+                    .font(model.moveDisplayFormat == .notation ? .system(.title3, design: .monospaced) : .title3.bold())
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
             }
@@ -234,14 +236,14 @@ struct WatchContentView: View {
             return "Your iPhone could not finish the analysis. Try again."
         }
         return switch failure.status {
-        case .setupRequired: "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots."
+        case .setupRequired: "Open Chess Best Next Move on iPhone and allow full Photos access to read new screenshots."
         case .noScreenshot: "No screenshot was found in your iPhone photo library. Take a screenshot, then tap Analyze again."
-        case .needsCorrection: "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone."
+        case .needsCorrection: "This position needs confirmation. Open the screenshot in Chess Best Next Move on iPhone."
         case .noBoard: "No clear chessboard found. Take a screenshot showing the whole board."
-        case .noCredits: "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses."
-        case .busy: "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again."
-        case .timedOut: "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again."
-        default: "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once."
+        case .noCredits: "No analyses remaining. Open Chess Best Next Move on iPhone for Pro or more analyses."
+        case .busy: "The iPhone app is busy. Leave Chess Best Next Move on iPhone, then try again."
+        case .timedOut: "The iPhone did not finish in time. Open Chess Best Next Move on iPhone once, then try again."
+        default: "Could not reach the iPhone app. Check the connection and open Chess Best Next Move on iPhone once."
         }
     }
 

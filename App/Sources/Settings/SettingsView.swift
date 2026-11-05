@@ -393,7 +393,7 @@ struct SettingsRestoreFeedback: Equatable, Sendable {
 struct SettingsScreenshotHelpView: View {
     /// The button combinations of this device family, then the way back.
     private var steps: [String] {
-        AppDevice.current.screenshotButtonSteps + [String(localized: "Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.")]
+        AppDevice.current.screenshotButtonSteps + [String(localized: "Open Chess Best Next Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.")]
     }
 
     var body: some View {

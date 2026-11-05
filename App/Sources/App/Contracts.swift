@@ -654,7 +654,7 @@ protocol StoreService: AnyObject, Observable, Sendable {
     var isLaunchCohortMember: Bool { get }
     /// Apple has **confirmed** the free launch offer, rather than the app granting it while
     /// nothing is known. It is the property copy that makes a claim about the past has to read:
-    /// Settings used to say "you installed Chess Best Move before October 15, 2026", which must
+    /// Settings used to say "you installed Chess Best Next Move before October 15, 2026", which must
     /// not be said to somebody whose app transaction has not been read yet. Nothing reads it
     /// today, because the window closed on 2026-09-28 and that footer went with it
     /// (monetization.md section 11); it is kept with the rest of the mechanism.

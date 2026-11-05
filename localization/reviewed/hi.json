@@ -29,12 +29,6 @@
     "source": "Off",
     "translation": "बंद"
   },
-  "012d240e132919177bc3": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move couldn't analyze this position.",
-    "translation": "Chess Best Move इस स्थिति का विश्लेषण नहीं कर सका।"
-  },
   "0187a339e5ca6ddd774c": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -58,12 +52,6 @@
     "reviewedAt": "2026-11-04",
     "source": "No analyses left.",
     "translation": "कोई विश्लेषण बाकी नहीं है।"
-  },
-  "0355de754655c496fb6b": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move, Copyright (C) 2026 Motomatic LLC",
-    "translation": "Chess Best Move, Copyright (C) 2026 Motomatic LLC"
   },
   "03b0f6bbda9b26e2d5ee": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -167,12 +155,6 @@
     "source": "Switch to a Better Move Automatically",
     "translation": "बेहतर चाल पर अपने आप जाएँ"
   },
-  "08ac348e22ee77ecfad6": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "You've used your free analyses. Open Chess Best Move to continue.",
-    "translation": "आपके मुफ़्त विश्लेषण खत्म हो गए हैं। जारी रखने के लिए Chess Best Move खोलें।"
-  },
   "09779c722155ed14295b": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -184,6 +166,13 @@
     "reviewedAt": "2026-11-04",
     "source": "More",
     "translation": "और"
+  },
+  "0a92bbd282da82546251": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Next Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
+    "translation": "पहले स्क्रीनशॉट सहेजें। होम स्क्रीन को दबाकर रखें, फिर “बदलें” > “विजेट जोड़ें” > Chess Best Next Move चुनें। लॉक स्क्रीन को दबाकर रखें, “कस्टमाइज़ करें” और फिर “विजेट जोड़ें” चुनें। विजेट पर टैप करने से ऐप खुलता है और सबसे नया सहेजा गया स्क्रीनशॉट जाँचता है। Photos का सीमित ऐक्सेस होने पर पूछे जाने पर स्क्रीनशॉट चुनें।"
   },
   "0acc1ec9328d9d08b986": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -334,6 +323,13 @@
     "reviewedAt": "2026-11-04",
     "source": "bishop",
     "translation": "ऊँट"
+  },
+  "12b23b0ffc1ba0ad7662": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "You've used your free analyses. Open Chess Best Next Move to continue.",
+    "translation": "आपके मुफ़्त विश्लेषण खत्म हो गए हैं। जारी रखने के लिए Chess Best Next Move खोलें।"
   },
   "13645bf6138ae0040355": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -654,10 +650,11 @@
     "translation": "वज़ीर"
   },
   "25acdbba03e74422a3c3": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch.",
-    "translation": "Chess Best Move आपके सबसे नए स्क्रीनशॉट में शतरंज का बोर्ड ढूँढता है। विश्लेषण आपके डिवाइस पर होता है। Apple Watch से अनुरोध करने पर नतीजे का काटा हुआ हिस्सा आपकी पेयर की हुई Watch पर भेजा जाता है।"
+    "source": "Chess Best Next Move reads your most recent screenshot to find the chessboard in it. Analysis runs on your device. If you request it from your Apple Watch, a cropped result is sent to your paired Watch.",
+    "translation": "Chess Best Next Move आपके सबसे नए स्क्रीनशॉट में शतरंज का बोर्ड ढूँढता है। विश्लेषण आपके डिवाइस पर होता है। Apple Watch से अनुरोध करने पर नतीजे का काटा हुआ हिस्सा आपकी पेयर की हुई Watch पर भेजा जाता है।"
   },
   "261a382bd2ca0ea10bfb": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -688,6 +685,13 @@
     "reviewedAt": "2026-11-04",
     "source": "depth %lld",
     "translation": "गहराई %lld"
+  },
+  "27da7b0048ff3dc508e3": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Chess Best Next Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
+    "translation": "Chess Best Next Move स्वतंत्र सॉफ़्टवेयर है। Free Software Foundation द्वारा प्रकाशित GNU General Public License संस्करण 3 की शर्तों के तहत इसे इस्तेमाल कर सकते हैं, इसका काम समझ सकते हैं, इसे बदल सकते हैं और बदली या मूल स्थिति में साझा कर सकते हैं। Stockfish भी इसी लाइसेंस के तहत है, इसलिए पूरा ऐप इसी लाइसेंस पर वितरित होता है।"
   },
   "27fb6bdff5c34fc4de32": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -754,12 +758,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Free analyses go back to 3, the boards already paid for are forgotten, and analyses added here are taken back. Bought analyses and Pro are not touched.",
     "translation": "मुफ़्त विश्लेषण फिर 3 हो जाएँगे। पहले इस्तेमाल किए गए बोर्ड भुला दिए जाएँगे और यहाँ जोड़े गए विश्लेषण वापस लिए जाएँगे। खरीदे गए विश्लेषण और Pro पर असर नहीं पड़ेगा।"
-  },
-  "2ae2cc278eb86d50fc20": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Add “Find Best Move” from Chess Best Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
-    "translation": "Chess Best Move से “सबसे अच्छी चाल ढूँढें” जोड़ें। उसके स्क्रीनशॉट इनपुट पर टैप करें, “वैरिएबल चुनें” चुनें और “स्क्रीनशॉट लें” का आउटपुट चुनें। अब “स्क्रीनशॉट में सबसे अच्छी चाल ढूँढें” दिखना चाहिए। स्क्रीनशॉट, आइकन वाले वैरिएबल के रूप में दिखेगा, जैसे “फ़ोटो ऐल्बम में सहेजें” में। हल्के रंग का स्क्रीनशॉट प्लेसहोल्डर जुड़ी हुई इमेज नहीं है। स्क्रीनशॉट शब्द टाइप न करें और इनपुट को “हर बार पूछें” पर न छोड़ें। ऐप इमेज सीधे लेता है, Photos में नहीं ढूँढता।"
   },
   "2b2055913ff4f2294155": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -863,6 +861,12 @@
     "source": "White O-O-O",
     "translation": "सफ़ेद O-O-O"
   },
+  "2ed7924c9766abc3d727": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Plain English",
+    "translation": "सरल भाषा"
+  },
   "2f1ba14a0b52a16ce1a4": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -959,18 +963,6 @@
     "source": "For puzzles, study, and reviewing games.",
     "translation": "पहेलियों, अभ्यास और बाज़ियों की समीक्षा के लिए।"
   },
-  "339dfc6e239d77bac8cd": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Move on iPhone once.",
-    "translation": "iPhone ऐप से संपर्क नहीं हुआ। कनेक्शन जाँचें और iPhone पर Chess Best Move एक बार खोलें।"
-  },
-  "33aa9217c69148ce87b3": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move is free software: you can use it, study how it works, change it and share it, changed or unchanged, under the terms of version 3 of the GNU General Public License as published by the Free Software Foundation. The app includes Stockfish, which is under the same license, so the app as a whole is distributed under it.",
-    "translation": "Chess Best Move स्वतंत्र सॉफ़्टवेयर है। Free Software Foundation द्वारा प्रकाशित GNU General Public License संस्करण 3 की शर्तों के तहत इसे इस्तेमाल कर सकते हैं, इसका काम समझ सकते हैं, इसे बदल सकते हैं और बदली या मूल स्थिति में साझा कर सकते हैं। Stockfish भी इसी लाइसेंस के तहत है, इसलिए पूरा ऐप इसी लाइसेंस पर वितरित होता है।"
-  },
   "3428bcc46141d84ee515": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -995,11 +987,24 @@
     "source": "Recognition wasn't sure it read the right board. Press and hold the board to compare it with your screenshot, then analyze.",
     "translation": "ऐप को पक्का नहीं है कि बोर्ड सही पढ़ा गया। स्क्रीनशॉट से मिलाने के लिए बोर्ड को दबाकर रखें, फिर विश्लेषण करें।"
   },
+  "3506dfd2c29dbb66a96d": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Both",
+    "translation": "दोनों"
+  },
   "354a9df0257659c20a7e": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
     "source": "The move on screen switches to a better one by itself, if you ask it to.",
     "translation": "इसे चालू करने पर बेहतर चाल मिलते ही स्क्रीन पर वह चाल अपने आप दिखती है।"
+  },
+  "372edd9bb965f3f5f81b": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Open Chess Best Next Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
+    "translation": "Chess Best Next Move खोलें। अपने आप विश्लेषण और Photos का पूरा ऐक्सेस चालू होने पर ऐप नया शतरंज स्क्रीनशॉट पहचानता है। पूछे जाने पर “विश्लेषण करें” पर टैप करें। वरना “नवीनतम स्क्रीनशॉट इस्तेमाल करें” चुनें।"
   },
   "3743137866cea1acab93": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -1030,12 +1035,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Optional: create a separate shortcut named Chess Action Button. Add Get Current App, then an If action that compares the current app’s Name with the name of your board app. Inside If, add Run Shortcut and choose Analyze my chess screenshot without the Wait action. Leave Otherwise empty. Assign Chess Action Button to the Action button. It will do nothing in other apps, rather than return to the button’s previous function.",
     "translation": "वैकल्पिक: “शतरंज ऐक्शन बटन” नाम का अलग शॉर्टकट बनाएँ। “वर्तमान ऐप पाएँ” जोड़ें। फिर “अगर” क्रिया जोड़ें, जो वर्तमान ऐप के नाम की तुलना आपके शतरंज ऐप के नाम से करे। “अगर” के अंदर “शॉर्टकट चलाएँ” जोड़ें और बिना इंतज़ार वाला “मेरा शतरंज स्क्रीनशॉट जाँचो” चुनें। “अन्यथा” खाली छोड़ें। “शतरंज ऐक्शन बटन” को ऐक्शन बटन पर सेट करें। दूसरे ऐप में यह कुछ नहीं करेगा और बटन का पिछला काम भी नहीं चलेगा।"
-  },
-  "3a7a45fb3c5639cf30e0": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
-    "translation": "Chess Best Move, Stockfish डेवलपरों के मुफ़्त और ओपन सोर्स शतरंज इंजन Stockfish से स्थितियों का विश्लेषण करता है। यह आपके %@ पर चलता है। कुछ भी अपलोड नहीं होता।"
   },
   "3b74d45b4ec6d3cea58e": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -1156,18 +1155,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Analyzes %@ to move instead. Re-running is free.",
     "translation": "अब %@ की चाल मानकर विश्लेषण होगा। दोबारा चलाना मुफ़्त है।"
-  },
-  "3f780709f4f80ae6ea0b": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Move to analyze it.",
-    "translation": "डिवाइस अनलॉक करें और माँगी गई अनुमतियाँ दें। Siri शॉर्टकट चलाकर स्क्रीनशॉट लेता है, “हाल के” में सहेजता है और विश्लेषण के लिए Chess Best Move खोलता है।"
-  },
-  "3f960063d371f12ae689": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "No analyses remaining. Open Chess Best Move on iPhone for Pro or more analyses.",
-    "translation": "कोई विश्लेषण बाकी नहीं है। Pro या और विश्लेषण के लिए iPhone पर Chess Best Move खोलें।"
   },
   "3fa20c3bb030ed094bad": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -1337,12 +1324,6 @@
     "source": "Needs a look: ",
     "translation": "इन्हें जाँचें: "
   },
-  "4a040553d42d7508d75e": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Move opens.",
-    "translation": "शतरंज की स्थिति के स्क्रीनशॉट में सबसे अच्छी चाल ढूँढता है। स्क्रीनशॉट दें या Chess Best Move खुलने पर Photos से चुनें।"
-  },
   "4aba6710fac685f9b5ad": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -1505,12 +1486,6 @@
     "source": "Clear History?",
     "translation": "इतिहास मिटाएँ?"
   },
-  "542a9756840cf6573c30": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "This position needs confirmation. Open the screenshot in Chess Best Move on iPhone.",
-    "translation": "इस स्थिति की पुष्टि ज़रूरी है। iPhone पर Chess Best Move में स्क्रीनशॉट खोलें।"
-  },
   "549342cc819bac01d613": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -1571,11 +1546,12 @@
     "source": "Originally: %@",
     "translation": "पहले: %@"
   },
-  "575af5d5ce253bbe2e3b": {
+  "57a7324faf715c561929": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
-    "source": "The analysis is still running in Chess Best Move.",
-    "translation": "Chess Best Move में विश्लेषण अभी चल रहा है।"
+    "source": "Some squares need a look. Check the position in Chess Best Next Move.",
+    "translation": "कुछ खाने जाँचने हैं। Chess Best Next Move में स्थिति जाँचें।"
   },
   "57b1a1b6aad0a13ead0f": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -1637,12 +1613,6 @@
     "source": "Allow full access in Settings",
     "translation": "सेटिंग्ज़ में पूरा ऐक्सेस दें"
   },
-  "5b13490a1f22e0229cc5": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
-    "translation": "Chess Best Move इस उम्मीद से वितरित किया जाता है कि यह उपयोगी होगा, लेकिन इसकी कोई वारंटी नहीं है, जिसमें बिक्री-योग्यता या किसी खास उद्देश्य के लिए उपयुक्तता की निहित वारंटी भी शामिल है। अधिक जानकारी के लिए GNU General Public License देखें।"
-  },
   "5b4d0c120adf8cbd2262": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -1690,12 +1660,6 @@
     "reviewedAt": "2026-11-04",
     "source": "week",
     "translation": "हफ़्ता"
-  },
-  "5caf3cb39cbc98371a90": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Some squares need a look. Check the position in Chess Best Move.",
-    "translation": "कुछ खाने जाँचने हैं। Chess Best Move में स्थिति जाँचें।"
   },
   "5d483a2a98693c68626a": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -1768,6 +1732,13 @@
     "reviewedAt": "2026-11-04",
     "source": "Move the board cursor up",
     "translation": "बोर्ड कर्सर ऊपर ले जाएँ"
+  },
+  "619c93441f7bdaa8ffc1": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "The iPhone did not finish in time. Open Chess Best Next Move on iPhone once, then try again.",
+    "translation": "iPhone समय पर पूरा नहीं कर सका। iPhone पर Chess Best Next Move एक बार खोलें, फिर कोशिश करें।"
   },
   "6264d5b9f1930a60a77a": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -1858,12 +1829,6 @@
     "reviewedAt": "2026-11-04",
     "source": "In the Shortcuts app, create a shortcut named “Analyze my chess screenshot”. Add “Take Screenshot” as its first action.",
     "translation": "Shortcuts ऐप में “मेरा शतरंज स्क्रीनशॉट जाँचो” नाम का शॉर्टकट बनाएँ। पहली क्रिया “स्क्रीनशॉट लें” रखें।"
-  },
-  "6624dc2fbca091a5464d": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Open Chess Best Move to see the best move.",
-    "translation": "सबसे अच्छी चाल देखने के लिए Chess Best Move खोलें।"
   },
   "663db260526dac9b16f8": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2039,12 +2004,6 @@
     "source": "A longer search that keeps running after the answer, up to 2 minutes.",
     "translation": "जवाब मिलने के बाद अधिकतम 2 मिनट तक खोज जारी रहती है।"
   },
-  "70be6dcce5ca9fab1453": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "The iPhone app is busy. Leave Chess Best Move on iPhone, then try again.",
-    "translation": "iPhone ऐप व्यस्त है। iPhone पर Chess Best Move खुला रहने दें और फिर कोशिश करें।"
-  },
   "7126cbfe690ae7fcd3bc": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2087,6 +2046,13 @@
     "source": "Flip",
     "translation": "पलटें"
   },
+  "73ad9327a36656ffcf9d": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "No analyses remaining. Open Chess Best Next Move on iPhone for Pro or more analyses.",
+    "translation": "कोई विश्लेषण बाकी नहीं है। Pro या और विश्लेषण के लिए iPhone पर Chess Best Next Move खोलें।"
+  },
   "73b1e853726b33712d03": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2117,11 +2083,12 @@
     "source": "Version",
     "translation": "संस्करण"
   },
-  "75ea5bc260f0ff122deb": {
+  "75d8d2a5dfa765faf1bc": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
-    "source": "Save a screenshot first. Touch and hold the Home Screen, then choose Edit > Add Widget > Chess Best Move. On the Lock Screen, touch and hold, choose Customize, then Add Widgets. Tap the widget to open the app and analyze your latest saved screenshot. With limited Photos access, choose the screenshot when prompted.",
-    "translation": "पहले स्क्रीनशॉट सहेजें। होम स्क्रीन को दबाकर रखें, फिर “बदलें” > “विजेट जोड़ें” > Chess Best Move चुनें। लॉक स्क्रीन को दबाकर रखें, “कस्टमाइज़ करें” और फिर “विजेट जोड़ें” चुनें। विजेट पर टैप करने से ऐप खुलता है और सबसे नया सहेजा गया स्क्रीनशॉट जाँचता है। Photos का सीमित ऐक्सेस होने पर पूछे जाने पर स्क्रीनशॉट चुनें।"
+    "source": "Chess Best Next Move is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.",
+    "translation": "Chess Best Next Move इस उम्मीद से वितरित किया जाता है कि यह उपयोगी होगा, लेकिन इसकी कोई वारंटी नहीं है, जिसमें बिक्री-योग्यता या किसी खास उद्देश्य के लिए उपयुक्तता की निहित वारंटी भी शामिल है। अधिक जानकारी के लिए GNU General Public License देखें।"
   },
   "760c54035e53d1958f63": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2153,6 +2120,13 @@
     "source": "Move the board cursor right",
     "translation": "बोर्ड कर्सर दाएँ ले जाएँ"
   },
+  "77cdda461ea3e09357a8": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Open Chess Best Next Move on iPhone and allow full Photos access to read new screenshots.",
+    "translation": "iPhone पर Chess Best Next Move खोलें और नए स्क्रीनशॉट पढ़ने के लिए Photos का पूरा ऐक्सेस दें।"
+  },
   "78356393817438eac772": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2170,12 +2144,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Tap to return to the result.",
     "translation": "नतीजे पर लौटने के लिए टैप करें।"
-  },
-  "79439b9e21d6d4f66096": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Opens Chess Best Move to analyze it",
-    "translation": "विश्लेषण के लिए Chess Best Move खोलता है"
   },
   "798e5b9d329da41834be": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2219,6 +2187,13 @@
     "source": "An analysis is spent on a position you have not analyzed before. Re-running the same board, at any think time, is free.",
     "translation": "हर नई स्थिति पर एक विश्लेषण खर्च होता है। उसी बोर्ड को किसी भी समय-सीमा पर फिर चलाना मुफ़्त है।"
   },
+  "7c877a90aa52826e9497": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Open Chess Best Next Move and import the screenshot from Photos.",
+    "translation": "Chess Best Next Move खोलें और Photos से स्क्रीनशॉट इंपोर्ट करें।"
+  },
   "7c8bceb6d0d55aad7cfc": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2230,6 +2205,13 @@
     "reviewedAt": "2026-11-04",
     "source": "Choose another screenshot",
     "translation": "दूसरा स्क्रीनशॉट चुनें"
+  },
+  "7cbf387c84cfcbdfe369": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Chess Best Next Move isn't ready. Open the app, then run the shortcut again.",
+    "translation": "Chess Best Next Move तैयार नहीं है। ऐप खोलें, फिर शॉर्टकट चलाएँ।"
   },
   "7d67ddb8ae65f954b980": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2267,12 +2249,6 @@
     "source": "Check the pieces, then analyze.",
     "translation": "मोहरों को जाँचें, फिर विश्लेषण करें।"
   },
-  "7fa59d1dcb14a0c87628": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Opening Chess Best Move",
-    "translation": "Chess Best Move खुल रहा है"
-  },
   "7faa7019894d7b773f99": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2297,6 +2273,12 @@
     "source": "%1$@ is in check but it's %2$@'s move.",
     "translation": "%1$@ को शह है, लेकिन चाल %2$@ की है।"
   },
+  "8153c63fc00b1a27b9ba": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Both",
+    "translation": "दोनों"
+  },
   "8194473d181df1f094b1": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2315,6 +2297,13 @@
     "source": "Clear board",
     "translation": "बोर्ड खाली करें"
   },
+  "8232b373b9abe3c061d7": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Opens Chess Best Next Move to analyze it",
+    "translation": "विश्लेषण के लिए Chess Best Next Move खोलता है"
+  },
   "82bae0ce69dffb1e093b": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2327,6 +2316,13 @@
     "source": "No free analyses",
     "translation": "कोई मुफ़्त विश्लेषण नहीं"
   },
+  "83145e8acb57c967964b": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Finds the best move in a screenshot of a chess position. Pass a screenshot, or choose one from Photos when Chess Best Next Move opens.",
+    "translation": "शतरंज की स्थिति के स्क्रीनशॉट में सबसे अच्छी चाल ढूँढता है। स्क्रीनशॉट दें या Chess Best Next Move खुलने पर Photos से चुनें।"
+  },
   "83255acd3979ce312e51": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2338,6 +2334,13 @@
     "reviewedAt": "2026-11-04",
     "source": "Screenshot",
     "translation": "स्क्रीनशॉट"
+  },
+  "83be255c0607833366c6": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Chess Best Next Move analyzes positions with Stockfish, a free and open-source chess engine by the Stockfish developers. It runs on your %@; nothing is uploaded.",
+    "translation": "Chess Best Next Move, Stockfish डेवलपरों के मुफ़्त और ओपन सोर्स शतरंज इंजन Stockfish से स्थितियों का विश्लेषण करता है। यह आपके %@ पर चलता है। कुछ भी अपलोड नहीं होता।"
   },
   "83c681f5761337efd935": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2471,6 +2474,13 @@
     "source": "%@ is in check from more than two pieces.",
     "translation": "%@ को दो से ज़्यादा मोहरों से शह है।"
   },
+  "8adab263a1ae1c73e880": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Chess Best Next Move couldn't analyze this position.",
+    "translation": "Chess Best Next Move इस स्थिति का विश्लेषण नहीं कर सका।"
+  },
   "8b6207c3be40244768b9": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2488,6 +2498,12 @@
     "reviewedAt": "2026-11-04",
     "source": "Neural Network",
     "translation": "न्यूरल नेटवर्क"
+  },
+  "8ca1cab617c915346c6a": {
+    "reason": "Reviewed concise move format choices. Plain language uses the app's current language.",
+    "reviewedAt": "2026-11-05T13:25:55.230957+00:00",
+    "source": "Plain English",
+    "translation": "सरल भाषा"
   },
   "8d9709a97c374dc375f8": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2513,6 +2529,20 @@
     "source": "Open Settings > Action Button. Swipe to Shortcut, tap Choose a Shortcut, and select Analyze my chess screenshot without the Wait action.",
     "translation": "सेटिंग्ज़ > ऐक्शन बटन खोलें। “शॉर्टकट” तक स्वाइप करें, “शॉर्टकट चुनें” पर टैप करें और “इंतज़ार करें” के बिना “मेरा शतरंज स्क्रीनशॉट जाँचो” चुनें।"
   },
+  "8ed29140af7c8240ec11": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Unlock your device and allow any requested permissions. When Siri runs the shortcut, it takes the screenshot, saves it to Recents, and opens Chess Best Next Move to analyze it.",
+    "translation": "डिवाइस अनलॉक करें और माँगी गई अनुमतियाँ दें। Siri शॉर्टकट चलाकर स्क्रीनशॉट लेता है, “हाल के” में सहेजता है और विश्लेषण के लिए Chess Best Next Move खोलता है।"
+  },
+  "8eed1aaf22da724a1929": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "This position needs confirmation. Open the screenshot in Chess Best Next Move on iPhone.",
+    "translation": "इस स्थिति की पुष्टि ज़रूरी है। iPhone पर Chess Best Next Move में स्क्रीनशॉट खोलें।"
+  },
   "8f95380e7baa068f365e": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2531,6 +2561,13 @@
     "source": "Open Shortcuts",
     "translation": "Shortcuts खोलें"
   },
+  "907fe985378fbd6c5fb6": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Chess Best Next Move couldn't read that image. Pass a screenshot to the shortcut.",
+    "translation": "Chess Best Next Move इस इमेज को पढ़ नहीं सका। शॉर्टकट को स्क्रीनशॉट दें।"
+  },
   "909fae6f5b46b2f3ac41": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2542,12 +2579,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Try again",
     "translation": "फिर कोशिश करें"
-  },
-  "90eabed501ac867eae87": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move couldn't read that image. Pass a screenshot to the shortcut.",
-    "translation": "Chess Best Move इस इमेज को पढ़ नहीं सका। शॉर्टकट को स्क्रीनशॉट दें।"
   },
   "912113e1b96740a5a48d": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2608,6 +2639,13 @@
     "reviewedAt": "2026-11-04",
     "source": "Unlimited Best Moves",
     "translation": "असीमित चाल सुझाव"
+  },
+  "947c52f09359a8f7cc17": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Could not reach the iPhone app. Check the connection and open Chess Best Next Move on iPhone once.",
+    "translation": "iPhone ऐप से संपर्क नहीं हुआ। कनेक्शन जाँचें और iPhone पर Chess Best Next Move एक बार खोलें।"
   },
   "954a58172de86aba72f8": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -2687,6 +2725,13 @@
     "source": "Free Analyses",
     "translation": "मुफ़्त विश्लेषण"
   },
+  "9b1a3c68e73fd4b17192": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "The analysis is still running in Chess Best Next Move.",
+    "translation": "Chess Best Next Move में विश्लेषण अभी चल रहा है।"
+  },
   "9b362ab8b1ca3fc9f8f6": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -2740,12 +2785,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Waiting for purchase approval. The analysis starts when it is approved.",
     "translation": "खरीदारी की मंज़ूरी बाकी है। मंज़ूरी मिलते ही विश्लेषण शुरू होगा।"
-  },
-  "9ccb83072a05cc2a7fe9": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Open Chess Best Move. With automatic analysis and Full Access to Photos enabled, the app recognizes your new chess screenshot. Tap Analyze if asked. Otherwise, tap Use latest screenshot.",
-    "translation": "Chess Best Move खोलें। अपने आप विश्लेषण और Photos का पूरा ऐक्सेस चालू होने पर ऐप नया शतरंज स्क्रीनशॉट पहचानता है। पूछे जाने पर “विश्लेषण करें” पर टैप करें। वरना “नवीनतम स्क्रीनशॉट इस्तेमाल करें” चुनें।"
   },
   "9d70cda159108bfc4849": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -3035,6 +3074,13 @@
     "source": "Try again",
     "translation": "फिर कोशिश करें"
   },
+  "aec9c15441247fed8fd6": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "The iPhone app is busy. Leave Chess Best Next Move on iPhone, then try again.",
+    "translation": "iPhone ऐप व्यस्त है। iPhone पर Chess Best Next Move खुला रहने दें और फिर कोशिश करें।"
+  },
   "af0a2f11226d747cbacf": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -3137,23 +3183,11 @@
     "source": "Pro, yearly",
     "translation": "Pro, वार्षिक"
   },
-  "b5e64080447fcb9eb166": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Chess Best Move isn't ready. Open the app, then run the shortcut again.",
-    "translation": "Chess Best Move तैयार नहीं है। ऐप खोलें, फिर शॉर्टकट चलाएँ।"
-  },
   "b5f6556910a08b38ac41": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
     "source": "Stopped when the app went to the background. Run it again for the full think time.",
     "translation": "ऐप बैकग्राउंड में जाते ही विश्लेषण रुक गया। पूरा समय देने के लिए फिर चलाएँ।"
-  },
-  "b6092eb6e2f17b475331": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Open Chess Best Move and import the screenshot from Photos.",
-    "translation": "Chess Best Move खोलें और Photos से स्क्रीनशॉट इंपोर्ट करें।"
   },
   "b61106566308373f8ec3": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -3287,6 +3321,13 @@
     "source": "Runs on your %@: works offline, nothing is uploaded",
     "translation": "आपके %@ पर चलता है: ऑफ़लाइन काम करता है, कुछ अपलोड नहीं होता"
   },
+  "bddf56c6be7dbafbbacd": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Add “Find Best Move” from Chess Best Next Move. Tap its Screenshot input, choose Select Variable, and select the output of Take Screenshot. It should read “Find the best move in Screenshot”, with Screenshot shown as a variable token with the screenshot icon, like the input in Save to Photo Album. A pale Screenshot placeholder is not a connected image. Do not type the word Screenshot or leave the input set to Ask Each Time. The app receives this image directly, without looking it up in Photos.",
+    "translation": "Chess Best Next Move से “सबसे अच्छी चाल ढूँढें” जोड़ें। उसके स्क्रीनशॉट इनपुट पर टैप करें, “वैरिएबल चुनें” चुनें और “स्क्रीनशॉट लें” का आउटपुट चुनें। अब “स्क्रीनशॉट में सबसे अच्छी चाल ढूँढें” दिखना चाहिए। स्क्रीनशॉट, आइकन वाले वैरिएबल के रूप में दिखेगा, जैसे “फ़ोटो ऐल्बम में सहेजें” में। हल्के रंग का स्क्रीनशॉट प्लेसहोल्डर जुड़ी हुई इमेज नहीं है। स्क्रीनशॉट शब्द टाइप न करें और इनपुट को “हर बार पूछें” पर न छोड़ें। ऐप इमेज सीधे लेता है, Photos में नहीं ढूँढता।"
+  },
   "bdeb37d13704a9213f4b": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -3353,12 +3394,6 @@
     "source": "%1$@, %2$lld left",
     "translation": "%1$@, %2$lld बाकी"
   },
-  "c1950fdb3fbb4ebe2024": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Open Chess Best Move on iPhone and allow full Photos access to read new screenshots.",
-    "translation": "iPhone पर Chess Best Move खोलें और नए स्क्रीनशॉट पढ़ने के लिए Photos का पूरा ऐक्सेस दें।"
-  },
   "c1ae1274933d7443b024": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -3376,6 +3411,13 @@
     "reviewedAt": "2026-11-04",
     "source": "Your yearly subscription is still active",
     "translation": "आपकी वार्षिक सदस्यता अभी चालू है"
+  },
+  "c387cfce614b01daab24": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Open Chess Best Next Move to see the best move.",
+    "translation": "सबसे अच्छी चाल देखने के लिए Chess Best Next Move खोलें।"
   },
   "c3f254b58f195e20f9cf": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -3478,6 +3520,20 @@
     "reviewedAt": "2026-11-04",
     "source": "Stalemate",
     "translation": "गतिरोध"
+  },
+  "cb24b0c9a7102d9d8235": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Open Chess Best Next Move and analyze your latest saved screenshot.",
+    "translation": "Chess Best Next Move खोलें और सबसे नए सहेजे गए स्क्रीनशॉट का विश्लेषण करें।"
+  },
+  "cb818ec90b391252d98c": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC",
+    "translation": "Chess Best Next Move, Copyright (C) 2026 Motomatic LLC"
   },
   "cbf240dce89ba6223c75": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -3905,12 +3961,6 @@
     "source": "Pro Weekly",
     "translation": "साप्ताहिक Pro"
   },
-  "e4b563aaf09601e1d061": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "The iPhone did not finish in time. Open Chess Best Move on iPhone once, then try again.",
-    "translation": "iPhone समय पर पूरा नहीं कर सका। iPhone पर Chess Best Move एक बार खोलें, फिर कोशिश करें।"
-  },
   "e58646d13a80d165c919": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -3965,6 +4015,13 @@
     "source": "You're offline. Connect to the internet to see purchase options.",
     "translation": "आप ऑफ़लाइन हैं। खरीद के विकल्प देखने के लिए इंटरनेट से जुड़ें।"
   },
+  "eb416a033d2c639d2de1": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Next Move when it is approved.",
+    "translation": "खरीदारी की मंज़ूरी बाकी है। मंज़ूरी मिलते ही Chess Best Next Move में विश्लेषण शुरू होगा।"
+  },
   "eb96926e0610bc0638ae": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -3995,6 +4052,13 @@
     "source": " The other marked squares were hard to read.",
     "translation": " बाकी चिह्नित खानों को पढ़ना मुश्किल था।"
   },
+  "ee087cba71b09594f6bf": {
+    "nameUpdatedAt": "2026-11-05T13:29:31.638179+00:00",
+    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
+    "reviewedAt": "2026-11-04",
+    "source": "Opening Chess Best Next Move",
+    "translation": "Chess Best Next Move खुल रहा है"
+  },
   "ee319dc3b330501b374a": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
     "reviewedAt": "2026-11-04",
@@ -4018,12 +4082,6 @@
     "reviewedAt": "2026-11-04",
     "source": "Unlock Unlimited",
     "translation": "असीमित ऐक्सेस पाएँ"
-  },
-  "efcbdc7ff2aeea4e80d6": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "The purchase is waiting for approval. The analysis starts in Chess Best Move when it is approved.",
-    "translation": "खरीदारी की मंज़ूरी बाकी है। मंज़ूरी मिलते ही Chess Best Move में विश्लेषण शुरू होगा।"
   },
   "f0826ec96d9e44a761a2": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
@@ -4198,12 +4256,6 @@
     "reviewedAt": "2026-11-04",
     "source": "%@ is ahead by 1 pawn",
     "translation": "%@ को 1 प्यादे की बढ़त है"
-  },
-  "fd5e5666f3ff4af56c06": {
-    "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",
-    "reviewedAt": "2026-11-04",
-    "source": "Open Chess Best Move and analyze your latest saved screenshot.",
-    "translation": "Chess Best Move खोलें और सबसे नए सहेजे गए स्क्रीनशॉट का विश्लेषण करें।"
   },
   "fdceecdbf50d36eabb35": {
     "reason": "Direct localization reviewed against English for chess terms, interface labels, and format arguments.",

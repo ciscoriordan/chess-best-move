@@ -4,7 +4,7 @@ import SwiftUI
 
 /// The Analysis result readout (design.md 9.4), shown unchanged while the engine thinks (9.3).
 ///
-/// The move sits in a badge centered across the card, in the selected Words or Chess Notation
+/// The move sits in a badge centered across the card, in plain language, chess notation, or both
 /// format. The pill and the evaluation are to the right of the badge, right-
 /// aligned to the card's trailing edge and vertically centered against it; at the largest text
 /// sizes `AnalysisReadoutHeaderLayout` stacks them under the badge instead of letting anything
@@ -110,9 +110,9 @@ struct AnalysisResultReadout: View {
                 AnalysisGlyphLine(
                     piece: move.piece, text: moveDisplayFormat.text(words: move.words, notation: move.san) ?? move.words,
                     spoken: content.spokenMove ?? move.words,
-                    capturedPiece: moveDisplayFormat == .words ? move.capture?.piece : nil, glyphToken: .title
+                    capturedPiece: moveDisplayFormat == .notation ? nil : move.capture?.piece, glyphToken: .title
                 )
-                    .typography(moveDisplayFormat == .words ? .title : .dataLarge)
+                    .typography(moveDisplayFormat == .notation ? .dataLarge : .title)
                     .foregroundStyle(isFinal ? (content.moveIsReply ? Palette.accent : Palette.ink) : Palette.ink2)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityIdentifier(AccessibilityID.analysisBestMove)
@@ -183,7 +183,7 @@ struct AnalysisResultReadout: View {
             AnalysisGlyphLine(
                 piece: guessed.piece, text: moveDisplayFormat.text(words: guessed.words, notation: guessed.san) ?? guessed.words,
                 spoken: AnalysisReadoutContent.spokenGuessedMove(guessed),
-                capturedPiece: moveDisplayFormat == .words ? guessed.capture?.piece : nil, glyphToken: .headline
+                capturedPiece: moveDisplayFormat == .notation ? nil : guessed.capture?.piece, glyphToken: .headline
             )
             .typography(.headline)
             .foregroundStyle(Palette.ink2)
