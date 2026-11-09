@@ -187,6 +187,18 @@ final class AppModel {
     /// Whether `warmUpRecognition(after:)` has started or finished its warm-up.
     @ObservationIgnored private(set) var hasStartedRecognitionWarmUp = false
 
+    /// A native rating request belongs on settled Home, outside imports, analysis, purchases,
+    /// and sheet dismissal animations. AppReviewPrompt also checks the active scene and pickers.
+    var canPresentReviewPrompt: Bool {
+        guard path.isEmpty, sheet == nil, presentedSheet == nil, queuedSheet == nil,
+              editor == nil, pendingAnalysis == nil, settings.pendingApprovalBoard == nil,
+              store.hasLoadedEntitlements else { return false }
+        switch engine.phase {
+        case .preparing, .searching: return false
+        default: return true
+        }
+    }
+
     init(
         settings: AppSettings,
         store: any StoreService,

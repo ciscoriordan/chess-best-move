@@ -44,6 +44,7 @@ struct RootView: View {
             }
         }
         .automaticallyAnalyzesScreenshots(capture: capture)
+        .requestsAppStoreReview(capture: capture, isWidgetImporting: widgetImportInProgress)
         .tint(Palette.ink)
         .environment(\.moveDisplayFormat, app.settings.moveDisplayFormat)
         .sheet(item: $app.sheet, onDismiss: { app.sheetDidDismiss() }) { route in

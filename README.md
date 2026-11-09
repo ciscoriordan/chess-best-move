@@ -1,8 +1,8 @@
-# Chess Best Move
+# Chess Best Next Move
 
 Copyright (C) 2026 Motomatic LLC
 
-This is the source code of Chess Best Move, an iOS app that analyzes a chess position from a
+This is the source code of Chess Best Next Move, an iOS app that analyzes a chess position from a
 screenshot. You take a screenshot of a position, import it into the app, and the app finds the
 board in the image, recognizes every piece with a Core ML model that runs on the device, works
 out which way the board is turned and whose turn it is, and searches the position with
@@ -28,6 +28,12 @@ without requesting a search. Watch Connectivity transfers only a bounded local r
 paired Watch; no server is involved. The saved Move Format setting changes phone/tablet results,
 History and Watch together. Chess symbols use the bundled Noto font; VoiceOver retains words.
 Retry reconnects and then starts analysis, refreshing the latest screenshot each time. Background execution depends on iOS and connectivity.
+
+The app requests Apple's native review dialog on its third distinct foreground process launch,
+after two settled seconds on Home. Background returns and permission dialogs do not add
+openings, and background-only Watch launches do not count. One attempt is saved across updates;
+Apple decides whether to show the dialog. Automatic requests are disabled in Debug and simulator
+builds so they do not interrupt development or screenshot captures.
 
 History keeps the last 500 completed positions and visible engine answers on this device,
 without original screenshots or cloud synchronization. It is excluded from device backups.
